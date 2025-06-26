@@ -26,7 +26,7 @@ export function AboutSection() {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { duration: 0.8 }
     }
   };
 
@@ -35,7 +35,7 @@ export function AboutSection() {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { duration: 0.8 }
     }
   };
 
@@ -44,7 +44,7 @@ export function AboutSection() {
     visible: {
       scale: 1,
       rotate: 0,
-      transition: { duration: 0.6, ease: "easeOut", delay: 0.3 }
+      transition: { duration: 0.6, delay: 0.3 }
     }
   };
 
@@ -147,8 +147,7 @@ export function AboutSection() {
                 }}
                 transition={{
                   duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut"
+                  repeat: Infinity
                 }}
               />
               
@@ -161,7 +160,6 @@ export function AboutSection() {
                 transition={{
                   duration: 6,
                   repeat: Infinity,
-                  ease: "easeInOut",
                   delay: 1
                 }}
               />

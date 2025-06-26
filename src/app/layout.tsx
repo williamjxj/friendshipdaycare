@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Nunito, Fredoka } from "next/font/google";
+import { Suspense } from "react";
+import { PageLoader } from "@/components/ui/LoadingSpinner";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -51,8 +54,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunito.variable} ${fredoka.variable} antialiased`}>
-        {children}
+      <body className={`${nunito.variable} ${fredoka.variable} antialiased font-sans`}>
+        <LanguageProvider>
+          <Suspense fallback={<PageLoader message="Loading magical content..." />}>
+            {children}
+          </Suspense>
+        </LanguageProvider>
       </body>
     </html>
   );

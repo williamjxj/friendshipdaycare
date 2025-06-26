@@ -4,6 +4,8 @@
     "about": "关于我们",
     "programs": "课程项目",
     "gallery": "图片展示",
+    "todaysStory": "今日故事",
+    "journal": "月刊",
     "contact": "联系我们"
   },
   "hero": {
@@ -37,6 +39,19 @@
       "age": "4 - 5岁",
       "description": "通过高级蒙特梭利教具和概念进行入学准备。"
     }
+  },
+  "journal": {
+    "title": "月度托儿所日志",
+    "subtitle": "记录我们的学习冒险",
+    "description": "探索我们的月度日志，记录孩子们全年精彩的学习体验、活动和里程碑。",
+    "noJournals": "暂无日志。请稍后查看！",
+    "readMore": "阅读完整日志",
+    "backToJournals": "返回所有日志",
+    "month": "月份",
+    "year": "年份",
+    "activities": "本月活动",
+    "highlights": "月度亮点",
+    "learningGoals": "已达成的学习目标"
   },
   "contact": {
     "title": "联系我们",

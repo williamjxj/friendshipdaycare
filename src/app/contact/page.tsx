@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { ThemeProvider } from '@/contexts/ThemeContext';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { LanguageToggle } from '@/components/ui/LanguageToggle';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import { GoogleMap } from '@/components/ui/GoogleMap';
 import Link from 'next/link';
 import { PhoneIcon, MapPinIcon, ClockIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
@@ -43,37 +45,10 @@ export default function ContactPage() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen flex flex-col">
-        {/* Header */}
-        <header className="bg-card border-b border-border sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <div className="flex-shrink-0">
-                <Link href="/" className="flex items-center space-x-2">
-                  <img
-                    src="/static/friendship-corner-daycare-logo.png"
-                    alt="Friendship Corner Daycare Logo"
-                    className="w-16 h-12 object-contain"
-                  />
-                  <span className="font-display font-semibold text-lg text-foreground">
-                    Friendship Corner Daycare
-                  </span>
-                </Link>
-              </div>
-              <div className="flex items-center space-x-4">
-                <nav className="hidden md:flex space-x-8">
-                  <Link href="/" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Home</Link>
-                  <Link href="/about" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">About</Link>
-                  <Link href="/programs" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Programs</Link>
-                  <Link href="/gallery" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Gallery</Link>
-                  <Link href="/contact" className="text-primary bg-primary/10 px-3 py-2 rounded-md text-sm font-medium">Contact</Link>
-                </nav>
-                <LanguageToggle />
-                <ThemeToggle />
-              </div>
-            </div>
-          </div>
-        </header>
+      <Suspense fallback={<LoadingSpinner message="Loading contact page..." />}>
+        <div className="min-h-screen flex flex-col">
+          <SkipNavigation />
+          <Header />
         
         <main className="flex-1">
           {/* Hero Section */}
@@ -101,7 +76,7 @@ export default function ContactPage() {
                       Get in Touch
                     </h2>
                     <p className="text-muted-foreground leading-relaxed mb-8">
-                      We'd love to hear from you! Whether you have questions about our programs, want to schedule a visit, or are ready to enroll your child, we're here to help.
+                      We&apos;d love to hear from you! Whether you have questions about our programs, want to schedule a visit, or are ready to enroll your child, we&apos;re here to help.
                     </p>
                   </div>
 
@@ -148,7 +123,7 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold text-foreground mb-1">Email</h3>
                         <p className="text-muted-foreground">info@friendshipcorner.ca</p>
-                        <p className="text-sm text-muted-foreground">We'll respond within 24 hours</p>
+                        <p className="text-sm text-muted-foreground">We&apos;ll respond within 24 hours</p>
                       </div>
                     </div>
                   </div>
@@ -190,7 +165,7 @@ export default function ContactPage() {
                   
                   {submitStatus === 'success' && (
                     <div className="mb-6 p-4 bg-accent/20 border border-accent/30 rounded-lg">
-                      <p className="text-accent font-medium">Thank you! We'll get back to you soon.</p>
+                      <p className="text-accent font-medium">Thank you! We&apos;ll get back to you soon.</p>
                     </div>
                   )}
 
@@ -245,7 +220,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <label htmlFor="childAge" className="block text-sm font-medium text-foreground mb-2">
-                          Child's Age
+                          Child&apos;s Age
                         </label>
                         <select
                           id="childAge"
@@ -275,7 +250,7 @@ export default function ContactPage() {
                         value={formData.message}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none"
-                        placeholder="Tell us about your child and what you'd like to know about our programs..."
+                        placeholder="Tell us about your child and what you&apos;d like to know about our programs..."
                       />
                     </div>
 
@@ -309,30 +284,9 @@ export default function ContactPage() {
           </section>
         </main>
 
-        {/* Footer */}
-        <footer className="bg-card border-t border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="text-center space-y-4">
-              <div className="flex items-center justify-center space-x-2">
-                <img
-                  src="/static/friendship-corner-daycare-logo.png"
-                  alt="Friendship Corner Daycare Logo"
-                  className="w-16 h-12 object-contain"
-                />
-                <span className="font-display font-semibold text-lg text-foreground">
-                  Friendship Corner Daycare
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                © 2024 Friendship Corner Daycare. All rights reserved.
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Montessori Excellence Since 2008 • Licensed Group Daycare • 604.945.8504
-              </p>
-            </div>
-          </div>
-        </footer>
-      </div>
+        <Footer />
+        </div>
+      </Suspense>
     </ThemeProvider>
   );
 }

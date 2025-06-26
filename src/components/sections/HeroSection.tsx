@@ -1,12 +1,12 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function HeroSection() {
-  const t = useTranslations();
+  const { t } = useLanguage();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -24,7 +24,7 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6 }
     }
   };
 
@@ -59,8 +59,7 @@ export function HeroSection() {
         }}
         transition={{
           duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
+          repeat: Infinity
         }}
       />
       
@@ -73,7 +72,6 @@ export function HeroSection() {
         transition={{
           duration: 4,
           repeat: Infinity,
-          ease: "easeInOut",
           delay: 1
         }}
       />
@@ -87,7 +85,6 @@ export function HeroSection() {
         transition={{
           duration: 5,
           repeat: Infinity,
-          ease: "easeInOut",
           delay: 2
         }}
       />

@@ -1,10 +1,13 @@
 'use client';
 
+import { Suspense } from 'react';
+import Image from 'next/image';
 import { ThemeProvider } from '@/contexts/ThemeContext';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { LanguageToggle } from '@/components/ui/LanguageToggle';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import { RealEnvironmentShowcase } from '@/components/sections/RealEnvironmentShowcase';
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import dynamic from 'next/dynamic';
 
 // Dynamically import VideoPlayer to prevent SSR hydration issues
@@ -27,157 +30,204 @@ export default function HomePage() {
     <ThemeProvider>
       <div className="min-h-screen flex flex-col">
         <SkipNavigation />
-        {/* Simple Header */}
-        <header className="bg-card border-b border-border sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <div className="flex-shrink-0">
-                <div className="flex items-center space-x-2">
-                  <img
-                    src="/images/friendship-corner-daycare-logo.png"
-                    alt="Friendship Corner Daycare Logo"
-                    className="w-16 h-12 object-contain"
-                  />
-                  <span className="font-display font-semibold text-lg text-foreground">
-                    Friendship Corner Daycare
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <nav className="hidden md:flex space-x-8">
-                  <a href="#home" className="text-primary bg-primary/10 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                  <a href="/about" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">About</a>
-                  <a href="/programs" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Programs</a>
-                  <a href="/gallery" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Gallery</a>
-                  <a href="#contact" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-                </nav>
-                <LanguageToggle />
-                <ThemeToggle />
-              </div>
-            </div>
-          </div>
-        </header>
+        <Header />
 
         <main id="main-content" className="flex-1">
-          {/* Hero Section */}
-          <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Magical Hero Section */}
+          <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0">
+              <Image
+                src="/images/slidetop-bg.jpg"
+                alt="Daycare Background"
+                fill
+                className="object-cover"
+                priority
+                sizes="100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-100/80 via-purple-100/80 to-blue-100/80"></div>
+            </div>
+
+            {/* Animated Decorative Elements */}
+            <div className="absolute inset-0">
+              {/* Floating Elements */}
+              <div className="absolute top-20 left-10 w-16 h-16 bg-pink-300 rounded-full floating-animation opacity-60"></div>
+              <div className="absolute top-40 right-20 w-12 h-12 bg-blue-300 rounded-full bounce-animation opacity-60"></div>
+              <div className="absolute bottom-40 left-20 w-20 h-20 bg-yellow-300 rounded-full wiggle-animation opacity-60"></div>
+              <div className="absolute bottom-20 right-10 w-14 h-14 bg-green-300 rounded-full floating-animation opacity-60"></div>
+
+              {/* Emoji decorations */}
+              <div className="absolute top-32 left-1/4 text-4xl floating-animation">🌟</div>
+              <div className="absolute top-20 right-1/3 text-3xl bounce-animation">🎈</div>
+              <div className="absolute bottom-32 left-1/3 text-4xl wiggle-animation">🌈</div>
+              <div className="absolute bottom-20 right-1/4 text-3xl floating-animation">🦋</div>
+            </div>
+
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <div className="space-y-8">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-foreground leading-tight">
-                  Where Little Dreams Take Flight
-                </h1>
-                <p className="text-xl md:text-2xl text-muted-foreground w-full text-center leading-relaxed">
-                  Montessori Daycare Excellence Since 2008 • A safe, clean, nurturing, and stimulating environment designed to help children grow, explore, create, and have fun.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a href="#contact" className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors text-center">
-                    Enroll Now
+                <div className="space-y-4">
+                  <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold rainbow-text leading-tight">
+                    Where Little Dreams Take Flight! ✨
+                  </h1>
+                  <div className="text-2xl md:text-3xl font-medium text-purple-600 wiggle-animation">
+                    🌟 Magical Learning Adventures Await! 🌟
+                  </div>
+                </div>
+
+                <div className="child-friendly-card max-w-4xl mx-auto">
+                  <div className="child-friendly-card-inner">
+                    <p className="text-lg md:text-xl text-purple-700 leading-relaxed">
+                      🎨 Montessori Excellence Since 2008 🎨<br/>
+                      A safe, colorful, and super fun environment where children grow, explore, create amazing things, and have the BEST time ever!
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                  <a href="#contact" className="playful-button text-xl px-10 py-5 fun-hover">
+                    🚀 Join Our Adventure!
                   </a>
-                  <a href="/about" className="inline-block border-2 border-primary text-primary bg-background/80 backdrop-blur-sm px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary hover:text-primary-foreground transition-colors text-center">
-                    Learn More
+                  <a href="/about" className="px-10 py-5 rounded-full border-4 border-purple-300 text-purple-600 bg-white font-bold text-xl hover:bg-purple-100 transition-all hover:scale-105 fun-hover">
+                    🔍 Discover More Magic
                   </a>
                 </div>
                 
-                {/* Trust Indicators */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-8">
-                  <div className="flex items-center space-x-2 text-muted-foreground">
-                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                      <span className="text-primary-foreground font-bold text-sm">✓</span>
+                {/* Fun Trust Badges */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
+                  <div className="child-friendly-card">
+                    <div className="child-friendly-card-inner flex items-center space-x-3">
+                      <div className="text-2xl">🏆</div>
+                      <div>
+                        <div className="font-bold text-purple-600">Licensed & Safe</div>
+                        <div className="text-sm text-purple-500">Official Daycare</div>
+                      </div>
                     </div>
-                    <span className="text-sm font-medium">Licensed Group Daycare</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-muted-foreground">
-                    <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                      <span className="text-secondary-foreground font-bold text-sm">M</span>
+
+                  <div className="child-friendly-card">
+                    <div className="child-friendly-card-inner flex items-center space-x-3">
+                      <div className="text-2xl">🎓</div>
+                      <div>
+                        <div className="font-bold text-blue-600">Montessori Magic</div>
+                        <div className="text-sm text-blue-500">Expert Learning</div>
+                      </div>
                     </div>
-                    <span className="text-sm font-medium">Montessori Method</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-muted-foreground">
-                    <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-                      <span className="text-accent-foreground font-bold text-sm">16</span>
+
+                  <div className="child-friendly-card">
+                    <div className="child-friendly-card-inner flex items-center space-x-3">
+                      <div className="text-2xl">⭐</div>
+                      <div>
+                        <div className="font-bold text-green-600">16 Amazing Years</div>
+                        <div className="text-sm text-green-500">Since 2008!</div>
+                      </div>
                     </div>
-                    <span className="text-sm font-medium">Years of Excellence</span>
                   </div>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* About Section */}
-          <section id="about" className="py-20 bg-card">
+          {/* About Our Magical Place */}
+          <section id="about" className="py-20 bg-gradient-to-br from-yellow-50 via-pink-50 to-purple-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div className="space-y-6">
-                  <div className="space-y-4">
-                    <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                      About Friendship Corner Daycare
+                <div className="space-y-8">
+                  <div className="text-center lg:text-left">
+                    <h2 className="text-4xl md:text-5xl font-display font-bold rainbow-text mb-4">
+                      🏰 Our Magical Learning Castle! 🏰
                     </h2>
-                    <p className="text-lg text-primary font-semibold">
-                      Montessori Excellence Since 2008
-                    </p>
+                    <div className="text-2xl font-bold text-purple-600 wiggle-animation">
+                      ✨ Where Friendship & Learning Meet! ✨
+                    </div>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Friendship Corner Daycare (Montessori), a non-profit society, opened in January 2008 in Coquitlam, BC. We are a Licensed Group Daycare for children from 30 months to school age.
-                  </p>
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-foreground">
-                      Our Mission
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      We offer a safe, clean, nurturing, and stimulating environment designed to help children grow, explore, create, and have fun. A developmentally appropriate curriculum provides many opportunities for self-expression and interaction.
-                    </p>
+
+                  <div className="child-friendly-card">
+                    <div className="child-friendly-card-inner space-y-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="text-3xl">🎈</div>
+                        <div>
+                          <h3 className="text-xl font-bold text-purple-600">Our Story</h3>
+                          <p className="text-purple-500">Since 2008 in beautiful Coquitlam!</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-700 leading-relaxed">
+                        We&apos;re a special place where children aged 2.5 to 5 years old come to learn, play, and make amazing friends!
+                        Our Montessori magic helps every child discover their unique superpowers! 🦸‍♀️🦸‍♂️
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="child-friendly-card">
+                    <div className="child-friendly-card-inner space-y-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="text-3xl">🌟</div>
+                        <div>
+                          <h3 className="text-xl font-bold text-blue-600">Our Super Mission</h3>
+                          <p className="text-blue-500">Making learning FUN every day!</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-700 leading-relaxed">
+                        We create a safe, colorful, and super exciting place where children can grow big and strong,
+                        explore amazing things, create beautiful art, and have the most wonderful time with their friends! 🎨🌈
+                      </p>
+                    </div>
                   </div>
                   
-                  {/* Key Features */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
-                        <span className="text-primary font-bold text-sm">✓</span>
-                      </div>
-                      <span className="text-sm text-muted-foreground">Safe Environment</span>
+                  {/* Super Cool Features */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex items-center space-x-3 fun-hover">
+                      <div className="text-2xl">🛡️</div>
+                      <span className="font-medium text-purple-600">Super Safe Space</span>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-secondary/20 rounded-full flex items-center justify-center">
-                        <span className="text-secondary font-bold text-sm">✓</span>
-                      </div>
-                      <span className="text-sm text-muted-foreground">Qualified Staff</span>
+                    <div className="flex items-center space-x-3 fun-hover">
+                      <div className="text-2xl">👩‍🏫</div>
+                      <span className="font-medium text-blue-600">Amazing Teachers</span>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center">
-                        <span className="text-accent font-bold text-sm">✓</span>
-                      </div>
-                      <span className="text-sm text-muted-foreground">Individual Attention</span>
+                    <div className="flex items-center space-x-3 fun-hover">
+                      <div className="text-2xl">💝</div>
+                      <span className="font-medium text-pink-600">Special Care for Each Child</span>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
-                        <span className="text-primary font-bold text-sm">✓</span>
-                      </div>
-                      <span className="text-sm text-muted-foreground">Montessori Method</span>
+                    <div className="flex items-center space-x-3 fun-hover">
+                      <div className="text-2xl">🎓</div>
+                      <span className="font-medium text-green-600">Montessori Magic</span>
                     </div>
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl p-8 h-96 flex items-center justify-center relative overflow-hidden">
-                  <div className="text-center space-y-4 z-10 relative">
-                    <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto shadow-lg">
-                      <span className="text-primary-foreground font-bold text-3xl">M</span>
-                    </div>
-                    <div>
-                      <p className="text-foreground font-semibold text-lg">Montessori Excellence</p>
-                      <p className="text-muted-foreground">Since 2008</p>
-                    </div>
-                    <div className="flex justify-center space-x-8 pt-4">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-primary">16+</div>
-                        <div className="text-xs text-muted-foreground">Years</div>
+                <div className="relative">
+                  {/* Fun Stats Card */}
+                  <div className="child-friendly-card h-96">
+                    <div className="child-friendly-card-inner flex flex-col items-center justify-center space-y-6 h-full relative">
+                      {/* Floating decorations */}
+                      <div className="absolute top-4 left-4 text-2xl floating-animation">🌟</div>
+                      <div className="absolute top-4 right-4 text-2xl bounce-animation">🎈</div>
+                      <div className="absolute bottom-4 left-4 text-2xl wiggle-animation">🌈</div>
+                      <div className="absolute bottom-4 right-4 text-2xl floating-animation">🦋</div>
+
+                      <div className="text-center space-y-4">
+                        <div className="w-24 h-24 gradient-bg-1 rounded-full flex items-center justify-center mx-auto shadow-lg fun-hover">
+                          <span className="text-white font-bold text-4xl">🏰</span>
+                        </div>
+                        <div>
+                          <p className="text-2xl font-bold rainbow-text">Montessori Magic!</p>
+                          <p className="text-purple-600 font-medium">Since 2008! ✨</p>
+                        </div>
                       </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-secondary">100+</div>
-                        <div className="text-xs text-muted-foreground">Families</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-accent">30+</div>
-                        <div className="text-xs text-muted-foreground">Children</div>
+
+                      <div className="grid grid-cols-3 gap-4 w-full">
+                        <div className="text-center child-rounded bg-pink-100 p-3">
+                          <div className="text-2xl font-bold text-pink-600">16+</div>
+                          <div className="text-xs text-pink-500 font-medium">Amazing Years</div>
+                        </div>
+                        <div className="text-center child-rounded bg-blue-100 p-3">
+                          <div className="text-2xl font-bold text-blue-600">100+</div>
+                          <div className="text-xs text-blue-500 font-medium">Happy Families</div>
+                        </div>
+                        <div className="text-center child-rounded bg-green-100 p-3">
+                          <div className="text-2xl font-bold text-green-600">30+</div>
+                          <div className="text-xs text-green-500 font-medium">Little Friends</div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -299,7 +349,17 @@ export default function HomePage() {
           </section>
 
           {/* Real Environment Showcase */}
-          <RealEnvironmentShowcase />
+          <Suspense fallback={
+            <div className="py-20 bg-gradient-to-br from-background via-muted/30 to-background">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center">
+                  <LoadingSpinner size="lg" message="Loading our magical classroom..." />
+                </div>
+              </div>
+            </div>
+          }>
+            <RealEnvironmentShowcase />
+          </Suspense>
 
           {/* Daily Videos Section */}
           <section id="videos" className="py-20 bg-muted/30">
@@ -376,29 +436,7 @@ export default function HomePage() {
           </section>
         </main>
 
-        {/* Footer */}
-        <footer className="bg-card border-t border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="text-center space-y-4">
-              <div className="flex items-center justify-center space-x-2">
-                <img
-                  src="/images/friendship-corner-daycare-logo.png"
-                  alt="Friendship Corner Daycare Logo"
-                  className="w-16 h-12 object-contain"
-                />
-                <span className="font-display font-semibold text-lg text-foreground">
-                  Friendship Corner Daycare
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                © 2024 Friendship Corner Daycare. All rights reserved.
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Montessori Excellence Since 2008 • Licensed Group Daycare • 604.945.8504
-              </p>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </ThemeProvider>
   );

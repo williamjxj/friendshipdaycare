@@ -4,6 +4,8 @@
     "about": "About",
     "programs": "Programs",
     "gallery": "Gallery",
+    "todaysStory": "Story",
+    "journal": "Journal",
     "contact": "Contact"
   },
   "hero": {
@@ -37,6 +39,19 @@
       "age": "4 - 5 years", 
       "description": "School readiness preparation with advanced Montessori materials and concepts."
     }
+  },
+  "journal": {
+    "title": "Monthly Daycare Journal",
+    "subtitle": "Capturing Our Learning Adventures",
+    "description": "Explore our monthly journals documenting the wonderful learning experiences, activities, and milestones of our children throughout the year.",
+    "noJournals": "No journals available yet. Check back soon!",
+    "readMore": "Read Full Journal",
+    "backToJournals": "Back to All Journals",
+    "month": "Month",
+    "year": "Year",
+    "activities": "Activities This Month",
+    "highlights": "Monthly Highlights",
+    "learningGoals": "Learning Goals Achieved"
   },
   "contact": {
     "title": "Contact Us",

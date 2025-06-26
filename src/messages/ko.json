@@ -4,6 +4,8 @@
     "about": "소개",
     "programs": "프로그램",
     "gallery": "갤러리",
+    "todaysStory": "오늘의 이야기",
+    "journal": "저널",
     "contact": "연락처"
   },
   "hero": {
@@ -37,6 +39,19 @@
       "age": "4 - 5세",
       "description": "고급 몬테소리 교구와 개념을 통한 입학 준비."
     }
+  },
+  "journal": {
+    "title": "월간 어린이집 저널",
+    "subtitle": "우리의 학습 모험 기록",
+    "description": "일년 내내 아이들의 멋진 학습 경험, 활동, 이정표를 기록한 월간 저널을 탐색해보세요.",
+    "noJournals": "아직 저널이 없습니다. 곧 다시 확인해주세요!",
+    "readMore": "전체 저널 읽기",
+    "backToJournals": "모든 저널로 돌아가기",
+    "month": "월",
+    "year": "년",
+    "activities": "이번 달 활동",
+    "highlights": "월간 하이라이트",
+    "learningGoals": "달성한 학습 목표"
   },
   "contact": {
     "title": "연락처",

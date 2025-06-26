@@ -2,26 +2,17 @@
 
 import { useState } from 'react';
 import { LanguageIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import { useLanguage, languageConfig } from '@/contexts/LanguageContext';
 
 export function LanguageToggle() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLanguage, setCurrentLanguage] = useState('en');
+  const { language, setLanguage } = useLanguage();
 
-  const languages = [
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'zh', name: '中文', flag: '🇨🇳' },
-    { code: 'fr', name: 'Français', flag: '🇫🇷' },
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
-    { code: 'ko', name: '한국어', flag: '🇰🇷' }
-  ];
-
-  const currentLang = languages.find(lang => lang.code === currentLanguage);
+  const currentLang = languageConfig.find(lang => lang.code === language);
 
   const handleLanguageChange = (langCode: string) => {
-    setCurrentLanguage(langCode);
+    setLanguage(langCode as 'en' | 'zh' | 'ko' | 'es' | 'fr');
     setIsOpen(false);
-    // In a full implementation, this would trigger a language change
-    // For now, it's just a demonstration
   };
 
   return (
@@ -46,18 +37,18 @@ export function LanguageToggle() {
           {/* Dropdown */}
           <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-md shadow-lg z-20">
             <div className="py-1">
-              {languages.map((language) => (
+              {languageConfig.map((lang) => (
                 <button
-                  key={language.code}
-                  onClick={() => handleLanguageChange(language.code)}
+                  key={lang.code}
+                  onClick={() => handleLanguageChange(lang.code)}
                   className={`w-full text-left px-4 py-2 text-sm transition-colors flex items-center space-x-3 ${
-                    currentLanguage === language.code
+                    language === lang.code
                       ? 'bg-primary/10 text-primary'
                       : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                   }`}
                 >
-                  <span className="text-lg">{language.flag}</span>
-                  <span>{language.name}</span>
+                  <span className="text-lg">{lang.flag}</span>
+                  <span>{lang.name}</span>
                 </button>
               ))}
             </div>

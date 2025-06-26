@@ -15,7 +15,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const themes = [
   {
     value: 'default' as Theme,
-    label: 'Warm & Friendly',
+    label: 'Theme',
     description: 'Classic warm colors perfect for a welcoming daycare environment'
   },
   {

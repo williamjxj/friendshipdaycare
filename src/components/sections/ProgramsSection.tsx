@@ -28,7 +28,7 @@ export function ProgramsSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6 }
     }
   };
 
@@ -78,7 +78,7 @@ export function ProgramsSection() {
           animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {programs.map((program, index) => (
+          {programs.map((program) => (
             <motion.div
               key={program.key}
               variants={cardVariants}

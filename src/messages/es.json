@@ -4,6 +4,8 @@
     "about": "Acerca de",
     "programs": "Programas",
     "gallery": "Galería",
+    "todaysStory": "Historia de Hoy",
+    "journal": "Diario",
     "contact": "Contacto"
   },
   "hero": {
@@ -37,6 +39,19 @@
       "age": "4 - 5 años",
       "description": "Preparación para la escuela con materiales y conceptos Montessori avanzados."
     }
+  },
+  "journal": {
+    "title": "Diario Mensual de la Guardería",
+    "subtitle": "Capturando Nuestras Aventuras de Aprendizaje",
+    "description": "Explora nuestros diarios mensuales que documentan las maravillosas experiencias de aprendizaje, actividades e hitos de nuestros niños durante todo el año.",
+    "noJournals": "Aún no hay diarios disponibles. ¡Vuelve pronto!",
+    "readMore": "Leer Diario Completo",
+    "backToJournals": "Volver a Todos los Diarios",
+    "month": "Mes",
+    "year": "Año",
+    "activities": "Actividades de Este Mes",
+    "highlights": "Aspectos Destacados del Mes",
+    "learningGoals": "Objetivos de Aprendizaje Logrados"
   },
   "contact": {
     "title": "Contáctanos",

@@ -110,7 +110,7 @@ export function RealEnvironmentShowcase() {
           {categories.map((category) => (
             <button
               key={category.id}
-              onClick={() => setSelectedCategory(category.id as any)}
+              onClick={() => setSelectedCategory(category.id as 'all' | 'montessori' | 'outdoor' | 'activities')}
               className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium text-sm transition-all duration-200 ${
                 selectedCategory === category.id
                   ? 'bg-primary text-primary-foreground shadow-lg scale-105'
@@ -169,8 +169,8 @@ export function RealEnvironmentShowcase() {
             <h3 className="text-2xl font-display font-bold text-foreground mb-4">
               Experience Our Environment in Person
             </h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              These photos show just a glimpse of our carefully prepared Montessori environment. 
+            <p className="text-muted-foreground mb-6 w-full text-center">
+              These photos show just a glimpse of our carefully prepared Montessori environment.
               Schedule a visit to see how your child will thrive in our nurturing space.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

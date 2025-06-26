@@ -1,8 +1,11 @@
 'use client';
 
+import { Suspense } from 'react';
 import { ThemeProvider } from '@/contexts/ThemeContext';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { LanguageToggle } from '@/components/ui/LanguageToggle';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -96,37 +99,10 @@ export default function ProgramsPage() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen flex flex-col">
-        {/* Header */}
-        <header className="bg-card border-b border-border sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <div className="flex-shrink-0">
-                <Link href="/" className="flex items-center space-x-2">
-                  <img
-                    src="/static/friendship-corner-daycare-logo.png"
-                    alt="Friendship Corner Daycare Logo"
-                    className="w-16 h-12 object-contain"
-                  />
-                  <span className="font-display font-semibold text-lg text-foreground">
-                    Friendship Corner Daycare
-                  </span>
-                </Link>
-              </div>
-              <div className="flex items-center space-x-4">
-                <nav className="hidden md:flex space-x-8">
-                  <Link href="/" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Home</Link>
-                  <Link href="/about" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">About</Link>
-                  <Link href="/programs" className="text-primary bg-primary/10 px-3 py-2 rounded-md text-sm font-medium">Programs</Link>
-                  <Link href="/gallery" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Gallery</Link>
-                  <Link href="/contact" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Contact</Link>
-                </nav>
-                <LanguageToggle />
-                <ThemeToggle />
-              </div>
-            </div>
-          </div>
-        </header>
+      <Suspense fallback={<LoadingSpinner message="Loading programs..." />}>
+        <div className="min-h-screen flex flex-col">
+          <SkipNavigation />
+          <Header />
         
         <main className="flex-1">
           {/* Hero Section */}
@@ -137,7 +113,7 @@ export default function ProgramsPage() {
                   Our Programs
                 </h1>
                 <p className="text-xl text-muted-foreground w-full text-center leading-relaxed">
-                  Age-appropriate Montessori education designed to nurture each child's natural development
+                  Age-appropriate Montessori education designed to nurture each child&apos;s natural development
                 </p>
               </div>
             </div>
@@ -274,7 +250,7 @@ export default function ProgramsPage() {
                   Ready to Enroll Your Child?
                 </h2>
                 <p className="text-xl text-primary-foreground/90 w-full text-center">
-                  Contact us today to schedule a visit and learn more about how our programs can benefit your child's development.
+                  Contact us today to schedule a visit and learn more about how our programs can benefit your child&apos;s development.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
@@ -295,28 +271,9 @@ export default function ProgramsPage() {
           </section>
         </main>
 
-        {/* Footer */}
-        <footer className="bg-card border-t border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="text-center space-y-4">
-              <div className="flex items-center justify-center space-x-2">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-lg">F</span>
-                </div>
-                <span className="font-display font-semibold text-lg text-foreground">
-                  Friendship Corner Daycare
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                © 2024 Friendship Corner Daycare. All rights reserved.
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Montessori Excellence Since 2008 • Licensed Group Daycare • 604.945.8504
-              </p>
-            </div>
-          </div>
-        </footer>
-      </div>
+        <Footer />
+        </div>
+      </Suspense>
     </ThemeProvider>
   );
 }

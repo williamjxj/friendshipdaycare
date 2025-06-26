@@ -4,6 +4,8 @@
     "about": "À propos",
     "programs": "Programmes",
     "gallery": "Galerie",
+    "todaysStory": "Histoire du Jour",
+    "journal": "Journal",
     "contact": "Contact"
   },
   "hero": {
@@ -37,6 +39,19 @@
       "age": "4 - 5 ans",
       "description": "Préparation à la scolarité avec du matériel et des concepts Montessori avancés."
     }
+  },
+  "journal": {
+    "title": "Journal Mensuel de la Garderie",
+    "subtitle": "Capturer Nos Aventures d'Apprentissage",
+    "description": "Explorez nos journaux mensuels documentant les merveilleuses expériences d'apprentissage, activités et étapes importantes de nos enfants tout au long de l'année.",
+    "noJournals": "Aucun journal disponible pour le moment. Revenez bientôt !",
+    "readMore": "Lire le Journal Complet",
+    "backToJournals": "Retour à Tous les Journaux",
+    "month": "Mois",
+    "year": "Année",
+    "activities": "Activités de Ce Mois",
+    "highlights": "Points Forts du Mois",
+    "learningGoals": "Objectifs d'Apprentissage Atteints"
   },
   "contact": {
     "title": "Contactez-nous",

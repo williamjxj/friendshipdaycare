@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { ThemeProvider } from '@/contexts/ThemeContext';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { LanguageToggle } from '@/components/ui/LanguageToggle';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import { VideoPlayer } from '@/components/ui/VideoPlayer';
 import { ImageCarousel } from '@/components/ui/ImageCarousel';
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
@@ -139,37 +141,10 @@ export default function GalleryPage() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen flex flex-col">
-        {/* Header */}
-        <header className="bg-card border-b border-border sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <div className="flex-shrink-0">
-                <Link href="/" className="flex items-center space-x-2">
-                  <img
-                    src="/static/friendship-corner-daycare-logo.png"
-                    alt="Friendship Corner Daycare Logo"
-                    className="w-16 h-12 object-contain"
-                  />
-                  <span className="font-display font-semibold text-lg text-foreground">
-                    Friendship Corner Daycare
-                  </span>
-                </Link>
-              </div>
-              <div className="flex items-center space-x-4">
-                <nav className="hidden md:flex space-x-8">
-                  <Link href="/" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Home</Link>
-                  <Link href="/about" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">About</Link>
-                  <Link href="/programs" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Programs</Link>
-                  <Link href="/gallery" className="text-primary bg-primary/10 px-3 py-2 rounded-md text-sm font-medium">Gallery</Link>
-                  <Link href="/contact" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Contact</Link>
-                </nav>
-                <LanguageToggle />
-                <ThemeToggle />
-              </div>
-            </div>
-          </div>
-        </header>
+      <Suspense fallback={<LoadingSpinner message="Loading gallery..." />}>
+        <div className="min-h-screen flex flex-col">
+          <SkipNavigation />
+          <Header />
         
         <main className="flex-1">
           {/* Hero Section */}
@@ -281,21 +256,21 @@ export default function GalleryPage() {
               
               <VideoPlayer videos={[
                 {
-                  url: 'https://www.youtube.com/watch?v=jNQXAC9IVRw', // Sample Montessori video
-                  title: 'Daily Montessori Activities',
-                  description: 'Watch our children engage in hands-on Montessori learning activities that promote independence and creativity.',
+                  url: 'https://www.youtube.com/watch?v=doKkOSMaTk4', // Montessori classroom tour
+                  title: '🎨 Daily Montessori Magic',
+                  description: 'Watch our amazing children engage in hands-on Montessori learning activities that promote independence, creativity, and joy!',
                   thumbnail: '/images/video-thumb-1.jpg'
                 },
                 {
-                  url: 'https://www.youtube.com/watch?v=2Vv-BfVoq4g', // Sample education video
-                  title: 'Learning Through Play',
-                  description: 'See how we combine education with fun activities that help children develop essential skills.',
+                  url: 'https://www.youtube.com/watch?v=Pk4Xi4bF0RE', // Montessori practical life
+                  title: '🌟 Learning Through Joyful Play',
+                  description: 'See how we combine education with super fun activities that help children develop essential life skills while having the best time!',
                   thumbnail: '/images/video-thumb-2.jpg'
                 },
                 {
-                  url: 'https://www.youtube.com/watch?v=HMUDVMiITOU', // Sample children's story
-                  title: 'Story Time Adventures',
-                  description: 'Gentle stories that teach values and morals in an age-appropriate way.',
+                  url: 'https://www.youtube.com/watch?v=Yz2NiUJHmhE', // Children's Bible story
+                  title: '📚 Gentle Story Time Adventures',
+                  description: 'Beautiful, gentle stories that teach wonderful values, kindness, and important life lessons in the most age-appropriate way!',
                   thumbnail: '/images/video-thumb-3.jpg'
                 }
               ]} />
@@ -385,30 +360,9 @@ export default function GalleryPage() {
           </div>
         )}
 
-        {/* Footer */}
-        <footer className="bg-card border-t border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="text-center space-y-4">
-              <div className="flex items-center justify-center space-x-2">
-                <img
-                  src="/static/friendship-corner-daycare-logo.png"
-                  alt="Friendship Corner Daycare Logo"
-                  className="w-16 h-12 object-contain"
-                />
-                <span className="font-display font-semibold text-lg text-foreground">
-                  Friendship Corner Daycare
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                © 2024 Friendship Corner Daycare. All rights reserved.
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Montessori Excellence Since 2008 • Licensed Group Daycare • 604.945.8504
-              </p>
-            </div>
-          </div>
-        </footer>
-      </div>
+        <Footer />
+        </div>
+      </Suspense>
     </ThemeProvider>
   );
 }

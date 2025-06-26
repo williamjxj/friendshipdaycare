@@ -1,0 +1,23 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore build output
+.next/
+dist/
+build/
+
+# Ignore generated files
+*.generated.md
+
+# Ignore changelog files (often have formatting issues)
+CHANGELOG.md
+HISTORY.md
+
+# Ignore README files from dependencies
+**/node_modules/**/README.md
+
+# Ignore specific files that might have formatting issues
+scripts/README.md
+
+# Ignore any auto-generated documentation
+docs/api/

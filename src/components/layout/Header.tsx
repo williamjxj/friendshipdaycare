@@ -1,24 +1,41 @@
 'use client';
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { LanguageSwitcher } from './LanguageSwitcher';
-import { ThemeSwitcher } from './ThemeSwitcher';
+import { LanguageToggle } from '@/components/ui/LanguageToggle';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const t = useTranslations('navigation');
+  const [isHydrated, setIsHydrated] = useState(false);
+  const { t } = useLanguage();
   const pathname = usePathname();
 
-  const navigation = [
-    { name: t('home'), href: '/' },
-    { name: t('about'), href: '/about' },
-    { name: t('programs'), href: '/programs' },
-    { name: t('gallery'), href: '/gallery' },
-    { name: t('contact'), href: '/contact' },
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  // Use static navigation during SSR to prevent hydration mismatch
+  const navigation = isHydrated ? [
+    { name: t('navigation.home'), href: '/' },
+    { name: t('navigation.about'), href: '/about' },
+    { name: t('navigation.programs'), href: '/programs' },
+    { name: t('navigation.gallery'), href: '/gallery' },
+    { name: t('navigation.todaysStory'), href: '/todays-story' },
+    { name: t('navigation.journal'), href: '/journal' },
+    { name: t('navigation.contact'), href: '/contact' },
+  ] : [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Programs', href: '/programs' },
+    { name: 'Gallery', href: '/gallery' },
+    { name: 'Story', href: '/todays-story' },
+    { name: 'Journal', href: '/journal' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const isActive = (href: string) => {
@@ -29,48 +46,64 @@ export function Header() {
   };
 
   return (
-    <header className="bg-card border-b border-border sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 border-b-4 border-pink-200 sticky top-0 z-50 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+        <div className="flex justify-between items-center h-20">
+          {/* Magical Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">F</span>
+            <Link href="/" className="flex items-center space-x-3 fun-hover">
+              <div className="child-friendly-card p-1">
+                <Image
+                  src="/images/friendship-corner-daycare-logo.png"
+                  alt="Friendship Corner Daycare Logo"
+                  width={64}
+                  height={48}
+                  className="w-16 h-12 object-contain"
+                  priority
+                />
               </div>
-              <span className="font-display font-semibold text-lg text-foreground">
-                Friendship Corner
-              </span>
+              <div>
+                <span className="font-display font-bold text-xl rainbow-text">
+                  Friendship Corner
+                </span>
+                <div className="text-sm text-purple-600 font-medium">
+                  🌟 Where Dreams Take Flight 🌟
+                </div>
+              </div>
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive(item.href)
-                    ? 'text-primary bg-primary/10'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+          {/* Fun Navigation */}
+          <nav className="hidden md:flex space-x-2">
+            {navigation.map((item, index) => {
+              const emojis = ['🏠', '📖', '🎨', '📸', '📚', '📖', '📞'];
+              const colors = ['pink', 'purple', 'blue', 'green', 'orange', 'indigo', 'pink'];
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all hover:scale-105 ${
+                    isActive(item.href)
+                      ? 'playful-button'
+                      : `text-${colors[index]}-600 hover:bg-${colors[index]}-100`
+                  }`}
+                >
+                  {emojis[index]} {item.name}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop Controls */}
           <div className="hidden md:flex items-center space-x-4">
-            <LanguageSwitcher />
-            <ThemeSwitcher />
+            <LanguageToggle />
+            <ThemeToggle />
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <LanguageSwitcher />
-            <ThemeSwitcher />
+            <LanguageToggle />
+            <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted"

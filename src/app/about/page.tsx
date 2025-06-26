@@ -1,44 +1,20 @@
 'use client';
 
+import { Suspense } from 'react';
 import { ThemeProvider } from '@/contexts/ThemeContext';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { LanguageToggle } from '@/components/ui/LanguageToggle';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import Link from 'next/link';
 
 export default function AboutPage() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen flex flex-col">
-        {/* Header */}
-        <header className="bg-card border-b border-border sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <div className="flex-shrink-0">
-                <Link href="/" className="flex items-center space-x-2">
-                  <img
-                    src="/static/friendship-corner-daycare-logo.png"
-                    alt="Friendship Corner Daycare Logo"
-                    className="w-16 h-12 object-contain"
-                  />
-                  <span className="font-display font-semibold text-lg text-foreground">
-                    Friendship Corner Daycare
-                  </span>
-                </Link>
-              </div>
-              <div className="flex items-center space-x-4">
-                <nav className="hidden md:flex space-x-8">
-                  <Link href="/" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Home</Link>
-                  <Link href="/about" className="text-primary bg-primary/10 px-3 py-2 rounded-md text-sm font-medium">About</Link>
-                  <Link href="/programs" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Programs</Link>
-                  <Link href="/gallery" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Gallery</Link>
-                  <Link href="/contact" className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium">Contact</Link>
-                </nav>
-                <LanguageToggle />
-                <ThemeToggle />
-              </div>
-            </div>
-          </div>
-        </header>
+      <Suspense fallback={<LoadingSpinner message="Loading about us..." />}>
+        <div className="min-h-screen flex flex-col">
+          <SkipNavigation />
+          <Header />
         
         <main className="flex-1">
           {/* Hero Section */}
@@ -96,7 +72,7 @@ export default function AboutPage() {
                   The Montessori Philosophy
                 </h2>
                 <p className="text-lg text-muted-foreground w-full text-center">
-                  Our approach is rooted in Dr. Maria Montessori's educational philosophy, emphasizing respect for the child's natural development
+                  Our approach is rooted in Dr. Maria Montessori&apos;s educational philosophy, emphasizing respect for the child&apos;s natural development
                 </p>
               </div>
               
@@ -107,7 +83,7 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-lg font-semibold text-foreground">Child-Centered</h3>
                   <p className="text-sm text-muted-foreground">
-                    Learning follows the child's natural interests and developmental pace
+                    Learning follows the child&apos;s natural interests and developmental pace
                   </p>
                 </div>
                 
@@ -165,7 +141,7 @@ export default function AboutPage() {
                         </div>
                         <div>
                           <h4 className="font-medium text-foreground">Respect</h4>
-                          <p className="text-sm text-muted-foreground">For each child's unique personality and learning style</p>
+                          <p className="text-sm text-muted-foreground">For each child&apos;s unique personality and learning style</p>
                         </div>
                       </div>
                       <div className="flex items-start space-x-3">
@@ -244,30 +220,9 @@ export default function AboutPage() {
           </section>
         </main>
 
-        {/* Footer */}
-        <footer className="bg-card border-t border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="text-center space-y-4">
-              <div className="flex items-center justify-center space-x-2">
-                <img
-                  src="/static/friendship-corner-daycare-logo.png"
-                  alt="Friendship Corner Daycare Logo"
-                  className="w-16 h-12 object-contain"
-                />
-                <span className="font-display font-semibold text-lg text-foreground">
-                  Friendship Corner Daycare
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                © 2024 Friendship Corner Daycare. All rights reserved.
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Montessori Excellence Since 2008 • Licensed Group Daycare • 604.945.8504
-              </p>
-            </div>
-          </div>
-        </footer>
-      </div>
+        <Footer />
+        </div>
+      </Suspense>
     </ThemeProvider>
   );
 }
