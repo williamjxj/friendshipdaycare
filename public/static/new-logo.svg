@@ -1,0 +1,49 @@
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="300" height="200" rx="20" fill="#7BB3E0"/>
+  
+  <!-- Text "Friendship Corner" -->
+  <text x="20" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">Friendship Corner</text>
+  
+  <!-- Text "Daycare" (vertical) -->
+  <text x="270" y="40" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" transform="rotate(90 270 40)">Daycare</text>
+  
+  <!-- Children faces -->
+  <!-- Child 1 - blonde girl with pigtails -->
+  <circle cx="60" cy="100" r="25" fill="#FDBCB4"/>
+  <circle cx="50" cy="85" r="8" fill="#FFD700"/> <!-- left pigtail -->
+  <circle cx="70" cy="85" r="8" fill="#FFD700"/> <!-- right pigtail -->
+  <circle cx="55" cy="95" r="2" fill="black"/> <!-- left eye -->
+  <circle cx="65" cy="95" r="2" fill="black"/> <!-- right eye -->
+  <path d="M 55 105 Q 60 110 65 105" stroke="black" stroke-width="1" fill="none"/> <!-- smile -->
+  <path d="M 45 75 Q 50 70 55 75" stroke="#FFD700" stroke-width="3" fill="none"/> <!-- left pigtail hair -->
+  <path d="M 65 75 Q 70 70 75 75" stroke="#FFD700" stroke-width="3" fill="none"/> <!-- right pigtail hair -->
+  
+  <!-- Child 2 - dark-skinned boy -->
+  <circle cx="120" cy="100" r="25" fill="#8B4513"/>
+  <path d="M 100 80 Q 120 70 140 80" stroke="#2F1B14" stroke-width="8" fill="none"/> <!-- hair -->
+  <circle cx="115" cy="95" r="2" fill="black"/> <!-- left eye -->
+  <circle cx="125" cy="95" r="2" fill="black"/> <!-- right eye -->
+  <path d="M 115 105 Q 120 110 125 105" stroke="black" stroke-width="1" fill="none"/> <!-- smile -->
+  
+  <!-- Child 3 - light-skinned boy with spiky hair -->
+  <circle cx="180" cy="100" r="25" fill="#FDBCB4"/>
+  <path d="M 160 80 L 165 70 L 170 80 L 175 70 L 180 80 L 185 70 L 190 80 L 195 70 L 200 80" stroke="#DEB887" stroke-width="3" fill="none"/> <!-- spiky hair -->
+  <circle cx="175" cy="95" r="2" fill="black"/> <!-- left eye -->
+  <circle cx="185" cy="95" r="2" fill="black"/> <!-- right eye -->
+  <path d="M 175 105 Q 180 110 185 105" stroke="black" stroke-width="1" fill="none"/> <!-- smile -->
+  
+  <!-- Child 4 - girl with bob haircut -->
+  <circle cx="90" cy="140" r="25" fill="#FDBCB4"/>
+  <path d="M 70 125 Q 90 115 110 125 Q 110 135 90 135 Q 70 135 70 125" fill="#8B4513"/> <!-- bob hair -->
+  <circle cx="85" cy="135" r="2" fill="black"/> <!-- left eye -->
+  <circle cx="95" cy="135" r="2" fill="black"/> <!-- right eye -->
+  <path d="M 85 145 Q 90 150 95 145" stroke="black" stroke-width="1" fill="none"/> <!-- smile -->
+  
+  <!-- Child 5 - boy with straight hair -->
+  <circle cx="150" cy="140" r="25" fill="#FDBCB4"/>
+  <path d="M 130 125 Q 150 115 170 125" stroke="#654321" stroke-width="8" fill="none"/> <!-- straight hair -->
+  <circle cx="145" cy="135" r="2" fill="black"/> <!-- left eye -->
+  <circle cx="155" cy="135" r="2" fill="black"/> <!-- right eye -->
+  <path d="M 145 145 Q 150 150 155 145" stroke="black" stroke-width="1" fill="none"/> <!-- smile -->
+</svg>

@@ -1,0 +1,68 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "about": "À propos",
+    "programs": "Programmes",
+    "gallery": "Galerie",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Nourrir les jeunes esprits grâce à l'excellence Montessori",
+    "subtitle": "Un environnement sûr, propre, bienveillant et stimulant conçu pour aider les enfants à grandir, explorer, créer et s'amuser.",
+    "cta": "En savoir plus",
+    "enrollNow": "S'inscrire maintenant"
+  },
+  "about": {
+    "title": "À propos de la garderie Friendship Corner",
+    "subtitle": "Excellence Montessori depuis 2008",
+    "description": "La garderie Friendship Corner (Montessori), une société à but non lucratif, a ouvert en janvier 2008 à Coquitlam, C.-B. Nous sommes une garderie de groupe agréée pour les enfants de 30 mois à l'âge scolaire.",
+    "mission": "Notre mission",
+    "missionText": "Nous offrons un environnement sûr, propre, bienveillant et stimulant conçu pour aider les enfants à grandir, explorer, créer et s'amuser. Un programme adapté au développement offre de nombreuses opportunités d'expression personnelle et d'interaction."
+  },
+  "programs": {
+    "title": "Nos programmes",
+    "subtitle": "Apprentissage adapté à l'âge pour chaque enfant",
+    "toddler": {
+      "title": "Programme tout-petits",
+      "age": "30 mois - 3 ans",
+      "description": "Introduction douce à l'apprentissage structuré avec un accent sur l'indépendance et les compétences sociales."
+    },
+    "preschool": {
+      "title": "Programme préscolaire",
+      "age": "3 - 4 ans",
+      "description": "Programme basé sur Montessori mettant l'accent sur l'apprentissage pratique et l'expression créative."
+    },
+    "prekindergarten": {
+      "title": "Pré-maternelle",
+      "age": "4 - 5 ans",
+      "description": "Préparation à la scolarité avec du matériel et des concepts Montessori avancés."
+    }
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Contactez-nous aujourd'hui",
+    "phone": "Téléphone",
+    "location": "Emplacement",
+    "hours": "Heures",
+    "address": "Près de la station Coquitlam, Coquitlam, C.-B.",
+    "operatingHours": "Lundi - Vendredi : 6h30 - 18h30",
+    "form": {
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "phone": "Numéro de téléphone",
+      "message": "Message",
+      "submit": "Envoyer le message",
+      "success": "Merci ! Nous vous répondrons bientôt.",
+      "error": "Quelque chose s'est mal passé. Veuillez réessayer."
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Garderie Friendship Corner. Tous droits réservés.",
+    "phone": "604.945.8504"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "retry": "Réessayer"
+  }
+}

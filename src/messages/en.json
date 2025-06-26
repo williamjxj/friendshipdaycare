@@ -1,0 +1,68 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "programs": "Programs",
+    "gallery": "Gallery",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Nurturing Young Minds Through Montessori Excellence",
+    "subtitle": "A safe, clean, nurturing, and stimulating environment designed to help children grow, explore, create, and have fun.",
+    "cta": "Learn More",
+    "enrollNow": "Enroll Now"
+  },
+  "about": {
+    "title": "About Friendship Corner Daycare",
+    "subtitle": "Montessori Excellence Since 2008",
+    "description": "Friendship Corner Daycare (Montessori), a non-profit society, opened in January 2008 in Coquitlam, BC. We are a Licensed Group Daycare for children from 30 months to school age.",
+    "mission": "Our Mission",
+    "missionText": "We offer a safe, clean, nurturing, and stimulating environment designed to help children grow, explore, create, and have fun. A developmentally appropriate curriculum provides many opportunities for self-expression and interaction."
+  },
+  "programs": {
+    "title": "Our Programs",
+    "subtitle": "Age-Appropriate Learning for Every Child",
+    "toddler": {
+      "title": "Toddler Program",
+      "age": "30 months - 3 years",
+      "description": "Gentle introduction to structured learning with focus on independence and social skills."
+    },
+    "preschool": {
+      "title": "Preschool Program", 
+      "age": "3 - 4 years",
+      "description": "Montessori-based curriculum emphasizing hands-on learning and creative expression."
+    },
+    "prekindergarten": {
+      "title": "Pre-Kindergarten",
+      "age": "4 - 5 years", 
+      "description": "School readiness preparation with advanced Montessori materials and concepts."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in Touch Today",
+    "phone": "Phone",
+    "location": "Location",
+    "hours": "Hours",
+    "address": "Near Coquitlam Station, Coquitlam, BC",
+    "operatingHours": "Monday - Friday: 6:30 AM - 6:30 PM",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Thank you! We'll get back to you soon.",
+      "error": "Something went wrong. Please try again."
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Friendship Corner Daycare. All rights reserved.",
+    "phone": "604.945.8504"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Try Again"
+  }
+}
