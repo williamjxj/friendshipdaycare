@@ -1,6 +1,6 @@
 {
   "name": "kidgarden-daycare",
-  "version": "0.1.0",
+  "version": "0.2.6",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -21,6 +21,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.58.1",
     "react-player": "^2.16.0",
+    "resend": "^4.7.0",
     "zod": "^3.25.67"
   },
   "devDependencies": {
