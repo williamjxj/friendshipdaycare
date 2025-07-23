@@ -1,9 +1,10 @@
 {
-  "name": "kidgarden-daycare",
-  "version": "0.2.6",
+  "name": "friendshipdaycare",
+  "version": "0.3.6",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
+    "dev:turbo": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
