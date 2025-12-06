@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, memo, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -8,6 +8,69 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
+
+// Constants outside component to prevent recreation on every render
+const NAV_EMOJIS = ['🏠', '📖', '🎨', '💰', '📝', '👥', '📸', '📞'];
+const NAV_COLORS = ['pink', 'purple', 'blue', 'green', 'orange', 'indigo', 'teal', 'pink'];
+
+// Memoized NavLink component to prevent unnecessary re-renders
+const NavLink = memo(function NavLink({
+  href,
+  name,
+  emoji,
+  color,
+  isActive,
+}: {
+  href: string;
+  name: string;
+  emoji: string;
+  color: string;
+  isActive: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`px-4 py-2 rounded-full text-sm font-medium transition-all hover:scale-105 ${
+        isActive
+          ? 'playful-button'
+          : `text-${color}-600 hover:bg-${color}-100`
+      }`}
+    >
+      {emoji} {name}
+    </Link>
+  );
+});
+
+NavLink.displayName = 'NavLink';
+
+// Memoized Mobile NavLink component
+const MobileNavLink = memo(function MobileNavLink({
+  href,
+  name,
+  isActive,
+  onClick,
+}: {
+  href: string;
+  name: string;
+  isActive: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+        isActive
+          ? 'text-primary bg-primary/10'
+          : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+      }`}
+      onClick={onClick}
+    >
+      {name}
+    </Link>
+  );
+});
+
+MobileNavLink.displayName = 'MobileNavLink';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,39 +82,88 @@ export function Header() {
     setIsHydrated(true);
   }, []);
 
-  // Use static navigation during SSR to prevent hydration mismatch
-  const navigation = isHydrated ? [
-    { name: t('navigation.home'), href: '/' },
-    { name: t('navigation.about'), href: '/about' },
-    { name: t('navigation.programs'), href: '/programs' },
-    { name: t('navigation.pricing'), href: '/pricing' },
-    { name: t('navigation.enrollment'), href: '/enrollment' },
-    { name: t('navigation.team'), href: '/team' },
-    { name: t('navigation.gallery'), href: '/gallery' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'FAQ', href: '/faq' },
-    { name: 'Resources', href: '/resources' },
-    { name: t('navigation.contact'), href: '/contact' },
-  ] : [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Programs', href: '/programs' },
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'Enrollment', href: '/enrollment' },
-    { name: 'Team', href: '/team' },
-    { name: 'Gallery', href: '/gallery' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'FAQ', href: '/faq' },
-    { name: 'Resources', href: '/resources' },
-    { name: 'Contact', href: '/contact' },
-  ];
+  // Base navigation structure - always the same to prevent hydration mismatch
+  const navigationBase = useMemo(() => [
+    { key: 'home', href: '/' },
+    { key: 'about', href: '/about' },
+    { key: 'programs', href: '/programs' },
+    { key: 'pricing', href: '/pricing' },
+    { key: 'enrollment', href: '/enrollment' },
+    { key: 'team', href: '/team' },
+    { key: 'gallery', href: '/gallery' },
+    { key: 'blog', href: '/blog' },
+    { key: 'faq', href: '/faq' },
+    { key: 'resources', href: '/resources' },
+    { key: 'contact', href: '/contact' },
+  ], []);
 
-  const isActive = (href: string) => {
-    if (href === '/') {
-      return pathname === '/' || pathname.endsWith('/');
-    }
-    return pathname.includes(href);
-  };
+  // English fallbacks for SSR - must match initial client render
+  const fallbackNames: Record<string, string> = useMemo(() => ({
+    home: 'Home',
+    about: 'About',
+    programs: 'Programs',
+    pricing: 'Pricing',
+    enrollment: 'Enrollment',
+    team: 'Team',
+    gallery: 'Gallery',
+    blog: 'Blog',
+    faq: 'FAQ',
+    resources: 'Resources',
+    contact: 'Contact',
+  }), []);
+
+  // Memoize navigation array to prevent re-renders on route changes
+  const navigation = useMemo(() => {
+    const getNavName = (key: string) => {
+      if (!isHydrated) {
+        return fallbackNames[key] || key;
+      }
+      
+      // Use translations after hydration
+      try {
+        const translationMap: Record<string, string> = {
+          home: t('navigation.home'),
+          about: t('navigation.about'),
+          programs: t('navigation.programs'),
+          pricing: t('navigation.pricing'),
+          enrollment: t('navigation.enrollment'),
+          team: t('navigation.team'),
+          gallery: t('navigation.gallery'),
+          blog: 'Blog',
+          faq: 'FAQ',
+          resources: 'Resources',
+          contact: t('navigation.contact'),
+        };
+        return translationMap[key] || fallbackNames[key] || key;
+      } catch {
+        // Fallback if translation fails
+        return fallbackNames[key] || key;
+      }
+    };
+
+    return navigationBase.map(item => ({
+      name: getNavName(item.key),
+      href: item.href,
+      key: item.key, // Add key for stable reference
+    }));
+  }, [navigationBase, fallbackNames, isHydrated, t]);
+
+  // Memoize active state computation to prevent recalculation
+  const activeStates = useMemo(() => {
+    const states: Record<string, boolean> = {};
+    navigation.forEach(item => {
+      if (item.href === '/') {
+        states[item.href] = pathname === '/' || pathname.endsWith('/');
+      } else {
+        states[item.href] = pathname.includes(item.href);
+      }
+    });
+    return states;
+  }, [navigation, pathname]);
+
+  const closeMobileMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
 
   return (
     <header className="bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 border-b-4 border-pink-200 sticky top-0 z-50 shadow-lg">
@@ -82,24 +194,17 @@ export function Header() {
           </div>
 
           {/* Fun Navigation */}
-          <nav className="hidden md:flex space-x-2">
-            {navigation.map((item, index) => {
-              const emojis = ['🏠', '📖', '🎨', '💰', '📝', '👥', '📸', '📞'];
-              const colors = ['pink', 'purple', 'blue', 'green', 'orange', 'indigo', 'teal', 'pink'];
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all hover:scale-105 ${
-                    isActive(item.href)
-                      ? 'playful-button'
-                      : `text-${colors[index]}-600 hover:bg-${colors[index]}-100`
-                  }`}
-                >
-                  {emojis[index]} {item.name}
-                </Link>
-              );
-            })}
+          <nav className="hidden md:flex space-x-2" suppressHydrationWarning>
+            {navigation.map((item, index) => (
+              <NavLink
+                key={item.key || item.href}
+                href={item.href}
+                name={item.name}
+                emoji={NAV_EMOJIS[index]}
+                color={NAV_COLORS[index]}
+                isActive={activeStates[item.href] || false}
+              />
+            ))}
           </nav>
 
           {/* Desktop Controls */}
@@ -127,21 +232,16 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden">
+          <div className="md:hidden" suppressHydrationWarning>
             <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border">
               {navigation.map((item) => (
-                <Link
-                  key={item.name}
+                <MobileNavLink
+                  key={item.key || item.href}
                   href={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                    isActive(item.href)
-                      ? 'text-primary bg-primary/10'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
+                  name={item.name}
+                  isActive={activeStates[item.href] || false}
+                  onClick={closeMobileMenu}
+                />
               ))}
             </div>
           </div>

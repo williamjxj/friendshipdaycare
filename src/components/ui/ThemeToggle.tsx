@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { SwatchIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 
@@ -8,12 +8,29 @@ export function ThemeToggle() {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme, themes } = useTheme();
 
-  const currentTheme = themes.find(t => t.value === theme);
+  // Memoize current theme lookup
+  const currentTheme = useMemo(() => 
+    themes.find(t => t.value === theme),
+    [themes, theme]
+  );
+
+  const toggleDropdown = useCallback(() => {
+    setIsOpen(prev => !prev);
+  }, []);
+
+  const closeDropdown = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const handleThemeChange = useCallback((themeValue: typeof theme) => {
+    setTheme(themeValue);
+    setIsOpen(false);
+  }, [setTheme]);
 
   return (
     <div className="relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleDropdown}
         className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
       >
         <SwatchIcon className="h-4 w-4" />
@@ -26,7 +43,7 @@ export function ThemeToggle() {
           {/* Backdrop */}
           <div
             className="fixed inset-0 z-10"
-            onClick={() => setIsOpen(false)}
+            onClick={closeDropdown}
           />
           
           {/* Dropdown */}
@@ -35,10 +52,7 @@ export function ThemeToggle() {
               {themes.map((themeOption) => (
                 <button
                   key={themeOption.value}
-                  onClick={() => {
-                    setTheme(themeOption.value);
-                    setIsOpen(false);
-                  }}
+                  onClick={() => handleThemeChange(themeOption.value)}
                   className={`w-full text-left px-4 py-3 transition-colors ${
                     theme === themeOption.value
                       ? 'bg-primary/10 text-primary'

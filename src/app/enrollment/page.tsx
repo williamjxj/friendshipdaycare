@@ -1,10 +1,6 @@
 'use client';
 
 import { Suspense } from 'react';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import Link from 'next/link';
 import { 
@@ -113,13 +109,8 @@ export default function EnrollmentPage() {
   ];
 
   return (
-    <ThemeProvider>
-      <Suspense fallback={<LoadingSpinner message="Loading enrollment information..." />}>
-        <div className="min-h-screen flex flex-col">
-          <SkipNavigation />
-          <Header />
-
-          <main id="main-content" className="flex-1">
+    <Suspense fallback={<LoadingSpinner message="Loading enrollment information..." />}>
+      <main id="main-content" className="flex-1">
             {/* Hero Section */}
             <section className="relative py-20 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -449,11 +440,7 @@ export default function EnrollmentPage() {
                 </p>
               </div>
             </section>
-          </main>
-
-          <Footer />
-        </div>
-      </Suspense>
-    </ThemeProvider>
+      </main>
+    </Suspense>
   );
 }

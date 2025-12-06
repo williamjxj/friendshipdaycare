@@ -1,10 +1,6 @@
 'use client';
 
 import { Suspense } from 'react';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
@@ -80,14 +76,9 @@ export default function JournalPage() {
   const { t } = useLanguage();
 
   return (
-    <ThemeProvider>
-      <Suspense fallback={<LoadingSpinner message="Loading journal..." />}>
-        <div className="min-h-screen flex flex-col">
-          <SkipNavigation />
-          <Header />
-
-          {/* Main Content */}
-          <main id="main-content" className="flex-1">
+    <Suspense fallback={<LoadingSpinner message="Loading journal..." />}>
+      {/* Main Content */}
+      <main id="main-content" className="flex-1">
             {/* Hero Section */}
             <section className="relative py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 overflow-hidden">
               <div className="absolute inset-0">
@@ -196,11 +187,7 @@ export default function JournalPage() {
                 )}
               </div>
             </section>
-          </main>
-
-          <Footer />
-        </div>
-      </Suspense>
-    </ThemeProvider>
+      </main>
+    </Suspense>
   );
 }

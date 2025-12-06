@@ -1,10 +1,7 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useMemo } from 'react';
 import Image from 'next/image';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import { RealEnvironmentShowcase } from '@/components/sections/RealEnvironmentShowcase';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import dynamic from 'next/dynamic';
@@ -13,12 +10,26 @@ import dynamic from 'next/dynamic';
 const VideoPlayer = dynamic(() => import('@/components/ui/VideoPlayer').then(mod => ({ default: mod.VideoPlayer })), { ssr: false });
 
 export default function HomePage() {
+  // Memoize videos array to prevent VideoPlayer re-renders
+  const videos = useMemo(() => [
+    {
+      url: 'https://www.youtube.com/watch?v=jNQXAC9IVRw', // Sample Montessori video
+      title: 'Today\'s Montessori Lesson',
+      description: 'Join us for today\'s hands-on learning activities where children explore, discover, and develop independence through the Montessori method.'
+    },
+    {
+      url: 'https://www.youtube.com/watch?v=HMUDVMiITOU', // Sample children's story
+      title: 'Gentle Bible Story Time',
+      description: 'A heartwarming animated Bible story designed to teach values, kindness, and moral lessons in a way that\'s perfect for young minds.'
+    },
+    {
+      url: 'https://www.youtube.com/watch?v=2Vv-BfVoq4g', // Sample education video
+      title: 'Creative Learning Through Play',
+      description: 'See how our children learn essential skills through creative activities, group work, and imaginative play.'
+    }
+  ], []);
   return (
-    <>
-      <SkipNavigation />
-      <Header />
-
-      <main id="main-content" className="flex-1">
+    <main id="main-content" className="flex-1">
         {/* Magical Hero Section */}
         <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
           {/* Background Image with Overlay */}
@@ -371,23 +382,7 @@ export default function HomePage() {
             </p>
           </div>
           
-          <VideoPlayer videos={[
-            {
-              url: 'https://www.youtube.com/watch?v=jNQXAC9IVRw', // Sample Montessori video
-              title: 'Today&apos;s Montessori Lesson',
-              description: 'Join us for today&apos;s hands-on learning activities where children explore, discover, and develop independence through the Montessori method.'
-            },
-            {
-              url: 'https://www.youtube.com/watch?v=HMUDVMiITOU', // Sample children's story
-              title: 'Gentle Bible Story Time',
-              description: 'A heartwarming animated Bible story designed to teach values, kindness, and moral lessons in a way that&apos;s perfect for young minds.'
-            },
-            {
-              url: 'https://www.youtube.com/watch?v=2Vv-BfVoq4g', // Sample education video
-              title: 'Creative Learning Through Play',
-              description: 'See how our children learn essential skills through creative activities, group work, and imaginative play.'
-            }
-          ]} />
+          <VideoPlayer videos={videos} />
         </div>
       </section>
 
@@ -433,8 +428,5 @@ export default function HomePage() {
         </div>
       </section>
     </main>
-
-    <Footer />
-  </>
   );
 }

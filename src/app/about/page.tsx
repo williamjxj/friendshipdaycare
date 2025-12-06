@@ -1,22 +1,13 @@
 'use client';
 
 import { Suspense } from 'react';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import Link from 'next/link';
 
 export default function AboutPage() {
   return (
-    <ThemeProvider>
-      <Suspense fallback={<LoadingSpinner message="Loading about us..." />}>
-        <div className="min-h-screen flex flex-col">
-          <SkipNavigation />
-          <Header />
-        
-        <main className="flex-1">
+    <Suspense fallback={<LoadingSpinner message="Loading about us..." />}>
+      <main className="flex-1">
           {/* Hero Section */}
           <section className="relative py-20 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -218,11 +209,7 @@ export default function AboutPage() {
               </div>
             </div>
           </section>
-        </main>
-
-        <Footer />
-        </div>
-      </Suspense>
-    </ThemeProvider>
+      </main>
+    </Suspense>
   );
 }

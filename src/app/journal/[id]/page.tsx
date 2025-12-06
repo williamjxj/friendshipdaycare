@@ -1,10 +1,6 @@
 'use client';
 
 import { Suspense } from 'react';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
@@ -172,29 +168,22 @@ export default function JournalDetailPage() {
   
   if (!journal) {
     return (
-      <ThemeProvider>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center space-y-4">
-            <h1 className="text-2xl font-bold text-foreground">Journal Not Found</h1>
-            <p className="text-muted-foreground">The journal you&apos;re looking for doesn&apos;t exist.</p>
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center space-y-4">
+          <h1 className="text-2xl font-bold text-foreground">Journal Not Found</h1>
+          <p className="text-muted-foreground">The journal you&apos;re looking for doesn&apos;t exist.</p>
             <Link href="/journal" className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
               {t('journal.backToJournals')}
             </Link>
           </div>
         </div>
-      </ThemeProvider>
     );
   }
 
   return (
-    <ThemeProvider>
-      <Suspense fallback={<LoadingSpinner message="Loading journal..." />}>
-        <div className="min-h-screen flex flex-col">
-          <SkipNavigation />
-          <Header />
-
-          {/* Main Content */}
-          <main id="main-content" className="flex-1">
+    <Suspense fallback={<LoadingSpinner message="Loading journal..." />}>
+      {/* Main Content */}
+      <main id="main-content" className="flex-1">
             <article className="py-12 bg-background">
               <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Back Button */}
@@ -286,11 +275,7 @@ export default function JournalDetailPage() {
                 </div>
               </div>
             </article>
-          </main>
-
-          <Footer />
-        </div>
-      </Suspense>
-    </ThemeProvider>
+      </main>
+    </Suspense>
   );
 }

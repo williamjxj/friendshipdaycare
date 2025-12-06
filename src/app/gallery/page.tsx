@@ -1,13 +1,9 @@
 'use client';
 
 import { Suspense, useState } from 'react';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
 import { VideoPlayer } from '@/components/ui/VideoPlayer';
 import { ImageCarousel } from '@/components/ui/ImageCarousel';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
@@ -140,13 +136,8 @@ export default function GalleryPage() {
   };
 
   return (
-    <ThemeProvider>
-      <Suspense fallback={<LoadingSpinner message="Loading gallery..." />}>
-        <div className="min-h-screen flex flex-col">
-          <SkipNavigation />
-          <Header />
-        
-        <main className="flex-1">
+    <Suspense fallback={<LoadingSpinner message="Loading gallery..." />}>
+      <main className="flex-1">
           {/* Hero Section */}
           <section className="relative py-20 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -359,10 +350,7 @@ export default function GalleryPage() {
             </div>
           </div>
         )}
-
-        <Footer />
-        </div>
-      </Suspense>
-    </ThemeProvider>
+      </main>
+    </Suspense>
   );
 }

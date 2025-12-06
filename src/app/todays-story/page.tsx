@@ -1,23 +1,14 @@
 'use client';
 
 import { Suspense } from 'react';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
 import { PageLoader, LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { VideoPlayer } from '@/components/ui/VideoPlayer';
-import { SkipNavigation } from '@/components/ui/SkipNavigation';
 import Link from 'next/link';
 
 export default function TodaysStoryPage() {
   return (
-    <ThemeProvider>
-      <Suspense fallback={<PageLoader message="Loading today's magical story..." />}>
-        <div className="min-h-screen flex flex-col">
-          <SkipNavigation />
-          <Header />
-        
-        <main className="flex-1">
+    <Suspense fallback={<PageLoader message="Loading today's magical story..." />}>
+      <main className="flex-1">
           {/* Magical Story Hero */}
           <section className="relative py-20 overflow-hidden">
             {/* Animated Background */}
@@ -255,11 +246,7 @@ export default function TodaysStoryPage() {
               </div>
             </div>
           </section>
-        </main>
-
-        <Footer />
-        </div>
-      </Suspense>
-    </ThemeProvider>
+      </main>
+    </Suspense>
   );
 }

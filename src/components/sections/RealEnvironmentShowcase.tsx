@@ -1,7 +1,7 @@
 'use client';
 
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 interface EnvironmentImage {
   src: string;
@@ -11,10 +11,8 @@ interface EnvironmentImage {
   category: 'montessori' | 'outdoor' | 'activities';
 }
 
-export function RealEnvironmentShowcase() {
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'montessori' | 'outdoor' | 'activities'>('all');
-
-  const environmentImages: EnvironmentImage[] = [
+// Constants outside component to prevent recreation on every render
+const ENVIRONMENT_IMAGES: EnvironmentImage[] = [
     {
       src: '/images/sensorial-shelf.jpg',
       alt: 'Montessori sensorial materials shelf',
@@ -78,18 +76,24 @@ export function RealEnvironmentShowcase() {
       description: 'Carefully selected toys and materials that encourage creativity and imaginative play',
       category: 'activities'
     }
-  ];
+];
 
-  const categories = [
-    { id: 'all', name: 'All Areas', icon: '🏫' },
-    { id: 'montessori', name: 'Montessori Materials', icon: '📚' },
-    { id: 'outdoor', name: 'Outdoor Spaces', icon: '🌳' },
-    { id: 'activities', name: 'Activities', icon: '🎨' }
-  ];
+const CATEGORIES = [
+  { id: 'all', name: 'All Areas', icon: '🏫' },
+  { id: 'montessori', name: 'Montessori Materials', icon: '📚' },
+  { id: 'outdoor', name: 'Outdoor Spaces', icon: '🌳' },
+  { id: 'activities', name: 'Activities', icon: '🎨' }
+] as const;
 
-  const filteredImages = selectedCategory === 'all' 
-    ? environmentImages 
-    : environmentImages.filter(img => img.category === selectedCategory);
+export function RealEnvironmentShowcase() {
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'montessori' | 'outdoor' | 'activities'>('all');
+
+  // Memoize filtered images to prevent recalculation on every render
+  const filteredImages = useMemo(() => {
+    return selectedCategory === 'all' 
+      ? ENVIRONMENT_IMAGES 
+      : ENVIRONMENT_IMAGES.filter(img => img.category === selectedCategory);
+  }, [selectedCategory]);
 
   return (
     <section className="py-20 bg-gradient-to-br from-background via-muted/30 to-background">
@@ -107,7 +111,7 @@ export function RealEnvironmentShowcase() {
 
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category) => (
+          {CATEGORIES.map((category) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id as 'all' | 'montessori' | 'outdoor' | 'activities')}

@@ -5,6 +5,9 @@ import { PageLoader } from "@/components/ui/LoadingSpinner";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { NextIntlProvider } from "@/components/providers/NextIntlProvider";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { SkipNavigation } from "@/components/ui/SkipNavigation";
 import { LocalBusinessSchema, OrganizationSchema, defaultOrganizationData } from "@/components/seo/StructuredData";
 import "./globals.css";
 
@@ -80,13 +83,18 @@ export default function RootLayout({
           address={defaultOrganizationData.address}
         />
       </head>
-      <body className={`${nunito.variable} ${fredoka.variable} antialiased font-sans`}>
+      <body className={`${nunito.variable} ${fredoka.variable} antialiased font-sans`} suppressHydrationWarning>
         <NextIntlProvider>
           <LanguageProvider>
             <ThemeProvider>
-              <Suspense fallback={<PageLoader message="Loading magical content..." />}>
-                {children}
-              </Suspense>
+              <div className="min-h-screen flex flex-col">
+                <SkipNavigation />
+                <Header />
+                <Suspense fallback={<PageLoader message="Loading magical content..." />}>
+                  {children}
+                </Suspense>
+                <Footer />
+              </div>
             </ThemeProvider>
           </LanguageProvider>
         </NextIntlProvider>

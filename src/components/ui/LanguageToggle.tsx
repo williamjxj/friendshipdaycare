@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { LanguageIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import { useLanguage, languageConfig } from '@/contexts/LanguageContext';
 
@@ -8,17 +8,30 @@ export function LanguageToggle() {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
 
-  const currentLang = languageConfig.find(lang => lang.code === language);
+  // Memoize current language lookup
+  const currentLang = useMemo(() => 
+    languageConfig.find(lang => lang.code === language),
+    [language]
+  );
 
-  const handleLanguageChange = (langCode: string) => {
+  // Memoize handler to prevent re-renders
+  const handleLanguageChange = useCallback((langCode: string) => {
     setLanguage(langCode as 'en' | 'zh' | 'ko' | 'es' | 'fr');
     setIsOpen(false);
-  };
+  }, [setLanguage]);
+
+  const toggleDropdown = useCallback(() => {
+    setIsOpen(prev => !prev);
+  }, []);
+
+  const closeDropdown = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   return (
     <div className="relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleDropdown}
         className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
       >
         <LanguageIcon className="h-4 w-4" />
@@ -31,7 +44,7 @@ export function LanguageToggle() {
           {/* Backdrop */}
           <div
             className="fixed inset-0 z-10"
-            onClick={() => setIsOpen(false)}
+            onClick={closeDropdown}
           />
           
           {/* Dropdown */}

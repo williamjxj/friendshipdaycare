@@ -1,6 +1,4 @@
 import { Metadata } from 'next';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
@@ -156,9 +154,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <Header />
-      
+    <div className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <main className="flex-grow">
         {/* Breadcrumb */}
         <section className="py-6 px-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
@@ -309,8 +305,6 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

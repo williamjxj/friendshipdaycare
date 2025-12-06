@@ -1,6 +1,4 @@
 import { Metadata } from 'next';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Parent Resources & Handbook | Friendship Corner Daycare',
@@ -237,9 +235,7 @@ export default function ResourcesPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <Header />
-      
+    <div className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative py-20 px-4">
@@ -411,8 +407,6 @@ export default function ResourcesPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }
