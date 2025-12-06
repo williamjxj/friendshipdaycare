@@ -3,6 +3,9 @@ import { Nunito, Fredoka } from "next/font/google";
 import { Suspense } from "react";
 import { PageLoader } from "@/components/ui/LoadingSpinner";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { NextIntlProvider } from "@/components/providers/NextIntlProvider";
+import { LocalBusinessSchema, OrganizationSchema, defaultOrganizationData } from "@/components/seo/StructuredData";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -54,12 +57,39 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Structured Data for SEO */}
+        <LocalBusinessSchema
+          name={defaultOrganizationData.name}
+          description="Licensed Montessori daycare in Coquitlam offering quality early childhood education for children aged 30 months to school age. Established in 2008."
+          address={defaultOrganizationData.address}
+          telephone={defaultOrganizationData.telephone}
+          email={defaultOrganizationData.email}
+          url={defaultOrganizationData.url}
+          priceRange="$$"
+          openingHours={["Mo-Fr 07:30-17:30"]}
+        />
+        <OrganizationSchema
+          name={defaultOrganizationData.name}
+          url={defaultOrganizationData.url}
+          logo={`${defaultOrganizationData.url}/images/friendship-corner-daycare-logo.png`}
+          description="Licensed Montessori daycare providing quality early childhood education since 2008"
+          foundingDate="2008-01-01"
+          telephone={defaultOrganizationData.telephone}
+          email={defaultOrganizationData.email}
+          address={defaultOrganizationData.address}
+        />
+      </head>
       <body className={`${nunito.variable} ${fredoka.variable} antialiased font-sans`}>
-        <LanguageProvider>
-          <Suspense fallback={<PageLoader message="Loading magical content..." />}>
-            {children}
-          </Suspense>
-        </LanguageProvider>
+        <NextIntlProvider>
+          <LanguageProvider>
+            <ThemeProvider>
+              <Suspense fallback={<PageLoader message="Loading magical content..." />}>
+                {children}
+              </Suspense>
+            </ThemeProvider>
+          </LanguageProvider>
+        </NextIntlProvider>
       </body>
     </html>
   );

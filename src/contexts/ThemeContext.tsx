@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export type Theme = 'default' | 'nature' | 'playful' | 'dark';
+export type Theme = 'default' | 'nature' | 'playful' | 'dark' | 'professional';
 
 interface ThemeContextType {
   theme: Theme;
@@ -14,8 +14,13 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const themes = [
   {
+    value: 'professional' as Theme,
+    label: 'Professional',
+    description: 'Clean, trustworthy design with professional blue tones'
+  },
+  {
     value: 'default' as Theme,
-    label: 'Theme',
+    label: 'Warm',
     description: 'Classic warm colors perfect for a welcoming daycare environment'
   },
   {
@@ -36,13 +41,16 @@ export const themes = [
 ];
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('default');
+  const [theme, setTheme] = useState<Theme>('professional');
 
   useEffect(() => {
     // Load theme from localStorage on mount
     const savedTheme = localStorage.getItem('daycare-theme') as Theme;
     if (savedTheme && themes.some(t => t.value === savedTheme)) {
       setTheme(savedTheme);
+    } else {
+      // Set professional as default for new users
+      setTheme('professional');
     }
   }, []);
 

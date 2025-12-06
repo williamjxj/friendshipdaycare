@@ -52,6 +52,23 @@
   --card-foreground: #831843;
 }
 
+/* Professional Theme (Recommended Default) */
+[data-theme="professional"] {
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #10b981;
+  --secondary-foreground: #ffffff;
+  --accent: #f59e0b;
+  --accent-foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #1f2937;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --border: #e5e7eb;
+  --card: #ffffff;
+  --card-foreground: #1f2937;
+}
+
 /* Dark Theme */
 [data-theme="dark"] {
   --primary: #6366f1;
@@ -219,6 +236,28 @@ body {
 
 .child-rounded-lg {
   border-radius: 32px;
+}
+
+/* Reduced Motion Support - Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .floating-animation,
+  .bounce-animation,
+  .wiggle-animation {
+    animation: none !important;
+  }
+
+  .fun-hover:hover {
+    transform: none !important;
+  }
 }
 
 /* Gradient backgrounds */

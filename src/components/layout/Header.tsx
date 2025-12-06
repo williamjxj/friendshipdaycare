@@ -24,17 +24,25 @@ export function Header() {
     { name: t('navigation.home'), href: '/' },
     { name: t('navigation.about'), href: '/about' },
     { name: t('navigation.programs'), href: '/programs' },
+    { name: t('navigation.pricing'), href: '/pricing' },
+    { name: t('navigation.enrollment'), href: '/enrollment' },
+    { name: t('navigation.team'), href: '/team' },
     { name: t('navigation.gallery'), href: '/gallery' },
-    { name: t('navigation.todaysStory'), href: '/todays-story' },
-    { name: t('navigation.journal'), href: '/journal' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Resources', href: '/resources' },
     { name: t('navigation.contact'), href: '/contact' },
   ] : [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Programs', href: '/programs' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'Enrollment', href: '/enrollment' },
+    { name: 'Team', href: '/team' },
     { name: 'Gallery', href: '/gallery' },
-    { name: 'Story', href: '/todays-story' },
-    { name: 'Journal', href: '/journal' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Resources', href: '/resources' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -76,8 +84,8 @@ export function Header() {
           {/* Fun Navigation */}
           <nav className="hidden md:flex space-x-2">
             {navigation.map((item, index) => {
-              const emojis = ['🏠', '📖', '🎨', '📸', '📚', '📖', '📞'];
-              const colors = ['pink', 'purple', 'blue', 'green', 'orange', 'indigo', 'pink'];
+              const emojis = ['🏠', '📖', '🎨', '💰', '📝', '👥', '📸', '📞'];
+              const colors = ['pink', 'purple', 'blue', 'green', 'orange', 'indigo', 'teal', 'pink'];
               return (
                 <Link
                   key={item.name}
