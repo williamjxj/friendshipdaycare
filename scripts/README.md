@@ -94,3 +94,15 @@ public/
 - The scripts are respectful and include delays between downloads
 - All scripts include error handling for failed downloads
 - File names are normalized to lowercase with hyphens for consistency
+
+## Script Reference Table
+
+| Script | Language | Purpose | Output Directory | Description |
+|--------|----------|---------|------------------|-------------|
+| `create_video_thumbnails.py` | Python | Generate thumbnails | `public/images/` | Creates 3 video thumbnail placeholders with emojis, text, and play buttons for gallery video section |
+| `download_all_images.js` | Node.js | Download images | `public/images/` | Downloads 12 known images from the original website to the images folder |
+| `download_all_images.py` | Python | Download images | `public/images/` | Comprehensive script that scans multiple pages and downloads all images found (uses BeautifulSoup for HTML parsing) |
+| `download_gallery_images.js` | Node.js | Download gallery images | `public/static/` | Downloads 12 specific gallery images from the original website to the static folder |
+| `download_gallery_images.py` | Python | Download gallery images | `public/static/` | Downloads 12 specific gallery images from the original website to the static folder |
+| `download_gallery_images.sh` | Bash | Download gallery images | `public/static/` | Downloads 12 specific gallery images using curl (fastest option, recommended) |
+| `update_logos.sh` | Bash | Update logos | N/A | Placeholder script that marks files for manual logo updates across multiple pages |

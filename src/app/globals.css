@@ -2,88 +2,152 @@
 
 /* Theme Variables */
 :root {
-  /* Default Theme - Child-Friendly & Magical */
-  --primary: #ff6b9d;
-  --primary-foreground: #ffffff;
-  --secondary: #4bcffa;
-  --secondary-foreground: #ffffff;
-  --accent: #78e08f;
-  --accent-foreground: #ffffff;
-  --background: #fef7ff;
-  --foreground: #2d1b69;
-  --muted: #f0f9ff;
-  --muted-foreground: #7c3aed;
-  --border: #e0e7ff;
-  --card: #ffffff;
-  --card-foreground: #2d1b69;
+  /* Default Theme - Montessori (Warm & Cozy) */
+  --primary: #2C5F4D;
+  /* Deep Forest Green - Trust, Nature */
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #D98C5F;
+  /* Terracotta/Warm Earth - Creativity, Warmth */
+  --secondary-foreground: #FFFFFF;
+
+  --accent: #E8C547;
+  /* Muted Sunshine - Energy, distinct from secondary */
+  --accent-foreground: #374151;
+
+  --background: #FDFBF7;
+  /* Warm Cream (Paper-like) */
+  --foreground: #2D3339;
+  /* Soft Charcoal - High readability */
+
+  --muted: #F3F0E6;
+  /* Light Beige/Stone */
+  --muted-foreground: #6B7280;
+
+  --border: #E5E0D5;
+  /* Warm Grey/Beige border */
+  --card: #FFFFFF;
+  --card-foreground: #2D3339;
+
+  /* Radius - Soft, organic curves */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.0rem;
+  --radius-xl: 1.5rem;
+
+  /* Shadows - Layered, soft diffusion shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(44 95 77 / 0.1), 0 2px 4px -2px rgb(44 95 77 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(44 95 77 / 0.1), 0 4px 6px -4px rgb(44 95 77 / 0.1);
+
+  /* Font families - CSS custom property for use in body */
+  --font-sans: "Nunito", system-ui, sans-serif;
+  --font-display: "Nunito", system-ui, sans-serif;
 }
 
-/* Nature Theme */
-[data-theme="nature"] {
-  --primary: #059669;
-  --primary-foreground: #ffffff;
-  --secondary: #d97706;
-  --secondary-foreground: #ffffff;
-  --accent: #7c3aed;
-  --accent-foreground: #ffffff;
-  --background: #f0fdf4;
-  --foreground: #064e3b;
-  --muted: #dcfce7;
-  --muted-foreground: #166534;
-  --border: #bbf7d0;
-  --card: #ffffff;
-  --card-foreground: #064e3b;
-}
-
-/* Playful Theme */
-[data-theme="playful"] {
-  --primary: #ff6b9d;
-  --primary-foreground: #ffffff;
-  --secondary: #ffd93d;
-  --secondary-foreground: #2d1b69;
-  --accent: #a29bfe;
-  --accent-foreground: #ffffff;
-  --background: #fff5f5;
-  --foreground: #2d1b69;
-  --muted: #fef2f2;
-  --muted-foreground: #7c3aed;
-  --border: #fecaca;
-  --card: #ffffff;
-  --card-foreground: #831843;
-}
-
-/* Professional Theme (Recommended Default) */
+/* Professional Theme (Clean Corporate Blue) */
 [data-theme="professional"] {
-  --primary: #2563eb;
-  --primary-foreground: #ffffff;
-  --secondary: #10b981;
-  --secondary-foreground: #ffffff;
-  --accent: #f59e0b;
-  --accent-foreground: #ffffff;
-  --background: #ffffff;
-  --foreground: #1f2937;
-  --muted: #f3f4f6;
-  --muted-foreground: #6b7280;
-  --border: #e5e7eb;
-  --card: #ffffff;
-  --card-foreground: #1f2937;
+  --primary: #2563EB;
+  /* Royal Blue */
+  --primary-foreground: #FFFFFF;
+  --secondary: #1E40AF;
+  /* Darker Blue */
+  --secondary-foreground: #FFFFFF;
+  --accent: #F59E0B;
+  /* Amber */
+  --accent-foreground: #FFFFFF;
+  --background: #FFFFFF;
+  --foreground: #1F2937;
+  --muted: #F3F4F6;
+  --muted-foreground: #6B7280;
+  --border: #E5E7EB;
+  --card: #FFFFFF;
+  --card-foreground: #1F2937;
 }
 
-/* Dark Theme */
+/* Nature Theme (Earthy Forests) */
+[data-theme="nature"] {
+  --primary: #3F6212;
+  /* Olive Green */
+  --primary-foreground: #FFFFFF;
+  --secondary: #A16207;
+  /* Brown/Gold */
+  --secondary-foreground: #FFFFFF;
+  --accent: #84CC16;
+  /* Lime */
+  --accent-foreground: #064E3B;
+  --background: #FEFCE8;
+  /* Very pale yellow/cream */
+  --foreground: #1C1917;
+  /* Warm Black */
+  --muted: #F0FDF4;
+  --muted-foreground: #374151;
+  --border: #D4D4D8;
+  --card: #FFFFFF;
+  --card-foreground: #1C1917;
+}
+
+/* Playful Theme (Legacy Bubblegum) */
+[data-theme="playful"] {
+  --primary: #FF6B9D;
+  /* Pink */
+  --primary-foreground: #FFFFFF;
+  --secondary: #4BCFFA;
+  /* Cyan */
+  --secondary-foreground: #FFFFFF;
+  --accent: #FCD34D;
+  /* Yellow */
+  --accent-foreground: #374151;
+  --background: #FFF5F7;
+  /* Pink tint */
+  --foreground: #4A044E;
+  --muted: #FCE7F3;
+  --muted-foreground: #BE185D;
+  --border: #FBCFE8;
+  --card: #FFFFFF;
+  --card-foreground: #4A044E;
+}
+
+/* Dark Theme - "Evening Quiet" */
 [data-theme="dark"] {
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
-  --secondary: #f59e0b;
-  --secondary-foreground: #1f2937;
-  --accent: #10b981;
-  --accent-foreground: #ffffff;
-  --background: #0f172a;
-  --foreground: #f1f5f9;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --border: #334155;
-  --card: #1e293b;
-  --card-foreground: #f1f5f9;
+  --primary: #4A7A67;
+  --primary-foreground: #FFFFFF;
+  --secondary: #E09F7D;
+  --secondary-foreground: #2D2D2D;
+  --accent: #F2D06B;
+  --accent-foreground: #2D2D2D;
+  --background: #1A1D1C;
+  /* Dark, warm grey */
+  --foreground: #ECECEC;
+  --muted: #2C302F;
+  --muted-foreground: #A1A1A1;
+  --border: #3A3F3E;
+  --card: #252827;
+  --card-foreground: #ECECEC;
+}
+
+/* Violet Theme (User Custom) */
+[data-theme="violet"] {
+  --background: oklch(0.9751 0.0127 244.2507);
+  --foreground: oklch(0.3729 0.0306 259.7328);
+  --card: oklch(1.0000 0 0);
+  --card-foreground: oklch(0.3729 0.0306 259.7328);
+  --popover: oklch(1.0000 0 0);
+  --popover-foreground: oklch(0.3729 0.0306 259.7328);
+  --primary: oklch(0.7227 0.1920 149.5793);
+  --primary-foreground: oklch(1.0000 0 0);
+  --secondary: oklch(0.9514 0.0250 236.8242);
+  --secondary-foreground: oklch(0.3030 0.1116 258.2555);
+  --muted: oklch(0.9670 0.0029 264.5419);
+  --muted-foreground: oklch(0.5510 0.0234 264.3637);
+  --accent: oklch(0.9505 0.0507 163.0508);
+  --accent-foreground: oklch(0.3729 0.0306 259.7328);
+  --destructive: oklch(0.6368 0.2078 25.3313);
+  --destructive-foreground: oklch(1.0000 0 0);
+  --border: oklch(0.9276 0.0058 264.5313);
+  --input: oklch(0.9276 0.0058 264.5313);
+  --ring: oklch(0.7227 0.1920 149.5793);
+  --radius: 0.5rem;
 }
 
 @theme {
@@ -102,10 +166,12 @@
   --color-card-foreground: var(--card-foreground);
 
   /* Font families */
+  /* Using Nunito for everything gives a clean, accessible, friendly look */
   --font-sans: "Nunito", system-ui, sans-serif;
-  --font-display: "Fredoka", system-ui, sans-serif;
+  --font-display: "Nunito", system-ui, sans-serif;
+  /* Unified font for cleaner look */
 
-  /* Spacing scale */
+  /* Spacing scale - Standardizing nice gaps */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
@@ -113,17 +179,6 @@
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
-
-  /* Border radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 body {
@@ -131,148 +186,126 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Smooth transitions for theme changes */
 * {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  /* Removed color transition on everything to prevent weird text scaling/jumps, kept bg/border */
 }
 
-/* Child-Friendly Enhancements */
+/* Montessori / Premium Component Classes */
+
+/* Legacy Support (Mapping old classes to new styles) */
+.montessori-card,
 .child-friendly-card {
-  background: linear-gradient(135deg, #ff6b9d 0%, #4bcffa 50%, #78e08f 100%);
-  border-radius: 24px;
-  padding: 2px;
-  box-shadow: 0 8px 32px rgba(255, 107, 157, 0.3);
-}
-
-.child-friendly-card-inner {
   background: var(--card);
-  border-radius: 22px;
-  padding: 1.5rem;
-  height: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
 }
 
+.montessori-card:hover,
+.child-friendly-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.warm-button,
 .playful-button {
-  background: linear-gradient(135deg, #ff6b9d, #4bcffa);
-  border-radius: 50px;
-  padding: 12px 24px;
-  color: white;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
   font-weight: 600;
-  text-transform: none;
-  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
-  transition: all 0.3s ease;
   border: none;
   cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: inline-block;
+  /* Ensure it behaves like a button */
 }
 
-.playful-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6);
+/* Override playful button specific weirdness if any, mainly shadow */
+.playful-button {
+  box-shadow: none !important;
+}
+
+.warm-button:hover {
+  background-color: color-mix(in srgb, var(--primary), white 10%);
+  /* Lighten slightly */
+}
+
+.warm-button-secondary {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.warm-button-secondary:hover {
+  background-color: var(--muted);
+}
+
+/* 3. Text & Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--primary);
+  /* Use deep green for headings for nature feel */
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* 4. Glass Panel (Modern Touch) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* 5. Subtle Animations (Premium Feel) */
+.fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .rainbow-text {
-  background: linear-gradient(135deg, #ff6b9d, #4bcffa, #78e08f, #ffd93d, #a29bfe);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: rainbow-flow 3s ease-in-out infinite;
+  /* Removed rainbow, mapped to primary gradient or solid */
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: var(--secondary);
+  /* Accentuate with Terracotta */
 }
 
-@keyframes rainbow-flow {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-.floating-animation {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-.bounce-animation {
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
-  40%, 43% { transform: translateY(-15px); }
-  70% { transform: translateY(-7px); }
-  90% { transform: translateY(-3px); }
-}
-
-.wiggle-animation {
-  animation: wiggle 2s ease-in-out infinite;
-}
-
-@keyframes wiggle {
-  0%, 7% { transform: rotateZ(0); }
-  15% { transform: rotateZ(-15deg); }
-  20% { transform: rotateZ(10deg); }
-  25% { transform: rotateZ(-10deg); }
-  30% { transform: rotateZ(6deg); }
-  35% { transform: rotateZ(-4deg); }
-  40%, 100% { transform: rotateZ(0); }
-}
-
-/* Fun hover effects */
-.fun-hover {
-  transition: all 0.3s ease;
-}
-
-.fun-hover:hover {
-  transform: scale(1.05) rotate(2deg);
-  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
-}
-
-/* Rounded everything for child-friendly feel */
-.child-rounded {
-  border-radius: 20px;
-}
-
-.child-rounded-lg {
-  border-radius: 32px;
-}
-
-/* Reduced Motion Support - Accessibility */
+/* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  * {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    transition: none !important;
   }
 
-  .floating-animation,
-  .bounce-animation,
-  .wiggle-animation {
-    animation: none !important;
+  .montessori-card:hover,
+  .child-friendly-card:hover {
+    transform: none;
   }
-
-  .fun-hover:hover {
-    transform: none !important;
-  }
-}
-
-/* Gradient backgrounds */
-.gradient-bg-1 {
-  background: linear-gradient(135deg, #ff6b9d 0%, #4bcffa 100%);
-}
-
-.gradient-bg-2 {
-  background: linear-gradient(135deg, #4bcffa 0%, #78e08f 100%);
-}
-
-.gradient-bg-3 {
-  background: linear-gradient(135deg, #78e08f 0%, #ffd93d 100%);
-}
-
-.gradient-bg-4 {
-  background: linear-gradient(135deg, #ffd93d 0%, #a29bfe 100%);
 }

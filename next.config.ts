@@ -5,6 +5,9 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/config.ts');
 
 const nextConfig: NextConfig = {
   /* config options here */
+  images: {
+    qualities: [75, 85],
+  },
 };
 
 export default withNextIntl(nextConfig);

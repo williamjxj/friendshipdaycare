@@ -63,7 +63,7 @@ export function VideoPlayer({ videos, className = '' }: VideoPlayerProps) {
       {/* Main Video Player */}
       <div className="relative bg-black rounded-xl overflow-hidden aspect-video">
         <ReactPlayer
-          url={currentVideoData.url}
+          src={currentVideoData.url}
           width="100%"
           height="100%"
           playing={playing}

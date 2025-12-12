@@ -9,34 +9,28 @@ import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-// Constants outside component to prevent recreation on every render
-const NAV_EMOJIS = ['🏠', '📖', '🎨', '💰', '📝', '👥', '📸', '📞'];
-const NAV_COLORS = ['pink', 'purple', 'blue', 'green', 'orange', 'indigo', 'teal', 'pink'];
-
 // Memoized NavLink component to prevent unnecessary re-renders
 const NavLink = memo(function NavLink({
   href,
   name,
-  emoji,
-  color,
   isActive,
 }: {
   href: string;
   name: string;
-  emoji: string;
-  color: string;
   isActive: boolean;
 }) {
   return (
     <Link
       href={href}
-      className={`px-4 py-2 rounded-full text-sm font-medium transition-all hover:scale-105 ${
+      className={`px-3 py-2 text-sm font-semibold transition-colors relative group ${
         isActive
-          ? 'playful-button'
-          : `text-${color}-600 hover:bg-${color}-100`
+          ? 'text-primary'
+          : 'text-muted-foreground hover:text-primary'
       }`}
     >
-      {emoji} {name}
+      {name}
+      {/* Subtle indicator for active state */}
+      <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-primary transform origin-left transition-transform duration-300 ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-50'}`} />
     </Link>
   );
 });
@@ -58,10 +52,10 @@ const MobileNavLink = memo(function MobileNavLink({
   return (
     <Link
       href={href}
-      className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+      className={`block px-4 py-3 rounded-md text-base font-medium transition-colors border-l-4 ${
         isActive
-          ? 'text-primary bg-primary/10'
-          : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+          ? 'border-primary text-primary bg-primary/5'
+          : 'border-transparent text-muted-foreground hover:text-foreground hover:bg-muted'
       }`}
       onClick={onClick}
     >
@@ -87,13 +81,8 @@ export function Header() {
     { key: 'home', href: '/' },
     { key: 'about', href: '/about' },
     { key: 'programs', href: '/programs' },
-    { key: 'pricing', href: '/pricing' },
     { key: 'enrollment', href: '/enrollment' },
-    { key: 'team', href: '/team' },
     { key: 'gallery', href: '/gallery' },
-    { key: 'blog', href: '/blog' },
-    { key: 'faq', href: '/faq' },
-    { key: 'resources', href: '/resources' },
     { key: 'contact', href: '/contact' },
   ], []);
 
@@ -102,13 +91,8 @@ export function Header() {
     home: 'Home',
     about: 'About',
     programs: 'Programs',
-    pricing: 'Pricing',
     enrollment: 'Enrollment',
-    team: 'Team',
     gallery: 'Gallery',
-    blog: 'Blog',
-    faq: 'FAQ',
-    resources: 'Resources',
     contact: 'Contact',
   }), []);
 
@@ -125,13 +109,8 @@ export function Header() {
           home: t('navigation.home'),
           about: t('navigation.about'),
           programs: t('navigation.programs'),
-          pricing: t('navigation.pricing'),
           enrollment: t('navigation.enrollment'),
-          team: t('navigation.team'),
           gallery: t('navigation.gallery'),
-          blog: 'Blog',
-          faq: 'FAQ',
-          resources: 'Resources',
           contact: t('navigation.contact'),
         };
         return translationMap[key] || fallbackNames[key] || key;
@@ -166,42 +145,40 @@ export function Header() {
   }, []);
 
   return (
-    <header className="bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 border-b-4 border-pink-200 sticky top-0 z-50 shadow-lg">
+    <header className="sticky top-0 z-50 glass-panel border-b border-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Magical Logo */}
+          {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-3 fun-hover">
-              <div className="child-friendly-card p-1">
+            <Link href="/" className="flex items-center space-x-3 group">
+              <div className="p-1 rounded-full bg-white/50 border border-primary/10 transition-transform group-hover:scale-105">
                 <Image
                   src="/images/friendship-corner-daycare-logo.png"
                   alt="Friendship Corner Daycare Logo"
                   width={64}
                   height={48}
-                  className="w-16 h-12 object-contain"
+                  className="w-12 h-10 object-contain"
                   priority
                 />
               </div>
-              <div>
-                <span className="font-display font-bold text-xl rainbow-text">
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-lg text-primary tracking-tight">
                   Friendship Corner
                 </span>
-                <div className="text-sm text-purple-600 font-medium">
-                  🌟 Where Dreams Take Flight 🌟
-                </div>
+                <span className="text-xs text-muted-foreground font-medium tracking-wide uppercase">
+                  Montessori Daycare
+                </span>
               </div>
             </Link>
           </div>
 
-          {/* Fun Navigation */}
-          <nav className="hidden md:flex space-x-2" suppressHydrationWarning>
-            {navigation.map((item, index) => (
+          {/* Regular Navigation */}
+          <nav className="hidden md:flex space-x-1" suppressHydrationWarning>
+            {navigation.map((item) => (
               <NavLink
                 key={item.key || item.href}
                 href={item.href}
                 name={item.name}
-                emoji={NAV_EMOJIS[index]}
-                color={NAV_COLORS[index]}
                 isActive={activeStates[item.href] || false}
               />
             ))}
@@ -211,6 +188,9 @@ export function Header() {
           <div className="hidden md:flex items-center space-x-4">
             <LanguageToggle />
             <ThemeToggle />
+            <Link href="/contact" className="warm-button text-sm px-4 py-2">
+              Book a Tour
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -219,7 +199,7 @@ export function Header() {
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted"
+              className="p-2 rounded-md text-primary hover:bg-primary/5 transition-colors"
             >
               {isMenuOpen ? (
                 <XMarkIcon className="h-6 w-6" />
@@ -233,7 +213,7 @@ export function Header() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden" suppressHydrationWarning>
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border">
+            <div className="px-2 pt-2 pb-6 space-y-1 border-t border-border bg-background/95 backdrop-blur-md">
               {navigation.map((item) => (
                 <MobileNavLink
                   key={item.key || item.href}
@@ -243,6 +223,15 @@ export function Header() {
                   onClick={closeMobileMenu}
                 />
               ))}
+              <div className="pt-4 px-4">
+                <Link 
+                  href="/contact" 
+                  onClick={closeMobileMenu}
+                  className="block w-full text-center warm-button"
+                >
+                  Book a Tour
+                </Link>
+              </div>
             </div>
           </div>
         )}

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   // In production, fetch post data from CMS
   return {
     title: 'Blog Post | Friendship Corner Daycare',
@@ -9,10 +9,11 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-export default function BlogPostPage({ params }: { params: { id: string } }) {
+export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   // Sample blog post - in production, this would come from a CMS based on params.id
   const post = {
-    id: params.id,
+    id,
     title: 'Montessori Activities You Can Do at Home',
     excerpt: 'Discover simple, hands-on Montessori activities that support your child\'s development.',
     category: 'Montessori',
@@ -204,7 +205,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
             </div>
 
             {/* Article Content */}
-            <div 
+            <div
               className="prose prose-lg dark:prose-invert max-w-none
                 prose-headings:bg-gradient-to-r prose-headings:from-blue-600 prose-headings:to-purple-600 prose-headings:bg-clip-text prose-headings:text-transparent
                 prose-p:text-gray-700 dark:prose-p:text-gray-300
@@ -289,14 +290,14 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
               Schedule a tour to see our Montessori classroom in action
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                href="/enrollment" 
+              <Link
+                href="/enrollment"
                 className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
               >
                 Schedule a Tour
               </Link>
-              <Link 
-                href="/programs" 
+              <Link
+                href="/programs"
                 className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
               >
                 View Programs

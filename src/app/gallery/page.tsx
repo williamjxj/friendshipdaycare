@@ -111,8 +111,8 @@ export default function GalleryPage() {
     }
   ];
 
-  const filteredImages = selectedCategory === 'all' 
-    ? galleryImages 
+  const filteredImages = selectedCategory === 'all'
+    ? galleryImages
     : galleryImages.filter(img => img.category === selectedCategory);
 
   const openLightbox = (index: number) => {
@@ -138,164 +138,162 @@ export default function GalleryPage() {
   return (
     <Suspense fallback={<LoadingSpinner message="Loading gallery..." />}>
       <main className="flex-1">
-          {/* Hero Section */}
-          <section className="relative py-20 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <div className="space-y-6">
-                <h1 className="text-4xl md:text-6xl font-display font-bold text-foreground leading-tight">
-                  Our Gallery
-                </h1>
-                <p className="text-xl text-muted-foreground w-full text-center leading-relaxed">
-                  Take a glimpse into our vibrant learning environment and see how children thrive in our Montessori setting
-                </p>
-              </div>
+        {/* Hero Section */}
+        <section className="relative py-20 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="space-y-6">
+              <h1 className="text-4xl md:text-6xl font-display font-bold text-foreground leading-tight">
+                Our Gallery
+              </h1>
+              <p className="text-xl text-muted-foreground w-full text-center leading-relaxed">
+                Take a glimpse into our vibrant learning environment and see how children thrive in our Montessori setting
+              </p>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Featured Carousel */}
-          <section className="py-20 bg-card">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center space-y-4 mb-12">
-                <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                  Featured Images
-                </h2>
-                <p className="text-lg text-muted-foreground">
-                  Explore our learning environment through this interactive carousel
-                </p>
-              </div>
-
-              <ImageCarousel
-                images={galleryImages.map(img => ({
-                  src: img.src,
-                  alt: img.alt,
-                  title: img.title
-                }))}
-                className="mb-12"
-              />
+        {/* Featured Carousel */}
+        <section className="py-20 bg-card">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center space-y-4 mb-12">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+                Featured Images
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Explore our learning environment through this interactive carousel
+              </p>
             </div>
-          </section>
 
-          {/* Gallery Section */}
-          <section className="py-20 bg-card">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              {/* Category Filter */}
-              <div className="flex flex-wrap justify-center gap-4 mb-12">
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`px-6 py-3 rounded-lg font-medium text-sm transition-colors ${
-                      selectedCategory === category.id
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
+            <ImageCarousel
+              images={galleryImages.map(img => ({
+                src: img.src,
+                alt: img.alt,
+                title: img.title
+              }))}
+              className="mb-12"
+            />
+          </div>
+        </section>
+
+        {/* Gallery Section */}
+        <section className="py-20 bg-card">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Category Filter */}
+            <div className="flex flex-wrap justify-center gap-4 mb-12">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`px-6 py-3 rounded-lg font-medium text-sm transition-colors ${selectedCategory === category.id
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
                     }`}
-                  >
-                    {category.name}
-                  </button>
-                ))}
-              </div>
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
 
-              {/* Image Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredImages.map((image, index) => (
-                  <div
-                    key={image.id}
-                    className="group cursor-pointer bg-muted/30 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                    onClick={() => openLightbox(index)}
-                  >
-                    <div className="relative h-64 overflow-hidden">
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="bg-white/90 rounded-full p-3">
-                          <span className="text-2xl">🔍</span>
-                        </div>
+            {/* Image Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredImages.map((image, index) => (
+                <div
+                  key={image.id}
+                  className="group cursor-pointer bg-muted/30 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  onClick={() => openLightbox(index)}
+                >
+                  <div className="relative h-64 overflow-hidden">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="bg-white/90 rounded-full p-3">
+                        <span className="text-2xl">🔍</span>
                       </div>
                     </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold text-foreground mb-2">{image.title}</h3>
-                      <p className="text-sm text-muted-foreground">{image.description}</p>
-                    </div>
                   </div>
-                ))}
-              </div>
-
-              {filteredImages.length === 0 && (
-                <div className="text-center py-12">
-                  <p className="text-muted-foreground">No images found in this category.</p>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-foreground mb-2">{image.title}</h3>
+                    <p className="text-sm text-muted-foreground">{image.description}</p>
+                  </div>
                 </div>
-              )}
+              ))}
             </div>
-          </section>
 
-          {/* Video Gallery Section */}
-          <section className="py-20 bg-muted/30">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-                  Educational Videos
-                </h2>
-                <p className="text-lg text-muted-foreground w-full text-center">
-                  Watch our daily activities, Montessori lessons, and gentle Bible stories designed for young learners.
-                </p>
+            {filteredImages.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">No images found in this category.</p>
               </div>
-              
-              <VideoPlayer videos={[
-                {
-                  url: 'https://www.youtube.com/watch?v=doKkOSMaTk4', // Montessori classroom tour
-                  title: '🎨 Daily Montessori Magic',
-                  description: 'Watch our amazing children engage in hands-on Montessori learning activities that promote independence, creativity, and joy!',
-                  thumbnail: '/images/video-thumb-1.jpg'
-                },
-                {
-                  url: 'https://www.youtube.com/watch?v=Pk4Xi4bF0RE', // Montessori practical life
-                  title: '🌟 Learning Through Joyful Play',
-                  description: 'See how we combine education with super fun activities that help children develop essential life skills while having the best time!',
-                  thumbnail: '/images/video-thumb-2.jpg'
-                },
-                {
-                  url: 'https://www.youtube.com/watch?v=Yz2NiUJHmhE', // Children's Bible story
-                  title: '📚 Gentle Story Time Adventures',
-                  description: 'Beautiful, gentle stories that teach wonderful values, kindness, and important life lessons in the most age-appropriate way!',
-                  thumbnail: '/images/video-thumb-3.jpg'
-                }
-              ]} />
-            </div>
-          </section>
+            )}
+          </div>
+        </section>
 
-          {/* Call to Action */}
-          <section className="py-20 bg-primary">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <div className="space-y-6">
-                <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
-                  See Our Environment in Person
-                </h2>
-                <p className="text-xl text-primary-foreground/90 w-full text-center">
-                  Schedule a visit to experience our nurturing Montessori environment firsthand and meet our dedicated educators.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link
-                    href="/contact"
-                    className="inline-block bg-primary-foreground text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-foreground/90 transition-colors"
-                  >
-                    Schedule a Visit
-                  </Link>
-                  <Link
-                    href="/programs"
-                    className="inline-block border-2 border-primary-foreground text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-foreground hover:text-primary transition-colors"
-                  >
-                    View Programs
-                  </Link>
-                </div>
+        {/* Video Gallery Section */}
+        <section className="py-20 bg-muted/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                Educational Videos
+              </h2>
+              <p className="text-lg text-muted-foreground w-full text-center">
+                Watch our daily activities, Montessori lessons, and gentle Bible stories designed for young learners.
+              </p>
+            </div>
+
+            <VideoPlayer videos={[
+              {
+                url: 'https://www.youtube.com/watch?v=doKkOSMaTk4', // Montessori classroom tour
+                title: '🎨 Daily Montessori Magic',
+                description: 'Watch our amazing children engage in hands-on Montessori learning activities that promote independence, creativity, and joy!',
+                thumbnail: '/images/video-thumb-1.jpg'
+              },
+              {
+                url: 'https://www.youtube.com/watch?v=Pk4Xi4bF0RE', // Montessori practical life
+                title: '🌟 Learning Through Joyful Play',
+                description: 'See how we combine education with super fun activities that help children develop essential life skills while having the best time!',
+                thumbnail: '/images/video-thumb-2.jpg'
+              },
+              {
+                url: 'https://www.youtube.com/watch?v=Yz2NiUJHmhE', // Children's Bible story
+                title: '📚 Gentle Story Time Adventures',
+                description: 'Beautiful, gentle stories that teach wonderful values, kindness, and important life lessons in the most age-appropriate way!',
+                thumbnail: '/images/video-thumb-3.jpg'
+              }
+            ]} />
+          </div>
+        </section>
+
+        {/* Call to Action */}
+        <section className="py-20 bg-primary">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="space-y-6">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
+                See Our Environment in Person
+              </h2>
+              <p className="text-xl text-primary-foreground/90 w-full text-center">
+                Schedule a visit to experience our nurturing Montessori environment firsthand and meet our dedicated educators.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/contact"
+                  className="inline-block bg-primary-foreground text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-foreground/90 transition-colors"
+                >
+                  Schedule a Visit
+                </Link>
+                <Link
+                  href="/programs"
+                  className="inline-block border-2 border-primary-foreground text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-foreground hover:text-primary transition-colors"
+                >
+                  View Programs
+                </Link>
               </div>
             </div>
-          </section>
-        </main>
+          </div>
+        </section>
 
         {/* Lightbox Modal */}
         {selectedImage !== null && (
@@ -336,7 +334,7 @@ export default function GalleryPage() {
                   height={600}
                   className="max-w-full max-h-[80vh] object-contain rounded-lg"
                 />
-                
+
                 {/* Image Info */}
                 <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4 rounded-b-lg">
                   <h3 className="font-semibold text-lg mb-1">

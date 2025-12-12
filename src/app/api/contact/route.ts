@@ -198,7 +198,7 @@ The Friendship Corner Daycare Team
         { 
           success: false, 
           message: 'Please check your form data and try again.',
-          errors: error.errors 
+          errors: error.issues 
         },
         { status: 400 }
       );

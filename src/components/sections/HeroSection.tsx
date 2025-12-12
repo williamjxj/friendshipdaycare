@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { cn } from '@/lib/utils';
+
 
 export function HeroSection() {
   const { t } = useLanguage();
@@ -13,14 +15,14 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.8,
         staggerChildren: 0.2
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
@@ -28,161 +30,117 @@ export function HeroSection() {
     }
   };
 
-  const buttonVariants = {
-    hover: { 
-      scale: 1.05,
-      transition: { duration: 0.2 }
-    },
-    tap: { scale: 0.95 }
-  };
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-muted">
+      {/* Background Image - High Quality, somewhat desaturated or warm overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero-bg.svg"
+          src="/images/hero-bg.svg" // Ideally this should be a real photo of the center
           alt="Daycare background"
           fill
-          className="object-cover"
+          className="object-cover opacity-30"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10" />
+        {/* Warm Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
       </div>
 
-      {/* Floating Elements Animation */}
-      <motion.div
-        className="absolute top-20 left-10 w-16 h-16 bg-primary/20 rounded-full"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 180, 360]
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity
-        }}
-      />
-      
-      <motion.div
-        className="absolute top-40 right-20 w-12 h-12 bg-secondary/30 rounded-lg"
-        animate={{
-          y: [0, 15, 0],
-          rotate: [0, -90, 0]
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          delay: 1
-        }}
-      />
-
-      <motion.div
-        className="absolute bottom-32 left-20 w-20 h-20 bg-accent/25 rounded-full"
-        animate={{
-          y: [0, -25, 0],
-          scale: [1, 1.1, 1]
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          delay: 2
-        }}
-      />
-
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="space-y-8"
         >
+          {/* Badge */}
+          <motion.div variants={itemVariants} className="flex justify-center">
+            <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide uppercase mb-4">
+              Licensed Montessori Daycare in Coquitlam
+            </span>
+          </motion.div>
+
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-foreground leading-tight"
+            className={cn(
+              "text-4xl md:text-6xl lg:text-7xl font-bold",
+              "text-foreground leading-tight tracking-tight"
+            )}
           >
             {t('hero.title')}
           </motion.h1>
-          
+
           <motion.p
             variants={itemVariants}
-            className="text-xl md:text-2xl text-muted-foreground w-full text-center leading-relaxed"
+            className={cn(
+              "text-xl md:text-2xl text-muted-foreground",
+              "w-full max-w-2xl mx-auto leading-relaxed"
+            )}
           >
             {t('hero.subtitle')}
           </motion.p>
-          
+
+          {/* CTA Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
           >
-            <motion.div
-              variants={buttonVariants}
-              whileHover="hover"
-              whileTap="tap"
+            <Link
+              href="/contact"
+              className="warm-button shadow-lg hover:shadow-xl text-lg px-8 py-4"
             >
-              <Link
-                href="/contact"
-                className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow"
-              >
-                {t('hero.enrollNow')}
-              </Link>
-            </motion.div>
-            
-            <motion.div
-              variants={buttonVariants}
-              whileHover="hover"
-              whileTap="tap"
+              {t('hero.enrollNow')}
+            </Link>
+
+            <Link
+              href="/about"
+              className="warm-button-secondary text-lg px-8 py-4 bg-white/50 backdrop-blur-sm"
             >
-              <Link
-                href="/about"
-                className="inline-block border-2 border-primary text-primary bg-background/80 backdrop-blur-sm px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary hover:text-primary-foreground transition-colors"
-              >
-                {t('hero.cta')}
-              </Link>
-            </motion.div>
+              {t('hero.cta')}
+            </Link>
           </motion.div>
 
-          {/* Trust Indicators */}
+          {/* Trust Indicators - Clean & Professional */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-8"
+            className="pt-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 text-left md:text-center"
           >
-            <div className="flex items-center space-x-2 text-muted-foreground">
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">✓</span>
+            <div className="flex flex-col md:items-center space-y-2">
+              <div className="flex items-center md:justify-center p-3 bg-white rounded-full shadow-sm w-12 h-12 mx-auto mb-2 md:mb-0">
+                <span className="text-primary text-xl font-bold">✓</span>
               </div>
-              <span className="text-sm font-medium">Licensed Group Daycare</span>
+              <h3 className="font-bold text-foreground">Licensed Care</h3>
+              <p className="text-sm text-muted-foreground">Fully government licensed & approved facility.</p>
             </div>
-            
-            <div className="flex items-center space-x-2 text-muted-foreground">
-              <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                <span className="text-secondary-foreground font-bold text-sm">M</span>
+
+            <div className="flex flex-col md:items-center space-y-2">
+              <div className="flex items-center md:justify-center p-3 bg-white rounded-full shadow-sm w-12 h-12 mx-auto mb-2 md:mb-0">
+                <span className="text-secondary text-xl font-bold">M</span>
               </div>
-              <span className="text-sm font-medium">Montessori Method</span>
+              <h3 className="font-bold text-foreground">Montessori Method</h3>
+              <p className="text-sm text-muted-foreground">Child-centered educational approach.</p>
             </div>
-            
-            <div className="flex items-center space-x-2 text-muted-foreground">
-              <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-                <span className="text-accent-foreground font-bold text-sm">16</span>
+
+            <div className="flex flex-col md:items-center space-y-2">
+              <div className="flex items-center md:justify-center p-3 bg-white rounded-full shadow-sm w-12 h-12 mx-auto mb-2 md:mb-0">
+                <span className="text-accent-foreground text-xl font-bold">16</span>
               </div>
-              <span className="text-sm font-medium">Years of Excellence</span>
+              <h3 className="font-bold text-foreground">Established 2008</h3>
+              <p className="text-sm text-muted-foreground">Over a decade of trusted childcare.</p>
             </div>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Subtle Scroll Indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-50"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5, y: [0, 10, 0] }}
+        transition={{ delay: 2, duration: 2, repeat: Infinity }}
       >
-        <div className="w-6 h-10 border-2 border-muted-foreground rounded-full flex justify-center">
-          <motion.div
-            className="w-1 h-3 bg-muted-foreground rounded-full mt-2"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
+        <div className="w-5 h-8 border-2 border-foreground/30 rounded-full flex justify-center p-1">
+          <div className="w-1 h-2 bg-foreground/30 rounded-full" />
         </div>
       </motion.div>
     </section>

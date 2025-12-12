@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export type Theme = 'default' | 'nature' | 'playful' | 'dark' | 'professional';
+export type Theme = 'default' | 'nature' | 'playful' | 'dark' | 'professional' | 'violet';
 
 interface ThemeContextType {
   theme: Theme;
@@ -37,6 +37,11 @@ export const themes = [
     value: 'dark' as Theme,
     label: 'Dark',
     description: 'Elegant dark theme for evening browsing'
+  },
+  {
+    value: 'violet' as Theme,
+    label: 'Green',
+    description: 'Fresh and energetic green theme'
   }
 ];
 
