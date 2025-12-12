@@ -4,248 +4,173 @@ import { Suspense } from 'react';
 import { PageLoader, LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { VideoPlayer } from '@/components/ui/VideoPlayer';
 import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import { BookOpen, Star, Heart, Calendar, Sparkles } from 'lucide-react';
 
 export default function TodaysStoryPage() {
   return (
     <Suspense fallback={<PageLoader message="Loading today's magical story..." />}>
-      <main className="flex-1">
-          {/* Magical Story Hero */}
-          <section className="relative py-20 overflow-hidden">
-            {/* Animated Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-yellow-100 to-pink-100">
-              {/* Floating Story Elements */}
-              <div className="absolute top-20 left-10 text-4xl floating-animation">📚</div>
-              <div className="absolute top-40 right-20 text-3xl bounce-animation">✨</div>
-              <div className="absolute bottom-40 left-20 text-4xl wiggle-animation">🌟</div>
-              <div className="absolute bottom-20 right-10 text-3xl floating-animation">📖</div>
-              <div className="absolute top-32 left-1/3 text-2xl bounce-animation">💫</div>
-              <div className="absolute bottom-32 right-1/3 text-3xl floating-animation">🎭</div>
-            </div>
+      <main className="flex-1 bg-background">
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <div className="space-y-8">
-                <div className="space-y-4">
-                  <h1 className="text-5xl md:text-7xl font-display font-bold rainbow-text leading-tight">
-                    📚 Today&apos;s Magical Story! 📚
-                  </h1>
-                  <div className="text-2xl md:text-3xl font-medium text-orange-600 wiggle-animation">
-                    ✨ Bible Adventures for Little Hearts ✨
-                  </div>
-                </div>
+        {/* Hero Section - Consistent with standard Hero */}
+        <div className="relative grid place-items-center w-full min-h-[60vh] bg-muted overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/slidetop-bg.jpg" // Use a generic bg or specific one if available
+              alt="Story time background"
+              fill
+              className="object-cover opacity-20"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background/90" />
+          </div>
 
-                <div className="child-friendly-card max-w-4xl mx-auto">
-                  <div className="child-friendly-card-inner">
-                    <p className="text-lg md:text-xl text-purple-700 leading-relaxed">
-                      🌈 Join us for this week&apos;s gentle Bible story! 🌈<br/>
-                      Specially chosen to inspire, teach amazing lessons, and fill young hearts with joy and wonder!
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="flex justify-center"
+            >
+              <span className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wide uppercase border border-primary/20">
+                <BookOpen className="w-4 h-4" />
+                Magical Story Time
+              </span>
+            </motion.div>
 
-          {/* Magical Video Section */}
-          <section className="py-20 bg-gradient-to-br from-yellow-50 via-orange-50 to-pink-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-5xl mx-auto">
-                <div className="text-center space-y-6 mb-12">
-                  <h2 className="text-4xl md:text-5xl font-display font-bold rainbow-text">
-                    🎬 This Week&apos;s Magical Story! 🎬
-                  </h2>
-                  <div className="child-friendly-card">
-                    <div className="child-friendly-card-inner">
-                      <p className="text-lg text-purple-700">
-                        📅 Updated every Monday with new adventures! Perfect for little hearts ages 3-6! 💕
-                      </p>
-                    </div>
-                  </div>
-                </div>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-5xl md:text-7xl font-bold text-foreground leading-tight"
+            >
+              Today&apos;s <span className="text-primary">Magical Story</span>
+            </motion.h1>
 
-                {/* Bible Story Video Player */}
-                <Suspense fallback={
-                  <div className="child-friendly-card">
-                    <div className="child-friendly-card-inner text-center py-20">
-                      <LoadingSpinner size="lg" message="Loading today's magical story..." />
-                    </div>
-                  </div>
-                }>
-                  <div className="child-friendly-card">
-                    <div className="child-friendly-card-inner">
-                      <VideoPlayer videos={[
-                        {
-                          url: 'https://www.youtube.com/watch?v=Yz2NiUJHmhE', // The Good Samaritan for kids
-                          title: '💝 The Good Samaritan 💝',
-                          description: 'A beautiful story about kindness, helping others, and being a good neighbor. Learn how we can show love to everyone around us!',
-                          thumbnail: '/images/video-thumb-1.jpg'
-                        },
-                        {
-                          url: 'https://www.youtube.com/watch?v=hlQEmjWRa4A', // David and Goliath for kids
-                          title: '⚔️ David and Goliath ⚔️',
-                          description: 'Discover how young David showed great courage and faith when facing the giant Goliath. A story about bravery and trusting in God!',
-                          thumbnail: '/images/video-thumb-2.jpg'
-                        },
-                        {
-                          url: 'https://www.youtube.com/watch?v=tLxKjqG6iAg', // Noah\'s Ark for kids
-                          title: '🌈 Noah\'s Ark 🌈',
-                          description: 'Join Noah and all the animals on their amazing adventure! Learn about obedience, caring for creation, and God\'s beautiful promises.',
-                          thumbnail: '/images/video-thumb-3.jpg'
-                        }
-                      ]} />
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl md:text-2xl text-muted-foreground w-full max-w-4xl mx-auto leading-relaxed"
+            >
+              Bible Adventures for Little Hearts. Specially chosen to inspire, teach amazing lessons, and fill young hearts with joy!
+            </motion.p>
+          </div>
+        </div>
 
-                      <div className="mt-8 text-center space-y-4">
-                        <div className="child-friendly-card">
-                          <div className="child-friendly-card-inner">
-                            <h3 className="text-xl font-bold text-orange-600 mb-2">
-                              🌟 This Week&apos;s Special Lesson 🌟
-                            </h3>
-                            <p className="text-purple-700 font-medium">
-                              Learning about <span className="rainbow-text font-bold">KINDNESS</span> and helping others in need!
-                              Just like the Good Samaritan, we can be helpers and show love to everyone! 💕
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                          <div className="child-rounded bg-pink-100 p-4 text-center">
-                            <div className="text-2xl mb-2">💝</div>
-                            <div className="font-bold text-pink-600">Be Kind</div>
-                            <div className="text-sm text-pink-500">Help others with a smile</div>
-                          </div>
-                          <div className="child-rounded bg-blue-100 p-4 text-center">
-                            <div className="text-2xl mb-2">🤝</div>
-                            <div className="font-bold text-blue-600">Be Helpful</div>
-                            <div className="text-sm text-blue-500">Lend a helping hand</div>
-                          </div>
-                          <div className="child-rounded bg-green-100 p-4 text-center">
-                            <div className="text-2xl mb-2">💕</div>
-                            <div className="font-bold text-green-600">Show Love</div>
-                            <div className="text-sm text-green-500">Care for everyone</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Suspense>
-              </div>
-            </div>
-          </section>
-
-          {/* Magical Story Calendar */}
-          <section className="py-20 bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center space-y-6 mb-12">
-                <h2 className="text-4xl md:text-5xl font-display font-bold rainbow-text">
-                  📅 Our Magical Story Calendar! 📅
+        {/* Video Section */}
+        <section className="py-20 relative z-10 -mt-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="montessori-card p-6 md:p-12 bg-card text-card-foreground shadow-xl border-t-4 border-primary"
+            >
+              <div className="text-center mb-8 space-y-2">
+                <h2 className="text-3xl font-bold text-foreground flex items-center justify-center gap-3">
+                  <Star className="w-8 h-8 text-accent" />
+                  This Week&apos;s Adventure
+                  <Star className="w-8 h-8 text-accent" />
                 </h2>
-                <div className="child-friendly-card max-w-3xl mx-auto">
-                  <div className="child-friendly-card-inner">
-                    <p className="text-lg text-purple-700">
-                      🌟 Every week brings a new amazing Bible adventure with super important life lessons! 🌟
-                    </p>
-                  </div>
-                </div>
+                <p className="text-muted-foreground">Updated every Monday for ages 3-6</p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="child-friendly-card fun-hover">
-                  <div className="child-friendly-card-inner text-center">
-                    <div className="text-4xl mb-4 floating-animation">💝</div>
-                    <div className="w-16 h-16 gradient-bg-1 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                      <span className="text-white font-bold text-xl">1</span>
-                    </div>
-                    <h3 className="font-display font-bold text-pink-600 mb-2">Week 1</h3>
-                    <p className="text-pink-500 font-medium">The Good Samaritan</p>
-                    <p className="text-xs text-pink-400 mt-2">💕 Being Kind & Helpful</p>
-                  </div>
+              <Suspense fallback={
+                <div className="h-[400px] grid place-items-center bg-muted rounded-xl">
+                  <LoadingSpinner size="lg" />
                 </div>
-
-                <div className="child-friendly-card fun-hover">
-                  <div className="child-friendly-card-inner text-center">
-                    <div className="text-4xl mb-4 bounce-animation">⚔️</div>
-                    <div className="w-16 h-16 gradient-bg-2 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                      <span className="text-white font-bold text-xl">2</span>
-                    </div>
-                    <h3 className="font-display font-bold text-blue-600 mb-2">Week 2</h3>
-                    <p className="text-blue-500 font-medium">David and Goliath</p>
-                    <p className="text-xs text-blue-400 mt-2">💪 Courage & Faith</p>
-                  </div>
+              }>
+                <div className="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-sm">
+                  <VideoPlayer videos={[
+                    {
+                      url: 'https://www.youtube.com/watch?v=Yz2NiUJHmhE',
+                      title: 'The Good Samaritan',
+                      description: 'A beautiful story about kindness, helping others, and being a good neighbor.',
+                      thumbnail: '/images/video-thumb-1.jpg'
+                    },
+                    {
+                      url: 'https://www.youtube.com/watch?v=hlQEmjWRa4A',
+                      title: 'David and Goliath',
+                      description: 'Discover how young David showed great courage and faith!',
+                      thumbnail: '/images/video-thumb-2.jpg'
+                    },
+                    {
+                      url: 'https://www.youtube.com/watch?v=tLxKjqG6iAg',
+                      title: 'Noah\'s Ark',
+                      description: 'Join Noah and all the animals on their amazing adventure!',
+                      thumbnail: '/images/video-thumb-3.jpg'
+                    }
+                  ]} />
                 </div>
+              </Suspense>
 
-                <div className="child-friendly-card fun-hover">
-                  <div className="child-friendly-card-inner text-center">
-                    <div className="text-4xl mb-4 wiggle-animation">🌈</div>
-                    <div className="w-16 h-16 gradient-bg-3 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                      <span className="text-white font-bold text-xl">3</span>
-                    </div>
-                    <h3 className="font-display font-bold text-green-600 mb-2">Week 3</h3>
-                    <p className="text-green-500 font-medium">Noah&apos;s Ark</p>
-                    <p className="text-xs text-green-400 mt-2">🐾 Caring for Creation</p>
-                  </div>
+              {/* Lesson Cards */}
+              <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="p-6 rounded-xl bg-primary/5 border border-primary/20 text-center space-y-3">
+                  <Heart className="w-10 h-10 mx-auto text-primary" />
+                  <h3 className="font-bold text-lg text-foreground">Be Kind</h3>
+                  <p className="text-sm text-muted-foreground">Help others with a big smile</p>
                 </div>
-
-                <div className="child-friendly-card fun-hover">
-                  <div className="child-friendly-card-inner text-center">
-                    <div className="text-4xl mb-4 floating-animation">🐑</div>
-                    <div className="w-16 h-16 gradient-bg-4 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                      <span className="text-white font-bold text-xl">4</span>
-                    </div>
-                    <h3 className="font-display font-bold text-purple-600 mb-2">Week 4</h3>
-                    <p className="text-purple-500 font-medium">The Lost Sheep</p>
-                    <p className="text-xs text-purple-400 mt-2">💕 God&apos;s Love for Us</p>
-                  </div>
+                <div className="p-6 rounded-xl bg-secondary/5 border border-secondary/20 text-center space-y-3">
+                  <Sparkles className="w-10 h-10 mx-auto text-secondary" />
+                  <h3 className="font-bold text-lg text-foreground">Be Helpful</h3>
+                  <p className="text-sm text-muted-foreground">Lend a helping hand to friends</p>
+                </div>
+                <div className="p-6 rounded-xl bg-accent/5 border border-accent/20 text-center space-y-3">
+                  <Star className="w-10 h-10 mx-auto text-accent-foreground" />
+                  <h3 className="font-bold text-lg text-foreground">Show Love</h3>
+                  <p className="text-sm text-muted-foreground">Care for everyone around us</p>
                 </div>
               </div>
-            </div>
-          </section>
+            </motion.div>
+          </div>
+        </section>
 
-          {/* Join Our Magical Adventure */}
-          <section className="py-20 bg-gradient-to-br from-pink-400 via-purple-400 to-blue-400 relative overflow-hidden">
-            {/* Floating decorations */}
-            <div className="absolute inset-0">
-              <div className="absolute top-10 left-10 text-4xl text-white/30 floating-animation">🌟</div>
-              <div className="absolute top-20 right-20 text-3xl text-white/30 bounce-animation">💫</div>
-              <div className="absolute bottom-20 left-20 text-4xl text-white/30 wiggle-animation">✨</div>
-              <div className="absolute bottom-10 right-10 text-3xl text-white/30 floating-animation">🎈</div>
+        {/* Story Calendar Preview - Simplified */}
+        <section className="py-20 bg-muted/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground">Our Story Calendar</h2>
+              <p className="text-muted-foreground text-lg">Every week brings a new amazing Bible adventure with important life lessons!</p>
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <div className="space-y-8">
-                <div className="space-y-4">
-                  <h2 className="text-4xl md:text-6xl font-display font-bold text-white leading-tight">
-                    🏰 Join Our Magical Learning Adventure! 🏰
-                  </h2>
-                  <div className="text-2xl font-medium text-white/90 wiggle-animation">
-                    ✨ Where Bible Stories Meet Montessori Magic! ✨
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { week: 1, title: "The Good Samaritan", theme: "Kindness", color: "bg-primary" },
+                { week: 2, title: "David and Goliath", theme: "Courage", color: "bg-secondary" },
+                { week: 3, title: "Noah's Ark", theme: "Caring", color: "bg-accent" },
+                { week: 4, title: "The Lost Sheep", theme: "Love", color: "bg-primary" },
+              ].map((item) => (
+                <div key={item.week} className="bg-card border border-border rounded-xl p-6 hover:shadow-md transition-all text-center group">
+                  <div className={cn("w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-4 bg-primary", item.color)}>
+                    {item.week}
                   </div>
+                  <h3 className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.theme}</p>
                 </div>
-
-                <div className="child-friendly-card max-w-4xl mx-auto">
-                  <div className="child-friendly-card-inner">
-                    <p className="text-xl text-purple-700 leading-relaxed">
-                      🌈 Come see how we blend gentle Bible stories with amazing Montessori learning! 🌈<br/>
-                      Your little one will grow in wisdom, kindness, and wonder every single day! 💕
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                  <Link
-                    href="/contact"
-                    className="playful-button text-xl px-10 py-5 fun-hover"
-                  >
-                    🚀 Schedule Our Magical Visit!
-                  </Link>
-                  <Link
-                    href="/programs"
-                    className="px-10 py-5 rounded-full border-4 border-white text-white bg-white/10 font-bold text-xl hover:bg-white/20 transition-all hover:scale-105 fun-hover"
-                  >
-                    🎨 Explore Our Programs
-                  </Link>
-                </div>
-              </div>
+              ))}
             </div>
-          </section>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-24 bg-primary text-primary-foreground text-center">
+          <div className="max-w-4xl mx-auto px-4 space-y-8">
+            <h2 className="text-3xl md:text-5xl font-bold">Join Our Magical Learning Adventure!</h2>
+            <p className="text-xl opacity-90">Where Bible Stories Meet Montessori Magic. Your little one will grow in wisdom, kindness, and wonder every single day!</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+              <Link href="/contact" className="bg-background text-foreground px-8 py-4 rounded-lg font-bold text-lg hover:brightness-110 transition-all shadow-lg hover:shadow-xl">
+                Schedule a Visit
+              </Link>
+              <Link href="/programs" className="bg-primary-foreground/10 border-2 border-primary-foreground/30 px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-foreground/20 transition-all">
+                Explore Programs
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
     </Suspense>
   );
