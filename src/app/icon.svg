@@ -1,0 +1,17 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular Background (Light friendly fill, optional, or just transparent) -->
+  
+  <!-- Stylized Leaf/Hand Left (Green - Growth/Nature) -->
+  <path d="M256 420C256 420 160 380 120 280C90 205 140 140 200 140C240 140 256 180 256 180" 
+        stroke="#2C5F4D" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+        
+  <!-- Stylized Leaf/Hand Right (Terracotta - Warmth/Friendship) -->
+  <path d="M256 420C256 420 352 380 392 280C422 205 372 140 312 140C272 140 256 180 256 180" 
+        stroke="#D98C5F" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Center Heart/Seed shape formed by negative space or fill -->
+  <circle cx="256" cy="110" r="40" fill="#E8C547" />
+  
+  <!-- "Corner" Roof accent (Subtle protection symbol) -->
+  <path d="M100 200L256 80L412 200" stroke="#2C5F4D" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" opacity="0.1"/>
+</svg>

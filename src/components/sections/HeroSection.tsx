@@ -31,104 +31,113 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-muted">
-      {/* Background Image - High Quality, somewhat desaturated or warm overlay */}
-      <div className="absolute inset-0 z-0">
+    <div className="relative grid place-items-center w-full min-h-[90vh] bg-muted overflow-hidden">
+      {/* Background Image & Overlay (DaisyUI .hero-overlay equivalent) */}
+      <div className="absolute inset-0 z-0 grid place-items-center w-full h-full">
         <Image
-          src="/images/hero-bg.svg" // Ideally this should be a real photo of the center
+          src="/images/hero-bg.svg"
           alt="Daycare background"
           fill
           className="object-cover opacity-30"
           priority
         />
-        {/* Warm Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Main Content (DaisyUI .hero-content text-center equivalent) */}
+      <div className="relative z-10 w-full max-w-4xl p-4 flex flex-col items-center justify-center gap-8 text-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="space-y-8"
+          className="w-full max-w-2xl mx-auto flex flex-col gap-6"
         >
           {/* Badge */}
           <motion.div variants={itemVariants} className="flex justify-center">
-            <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide uppercase mb-4">
+            <span className="inline-block py-2 px-4 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wide uppercase border border-primary/20">
               Licensed Montessori Daycare in Coquitlam
             </span>
           </motion.div>
 
+          {/* Heading */}
           <motion.h1
             variants={itemVariants}
             className={cn(
-              "text-4xl md:text-6xl lg:text-7xl font-bold",
-              "text-foreground leading-tight tracking-tight"
+              "text-5xl md:text-6xl lg:text-7xl font-bold",
+              "text-foreground leading-tight tracking-tight drop-shadow-sm"
             )}
           >
             {t('hero.title')}
           </motion.h1>
 
+          {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className={cn(
-              "text-xl md:text-2xl text-muted-foreground",
-              "w-full max-w-2xl mx-auto leading-relaxed"
-            )}
+            className="text-xl md:text-2xl text-muted-foreground leading-relaxed"
           >
             {t('hero.subtitle')}
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - DaisyUI .btn equivalents */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
+            className="flex flex-col sm:flex-row gap-4 justify-center pt-2"
           >
             <Link
               href="/contact"
-              className="warm-button shadow-lg hover:shadow-xl text-lg px-8 py-4"
+              className={cn(
+                "inline-flex items-center justify-center h-14 px-8",
+                "rounded-lg font-bold text-lg transition-all duration-200",
+                "bg-primary text-primary-foreground shadow-lg",
+                "hover:brightness-110 hover:shadow-xl active:scale-95"
+              )}
             >
               {t('hero.enrollNow')}
             </Link>
 
             <Link
               href="/about"
-              className="warm-button-secondary text-lg px-8 py-4 bg-white/50 backdrop-blur-sm"
+              className={cn(
+                "inline-flex items-center justify-center h-14 px-8",
+                "rounded-lg font-bold text-lg transition-all duration-200",
+                "bg-transparent border-2 border-primary text-primary",
+                "hover:bg-primary/5 active:scale-95"
+              )}
             >
               {t('hero.cta')}
             </Link>
           </motion.div>
 
-          {/* Trust Indicators - Clean & Professional */}
+          {/* Trust Indicators - Simple Stats grid */}
           <motion.div
             variants={itemVariants}
-            className="pt-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 text-left md:text-center"
+            className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center w-full"
           >
-            <div className="flex flex-col md:items-center space-y-2">
-              <div className="flex items-center md:justify-center p-3 bg-white rounded-full shadow-sm w-12 h-12 mx-auto mb-2 md:mb-0">
-                <span className="text-primary text-xl font-bold">✓</span>
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold">✓</div>
+              <div className="flex flex-col">
+                <span className="font-bold text-foreground">Licensed Care</span>
+                <span className="text-sm text-muted-foreground">Government approved</span>
               </div>
-              <h3 className="font-bold text-foreground">Licensed Care</h3>
-              <p className="text-sm text-muted-foreground">Fully government licensed & approved facility.</p>
             </div>
 
-            <div className="flex flex-col md:items-center space-y-2">
-              <div className="flex items-center md:justify-center p-3 bg-white rounded-full shadow-sm w-12 h-12 mx-auto mb-2 md:mb-0">
-                <span className="text-secondary text-xl font-bold">M</span>
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary text-xl font-bold">M</div>
+              <div className="flex flex-col">
+                <span className="font-bold text-foreground">Montessori</span>
+                <span className="text-sm text-muted-foreground">Child-centered</span>
               </div>
-              <h3 className="font-bold text-foreground">Montessori Method</h3>
-              <p className="text-sm text-muted-foreground">Child-centered educational approach.</p>
             </div>
 
-            <div className="flex flex-col md:items-center space-y-2">
-              <div className="flex items-center md:justify-center p-3 bg-white rounded-full shadow-sm w-12 h-12 mx-auto mb-2 md:mb-0">
-                <span className="text-accent-foreground text-xl font-bold">16</span>
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent-foreground text-xl font-bold">16</div>
+              <div className="flex flex-col">
+                <span className="font-bold text-foreground">Est. 2008</span>
+                <span className="text-sm text-muted-foreground">Trusted care</span>
               </div>
-              <h3 className="font-bold text-foreground">Established 2008</h3>
-              <p className="text-sm text-muted-foreground">Over a decade of trusted childcare.</p>
             </div>
           </motion.div>
+
         </motion.div>
       </div>
 
@@ -143,6 +152,6 @@ export function HeroSection() {
           <div className="w-1 h-2 bg-foreground/30 rounded-full" />
         </div>
       </motion.div>
-    </section>
+    </div>
   );
 }

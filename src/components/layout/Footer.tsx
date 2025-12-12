@@ -13,11 +13,11 @@ export function Footer() {
           <div className="flex flex-col items-center md:items-start space-y-4 flex-1">
             <div className="flex items-center space-x-3">
               <Image
-                src="/images/friendship-corner-daycare-logo.png"
+                src="/images/logo.svg"
                 alt="Friendship Corner Daycare"
                 width={48}
-                height={36}
-                className="w-10 h-auto object-contain"
+                height={48}
+                className="w-12 h-12 object-contain"
               />
               <span className="font-display font-bold text-lg text-foreground">
                 Friendship Corner
@@ -32,8 +32,8 @@ export function Footer() {
 
           {/* Quick Contact */}
           <div className="flex flex-col items-center md:items-end space-y-2 flex-shrink-0">
-            <a 
-              href="tel:6049458504" 
+            <a
+              href="tel:6049458504"
               className="text-primary font-bold text-lg hover:text-primary/80 transition-colors whitespace-nowrap"
             >
               604.945.8504
@@ -51,14 +51,14 @@ export function Footer() {
             © {new Date().getFullYear()} Friendship Corner Daycare. All rights reserved.
           </p>
           <nav className="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6">
-            <Link 
-              href="/privacy" 
+            <Link
+              href="/privacy"
               className="hover:text-foreground transition-colors whitespace-nowrap"
             >
               Privacy Policy
             </Link>
-            <Link 
-              href="/contact" 
+            <Link
+              href="/contact"
               className="hover:text-foreground transition-colors whitespace-nowrap"
             >
               Contact Us
