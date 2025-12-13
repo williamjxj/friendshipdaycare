@@ -160,7 +160,7 @@ export default function FAQPage() {
         },
         {
           question: "What payment methods do you accept?",
-          answer: "We accept post-dated checks, e-transfers (to info@friendshipcorner.ca), and direct bank transfers. Cash payments are accepted but not encouraged. We do not currently accept credit cards."
+          answer: "We accept post-dated checks, e-transfers (to friendship.care@live.ca), and direct bank transfers. Cash payments are accepted but not encouraged. We do not currently accept credit cards."
         },
         {
           question: "What if I need to withdraw my child?",
@@ -208,7 +208,7 @@ export default function FAQPage() {
               <p className="text-gray-700 dark:text-gray-300">
                 <strong>Can't find what you're looking for?</strong> Contact us at{' '}
                 <a href="tel:604-945-8504" className="text-blue-600 hover:underline">604.945.8504</a> or{' '}
-                <a href="mailto:info@friendshipcorner.ca" className="text-blue-600 hover:underline">info@friendshipcorner.ca</a>
+                <a href="mailto:friendship.care@live.ca" className="text-blue-600 hover:underline">friendship.care@live.ca</a>
               </p>
             </div>
           </div>
@@ -225,11 +225,11 @@ export default function FAQPage() {
                     {category.category}
                   </span>
                 </h2>
-                
+
                 <div className="space-y-6">
                   {category.questions.map((faq, faqIndex) => (
-                    <details 
-                      key={faqIndex} 
+                    <details
+                      key={faqIndex}
                       className="group border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0 last:pb-0"
                     >
                       <summary className="cursor-pointer list-none flex items-start gap-3">
@@ -263,20 +263,20 @@ export default function FAQPage() {
               Learn more about our programs and enrollment process
             </p>
             <div className="grid md:grid-cols-3 gap-6">
-              <a 
-                href="/enrollment" 
+              <a
+                href="/enrollment"
                 className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all"
               >
                 Enrollment Process
               </a>
-              <a 
-                href="/pricing" 
+              <a
+                href="/pricing"
                 className="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all"
               >
                 View Pricing
               </a>
-              <a 
-                href="/contact" 
+              <a
+                href="/contact"
                 className="bg-white text-pink-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all"
               >
                 Schedule a Tour
@@ -293,8 +293,8 @@ export default function FAQPage() {
               We're here to help! Reach out to us and we'll get back to you within 24 hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="tel:604-945-8504" 
+              <a
+                href="tel:604-945-8504"
                 className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -302,8 +302,8 @@ export default function FAQPage() {
                 </svg>
                 Call Us
               </a>
-              <a 
-                href="mailto:info@friendshipcorner.ca" 
+              <a
+                href="mailto:friendship.care@live.ca"
                 className="inline-flex items-center justify-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

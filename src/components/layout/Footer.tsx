@@ -15,14 +15,14 @@ import {
   Clock,
   Smartphone
 } from 'lucide-react';
+import QRCode from 'react-qr-code';
 import { cn } from '@/lib/utils';
 
 export function Footer() {
   const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
   // In a real app, this would be the deployed domain. Using a placeholder or internal logic.
-  const siteUrl = "https://friendshipdaycare.com";
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(siteUrl)}`;
+  const siteUrl = "https://www.friendshipdaycare.com";
 
   return (
     <footer className="bg-muted border-t border-border pt-16 pb-8">
@@ -117,8 +117,8 @@ export function Footer() {
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <MapPin className="w-5 h-5 text-primary shrink-0" />
                 <span>
-                  123 Montessori Lane<br />
-                  Coquitlam, BC V3B 1A1
+                  2950 Dewdney Trunk Road<br />
+                  Coquitlam, BC V3C 2J4 Canada
                 </span>
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
@@ -127,7 +127,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <a href="mailto:hello@friendshipdaycare.com" className="hover:text-primary transition-colors">hello@friendshipdaycare.com</a>
+                <a href="mailto:friendship.care@live.ca" className="hover:text-primary transition-colors">friendship.care@live.ca</a>
               </li>
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <Clock className="w-5 h-5 text-primary shrink-0" />
@@ -146,13 +146,11 @@ export function Footer() {
               Mobile Access
             </h3>
             <div className="bg-white p-2 rounded-lg inline-block shadow-sm mx-auto md:mx-0">
-              <Image
-                src={qrCodeUrl}
-                alt="Scan for Mobile Access"
-                width={100}
-                height={100}
-                className="mix-blend-multiply"
-                unoptimized
+              <QRCode
+                value={siteUrl}
+                size={100}
+                style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                viewBox={`0 0 256 256`}
               />
             </div>
             <p className="text-[10px] text-muted-foreground/60 mt-2">
@@ -161,9 +159,23 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
-          <p>&copy; {currentYear} Friendship Corner Daycare. All rights reserved.</p>
+          <div className="flex flex-col md:flex-row items-center gap-2">
+            <p>&copy; {currentYear} Friendship Corner Daycare. All rights reserved.</p>
+            <span className="hidden md:inline text-muted-foreground/40">|</span>
+            <p className="flex items-center gap-1">
+              Website by <a href="https://www.bestitconsulting.ca" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors font-medium inline-flex items-center gap-1">
+                <Image
+                  src="/images/bestit-favicon.ico"
+                  alt="Best IT Consulting"
+                  width={16}
+                  height={16}
+                  className="w-4 h-4"
+                />
+                Best IT Consulting
+              </a>
+            </p>
+          </div>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>

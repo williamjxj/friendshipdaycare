@@ -1,23 +1,24 @@
 # Friendship Corner Daycare Website
 
-A modern, responsive website for Friendship Corner Daycare built with **Next.js 15**, **React 19**, **TypeScript**, and **TailwindCSS v4**. This website replaces the existing site at http://www.friendshipdaycare.com/ with enhanced features and improved user experience.
+A modern, responsive website for Friendship Corner Daycare built with **Next.js 16**, **React 19**, **TypeScript**, and **TailwindCSS v4**. This website replaces the existing site with enhanced visual aesthetics, animations, and improved user experience.
 
 ## 🌟 Features
 
 ### ✅ Implemented Features
 
-- **🎨 Multi-Theme Support**: 4 beautiful themes (Default, Nature, Playful, Dark)
+- **🎨 Multi-Theme Support**: 5 beautiful themes (Professional, Nature, Playful, Dark, Violet)
+- **✨ Advanced Animations**: GSAP ScrollTrigger & Framer Motion for premium feel
+- **🎥 Dynamic Hero**: Immersive video backgrounds with fallback support
+- **🍱 Modern Layouts**: Bento Grid & Montessori Card designs for information display
 - **🌍 Internationalization**: Support for English, Spanish, French, Korean, and Chinese
-- **📱 Responsive Design**: Optimized for all devices and screen sizes
+- **📱 Responsive Design**: Optimized for all devices with Mobile QR Access
 - **🖼️ Image Gallery**: Animated carousel with category filtering and lightbox view
-- **🎥 Video Player**: Educational videos with playlist support
 - **🗺️ Google Maps Integration**: Interactive map showing daycare location
-- **♿ Accessibility**: WCAG compliant with screen reader support
-- **⚡ Performance**: Optimized with Next.js 15 and Turbopack
+- **⚡ Performance**: Optimized with Next.js 16 server components and Turbopack
 
 ### 🏗️ Project Structure
 
-```
+```text
 src/
 ├── app/                    # Next.js App Router
 │   ├── page.tsx           # Homepage
@@ -39,45 +40,51 @@ src/
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. **Clone the repository**
+
 ```bash
 git clone <repository-url>
 cd kidgarden-daycare
 ```
 
-2. **Install dependencies**
+1. **Install dependencies**
+
 ```bash
 npm install
 ```
 
-3. **Start development server**
+1. **Start development server**
+
 ```bash
 npm run dev
 ```
 
-4. **Open in browser**
-Navigate to [http://localhost:3000](http://localhost:3000)
+1. **Open in browser**
+    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 📋 Content Migration
 
 The website content has been migrated and enhanced from the original site:
 
-### Original Site Information
+### School Information
+
 - **Name**: Friendship Corner Daycare (Montessori)
 - **Type**: Licensed Group Daycare (Non-profit society)
 - **Established**: January 2008
 - **Location**: Near Coquitlam Station, Coquitlam, BC
 - **Address**: 2950 Dewdney Trunk Road, Coquitlam, BC V3C 2J4, Canada
 - **Phone**: 604.945.8504
+- **Email**: <friendship.care@live.ca>
 - **Age Range**: 30 months to school age
 - **Service Area**: Tri-Cities (Coquitlam, Port Coquitlam, Port Moody)
 
 ### Enhanced Content Features
+
 - **Inspiring Hero**: "Where Little Dreams Take Flight"
 - **Detailed Programs**: Toddler, Preschool, Pre-Kindergarten
 - **Educational Focus**: Montessori method + gentle Bible stories
@@ -87,16 +94,18 @@ The website content has been migrated and enhanced from the original site:
 
 The website supports 4 beautiful themes:
 
-1. **Default** - Warm & Friendly colors
-2. **Nature** - Earth tones and greens  
+1. **Professional** - Clean & Corporate
+2. **Nature** - Earth tones and greens
 3. **Playful** - Bright and vibrant colors
 4. **Dark** - Elegant dark theme
+5. **Violet** - Soft purple aesthetics
 
 Themes are stored in localStorage and applied system-wide.
 
 ## 🌍 Multi-Language Support
 
 Supported languages:
+
 - 🇺🇸 English
 - 🇪🇸 Spanish  
 - 🇫🇷 French
@@ -127,11 +136,11 @@ See `IMAGES_README.md` for image requirements.
 
 ## 🛠️ Technology Stack
 
-- **Framework**: Next.js 15 with App Router
+- **Framework**: Next.js 16 with App Router
 - **Language**: TypeScript
 - **Styling**: TailwindCSS v4
-- **UI Components**: Custom components with Heroicons
-- **Animations**: Framer Motion
+- **Animations**: GSAP (GreenSock) + Framer Motion
+- **UI Components**: Aceternity UI, Magic UI, Lucide Icons
 - **Video**: React Player
 - **Carousel**: Embla Carousel
 - **Forms**: React Hook Form with Zod validation
@@ -140,6 +149,7 @@ See `IMAGES_README.md` for image requirements.
 ## 📱 Pages Overview
 
 ### Homepage (`/`)
+
 - Hero section with compelling tagline
 - About section with mission
 - Programs overview
@@ -147,24 +157,28 @@ See `IMAGES_README.md` for image requirements.
 - Contact information
 
 ### About (`/about`)
+
 - Detailed daycare information
 - History and mission
 - Staff qualifications
 - Montessori approach
 
 ### Programs (`/programs`)  
+
 - Age-specific program details
 - Toddler Program (30 months - 3 years)
 - Preschool Program (3 - 4 years)
 - Pre-Kindergarten (4 - 5 years)
 
 ### Gallery (`/gallery`)
+
 - Photo gallery with categories
 - Animated carousel
 - Educational videos
 - Activity highlights
 
 ### Contact (`/contact`)
+
 - Contact form
 - Location information
 - Interactive Google Map
@@ -173,6 +187,7 @@ See `IMAGES_README.md` for image requirements.
 ## 🔧 Build & Deployment
 
 ### Development
+
 ```bash
 npm run dev      # Start dev server
 npm run build    # Build for production  
@@ -183,6 +198,7 @@ npm run lint     # Run ESLint
 ### Production Deployment
 
 The site is optimized for deployment on:
+
 - Vercel (recommended for Next.js)
 - Netlify
 - Any Node.js hosting provider
@@ -190,13 +206,20 @@ The site is optimized for deployment on:
 ## 📞 Support & Contact
 
 For questions about this website implementation:
+
 - Review the documentation files
 - Check the component source code
 - Refer to Next.js and TailwindCSS documentation
 
 For daycare enrollment and information:
+
 - **Phone**: 604.945.8504
+- **Email**: <friendship.care@live.ca>
 - **Address**: 2950 Dewdney Trunk Road, Coquitlam, BC V3C 2J4, Canada
+
+### Developer Credit
+
+Website design and development by **Best IT Consulting** (<www.bestitconsulting.ca>).
 
 ---
 

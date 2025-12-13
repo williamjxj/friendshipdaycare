@@ -30,7 +30,7 @@ export default function PoliciesPage() {
         {/* Policies Content */}
         <section className="py-12 px-4">
           <div className="max-w-4xl mx-auto space-y-12">
-            
+
             {/* Health & Safety */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
               <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
@@ -39,7 +39,7 @@ export default function PoliciesPage() {
                   Health & Safety Policies
                 </span>
               </h2>
-              
+
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200">Illness Policy</h3>
@@ -61,7 +61,7 @@ export default function PoliciesPage() {
                 <div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200">Immunization Requirements</h3>
                   <p className="text-gray-700 dark:text-gray-300">
-                    All children must provide up-to-date immunization records as required by BC health regulations. 
+                    All children must provide up-to-date immunization records as required by BC health regulations.
                     We will request updated records annually or when new immunizations are due.
                   </p>
                 </div>
@@ -85,7 +85,7 @@ export default function PoliciesPage() {
                 <div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200">Emergency Procedures</h3>
                   <p className="text-gray-700 dark:text-gray-300">
-                    In case of medical emergency, we will call 911 immediately and then contact parents. 
+                    In case of medical emergency, we will call 911 immediately and then contact parents.
                     All staff are trained in pediatric first aid and CPR. We conduct monthly fire drills and quarterly earthquake drills.
                   </p>
                 </div>
@@ -100,12 +100,12 @@ export default function PoliciesPage() {
                   Attendance & Operations
                 </span>
               </h2>
-              
+
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200">Hours of Operation</h3>
                   <p className="text-gray-700 dark:text-gray-300">
-                    <strong>Regular Hours:</strong> Monday - Friday, 7:30 AM - 5:30 PM<br/>
+                    <strong>Regular Hours:</strong> Monday - Friday, 7:30 AM - 5:30 PM<br />
                     <strong>Closed:</strong> Statutory holidays and two weeks in December/January
                   </p>
                 </div>
@@ -123,7 +123,7 @@ export default function PoliciesPage() {
                 <div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200">Late Pick-up Policy</h3>
                   <p className="text-gray-700 dark:text-gray-300">
-                    <strong>Closing time is 5:30 PM sharp.</strong> Late pick-ups incur a fee of $1.00 per minute after 5:30 PM. 
+                    <strong>Closing time is 5:30 PM sharp.</strong> Late pick-ups incur a fee of $1.00 per minute after 5:30 PM.
                     Please call immediately if you're running late. Repeated late pick-ups may result in termination of care.
                   </p>
                 </div>
@@ -145,7 +145,7 @@ export default function PoliciesPage() {
                   Tuition & Payment Policies
                 </span>
               </h2>
-              
+
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200">Payment Schedule</h3>
@@ -161,7 +161,7 @@ export default function PoliciesPage() {
                   <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200">Accepted Payment Methods</h3>
                   <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
                     <li>Post-dated checks (preferred)</li>
-                    <li>E-transfer to info@friendshipcorner.ca</li>
+                    <li>E-transfer to friendship.care@live.ca</li>
                     <li>Direct bank transfer</li>
                     <li>Cash (not encouraged)</li>
                   </ul>
@@ -170,7 +170,7 @@ export default function PoliciesPage() {
                 <div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200">Withdrawal Policy</h3>
                   <p className="text-gray-700 dark:text-gray-300">
-                    One full month's written notice is required for withdrawal. If less notice is given, 
+                    One full month's written notice is required for withdrawal. If less notice is given,
                     you are responsible for the full month's tuition. Registration fees are non-refundable.
                   </p>
                 </div>
@@ -195,13 +195,13 @@ export default function PoliciesPage() {
                   Behavior Guidance Policy
                 </span>
               </h2>
-              
+
               <div className="space-y-4 text-gray-700 dark:text-gray-300">
                 <p>
-                  We use positive guidance techniques to help children develop self-control and respect for others. 
+                  We use positive guidance techniques to help children develop self-control and respect for others.
                   Our approach is based on Montessori principles and age-appropriate expectations.
                 </p>
-                
+
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mt-4">Our Approach:</h3>
                 <ul className="list-disc list-inside space-y-2 ml-4">
                   <li>Redirect inappropriate behavior to positive alternatives</li>
@@ -224,10 +224,10 @@ export default function PoliciesPage() {
                   Parent Communication
                 </span>
               </h2>
-              
+
               <div className="space-y-4 text-gray-700 dark:text-gray-300">
                 <p>Open communication between families and staff is essential. We use multiple channels:</p>
-                
+
                 <ul className="list-disc list-inside space-y-2 ml-4">
                   <li><strong>Daily:</strong> Brief verbal updates at pick-up</li>
                   <li><strong>Weekly:</strong> Classroom newsletters</li>
@@ -237,7 +237,7 @@ export default function PoliciesPage() {
                 </ul>
 
                 <p className="mt-4">
-                  <strong>Concerns or Questions:</strong> Please speak with your child's teacher first. 
+                  <strong>Concerns or Questions:</strong> Please speak with your child's teacher first.
                   If concerns remain, contact the director. We're committed to addressing all issues promptly and professionally.
                 </p>
               </div>
@@ -256,14 +256,14 @@ export default function PoliciesPage() {
               We're happy to discuss any of our policies in detail
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                href="/contact" 
+              <Link
+                href="/contact"
                 className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
               >
                 Contact Us
               </Link>
-              <Link 
-                href="/faq" 
+              <Link
+                href="/faq"
                 className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
               >
                 View FAQ
@@ -280,7 +280,7 @@ export default function PoliciesPage() {
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               Download our comprehensive parent handbook for detailed information on all policies and procedures
             </p>
-            <Link 
+            <Link
               href="/resources"
               className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
             >

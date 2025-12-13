@@ -367,7 +367,7 @@ export const defaultOrganizationData = {
   name: "Friendship Corner Daycare",
   url: "https://friendshipdaycare.com",
   telephone: "+1-604-945-8504",
-  email: "info@friendshipcorner.ca",
+  email: "friendship.care@live.ca",
   address: {
     streetAddress: "1060 Lougheed Highway",
     addressLocality: "Coquitlam",

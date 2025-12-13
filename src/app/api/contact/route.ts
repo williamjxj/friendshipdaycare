@@ -26,9 +26,9 @@ export async function POST(request: NextRequest) {
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
-        { 
-          success: false, 
-          message: 'Email service is not configured. Please contact us directly at info@friendshipcorner.ca or call 604.945.8504.' 
+        {
+          success: false,
+          message: 'Email service is not configured. Please contact us directly at friendship.care@live.ca or call 604.945.8504.'
         },
         { status: 503 }
       );
@@ -36,12 +36,12 @@ export async function POST(request: NextRequest) {
 
     // Initialize Resend with API key
     const resend = new Resend(apiKey);
-    
+
     const body = await request.json();
-    
+
     // Validate the form data
     const validatedData = contactFormSchema.parse(body);
-    
+
     const { name, email, phone, childAge, message } = validatedData;
 
     // Email configuration options
@@ -107,7 +107,7 @@ Please respond to this inquiry within 24 hours.
     // Send email using Resend
     const emailResult = await resend.emails.send({
       from: currentConfig.businessFrom,
-      to: ['info@friendshipcorner.ca'], // Your business email
+      to: ['friendship.care@live.ca'], // Your business email
       replyTo: email, // Allow replying directly to the customer
       subject: `New Contact Form Submission from ${name}`,
       html: emailHtml,
@@ -151,7 +151,7 @@ Please respond to this inquiry within 24 hours.
               Best regards,<br>
               <strong>The Friendship Corner Daycare Team</strong><br>
               2950 Dewdney Trunk Road, Coquitlam, BC<br>
-              604.945.8504 | info@friendshipcorner.ca
+              604.945.8504 | friendship.care@live.ca
             </p>
           </div>
         </div>
@@ -177,28 +177,28 @@ In the meantime, feel free to call us at 604.945.8504 if you have any urgent que
 Best regards,
 The Friendship Corner Daycare Team
 2950 Dewdney Trunk Road, Coquitlam, BC
-604.945.8504 | info@friendshipcorner.ca`,
+604.945.8504 | friendship.care@live.ca`,
     });
 
     return NextResponse.json(
-      { 
-        success: true, 
+      {
+        success: true,
         message: 'Message sent successfully! We\'ll get back to you within 24 hours.',
-        emailId: emailResult.data?.id 
+        emailId: emailResult.data?.id
       },
       { status: 200 }
     );
 
   } catch (error) {
     console.error('Contact form error:', error);
-    
+
     // Handle validation errors
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { 
-          success: false, 
+        {
+          success: false,
           message: 'Please check your form data and try again.',
-          errors: error.issues 
+          errors: error.issues
         },
         { status: 400 }
       );
@@ -207,9 +207,9 @@ The Friendship Corner Daycare Team
     // Handle Resend API errors
     if (error && typeof error === 'object' && 'message' in error) {
       return NextResponse.json(
-        { 
-          success: false, 
-          message: 'There was an issue sending your message. Please try again or call us directly at 604.945.8504.' 
+        {
+          success: false,
+          message: 'There was an issue sending your message. Please try again or call us directly at 604.945.8504.'
         },
         { status: 500 }
       );
@@ -217,9 +217,9 @@ The Friendship Corner Daycare Team
 
     // Generic error response
     return NextResponse.json(
-      { 
-        success: false, 
-        message: 'An unexpected error occurred. Please try again later or contact us directly.' 
+      {
+        success: false,
+        message: 'An unexpected error occurred. Please try again later or contact us directly.'
       },
       { status: 500 }
     );
