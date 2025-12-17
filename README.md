@@ -2,6 +2,13 @@
 
 A modern, responsive website for Friendship Corner Daycare built with **Next.js 16**, **React 19**, **TypeScript**, and **TailwindCSS v4**. This website replaces the existing site with enhanced visual aesthetics, animations, and improved user experience.
 
+## 🖼️ Visual Showcase
+
+<div align="center">
+  <img src="public/collects/canva-1.png" alt="Friendship Corner Daycare - Canva Design" width="48%" />
+  <img src="public/collects/gemini-1.png" alt="Friendship Corner Daycare - Gemini Design" width="48%" />
+</div>
+
 ## 🌟 Features
 
 ### ✅ Implemented Features
