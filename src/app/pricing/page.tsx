@@ -2,16 +2,14 @@
 
 import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { CheckIcon } from '@heroicons/react/24/outline';
 
 export default function PricingPage() {
-  const t = useTranslations();
-
   const programs = [
     {
       key: 'toddler',
+      title: 'Toddler Program',
       age: '30 months - 3 years',
       fullTime: '$1,200',
       partTime3: '$850',
@@ -27,6 +25,7 @@ export default function PricingPage() {
     },
     {
       key: 'preschool',
+      title: 'Preschool Program',
       age: '3 - 4 years',
       fullTime: '$1,150',
       partTime3: '$800',
@@ -42,6 +41,7 @@ export default function PricingPage() {
     },
     {
       key: 'prekindergarten',
+      title: 'Pre-Kindergarten',
       age: '4 - 5 years',
       fullTime: '$1,150',
       partTime3: '$800',
@@ -87,7 +87,7 @@ export default function PricingPage() {
                       {/* Header */}
                       <div className="bg-gradient-to-br from-primary to-secondary p-6 text-white">
                         <h2 className="text-2xl font-bold mb-2">
-                          {t(`programs.${program.key}.title`)}
+                          {program.title}
                         </h2>
                         <p className="text-white/90 font-medium">{program.age}</p>
                       </div>
