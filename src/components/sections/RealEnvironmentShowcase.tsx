@@ -2,6 +2,7 @@
 
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { useState, useMemo } from 'react';
+import { getImageUrl } from '@/lib/image-utils';
 
 interface EnvironmentImage {
   src: string;
@@ -10,6 +11,9 @@ interface EnvironmentImage {
   description: string;
   category: 'montessori' | 'outdoor' | 'activities';
 }
+
+// Helper function to get R2 URLs for images
+const getR2Src = (path: string) => getImageUrl(path);
 
 // Constants outside component to prevent recreation on every render
 const ENVIRONMENT_IMAGES: EnvironmentImage[] = [
@@ -139,7 +143,7 @@ export function RealEnvironmentShowcase() {
             >
               <div className="relative h-64 overflow-hidden">
                 <OptimizedImage
-                  src={image.src}
+                  src={getR2Src(image.src)}
                   alt={image.alt}
                   fill
                   className="group-hover:scale-110 transition-transform duration-500"

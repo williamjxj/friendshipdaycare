@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import QRCode from 'react-qr-code';
 import { cn } from '@/lib/utils';
+import { getImageUrl } from '@/lib/image-utils';
 
 export function Footer() {
   const { t } = useLanguage();
@@ -27,15 +28,15 @@ export function Footer() {
   return (
     <footer className="bg-muted border-t border-border pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
 
           {/* Column 1: Brand & About */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-3 group w-fit">
               <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110">
                 <Image
-                  src="/images/logo.svg"
-                  alt="Friendship Corner"
+                  src="/logo.svg"
+                    alt="Friendship Corner"
                   fill
                   className="object-contain"
                 />
@@ -96,13 +97,13 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/todays-story" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/community/todays-story" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   Today's Story
                 </Link>
               </li>
               <li>
-                <Link href="/journal" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/community/journal" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   Journal
                 </Link>
@@ -110,7 +111,38 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Contact Info */}
+          {/* Column 3: Resources */}
+          <div>
+            <h3 className="font-bold text-foreground mb-6 uppercase tracking-wider text-sm">Resources</h3>
+            <ul className="space-y-3">
+            <li>
+                <Link href="/canva" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  Canva 1
+                </Link>
+              </li>
+              <li>
+                <Link href="/canva2" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  Canva 2
+                </Link>
+              </li>
+              <li>
+                <Link href="/gamma" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  Gamma
+                </Link>
+              </li>
+              <li>
+                <Link href="/slide-deck" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  Slide Deck
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Contact Info */}
           <div>
             <h3 className="font-bold text-foreground mb-6 uppercase tracking-wider text-sm">Contact Us</h3>
             <ul className="space-y-4">
@@ -139,7 +171,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Mobile Access (QR Code) */}
+          {/* Column 5: Mobile Access (QR Code) */}
           <div className="text-center md:text-left">
             <h3 className="font-bold text-foreground mb-4 uppercase tracking-wider text-sm flex items-center justify-center md:justify-start gap-2">
               <Smartphone className="w-5 h-5 text-primary" />
@@ -166,7 +198,7 @@ export function Footer() {
             <p className="flex items-center gap-1">
               Website by <a href="https://www.bestitconsulting.ca" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors font-medium inline-flex items-center gap-1">
                 <Image
-                  src="/images/bestit-favicon.ico"
+                  src="/bestit-favicon.ico"
                   alt="Best IT Consulting"
                   width={16}
                   height={16}

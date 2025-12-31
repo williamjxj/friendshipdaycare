@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { getImageUrl } from '@/lib/image-utils';
 
 interface OptimizedImageProps {
   src: string;
@@ -66,7 +67,7 @@ export function OptimizedImage({
       )}
       
       <Image
-        src={src}
+        src={getImageUrl(src)}
         alt={alt}
         width={width}
         height={height}

@@ -15,12 +15,20 @@ import {
   MessageCircle,
   BookMarked,
   Newspaper,
-  ChevronDown
+  ChevronDown,
+  FileText,
+  HelpCircle,
+  Shield,
+  DollarSign,
+  FolderOpen,
+  UserCircle,
+  Star
 } from 'lucide-react';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
+import { getImageUrl } from '@/lib/image-utils';
 
 // --- Types ---
 type NavItem = {
@@ -155,8 +163,16 @@ export function Header() {
       key: 'community',
       icon: Users,
       children: [
-        { key: 'todays-story', href: '/todays-story', icon: BookMarked },
-        { key: 'journal', href: '/journal', icon: Newspaper }, // Changed from 'blog' to 'journal' to match
+        { key: 'todays-story', href: '/community/todays-story', icon: BookMarked },
+        { key: 'journal', href: '/community/journal', icon: Newspaper },
+        // Unused routes for review (route group (unused) doesn't affect URL)
+        { key: 'blog', href: '/blog', icon: FileText },
+        { key: 'faq', href: '/faq', icon: HelpCircle },
+        { key: 'policies', href: '/policies', icon: Shield },
+        { key: 'pricing', href: '/pricing', icon: DollarSign },
+        { key: 'resources', href: '/resources', icon: FolderOpen },
+        { key: 'team', href: '/team', icon: UserCircle },
+        { key: 'testimonials', href: '/testimonials', icon: Star },
       ]
     },
     { key: 'gallery', href: '/gallery', icon: Images },
@@ -179,6 +195,14 @@ export function Header() {
       journal: t('navigation.journal'),
       gallery: t('navigation.gallery'),
       contact: t('navigation.contact'),
+      // Unused routes
+      blog: 'Blog (Unused)',
+      faq: 'FAQ (Unused)',
+      policies: 'Policies (Unused)',
+      pricing: 'Pricing (Unused)',
+      resources: 'Resources (Unused)',
+      team: 'Team (Unused)',
+      testimonials: 'Testimonials (Unused)',
     };
     return map[key] || key;
   }, [isHydrated, t]);
@@ -193,7 +217,7 @@ export function Header() {
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110">
                 <Image
-                  src="/images/logo.svg"
+                  src={"/logo.svg"}
                   alt="Friendship Corner Daycare"
                   fill
                   className="object-contain"

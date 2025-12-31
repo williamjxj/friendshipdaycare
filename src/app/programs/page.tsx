@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getImageUrl } from '@/lib/image-utils';
 
 export default function ProgramsPage() {
   const programs = [
@@ -13,7 +14,7 @@ export default function ProgramsPage() {
       age: '30 months - 3 years',
       color: 'primary',
       icon: 'T',
-      image: '/images/practical-life-shelf-1.jpg',
+      image: getImageUrl('/images/practical-life-shelf-1.jpg'),
       description: 'Our toddler program provides a gentle introduction to structured learning with a focus on independence and social skills development.',
       features: [
         'Social Skills Development',
@@ -41,7 +42,7 @@ export default function ProgramsPage() {
       age: '3 - 4 years',
       color: 'secondary',
       icon: 'P',
-      image: '/images/sensorial-shelf.jpg',
+      image: getImageUrl('/images/sensorial-shelf.jpg'),
       description: 'Our preschool program uses Montessori-based curriculum emphasizing hands-on learning and creative expression.',
       features: [
         'Creative Expression',
@@ -69,7 +70,7 @@ export default function ProgramsPage() {
       age: '4 - 5 years',
       color: 'accent',
       icon: 'K',
-      image: '/images/language-shelf.jpg',
+      image: getImageUrl('/images/language-shelf.jpg'),
       description: 'Our pre-kindergarten program focuses on school readiness preparation with advanced Montessori materials and concepts.',
       features: [
         'School Readiness',

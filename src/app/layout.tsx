@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito, Fredoka } from "next/font/google";
+import { Nunito, Fredoka, Open_Sans } from "next/font/google";
 import { Suspense } from "react";
 import { PageLoader } from "@/components/ui/LoadingSpinner";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -9,6 +9,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SkipNavigation } from "@/components/ui/SkipNavigation";
 import { LocalBusinessSchema, OrganizationSchema, defaultOrganizationData } from "@/components/seo/StructuredData";
+import { getImageUrl } from "@/lib/image-utils";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -21,6 +22,12 @@ const fredoka = Fredoka({
   variable: "--font-fredoka",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+});
+
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -75,7 +82,7 @@ export default function RootLayout({
         <OrganizationSchema
           name={defaultOrganizationData.name}
           url={defaultOrganizationData.url}
-          logo={`${defaultOrganizationData.url}/images/friendship-corner-daycare-logo.png`}
+          logo={'/logo.svg'}
           description="Licensed Montessori daycare providing quality early childhood education since 2008"
           foundingDate="2008-01-01"
           telephone={defaultOrganizationData.telephone}
@@ -83,7 +90,7 @@ export default function RootLayout({
           address={defaultOrganizationData.address}
         />
       </head>
-      <body className={`${nunito.variable} ${fredoka.variable} antialiased font-sans`} suppressHydrationWarning>
+      <body className={`${openSans.variable} ${nunito.variable} ${fredoka.variable} antialiased font-sans`} suppressHydrationWarning>
         <NextIntlProvider>
           <LanguageProvider>
             <ThemeProvider>

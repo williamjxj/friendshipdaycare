@@ -40,9 +40,6 @@
   --shadow-md: 0 4px 6px -1px rgb(44 95 77 / 0.1), 0 2px 4px -2px rgb(44 95 77 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(44 95 77 / 0.1), 0 4px 6px -4px rgb(44 95 77 / 0.1);
 
-  /* Font families - CSS custom property for use in body */
-  --font-sans: "Nunito", system-ui, sans-serif;
-  --font-display: "Nunito", system-ui, sans-serif;
 }
 
 /* Professional Theme (Clean Corporate Blue) */
@@ -166,10 +163,9 @@
   --color-card-foreground: var(--card-foreground);
 
   /* Font families */
-  /* Using Nunito for everything gives a clean, accessible, friendly look */
-  --font-sans: "Nunito", system-ui, sans-serif;
-  --font-display: "Nunito", system-ui, sans-serif;
-  /* Unified font for cleaner look */
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-accent: var(--font-accent);
 
   /* Spacing scale - Standardizing nice gaps */
   --spacing-xs: 0.25rem;
@@ -184,6 +180,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  /* Font families - mapping Next.js variables to theme variables locally in body */
+  --font-sans: var(--font-open-sans), system-ui, sans-serif;
+  --font-display: var(--font-nunito), system-ui, sans-serif;
+  --font-accent: var(--font-fredoka), system-ui, sans-serif;
+
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -263,6 +264,7 @@ h5,
 h6 {
   color: var(--primary);
   /* Use deep green for headings for nature feel */
+  font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.02em;
 }

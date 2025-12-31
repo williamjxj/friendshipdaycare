@@ -11,6 +11,7 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { getImageUrl } from '@/lib/image-utils';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -74,7 +75,7 @@ export default function HomePage() {
 
         <HeroVideoBackground
           videoId="jNQXAC9IVRw" // Montessori sample video
-          fallbackImage="/images/slidetop-bg.jpg"
+          fallbackImage={getImageUrl("/images/slidetop-bg.jpg")}
           overlayColor="bg-gradient-to-br from-indigo-900/40 via-purple-900/40 to-pink-900/40"
         />
 
@@ -145,7 +146,7 @@ export default function HomePage() {
               header={
                 <div className="relative flex flex-1 w-full h-full min-h-[6rem] rounded-xl overflow-hidden group">
                   <Image
-                    src="/images/circle-time-board-2.jpg"
+                    src={getImageUrl("/images/circle-time-board-2.jpg")}
                     alt="Circle Time"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -166,7 +167,7 @@ export default function HomePage() {
                   {/* Using a placeholder gradient or another image if specific safety image missing */}
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-indigo-500/20" />
                   <Image
-                    src="/images/playground.jpg"
+                    src={getImageUrl("/images/playground.jpg")}
                     alt="Playground"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"

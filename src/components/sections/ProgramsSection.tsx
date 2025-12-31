@@ -6,6 +6,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getImageUrl } from '@/lib/image-utils';
 
 export function ProgramsSection() {
   const t = useTranslations();
@@ -92,7 +93,7 @@ export function ProgramsSection() {
                 {/* Program Image */}
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src={program.image}
+                    src={getImageUrl(program.image)}
                     alt={t(`programs.${program.key}.title`)}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"

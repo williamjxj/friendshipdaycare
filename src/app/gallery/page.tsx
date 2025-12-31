@@ -7,6 +7,7 @@ import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import Link from 'next/link';
 import Image from 'next/image';
 import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { getImageUrl } from '@/lib/image-utils';
 
 export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -23,7 +24,7 @@ export default function GalleryPage() {
   const galleryImages = [
     {
       id: 1,
-      src: '/images/playground.jpg',
+      src: getImageUrl('/images/playground.jpg'),
       alt: 'Outdoor playground area',
       category: 'outdoor',
       title: 'Playground Area',
@@ -31,7 +32,7 @@ export default function GalleryPage() {
     },
     {
       id: 2,
-      src: '/images/circle-time-area.jpg',
+      src: getImageUrl('/images/circle-time-area.jpg'),
       alt: 'Circle time learning area',
       category: 'classroom',
       title: 'Circle Time Area',
@@ -39,7 +40,7 @@ export default function GalleryPage() {
     },
     {
       id: 3,
-      src: '/images/sensorial-shelf.jpg',
+      src: getImageUrl('/images/sensorial-shelf.jpg'),
       alt: 'Montessori sensorial materials',
       category: 'classroom',
       title: 'Sensorial Learning',
@@ -47,7 +48,7 @@ export default function GalleryPage() {
     },
     {
       id: 4,
-      src: '/images/language-shelf.jpg',
+      src: getImageUrl('/images/language-shelf.jpg'),
       alt: 'Language learning materials',
       category: 'classroom',
       title: 'Language Development',
@@ -55,7 +56,7 @@ export default function GalleryPage() {
     },
     {
       id: 5,
-      src: '/images/practical-life-shelf-1.jpg',
+      src: getImageUrl('/images/practical-life-shelf-1.jpg'),
       alt: 'Practical life activities shelf 1',
       category: 'activities',
       title: 'Practical Life Skills',
@@ -63,7 +64,7 @@ export default function GalleryPage() {
     },
     {
       id: 6,
-      src: '/images/practical-life-shelf-2.jpg',
+      src: getImageUrl('/images/practical-life-shelf-2.jpg'),
       alt: 'Practical life activities shelf 2',
       category: 'activities',
       title: 'Life Skills Development',
@@ -71,7 +72,7 @@ export default function GalleryPage() {
     },
     {
       id: 7,
-      src: '/images/math-shelf.jpg',
+      src: getImageUrl('/images/math-shelf.jpg'),
       alt: 'Mathematics learning materials',
       category: 'classroom',
       title: 'Mathematics Learning',
@@ -79,7 +80,7 @@ export default function GalleryPage() {
     },
     {
       id: 8,
-      src: '/images/culture-shelf.jpg',
+      src: getImageUrl('/images/culture-shelf.jpg'),
       alt: 'Cultural studies materials',
       category: 'classroom',
       title: 'Cultural Studies',
@@ -87,7 +88,7 @@ export default function GalleryPage() {
     },
     {
       id: 9,
-      src: '/images/circle-time-board-2.jpg',
+      src: getImageUrl('/images/circle-time-board-2.jpg'),
       alt: 'Circle time display board',
       category: 'classroom',
       title: 'Learning Displays',
@@ -95,7 +96,7 @@ export default function GalleryPage() {
     },
     {
       id: 10,
-      src: '/images/art-themed-board-2.jpg',
+      src: getImageUrl('/images/art-themed-board-2.jpg'),
       alt: 'Art-themed display board',
       category: 'activities',
       title: 'Creative Arts',
@@ -103,7 +104,7 @@ export default function GalleryPage() {
     },
     {
       id: 11,
-      src: '/images/toys.jpg',
+      src: getImageUrl('/images/toys.jpg'),
       alt: 'Toys and pretend play area',
       category: 'activities',
       title: 'Imaginative Play',
@@ -249,19 +250,19 @@ export default function GalleryPage() {
                 url: 'https://www.youtube.com/watch?v=doKkOSMaTk4', // Montessori classroom tour
                 title: '🎨 Daily Montessori Magic',
                 description: 'Watch our amazing children engage in hands-on Montessori learning activities that promote independence, creativity, and joy!',
-                thumbnail: '/images/video-thumb-1.jpg'
+                thumbnail: getImageUrl('/images/video-thumb-1.jpg')
               },
               {
                 url: 'https://www.youtube.com/watch?v=Pk4Xi4bF0RE', // Montessori practical life
                 title: '🌟 Learning Through Joyful Play',
                 description: 'See how we combine education with super fun activities that help children develop essential life skills while having the best time!',
-                thumbnail: '/images/video-thumb-2.jpg'
+                thumbnail: getImageUrl('/images/video-thumb-2.jpg')
               },
               {
                 url: 'https://www.youtube.com/watch?v=Yz2NiUJHmhE', // Children's Bible story
                 title: '📚 Gentle Story Time Adventures',
                 description: 'Beautiful, gentle stories that teach wonderful values, kindness, and important life lessons in the most age-appropriate way!',
-                thumbnail: '/images/video-thumb-3.jpg'
+                thumbnail: getImageUrl('/images/video-thumb-3.jpg')
               }
             ]} />
           </div>
