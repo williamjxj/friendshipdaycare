@@ -173,7 +173,7 @@ export default function JournalDetailPage() {
         <div className="text-center space-y-4">
           <h1 className="text-2xl font-bold text-foreground">Journal Not Found</h1>
           <p className="text-muted-foreground">The journal you&apos;re looking for doesn&apos;t exist.</p>
-            <Link href="/community/journal" className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+            <Link href="/community/journal" className="inline-flex items-center justify-center bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors min-h-[44px]">
               {t('journal.backToJournals')}
             </Link>
           </div>
@@ -269,7 +269,7 @@ export default function JournalDetailPage() {
                 <div className="text-center">
                   <Link
                     href="/community/journal"
-                    className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+                    className="inline-flex items-center justify-center bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors min-h-[44px]"
                   >
                     {t('journal.backToJournals')}
                   </Link>

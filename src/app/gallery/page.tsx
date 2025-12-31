@@ -4,10 +4,14 @@ import { Suspense, useState } from 'react';
 import { VideoPlayer } from '@/components/ui/VideoPlayer';
 import { ImageCarousel } from '@/components/ui/ImageCarousel';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { PageHero } from '@/components/ui/page-hero';
+import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
+import { getImageUrl, getPlaceholderUrl } from '@/lib/image-utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { getImageUrl } from '@/lib/image-utils';
+import { motion } from 'framer-motion';
+import { fadeIn, slideUp } from '@/lib/animations';
 
 export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -140,21 +144,25 @@ export default function GalleryPage() {
     <Suspense fallback={<LoadingSpinner message="Loading gallery..." />}>
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-6xl font-display font-bold text-foreground leading-tight">
-                Our Gallery
-              </h1>
-              <p className="text-xl text-muted-foreground w-full text-center leading-relaxed">
-                Take a glimpse into our vibrant learning environment and see how children thrive in our Montessori setting
-              </p>
-            </div>
-          </div>
-        </section>
+        <PageHero
+          title="Our Gallery"
+          subtitle="Take a glimpse into our vibrant learning environment and see how children thrive in our Montessori setting"
+          backgroundSvg={getImageUrl('/imgs/gallery/gallery_hero_1.gif')}
+          enableScrollTrigger={true}
+          hideSubtitle={true}
+          hideTitle={true}
+        >
+          <HeroCTAButtons variant="outlined" />
+        </PageHero>
 
         {/* Featured Carousel */}
-        <section className="py-20 bg-card">
+        <motion.section
+          className="py-20 bg-card"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
@@ -174,10 +182,16 @@ export default function GalleryPage() {
               className="mb-12"
             />
           </div>
-        </section>
+        </motion.section>
 
         {/* Gallery Section */}
-        <section className="py-20 bg-card">
+        <motion.section
+          className="py-20 bg-card"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Category Filter */}
             <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -185,9 +199,9 @@ export default function GalleryPage() {
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`px-6 py-3 rounded-lg font-medium text-sm transition-colors ${selectedCategory === category.id
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
+                  className={`px-6 py-3 rounded-lg font-medium text-sm transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${selectedCategory === category.id
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
                     }`}
                 >
                   {category.name}
@@ -200,26 +214,36 @@ export default function GalleryPage() {
               {filteredImages.map((image, index) => (
                 <div
                   key={image.id}
-                  className="group cursor-pointer bg-muted/30 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  className="group cursor-pointer bg-muted/30 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 touch-manipulation"
                   onClick={() => openLightbox(index)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      openLightbox(index);
+                    }
+                  }}
+                  aria-label={`View ${image.title} in full screen`}
                 >
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative h-64 sm:h-80 overflow-hidden">
                     <Image
                       src={image.src}
                       alt={image.alt}
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="bg-white/90 rounded-full p-3">
+                      <div className="bg-white/90 rounded-full p-3 min-h-[44px] min-w-[44px] flex items-center justify-center">
                         <span className="text-2xl">🔍</span>
                       </div>
                     </div>
                   </div>
                   <div className="p-4">
-                    <h3 className="font-semibold text-foreground mb-2">{image.title}</h3>
-                    <p className="text-sm text-muted-foreground">{image.description}</p>
+                    <h3 className="font-semibold text-foreground mb-2 text-base">{image.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{image.description}</p>
                   </div>
                 </div>
               ))}
@@ -231,10 +255,16 @@ export default function GalleryPage() {
               </div>
             )}
           </div>
-        </section>
+        </motion.section>
 
         {/* Video Gallery Section */}
-        <section className="py-20 bg-muted/30">
+        <motion.section
+          className="py-20 bg-muted/30"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
@@ -266,10 +296,16 @@ export default function GalleryPage() {
               }
             ]} />
           </div>
-        </section>
+        </motion.section>
 
         {/* Call to Action */}
-        <section className="py-20 bg-primary">
+        <motion.section
+          className="py-20 bg-primary"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="space-y-6">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
@@ -281,20 +317,20 @@ export default function GalleryPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/contact"
-                  className="inline-block bg-primary-foreground text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-foreground/90 transition-colors"
+                  className="inline-block bg-primary-foreground text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-foreground/90 transition-colors min-h-[44px] flex items-center justify-center"
                 >
                   Schedule a Visit
                 </Link>
                 <Link
                   href="/programs"
-                  className="inline-block border-2 border-primary-foreground text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-foreground hover:text-primary transition-colors"
+                  className="inline-block border-2 border-primary-foreground text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-foreground hover:text-primary transition-colors min-h-[44px] flex items-center justify-center"
                 >
                   View Programs
                 </Link>
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Lightbox Modal */}
         {selectedImage !== null && (
@@ -303,7 +339,8 @@ export default function GalleryPage() {
               {/* Close Button */}
               <button
                 onClick={closeLightbox}
-                className="absolute top-4 right-4 z-10 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors"
+                className="absolute top-4 right-4 z-10 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                aria-label="Close image"
               >
                 <XMarkIcon className="h-6 w-6 text-white" />
               </button>
@@ -313,13 +350,15 @@ export default function GalleryPage() {
                 <>
                   <button
                     onClick={prevImage}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors"
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    aria-label="Previous image"
                   >
                     <ChevronLeftIcon className="h-6 w-6 text-white" />
                   </button>
                   <button
                     onClick={nextImage}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    aria-label="Next image"
                   >
                     <ChevronRightIcon className="h-6 w-6 text-white" />
                   </button>

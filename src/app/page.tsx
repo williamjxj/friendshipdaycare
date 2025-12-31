@@ -21,17 +21,65 @@ const VideoPlayer = dynamic(() => import('@/components/ui/VideoPlayer').then(mod
 
 export default function HomePage() {
   const mainRef = useRef<HTMLElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
 
   // Animations
   useGSAP(() => {
-    // Animate Hero Content
-    gsap.from('.hero-content > *', {
+    // Animate Hero Content (badge and title)
+    gsap.from('.hero-content > div:first-child > *', {
       y: 50,
       opacity: 0,
       duration: 1,
       stagger: 0.2,
       ease: 'power3.out',
       delay: 0.5
+    });
+
+    // Animate subtitle with word-by-word effect
+    if (subtitleRef.current) {
+      // Wait a bit to ensure DOM is ready and text is visible
+      setTimeout(() => {
+        if (subtitleRef.current) {
+          const subtitleText = subtitleRef.current.textContent || subtitleRef.current.innerText || '';
+          if (subtitleText.trim()) {
+            const words = subtitleText.split(' ').filter(w => w.trim());
+
+            // Split into words for animation - keep visible initially
+            subtitleRef.current.innerHTML = words
+              .map((word, i) => `<span class="hero-subtitle-word inline-block" style="opacity: 1; transform: translateY(0);">${word}${i < words.length - 1 ? ' ' : ''}</span>`)
+              .join('');
+
+            const wordElements = subtitleRef.current.querySelectorAll('.hero-subtitle-word');
+            if (wordElements.length > 0) {
+              // Reset to initial state for animation
+              gsap.set(wordElements, {
+                y: 30,
+                opacity: 0,
+                immediateRender: false,
+              });
+
+              // Animate to visible
+              gsap.to(wordElements, {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.06,
+                ease: 'power2.out',
+                delay: 1.0,
+              });
+            }
+          }
+        }
+      }, 100);
+    }
+
+    // Animate buttons
+    gsap.from('.hero-content > div:last-child', {
+      y: 40,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+      delay: 1.4,
     });
 
     // Animate Section Headers
@@ -91,13 +139,20 @@ export default function HomePage() {
               <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium text-sm tracking-wide uppercase">
                 Est. 2008 &bull; Coquitlam, BC
               </span>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-tight drop-shadow-lg">
+              <h1 className="sr-only">
                 Where Young <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-200 to-blue-200">
                   Minds Flourish
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl font-medium text-white/90 w-full max-w-4xl mx-auto leading-relaxed drop-shadow-md">
+              <p
+                ref={subtitleRef}
+                className="sr-only"
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  letterSpacing: '0.02em',
+                }}
+              >
                 A safe, nurturing Montessori environment where every child discovers their unique superpowers.
               </p>
             </div>
@@ -149,6 +204,7 @@ export default function HomePage() {
                     src={getImageUrl("/images/circle-time-board-2.jpg")}
                     alt="Circle Time"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
@@ -170,6 +226,7 @@ export default function HomePage() {
                     src={getImageUrl("/images/playground.jpg")}
                     alt="Playground"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>

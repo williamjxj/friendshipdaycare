@@ -2,13 +2,15 @@
 
 import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { PageHero } from '@/components/ui/page-hero';
+import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { getImageUrl, getPlaceholderUrl } from '@/lib/image-utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Newspaper, Calendar, ArrowRight } from 'lucide-react';
-import { getImageUrl } from '@/lib/image-utils';
 
 // Sample journal data
 const sampleJournals = [
@@ -84,51 +86,15 @@ export default function JournalPage() {
     <Suspense fallback={<LoadingSpinner message="Loading journal..." />}>
       <main className="flex-1 bg-background">
 
-        {/* Hero Section - Standardized */}
-        <div className="relative grid place-items-center w-full min-h-[50vh] bg-muted overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <Image
-              src={getImageUrl("/images/practical-life-shelf-1.jpg")} // Clean Montessori image
-              alt="Journal background"
-              fill
-              className="object-cover opacity-20"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background/90" />
-          </div>
-
-          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex justify-center"
-            >
-              <span className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wide uppercase border border-primary/20">
-                <Newspaper className="w-4 h-4" />
-                Monthly Updates
-              </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl md:text-7xl font-bold text-foreground leading-tight"
-            >
-              Daycare <span className="text-primary">Journal</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl md:text-2xl text-muted-foreground w-full max-w-4xl mx-auto leading-relaxed"
-            >
-              Peek inside our classroom! Discover what our little learners have been exploring, creating, and achieving each month.
-            </motion.p>
-          </div>
-        </div>
+        {/* Hero Section */}
+        <PageHero
+          title="Monthly Journal"
+          subtitle="Explore our monthly updates, learning highlights, and special moments from our Montessori classroom"
+          backgroundSvg={getPlaceholderUrl('community/community_journal_hero_1.gif')}
+          enableScrollTrigger={true}
+        >
+          <HeroCTAButtons variant="outlined" />
+        </PageHero>
 
         {/* Journals Grid */}
         <section className="py-20 bg-background relative z-10">

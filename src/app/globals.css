@@ -216,18 +216,23 @@ body {
   border-color: var(--primary);
 }
 
+/* Standardized Button Styles */
 .warm-button,
-.playful-button {
+.playful-button,
+.btn-primary {
   background-color: var(--primary);
   color: var(--primary-foreground);
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
+  padding: 1rem 2rem; /* px-8 py-4 */
+  border-radius: var(--radius-lg); /* rounded-lg */
+  font-weight: 600; /* font-semibold */
+  font-size: 1.125rem; /* text-lg */
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  display: inline-block;
-  /* Ensure it behaves like a button */
+  transition: background-color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px; /* Mobile touch target */
 }
 
 /* Override playful button specific weirdness if any, mainly shadow */
@@ -235,38 +240,112 @@ body {
   box-shadow: none !important;
 }
 
-.warm-button:hover {
-  background-color: color-mix(in srgb, var(--primary), white 10%);
-  /* Lighten slightly */
+.warm-button:hover,
+.btn-primary:hover {
+  background-color: color-mix(in srgb, var(--primary), black 10%);
+  /* Darken slightly for better hover feedback */
 }
 
-.warm-button-secondary {
+.warm-button-secondary,
+.btn-secondary {
   background-color: transparent;
   color: var(--primary);
   border: 2px solid var(--primary);
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
+  padding: 1rem 2rem; /* px-8 py-4 */
+  border-radius: var(--radius-lg); /* rounded-lg */
+  font-weight: 600; /* font-semibold */
+  font-size: 1.125rem; /* text-lg */
   cursor: pointer;
   transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px; /* Mobile touch target */
 }
 
-.warm-button-secondary:hover {
-  background-color: var(--muted);
+.warm-button-secondary:hover,
+.btn-secondary:hover {
+  background-color: var(--primary);
+  background-color: color-mix(in srgb, var(--primary), transparent 90%);
+  /* Light primary background on hover */
 }
 
-/* 3. Text & Headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--primary);
-  /* Use deep green for headings for nature feel */
+/* 3. Text & Headings - Standardized Typography Hierarchy */
+h1 {
+  font-size: 2.25rem; /* text-4xl */
+  line-height: 1.2; /* leading-tight */
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 700; /* font-bold */
+  color: var(--foreground);
   letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3.75rem; /* md:text-6xl */
+  }
+}
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 4.5rem; /* lg:text-7xl */
+  }
+}
+
+h2 {
+  font-size: 1.875rem; /* text-3xl */
+  line-height: 1.2; /* leading-tight */
+  font-family: var(--font-display);
+  font-weight: 700; /* font-bold */
+  color: var(--foreground);
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 2.25rem; /* md:text-4xl */
+  }
+}
+
+h3 {
+  font-size: 1.5rem; /* text-2xl */
+  line-height: 1.3;
+  font-weight: 600; /* font-semibold */
+  color: var(--foreground);
+}
+
+h4 {
+  font-size: 1.125rem; /* text-lg */
+  line-height: 1.4;
+  font-weight: 600; /* font-semibold */
+  color: var(--foreground);
+}
+
+h5 {
+  font-size: 1rem; /* text-base */
+  line-height: 1.5;
+  font-weight: 500; /* font-medium */
+  color: var(--foreground);
+}
+
+h6 {
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1.5;
+  font-weight: 500; /* font-medium */
+  color: var(--foreground);
+}
+
+/* Body text defaults */
+p {
+  font-size: 1rem; /* text-base */
+  line-height: 1.6; /* leading-relaxed */
+  color: var(--foreground);
+}
+
+/* Large body text for intros/heroes */
+.text-large {
+  font-size: 1.25rem; /* text-xl */
+  line-height: 1.6; /* leading-relaxed */
 }
 
 /* 4. Glass Panel (Modern Touch) */
@@ -299,15 +378,226 @@ h6 {
   /* Accentuate with Terracotta */
 }
 
+/* Accessibility - Focus Indicators */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Skip to main content link */
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  padding: 0.5rem 1rem;
+  z-index: 100;
+  text-decoration: none;
+}
+
+.skip-to-main:focus {
+  top: 0;
+}
+
+/* Mobile Touch Targets - Ensure minimum 44x44px for accessibility */
+@media (max-width: 1023px) {
+  /* Buttons and links on mobile */
+  button,
+  a[role="button"],
+  .warm-button,
+  .warm-button-secondary {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Form inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="time"],
+  select,
+  textarea {
+    min-height: 44px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  /* Ensure text is readable without zooming */
+  body {
+    font-size: 16px; /* Minimum readable size */
+  }
+
+  p, span, div {
+    font-size: clamp(16px, 4vw, 18px); /* Responsive but minimum 16px */
+  }
+}
+
+/* Consistent Spacing Patterns */
+.section-padding {
+  padding-top: 5rem; /* py-20 */
+  padding-bottom: 5rem;
+}
+
+.section-padding-spacious {
+  padding-top: 6rem; /* py-24 */
+  padding-bottom: 6rem;
+}
+
+.section-padding-compact {
+  padding-top: 4rem; /* py-16 */
+  padding-bottom: 4rem;
+}
+
+.container-padding {
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-padding {
+    padding-left: 1.5rem; /* sm:px-6 */
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-padding {
+    padding-left: 2rem; /* lg:px-8 */
+    padding-right: 2rem;
+  }
+}
+
+/* Consistent Card Styling */
+.card-standard {
+  background: var(--card);
+  border-radius: var(--radius-xl); /* rounded-xl */
+  padding: 1.5rem; /* p-6 */
+  box-shadow: var(--shadow-md);
+}
+
+.card-feature {
+  background: var(--card);
+  border-radius: var(--radius-2xl); /* rounded-2xl */
+  padding: 2rem; /* p-8 */
+  box-shadow: var(--shadow-lg);
+  transition: box-shadow 0.3s ease;
+}
+
+.card-feature:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+.card-gradient {
+  background: linear-gradient(to bottom right, 
+    color-mix(in srgb, var(--primary), transparent 90%),
+    color-mix(in srgb, var(--secondary), transparent 90%)
+  );
+  border-radius: var(--radius-2xl); /* rounded-2xl */
+  padding: 2rem; /* p-8 */
+}
+
+/* Consistent Hover States */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
-    transition: none !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 
   .montessori-card:hover,
-  .child-friendly-card:hover {
+  .child-friendly-card:hover,
+  .hover-lift:hover,
+  .hover-scale:hover {
     transform: none;
   }
+}
+
+/* Color Contrast - Ensure WCAG AA compliance */
+/* Primary text on background should have 4.5:1 contrast */
+/* Large text (18px+) should have 3:1 contrast */
+/* These are handled by theme variables, but we ensure proper usage */
+.text-foreground {
+  color: var(--foreground);
+}
+
+.text-muted-foreground {
+  color: var(--muted-foreground);
+}
+
+/* Ensure sufficient contrast for error states */
+.text-error {
+  color: #dc2626; /* Red-600 - high contrast */
+}
+
+.border-error {
+  border-color: #dc2626;
+}
+
+/* Hero Subtitle Animation - Ensure visibility by default */
+.hero-subtitle {
+  opacity: 1 !important;
+}
+
+.hero-subtitle-word {
+  /* Visible by default - GSAP will animate if available */
+  display: inline-block;
+}
+
+/* MagicUI Animation Keyframes */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gridMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+/* MagicUI Utility Classes */
+.magic-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.magic-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 20s linear infinite;
 }

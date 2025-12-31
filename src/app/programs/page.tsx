@@ -2,9 +2,16 @@
 
 import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { PageHero } from '@/components/ui/page-hero';
+import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
+import { getImageUrl, getPlaceholderUrl } from '@/lib/image-utils';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getImageUrl } from '@/lib/image-utils';
+import { motion } from 'framer-motion';
+import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
+import { textReveal, textRevealItem, borderBeam, scaleInMagic } from '@/lib/magicui-animations';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 export default function ProgramsPage() {
   const programs = [
@@ -98,21 +105,25 @@ export default function ProgramsPage() {
     <Suspense fallback={<LoadingSpinner message="Loading programs..." />}>
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-6xl font-display font-bold text-foreground leading-tight">
-                Our Programs
-              </h1>
-              <p className="text-xl text-muted-foreground w-full text-center leading-relaxed">
-                Age-appropriate Montessori education designed to nurture each child&apos;s natural development
-              </p>
-            </div>
-          </div>
-        </section>
+        <PageHero
+          title="Our Programs"
+          subtitle="Age-appropriate Montessori education designed to nurture each child's natural development"
+          backgroundSvg={getImageUrl('/imgs/programs/programs_hero_1.gif')}
+          enableScrollTrigger={true}
+          hideSubtitle={true}
+          hideTitle={true}
+        >
+          <HeroCTAButtons variant="outlined" />
+        </PageHero>
 
         {/* Programs Overview */}
-        <section className="py-20 bg-card">
+        <motion.section
+          className="py-20 bg-card"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-16">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
@@ -123,52 +134,67 @@ export default function ProgramsPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
               {programs.map((program) => (
-                <div key={program.id} className="bg-muted/30 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="relative h-48">
-                    <Image
-                      src={program.image}
-                      alt={program.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-6 space-y-4">
-                    <div className="flex items-center space-x-3">
-                      <div className={`w-12 h-12 bg-${program.color}/20 rounded-lg flex items-center justify-center`}>
-                        <span className={`text-${program.color} font-bold text-xl`}>
-                          {program.icon}
-                        </span>
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold text-foreground">
-                          {program.title}
-                        </h3>
-                        <p className={`text-sm text-${program.color} font-medium`}>
-                          {program.age}
-                        </p>
-                      </div>
+                <motion.div
+                  key={program.id}
+                  className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative group"
+                  variants={scaleInMagic}
+                >
+                  <Card variant="outlined" hover className="p-0 overflow-hidden">
+                    <div className="relative h-48">
+                      <Image
+                        src={program.image}
+                        alt={program.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover"
+                      />
                     </div>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {program.description}
-                    </p>
-                    <div className="grid grid-cols-2 gap-2">
-                      {program.features.slice(0, 4).map((feature, index) => (
-                        <div key={index} className="flex items-center space-x-2">
-                          <div className={`w-4 h-4 bg-${program.color}/20 rounded-full flex items-center justify-center`}>
-                            <span className={`text-${program.color} text-xs`}>✓</span>
+                    <CardContent className="space-y-4">
+                      <CardHeader>
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-12 h-12 bg-${program.color}/20 rounded-lg flex items-center justify-center`}>
+                            <span className={`text-${program.color} font-bold text-xl`}>
+                              {program.icon}
+                            </span>
                           </div>
-                          <span className="text-xs text-muted-foreground">{feature}</span>
+                          <div>
+                            <CardTitle>{program.title}</CardTitle>
+                            <Badge variant={program.color as 'primary' | 'secondary' | 'accent'} size="sm" className="mt-1">
+                              {program.age}
+                            </Badge>
+                          </div>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                      </CardHeader>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {program.description}
+                      </p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {program.features.slice(0, 4).map((feature, index) => (
+                          <div key={index} className="flex items-center space-x-2">
+                            <div className={`w-4 h-4 bg-${program.color}/20 rounded-full flex items-center justify-center`}>
+                              <span className={`text-${program.color} text-xs`}>✓</span>
+                            </div>
+                            <span className="text-xs text-muted-foreground">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                    {/* MagicUI Border Beam Effect */}
+                    <div className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  </Card>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Detailed Program Information */}
         {programs.map((program, index) => (

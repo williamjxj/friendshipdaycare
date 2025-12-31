@@ -69,3 +69,34 @@ export function getImageUrl(path: string): string {
   return path;
 }
 
+/**
+ * Gets placeholder asset URL
+ * Handles placeholder images/videos from public/imgs/ directory
+ * 
+ * @param path - Placeholder path (e.g., 'about/about_hero_1.gif' or 'imgs/about/about_hero_1.gif')
+ * @returns Full path to placeholder asset
+ */
+export function getPlaceholderUrl(path: string): string {
+  // Remove leading slash if present
+  const normalizedPath = path.startsWith('/') ? path.slice(1) : path;
+  
+  // If it already includes imgs/, return as-is
+  if (normalizedPath.startsWith('imgs/')) {
+    return `/${normalizedPath}`;
+  }
+  
+  // Otherwise, prepend imgs/
+  return `/imgs/${normalizedPath}`;
+}
+
+/**
+ * Checks if a path is a placeholder asset
+ * 
+ * @param path - Path to check
+ * @returns true if path is a placeholder asset
+ */
+export function isPlaceholder(path: string): boolean {
+  return path.includes('/imgs/') || path.startsWith('imgs/') || 
+         path.includes('/placeholders/') || path.startsWith('placeholders/');
+}
+

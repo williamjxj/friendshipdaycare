@@ -2,9 +2,14 @@
 
 import { Suspense, useState } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { PageHero } from '@/components/ui/page-hero';
+import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
 import { GoogleMap } from '@/components/ui/GoogleMap';
+import { getImageUrl, getPlaceholderUrl } from '@/lib/image-utils';
 import Link from 'next/link';
 import { PhoneIcon, MapPinIcon, ClockIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
+import { fadeIn, slideUp } from '@/lib/animations';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -17,11 +22,44 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  const validateForm = (): boolean => {
+    const errors: Record<string, string> = {};
+
+    if (!formData.name.trim()) {
+      errors.name = 'Full name is required';
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = 'Email address is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.message.trim()) {
+      errors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      errors.message = 'Message must be at least 10 characters long';
+    }
+
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setFieldErrors({});
     setErrorMessage('');
+
+    // Validate form before submission
+    if (!validateForm()) {
+      setSubmitStatus('error');
+      setErrorMessage('Please correct the errors below and try again.');
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
       const response = await fetch('/api/contact', {
@@ -37,6 +75,7 @@ export default function ContactPage() {
       if (result.success) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', phone: '', childAge: '', message: '' });
+        setFieldErrors({});
 
         // Reset status after 5 seconds
         setTimeout(() => setSubmitStatus('idle'), 5000);
@@ -64,21 +103,25 @@ export default function ContactPage() {
     <Suspense fallback={<LoadingSpinner message="Loading contact page..." />}>
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-6xl font-display font-bold text-foreground leading-tight">
-                Contact Us
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground w-full leading-relaxed text-center">
-                Ready to give your child the best start? Get in touch with us today to learn more about our programs.
-              </p>
-            </div>
-          </div>
-        </section>
+        <PageHero
+          title="Contact Us"
+          subtitle="Ready to give your child the best start? Get in touch with us today to learn more about our programs."
+          backgroundSvg={getImageUrl('/imgs/contact/contact_hero_1.gif')}
+          enableScrollTrigger={true}
+          hideTitle={true}
+          hideSubtitle={true}
+        >
+          <HeroCTAButtons variant="outlined" contactLink="#contact-form" />
+        </PageHero>
 
         {/* Contact Information */}
-        <section className="py-20 bg-card">
+        <motion.section
+          className="py-20 bg-card"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Info */}
@@ -170,7 +213,7 @@ export default function ContactPage() {
               </div>
 
               {/* Contact Form */}
-              <div className="bg-muted/30 rounded-xl p-8">
+              <div id="contact-form" className="bg-muted/30 rounded-xl p-4 sm:p-8 scroll-mt-20">
                 <h2 className="text-2xl font-display font-bold text-foreground mb-6">
                   Send us a Message
                 </h2>
@@ -200,9 +243,17 @@ export default function ContactPage() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                        aria-invalid={fieldErrors.name ? 'true' : 'false'}
+                        aria-describedby={fieldErrors.name ? 'name-error' : undefined}
+                        className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base ${fieldErrors.name ? 'border-red-500 focus:ring-red-500' : 'border-border'
+                          }`}
                         placeholder="Your full name"
                       />
+                      {fieldErrors.name && (
+                        <p id="name-error" className="mt-1 text-sm text-red-600" role="alert">
+                          {fieldErrors.name}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
@@ -215,9 +266,17 @@ export default function ContactPage() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                        aria-invalid={fieldErrors.email ? 'true' : 'false'}
+                        aria-describedby={fieldErrors.email ? 'email-error' : undefined}
+                        className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base ${fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-border'
+                          }`}
                         placeholder="your.email@example.com"
                       />
+                      {fieldErrors.email && (
+                        <p id="email-error" className="mt-1 text-sm text-red-600" role="alert">
+                          {fieldErrors.email}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -232,7 +291,7 @@ export default function ContactPage() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base"
                         placeholder="604.945.8504"
                       />
                     </div>
@@ -245,7 +304,7 @@ export default function ContactPage() {
                         name="childAge"
                         value={formData.childAge}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base"
                       >
                         <option value="">Select age range</option>
                         <option value="30months-3years">30 months - 3 years</option>
@@ -267,15 +326,23 @@ export default function ContactPage() {
                       rows={5}
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none"
+                      aria-invalid={fieldErrors.message ? 'true' : 'false'}
+                      aria-describedby={fieldErrors.message ? 'message-error' : undefined}
+                      className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none min-h-[132px] text-base ${fieldErrors.message ? 'border-red-500 focus:ring-red-500' : 'border-border'
+                        }`}
                       placeholder="Tell us about your child and what you&apos;d like to know about our programs..."
                     />
+                    {fieldErrors.message && (
+                      <p id="message-error" className="mt-1 text-sm text-red-600" role="alert">
+                        {fieldErrors.message}
+                      </p>
+                    )}
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="w-full bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors min-h-[44px] flex items-center justify-center"
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
@@ -283,10 +350,16 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Map Section */}
-        <section className="py-20 bg-muted/30">
+        <motion.section
+          className="py-20 bg-muted/30"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
@@ -299,7 +372,7 @@ export default function ContactPage() {
 
             <GoogleMap />
           </div>
-        </section>
+        </motion.section>
       </main>
     </Suspense>
   );

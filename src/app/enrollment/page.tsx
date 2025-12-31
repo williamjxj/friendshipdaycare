@@ -2,6 +2,9 @@
 
 import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { PageHero } from '@/components/ui/page-hero';
+import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
+import { getImageUrl, getPlaceholderUrl } from '@/lib/image-utils';
 import Link from 'next/link';
 import {
   ClipboardDocumentListIcon,
@@ -10,6 +13,8 @@ import {
   UserGroupIcon,
   CheckCircleIcon
 } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
+import { fadeIn, slideUp } from '@/lib/animations';
 
 export default function EnrollmentPage() {
   const steps = [
@@ -112,19 +117,16 @@ export default function EnrollmentPage() {
     <Suspense fallback={<LoadingSpinner message="Loading enrollment information..." />}>
       <main id="main-content" className="flex-1">
         {/* Hero Section */}
-        <section className="relative py-20 bg-muted">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-6xl font-display font-bold text-foreground leading-tight">
-                Enrollment Process
-              </h1>
-              <p className="text-xl text-muted-foreground w-full max-w-4xl mx-auto leading-relaxed">
-                Join our caring community in 5 simple steps. We make enrollment easy and transparent,
-                so you can focus on what matters most—your child's learning journey.
-              </p>
-            </div>
-          </div>
-        </section>
+        <PageHero
+          title="Enrollment Process"
+          subtitle="Join our caring community in 5 simple steps. We make enrollment easy and transparent, so you can focus on what matters most—your child's learning journey."
+          backgroundSvg={getImageUrl('/imgs/enrollment/enrollment_hero_1.gif')}
+          enableScrollTrigger={true}
+          hideSubtitle={true}
+          hideTitle={true}
+        >
+          <HeroCTAButtons variant="outlined" />
+        </PageHero>
 
         {/* Quick Info Bar */}
         <section className="py-8 -mt-8 relative z-10">
@@ -248,14 +250,14 @@ export default function EnrollmentPage() {
                             {step.cta.primary ? (
                               <Link
                                 href={step.cta.href}
-                                className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+                                className="inline-flex items-center justify-center bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors min-h-[44px]"
                               >
                                 {step.cta.text}
                               </Link>
                             ) : (
                               <Link
                                 href={step.cta.href}
-                                className="inline-block border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary/10 transition-colors"
+                                className="inline-flex items-center justify-center border-2 border-primary text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/10 transition-colors min-h-[44px]"
                               >
                                 {step.cta.text}
                               </Link>
@@ -423,13 +425,13 @@ export default function EnrollmentPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-white/90 transition-colors inline-block"
+                className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/90 transition-colors inline-flex items-center justify-center min-h-[44px]"
               >
                 Schedule a Tour
               </Link>
               <Link
                 href="/pricing"
-                className="bg-primary-foreground/10 text-white border-2 border-white px-8 py-4 rounded-lg font-semibold hover:bg-white/20 transition-colors inline-block"
+                className="bg-primary-foreground/10 text-white border-2 border-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/20 transition-colors inline-flex items-center justify-center min-h-[44px]"
               >
                 View Tuition
               </Link>

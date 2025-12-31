@@ -57,6 +57,7 @@ const NavLink = memo(function NavLink({
       href={href}
       className={cn(
         "flex flex-col items-center justify-center px-3 py-2 text-xs font-semibold transition-colors relative group gap-1",
+        "min-h-[44px] min-w-[44px] lg:min-w-auto", // Mobile touch target
         isActive ? 'text-primary' : 'text-muted-foreground hover:text-primary'
       )}
     >
@@ -94,6 +95,7 @@ const NavDropdown = memo(function NavDropdown({
       <button
         className={cn(
           "flex flex-col items-center justify-center px-3 py-2 text-xs font-semibold transition-colors gap-1",
+          "min-h-[44px] min-w-[44px] lg:min-w-auto", // Mobile touch target
           isActiveParent || isOpen ? 'text-primary' : 'text-muted-foreground hover:text-primary'
         )}
       >
@@ -153,7 +155,7 @@ export function Header() {
     setIsHydrated(true);
   }, []);
 
-  // Updated Navigation Structure with Children and Icons
+  // Updated Navigation Structure - Standard items + Community dropdown with Story and Journal only
   const navigationConfig: NavItem[] = useMemo(() => [
     { key: 'home', href: '/', icon: Home },
     { key: 'about', href: '/about', icon: Info },
@@ -165,14 +167,8 @@ export function Header() {
       children: [
         { key: 'todays-story', href: '/community/todays-story', icon: BookMarked },
         { key: 'journal', href: '/community/journal', icon: Newspaper },
-        // Unused routes for review (route group (unused) doesn't affect URL)
-        { key: 'blog', href: '/blog', icon: FileText },
-        { key: 'faq', href: '/faq', icon: HelpCircle },
-        { key: 'policies', href: '/policies', icon: Shield },
-        { key: 'pricing', href: '/pricing', icon: DollarSign },
-        { key: 'resources', href: '/resources', icon: FolderOpen },
-        { key: 'team', href: '/team', icon: UserCircle },
-        { key: 'testimonials', href: '/testimonials', icon: Star },
+        // Note: Other items (blog, faq, policies, pricing, resources, team, testimonials) 
+        // are in (unused) folder and can be accessed directly via URL if needed
       ]
     },
     { key: 'gallery', href: '/gallery', icon: Images },
@@ -195,14 +191,6 @@ export function Header() {
       journal: t('navigation.journal'),
       gallery: t('navigation.gallery'),
       contact: t('navigation.contact'),
-      // Unused routes
-      blog: 'Blog (Unused)',
-      faq: 'FAQ (Unused)',
-      policies: 'Policies (Unused)',
-      pricing: 'Pricing (Unused)',
-      resources: 'Resources (Unused)',
-      team: 'Team (Unused)',
-      testimonials: 'Testimonials (Unused)',
     };
     return map[key] || key;
   }, [isHydrated, t]);
@@ -290,7 +278,8 @@ export function Header() {
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-primary hover:bg-primary/5 transition-colors"
+              className="p-2 rounded-md text-primary hover:bg-primary/5 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label="Toggle menu"
             >
               {isMenuOpen ? (
                 <XMarkIcon className="h-6 w-6" />
@@ -323,6 +312,7 @@ export function Header() {
                             onClick={() => setIsMenuOpen(false)}
                             className={cn(
                               "flex items-center gap-3 px-4 py-3 rounded-md text-sm font-medium transition-colors",
+                              "min-h-[44px]", // Mobile touch target
                               pathname.startsWith(child.href!)
                                 ? "text-primary bg-primary/5"
                                 : "text-muted-foreground hover:bg-muted"
@@ -344,6 +334,7 @@ export function Header() {
                     onClick={() => setIsMenuOpen(false)}
                     className={cn(
                       "flex items-center gap-3 px-4 py-3 rounded-md text-base font-medium transition-colors border-l-4",
+                      "min-h-[44px]", // Mobile touch target
                       (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href!))
                         ? 'border-primary text-primary bg-primary/5'
                         : 'border-transparent text-muted-foreground hover:text-foreground hover:bg-muted'
@@ -358,7 +349,7 @@ export function Header() {
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="block w-full text-center warm-button"
+                  className="block w-full text-center warm-button min-h-[44px] flex items-center justify-center"
                 >
                   Book a Tour
                 </Link>

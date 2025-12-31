@@ -2,64 +2,30 @@
 
 import { Suspense } from 'react';
 import { PageLoader, LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { PageHero } from '@/components/ui/page-hero';
+import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
 import { VideoPlayer } from '@/components/ui/VideoPlayer';
+import { getImageUrl, getPlaceholderUrl } from '@/lib/image-utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { BookOpen, Star, Heart, Calendar, Sparkles } from 'lucide-react';
-import { getImageUrl } from '@/lib/image-utils';
 
 export default function TodaysStoryPage() {
   return (
     <Suspense fallback={<PageLoader message="Loading today's magical story..." />}>
       <main className="flex-1 bg-background">
 
-        {/* Hero Section - Consistent with standard Hero */}
-        <div className="relative grid place-items-center w-full min-h-[60vh] bg-muted overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <Image
-              src={getImageUrl("/images/slidetop-bg.jpg")} // Use a generic bg or specific one if available
-              alt="Story time background"
-              fill
-              className="object-cover opacity-20"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background/90" />
-          </div>
-
-          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex justify-center"
-            >
-              <span className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wide uppercase border border-primary/20">
-                <BookOpen className="w-4 h-4" />
-                Magical Story Time
-              </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl md:text-7xl font-bold text-foreground leading-tight"
-            >
-              Today&apos;s <span className="text-primary">Magical Story</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl md:text-2xl text-muted-foreground w-full max-w-4xl mx-auto leading-relaxed"
-            >
-              Bible Adventures for Little Hearts. Specially chosen to inspire, teach amazing lessons, and fill young hearts with joy!
-            </motion.p>
-          </div>
-        </div>
+        {/* Hero Section */}
+        <PageHero
+          title="Today's Story"
+          subtitle="Join us for daily adventures, learning moments, and heartwarming stories from our Montessori classroom"
+          backgroundSvg={getPlaceholderUrl('community/community_story_hero_1.gif')}
+          enableScrollTrigger={true}
+        >
+          <HeroCTAButtons variant="outlined" />
+        </PageHero>
 
         {/* Video Section */}
         <section className="py-20 relative z-10 -mt-20">
@@ -166,7 +132,7 @@ export default function TodaysStoryPage() {
               <Link href="/contact" className="bg-background text-foreground px-8 py-4 rounded-lg font-bold text-lg hover:brightness-110 transition-all shadow-lg hover:shadow-xl">
                 Schedule a Visit
               </Link>
-              <Link href="/programs" className="bg-primary-foreground/10 border-2 border-primary-foreground/30 px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-foreground/20 transition-all">
+              <Link href="/programs" className="inline-flex items-center justify-center bg-primary-foreground/10 border-2 border-primary-foreground/30 px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-foreground/20 transition-all min-h-[44px]">
                 Explore Programs
               </Link>
             </div>

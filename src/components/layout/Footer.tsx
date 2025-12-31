@@ -26,9 +26,9 @@ export function Footer() {
   const siteUrl = "https://www.friendshipdaycare.com";
 
   return (
-    <footer className="bg-muted border-t border-border pt-16 pb-8">
+    <footer className="bg-muted border-t border-border pt-20 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
 
           {/* Column 1: Brand & About */}
           <div className="space-y-6">
@@ -55,21 +55,33 @@ export function Footer() {
               safe, and inspiring environment where every child can grow, learn, and flourish.
             </p>
             <div className="flex items-center space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link 
+                href="#" 
+                className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                aria-label="Facebook"
+              >
                 <Facebook className="w-5 h-5" />
-                <span className="sr-only">Facebook</span>
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link 
+                href="#" 
+                className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                aria-label="Instagram"
+              >
                 <Instagram className="w-5 h-5" />
-                <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link 
+                href="#" 
+                className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                aria-label="Twitter"
+              >
                 <Twitter className="w-5 h-5" />
-                <span className="sr-only">Twitter</span>
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link 
+                href="#" 
+                className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                aria-label="LinkedIn"
+              >
                 <Linkedin className="w-5 h-5" />
-                <span className="sr-only">LinkedIn</span>
               </Link>
             </div>
           </div>
@@ -192,11 +204,16 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
-          <div className="flex flex-col md:flex-row items-center gap-2">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
             <p>&copy; {currentYear} Friendship Corner Daycare. All rights reserved.</p>
             <span className="hidden md:inline text-muted-foreground/40">|</span>
             <p className="flex items-center gap-1">
-              Website by <a href="https://www.bestitconsulting.ca" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors font-medium inline-flex items-center gap-1">
+              Website by <a 
+                href="https://www.bestitconsulting.ca" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-primary transition-colors font-medium inline-flex items-center gap-1 min-h-[44px]"
+              >
                 <Image
                   src="/bestit-favicon.ico"
                   alt="Best IT Consulting"
@@ -208,10 +225,25 @@ export function Footer() {
               </a>
             </p>
           </div>
-          <div className="flex items-center gap-6">
-            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
-            <Link href="/sitemap" className="hover:text-primary transition-colors">Sitemap</Link>
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+            <Link 
+              href="/privacy" 
+              className="hover:text-primary transition-colors min-h-[44px] flex items-center"
+            >
+              Privacy Policy
+            </Link>
+            <Link 
+              href="/terms" 
+              className="hover:text-primary transition-colors min-h-[44px] flex items-center"
+            >
+              Terms of Service
+            </Link>
+            <Link 
+              href="/sitemap" 
+              className="hover:text-primary transition-colors min-h-[44px] flex items-center"
+            >
+              Sitemap
+            </Link>
           </div>
         </div>
       </div>

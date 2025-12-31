@@ -42,3 +42,6 @@ next-env.d.ts
 
 # William added
 .obsidian/
+.specify/
+.cursor/
+specs/
