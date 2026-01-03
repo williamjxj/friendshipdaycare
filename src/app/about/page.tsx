@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { textReveal, textRevealItem, borderBeam, scaleInMagic } from '@/lib/magicui-animations';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 export default function AboutPage() {
   return (
@@ -99,62 +101,32 @@ export default function AboutPage() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <motion.div
-                className="bg-card rounded-xl p-6 text-center space-y-4 relative overflow-hidden group"
-                variants={scaleInMagic}
-              >
-                {/* MagicUI Grid Pattern Background */}
-                <div className="absolute inset-0 magic-grid opacity-20" />
-                <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto relative z-10">
-                  <span className="text-primary font-bold text-2xl">🧠</span>
-                </div>
-                <h3 className="text-lg font-semibold text-foreground relative z-10">Child-Centered</h3>
-                <p className="text-sm text-muted-foreground relative z-10">
-                  Learning follows the child&apos;s natural interests and developmental pace
-                </p>
-              </motion.div>
-
-              <motion.div
-                className="bg-card rounded-xl p-6 text-center space-y-4 relative overflow-hidden group"
-                variants={scaleInMagic}
-              >
-                <div className="absolute inset-0 magic-grid opacity-20" />
-                <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto relative z-10">
-                  <span className="text-secondary font-bold text-2xl">🤲</span>
-                </div>
-                <h3 className="text-lg font-semibold text-foreground relative z-10">Hands-On Learning</h3>
-                <p className="text-sm text-muted-foreground relative z-10">
-                  Specially designed materials encourage exploration and discovery
-                </p>
-              </motion.div>
-
-              <motion.div
-                className="bg-card rounded-xl p-6 text-center space-y-4 relative overflow-hidden group"
-                variants={scaleInMagic}
-              >
-                <div className="absolute inset-0 magic-grid opacity-20" />
-                <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto relative z-10">
-                  <span className="text-accent font-bold text-2xl">🌱</span>
-                </div>
-                <h3 className="text-lg font-semibold text-foreground relative z-10">Independence</h3>
-                <p className="text-sm text-muted-foreground relative z-10">
-                  Children develop confidence through self-directed activities
-                </p>
-              </motion.div>
-
-              <motion.div
-                className="bg-card rounded-xl p-6 text-center space-y-4 relative overflow-hidden group"
-                variants={scaleInMagic}
-              >
-                <div className="absolute inset-0 magic-grid opacity-20" />
-                <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto relative z-10">
-                  <span className="text-primary font-bold text-2xl">🤝</span>
-                </div>
-                <h3 className="text-lg font-semibold text-foreground relative z-10">Mixed Ages</h3>
-                <p className="text-sm text-muted-foreground relative z-10">
-                  Multi-age classrooms foster peer learning and mentorship
-                </p>
-              </motion.div>
+              {[
+                { icon: '🧠', title: 'Child-Centered', desc: "Learning follows the child's natural interests and developmental pace", color: 'primary' },
+                { icon: '🤲', title: 'Hands-On Learning', desc: 'Specially designed materials encourage exploration and discovery', color: 'secondary' },
+                { icon: '🌱', title: 'Independence', desc: 'Children develop confidence through self-directed activities', color: 'accent' },
+                { icon: '🤝', title: 'Mixed Ages', desc: 'Multi-age classrooms foster peer learning and mentorship', color: 'primary' },
+              ].map((item, idx) => (
+                <motion.div key={idx} variants={scaleInMagic} className="group">
+                  <Card variant="interactive" className="h-full text-center space-y-4 relative overflow-hidden p-6">
+                    {/* MagicUI Grid Pattern Background */}
+                    <div className="absolute inset-0 magic-grid opacity-20 z-0" />
+                    <div className={cn("w-16 h-16 rounded-full flex items-center justify-center mx-auto relative z-10 transition-transform group-hover:scale-110",
+                      item.color === 'primary' ? 'bg-primary/20' :
+                        item.color === 'secondary' ? 'bg-secondary/20' : 'bg-accent/20')}>
+                      <span className={cn("font-bold text-2xl",
+                        item.color === 'primary' ? 'text-primary' :
+                          item.color === 'secondary' ? 'text-secondary' : 'text-accent')}>
+                        {item.icon}
+                      </span>
+                    </div>
+                    <CardTitle className="text-lg font-bold text-foreground relative z-10">{item.title}</CardTitle>
+                    <CardDescription className="text-sm text-muted-foreground relative z-10">
+                      {item.desc}
+                    </CardDescription>
+                  </Card>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </motion.section>
@@ -221,35 +193,26 @@ export default function AboutPage() {
               </div>
 
               <div className="space-y-8">
-                <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8">
-                  <h3 className="text-2xl font-semibold text-foreground mb-6">Why Choose Us?</h3>
+                <Card variant="data" className="bg-gradient-to-br from-primary/10 to-secondary/10 p-8 border-none">
+                  <CardTitle className="text-2xl font-bold text-foreground mb-6">Why Choose Us?</CardTitle>
                   <div className="space-y-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                        <span className="text-primary-foreground font-bold text-sm">16+</span>
+                    {[
+                      { icon: '16+', label: 'Years of Experience', color: 'primary' },
+                      { icon: '✓', label: 'Licensed & Insured', color: 'secondary' },
+                      { icon: 'M', label: 'Certified Montessori Educators', color: 'accent' },
+                      { icon: '♥', label: 'Low Student-Teacher Ratio', color: 'primary' },
+                    ].map((item, idx) => (
+                      <div key={idx} className="flex items-center space-x-3">
+                        <div className={cn("w-8 h-8 rounded-full flex items-center justify-center shadow-sm",
+                          item.color === 'primary' ? 'bg-primary text-primary-foreground' :
+                            item.color === 'secondary' ? 'bg-secondary text-secondary-foreground' : 'bg-accent text-accent-foreground')}>
+                          <span className="font-bold text-sm">{item.icon}</span>
+                        </div>
+                        <span className="text-foreground font-medium">{item.label}</span>
                       </div>
-                      <span className="text-foreground font-medium">Years of Experience</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                        <span className="text-secondary-foreground font-bold text-sm">✓</span>
-                      </div>
-                      <span className="text-foreground font-medium">Licensed & Insured</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-                        <span className="text-accent-foreground font-bold text-sm">M</span>
-                      </div>
-                      <span className="text-foreground font-medium">Certified Montessori Educators</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                        <span className="text-primary-foreground font-bold text-sm">♥</span>
-                      </div>
-                      <span className="text-foreground font-medium">Low Student-Teacher Ratio</span>
-                    </div>
+                    ))}
                   </div>
-                </div>
+                </Card>
 
                 <div className="text-center">
                   <Link

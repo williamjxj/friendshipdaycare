@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { PhoneIcon, MapPinIcon, ClockIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -133,104 +135,112 @@ export default function ContactPage() {
                 </div>
 
                 <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
+                  <Card variant="data" className="flex items-start space-x-4 p-6 transition-colors hover:bg-muted/30">
                     <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <PhoneIcon className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">Phone</h3>
-                      <p className="text-muted-foreground">604.945.8504</p>
-                      <p className="text-sm text-muted-foreground">Monday - Friday: 7:00 AM - 6:00 PM</p>
+                      <CardTitle className="font-bold text-foreground mb-1 text-lg">Phone</CardTitle>
+                      <p className="text-muted-foreground font-medium">604.945.8504</p>
+                      <CardDescription className="text-sm text-muted-foreground mt-1">Monday - Friday: 7:00 AM - 6:00 PM</CardDescription>
                     </div>
-                  </div>
+                  </Card>
 
-                  <div className="flex items-start space-x-4">
+                  <Card variant="data" className="flex items-start space-x-4 p-6 transition-colors hover:bg-muted/30">
                     <div className="w-12 h-12 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <MapPinIcon className="h-6 w-6 text-secondary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">Location</h3>
-                      <p className="text-muted-foreground">2950 Dewdney Trunk Road</p>
-                      <p className="text-muted-foreground">Coquitlam, BC V3C 2J4 Canada</p>
-                      <p className="text-sm text-muted-foreground">Convenient public transit access</p>
+                      <CardTitle className="font-bold text-foreground mb-1 text-lg">Location</CardTitle>
+                      <p className="text-muted-foreground font-medium">2950 Dewdney Trunk Road</p>
+                      <p className="text-muted-foreground font-medium">Coquitlam, BC V3C 2J4 Canada</p>
+                      <CardDescription className="text-sm text-muted-foreground mt-1">Convenient public transit access</CardDescription>
                     </div>
-                  </div>
+                  </Card>
 
-                  <div className="flex items-start space-x-4">
+                  <Card variant="data" className="flex items-start space-x-4 p-6 transition-colors hover:bg-muted/30">
                     <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <ClockIcon className="h-6 w-6 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">Hours</h3>
-                      <p className="text-muted-foreground">Monday - Friday</p>
-                      <p className="text-muted-foreground">7:00 AM - 6:00 PM</p>
-                      <p className="text-sm text-muted-foreground">Closed weekends and holidays</p>
+                      <CardTitle className="font-bold text-foreground mb-1 text-lg">Hours</CardTitle>
+                      <p className="text-muted-foreground font-medium">Monday - Friday</p>
+                      <p className="text-muted-foreground font-medium">7:00 AM - 6:00 PM</p>
+                      <CardDescription className="text-sm text-muted-foreground mt-1">Closed weekends and holidays</CardDescription>
                     </div>
-                  </div>
+                  </Card>
 
-                  <div className="flex items-start space-x-4">
+                  <Card variant="data" className="flex items-start space-x-4 p-6 transition-colors hover:bg-muted/30">
                     <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <EnvelopeIcon className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">Email</h3>
-                      <p className="text-muted-foreground">friendship.care@live.ca</p>
-                      <p className="text-sm text-muted-foreground">We&apos;ll respond within 24 hours</p>
+                      <CardTitle className="font-bold text-foreground mb-1 text-lg">Email</CardTitle>
+                      <p className="text-muted-foreground font-medium">friendship.care@live.ca</p>
+                      <CardDescription className="text-sm text-muted-foreground mt-1">We&apos;ll respond within 24 hours</CardDescription>
                     </div>
-                  </div>
+                  </Card>
                 </div>
 
                 {/* Quick Actions */}
-                <div className="bg-muted/30 rounded-xl p-6">
-                  <h3 className="font-semibold text-foreground mb-4">Quick Actions</h3>
-                  <div className="space-y-3">
+                <Card variant="interactive" className="bg-muted/30 p-6 border-none">
+                  <CardTitle className="font-bold text-foreground mb-4 text-xl">Quick Actions</CardTitle>
+                  <div className="space-y-4">
                     <a
                       href="tel:6049458504"
-                      className="flex items-center space-x-3 text-primary hover:text-primary/80 transition-colors"
+                      className="flex items-center space-x-3 text-primary hover:text-primary/80 transition-colors font-bold"
                     >
-                      <PhoneIcon className="h-5 w-5" />
+                      <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                        <PhoneIcon className="h-4 w-4" />
+                      </div>
                       <span className="font-medium">Call Now</span>
                     </a>
                     <a
                       href="mailto:friendship.care@live.ca"
-                      className="flex items-center space-x-3 text-secondary hover:text-secondary/80 transition-colors"
+                      className="flex items-center space-x-3 text-secondary hover:text-secondary/80 transition-colors font-bold"
                     >
-                      <EnvelopeIcon className="h-5 w-5" />
+                      <div className="w-8 h-8 bg-secondary/10 rounded-full flex items-center justify-center">
+                        <EnvelopeIcon className="h-4 w-4" />
+                      </div>
                       <span className="font-medium">Send Email</span>
                     </a>
                     <Link
                       href="/programs"
-                      className="flex items-center space-x-3 text-accent hover:text-accent/80 transition-colors"
+                      className="flex items-center space-x-3 text-accent hover:text-accent/80 transition-colors font-bold"
                     >
-                      <span className="w-5 h-5 flex items-center justify-center">📚</span>
+                      <div className="w-8 h-8 bg-accent/10 rounded-full flex items-center justify-center">
+                        <span className="text-xs">📚</span>
+                      </div>
                       <span className="font-medium">View Programs</span>
                     </Link>
                   </div>
-                </div>
+                </Card>
               </div>
 
               {/* Contact Form */}
-              <div id="contact-form" className="bg-muted/30 rounded-xl p-4 sm:p-8 scroll-mt-20">
-                <h2 className="text-2xl font-display font-bold text-foreground mb-6">
-                  Send us a Message
-                </h2>
+              <Card className="bg-muted/30 p-4 sm:p-8 scroll-mt-20 border-none shadow-sm">
+                <CardHeader className="p-0 mb-6">
+                  <CardTitle className="text-2xl font-display font-bold text-foreground">
+                    Send us a Message
+                  </CardTitle>
+                </CardHeader>
 
                 {submitStatus === 'success' && (
                   <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                    <p className="text-green-800 font-medium">Thank you! We&apos;ll get back to you within 24 hours.</p>
+                    <p className="text-green-800 font-bold">Thank you! We&apos;ll get back to you within 24 hours.</p>
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
                   <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                    <p className="text-red-800 font-medium">{errorMessage}</p>
+                    <p className="text-red-800 font-bold">{errorMessage}</p>
                   </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="block text-sm font-bold text-foreground">
                         Full Name *
                       </label>
                       <input
@@ -242,18 +252,18 @@ export default function ContactPage() {
                         onChange={handleChange}
                         aria-invalid={fieldErrors.name ? 'true' : 'false'}
                         aria-describedby={fieldErrors.name ? 'name-error' : undefined}
-                        className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base ${fieldErrors.name ? 'border-red-500 focus:ring-red-500' : 'border-border'
+                        className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium ${fieldErrors.name ? 'border-red-500 focus:ring-red-500' : 'border-border'
                           }`}
                         placeholder="Your full name"
                       />
                       {fieldErrors.name && (
-                        <p id="name-error" className="mt-1 text-sm text-red-600" role="alert">
+                        <p id="name-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
                           {fieldErrors.name}
                         </p>
                       )}
                     </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="block text-sm font-bold text-foreground">
                         Email Address *
                       </label>
                       <input
@@ -265,12 +275,12 @@ export default function ContactPage() {
                         onChange={handleChange}
                         aria-invalid={fieldErrors.email ? 'true' : 'false'}
                         aria-describedby={fieldErrors.email ? 'email-error' : undefined}
-                        className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base ${fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-border'
+                        className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium ${fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-border'
                           }`}
                         placeholder="your.email@example.com"
                       />
                       {fieldErrors.email && (
-                        <p id="email-error" className="mt-1 text-sm text-red-600" role="alert">
+                        <p id="email-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
                           {fieldErrors.email}
                         </p>
                       )}
@@ -278,8 +288,8 @@ export default function ContactPage() {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                    <div className="space-y-2">
+                      <label htmlFor="phone" className="block text-sm font-bold text-foreground">
                         Phone Number
                       </label>
                       <input
@@ -288,12 +298,12 @@ export default function ContactPage() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base"
+                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium"
                         placeholder="604.945.8504"
                       />
                     </div>
-                    <div>
-                      <label htmlFor="childAge" className="block text-sm font-medium text-foreground mb-2">
+                    <div className="space-y-2">
+                      <label htmlFor="childAge" className="block text-sm font-bold text-foreground">
                         Child&apos;s Age
                       </label>
                       <select
@@ -301,7 +311,7 @@ export default function ContactPage() {
                         name="childAge"
                         value={formData.childAge}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base"
+                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium cursor-pointer"
                       >
                         <option value="">Select age range</option>
                         <option value="30months-3years">30 months - 3 years</option>
@@ -312,8 +322,8 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="block text-sm font-bold text-foreground">
                       Message *
                     </label>
                     <textarea
@@ -325,12 +335,12 @@ export default function ContactPage() {
                       onChange={handleChange}
                       aria-invalid={fieldErrors.message ? 'true' : 'false'}
                       aria-describedby={fieldErrors.message ? 'message-error' : undefined}
-                      className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none min-h-[132px] text-base ${fieldErrors.message ? 'border-red-500 focus:ring-red-500' : 'border-border'
+                      className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none min-h-[132px] text-base font-medium ${fieldErrors.message ? 'border-red-500 focus:ring-red-500' : 'border-border'
                         }`}
                       placeholder="Tell us about your child and what you&apos;d like to know about our programs..."
                     />
                     {fieldErrors.message && (
-                      <p id="message-error" className="mt-1 text-sm text-red-600" role="alert">
+                      <p id="message-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
                         {fieldErrors.message}
                       </p>
                     )}
@@ -339,12 +349,12 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors min-h-[44px] flex items-center justify-center"
+                    className="w-full bg-primary text-primary-foreground px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg min-h-[44px] flex items-center justify-center"
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
                 </form>
-              </div>
+              </Card>
             </div>
           </div>
         </motion.section>

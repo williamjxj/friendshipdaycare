@@ -22,7 +22,8 @@ import {
   DollarSign,
   FolderOpen,
   UserCircle,
-  Star
+  Star,
+  Calendar
 } from 'lucide-react';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
@@ -198,12 +199,12 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 glass-panel border-b border-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16">
 
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-3 group">
-              <div className="relative w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110">
+            <Link href="/" className="flex items-center space-x-2 group">
+              <div className="relative w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 group-hover:scale-110">
                 <Image
                   src={"/logo.svg"}
                   alt="Friendship Corner Daycare"
@@ -212,11 +213,11 @@ export function Header() {
                   priority
                 />
               </div>
-              <div className="flex flex-col">
-                <span className="font-display font-bold text-lg md:text-xl text-primary leading-none group-hover:text-secondary transition-colors duration-300">
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-display font-bold text-base md:text-lg text-primary leading-none group-hover:text-secondary transition-colors duration-300 whitespace-nowrap">
                   Friendship Corner
                 </span>
-                <span className="text-[0.65rem] md:text-xs text-muted-foreground uppercase tracking-wider font-medium">
+                <span className="hidden sm:inline text-[0.6rem] md:text-[0.65rem] text-muted-foreground uppercase tracking-wider font-medium whitespace-nowrap pt-0.5">
                   Montessori Daycare
                 </span>
               </div>
@@ -267,8 +268,12 @@ export function Header() {
           <div className="hidden lg:flex items-center space-x-4">
             <LanguageToggle />
             <ThemeToggle />
-            <Link href="/contact" className="warm-button text-sm px-4 py-2">
-              Book a Tour
+            <Link
+              href="/contact"
+              className="warm-button text-xs px-4 py-1.5 flex items-center gap-1.5 group/cta shadow-md hover:shadow-primary/10 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap"
+            >
+              <Calendar className="w-3.5 h-3.5 transition-transform group-hover/cta:rotate-12" />
+              <span>Book a Tour</span>
             </Link>
           </div>
 
@@ -349,9 +354,10 @@ export function Header() {
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="block w-full text-center warm-button min-h-[44px] flex items-center justify-center"
+                  className="block w-full text-center warm-button min-h-[44px] py-2 flex items-center justify-center gap-2 shadow-md text-sm"
                 >
-                  Book a Tour
+                  <Calendar className="w-4 h-4" />
+                  <span>Book a Tour</span>
                 </Link>
               </div>
             </div>

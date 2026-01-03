@@ -10,6 +10,8 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Newspaper, Calendar, ArrowRight } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import { AnimatedPlaceholder } from '@/components/ui/AnimatedPlaceholder';
 
 // Sample journal data
 const sampleJournals = [
@@ -107,34 +109,34 @@ export default function JournalPage() {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                     key={journal.id}
-                    className="group bg-card rounded-2xl overflow-hidden shadow-lg border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
+                    className="flex"
                   >
-                    {/* Card Header Illustration/Image Placeholder */}
-                    <div className="relative h-48 bg-muted grid place-items-center overflow-hidden">
-                      <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors" />
-                      <div className="text-center">
-                        <div className="text-4xl mb-2">📖</div>
-                        <span className="font-bold text-primary text-lg">{journal.month} {journal.year}</span>
-                      </div>
-                    </div>
-
-                    <div className="p-6 space-y-4 flex flex-col flex-1">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                          <Calendar className="w-3 h-3" />
-                          {journal.date}
+                    <Card variant="interactive" className="overflow-hidden flex flex-col h-full w-full">
+                      {/* Card Header Illustration/Image Placeholder */}
+                      <CardHeader className="p-0 relative h-48 bg-muted grid place-items-center overflow-hidden border-b border-border">
+                        <AnimatedPlaceholder className="absolute inset-0 z-0" />
+                        <div className="relative z-10 text-center">
+                          <div className="text-4xl mb-2 animate-[magic-float_4s_ease-in-out_infinite]">📖</div>
+                          <span className="font-bold text-primary text-lg">{journal.month} {journal.year}</span>
                         </div>
-                        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                          {journal.title}
-                        </h3>
-                      </div>
+                      </CardHeader>
 
-                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
-                        {journal.excerpt}
-                      </p>
+                      <CardContent className="p-6 space-y-4 flex flex-col flex-1">
+                        <div className="space-y-1">
+                          <CardDescription className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                            <Calendar className="w-3 h-3" />
+                            {journal.date}
+                          </CardDescription>
+                          <CardTitle className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                            {journal.title}
+                          </CardTitle>
+                        </div>
 
-                      <div className="pt-4 mt-auto space-y-4 border-t border-border">
-                        <div>
+                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                          {journal.excerpt}
+                        </p>
+
+                        <div className="pt-4 mt-auto">
                           <h4 className="text-xs font-bold text-foreground mb-2 uppercase tracking-wide">Highlights:</h4>
                           <ul className="space-y-1.5">
                             {journal.highlights.slice(0, 3).map((highlight, idx) => (
@@ -145,16 +147,18 @@ export default function JournalPage() {
                             ))}
                           </ul>
                         </div>
+                      </CardContent>
 
+                      <CardFooter className="p-6 pt-0 mt-auto">
                         <Link
                           href={`/community/journal/${journal.id}`}
-                          className="inline-flex items-center justify-center w-full gap-2 bg-muted hover:bg-muted/80 text-foreground px-4 py-3 rounded-lg font-bold text-sm transition-colors group/btn"
+                          className="inline-flex items-center justify-center w-full gap-2 bg-muted hover:bg-muted/80 text-foreground px-4 py-3 rounded-lg font-bold text-sm transition-colors group/btn min-h-[44px]"
                         >
                           Read Full Entry
                           <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                         </Link>
-                      </div>
-                    </div>
+                      </CardFooter>
+                    </Card>
                   </motion.div>
                 ))}
               </div>

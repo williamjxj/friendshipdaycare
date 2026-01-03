@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { BookOpen, Star, Heart, Calendar, Sparkles } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 
 export default function TodaysStoryPage() {
   return (
@@ -29,20 +30,18 @@ export default function TodaysStoryPage() {
         {/* Video Section */}
         <section className="py-20 relative z-10 -mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="montessori-card p-6 md:p-12 bg-card text-card-foreground shadow-xl border-t-4 border-primary"
+            <Card
+              variant="elevated"
+              className="p-6 md:p-12 border-t-4 border-t-primary rounded-[var(--radius-lg)]"
             >
-              <div className="text-center mb-8 space-y-2">
-                <h2 className="text-3xl font-bold text-foreground flex items-center justify-center gap-3">
-                  <Star className="w-8 h-8 text-accent" />
+              <CardHeader className="p-0 text-center mb-8 space-y-2">
+                <CardTitle className="text-3xl font-display font-bold text-foreground flex items-center justify-center gap-3">
+                  <Star className="w-8 h-8 text-accent shrink-0" />
                   This Week&apos;s Adventure
-                  <Star className="w-8 h-8 text-accent" />
-                </h2>
-                <p className="text-muted-foreground">Updated every Monday for ages 3-6</p>
-              </div>
+                  <Star className="w-8 h-8 text-accent shrink-0" />
+                </CardTitle>
+                <CardDescription className="text-muted-foreground">Updated every Monday for ages 3-6</CardDescription>
+              </CardHeader>
 
               <Suspense fallback={
                 <div className="h-[400px] grid place-items-center bg-muted rounded-xl">
@@ -73,25 +72,25 @@ export default function TodaysStoryPage() {
                 </div>
               </Suspense>
 
-              {/* Lesson Cards */}
+              {/* Lesson Cards using 'data' variant */}
               <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="p-6 rounded-xl bg-primary/5 border border-primary/20 text-center space-y-3">
+                <Card variant="data" className="p-6 text-center space-y-3 bg-primary/5 hover:bg-primary/10 border-primary/20 transition-colors">
                   <Heart className="w-10 h-10 mx-auto text-primary" />
-                  <h3 className="font-bold text-lg text-foreground">Be Kind</h3>
-                  <p className="text-sm text-muted-foreground">Help others with a big smile</p>
-                </div>
-                <div className="p-6 rounded-xl bg-secondary/5 border border-secondary/20 text-center space-y-3">
+                  <CardTitle className="font-bold text-lg text-foreground">Be Kind</CardTitle>
+                  <CardDescription className="text-sm text-muted-foreground p-0">Help others with a big smile</CardDescription>
+                </Card>
+                <Card variant="data" className="p-6 text-center space-y-3 bg-secondary/5 hover:bg-secondary/10 border-secondary/20 transition-colors">
                   <Sparkles className="w-10 h-10 mx-auto text-secondary" />
-                  <h3 className="font-bold text-lg text-foreground">Be Helpful</h3>
-                  <p className="text-sm text-muted-foreground">Lend a helping hand to friends</p>
-                </div>
-                <div className="p-6 rounded-xl bg-accent/5 border border-accent/20 text-center space-y-3">
+                  <CardTitle className="font-bold text-lg text-foreground">Be Helpful</CardTitle>
+                  <CardDescription className="text-sm text-muted-foreground p-0">Lend a helping hand to friends</CardDescription>
+                </Card>
+                <Card variant="data" className="p-6 text-center space-y-3 bg-accent/5 hover:bg-accent/10 border-accent/20 transition-colors">
                   <Star className="w-10 h-10 mx-auto text-accent-foreground" />
-                  <h3 className="font-bold text-lg text-foreground">Show Love</h3>
-                  <p className="text-sm text-muted-foreground">Care for everyone around us</p>
-                </div>
+                  <CardTitle className="font-bold text-lg text-foreground">Show Love</CardTitle>
+                  <CardDescription className="text-sm text-muted-foreground p-0">Care for everyone around us</CardDescription>
+                </Card>
               </div>
-            </motion.div>
+            </Card>
           </div>
         </section>
 
@@ -105,18 +104,24 @@ export default function TodaysStoryPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { week: 1, title: "The Good Samaritan", theme: "Kindness", color: "bg-primary" },
-                { week: 2, title: "David and Goliath", theme: "Courage", color: "bg-secondary" },
-                { week: 3, title: "Noah's Ark", theme: "Caring", color: "bg-accent" },
-                { week: 4, title: "The Lost Sheep", theme: "Love", color: "bg-primary" },
+                { week: 1, title: "The Good Samaritan", theme: "Kindness", color: "primary" },
+                { week: 2, title: "David and Goliath", theme: "Courage", color: "secondary" },
+                { week: 3, title: "Noah's Ark", theme: "Caring", color: "accent" },
+                { week: 4, title: "The Lost Sheep", theme: "Love", color: "primary" },
               ].map((item) => (
-                <div key={item.week} className="bg-card border border-border rounded-xl p-6 hover:shadow-md transition-all text-center group">
-                  <div className={cn("w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-4 bg-primary", item.color)}>
+                <Card key={item.week} className="text-center group p-6">
+                  <div className={cn("w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-4 transition-transform group-hover:scale-110",
+                    item.color === 'primary' ? 'bg-primary' :
+                      item.color === 'secondary' ? 'bg-secondary' : 'bg-accent')}>
                     {item.week}
                   </div>
-                  <h3 className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.theme}</p>
-                </div>
+                  <CardTitle className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors text-lg">
+                    {item.title}
+                  </CardTitle>
+                  <CardDescription className="text-sm text-muted-foreground p-0">
+                    {item.theme}
+                  </CardDescription>
+                </Card>
               ))}
             </div>
           </div>

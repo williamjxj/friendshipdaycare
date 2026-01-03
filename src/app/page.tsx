@@ -12,6 +12,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { getImageUrl } from '@/lib/image-utils';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { AnimatedPlaceholder } from '@/components/ui/AnimatedPlaceholder';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -190,14 +192,15 @@ export default function HomePage() {
               description="More than just a daycare, we are a family where everyone belongs."
               header={
                 <div className="relative flex flex-1 w-full h-full min-h-[6rem] rounded-xl overflow-hidden group">
+                  <AnimatedPlaceholder className="absolute inset-0 z-0" />
                   <Image
                     src={getImageUrl("/images/circle-time-board-2.jpg")}
                     alt="Circle Time"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover group-hover:scale-110 transition-transform duration-500 z-10 opacity-0" // Hidden initially as per user request to use placeholder "for now"
                   />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-20" />
                 </div>
               }
               icon={<span className="text-4xl">❤️</span>}
@@ -210,15 +213,15 @@ export default function HomePage() {
               description="Licensed facility complying with all health and safety regulations."
               header={
                 <div className="relative flex flex-1 w-full h-full min-h-[6rem] rounded-xl overflow-hidden group">
-                  {/* Using a placeholder gradient or another image if specific safety image missing */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-indigo-500/20" />
+                  <AnimatedPlaceholder className="absolute inset-0 z-0" />
                   <Image
                     src={getImageUrl("/images/playground.jpg")}
                     alt="Playground"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover group-hover:scale-110 transition-transform duration-500 z-10 opacity-0" // Hidden initially as per user request
                   />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 z-20" />
                 </div>
               }
               icon={<span className="text-4xl">🛡️</span>}
@@ -250,25 +253,33 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Program Cards with Hover Effects */}
+            {/* Program Cards with Standardized Card Component */}
             {[
               { id: 'toddler', title: 'Toddler', range: '30mo - 3yrs', color: 'primary', icon: '🧸', desc: 'Gentle introduction to structure & social skills.' },
               { id: 'preschool', title: 'Preschool', range: '3 - 4yrs', color: 'secondary', icon: '🎨', desc: 'Hands-on Montessori materials & creative play.' },
               { id: 'prek', title: 'Pre-Kindergarten', range: '4 - 5yrs', color: 'accent', icon: '🚀', desc: 'Advanced concepts & school readiness.' },
             ].map((prog, idx) => (
-              <div key={prog.id} className="group relative bg-muted/20 rounded-3xl p-8 hover:bg-muted/40 transition-colors duration-300 border border-transparent hover:border-black/5 section-header">
-                <div className={`w-16 h-16 rounded-2xl bg-${prog.color}/10 flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform`}>
-                  {prog.icon}
-                </div>
-                <h3 className="text-2xl font-bold mb-2">{prog.title} Program</h3>
-                <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-4">{prog.range}</div>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  {prog.desc}
-                </p>
-                <a href="/programs" className={`inline-flex items-center font-bold text-${prog.color} hover:translate-x-1 transition-transform`}>
+              <Card key={prog.id} variant="interactive" className="p-8 border-none bg-muted/20 hover:bg-muted/40 section-header">
+                <CardHeader className="p-0 mb-6">
+                  <div className={cn("w-16 h-16 rounded-2xl flex items-center justify-center text-4xl group-hover:scale-110 transition-transform",
+                    prog.color === 'primary' ? 'bg-primary/10' :
+                      prog.color === 'secondary' ? 'bg-secondary/10' : 'bg-accent/10')}>
+                    {prog.icon}
+                  </div>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <CardTitle className="text-2xl font-bold mb-2">{prog.title} Program</CardTitle>
+                  <CardDescription className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-4">{prog.range}</CardDescription>
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                    {prog.desc}
+                  </p>
+                </CardContent>
+                <a href="/programs" className={cn("inline-flex items-center font-bold hover:translate-x-1 transition-transform",
+                  prog.color === 'primary' ? 'text-primary' :
+                    prog.color === 'secondary' ? 'text-secondary' : 'text-accent')}>
                   Learn details <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                 </a>
-              </div>
+              </Card>
             ))}
           </div>
         </div>

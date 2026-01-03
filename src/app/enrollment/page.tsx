@@ -15,6 +15,8 @@ import {
 } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 export default function EnrollmentPage() {
   const steps = [
@@ -131,22 +133,22 @@ export default function EnrollmentPage() {
         {/* Quick Info Bar */}
         <section className="py-8 -mt-8 relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="montessori-card p-8 bg-card">
+            <Card variant="data" className="p-8 border-none">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-border">
                 <div className="pt-4 md:pt-0">
                   <div className="text-3xl font-bold text-primary mb-1">5 Steps</div>
-                  <div className="text-muted-foreground font-medium">Simple Process</div>
+                  <CardDescription className="font-bold">Simple Process</CardDescription>
                 </div>
                 <div className="pt-4 md:pt-0">
                   <div className="text-3xl font-bold text-primary mb-1">1-2 Weeks</div>
-                  <div className="text-muted-foreground font-medium">Average Timeline</div>
+                  <CardDescription className="font-bold">Average Timeline</CardDescription>
                 </div>
                 <div className="pt-4 md:pt-0">
                   <div className="text-3xl font-bold text-primary mb-1">3-5 Days</div>
-                  <div className="text-muted-foreground font-medium">Application Review</div>
+                  <CardDescription className="font-bold">Application Review</CardDescription>
                 </div>
               </div>
-            </div>
+            </Card>
           </div>
         </section>
 
@@ -161,34 +163,36 @@ export default function EnrollmentPage() {
                     <div className="hidden md:block absolute left-8 top-20 bottom-0 w-0.5 bg-border -mb-12"></div>
                   )}
 
-                  <div className="bg-card rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                  <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <div className="md:flex">
                       {/* Step Number & Icon */}
-                      <div className="md:w-48 bg-gradient-to-br from-primary to-secondary p-8 text-white flex flex-col items-center justify-center text-center">
-                        <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4">
+                      <div className="md:w-48 bg-gradient-to-br from-primary to-secondary p-8 text-white flex flex-col items-center justify-center text-center shrink-0">
+                        <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
                           <step.icon className="w-8 h-8" />
                         </div>
                         <div className="text-5xl font-bold mb-2">{step.number}</div>
-                        <div className="text-sm font-medium">STEP</div>
+                        <div className="text-sm font-bold uppercase tracking-widest">Step</div>
                       </div>
 
                       {/* Content */}
-                      <div className="flex-1 p-8">
-                        <h2 className="text-2xl font-bold text-foreground mb-3">
-                          {step.title}
-                        </h2>
-                        <p className="text-muted-foreground mb-6">
-                          {step.description}
-                        </p>
+                      <CardContent className="flex-1 p-8">
+                        <CardHeader className="p-0 mb-6">
+                          <CardTitle className="text-2xl font-bold text-foreground mb-3">
+                            {step.title}
+                          </CardTitle>
+                          <CardDescription className="text-muted-foreground text-base leading-relaxed">
+                            {step.description}
+                          </CardDescription>
+                        </CardHeader>
 
                         {/* Actions/Checklist */}
                         <div className="space-y-4">
-                          <h3 className="font-semibold text-foreground">What to do:</h3>
+                          <h3 className="font-bold text-foreground">What to do:</h3>
                           <ul className="space-y-2">
                             {step.actions.map((action, idx) => (
                               <li key={idx} className="flex items-start gap-2">
                                 <CheckCircleIcon className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                                <span className="text-muted-foreground">{action}</span>
+                                <span className="text-muted-foreground text-sm font-medium">{action}</span>
                               </li>
                             ))}
                           </ul>
@@ -199,8 +203,8 @@ export default function EnrollmentPage() {
                           <div className="mt-6 bg-muted/50 rounded-lg p-4">
                             <div className="flex items-center gap-2">
                               <CalendarDaysIcon className="w-5 h-5 text-primary" />
-                              <span className="font-semibold text-foreground">Timeline:</span>
-                              <span className="text-muted-foreground">{step.timeline}</span>
+                              <span className="font-bold text-foreground">Timeline:</span>
+                              <span className="text-muted-foreground text-sm font-medium">{step.timeline}</span>
                             </div>
                           </div>
                         )}
@@ -208,11 +212,11 @@ export default function EnrollmentPage() {
                         {/* Documents */}
                         {step.documents && (
                           <div className="mt-6">
-                            <h4 className="font-semibold text-foreground mb-3">Required Documents:</h4>
+                            <h4 className="font-bold text-foreground mb-3">Required Documents:</h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                               {step.documents.map((doc, idx) => (
-                                <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                                <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></div>
                                   {doc}
                                 </div>
                               ))}
@@ -223,11 +227,11 @@ export default function EnrollmentPage() {
                         {/* Preparation */}
                         {step.preparation && (
                           <div className="mt-6">
-                            <h4 className="font-semibold text-foreground mb-3">How to Prepare:</h4>
+                            <h4 className="font-bold text-foreground mb-3">How to Prepare:</h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                               {step.preparation.map((item, idx) => (
-                                <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-accent"></div>
+                                <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-accent shrink-0"></div>
                                   {item}
                                 </div>
                               ))}
@@ -246,27 +250,27 @@ export default function EnrollmentPage() {
 
                         {/* CTA */}
                         {step.cta && (
-                          <div className="mt-6">
+                          <div className="mt-8">
                             {step.cta.primary ? (
                               <Link
                                 href={step.cta.href}
-                                className="inline-flex items-center justify-center bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors min-h-[44px]"
+                                className="inline-flex items-center justify-center bg-primary text-primary-foreground px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary/90 transition-all shadow-md hover:shadow-lg min-h-[44px]"
                               >
                                 {step.cta.text}
                               </Link>
                             ) : (
                               <Link
                                 href={step.cta.href}
-                                className="inline-flex items-center justify-center border-2 border-primary text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/10 transition-colors min-h-[44px]"
+                                className="inline-flex items-center justify-center border-2 border-primary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary/5 transition-all min-h-[44px]"
                               >
                                 {step.cta.text}
                               </Link>
                             )}
                           </div>
                         )}
-                      </div>
+                      </CardContent>
                     </div>
-                  </div>
+                  </Card>
                 </div>
               ))}
             </div>
@@ -280,68 +284,73 @@ export default function EnrollmentPage() {
               Important Information
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-muted/30 rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-3">
+              <Card variant="data" className="p-6">
+                <CardTitle className="text-xl font-bold text-foreground mb-3">
                   Age Requirements
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  We accept children from 30 months to school age (5-6 years).
-                  Children must be potty-trained or actively working on potty training.
-                </p>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Toddler Program: 30 months - 3 years</li>
-                  <li>• Preschool Program: 3 - 4 years</li>
-                  <li>• Pre-Kindergarten: 4 - 5 years</li>
-                </ul>
-              </div>
+                </CardTitle>
+                <CardContent className="p-0 space-y-4">
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    We accept children from 30 months to school age (5-6 years).
+                    Children must be potty-trained or actively working on potty training.
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground font-medium">
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Toddler Program: 30 months - 3 years</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-secondary" /> Preschool Program: 3 - 4 years</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent" /> Pre-Kindergarten: 4 - 5 years</li>
+                  </ul>
+                </CardContent>
+              </Card>
 
-              <div className="bg-muted/30 rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-3">
+              <Card variant="data" className="p-6">
+                <CardTitle className="text-xl font-bold text-foreground mb-3">
                   Start Dates
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  We accept new enrollments year-round, subject to availability.
-                  Most families prefer to start at the beginning of the month.
-                </p>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• September: Primary enrollment season</li>
-                  <li>• January: Second major intake</li>
-                  <li>• Year-round: Rolling admissions</li>
-                  <li>• Flexible start dates available</li>
-                </ul>
-              </div>
+                </CardTitle>
+                <CardContent className="p-0 space-y-4">
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    We accept new enrollments year-round, subject to availability.
+                    Most families prefer to start at the beginning of the month.
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground font-medium">
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> September: Primary enrollment season</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-secondary" /> January: Second major intake</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent" /> Year-round: Rolling admissions</li>
+                  </ul>
+                </CardContent>
+              </Card>
 
-              <div className="bg-muted/30 rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-3">
+              <Card variant="data" className="p-6">
+                <CardTitle className="text-xl font-bold text-foreground mb-3">
                   Waitlist Policy
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  If no spots are available, you'll be added to our waitlist at no charge.
-                  Priority is given to siblings and by application date.
-                </p>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Free to join waitlist</li>
-                  <li>• Sibling priority given</li>
-                  <li>• First-come, first-served otherwise</li>
-                  <li>• 48-hour response required when spot opens</li>
-                </ul>
-              </div>
+                </CardTitle>
+                <CardContent className="p-0 space-y-4">
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    If no spots are available, you&apos;ll be added to our waitlist at no charge.
+                    Priority is given to siblings and by application date.
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground font-medium">
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Free to join waitlist</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-secondary" /> Sibling priority given</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent" /> First-come, first-served otherwise</li>
+                  </ul>
+                </CardContent>
+              </Card>
 
-              <div className="bg-muted/30 rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-3">
+              <Card variant="data" className="p-6">
+                <CardTitle className="text-xl font-bold text-foreground mb-3">
                   Gradual Transition
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  We offer gradual transition options for children who need extra time
-                  to adjust to their new environment.
-                </p>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Shorter days in first week</li>
-                  <li>• Parent stay options available</li>
-                  <li>• Gradual separation support</li>
-                  <li>• Communication with family throughout</li>
-                </ul>
-              </div>
+                </CardTitle>
+                <CardContent className="p-0 space-y-4">
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    We offer gradual transition options for children who need extra time
+                    to adjust to their new environment.
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground font-medium">
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Shorter days in first week</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-secondary" /> Parent stay options available</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent" /> Gradual separation support</li>
+                  </ul>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
@@ -353,61 +362,37 @@ export default function EnrollmentPage() {
               Enrollment FAQs
             </h2>
             <div className="space-y-6">
-              <div className="bg-card rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-foreground mb-2">
-                  How long does the enrollment process take?
-                </h3>
-                <p className="text-muted-foreground">
-                  From initial tour to start date typically takes 1-2 weeks if space is available.
-                  The application review process takes 3-5 business days. If you're on the waitlist,
-                  the timeline depends on when a spot opens up.
-                </p>
-              </div>
-
-              <div className="bg-card rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-foreground mb-2">
-                  Can I tour the facility before applying?
-                </h3>
-                <p className="text-muted-foreground">
-                  Absolutely! We highly encourage tours. It's the best way to see our Montessori
-                  environment, meet our staff, and ask questions. You can schedule an in-person
-                  tour or request a virtual tour if that's more convenient.
-                </p>
-              </div>
-
-              <div className="bg-card rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-foreground mb-2">
-                  What if my child has special needs?
-                </h3>
-                <p className="text-muted-foreground">
-                  We welcome children with diverse needs and work to provide appropriate
-                  accommodations. Please discuss your child's specific needs during the tour
-                  and application process so we can determine if we can provide the best
-                  environment for your child's success.
-                </p>
-              </div>
-
-              <div className="bg-card rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-foreground mb-2">
-                  Is the registration fee refundable?
-                </h3>
-                <p className="text-muted-foreground">
-                  The $200 registration fee is non-refundable as it secures your child's spot
-                  and covers administrative costs. However, if we cannot accommodate your child
-                  for any reason, the fee will be fully refunded.
-                </p>
-              </div>
-
-              <div className="bg-card rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-foreground mb-2">
-                  Can I change my child's schedule after enrolling?
-                </h3>
-                <p className="text-muted-foreground">
-                  Yes, schedule changes are possible subject to availability. We require at least
-                  2 weeks notice for any schedule changes, and changes take effect at the beginning
-                  of the following month.
-                </p>
-              </div>
+              {[
+                {
+                  q: "How long does the enrollment process take?",
+                  a: "From initial tour to start date typically takes 1-2 weeks if space is available. The application review process takes 3-5 business days. If you're on the waitlist, the timeline depends on when a spot opens up."
+                },
+                {
+                  q: "Can I tour the facility before applying?",
+                  a: "Absolutely! We highly encourage tours. It's the best way to see our Montessori environment, meet our staff, and ask questions. You can schedule an in-person tour or request a virtual tour if that's more convenient."
+                },
+                {
+                  q: "What if my child has special needs?",
+                  a: "We welcome children with diverse needs and work to provide appropriate accommodations. Please discuss your child's specific needs during the tour and application process so we can determine if we can provide the best environment for your child's success."
+                },
+                {
+                  q: "Is the registration fee refundable?",
+                  a: "The $200 registration fee is non-refundable as it secures your child's spot and covers administrative costs. However, if we cannot accommodate your child for any reason, the fee will be fully refunded."
+                },
+                {
+                  q: "Can I change my child's schedule after enrolling?",
+                  a: "Yes, schedule changes are possible subject to availability. We require at least 2 weeks notice for any schedule changes, and changes take effect at the beginning of the following month."
+                }
+              ].map((faq, idx) => (
+                <Card key={idx} className="p-6">
+                  <CardTitle className="text-lg font-bold text-foreground mb-2">
+                    {faq.q}
+                  </CardTitle>
+                  <CardDescription className="text-muted-foreground text-sm leading-relaxed p-0">
+                    {faq.a}
+                  </CardDescription>
+                </Card>
+              ))}
             </div>
           </div>
         </section>

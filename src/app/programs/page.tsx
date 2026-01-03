@@ -4,14 +4,16 @@ import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { PageHero } from '@/components/ui/page-hero';
 import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
+import { cn } from '@/lib/utils';
 import { getImageUrl, getPlaceholderUrl } from '@/lib/image-utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { textReveal, textRevealItem, borderBeam, scaleInMagic } from '@/lib/magicui-animations';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { AnimatedPlaceholder } from '@/components/ui/AnimatedPlaceholder';
 
 export default function ProgramsPage() {
   const programs = [
@@ -144,24 +146,29 @@ export default function ProgramsPage() {
               {programs.map((program) => (
                 <motion.div
                   key={program.id}
-                  className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative group"
                   variants={scaleInMagic}
+                  className="group relative"
                 >
-                  <Card variant="outlined" hover className="p-0 overflow-hidden">
-                    <div className="relative h-48">
+                  <Card variant="feature" className="p-0 overflow-hidden h-full flex flex-col">
+                    <div className="relative h-48 overflow-hidden rounded-t-[calc(var(--radius-lg)-4px)]">
+                      <AnimatedPlaceholder className="absolute inset-0 z-0" />
                       <Image
                         src={program.image}
                         alt={program.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover"
+                        className="object-cover transition-transform duration-500 group-hover:scale-110 z-10 opacity-0"
                       />
                     </div>
-                    <CardContent className="space-y-4">
-                      <CardHeader>
+                    <CardContent className="p-6 space-y-4 flex-1">
+                      <CardHeader className="p-0">
                         <div className="flex items-center space-x-3">
-                          <div className={`w-12 h-12 bg-${program.color}/20 rounded-lg flex items-center justify-center`}>
-                            <span className={`text-${program.color} font-bold text-xl`}>
+                          <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110",
+                            program.color === 'primary' ? 'bg-primary/20' :
+                              program.color === 'secondary' ? 'bg-secondary/20' : 'bg-accent/20')}>
+                            <span className={cn("font-bold text-xl",
+                              program.color === 'primary' ? 'text-primary' :
+                                program.color === 'secondary' ? 'text-secondary' : 'text-accent')}>
                               {program.icon}
                             </span>
                           </div>
@@ -173,22 +180,28 @@ export default function ProgramsPage() {
                           </div>
                         </div>
                       </CardHeader>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <CardDescription className="text-muted-foreground leading-relaxed">
                         {program.description}
-                      </p>
-                      <div className="grid grid-cols-2 gap-2">
+                      </CardDescription>
+                      <div className="grid grid-cols-2 gap-2 pt-2">
                         {program.features.slice(0, 4).map((feature, index) => (
                           <div key={index} className="flex items-center space-x-2">
-                            <div className={`w-4 h-4 bg-${program.color}/20 rounded-full flex items-center justify-center`}>
-                              <span className={`text-${program.color} text-xs`}>✓</span>
+                            <div className={cn("w-4 h-4 rounded-full flex items-center justify-center",
+                              program.color === 'primary' ? 'bg-primary/20' :
+                                program.color === 'secondary' ? 'bg-secondary/20' : 'bg-accent/20')}>
+                              <span className={cn("text-xs",
+                                program.color === 'primary' ? 'text-primary' :
+                                  program.color === 'secondary' ? 'text-secondary' : 'text-accent')}>
+                                ✓
+                              </span>
                             </div>
                             <span className="text-xs text-muted-foreground">{feature}</span>
                           </div>
                         ))}
                       </div>
                     </CardContent>
-                    {/* MagicUI Border Beam Effect */}
-                    <div className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    {/* MagicUI Border Beam Effect - now managed by standard variant if desired, or kept custom */}
+                    <div className="absolute inset-0 rounded-[var(--radius-lg)] border-2 border-transparent bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   </Card>
                 </motion.div>
               ))}
@@ -239,12 +252,14 @@ export default function ProgramsPage() {
                 </div>
 
                 <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                  <div className="bg-card rounded-xl p-6 shadow-lg">
-                    <h3 className="text-xl font-semibold text-foreground mb-6">Daily Schedule</h3>
+                  <Card variant="data" className="p-8">
+                    <h3 className="text-xl font-bold text-foreground mb-6">Daily Schedule</h3>
                     <div className="space-y-3">
                       {program.dailySchedule.map((item, scheduleIndex) => (
                         <div key={scheduleIndex} className="flex items-center space-x-4">
-                          <div className={`w-20 text-sm font-medium text-${program.color} flex-shrink-0`}>
+                          <div className={cn("w-20 text-sm font-bold flex-shrink-0",
+                            program.color === 'primary' ? 'text-primary' :
+                              program.color === 'secondary' ? 'text-secondary' : 'text-accent')}>
                             {item.time}
                           </div>
                           <div className="flex-1 text-sm text-muted-foreground">
@@ -253,7 +268,7 @@ export default function ProgramsPage() {
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </Card>
                 </div>
               </div>
             </div>
