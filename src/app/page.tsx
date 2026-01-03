@@ -100,19 +100,9 @@ export default function HomePage() {
 
   const videos = useMemo(() => [
     {
-      url: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
-      title: 'Today\'s Montessori Lesson',
-      description: 'Join us for today\'s hands-on learning activities where children explore, discover, and develop independence.'
-    },
-    {
-      url: 'https://www.youtube.com/watch?v=HMUDVMiITOU',
-      title: 'Gentle Bible Story Time',
-      description: 'A heartwarming animated Bible story designed to teach values, kindness, and moral lessons.'
-    },
-    {
-      url: 'https://www.youtube.com/watch?v=2Vv-BfVoq4g',
-      title: 'Creative Learning Through Play',
-      description: 'See how our children learn essential skills through creative activities and imaginative play.'
+      url: '/videos/friendship-daycare.mp4',
+      title: 'Daily Adventures',
+      description: 'A peek into our classroom - see the joy, learning, and growth happening every day at Friendship Corner Daycare.'
     }
   ], []);
 

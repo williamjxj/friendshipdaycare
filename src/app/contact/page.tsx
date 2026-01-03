@@ -3,7 +3,6 @@
 import { Suspense, useState } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { PageHero } from '@/components/ui/page-hero';
-import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
 import { GoogleMap } from '@/components/ui/GoogleMap';
 import { getImageUrl, getPlaceholderUrl } from '@/lib/image-utils';
 import Link from 'next/link';
@@ -110,9 +109,7 @@ export default function ContactPage() {
           enableScrollTrigger={true}
           hideTitle={true}
           hideSubtitle={true}
-        >
-          <HeroCTAButtons variant="outlined" contactLink="#contact-form" />
-        </PageHero>
+        />
 
         {/* Contact Information */}
         <motion.section

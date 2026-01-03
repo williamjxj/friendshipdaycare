@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { HeroSideBackground } from './hero-side-background';
+import { HeroCurveDivider } from './hero-curve-divider';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -258,6 +259,11 @@ export function PageHero({
           )}
         </div>
       </div>
+
+      {/* Curved bottom divider - only for non-fullScreen heroes */}
+      {!fullScreen && (
+        <HeroCurveDivider color="fill-background" height="lg" />
+      )}
     </section>
   );
 }

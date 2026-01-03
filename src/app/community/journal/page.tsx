@@ -3,7 +3,6 @@
 import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { PageHero } from '@/components/ui/page-hero';
-import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getImageUrl, getPlaceholderUrl } from '@/lib/image-utils';
 import Link from 'next/link';
@@ -90,11 +89,11 @@ export default function JournalPage() {
         <PageHero
           title="Monthly Journal"
           subtitle="Explore our monthly updates, learning highlights, and special moments from our Montessori classroom"
-          backgroundSvg={getPlaceholderUrl('community/community_journal_hero_1.gif')}
+          backgroundSvg={getImageUrl('/imgs/community/community_journal_hero_1.gif')}
           enableScrollTrigger={true}
-        >
-          <HeroCTAButtons variant="outlined" />
-        </PageHero>
+          hideTitle={true}
+          hideSubtitle={true}
+        />
 
         {/* Journals Grid */}
         <section className="py-20 bg-background relative z-10">

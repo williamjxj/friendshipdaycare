@@ -3,7 +3,6 @@
 import { Suspense } from 'react';
 import { PageLoader, LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { PageHero } from '@/components/ui/page-hero';
-import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
 import { VideoPlayer } from '@/components/ui/VideoPlayer';
 import { getImageUrl, getPlaceholderUrl } from '@/lib/image-utils';
 import Link from 'next/link';
@@ -21,11 +20,11 @@ export default function TodaysStoryPage() {
         <PageHero
           title="Today's Story"
           subtitle="Join us for daily adventures, learning moments, and heartwarming stories from our Montessori classroom"
-          backgroundSvg={getPlaceholderUrl('community/community_story_hero_1.gif')}
+          backgroundSvg={getImageUrl('/imgs/community/community_story_1.gif')}
           enableScrollTrigger={true}
-        >
-          <HeroCTAButtons variant="outlined" />
-        </PageHero>
+          hideTitle={true}
+          hideSubtitle={true}
+        />
 
         {/* Video Section */}
         <section className="py-20 relative z-10 -mt-20">
