@@ -75,6 +75,79 @@
     "copyright": "© 2024 Guardería Friendship Corner. Todos los derechos reservados.",
     "phone": "604.945.8504"
   },
+  "home": {
+    "hero": {
+      "title": "Donde las Mentes Jóvenes Florecen",
+      "subtitle": "Un ambiente seguro y acogedor Montessori donde cada niño descubre sus superpoderes únicos.",
+      "scheduleTour": "Programar una Visita",
+      "viewPrograms": "Ver Programas"
+    },
+    "discoverDifference": {
+      "title": "Descubre Nuestra Diferencia",
+      "subtitle": "Por qué las familias nos han confiado durante más de 16 años",
+      "authenticMontessori": {
+        "title": "Montessori Auténtico",
+        "description": "Aprendizaje centrado en el niño que fomenta la independencia y la curiosidad natural."
+      },
+      "lovingCommunity": {
+        "title": "Una Comunidad Cariñosa",
+        "description": "Más que una guardería, somos una familia donde todos pertenecen."
+      },
+      "safetyFirst": {
+        "title": "Seguridad Primero",
+        "description": "Instalación con licencia que cumple con todas las regulaciones de salud y seguridad."
+      },
+      "dedicatedEducators": {
+        "title": "Educadores Dedicados",
+        "description": "Maestros experimentados y certificados que realmente se preocupan."
+      }
+    },
+    "programs": {
+      "title": "Nuestros Programas",
+      "subtitle": "Currículos apropiados para la edad diseñados para despertar un amor de por vida por el aprendizaje.",
+      "toddler": {
+        "title": "Programa de Niños Pequeños",
+        "range": "30 meses - 3 años",
+        "description": "Introducción suave a la estructura y habilidades sociales."
+      },
+      "preschool": {
+        "title": "Programa Preescolar",
+        "range": "3 - 4 años",
+        "description": "Materiales Montessori prácticos y juego creativo."
+      },
+      "prek": {
+        "title": "Programa Pre-Kindergarten",
+        "range": "4 - 5 años",
+        "description": "Conceptos avanzados y preparación escolar."
+      },
+      "learnDetails": "Conocer detalles"
+    },
+    "realEnvironment": {
+      "title": "Nuestro Entorno de Aprendizaje Real",
+      "subtitle": "Echa un vistazo dentro de nuestro auténtico aula Montessori y ve el entorno cuidadosamente preparado donde los niños aprenden, crecen y descubren su potencial todos los días.",
+      "categories": {
+        "all": "Todas las Áreas",
+        "montessori": "Materiales Montessori",
+        "outdoor": "Espacios Exteriores",
+        "activities": "Actividades"
+      },
+      "cta": {
+        "title": "Experimenta Nuestro Entorno en Persona",
+        "description": "Estas fotos muestran solo un vistazo de nuestro entorno Montessori cuidadosamente preparado. Programa una visita para ver cómo su hijo prosperará en nuestro espacio acogedor.",
+        "scheduleVisit": "Programar una Visita",
+        "viewGallery": "Ver Galería Completa"
+      }
+    },
+    "dailyAdventures": {
+      "title": "Aventuras Diarias",
+      "subtitle": "Un vistazo a nuestro aula"
+    },
+    "readyToVisit": {
+      "title": "¿Listo para Visitar?",
+      "subtitle": "Nos encantaría mostrarle nuestras hermosas instalaciones y conocer a su pequeño.",
+      "bookTour": "Reservar una Visita"
+    }
+  },
   "common": {
     "loading": "Cargando...",
     "error": "Ocurrió un error",

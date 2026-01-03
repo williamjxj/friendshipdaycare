@@ -75,6 +75,79 @@
     "copyright": "© 2024 Garderie Friendship Corner. Tous droits réservés.",
     "phone": "604.945.8504"
   },
+  "home": {
+    "hero": {
+      "title": "Où les Jeunes Esprits S'épanouissent",
+      "subtitle": "Un environnement Montessori sûr et bienveillant où chaque enfant découvre ses superpouvoirs uniques.",
+      "scheduleTour": "Planifier une Visite",
+      "viewPrograms": "Voir les Programmes"
+    },
+    "discoverDifference": {
+      "title": "Découvrez Notre Différence",
+      "subtitle": "Pourquoi les familles nous font confiance depuis plus de 16 ans",
+      "authenticMontessori": {
+        "title": "Montessori Authentique",
+        "description": "Apprentissage centré sur l'enfant qui favorise l'indépendance et la curiosité naturelle."
+      },
+      "lovingCommunity": {
+        "title": "Une Communauté Bienveillante",
+        "description": "Plus qu'une garderie, nous sommes une famille où chacun a sa place."
+      },
+      "safetyFirst": {
+        "title": "Sécurité d'Abord",
+        "description": "Installation agréée respectant toutes les réglementations de santé et de sécurité."
+      },
+      "dedicatedEducators": {
+        "title": "Éducateurs Dévoués",
+        "description": "Enseignants expérimentés et certifiés qui se soucient vraiment des enfants."
+      }
+    },
+    "programs": {
+      "title": "Nos Programmes",
+      "subtitle": "Curriculums adaptés à l'âge conçus pour susciter un amour de l'apprentissage à vie.",
+      "toddler": {
+        "title": "Programme Tout-Petits",
+        "range": "30 mois - 3 ans",
+        "description": "Introduction douce à la structure et aux compétences sociales."
+      },
+      "preschool": {
+        "title": "Programme Préscolaire",
+        "range": "3 - 4 ans",
+        "description": "Matériel Montessori pratique et jeu créatif."
+      },
+      "prek": {
+        "title": "Programme Pré-Maternelle",
+        "range": "4 - 5 ans",
+        "description": "Concepts avancés et préparation à l'école."
+      },
+      "learnDetails": "En savoir plus"
+    },
+    "realEnvironment": {
+      "title": "Notre Environnement d'Apprentissage Réel",
+      "subtitle": "Jetez un coup d'œil dans notre classe Montessori authentique et découvrez l'environnement soigneusement préparé où les enfants apprennent, grandissent et découvrent leur potentiel chaque jour.",
+      "categories": {
+        "all": "Tous les Espaces",
+        "montessori": "Matériel Montessori",
+        "outdoor": "Espaces Extérieurs",
+        "activities": "Activités"
+      },
+      "cta": {
+        "title": "Découvrez Notre Environnement en Personne",
+        "description": "Ces photos ne montrent qu'un aperçu de notre environnement Montessori soigneusement préparé. Planifiez une visite pour voir comment votre enfant s'épanouira dans notre espace bienveillant.",
+        "scheduleVisit": "Planifier une Visite",
+        "viewGallery": "Voir la Galerie Complète"
+      }
+    },
+    "dailyAdventures": {
+      "title": "Aventures Quotidiennes",
+      "subtitle": "Un aperçu de notre classe"
+    },
+    "readyToVisit": {
+      "title": "Prêt à Visiter?",
+      "subtitle": "Nous serions ravis de vous faire visiter nos belles installations et de rencontrer votre petit.",
+      "bookTour": "Réserver une Visite"
+    }
+  },
   "common": {
     "loading": "Chargement...",
     "error": "Une erreur s'est produite",

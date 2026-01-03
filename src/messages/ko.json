@@ -75,6 +75,79 @@
     "copyright": "© 2024 프렌드십 코너 어린이집. 모든 권리 보유.",
     "phone": "604.945.8504"
   },
+  "home": {
+    "hero": {
+      "title": "젊은 마음이 꽃피는 곳",
+      "subtitle": "모든 아이가 자신만의 독특한 능력을 발견할 수 있는 안전하고 따뜻한 몬테소리 환경입니다.",
+      "scheduleTour": "견학 예약",
+      "viewPrograms": "프로그램 보기"
+    },
+    "discoverDifference": {
+      "title": "우리의 차이점 발견하기",
+      "subtitle": "가족들이 16년 이상 저희를 신뢰해 온 이유",
+      "authenticMontessori": {
+        "title": "진정한 몬테소리",
+        "description": "독립성과 자연스러운 호기심을 키우는 아동 중심 학습입니다."
+      },
+      "lovingCommunity": {
+        "title": "사랑이 넘치는 커뮤니티",
+        "description": "단순한 어린이집이 아닌, 모든 사람이 소속감을 느낄 수 있는 가족 같은 곳입니다."
+      },
+      "safetyFirst": {
+        "title": "안전 우선",
+        "description": "모든 건강 및 안전 규정을 준수하는 허가받은 시설입니다."
+      },
+      "dedicatedEducators": {
+        "title": "헌신적인 교사들",
+        "description": "경험이 풍부하고 자격을 갖춘, 진심으로 아이들을 돌보는 교사들입니다."
+      }
+    },
+    "programs": {
+      "title": "우리의 프로그램",
+      "subtitle": "평생 학습에 대한 사랑을 불러일으키도록 설계된 연령에 맞는 교육과정입니다.",
+      "toddler": {
+        "title": "유아 프로그램",
+        "range": "30개월 - 3세",
+        "description": "구조와 사회적 기술에 대한 부드러운 소개입니다."
+      },
+      "preschool": {
+        "title": "유치원 프로그램",
+        "range": "3 - 4세",
+        "description": "실습 몬테소리 교구와 창의적 놀이입니다."
+      },
+      "prek": {
+        "title": "예비 초등학교 프로그램",
+        "range": "4 - 5세",
+        "description": "고급 개념과 학교 준비입니다."
+      },
+      "learnDetails": "자세히 알아보기"
+    },
+    "realEnvironment": {
+      "title": "우리의 실제 학습 환경",
+      "subtitle": "우리의 진정한 몬테소리 교실을 살펴보고, 아이들이 매일 학습하고 성장하며 자신의 잠재력을 발견하는 신중하게 준비된 환경을 확인하세요.",
+      "categories": {
+        "all": "모든 영역",
+        "montessori": "몬테소리 교구",
+        "outdoor": "야외 공간",
+        "activities": "활동"
+      },
+      "cta": {
+        "title": "직접 우리의 환경을 경험하세요",
+        "description": "이 사진들은 우리가 신중하게 준비한 몬테소리 환경의 일부만 보여줍니다. 견학을 예약하여 귀하의 아이가 우리의 따뜻한 공간에서 어떻게 번성할지 확인하세요.",
+        "scheduleVisit": "견학 예약",
+        "viewGallery": "전체 갤러리 보기"
+      }
+    },
+    "dailyAdventures": {
+      "title": "일일 모험",
+      "subtitle": "우리 교실 엿보기"
+    },
+    "readyToVisit": {
+      "title": "방문할 준비가 되셨나요?",
+      "subtitle": "저희는 아름다운 시설을 보여드리고 귀여운 아이를 만나뵙기를 기대합니다.",
+      "bookTour": "견학 예약"
+    }
+  },
   "common": {
     "loading": "로딩 중...",
     "error": "오류가 발생했습니다",

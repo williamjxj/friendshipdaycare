@@ -14,6 +14,7 @@ import Image from 'next/image';
 import { getImageUrl } from '@/lib/image-utils';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { AnimatedPlaceholder } from '@/components/ui/AnimatedPlaceholder';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -24,6 +25,7 @@ const VideoPlayer = dynamic(() => import('@/components/ui/VideoPlayer').then(mod
 export default function HomePage() {
   const mainRef = useRef<HTMLElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const { t } = useLanguage();
 
   // Animations
   useGSAP(() => {
@@ -151,10 +153,10 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
               <a href="/contact" className="bg-primary text-white text-lg px-8 py-4 rounded-xl font-bold hover:bg-primary/90 transition-all hover:scale-105 shadow-xl hover:shadow-2xl ring-4 ring-primary/20">
-                Schedule a Tour
+                {t('home.hero.scheduleTour')}
               </a>
               <a href="/programs" className="px-8 py-4 rounded-xl bg-white/10 backdrop-blur-md border-2 border-white/50 text-white font-bold text-lg hover:bg-white/20 transition-all hover:scale-105 shadow-xl">
-                View Programs
+                {t('home.hero.viewPrograms')}
               </a>
             </div>
           </div>
@@ -171,72 +173,68 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 section-header">
             <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-4">
-              Discover Our Difference
+              {t('home.discoverDifference.title')}
             </h2>
-            <p className="text-xl text-muted-foreground">Why families have trusted us for over 16 years</p>
+            <p className="text-xl text-muted-foreground">{t('home.discoverDifference.subtitle')}</p>
           </div>
 
-          <BentoGrid className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Item 1: Montessori Method */}
-            <BentoGridItem
-              title="Authentic Montessori"
-              description="Child-centered learning that fosters independence and natural curiosity."
-              header={<div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-green-100 to-emerald-50" />}
-              icon={<span className="text-4xl">🌱</span>}
-              className="md:col-span-1"
-            />
+            <div className="flex flex-col space-y-3">
+              <div className="text-4xl">🌱</div>
+              <h3 className="text-xl font-semibold text-foreground">{t('home.discoverDifference.authenticMontessori.title')}</h3>
+              <p className="text-sm text-muted-foreground">
+                {t('home.discoverDifference.authenticMontessori.description')}
+              </p>
+            </div>
 
-            {/* Item 2: Community (Large) */}
-            <BentoGridItem
-              title="A Loving Community"
-              description="More than just a daycare, we are a family where everyone belongs."
-              header={
-                <div className="relative flex flex-1 w-full h-full min-h-[6rem] rounded-xl overflow-hidden group">
-                  <AnimatedPlaceholder className="absolute inset-0 z-0" />
-                  <Image
-                    src={getImageUrl("/images/circle-time-board-2.jpg")}
-                    alt="Circle Time"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-500 z-10 opacity-0" // Hidden initially as per user request to use placeholder "for now"
-                  />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-20" />
-                </div>
-              }
-              icon={<span className="text-4xl">❤️</span>}
-              className="md:col-span-2"
-            />
+            {/* Item 2: Community */}
+            <div className="flex flex-col space-y-3">
+              <div className="relative w-full h-48 rounded-lg overflow-hidden group">
+                <AnimatedPlaceholder className="absolute inset-0 z-0" />
+                <Image
+                  src={getImageUrl("/images/circle-time-board-2.jpg")}
+                  alt="Circle Time"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700 z-10"
+                />
+              </div>
+              <div className="text-4xl">❤️</div>
+              <h3 className="text-xl font-semibold text-foreground">{t('home.discoverDifference.lovingCommunity.title')}</h3>
+              <p className="text-sm text-muted-foreground">
+                {t('home.discoverDifference.lovingCommunity.description')}
+              </p>
+            </div>
 
-            {/* Item 3: Safety (Large) */}
-            <BentoGridItem
-              title="Safety First"
-              description="Licensed facility complying with all health and safety regulations."
-              header={
-                <div className="relative flex flex-1 w-full h-full min-h-[6rem] rounded-xl overflow-hidden group">
-                  <AnimatedPlaceholder className="absolute inset-0 z-0" />
-                  <Image
-                    src={getImageUrl("/images/playground.jpg")}
-                    alt="Playground"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-500 z-10 opacity-0" // Hidden initially as per user request
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 z-20" />
-                </div>
-              }
-              icon={<span className="text-4xl">🛡️</span>}
-              className="md:col-span-2"
-            />
+            {/* Item 3: Safety */}
+            <div className="flex flex-col space-y-3">
+              <div className="relative w-full h-48 rounded-lg overflow-hidden group">
+                <AnimatedPlaceholder className="absolute inset-0 z-0" />
+                <Image
+                  src={getImageUrl("/images/playground.jpg")}
+                  alt="Playground"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700 z-10"
+                />
+              </div>
+              <div className="text-4xl">🛡️</div>
+              <h3 className="text-xl font-semibold text-foreground">{t('home.discoverDifference.safetyFirst.title')}</h3>
+              <p className="text-sm text-muted-foreground">
+                {t('home.discoverDifference.safetyFirst.description')}
+              </p>
+            </div>
 
             {/* Item 4: Teachers */}
-            <BentoGridItem
-              title="Dedicated Educators"
-              description="Experienced, certified teachers who truly care."
-              header={<div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-orange-100 to-amber-50" />}
-              icon={<span className="text-4xl">👩‍🏫</span>}
-              className="md:col-span-1"
-            />
-          </BentoGrid>
+            <div className="flex flex-col space-y-3">
+              <div className="text-4xl">👩‍🏫</div>
+              <h3 className="text-xl font-semibold text-foreground">{t('home.discoverDifference.dedicatedEducators.title')}</h3>
+              <p className="text-sm text-muted-foreground">
+                {t('home.discoverDifference.dedicatedEducators.description')}
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -245,39 +243,39 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-20 section-header">
             <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground">
-              Our Programs
+              {t('home.programs.title')}
             </h2>
             <p className="text-xl text-muted-foreground w-full max-w-4xl mx-auto">
-              Age-appropriate curriculums designed to spark a lifelong love for learning.
+              {t('home.programs.subtitle')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Program Cards with Standardized Card Component */}
             {[
-              { id: 'toddler', title: 'Toddler', range: '30mo - 3yrs', color: 'primary', icon: '🧸', desc: 'Gentle introduction to structure & social skills.' },
-              { id: 'preschool', title: 'Preschool', range: '3 - 4yrs', color: 'secondary', icon: '🎨', desc: 'Hands-on Montessori materials & creative play.' },
-              { id: 'prek', title: 'Pre-Kindergarten', range: '4 - 5yrs', color: 'accent', icon: '🚀', desc: 'Advanced concepts & school readiness.' },
+              { id: 'toddler', key: 'toddler', color: 'primary', icon: '🧸' },
+              { id: 'preschool', key: 'preschool', color: 'secondary', icon: '🎨' },
+              { id: 'prek', key: 'prek', color: 'accent', icon: '🚀' },
             ].map((prog, idx) => (
               <Card key={prog.id} variant="interactive" className="p-8 border-none bg-muted/20 hover:bg-muted/40 section-header">
                 <CardHeader className="p-0 mb-6">
-                  <div className={cn("w-16 h-16 rounded-2xl flex items-center justify-center text-4xl group-hover:scale-110 transition-transform",
+                  <div className={cn("w-16 h-16 rounded-2xl flex items-center justify-center text-4xl group-hover:scale-[1.2] transition-transform duration-500",
                     prog.color === 'primary' ? 'bg-primary/10' :
                       prog.color === 'secondary' ? 'bg-secondary/10' : 'bg-accent/10')}>
                     {prog.icon}
                   </div>
                 </CardHeader>
                 <CardContent className="p-0">
-                  <CardTitle className="text-2xl font-bold mb-2">{prog.title} Program</CardTitle>
-                  <CardDescription className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-4">{prog.range}</CardDescription>
+                  <CardTitle className="text-2xl font-bold mb-2">{t(`home.programs.${prog.key}.title`)}</CardTitle>
+                  <CardDescription className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-4">{t(`home.programs.${prog.key}.range`)}</CardDescription>
                   <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    {prog.desc}
+                    {t(`home.programs.${prog.key}.description`)}
                   </p>
                 </CardContent>
                 <a href="/programs" className={cn("inline-flex items-center font-bold hover:translate-x-1 transition-transform",
                   prog.color === 'primary' ? 'text-primary' :
                     prog.color === 'secondary' ? 'text-secondary' : 'text-accent')}>
-                  Learn details <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                  {t('home.programs.learnDetails')} <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                 </a>
               </Card>
             ))}
@@ -295,10 +293,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16 section-header">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
-              Daily Adventures
+              {t('home.dailyAdventures.title')}
             </h2>
             <p className="text-xl text-muted-foreground">
-              A peek into our classroom
+              {t('home.dailyAdventures.subtitle')}
             </p>
           </div>
 
@@ -313,14 +311,14 @@ export default function HomePage() {
 
         <div className="max-w-4xl mx-auto px-4 relative z-10 text-center space-y-8 section-header">
           <h2 className="text-4xl md:text-6xl font-display font-bold text-white">
-            Ready to Visit?
+            {t('home.readyToVisit.title')}
           </h2>
           <p className="text-xl md:text-2xl text-white/90">
-            We would love to show you around our beautiful facility and meet your little one.
+            {t('home.readyToVisit.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
             <a href="/contact" className="bg-white text-primary px-10 py-5 rounded-xl font-bold text-xl hover:bg-gray-100 transition-colors shadow-xl">
-              Book a Tour
+              {t('home.readyToVisit.bookTour')}
             </a>
             <a href="tel:6049458504" className="border-2 border-white text-white px-10 py-5 rounded-xl font-bold text-xl hover:bg-white/10 transition-colors">
               604.945.8504

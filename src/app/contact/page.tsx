@@ -136,7 +136,7 @@ export default function ContactPage() {
 
                 <div className="space-y-6">
                   <Card variant="data" className="flex items-start space-x-4 p-6 transition-colors hover:bg-muted/30">
-                    <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-500 group-hover:scale-[1.2]">
                       <PhoneIcon className="h-6 w-6 text-primary" />
                     </div>
                     <div>
@@ -147,7 +147,7 @@ export default function ContactPage() {
                   </Card>
 
                   <Card variant="data" className="flex items-start space-x-4 p-6 transition-colors hover:bg-muted/30">
-                    <div className="w-12 h-12 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-500 group-hover:scale-[1.2]">
                       <MapPinIcon className="h-6 w-6 text-secondary" />
                     </div>
                     <div>
@@ -159,7 +159,7 @@ export default function ContactPage() {
                   </Card>
 
                   <Card variant="data" className="flex items-start space-x-4 p-6 transition-colors hover:bg-muted/30">
-                    <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-500 group-hover:scale-[1.2]">
                       <ClockIcon className="h-6 w-6 text-accent" />
                     </div>
                     <div>
@@ -171,7 +171,7 @@ export default function ContactPage() {
                   </Card>
 
                   <Card variant="data" className="flex items-start space-x-4 p-6 transition-colors hover:bg-muted/30">
-                    <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-500 group-hover:scale-[1.2]">
                       <EnvelopeIcon className="h-6 w-6 text-primary" />
                     </div>
                     <div>

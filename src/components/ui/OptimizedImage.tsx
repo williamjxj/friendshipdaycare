@@ -16,6 +16,7 @@ interface OptimizedImageProps {
   quality?: number;
   placeholder?: 'blur' | 'empty';
   blurDataURL?: string;
+  unoptimized?: boolean;
 }
 
 export function OptimizedImage({
@@ -29,10 +30,14 @@ export function OptimizedImage({
   sizes,
   quality = 85,
   placeholder = 'empty',
-  blurDataURL
+  blurDataURL,
+  unoptimized
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+
+  const isGif = src.toLowerCase().endsWith('.gif');
+  const shouldBeUnoptimized = unoptimized ?? isGif;
 
   const handleLoad = () => {
     setIsLoading(false);
@@ -65,7 +70,7 @@ export function OptimizedImage({
           </div>
         </div>
       )}
-      
+
       <Image
         src={getImageUrl(src)}
         alt={alt}
@@ -75,11 +80,11 @@ export function OptimizedImage({
         sizes={sizes}
         quality={quality}
         priority={priority}
+        unoptimized={shouldBeUnoptimized}
         placeholder={placeholder}
         blurDataURL={blurDataURL}
-        className={`transition-opacity duration-300 ${
-          isLoading ? 'opacity-0' : 'opacity-100'
-        } ${fill ? 'object-cover' : ''}`}
+        className={`transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'
+          } ${fill ? 'object-cover' : ''}`}
         onLoad={handleLoad}
         onError={handleError}
       />

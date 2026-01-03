@@ -75,17 +75,17 @@ export default function TodaysStoryPage() {
               {/* Lesson Cards using 'data' variant */}
               <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card variant="data" className="p-6 text-center space-y-3 bg-primary/5 hover:bg-primary/10 border-primary/20 transition-colors">
-                  <Heart className="w-10 h-10 mx-auto text-primary" />
+                  <Heart className="w-10 h-10 mx-auto text-primary transition-transform duration-500 group-hover:scale-[1.2]" />
                   <CardTitle className="font-bold text-lg text-foreground">Be Kind</CardTitle>
                   <CardDescription className="text-sm text-muted-foreground p-0">Help others with a big smile</CardDescription>
                 </Card>
                 <Card variant="data" className="p-6 text-center space-y-3 bg-secondary/5 hover:bg-secondary/10 border-secondary/20 transition-colors">
-                  <Sparkles className="w-10 h-10 mx-auto text-secondary" />
+                  <Sparkles className="w-10 h-10 mx-auto text-secondary transition-transform duration-500 group-hover:scale-[1.2]" />
                   <CardTitle className="font-bold text-lg text-foreground">Be Helpful</CardTitle>
                   <CardDescription className="text-sm text-muted-foreground p-0">Lend a helping hand to friends</CardDescription>
                 </Card>
                 <Card variant="data" className="p-6 text-center space-y-3 bg-accent/5 hover:bg-accent/10 border-accent/20 transition-colors">
-                  <Star className="w-10 h-10 mx-auto text-accent-foreground" />
+                  <Star className="w-10 h-10 mx-auto text-accent-foreground transition-transform duration-500 group-hover:scale-[1.2]" />
                   <CardTitle className="font-bold text-lg text-foreground">Show Love</CardTitle>
                   <CardDescription className="text-sm text-muted-foreground p-0">Care for everyone around us</CardDescription>
                 </Card>
@@ -110,12 +110,12 @@ export default function TodaysStoryPage() {
                 { week: 4, title: "The Lost Sheep", theme: "Love", color: "primary" },
               ].map((item) => (
                 <Card key={item.week} className="text-center group p-6">
-                  <div className={cn("w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-4 transition-transform group-hover:scale-110",
+                  <div className={cn("w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-4 transition-transform duration-500 group-hover:scale-[1.2]",
                     item.color === 'primary' ? 'bg-primary' :
                       item.color === 'secondary' ? 'bg-secondary' : 'bg-accent')}>
                     {item.week}
                   </div>
-                  <CardTitle className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors text-lg">
+                  <CardTitle className="font-bold text-foreground mb-1 text-lg">
                     {item.title}
                   </CardTitle>
                   <CardDescription className="text-sm text-muted-foreground p-0">

@@ -1,6 +1,7 @@
 'use client';
 
 import { Star } from 'lucide-react';
+import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 
 export interface Testimonial {
   id: number;
@@ -21,44 +22,43 @@ interface TestimonialCardProps {
 
 export function TestimonialCard({ testimonial, featured = false }: TestimonialCardProps) {
   return (
-    <div className={`bg-card rounded-xl p-6 shadow-lg ${featured ? 'border-2 border-primary' : ''}`}>
+    <Card className={`p-6 shadow-lg h-full flex flex-col ${featured ? 'border-2 border-primary' : ''}`}>
       {/* Rating Stars */}
       <div className="flex gap-1 mb-4">
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
-            className={`w-5 h-5 ${
-              i < testimonial.rating
+            className={`w-5 h-5 ${i < testimonial.rating
                 ? 'fill-amber-400 text-amber-400'
                 : 'text-gray-300'
-            }`}
+              }`}
           />
         ))}
       </div>
 
       {/* Quote */}
-      <blockquote className="text-muted-foreground mb-6 leading-relaxed italic">
+      <blockquote className="text-muted-foreground mb-6 leading-relaxed italic flex-1">
         "{testimonial.quote}"
       </blockquote>
 
       {/* Parent Info */}
-      <div className="border-t border-border pt-4">
+      <div className="border-t border-border pt-4 mt-auto">
         <div className="flex items-center justify-between">
           <div>
-            <p className="font-semibold text-foreground">{testimonial.parentName}</p>
-            <p className="text-sm text-muted-foreground">
+            <CardTitle className="text-base font-bold text-foreground">{testimonial.parentName}</CardTitle>
+            <CardDescription className="text-sm text-muted-foreground">
               Parent of {testimonial.childName} ({testimonial.childAge})
-            </p>
+            </CardDescription>
             {testimonial.program && (
-              <p className="text-xs text-primary mt-1">{testimonial.program}</p>
+              <p className="text-xs text-primary mt-1 font-semibold">{testimonial.program}</p>
             )}
           </div>
           <div className="text-right">
-            <p className="text-sm text-muted-foreground">{testimonial.enrollmentDuration}</p>
+            <p className="text-sm text-muted-foreground">{testimonial.date}</p>
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }
 
@@ -94,11 +94,10 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                className={`w-6 h-6 ${
-                  i < testimonial.rating
+                className={`w-6 h-6 ${i < testimonial.rating
                     ? 'fill-amber-400 text-amber-400'
                     : 'text-gray-300'
-                }`}
+                  }`}
               />
             ))}
           </div>

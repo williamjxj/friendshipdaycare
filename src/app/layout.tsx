@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Nunito, Fredoka, Open_Sans } from "next/font/google";
+import { Nunito, Fredoka, Open_Sans, Rubik } from "next/font/google";
 import { Suspense } from "react";
 import { PageLoader } from "@/components/ui/LoadingSpinner";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import { NextIntlProvider } from "@/components/providers/NextIntlProvider";
+import { NextIntlProviderSync } from "@/components/providers/NextIntlProviderSync";
+import { LanguageAwareHtml } from "@/components/providers/LanguageAwareHtml";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SkipNavigation } from "@/components/ui/SkipNavigation";
@@ -28,6 +29,12 @@ const openSans = Open_Sans({
   variable: "--font-open-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const rubik = Rubik({
+  variable: "--font-rubik",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -92,21 +99,23 @@ export default function RootLayout({
           address={defaultOrganizationData.address}
         />
       </head>
-      <body className={`${openSans.variable} ${nunito.variable} ${fredoka.variable} antialiased font-sans`} suppressHydrationWarning>
-        <NextIntlProvider>
-          <LanguageProvider>
-            <ThemeProvider>
-              <div className="min-h-screen flex flex-col">
-                <SkipNavigation />
-                <Header />
-                <Suspense fallback={<PageLoader message="Loading magical content..." />}>
-                  {children}
-                </Suspense>
-                <Footer />
-              </div>
-            </ThemeProvider>
-          </LanguageProvider>
-        </NextIntlProvider>
+      <body className={`${openSans.variable} ${nunito.variable} ${fredoka.variable} ${rubik.variable} antialiased font-sans`} suppressHydrationWarning>
+        <LanguageProvider>
+          <LanguageAwareHtml>
+            <NextIntlProviderSync>
+              <ThemeProvider>
+                <div className="min-h-screen flex flex-col">
+                  <SkipNavigation />
+                  <Header />
+                  <Suspense fallback={<PageLoader message="Loading magical content..." />}>
+                    {children}
+                  </Suspense>
+                  <Footer />
+                </div>
+              </ThemeProvider>
+            </NextIntlProviderSync>
+          </LanguageAwareHtml>
+        </LanguageProvider>
       </body>
     </html>
   );

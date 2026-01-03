@@ -13,6 +13,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { cn } from '@/lib/utils';
 
 export default function AboutPage() {
+
   return (
     <Suspense fallback={<LoadingSpinner message="Loading about us..." />}>
       <main className="flex-1">
@@ -61,16 +62,18 @@ export default function AboutPage() {
                 </div>
               </motion.div>
               <motion.div
-                className="bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl p-8 h-96 flex items-center justify-center"
+                className="relative rounded-2xl overflow-hidden aspect-video bg-muted"
                 variants={slideUp}
               >
-                <div className="text-center space-y-4">
-                  <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto shadow-lg">
-                    <span className="text-primary-foreground font-bold text-3xl">2008</span>
-                  </div>
-                  <p className="text-foreground font-semibold text-lg">Established</p>
-                  <p className="text-muted-foreground">16+ Years of Excellence</p>
-                </div>
+                <video
+                  src="/imgs/about/17.mp4"
+                  controls
+                  className="w-full h-full object-cover rounded-2xl"
+                  preload="metadata"
+                  playsInline
+                >
+                  Your browser does not support the video tag.
+                </video>
               </motion.div>
             </motion.div>
           </div>
@@ -111,7 +114,7 @@ export default function AboutPage() {
                   <Card variant="interactive" className="h-full text-center space-y-4 relative overflow-hidden p-6">
                     {/* MagicUI Grid Pattern Background */}
                     <div className="absolute inset-0 magic-grid opacity-20 z-0" />
-                    <div className={cn("w-16 h-16 rounded-full flex items-center justify-center mx-auto relative z-10 transition-transform group-hover:scale-110",
+                    <div className={cn("w-16 h-16 rounded-full flex items-center justify-center mx-auto relative z-10 transition-transform duration-500 group-hover:scale-[1.2]",
                       item.color === 'primary' ? 'bg-primary/20' :
                         item.color === 'secondary' ? 'bg-secondary/20' : 'bg-accent/20')}>
                       <span className={cn("font-bold text-2xl",

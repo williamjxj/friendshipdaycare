@@ -78,6 +78,79 @@
     "copyright": "© 2024 Friendship Corner Daycare. All rights reserved.",
     "phone": "604.945.8504"
   },
+  "home": {
+    "hero": {
+      "title": "Where Young Minds Flourish",
+      "subtitle": "A safe, nurturing Montessori environment where every child discovers their unique superpowers.",
+      "scheduleTour": "Schedule a Tour",
+      "viewPrograms": "View Programs"
+    },
+    "discoverDifference": {
+      "title": "Discover Our Difference",
+      "subtitle": "Why families have trusted us for over 16 years",
+      "authenticMontessori": {
+        "title": "Authentic Montessori",
+        "description": "Child-centered learning that fosters independence and natural curiosity."
+      },
+      "lovingCommunity": {
+        "title": "A Loving Community",
+        "description": "More than just a daycare, we are a family where everyone belongs."
+      },
+      "safetyFirst": {
+        "title": "Safety First",
+        "description": "Licensed facility complying with all health and safety regulations."
+      },
+      "dedicatedEducators": {
+        "title": "Dedicated Educators",
+        "description": "Experienced, certified teachers who truly care."
+      }
+    },
+    "programs": {
+      "title": "Our Programs",
+      "subtitle": "Age-appropriate curriculums designed to spark a lifelong love for learning.",
+      "toddler": {
+        "title": "Toddler Program",
+        "range": "30mo - 3yrs",
+        "description": "Gentle introduction to structure & social skills."
+      },
+      "preschool": {
+        "title": "Preschool Program",
+        "range": "3 - 4yrs",
+        "description": "Hands-on Montessori materials & creative play."
+      },
+      "prek": {
+        "title": "Pre-Kindergarten Program",
+        "range": "4 - 5yrs",
+        "description": "Advanced concepts & school readiness."
+      },
+      "learnDetails": "Learn details"
+    },
+    "realEnvironment": {
+      "title": "Our Real Learning Environment",
+      "subtitle": "Take a look inside our authentic Montessori classroom and see the carefully prepared environment where children learn, grow, and discover their potential every day.",
+      "categories": {
+        "all": "All Areas",
+        "montessori": "Montessori Materials",
+        "outdoor": "Outdoor Spaces",
+        "activities": "Activities"
+      },
+      "cta": {
+        "title": "Experience Our Environment in Person",
+        "description": "These photos show just a glimpse of our carefully prepared Montessori environment. Schedule a visit to see how your child will thrive in our nurturing space.",
+        "scheduleVisit": "Schedule a Visit",
+        "viewGallery": "View Full Gallery"
+      }
+    },
+    "dailyAdventures": {
+      "title": "Daily Adventures",
+      "subtitle": "A peek into our classroom"
+    },
+    "readyToVisit": {
+      "title": "Ready to Visit?",
+      "subtitle": "We would love to show you around our beautiful facility and meet your little one.",
+      "bookTour": "Book a Tour"
+    }
+  },
   "common": {
     "loading": "Loading...",
     "error": "An error occurred",

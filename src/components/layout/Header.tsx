@@ -204,7 +204,7 @@ export function Header() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-2 group">
-              <div className="relative w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 group-hover:scale-110">
+              <div className="relative w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110">
                 <Image
                   src={"/logo.svg"}
                   alt="Friendship Corner Daycare"
@@ -213,11 +213,11 @@ export function Header() {
                   priority
                 />
               </div>
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-display font-bold text-base md:text-lg text-primary leading-none group-hover:text-secondary transition-colors duration-300 whitespace-nowrap">
+              <div className="flex flex-col justify-center -space-y-1">
+                <span className="font-display font-bold text-lg md:text-xl text-primary leading-tight group-hover:text-secondary transition-colors duration-300 whitespace-nowrap">
                   Friendship Corner
                 </span>
-                <span className="hidden sm:inline text-[0.6rem] md:text-[0.65rem] text-muted-foreground uppercase tracking-wider font-medium whitespace-nowrap pt-0.5">
+                <span className="text-[0.6rem] md:text-[0.65rem] text-muted-foreground uppercase tracking-[0.18em] font-semibold whitespace-nowrap leading-tight">
                   Montessori Daycare
                 </span>
               </div>
@@ -270,10 +270,11 @@ export function Header() {
             <ThemeToggle />
             <Link
               href="/contact"
-              className="warm-button text-xs px-4 py-1.5 flex items-center gap-1.5 group/cta shadow-md hover:shadow-primary/10 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap"
+              className="relative overflow-hidden warm-button text-[0.6rem] px-2 py-2 flex items-center gap-1.5 group/cta shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap !h-[26px] !min-h-0 !rounded-md"
             >
-              <Calendar className="w-3.5 h-3.5 transition-transform group-hover/cta:rotate-12" />
-              <span>Book a Tour</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500 bg-[length:200%_auto] group-hover/cta:animate-[gradient_3s_linear_infinite]" />
+              <Calendar className="relative z-10 w-6 h-6 shrink-0 transition-transform group-hover/cta:rotate-12" />
+              <span className="relative z-10 font-bold">Book a Tour</span>
             </Link>
           </div>
 

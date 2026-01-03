@@ -9,11 +9,11 @@ import { getImageUrl, getPlaceholderUrl } from '@/lib/image-utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { Calendar } from 'lucide-react';
 import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { textReveal, textRevealItem, borderBeam, scaleInMagic } from '@/lib/magicui-animations';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { AnimatedPlaceholder } from '@/components/ui/AnimatedPlaceholder';
 
 export default function ProgramsPage() {
   const programs = [
@@ -24,6 +24,7 @@ export default function ProgramsPage() {
       color: 'primary',
       icon: 'T',
       image: getImageUrl('/images/practical-life-shelf-1.jpg'),
+      video: '/imgs/programs/toddler.mp4',
       description: 'Our toddler program provides a gentle introduction to structured learning with a focus on independence and social skills development.',
       features: [
         'Social Skills Development',
@@ -52,6 +53,7 @@ export default function ProgramsPage() {
       color: 'secondary',
       icon: 'P',
       image: getImageUrl('/images/sensorial-shelf.jpg'),
+      video: '/imgs/programs/preschool.mp4',
       description: 'Our preschool program uses Montessori-based curriculum emphasizing hands-on learning and creative expression.',
       features: [
         'Creative Expression',
@@ -80,6 +82,7 @@ export default function ProgramsPage() {
       color: 'accent',
       icon: 'K',
       image: getImageUrl('/images/language-shelf.jpg'),
+      video: '/imgs/programs/pre-kindergarten.mp4',
       description: 'Our pre-kindergarten program focuses on school readiness preparation with advanced Montessori materials and concepts.',
       features: [
         'School Readiness',
@@ -151,19 +154,20 @@ export default function ProgramsPage() {
                 >
                   <Card variant="feature" className="p-0 overflow-hidden h-full flex flex-col">
                     <div className="relative h-48 overflow-hidden rounded-t-[calc(var(--radius-lg)-4px)]">
-                      <AnimatedPlaceholder className="absolute inset-0 z-0" />
-                      <Image
-                        src={program.image}
-                        alt={program.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-110 z-10 opacity-0"
-                      />
+                      <video
+                        src={program.video}
+                        controls
+                        className="w-full h-full object-cover"
+                        preload="metadata"
+                        playsInline
+                      >
+                        Your browser does not support the video tag.
+                      </video>
                     </div>
                     <CardContent className="p-6 space-y-4 flex-1">
                       <CardHeader className="p-0">
                         <div className="flex items-center space-x-3">
-                          <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110",
+                          <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center transition-transform duration-500 group-hover:scale-[1.2]",
                             program.color === 'primary' ? 'bg-primary/20' :
                               program.color === 'secondary' ? 'bg-secondary/20' : 'bg-accent/20')}>
                             <span className={cn("font-bold text-xl",
@@ -252,12 +256,15 @@ export default function ProgramsPage() {
                 </div>
 
                 <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                  <Card variant="data" className="p-8">
-                    <h3 className="text-xl font-bold text-foreground mb-6">Daily Schedule</h3>
+                  <Card variant="data" className="p-8 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-primary/30 group">
+                    <h3 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+                      <Calendar className="w-6 h-6 text-primary transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110" />
+                      Daily Schedule
+                    </h3>
                     <div className="space-y-3">
                       {program.dailySchedule.map((item, scheduleIndex) => (
                         <div key={scheduleIndex} className="flex items-center space-x-4">
-                          <div className={cn("w-20 text-sm font-bold flex-shrink-0",
+                          <div className={cn("w-32 whitespace-nowrap text-sm font-bold flex-shrink-0",
                             program.color === 'primary' ? 'text-primary' :
                               program.color === 'secondary' ? 'text-secondary' : 'text-accent')}>
                             {item.time}

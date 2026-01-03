@@ -27,7 +27,7 @@ export function HeroCurveDivider({
   return (
     <div
       className={cn(
-        'absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20 pointer-events-none',
+        'absolute bottom-[-1px] left-0 w-full overflow-hidden leading-[0] z-30 pointer-events-none scale-y-[1.02] origin-bottom will-change-transform',
         heightClasses[height],
         className
       )}

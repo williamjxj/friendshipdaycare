@@ -152,7 +152,7 @@ export function PageHero({
         {(backgroundSvg || backgroundImage) && (
           <HeroSideBackground variant="organic" />
         )}
-        
+
         {backgroundSvg ? (
           <div className="absolute inset-0 z-10">
             <Image
@@ -164,18 +164,18 @@ export function PageHero({
                 'object-contain',
                 // Position the image within the container
                 backgroundPosition === 'center' || !backgroundPosition
-                  ? 'object-center' 
+                  ? 'object-center'
                   : backgroundPosition === 'top'
-                  ? 'object-top'
-                  : backgroundPosition === 'bottom'
-                  ? 'object-bottom'
-                  : backgroundPosition === 'left'
-                  ? 'object-left'
-                  : backgroundPosition === 'right'
-                  ? 'object-right'
-                  : typeof backgroundPosition === 'string'
-                  ? `object-[${backgroundPosition}]`
-                  : 'object-center'
+                    ? 'object-top'
+                    : backgroundPosition === 'bottom'
+                      ? 'object-bottom'
+                      : backgroundPosition === 'left'
+                        ? 'object-left'
+                        : backgroundPosition === 'right'
+                          ? 'object-right'
+                          : typeof backgroundPosition === 'string'
+                            ? `object-[${backgroundPosition}]`
+                            : 'object-center'
               )}
               priority
               aria-hidden="true"
@@ -191,18 +191,18 @@ export function PageHero({
               className={cn(
                 'object-contain',
                 backgroundPosition === 'center' || !backgroundPosition
-                  ? 'object-center' 
+                  ? 'object-center'
                   : backgroundPosition === 'top'
-                  ? 'object-top'
-                  : backgroundPosition === 'bottom'
-                  ? 'object-bottom'
-                  : backgroundPosition === 'left'
-                  ? 'object-left'
-                  : backgroundPosition === 'right'
-                  ? 'object-right'
-                  : typeof backgroundPosition === 'string'
-                  ? `object-[${backgroundPosition}]`
-                  : 'object-center'
+                    ? 'object-top'
+                    : backgroundPosition === 'bottom'
+                      ? 'object-bottom'
+                      : backgroundPosition === 'left'
+                        ? 'object-left'
+                        : backgroundPosition === 'right'
+                          ? 'object-right'
+                          : typeof backgroundPosition === 'string'
+                            ? `object-[${backgroundPosition}]`
+                            : 'object-center'
               )}
               priority
               aria-hidden="true"
@@ -262,7 +262,7 @@ export function PageHero({
 
       {/* Curved bottom divider - only for non-fullScreen heroes */}
       {!fullScreen && (
-        <HeroCurveDivider color="fill-background" height="lg" />
+        <HeroCurveDivider color="fill-card" height="lg" />
       )}
     </section>
   );

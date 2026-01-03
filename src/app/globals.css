@@ -193,6 +193,7 @@
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
   --font-accent: var(--font-accent);
+  --font-rubik: var(--font-rubik);
 
   /* Spacing scale - Standardizing nice gaps */
   --spacing-xs: 0.25rem;
@@ -209,6 +210,7 @@ body {
   --font-sans: var(--font-open-sans), system-ui, sans-serif;
   --font-display: var(--font-nunito), system-ui, sans-serif;
   --font-accent: var(--font-fredoka), system-ui, sans-serif;
+  --font-rubik: var(--font-rubik), system-ui, sans-serif;
 
   font-family: var(--font-sans);
   line-height: 1.6;
@@ -660,6 +662,20 @@ textarea:focus-visible {
 
   100% {
     background-position: 200% 0;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
   }
 }
 

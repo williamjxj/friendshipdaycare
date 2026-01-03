@@ -167,7 +167,7 @@ export default function EnrollmentPage() {
                     <div className="md:flex">
                       {/* Step Number & Icon */}
                       <div className="md:w-48 bg-gradient-to-br from-primary to-secondary p-8 text-white flex flex-col items-center justify-center text-center shrink-0">
-                        <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                        <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 transition-transform duration-500 group-hover:scale-[1.2]">
                           <step.icon className="w-8 h-8" />
                         </div>
                         <div className="text-5xl font-bold mb-2">{step.number}</div>

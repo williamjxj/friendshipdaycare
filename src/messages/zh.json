@@ -75,6 +75,79 @@
     "copyright": "© 2024 友谊角托儿所。保留所有权利。",
     "phone": "604.945.8504"
   },
+  "home": {
+    "hero": {
+      "title": "让年轻的心灵茁壮成长",
+      "subtitle": "一个安全、温馨的蒙特梭利环境，让每个孩子都能发现自己的独特天赋。",
+      "scheduleTour": "预约参观",
+      "viewPrograms": "查看课程"
+    },
+    "discoverDifference": {
+      "title": "发现我们的不同",
+      "subtitle": "为什么家庭16年来一直信任我们",
+      "authenticMontessori": {
+        "title": "正宗蒙特梭利",
+        "description": "以儿童为中心的学习，培养独立性和自然好奇心。"
+      },
+      "lovingCommunity": {
+        "title": "充满爱的社区",
+        "description": "不仅仅是一个托儿所，我们是一个每个人都能归属的大家庭。"
+      },
+      "safetyFirst": {
+        "title": "安全第一",
+        "description": "持牌设施，遵守所有健康和安全规定。"
+      },
+      "dedicatedEducators": {
+        "title": "敬业的教师",
+        "description": "经验丰富、持证上岗、真正关心孩子的教师。"
+      }
+    },
+    "programs": {
+      "title": "我们的课程",
+      "subtitle": "适合年龄的课程，旨在激发终身学习的热爱。",
+      "toddler": {
+        "title": "幼儿课程",
+        "range": "30个月 - 3岁",
+        "description": "温和地引入结构和社交技能。"
+      },
+      "preschool": {
+        "title": "学前课程",
+        "range": "3 - 4岁",
+        "description": "动手操作的蒙特梭利教具和创意游戏。"
+      },
+      "prek": {
+        "title": "学前班课程",
+        "range": "4 - 5岁",
+        "description": "高级概念和入学准备。"
+      },
+      "learnDetails": "了解详情"
+    },
+    "realEnvironment": {
+      "title": "我们的真实学习环境",
+      "subtitle": "看看我们正宗的蒙特梭利教室，了解精心准备的环境，孩子们每天在这里学习、成长和发现自己的潜力。",
+      "categories": {
+        "all": "所有区域",
+        "montessori": "蒙特梭利教具",
+        "outdoor": "户外空间",
+        "activities": "活动"
+      },
+      "cta": {
+        "title": "亲身体验我们的环境",
+        "description": "这些照片只是我们精心准备的蒙特梭利环境的一瞥。预约参观，看看您的孩子将如何在我们的温馨空间中茁壮成长。",
+        "scheduleVisit": "预约参观",
+        "viewGallery": "查看完整图库"
+      }
+    },
+    "dailyAdventures": {
+      "title": "每日冒险",
+      "subtitle": "一窥我们的教室"
+    },
+    "readyToVisit": {
+      "title": "准备参观了吗？",
+      "subtitle": "我们很乐意带您参观我们美丽的设施，并认识您的小宝贝。",
+      "bookTour": "预约参观"
+    }
+  },
   "common": {
     "loading": "加载中...",
     "error": "发生错误",
