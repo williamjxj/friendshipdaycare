@@ -35,8 +35,8 @@ export function Footer() {
             <Link href="/" className="flex items-center space-x-3 group w-fit">
               <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110">
                 <Image
-                  src="/logo.svg"
-                    alt="Friendship Corner"
+                  src="/logo.png"
+                  alt="Friendship Corner"
                   fill
                   className="object-contain"
                 />
@@ -55,29 +55,29 @@ export function Footer() {
               safe, and inspiring environment where every child can grow, learn, and flourish.
             </p>
             <div className="flex items-center space-x-4">
-              <Link 
-                href="#" 
+              <Link
+                href="#"
                 className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
               </Link>
-              <Link 
-                href="#" 
+              <Link
+                href="#"
                 className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
               </Link>
-              <Link 
-                href="#" 
+              <Link
+                href="#"
                 className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Twitter"
               >
                 <Twitter className="w-5 h-5" />
               </Link>
-              <Link 
-                href="#" 
+              <Link
+                href="#"
                 className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="LinkedIn"
               >
@@ -127,7 +127,7 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-foreground mb-6 uppercase tracking-wider text-sm">Resources</h3>
             <ul className="space-y-3">
-            <li>
+              <li>
                 <Link href="/canva" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   Canva 1
@@ -208,10 +208,10 @@ export function Footer() {
             <p>&copy; {currentYear} Friendship Corner Daycare. All rights reserved.</p>
             <span className="hidden md:inline text-muted-foreground/40">|</span>
             <p className="flex items-center gap-1">
-              Website by <a 
-                href="https://www.bestitconsulting.ca" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              Website by <a
+                href="https://www.bestitconsulting.ca"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-primary transition-colors font-medium inline-flex items-center gap-1 min-h-[44px]"
               >
                 <Image
@@ -226,20 +226,20 @@ export function Footer() {
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-            <Link 
-              href="/privacy" 
+            <Link
+              href="/privacy"
               className="hover:text-primary transition-colors min-h-[44px] flex items-center"
             >
               Privacy Policy
             </Link>
-            <Link 
-              href="/terms" 
+            <Link
+              href="/terms"
               className="hover:text-primary transition-colors min-h-[44px] flex items-center"
             >
               Terms of Service
             </Link>
-            <Link 
-              href="/sitemap" 
+            <Link
+              href="/sitemap"
               className="hover:text-primary transition-colors min-h-[44px] flex items-center"
             >
               Sitemap

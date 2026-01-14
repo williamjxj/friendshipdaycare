@@ -91,7 +91,7 @@ export default function RootLayout({
         <OrganizationSchema
           name={defaultOrganizationData.name}
           url={defaultOrganizationData.url}
-          logo={'/logo.svg'}
+          logo={'/logo.png'}
           description="Licensed Montessori daycare providing quality early childhood education since 2008"
           foundingDate="2008-01-01"
           telephone={defaultOrganizationData.telephone}

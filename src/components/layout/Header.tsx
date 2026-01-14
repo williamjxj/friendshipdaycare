@@ -206,7 +206,7 @@ export function Header() {
             <Link href="/" className="flex items-center space-x-2 group">
               <div className="relative w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110">
                 <Image
-                  src={"/logo.svg"}
+                  src={"/logo.png"}
                   alt="Friendship Corner Daycare"
                   fill
                   className="object-contain"

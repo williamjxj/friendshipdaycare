@@ -50,7 +50,7 @@ export default function HomePage() {
 
             // Split into words for animation - keep visible initially
             subtitleRef.current.innerHTML = words
-              .map((word, i) => `<span class="hero-subtitle-word inline-block" style="opacity: 1; transform: translateY(0);">${word}${i < words.length - 1 ? ' ' : ''}</span>`)
+              .map((word, i) => `<span class="hero-subtitle-word inline-block" style="opacity: 1; transform: translateY(0);">${word}${i < words.length - 1 ? '&nbsp;' : ''}</span>`)
               .join('');
 
             const wordElements = subtitleRef.current.querySelectorAll('.hero-subtitle-word');
@@ -118,7 +118,7 @@ export default function HomePage() {
         <HeroVideoBackground
           videoId="jNQXAC9IVRw" // Montessori sample video
           fallbackImage={getImageUrl("/images/slidetop-bg.jpg")}
-          overlayColor="bg-gradient-to-br from-indigo-900/40 via-purple-900/40 to-pink-900/40"
+          overlayColor="bg-gradient-to-br from-blue-900/40 via-blue-600/40 to-sky-400/30"
         />
 
         {/* Animated Decorative Elements - Subtle for Video BG */}
@@ -133,15 +133,15 @@ export default function HomePage() {
               <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium text-sm tracking-wide uppercase">
                 Est. 2008 &bull; Coquitlam, BC
               </span>
-              <h1 className="sr-only">
+              <h1 className="text-4xl md:text-7xl font-display font-bold text-foreground drop-shadow-lg">
                 Where Young <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-200 to-blue-200">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary/90 to-secondary/90">
                   Minds Flourish
                 </span>
               </h1>
               <p
                 ref={subtitleRef}
-                className="sr-only"
+                className="text-2xl md:text-5xl font-medium text-foreground/90 w-full max-w-4xl mx-auto drop-shadow-md leading-relaxed"
                 style={{
                   fontFamily: 'var(--font-sans)',
                   letterSpacing: '0.02em',
@@ -152,7 +152,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
-              <a href="/contact" className="bg-primary text-white text-lg px-8 py-4 rounded-xl font-bold hover:bg-primary/90 transition-all hover:scale-105 shadow-xl hover:shadow-2xl ring-4 ring-primary/20">
+              <a href="/contact" className="bg-accent text-white text-lg px-8 py-4 rounded-xl font-bold hover:bg-accent/90 transition-all hover:scale-105 shadow-xl hover:shadow-2xl ring-4 ring-accent/20">
                 {t('home.hero.scheduleTour')}
               </a>
               <a href="/programs" className="px-8 py-4 rounded-xl bg-white/10 backdrop-blur-md border-2 border-white/50 text-white font-bold text-lg hover:bg-white/20 transition-all hover:scale-105 shadow-xl">
@@ -227,7 +227,7 @@ export default function HomePage() {
             </div>
 
             {/* Item 4: Teachers */}
-            <div className="flex flex-col space-y-3">
+            <div className="flex flex-col space-y-3 p-6 rounded-2xl bg-white shadow-md hover:shadow-lg transition-shadow border border-border/50">
               <div className="text-4xl">👩‍🏫</div>
               <h3 className="text-xl font-semibold text-foreground">{t('home.discoverDifference.dedicatedEducators.title')}</h3>
               <p className="text-sm text-muted-foreground">
@@ -317,7 +317,7 @@ export default function HomePage() {
             {t('home.readyToVisit.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <a href="/contact" className="bg-white text-primary px-10 py-5 rounded-xl font-bold text-xl hover:bg-gray-100 transition-colors shadow-xl">
+            <a href="/contact" className="bg-accent text-white px-10 py-5 rounded-xl font-bold text-xl hover:bg-white hover:text-accent transition-colors shadow-xl">
               {t('home.readyToVisit.bookTour')}
             </a>
             <a href="tel:6049458504" className="border-2 border-white text-white px-10 py-5 rounded-xl font-bold text-xl hover:bg-white/10 transition-colors">
