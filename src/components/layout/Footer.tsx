@@ -26,14 +26,14 @@ export function Footer() {
   const siteUrl = "https://www.friendshipdaycare.com";
 
   return (
-    <footer className="bg-muted border-t border-border pt-20 pb-8">
+    <footer className="bg-slate-50 border-t border-border/50 pt-20 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
 
           {/* Column 1: Brand & About */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-3 group w-fit">
-              <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110">
+              <div className="relative w-12 h-12 transition-transform duration-300 group-hover:scale-110">
                 <Image
                   src="/logo.png"
                   alt="Friendship Corner"
@@ -42,10 +42,10 @@ export function Footer() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-display font-bold text-lg text-foreground leading-none">
+                <span className="font-display font-bold text-xl text-foreground leading-none">
                   Friendship Corner
                 </span>
-                <span className="text-[0.65rem] text-muted-foreground uppercase tracking-wider font-medium">
+                <span className="text-[0.7rem] text-muted-foreground uppercase tracking-widest font-semibold mt-1">
                   Montessori Daycare
                 </span>
               </div>

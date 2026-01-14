@@ -207,8 +207,8 @@
 
 body {
   /* Font families - mapping Next.js variables to theme variables locally in body */
-  --font-sans: var(--font-open-sans), system-ui, sans-serif;
-  --font-display: var(--font-nunito), system-ui, sans-serif;
+  --font-sans: var(--font-nunito-sans), system-ui, sans-serif;
+  --font-display: var(--font-varela-round), system-ui, sans-serif;
   --font-accent: var(--font-fredoka), system-ui, sans-serif;
   --font-rubik: var(--font-rubik), system-ui, sans-serif;
 
