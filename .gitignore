@@ -41,8 +41,53 @@ yarn-error.log*
 next-env.d.ts
 
 # William added
+.agent/
+.cursor/
 .obsidian/
 .specify/
-.cursor/
-specs/
-.agent/
+specs/ 
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# venv
+.venv/
+venv/
+ENV/
+env/
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
