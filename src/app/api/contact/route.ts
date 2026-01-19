@@ -53,8 +53,8 @@ export async function POST(request: NextRequest) {
       },
       // Option 2: Custom domain (requires domain verification in Resend)
       customDomain: {
-        businessFrom: 'Contact Form <noreply@friendshipcorner.ca>',
-        customerFrom: 'Friendship Corner Daycare <noreply@friendshipcorner.ca>'
+        businessFrom: 'Contact Form <friendship.care@live.ca>',
+        customerFrom: 'Friendship Corner Daycare <friendship.care@live.ca>'
       }
     };
 

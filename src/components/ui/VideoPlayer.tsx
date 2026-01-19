@@ -14,7 +14,7 @@ const ReactPlayer = dynamic(() => import('react-player'), {
         <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto animate-pulse">
           <PlayIcon className="w-8 h-8 text-primary" />
         </div>
-        <p className="text-muted-foreground">Loading video player...</p>
+        <p className="text-foreground/70">Loading video player...</p>
       </div>
     </div>
   )
@@ -51,7 +51,7 @@ export function VideoPlayer({ videos, className = '' }: VideoPlayerProps) {
             <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto animate-pulse">
               <PlayIcon className="w-8 h-8 text-primary" />
             </div>
-            <p className="text-muted-foreground">Loading video player...</p>
+            <p className="text-foreground/70">Loading video player...</p>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@ export function VideoPlayer({ videos, className = '' }: VideoPlayerProps) {
                     : 'border-transparent hover:border-primary/50'
                 }`}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
                   {video.thumbnail ? (
                     <>
                       <Image
@@ -125,7 +125,7 @@ export function VideoPlayer({ videos, className = '' }: VideoPlayerProps) {
                       </div>
                     </div>
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+                  <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-3">
                     <p className="text-white text-sm font-medium truncate">
                       {video.title}
                     </p>

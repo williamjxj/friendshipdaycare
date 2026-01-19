@@ -75,11 +75,20 @@
 - **Action Required**: Install shadcn/ui CLI or manually add components
 
 ### 3. Performance Audits
-- **Status**: Pending
+- **Status**: In Progress
 - **Tools to Use**:
   - Lighthouse (Chrome DevTools)
   - Core Web Vitals (PageSpeed Insights)
   - WebPageTest
+- **Notes**:
+  - Basic smoke test completed in dev: home, contact, programs, enrollment loaded without console errors.
+  - Lighthouse (local dev, home page) results:
+    - Performance: 60
+    - Accessibility: 91
+    - Best Practices: 100
+    - SEO: 92
+  - Report saved to `docs/lighthouse-local.json`.
+  - Core Web Vitals and additional page audits still required.
 - **Metrics to Check**:
   - LCP (Largest Contentful Paint) < 2.5s
   - FID (First Input Delay) < 100ms
@@ -88,13 +97,17 @@
   - TTI (Time to Interactive) < 3.8s
 
 ### 4. Accessibility Audits
-- **Status**: Pending
+- **Status**: In Progress
 - **Tools to Use**:
   - WAVE (Web Accessibility Evaluation Tool)
   - axe DevTools
   - Lighthouse Accessibility Audit
   - Keyboard navigation testing
   - Screen reader testing (NVDA/JAWS)
+- **Notes**:
+  - Accessibility snapshots reviewed on key pages; no obvious landmark/heading issues found.
+  - axe-core (local dev, home page) passed with 0 violations after fixes.
+  - WAVE audit and broader page coverage still required.
 - **Standards**: WCAG 2.1 AA compliance
 - **Areas to Check**:
   - Color contrast ratios
@@ -105,7 +118,7 @@
   - Alt text for images
 
 ### 5. Final Testing & Validation
-- **Status**: Pending
+- **Status**: In Progress
 - **Cross-Browser Testing**:
   - Chrome (latest 2 versions)
   - Firefox (latest 2 versions)
@@ -119,6 +132,9 @@
   - Mobile: < 768px
   - Tablet: 768px - 1024px
   - Desktop: > 1024px
+- **Notes**:
+  - Basic navigation smoke test completed for key pages.
+  - Accessibility issues fixed from axe report (contrast + redundant alt text).
 
 ## 📋 Implementation Plan for Remaining Tasks
 

@@ -6,30 +6,14 @@ import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 import { getImageUrl } from '@/lib/image-utils';
+import { scaleInMagic, slideIn, staggerContainerMagic } from '@/lib/magicui-animations';
 
-
+/**
+ * Hero section with animated headline and CTAs.
+ */
 export function HeroSection() {
   const { t } = useLanguage();
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 }
-    }
-  };
+  const slideUp = slideIn('up');
 
   return (
     <div className="relative grid place-items-center w-full min-h-[90vh] bg-muted overflow-hidden">
@@ -42,19 +26,19 @@ export function HeroSection() {
           className="object-cover opacity-30"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
+        <div className="absolute inset-0 bg-linear-to-b from-background/80 via-background/60 to-background/90" />
       </div>
 
       {/* Main Content (DaisyUI .hero-content text-center equivalent) */}
       <div className="relative z-10 w-full max-w-4xl p-4 flex flex-col items-center justify-center gap-8 text-center">
         <motion.div
-          variants={containerVariants}
+          variants={staggerContainerMagic}
           initial="hidden"
           animate="visible"
           className="w-full max-w-2xl mx-auto flex flex-col gap-6"
         >
           {/* Badge */}
-          <motion.div variants={itemVariants} className="flex justify-center">
+          <motion.div variants={scaleInMagic} className="flex justify-center">
             <span className="inline-block py-2 px-4 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wide uppercase border border-primary/20">
               Licensed Montessori Daycare in Coquitlam
             </span>
@@ -62,7 +46,7 @@ export function HeroSection() {
 
           {/* Heading */}
           <motion.h1
-            variants={itemVariants}
+            variants={slideUp}
             className={cn(
               "text-5xl md:text-6xl lg:text-7xl font-bold",
               "text-foreground leading-tight tracking-tight drop-shadow-sm"
@@ -73,7 +57,7 @@ export function HeroSection() {
 
           {/* Subtitle */}
           <motion.p
-            variants={itemVariants}
+            variants={slideUp}
             className="text-xl md:text-2xl text-muted-foreground leading-relaxed"
           >
             {t('hero.subtitle')}
@@ -81,7 +65,7 @@ export function HeroSection() {
 
           {/* CTA Buttons - DaisyUI .btn equivalents */}
           <motion.div
-            variants={itemVariants}
+            variants={slideUp}
             className="flex flex-col sm:flex-row gap-4 justify-center pt-2"
           >
             <Link
@@ -111,7 +95,7 @@ export function HeroSection() {
 
           {/* Trust Indicators - Simple Stats grid */}
           <motion.div
-            variants={itemVariants}
+            variants={scaleInMagic}
             className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center w-full"
           >
             <div className="flex flex-col items-center gap-2">

@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://friendshipcorner.ca/sitemap.xml
+Sitemap: https://friendshipdaycare.com/sitemap.xml
 
 # Disallow admin or private areas (if any)
 # Disallow: /admin/

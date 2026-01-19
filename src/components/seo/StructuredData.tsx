@@ -1,3 +1,5 @@
+import { businessProfile } from "@/lib/business-profile";
+
 /**
  * Structured Data (Schema.org) Components for SEO
  * These components add JSON-LD structured data to pages for better search engine understanding
@@ -364,15 +366,9 @@ export function CourseSchema({
 
 // Default organization data for reuse
 export const defaultOrganizationData = {
-  name: "Friendship Corner Daycare",
-  url: "https://friendshipdaycare.com",
-  telephone: "+1-604-945-8504",
-  email: "friendship.care@live.ca",
-  address: {
-    streetAddress: "1060 Lougheed Highway",
-    addressLocality: "Coquitlam",
-    addressRegion: "BC",
-    postalCode: "V3K 6G6",
-    addressCountry: "CA"
-  }
+  name: businessProfile.name,
+  url: businessProfile.url,
+  telephone: businessProfile.telephone,
+  email: businessProfile.email,
+  address: businessProfile.address
 };

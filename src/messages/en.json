@@ -62,8 +62,8 @@
     "phone": "Phone",
     "location": "Location",
     "hours": "Hours",
-    "address": "Near Coquitlam Station, Coquitlam, BC",
-    "operatingHours": "Monday - Friday: 6:30 AM - 6:30 PM",
+    "address": "2950 Dewdney Trunk Road, Coquitlam, BC V3C 2J4",
+    "operatingHours": "Monday - Friday: 7:00 AM - 6:00 PM",
     "form": {
       "name": "Full Name",
       "email": "Email Address",
@@ -77,6 +77,32 @@
   "footer": {
     "copyright": "© 2024 Friendship Corner Daycare. All rights reserved.",
     "phone": "604.945.8504"
+  },
+  "seo": {
+    "home": {
+      "title": "Montessori Daycare in Coquitlam, BC",
+      "description": "Friendship Corner Daycare is a licensed Montessori daycare in Coquitlam, BC serving Tri-Cities families. Schedule a tour today."
+    },
+    "about": {
+      "title": "About Friendship Corner Daycare in Coquitlam",
+      "description": "Learn about Friendship Corner Daycare, a licensed Montessori daycare in Coquitlam, BC serving Tri-Cities families since 2008."
+    },
+    "programs": {
+      "title": "Montessori Programs in Coquitlam",
+      "description": "Explore toddler, preschool, and pre-kindergarten Montessori programs at Friendship Corner Daycare in Coquitlam, BC."
+    },
+    "enrollment": {
+      "title": "Daycare Enrollment in Coquitlam",
+      "description": "Learn how to enroll at Friendship Corner Daycare, a Montessori daycare in Coquitlam, BC. Review steps and requirements."
+    },
+    "contact": {
+      "title": "Contact Friendship Corner Daycare",
+      "description": "Contact Friendship Corner Daycare in Coquitlam, BC to schedule a tour, ask questions, or begin enrollment."
+    },
+    "gallery": {
+      "title": "Daycare Gallery in Coquitlam",
+      "description": "Browse photos and videos from Friendship Corner Daycare in Coquitlam, BC. See Montessori classrooms, activities, and spaces."
+    }
   },
   "home": {
     "hero": {
@@ -106,7 +132,7 @@
       }
     },
     "programs": {
-      "title": "Our Programs",
+      "title": "Coquitlam Montessori Programs",
       "subtitle": "Age-appropriate curriculums designed to spark a lifelong love for learning.",
       "toddler": {
         "title": "Toddler Program",

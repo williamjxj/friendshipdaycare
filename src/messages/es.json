@@ -59,8 +59,8 @@
     "phone": "Teléfono",
     "location": "Ubicación",
     "hours": "Horarios",
-    "address": "Cerca de la estación Coquitlam, Coquitlam, BC",
-    "operatingHours": "Lunes - Viernes: 6:30 AM - 6:30 PM",
+    "address": "2950 Dewdney Trunk Road, Coquitlam, BC V3C 2J4",
+    "operatingHours": "Lunes - Viernes: 7:00 AM - 6:00 PM",
     "form": {
       "name": "Nombre completo",
       "email": "Dirección de correo",
@@ -74,6 +74,32 @@
   "footer": {
     "copyright": "© 2024 Guardería Friendship Corner. Todos los derechos reservados.",
     "phone": "604.945.8504"
+  },
+  "seo": {
+    "home": {
+      "title": "Guardería Montessori en Coquitlam, BC",
+      "description": "Friendship Corner Daycare es una guardería Montessori con licencia en Coquitlam, BC que sirve a familias de Tri-Cities. Agenda una visita hoy."
+    },
+    "about": {
+      "title": "Sobre Friendship Corner Daycare en Coquitlam",
+      "description": "Conoce Friendship Corner Daycare, una guardería Montessori con licencia en Coquitlam, BC que sirve a familias de Tri-Cities desde 2008."
+    },
+    "programs": {
+      "title": "Programas Montessori en Coquitlam",
+      "description": "Explora programas Montessori para niños pequeños, preescolar y pre-kínder en Friendship Corner Daycare en Coquitlam, BC."
+    },
+    "enrollment": {
+      "title": "Inscripción en guardería en Coquitlam",
+      "description": "Conoce cómo inscribirte en Friendship Corner Daycare, una guardería Montessori en Coquitlam, BC. Revisa pasos y requisitos."
+    },
+    "contact": {
+      "title": "Contacta a Friendship Corner Daycare",
+      "description": "Contacta a Friendship Corner Daycare en Coquitlam, BC para programar una visita, hacer preguntas o iniciar la inscripción."
+    },
+    "gallery": {
+      "title": "Galería de la guardería en Coquitlam",
+      "description": "Explora fotos y videos de Friendship Corner Daycare en Coquitlam, BC. Ve aulas Montessori, actividades y espacios."
+    }
   },
   "home": {
     "hero": {
@@ -103,7 +129,7 @@
       }
     },
     "programs": {
-      "title": "Nuestros Programas",
+      "title": "Programas Montessori en Coquitlam",
       "subtitle": "Currículos apropiados para la edad diseñados para despertar un amor de por vida por el aprendizaje.",
       "toddler": {
         "title": "Programa de Niños Pequeños",

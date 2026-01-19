@@ -6,31 +6,19 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Link from 'next/link';
 import { PhoneIcon, MapPinIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { businessProfile } from '@/lib/business-profile';
+import { borderBeam, gridPattern, shimmer, slideIn, staggerContainerMagic } from '@/lib/magicui-animations';
 
+/**
+ * Primary contact call-to-action section with animated highlights.
+ */
 export function ContactCTASection() {
   const t = useTranslations();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const slideUp = slideIn('up');
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 }
-    }
-  };
+  const formattedAddress = `${businessProfile.address.streetAddress}, ${businessProfile.address.addressLocality}, ${businessProfile.address.addressRegion} ${businessProfile.address.postalCode}`;
 
   const floatingVariants = {
     animate: {
@@ -44,6 +32,7 @@ export function ContactCTASection() {
 
   return (
     <section ref={ref} className="relative py-20 bg-primary overflow-hidden">
+      <div className="absolute inset-0 opacity-15" style={gridPattern} />
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-32 h-32 border-2 border-primary-foreground rounded-full" />
@@ -68,20 +57,20 @@ export function ContactCTASection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          variants={containerVariants}
+          variants={staggerContainerMagic}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           className="text-center space-y-8"
         >
           <motion.h2
-            variants={itemVariants}
+            variants={slideUp}
             className="text-3xl md:text-4xl font-display font-bold text-primary-foreground"
           >
             {t('contact.subtitle')}
           </motion.h2>
           
           <motion.p
-            variants={itemVariants}
+            variants={slideUp}
             className="text-xl text-primary-foreground/90 max-w-2xl mx-auto leading-relaxed"
           >
             Ready to give your child the best start? Contact us today to learn more about our Montessori programs and schedule a visit.
@@ -89,14 +78,18 @@ export function ContactCTASection() {
 
           {/* Contact Info Cards */}
           <motion.div
-            variants={itemVariants}
+            variants={slideUp}
             className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
           >
             <motion.div
-              className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center"
+              className="group relative overflow-hidden bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center"
               whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
               transition={{ duration: 0.3 }}
             >
+              <div
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                style={shimmer}
+              />
               <motion.div
                 className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center mx-auto mb-4"
                 whileHover={{ rotate: 360 }}
@@ -105,14 +98,18 @@ export function ContactCTASection() {
                 <PhoneIcon className="h-6 w-6 text-primary-foreground" />
               </motion.div>
               <h3 className="font-semibold text-primary-foreground mb-2">{t('contact.phone')}</h3>
-              <p className="text-primary-foreground/90">{t('footer.phone')}</p>
+              <p className="text-primary-foreground/90">{businessProfile.telephone}</p>
             </motion.div>
 
             <motion.div
-              className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center"
+              className="group relative overflow-hidden bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center"
               whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
               transition={{ duration: 0.3 }}
             >
+              <div
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                style={shimmer}
+              />
               <motion.div
                 className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center mx-auto mb-4"
                 whileHover={{ rotate: 360 }}
@@ -121,14 +118,18 @@ export function ContactCTASection() {
                 <MapPinIcon className="h-6 w-6 text-primary-foreground" />
               </motion.div>
               <h3 className="font-semibold text-primary-foreground mb-2">{t('contact.location')}</h3>
-              <p className="text-primary-foreground/90">{t('contact.address')}</p>
+              <p className="text-primary-foreground/90">{formattedAddress}</p>
             </motion.div>
 
             <motion.div
-              className="bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center"
+              className="group relative overflow-hidden bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center"
               whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
               transition={{ duration: 0.3 }}
             >
+              <div
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                style={shimmer}
+              />
               <motion.div
                 className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center mx-auto mb-4"
                 whileHover={{ rotate: 360 }}
@@ -143,7 +144,7 @@ export function ContactCTASection() {
 
           {/* Action Buttons */}
           <motion.div
-            variants={itemVariants}
+            variants={slideUp}
             className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
           >
             <motion.div
@@ -163,7 +164,7 @@ export function ContactCTASection() {
               whileTap={{ scale: 0.95 }}
             >
               <a
-                href={`tel:${t('footer.phone').replace(/\D/g, '')}`}
+                href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
                 className="inline-block border-2 border-primary-foreground text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-foreground hover:text-primary transition-colors"
               >
                 Call Now
@@ -173,7 +174,7 @@ export function ContactCTASection() {
 
           {/* Trust Badge */}
           <motion.div
-            variants={itemVariants}
+            variants={borderBeam}
             className="pt-8"
           >
             <div className="inline-flex items-center space-x-4 bg-primary-foreground/10 backdrop-blur-sm rounded-full px-6 py-3">

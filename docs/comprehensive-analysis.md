@@ -238,7 +238,7 @@ src/components/
 **Active:**
 - Website (primary digital presence)
 - Phone inquiries (604.945.8504)
-- Email contact (info@friendshipcorner.ca)
+- Email contact (friendship.care@live.ca)
 - Word-of-mouth referrals
 
 **Missing:**
@@ -483,7 +483,7 @@ src/components/
 
 11. **Email Service Configuration**
     - Using Resend's default domain (onboarding@resend.dev)
-    - Not using custom domain (info@friendshipcorner.ca)
+    - Not using custom domain (friendship.care@live.ca)
     - May impact email deliverability and trust
 
 12. **Missing Analytics**

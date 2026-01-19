@@ -59,8 +59,8 @@
     "phone": "电话",
     "location": "地址",
     "hours": "营业时间",
-    "address": "高贵林车站附近，不列颠哥伦比亚省高贵林市",
-    "operatingHours": "周一至周五：上午6:30 - 下午6:30",
+    "address": "2950 Dewdney Trunk Road, Coquitlam, BC V3C 2J4",
+    "operatingHours": "周一至周五：上午7:00 - 下午6:00",
     "form": {
       "name": "姓名",
       "email": "电子邮箱",
@@ -74,6 +74,32 @@
   "footer": {
     "copyright": "© 2024 友谊角托儿所。保留所有权利。",
     "phone": "604.945.8504"
+  },
+  "seo": {
+    "home": {
+      "title": "高贵林蒙特梭利日托中心",
+      "description": "Friendship Corner Daycare 是位于BC省高贵林的持牌蒙特梭利日托中心，服务于Tri-Cities家庭。立即预约参观。"
+    },
+    "about": {
+      "title": "关于高贵林 Friendship Corner Daycare",
+      "description": "了解位于BC省高贵林的持牌蒙特梭利日托中心 Friendship Corner Daycare，自2008年以来服务Tri-Cities家庭。"
+    },
+    "programs": {
+      "title": "高贵林蒙特梭利课程",
+      "description": "探索 Friendship Corner Daycare 的幼儿、学前班与学前准备蒙特梭利课程，位于BC省高贵林。"
+    },
+    "enrollment": {
+      "title": "高贵林日托报名",
+      "description": "了解如何报名 Friendship Corner Daycare，这是一家位于BC省高贵林的蒙特梭利日托中心。查看步骤和要求。"
+    },
+    "contact": {
+      "title": "联系 Friendship Corner Daycare",
+      "description": "联系位于BC省高贵林的 Friendship Corner Daycare，预约参观、咨询或开始报名。"
+    },
+    "gallery": {
+      "title": "高贵林日托相册",
+      "description": "浏览 Friendship Corner Daycare 在BC省高贵林的照片和视频，查看蒙特梭利教室、活动和空间。"
+    }
   },
   "home": {
     "hero": {
@@ -103,7 +129,7 @@
       }
     },
     "programs": {
-      "title": "我们的课程",
+      "title": "高贵林蒙特梭利课程",
       "subtitle": "适合年龄的课程，旨在激发终身学习的热爱。",
       "toddler": {
         "title": "幼儿课程",

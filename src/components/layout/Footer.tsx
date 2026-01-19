@@ -16,14 +16,13 @@ import {
   Smartphone
 } from 'lucide-react';
 import QRCode from 'react-qr-code';
-import { cn } from '@/lib/utils';
-import { getImageUrl } from '@/lib/image-utils';
+import { businessProfile } from '@/lib/business-profile';
 
 export function Footer() {
   const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
   // In a real app, this would be the deployed domain. Using a placeholder or internal logic.
-  const siteUrl = "https://www.friendshipdaycare.com";
+  const siteUrl = businessProfile.url;
 
   return (
     <footer className="bg-slate-50 border-t border-border/50 pt-20 pb-8">
@@ -151,6 +150,17 @@ export function Footer() {
                   Slide Deck
                 </Link>
               </li>
+              <li>
+                <a
+                  href="https://pub-fafb0f1d538f40ebb6fdd21bb5041a1c.r2.dev/collects/notebooklm-slides.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  NotebookLM Slides
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -161,17 +171,21 @@ export function Footer() {
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <MapPin className="w-5 h-5 text-primary shrink-0" />
                 <span>
-                  2950 Dewdney Trunk Road<br />
-                  Coquitlam, BC V3C 2J4 Canada
+                  {businessProfile.address.streetAddress}<br />
+                  {businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode} {businessProfile.address.addressCountry}
                 </span>
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <a href="tel:604-945-8504" className="hover:text-primary transition-colors">604.945.8504</a>
+                <a href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`} className="hover:text-primary transition-colors">
+                  {businessProfile.telephone}
+                </a>
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <a href="mailto:friendship.care@live.ca" className="hover:text-primary transition-colors">friendship.care@live.ca</a>
+                <a href={`mailto:${businessProfile.email}`} className="hover:text-primary transition-colors">
+                  {businessProfile.email}
+                </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <Clock className="w-5 h-5 text-primary shrink-0" />
@@ -216,7 +230,8 @@ export function Footer() {
               >
                 <Image
                   src="/bestit-favicon.ico"
-                  alt="Best IT Consulting"
+                  alt=""
+                  aria-hidden="true"
                   width={16}
                   height={16}
                   className="w-4 h-4"

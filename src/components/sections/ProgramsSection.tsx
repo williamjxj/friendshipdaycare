@@ -7,31 +7,15 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getImageUrl } from '@/lib/image-utils';
+import { gridPattern, scaleInMagic, shimmer, staggerContainerMagic } from '@/lib/magicui-animations';
 
+/**
+ * Programs overview section with animated cards.
+ */
 export function ProgramsSection() {
   const t = useTranslations();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 }
-    }
-  };
 
   const programs = [
     {
@@ -55,7 +39,8 @@ export function ProgramsSection() {
   ];
 
   return (
-    <section ref={ref} className="py-20 bg-muted/30">
+    <section ref={ref} className="relative py-20 bg-muted/30 overflow-hidden">
+      <div className="absolute inset-0 opacity-40" style={gridPattern} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -74,7 +59,7 @@ export function ProgramsSection() {
         
         {/* Programs Grid */}
         <motion.div
-          variants={containerVariants}
+          variants={staggerContainerMagic}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
@@ -82,14 +67,18 @@ export function ProgramsSection() {
           {programs.map((program) => (
             <motion.div
               key={program.key}
-              variants={cardVariants}
+              variants={scaleInMagic}
               whileHover={{ 
                 y: -10,
                 transition: { duration: 0.3 }
               }}
               className="group"
             >
-              <div className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="relative bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={shimmer}
+                />
                 {/* Program Image */}
                 <div className="relative h-48 overflow-hidden">
                   <Image
@@ -98,7 +87,7 @@ export function ProgramsSection() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
                 </div>
 
                 {/* Program Content */}
