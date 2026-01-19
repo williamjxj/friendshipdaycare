@@ -125,7 +125,7 @@ export function GalleryPageClient() {
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
                 Montessori Daycare Moments
               </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground w-full max-w-none">
                 See how our Coquitlam Montessori daycare inspires curiosity and joyful learning.
               </p>
             </div>
@@ -189,7 +189,7 @@ export function GalleryPageClient() {
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
                 See Our Montessori Daycare in Action
               </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground w-full max-w-none">
                 Watch a glimpse of daily routines and learning moments at our Coquitlam daycare.
               </p>
             </div>

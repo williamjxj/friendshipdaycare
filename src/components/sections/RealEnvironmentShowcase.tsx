@@ -3,9 +3,9 @@
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { getPlaceholderUrl } from '@/lib/image-utils';
-import { CategoryAnimatedSVG } from '@/components/ui/CategoryAnimatedSVG';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { School, BookOpen, TreeDeciduous, Palette } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface EnvironmentImageSet {
@@ -103,11 +103,14 @@ const ENVIRONMENT_DATA: EnvironmentImageSet[] = [
   }
 ];
 
+
+// ... existing imports
+
 const getCategories = (t: (key: string) => string) => [
-  { id: 'all', name: t('home.realEnvironment.categories.all'), icon: '🏫' },
-  { id: 'montessori', name: t('home.realEnvironment.categories.montessori'), icon: '📚' },
-  { id: 'outdoor', name: t('home.realEnvironment.categories.outdoor'), icon: '🌳' },
-  { id: 'activities', name: t('home.realEnvironment.categories.activities'), icon: '🎨' }
+  { id: 'all', name: t('home.realEnvironment.categories.all'), icon: School },
+  { id: 'montessori', name: t('home.realEnvironment.categories.montessori'), icon: BookOpen },
+  { id: 'outdoor', name: t('home.realEnvironment.categories.outdoor'), icon: TreeDeciduous },
+  { id: 'activities', name: t('home.realEnvironment.categories.activities'), icon: Palette }
 ] as const;
 
 function CardCarousel({ images, category }: { images: { src: string; alt: string }[], category: string }) {
@@ -146,7 +149,7 @@ function CardCarousel({ images, category }: { images: { src: string; alt: string
   }, [emblaApi, images.length, isHovered]);
 
   return (
-    <div 
+    <div
       className="relative h-full w-full group/carousel"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -170,13 +173,6 @@ function CardCarousel({ images, category }: { images: { src: string; alt: string
       {/* Gradient overlay on hover */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 z-[15] pointer-events-none" />
 
-      {/* Animated SVG on Hover - positioned above gradient */}
-      <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-20 flex items-center justify-center">
-        <div className="relative w-full h-full flex items-center justify-center">
-          <CategoryAnimatedSVG category={category as any} className="!bg-transparent !backdrop-blur-none scale-75" />
-        </div>
-      </div>
-
       {/* Navigation Buttons - visible only when hovered */}
       {images.length > 1 && (
         <>
@@ -187,7 +183,7 @@ function CardCarousel({ images, category }: { images: { src: string; alt: string
           >
             <ChevronLeftIcon className="w-4 h-4 text-gray-800" />
           </button>
-          
+
           <button
             onClick={scrollNext}
             className={`absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-1.5 rounded-full shadow-lg transition-all duration-300 z-40 h-8 w-8 flex items-center justify-center ${isHovered ? 'opacity-100' : 'opacity-0'}`}
@@ -248,7 +244,7 @@ export function RealEnvironmentShowcase() {
                 : 'bg-card text-muted-foreground hover:bg-muted hover:text-foreground hover:scale-102'
                 }`}
             >
-              <span className="text-lg">{category.icon}</span>
+              <span className="text-lg"><category.icon className="w-5 h-5" /></span>
               <span>{category.name}</span>
             </button>
           ))}
@@ -296,7 +292,7 @@ export function RealEnvironmentShowcase() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/contact"
-                className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-md hover:shadow-lg active:scale-95"
+                className="btn-clay inline-block px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90"
               >
                 {t('home.realEnvironment.cta.scheduleVisit')}
               </a>

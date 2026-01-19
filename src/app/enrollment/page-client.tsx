@@ -34,7 +34,7 @@ export function EnrollmentPageClient() {
           hideSubtitle={true}
           hideTitle={true}
         >
-          <HeroCTAButtons variant="filled" />
+          <HeroCTAButtons variant="default" />
         </PageHero>
 
         {/* Enrollment Process */}
@@ -50,7 +50,7 @@ export function EnrollmentPageClient() {
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
                 Enrollment Process
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground w-full max-w-none">
                 Follow these simple steps to begin your child&apos;s Montessori journey in Coquitlam.
               </p>
             </div>

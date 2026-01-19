@@ -84,7 +84,7 @@ export function AboutPageClient() {
               >
                 <div className="relative h-96 rounded-2xl overflow-hidden shadow-xl">
                   <img
-                    src={getImageUrl('/images/school-outside.jpg')}
+                    src={getImageUrl('/imgs/home/1.jpeg')}
                     alt="Friendship Corner Daycare building"
                     className="w-full h-full object-cover"
                   />
@@ -119,7 +119,7 @@ export function AboutPageClient() {
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
                 Our Mission & Values
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground w-full max-w-none">
                 Creating a foundation for lifelong learning through Montessori principles and a loving community.
               </p>
             </div>
@@ -203,7 +203,7 @@ export function AboutPageClient() {
               <motion.div variants={slideUp} className="relative">
                 <div className="relative h-80 rounded-2xl overflow-hidden shadow-xl">
                   <img
-                    src={getImageUrl('/images/montessori-classroom.jpg')}
+                    src={getImageUrl('/imgs/home/2.jpeg')}
                     alt="Montessori classroom activities"
                     className="w-full h-full object-cover"
                   />

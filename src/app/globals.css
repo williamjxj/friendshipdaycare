@@ -207,10 +207,9 @@
 
 body {
   /* Font families - mapping Next.js variables to theme variables locally in body */
-  --font-sans: var(--font-nunito-sans), system-ui, sans-serif;
-  --font-display: var(--font-varela-round), system-ui, sans-serif;
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+  --font-display: var(--font-fredoka), system-ui, sans-serif;
   --font-accent: var(--font-fredoka), system-ui, sans-serif;
-  --font-rubik: var(--font-rubik), system-ui, sans-serif;
 
   font-family: var(--font-sans);
   line-height: 1.6;
@@ -266,6 +265,23 @@ body {
   min-height: 44px;
   /* Mobile touch target */
   box-shadow: var(--shadow-sm);
+}
+
+.btn-clay {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  transition: all 0.1s;
+  box-shadow: 
+    0 4px 0 color-mix(in srgb, var(--primary), black 20%), /* Deep edge */
+    0 5px 10px rgba(0,0,0,0.1);     /* Drop shadow */
+  transform: translateY(0);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-clay:active {
+  box-shadow: 0 0 0 color-mix(in srgb, var(--primary), black 20%);
+  transform: translateY(4px);
 }
 
 /* Override playful button specific weirdness if any, mainly shadow */

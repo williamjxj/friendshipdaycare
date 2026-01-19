@@ -84,3 +84,12 @@ This doc consolidates SEO notes, audits, and implementation guidance for `friend
 - "Christian daycare Coquitlam"
 - "Daycare Center Tri-Cities"
 - "Early learning center Coquitlam BC"
+
+### SEO
+
+- next-seo, 
+- crawlers, user-agent
+- robots.txtweb 
+- XML sitemaps <-> Google
+- Meta Tags for search engines
+- `<link rel="canonical" href="https://example.com/products/phone" />`

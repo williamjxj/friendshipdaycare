@@ -121,7 +121,7 @@ export function ProgramsPageClient() {
           hideSubtitle={true}
           hideTitle={true}
         >
-          <HeroCTAButtons variant="filled" />
+          <HeroCTAButtons variant="default" />
         </PageHero>
 
         {/* Programs Overview */}
@@ -137,7 +137,7 @@ export function ProgramsPageClient() {
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
                 Montessori Programs in Coquitlam
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground w-full max-w-none">
                 Our age-appropriate programs support each child&apos;s growth with hands-on Montessori learning in Coquitlam, BC.
               </p>
             </div>
@@ -246,7 +246,7 @@ export function ProgramsPageClient() {
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
                 A Day in Our Montessori Classroom
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground w-full max-w-none">
                 A structured yet flexible daily rhythm designed to support learning, play, and rest.
               </p>
             </div>
