@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { useTheme, Theme } from '@/contexts/ThemeContext';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Color mapping for the theme dots
 const THEME_COLORS: Record<Theme, string> = {
@@ -17,12 +18,23 @@ const THEME_COLORS: Record<Theme, string> = {
 export function ThemeToggle() {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme, themes } = useTheme();
+  const { t } = useLanguage();
 
   // Memoize current theme lookup
   const currentTheme = useMemo(() =>
     themes.find(t => t.value === theme),
     [themes, theme]
   );
+
+  const getThemeLabel = useCallback((value: Theme, fallback?: string) => {
+    const label = t(`themeSwitcher.themes.${value}.label`);
+    return label || fallback || value;
+  }, [t]);
+
+  const getThemeDescription = useCallback((value: Theme, fallback?: string) => {
+    const description = t(`themeSwitcher.themes.${value}.description`);
+    return description || fallback || '';
+  }, [t]);
 
   const toggleDropdown = useCallback(() => {
     setIsOpen(prev => !prev);
@@ -42,14 +54,16 @@ export function ThemeToggle() {
       <button
         onClick={toggleDropdown}
         className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors border border-transparent hover:border-border"
-        aria-label="Switch theme"
+        aria-label={t('themeSwitcher.ariaLabel')}
       >
         {/* Active Theme Dot */}
         <div
           className="w-4 h-4 rounded-full border border-gray-200 shadow-sm"
           style={{ backgroundColor: THEME_COLORS[theme] || '#ccc' }}
         />
-        <span className="hidden sm:inline">{currentTheme?.label}</span>
+        <span className="hidden sm:inline">
+          {getThemeLabel(theme, currentTheme?.label)}
+        </span>
         <ChevronDownIcon className="h-3 w-3 opacity-50" />
       </button>
 
@@ -74,18 +88,18 @@ export function ThemeToggle() {
                     }`}
                 >
                   {/* Theme Color Dot */}
-                  <div
-                    className="w-4 h-4 rounded-full mt-1 flex-shrink-0 border border-gray-200 shadow-sm"
-                    style={{ backgroundColor: THEME_COLORS[themeOption.value] }}
-                  />
+                    <div
+                      className="w-4 h-4 rounded-full mt-1 shrink-0 border border-gray-200 shadow-sm"
+                      style={{ backgroundColor: THEME_COLORS[themeOption.value] }}
+                    />
 
                   <div>
                     <div className={`font-medium text-sm ${theme === themeOption.value ? 'text-foreground' : 'text-muted-foreground'
                       }`}>
-                      {themeOption.label}
+                      {getThemeLabel(themeOption.value, themeOption.label)}
                     </div>
                     <div className="text-xs text-muted-foreground/60 mt-0.5 line-clamp-1">
-                      {themeOption.description}
+                      {getThemeDescription(themeOption.value, themeOption.description)}
                     </div>
                   </div>
                 </button>

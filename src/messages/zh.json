@@ -229,6 +229,35 @@
       "weekdays": "周一至周五：上午7:00 - 下午6:00"
     }
   },
+  "themeSwitcher": {
+    "ariaLabel": "切换主题",
+    "themes": {
+      "professional": {
+        "label": "专业",
+        "description": "干净可靠的蓝色专业风格"
+      },
+      "default": {
+        "label": "温暖",
+        "description": "适合温馨托儿所氛围的暖色调"
+      },
+      "nature": {
+        "label": "自然",
+        "description": "灵感来自自然的土色与绿色"
+      },
+      "playful": {
+        "label": "活泼",
+        "description": "明亮活力的色彩，激发创造力"
+      },
+      "dark": {
+        "label": "深色",
+        "description": "夜间浏览的优雅深色主题"
+      },
+      "violet": {
+        "label": "紫色",
+        "description": "柔和现代的紫色风格"
+      }
+    }
+  },
   "header": {
     "brandName": "友谊角",
     "brandTagline": "蒙特梭利托儿所",

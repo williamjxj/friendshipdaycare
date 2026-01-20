@@ -229,6 +229,35 @@
       "weekdays": "Lun - Vie: 7:00 AM - 6:00 PM"
     }
   },
+  "themeSwitcher": {
+    "ariaLabel": "Cambiar tema",
+    "themes": {
+      "professional": {
+        "label": "Profesional",
+        "description": "Diseño limpio y confiable con tonos azules profesionales"
+      },
+      "default": {
+        "label": "Cálido",
+        "description": "Colores cálidos ideales para un entorno acogedor"
+      },
+      "nature": {
+        "label": "Naturaleza",
+        "description": "Tonos tierra y verdes inspirados en entornos naturales"
+      },
+      "playful": {
+        "label": "Divertido",
+        "description": "Colores brillantes que inspiran creatividad y alegría"
+      },
+      "dark": {
+        "label": "Oscuro",
+        "description": "Tema oscuro elegante para la noche"
+      },
+      "violet": {
+        "label": "Violeta",
+        "description": "Tonos violetas suaves con un estilo moderno"
+      }
+    }
+  },
   "header": {
     "brandName": "Friendship Corner",
     "brandTagline": "Guardería Montessori",

@@ -231,6 +231,35 @@
       "weekdays": "Mon - Fri: 7:00 AM - 6:00 PM"
     }
   },
+  "themeSwitcher": {
+    "ariaLabel": "Switch theme",
+    "themes": {
+      "professional": {
+        "label": "Professional",
+        "description": "Clean, trustworthy design with professional blue tones"
+      },
+      "default": {
+        "label": "Warm",
+        "description": "Classic warm colors perfect for a welcoming daycare environment"
+      },
+      "nature": {
+        "label": "Nature",
+        "description": "Earth tones and greens inspired by natural learning environments"
+      },
+      "playful": {
+        "label": "Playful",
+        "description": "Bright and vibrant colors that spark creativity and joy"
+      },
+      "dark": {
+        "label": "Dark",
+        "description": "Elegant dark theme for evening browsing"
+      },
+      "violet": {
+        "label": "Violet",
+        "description": "Soft violet tones with a calm, modern feel"
+      }
+    }
+  },
   "header": {
     "brandName": "Friendship Corner",
     "brandTagline": "Montessori Daycare",

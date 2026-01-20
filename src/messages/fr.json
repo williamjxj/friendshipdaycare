@@ -229,6 +229,35 @@
       "weekdays": "Lun - Ven : 7h00 - 18h00"
     }
   },
+  "themeSwitcher": {
+    "ariaLabel": "Changer le thème",
+    "themes": {
+      "professional": {
+        "label": "Professionnel",
+        "description": "Design propre et fiable avec des tons bleus professionnels"
+      },
+      "default": {
+        "label": "Chaleureux",
+        "description": "Couleurs chaudes idéales pour une garderie accueillante"
+      },
+      "nature": {
+        "label": "Nature",
+        "description": "Tons terre et verts inspirés de la nature"
+      },
+      "playful": {
+        "label": "Joyeux",
+        "description": "Couleurs vives qui stimulent la créativité"
+      },
+      "dark": {
+        "label": "Sombre",
+        "description": "Thème sombre élégant pour le soir"
+      },
+      "violet": {
+        "label": "Violet",
+        "description": "Tons violets doux avec un style moderne"
+      }
+    }
+  },
   "header": {
     "brandName": "Friendship Corner",
     "brandTagline": "Garderie Montessori",

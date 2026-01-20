@@ -17,7 +17,7 @@ A modern, responsive website for Friendship Corner Daycare built with **Next.js 
 - **✨ Advanced Animations**: GSAP ScrollTrigger & Framer Motion for premium feel
 - **🎥 Dynamic Hero**: Immersive video backgrounds with fallback support
 - **🍱 Modern Layouts**: Bento Grid & Montessori Card designs for information display
-- **🌍 Internationalization**: Support for English, Spanish, French, Korean, and Chinese
+- **🌍 Internationalization**: Full content switching for English, Spanish, French, Korean, and Chinese with localized metadata and fallbacks
 - **📱 Responsive Design**: Optimized for all devices with Mobile QR Access
 - **🖼️ Image Gallery**: Animated carousel with category filtering and lightbox view
 - **🗺️ Google Maps Integration**: Interactive map showing daycare location
@@ -92,14 +92,14 @@ The website content has been migrated and enhanced from the original site:
 
 ### Enhanced Content Features
 
-- **Inspiring Hero**: "Where Little Dreams Take Flight"
+- **Inspiring Hero**: "Where Young Minds Flourish"
 - **Detailed Programs**: Toddler, Preschool, Pre-Kindergarten
 - **Educational Focus**: Montessori method + gentle Bible stories
 - **Safety & Quality**: Licensed, qualified staff, individual attention
 
 ## 🎨 Theme System
 
-The website supports 4 beautiful themes:
+The website supports 5 themes:
 
 1. **Professional** - Clean & Corporate
 2. **Nature** - Earth tones and greens
@@ -139,7 +139,7 @@ The gallery supports both photos and videos. To add content:
 2. **Update** image arrays in gallery components
 3. **Videos**: Update video URLs in the VideoPlayer components
 
-See `IMAGES_README.md` for image requirements.
+See `docs/images-readme.md` for image requirements.
 
 ## 🛠️ Technology Stack
 
@@ -230,4 +230,4 @@ Website design and development by **Best IT Consulting** (<www.bestitconsulting.
 
 ---
 
-**Built with ❤️ for Friendship Corner Daycare - Where Little Dreams Take Flight** ✨
+**Built with ❤️ for Friendship Corner Daycare - Where Young Minds Flourish**

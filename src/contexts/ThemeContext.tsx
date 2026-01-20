@@ -40,8 +40,8 @@ export const themes = [
   },
   {
     value: 'violet' as Theme,
-    label: 'Green',
-    description: 'Fresh and energetic green theme'
+    label: 'Violet',
+    description: 'Soft violet tones with a calm, modern feel'
   }
 ];
 

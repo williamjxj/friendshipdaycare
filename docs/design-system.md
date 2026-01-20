@@ -4,6 +4,20 @@
 **Date**: 2025-12-30  
 **Purpose**: Codify UI patterns for consistent implementation across the website
 
+## Audit Summary (Dec 2025)
+
+**Scope**: Review of headings, buttons, spacing, cards, hero sections, forms, and navigation patterns.
+
+**Key Findings**:
+
+- Heading sizes varied between pages (hero and section scales were inconsistent).
+- Buttons had multiple size/radius variants without a clear standard.
+- Card spacing and corner radii were inconsistent across sections.
+- Hero sections diverged (video hero vs static hero patterns).
+- Hover/transition styles varied between components.
+
+**Outcome**: This document standardizes the patterns above for consistent reuse across pages.
+
 ## Principles
 
 1. **Montessori-Inspired**: Warm, nurturing, child-centered aesthetic

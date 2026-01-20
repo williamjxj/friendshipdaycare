@@ -229,6 +229,35 @@
       "weekdays": "월 - 금: 오전 7:00 - 오후 6:00"
     }
   },
+  "themeSwitcher": {
+    "ariaLabel": "테마 변경",
+    "themes": {
+      "professional": {
+        "label": "프로페셔널",
+        "description": "전문적인 블루 톤의 깔끔하고 신뢰감 있는 테마"
+      },
+      "default": {
+        "label": "따뜻함",
+        "description": "따뜻하고 환영하는 어린이집 분위기"
+      },
+      "nature": {
+        "label": "자연",
+        "description": "자연에서 영감을 받은 톤 다운된 그린"
+      },
+      "playful": {
+        "label": "발랄함",
+        "description": "창의성과 즐거움을 주는 밝은 색상"
+      },
+      "dark": {
+        "label": "다크",
+        "description": "야간에 어울리는 세련된 다크 테마"
+      },
+      "violet": {
+        "label": "바이올렛",
+        "description": "차분하고 현대적인 보라 톤"
+      }
+    }
+  },
   "header": {
     "brandName": "프렌드십 코너",
     "brandTagline": "몬테소리 어린이집",

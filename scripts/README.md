@@ -2,6 +2,8 @@
 
 This folder contains scripts to download images from the original Friendship Corner Daycare website gallery and save them to the `public/static/` folder for use in the new website.
 
+For placeholder guidance and expected filenames, see `docs/images-readme.md`.
+
 ## Available Scripts
 
 ### 1. Bash Script (Recommended)
