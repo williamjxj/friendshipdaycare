@@ -15,6 +15,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { AnimatedPlaceholder } from '@/components/ui/AnimatedPlaceholder';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { businessProfile } from '@/lib/business-profile';
+import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -29,6 +30,11 @@ export function HomePageClient() {
   const mainRef = useRef<HTMLElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const { t } = useLanguage();
+
+  useLocalizedMetadata({
+    title: t('seo.home.title'),
+    description: t('seo.home.description'),
+  });
 
   // Animations
   useGSAP(() => {
@@ -108,10 +114,10 @@ export function HomePageClient() {
   const videos = useMemo(() => [
     {
       url: '/videos/friendship-daycare.mp4',
-      title: 'Daily Adventures',
-      description: 'A peek into our classroom - see the joy, learning, and growth happening every day at Friendship Corner Daycare.'
+      title: t('home.dailyAdventures.videoTitle'),
+      description: t('home.dailyAdventures.videoDescription'),
     }
-  ], []);
+  ], [t]);
 
   return (
     <main id="main-content" ref={mainRef} className="flex-1 overflow-x-hidden">
@@ -134,12 +140,12 @@ export function HomePageClient() {
           <div className="space-y-8">
             <div className="space-y-4">
               <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium text-sm tracking-wide uppercase">
-                Est. 2008 &bull; Coquitlam, BC
+                {t('home.hero.badge')}
               </span>
               <h1 className="text-4xl md:text-7xl font-display font-bold text-foreground drop-shadow-lg">
-                Montessori Daycare <br />
+                {t('home.hero.headline')} <br />
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-primary/90 to-secondary/90">
-                  in Coquitlam, BC
+                  {t('home.hero.highlight')}
                 </span>
               </h1>
               <p
@@ -150,7 +156,7 @@ export function HomePageClient() {
                   letterSpacing: '0.02em',
                 }}
               >
-                Friendship Corner Daycare offers a safe, nurturing Montessori environment for children 30 months to school age.
+                {t('home.hero.subtitle')}
               </p>
             </div>
 
@@ -323,7 +329,7 @@ export function HomePageClient() {
             <p>
               {businessProfile.address.streetAddress}, {businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode}
             </p>
-            <p>Mon - Fri: 7:00 AM - 6:00 PM</p>
+              <p>{t('common.hours.weekdays')}</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
             <a href="/contact" className="bg-accent text-white px-10 py-5 rounded-xl font-bold text-xl hover:bg-white hover:text-accent transition-colors shadow-xl">

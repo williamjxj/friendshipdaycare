@@ -16,6 +16,7 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  hasTranslation: (key: string) => boolean;
   messages: Record<string, any>;
 }
 
@@ -33,12 +34,38 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>('en');
   const [isHydrated, setIsHydrated] = useState(false);
 
+  const resolveValue = (source: Record<string, any>, key: string) => {
+    const keys = key.split('.');
+    let value: any = source;
+
+    for (const part of keys) {
+      if (value && typeof value === 'object' && part in value) {
+        value = value[part];
+      } else {
+        return undefined;
+      }
+    }
+
+    return value;
+  };
+
+  const hasTranslation = (key: string): boolean => {
+    const currentLanguage = isHydrated ? language : 'en';
+    return resolveValue(messages[currentLanguage], key) !== undefined;
+  };
+
   // Load saved language from localStorage on mount
   useEffect(() => {
     setIsHydrated(true);
-    const savedLanguage = localStorage.getItem('language') as Language;
+    const savedLanguage = localStorage.getItem('language') as Language | null;
     if (savedLanguage && messages[savedLanguage]) {
       setLanguage(savedLanguage);
+      return;
+    }
+
+    const browserLanguage = navigator.language?.split('-')[0] as Language | undefined;
+    if (browserLanguage && messages[browserLanguage]) {
+      setLanguage(browserLanguage);
     }
   }, []);
 
@@ -49,34 +76,30 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   // Translation function
   const t = (key: string): string => {
-    const keys = key.split('.');
     const currentLanguage = isHydrated ? language : 'en';
-    let value: any = messages[currentLanguage];
-    
-    for (const k of keys) {
-      if (value && typeof value === 'object' && k in value) {
-        value = value[k];
-      } else {
-        // Fallback to English if key not found
-        value = messages.en;
-        for (const fallbackKey of keys) {
-          if (value && typeof value === 'object' && fallbackKey in value) {
-            value = value[fallbackKey];
-          } else {
-            return key; // Return key if not found in fallback
-          }
-        }
-        break;
-      }
+    const localizedValue = resolveValue(messages[currentLanguage], key);
+
+    if (typeof localizedValue === 'string') {
+      return localizedValue;
     }
-    
-    return typeof value === 'string' ? value : key;
+
+    const fallbackValue = resolveValue(messages.en, key);
+    if (typeof fallbackValue === 'string') {
+      return fallbackValue;
+    }
+
+    const fallbackMessage =
+      resolveValue(messages[currentLanguage], 'common.translationFallback') ??
+      resolveValue(messages.en, 'common.translationFallback');
+
+    return typeof fallbackMessage === 'string' ? fallbackMessage : key;
   };
 
   const value = {
     language: isHydrated ? language : 'en' as Language,
     setLanguage,
     t,
+    hasTranslation,
     messages: messages[isHydrated ? language : 'en'],
   };
 

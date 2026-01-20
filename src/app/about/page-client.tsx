@@ -11,18 +11,34 @@ import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { textReveal, scaleInMagic } from '@/lib/magicui-animations';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 
 /**
  * About page client component with interactive sections.
  */
 export function AboutPageClient() {
+  const { t, messages } = useLanguage();
+
+  useLocalizedMetadata({
+    title: t('seo.about.title'),
+    description: t('seo.about.description'),
+  });
+
+  const values = (messages.aboutPage?.values?.items ?? []) as Array<{
+    title: string;
+    description: string;
+    icon: string;
+    color: 'primary' | 'secondary' | 'accent';
+  }>;
+
   return (
     <Suspense fallback={<LoadingSpinner message="Loading about us..." />}>
       <main className="flex-1">
         {/* Hero Section */}
         <PageHero
-          title="About Friendship Corner Daycare in Coquitlam"
-          subtitle="Montessori daycare serving Tri-Cities families with nurturing care since 2008"
+          title={t('aboutPage.hero.title')}
+          subtitle={t('aboutPage.hero.subtitle')}
           backgroundSvg={getImageUrl('/imgs/about/about_hero_1.gif')}
           enableScrollTrigger={true}
           hideSubtitle={true}
@@ -49,17 +65,17 @@ export function AboutPageClient() {
             >
               <motion.div className="space-y-6" variants={slideUp}>
                 <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                  Our Story
+                  {t('aboutPage.story.title')}
                 </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    Friendship Corner Daycare (Montessori) opened its doors in January 2008 as a non-profit society dedicated to providing exceptional early childhood education in Coquitlam, BC.
+                    {t('aboutPage.story.paragraphs.one')}
                   </p>
                   <p>
-                    As a Licensed Group Daycare, we serve children from 30 months to school age, creating a bridge between home and formal education through the proven Montessori method.
+                    {t('aboutPage.story.paragraphs.two')}
                   </p>
                   <p>
-                    Our mission is to provide a safe, clean, nurturing, and stimulating environment designed to help children grow, explore, create, and have fun while developing independence and self-confidence.
+                    {t('aboutPage.story.paragraphs.three')}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-4 pt-4">
@@ -67,13 +83,13 @@ export function AboutPageClient() {
                     href="/programs"
                     className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
                   >
-                    Explore Programs
+                    {t('aboutPage.story.ctaPrograms')}
                   </Link>
                   <Link
                     href="/contact"
                     className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
                   >
-                    Schedule a Visit
+                    {t('aboutPage.story.ctaVisit')}
                   </Link>
                 </div>
               </motion.div>
@@ -97,8 +113,8 @@ export function AboutPageClient() {
                   variants={scaleInMagic}
                 >
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-primary">16+</div>
-                    <div className="text-sm text-muted-foreground">Years of Excellence</div>
+                    <div className="text-3xl font-bold text-primary">{t('aboutPage.story.statsValue')}</div>
+                    <div className="text-sm text-muted-foreground">{t('aboutPage.story.statsLabel')}</div>
                   </div>
                 </motion.div>
               </motion.div>
@@ -117,34 +133,15 @@ export function AboutPageClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-16">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                Our Mission & Values
+                {t('aboutPage.values.title')}
               </h2>
               <p className="text-xl text-muted-foreground w-full max-w-none">
-                Creating a foundation for lifelong learning through Montessori principles and a loving community.
+                {t('aboutPage.values.subtitle')}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: 'Child-Centered Learning',
-                  description: 'We follow each child&apos;s natural curiosity and developmental pace, fostering independence and confidence.',
-                  icon: '🌱',
-                  color: 'primary'
-                },
-                {
-                  title: 'Safe & Nurturing',
-                  description: 'Our licensed facility provides a secure, clean environment where children feel supported and valued.',
-                  icon: '🛡️',
-                  color: 'secondary'
-                },
-                {
-                  title: 'Community Connection',
-                  description: 'We build strong partnerships with families to support each child&apos;s growth and success.',
-                  icon: '❤️',
-                  color: 'accent'
-                }
-              ].map((value, index) => (
+              {values.map((value, index) => (
                 <motion.div
                   key={value.title}
                   variants={textReveal}
@@ -185,17 +182,17 @@ export function AboutPageClient() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div variants={slideUp} className="space-y-6">
                 <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                  The Montessori Difference
+                  {t('aboutPage.montessori.title')}
                 </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    Our Montessori approach encourages children to explore and learn through hands-on activities in a carefully prepared environment.
+                    {t('aboutPage.montessori.paragraphs.one')}
                   </p>
                   <p>
-                    Children develop independence, concentration, and a love of learning through self-directed activities guided by trained educators.
+                    {t('aboutPage.montessori.paragraphs.two')}
                   </p>
                   <p>
-                    This proven method supports cognitive, social, emotional, and physical development during the most important early years.
+                    {t('aboutPage.montessori.paragraphs.three')}
                   </p>
                 </div>
               </motion.div>

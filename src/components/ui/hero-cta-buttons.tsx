@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/solid';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface HeroCTAButtonsProps {
   className?: string;
@@ -23,6 +24,7 @@ export function HeroCTAButtons({
   phoneNumber = '6049458504',
   contactLink = '/contact',
 }: HeroCTAButtonsProps) {
+  const { t } = useLanguage();
   const baseButtonClasses = cn(
     'inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-lg transition-all duration-200 min-h-[44px]',
     'hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl',
@@ -50,7 +52,7 @@ export function HeroCTAButtons({
         className={baseButtonClasses}
       >
         <EnvelopeIcon className="w-5 h-5" />
-        <span>Contact Us</span>
+        <span>{t('common.cta.contact')}</span>
       </Link>
       <a
         href={`tel:${phoneNumber}`}
@@ -58,7 +60,7 @@ export function HeroCTAButtons({
         aria-label={`Call us at ${phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1.$2.$3')}`}
       >
         <PhoneIcon className="w-5 h-5" />
-        <span>Call Now</span>
+        <span>{t('common.cta.callNow')}</span>
       </a>
     </div>
   );

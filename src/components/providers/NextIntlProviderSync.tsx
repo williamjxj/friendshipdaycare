@@ -24,9 +24,18 @@ const messagesMap = {
 export function NextIntlProviderSync({ children }: { children: ReactNode }) {
   const { language } = useLanguage();
   const messages = messagesMap[language] || enMessages;
+  const fallbackMessage =
+    messages.common?.translationFallback ||
+    enMessages.common?.translationFallback ||
+    'Translation unavailable.';
 
   return (
-    <NextIntlClientProvider locale={language} messages={messages}>
+    <NextIntlClientProvider
+      locale={language}
+      messages={messages}
+      getMessageFallback={() => fallbackMessage}
+      onError={() => undefined}
+    >
       {children}
     </NextIntlClientProvider>
   );

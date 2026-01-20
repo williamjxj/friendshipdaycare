@@ -3,10 +3,12 @@
     "home": "首页",
     "about": "关于我们",
     "programs": "课程项目",
+    "enrollment": "报名",
     "gallery": "图片展示",
     "todaysStory": "今日故事",
     "journal": "月刊",
-    "contact": "联系我们"
+    "contact": "联系我们",
+    "community": "社区"
   },
   "hero": {
     "title": "通过蒙特梭利教育培养幼小心灵",
@@ -72,6 +74,41 @@
     }
   },
   "footer": {
+    "brandName": "友谊角",
+    "brandTagline": "蒙特梭利托儿所",
+    "about": "通过蒙特梭利方法培育幼小心灵。我们营造温暖、安全、启发性的环境，让每个孩子都能成长与学习。",
+    "quickLinks": {
+      "title": "快速链接",
+      "programs": "课程项目",
+      "about": "关于我们",
+      "enrollment": "报名",
+      "todaysStory": "今日故事",
+      "journal": "月刊"
+    },
+    "resources": {
+      "title": "资源",
+      "canva1": "Canva 1",
+      "canva2": "Canva 2",
+      "gamma": "Gamma",
+      "slideDeck": "Slide Deck",
+      "notebookSlides": "NotebookLM 幻灯片"
+    },
+    "contact": {
+      "title": "联系我们",
+      "hoursWeekdays": "周一至周五：上午7:00 - 下午6:00",
+      "hoursWeekend": "周六周日：休息"
+    },
+    "mobileAccess": {
+      "title": "手机访问",
+      "scan": "扫码在手机查看"
+    },
+    "rightsReserved": "保留所有权利。",
+    "siteBy": "网站由",
+    "links": {
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "sitemap": "网站地图"
+    },
     "copyright": "© 2024 友谊角托儿所。保留所有权利。",
     "phone": "604.945.8504"
   },
@@ -103,6 +140,9 @@
   },
   "home": {
     "hero": {
+      "badge": "2008年成立 • 高贵林, BC",
+      "headline": "蒙特梭利托儿所",
+      "highlight": "高贵林, BC",
       "title": "让年轻的心灵茁壮成长",
       "subtitle": "一个安全、温馨的蒙特梭利环境，让每个孩子都能发现自己的独特天赋。",
       "scheduleTour": "预约参观",
@@ -166,7 +206,9 @@
     },
     "dailyAdventures": {
       "title": "每日冒险",
-      "subtitle": "一窥我们的教室"
+      "subtitle": "一窥我们的教室",
+      "videoTitle": "每日冒险",
+      "videoDescription": "看看教室里每天发生的欢乐、学习与成长。"
     },
     "readyToVisit": {
       "title": "准备参观了吗？",
@@ -177,6 +219,463 @@
   "common": {
     "loading": "加载中...",
     "error": "发生错误",
-    "retry": "重试"
+    "retry": "重试",
+    "translationFallback": "暂无翻译。",
+    "cta": {
+      "contact": "联系我们",
+      "callNow": "立即致电"
+    },
+    "hours": {
+      "weekdays": "周一至周五：上午7:00 - 下午6:00"
+    }
+  },
+  "header": {
+    "brandName": "友谊角",
+    "brandTagline": "蒙特梭利托儿所",
+    "bookTour": "预约参观"
+  },
+  "aboutPage": {
+    "hero": {
+      "title": "关于高贵林友谊角托儿所",
+      "subtitle": "自2008年以来为三城家庭提供温暖的蒙特梭利照护"
+    },
+    "story": {
+      "title": "我们的故事",
+      "paragraphs": {
+        "one": "友谊角托儿所（蒙特梭利）于2008年1月在高贵林成立，是一家非营利机构。",
+        "two": "我们是持牌集体托儿所，服务30个月至学龄儿童。",
+        "three": "我们提供安全、清洁、温馨的环境，帮助孩子成长、探索并建立自信。"
+      },
+      "ctaPrograms": "查看课程",
+      "ctaVisit": "预约参观",
+      "statsValue": "16+",
+      "statsLabel": "年经验"
+    },
+    "values": {
+      "title": "我们的使命与价值",
+      "subtitle": "以蒙特梭利理念和关爱的社区为终身学习打下基础。",
+      "items": [
+        {
+          "title": "儿童为本",
+          "description": "顺应孩子的好奇心和发展节奏，培养独立与自信。",
+          "icon": "🌱",
+          "color": "primary"
+        },
+        {
+          "title": "安全与关怀",
+          "description": "持牌设施提供安全、整洁的环境，让孩子安心成长。",
+          "icon": "🛡️",
+          "color": "secondary"
+        },
+        {
+          "title": "家庭合作",
+          "description": "与家庭紧密合作，共同支持孩子的发展。",
+          "icon": "❤️",
+          "color": "accent"
+        }
+      ]
+    },
+    "montessori": {
+      "title": "蒙特梭利的不同",
+      "paragraphs": {
+        "one": "在精心准备的环境中，孩子通过动手活动自主探索。",
+        "two": "在引导下的自主学习中培养专注、独立与热爱学习。",
+        "three": "这一方法支持儿童认知、社交与情感发展。"
+      }
+    }
+  },
+  "programsPage": {
+    "hero": {
+      "title": "高贵林蒙特梭利课程",
+      "subtitle": "幼儿、学前班与学前准备课程"
+    },
+    "overview": {
+      "title": "高贵林蒙特梭利课程",
+      "subtitle": "适龄课程帮助孩子在实践中成长。"
+    },
+    "programDetail": {
+      "keyFeatures": "主要特色"
+    },
+    "programs": {
+      "toddler": {
+        "title": "幼儿课程",
+        "age": "30个月 - 3岁",
+        "description": "以独立性与社交发展为重点的温和学习启蒙。",
+        "features": [
+          "社交技能发展",
+          "独立性培养",
+          "感官探索",
+          "语言发展",
+          "精细动作发展",
+          "情绪管理"
+        ],
+        "dailySchedule": [
+          { "time": "6:30 - 8:00", "activity": "到园与自由玩耍" },
+          { "time": "8:00 - 8:30", "activity": "早间加餐" },
+          { "time": "8:30 - 10:00", "activity": "蒙特梭利工作时间" },
+          { "time": "10:00 - 11:00", "activity": "户外活动" },
+          { "time": "11:00 - 12:00", "activity": "午餐" },
+          { "time": "12:00 - 2:30", "activity": "午休" },
+          { "time": "2:30 - 3:00", "activity": "下午加餐" },
+          { "time": "3:00 - 5:00", "activity": "活动与游戏" },
+          { "time": "5:00 - 6:30", "activity": "离园" }
+        ]
+      },
+      "preschool": {
+        "title": "学前课程",
+        "age": "3 - 4岁",
+        "description": "基于蒙特梭利的动手学习与创意表达。",
+        "features": [
+          "创意表达",
+          "动手学习",
+          "数学启蒙",
+          "阅读准备",
+          "科学探索",
+          "文化学习"
+        ],
+        "dailySchedule": [
+          { "time": "6:30 - 8:00", "activity": "到园与自由选择" },
+          { "time": "8:00 - 8:30", "activity": "晨圈时间" },
+          { "time": "8:30 - 10:30", "activity": "蒙特梭利工作周期" },
+          { "time": "10:30 - 11:30", "activity": "户外探索" },
+          { "time": "11:30 - 12:30", "activity": "午餐与社交" },
+          { "time": "12:30 - 2:30", "activity": "安静时间/午休" },
+          { "time": "2:30 - 3:00", "activity": "下午加餐" },
+          { "time": "3:00 - 5:30", "activity": "艺术与活动" },
+          { "time": "5:30 - 6:30", "activity": "离园" }
+        ]
+      },
+      "prekindergarten": {
+        "title": "学前班",
+        "age": "4 - 5岁",
+        "description": "为入学准备提供更高级的蒙特梭利材料与概念。",
+        "features": [
+          "入学准备",
+          "高级概念",
+          "阅读与书写",
+          "数学",
+          "批判性思维",
+          "领导力"
+        ],
+        "dailySchedule": [
+          { "time": "6:30 - 8:00", "activity": "到园与早间工作" },
+          { "time": "8:00 - 8:30", "activity": "晨间会议" },
+          { "time": "8:30 - 11:00", "activity": "延长工作时段" },
+          { "time": "11:00 - 12:00", "activity": "户外学习" },
+          { "time": "12:00 - 1:00", "activity": "午餐与交流" },
+          { "time": "1:00 - 2:30", "activity": "休息/安静活动" },
+          { "time": "2:30 - 3:00", "activity": "下午加餐" },
+          { "time": "3:00 - 6:00", "activity": "项目与游戏" },
+          { "time": "6:00 - 6:30", "activity": "离园" }
+        ]
+      }
+    },
+    "dailySchedule": {
+      "title": "蒙特梭利课堂的一天",
+      "subtitle": "兼顾学习、游戏与休息的日程安排。"
+    },
+    "cta": {
+      "title": "准备加入我们的蒙特梭利社区了吗？",
+      "subtitle": "联系我们预约参观或了解报名流程。",
+      "primary": "预约参观",
+      "secondary": "报名详情"
+    }
+  },
+  "enrollmentPage": {
+    "hero": {
+      "title": "高贵林蒙特梭利报名",
+      "subtitle": "报名步骤与要求"
+    },
+    "process": {
+      "title": "报名流程",
+      "subtitle": "按照以下步骤开始孩子的蒙特梭利之旅。"
+    },
+    "steps": [
+      {
+        "title": "提交申请",
+        "description": "填写报名表并提供孩子信息。"
+      },
+      {
+        "title": "预约参观",
+        "description": "来园参观，与我们的团队见面。"
+      },
+      {
+        "title": "审核确认",
+        "description": "我们将审核申请并确认名额。"
+      },
+      {
+        "title": "确认入园",
+        "description": "完成手续并确定入园日期。"
+      }
+    ],
+    "requirements": {
+      "title": "报名资料",
+      "subtitle": "请准备以下材料以便顺利报名。",
+      "items": [
+        "报名申请表",
+        "孩子出生证明或护照",
+        "疫苗记录",
+        "紧急联系人信息",
+        "医疗与过敏信息",
+        "月费押金"
+      ]
+    },
+    "cta": {
+      "title": "准备好报名了吗？",
+      "subtitle": "联系我们开始报名或预约参观。",
+      "primary": "联系我们",
+      "secondary": "致电 604.945.8504"
+    }
+  },
+  "galleryPage": {
+    "hero": {
+      "title": "高贵林托儿所相册",
+      "subtitle": "探索教室、活动与空间"
+    },
+    "gallery": {
+      "title": "蒙特梭利精彩瞬间",
+      "subtitle": "看看我们的课堂如何激发好奇心和快乐学习。"
+    },
+    "categories": [
+      { "id": "all", "name": "全部" },
+      { "id": "classroom", "name": "教室" },
+      { "id": "playground", "name": "操场" },
+      { "id": "activities", "name": "活动" }
+    ],
+    "categoriesFallback": {
+      "all": "全部",
+      "classroom": "教室",
+      "playground": "操场",
+      "activities": "活动"
+    },
+    "video": {
+      "title": "每日冒险",
+      "description": "看看每天发生在教室里的欢乐与成长。"
+    },
+    "videoSection": {
+      "title": "看看蒙特梭利的一天",
+      "subtitle": "了解我们在高贵林的日常活动与学习时刻。"
+    },
+    "cta": {
+      "title": "想亲自来看看吗？",
+      "subtitle": "预约参观，亲身体验我们的托儿所。",
+      "primary": "预约参观",
+      "secondary": "查看课程"
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "title": "联系友谊角托儿所",
+      "subtitle": "预约参观、咨询或开始报名"
+    },
+    "info": {
+      "title": "联系我们",
+      "description": "无论是咨询课程、预约参观或报名，我们都乐意协助。"
+    },
+    "cards": {
+      "phone": {
+        "title": "电话",
+        "subtitle": "周一至周五：上午7:00 - 下午6:00"
+      },
+      "location": {
+        "title": "地址",
+        "subtitle": "公共交通便利"
+      },
+      "hours": {
+        "title": "营业时间",
+        "weekdays": "周一至周五",
+        "hours": "上午7:00 - 下午6:00",
+        "subtitle": "周末和节假日休息"
+      },
+      "email": {
+        "title": "邮箱",
+        "subtitle": "24小时内回复"
+      }
+    },
+    "quickActions": {
+      "title": "快捷操作",
+      "call": "立即致电",
+      "email": "发送邮件",
+      "programs": "查看课程"
+    },
+    "form": {
+      "title": "给我们留言",
+      "success": "感谢您的留言！我们将在24小时内回复。",
+      "submit": "发送消息",
+      "submitting": "发送中...",
+      "fields": {
+        "name": "姓名",
+        "email": "邮箱地址",
+        "phone": "电话号码",
+        "childAge": "孩子年龄",
+        "message": "留言"
+      },
+      "placeholders": {
+        "name": "请输入姓名",
+        "email": "your.email@example.com",
+        "phone": "604.945.8504",
+        "message": "请告诉我们您的需求与孩子情况..."
+      },
+      "options": {
+        "agePlaceholder": "选择年龄段",
+        "ageToddler": "30个月 - 3岁",
+        "agePreschool": "3 - 4岁",
+        "agePreK": "4 - 5岁",
+        "ageOther": "其他"
+      },
+      "validation": {
+        "nameRequired": "请输入姓名",
+        "emailRequired": "请输入邮箱地址",
+        "emailInvalid": "请输入有效的邮箱地址",
+        "messageRequired": "请输入留言内容",
+        "messageMin": "留言至少需要10个字符",
+        "formError": "请检查错误后再试。",
+        "submitError": "发送失败，请重试。",
+        "networkError": "网络错误，请检查连接。"
+      }
+    },
+    "map": {
+      "title": "来访路线",
+      "subtitle": "靠近高贵林站，公共交通便利"
+    }
+  },
+  "community": {
+    "journal": {
+      "meta": {
+        "title": "月度托儿所日志",
+        "description": "了解蒙特梭利课堂的月度更新与亮点。"
+      },
+      "hero": {
+        "title": "月度日志",
+        "subtitle": "了解我们的月度更新与学习亮点"
+      },
+      "labels": {
+        "highlights": "亮点："
+      },
+      "actions": {
+        "readFull": "阅读全文"
+      },
+      "empty": {
+        "title": "暂无日志",
+        "subtitle": "请稍后再来查看。"
+      },
+      "samples": [
+        {
+          "id": 1,
+          "month": "12月",
+          "year": 2024,
+          "title": "冬日奇境冒险",
+          "excerpt": "本月孩子们通过蒙特梭利活动、季节手工和故事时间感受冬日的魔法。",
+          "coverImage": "/images/journal-dec-2024.jpg",
+          "date": "2024-12-01",
+          "highlights": [
+            "雪与冰感官盒",
+            "世界各地的节日传统",
+            "实务活动：制作热巧克力",
+            "自然散步观察冬季变化"
+          ],
+          "activities": [
+            "雪花剪纸与对称探索",
+            "冬季动物栖息地学习",
+            "季节料理活动",
+            "为家庭制作节日贺卡"
+          ]
+        },
+        {
+          "id": 2,
+          "month": "11月",
+          "year": 2024,
+          "title": "感恩与收获庆典",
+          "excerpt": "通过感恩与收获主题活动，体验季节变化与社区合作。",
+          "coverImage": "/images/journal-nov-2024.jpg",
+          "date": "2024-11-01",
+          "highlights": [
+            "感恩节餐点准备",
+            "感恩树项目",
+            "秋叶收集与分类",
+            "社区助手感谢周"
+          ],
+          "activities": [
+            "南瓜生命周期学习",
+            "传统面包制作",
+            "秋季自然艺术",
+            "感谢卡书写练习"
+          ]
+        },
+        {
+          "id": 3,
+          "month": "10月",
+          "year": 2024,
+          "title": "秋日探索与万圣节",
+          "excerpt": "十月充满秋日探索与节日乐趣，发现季节变化的精彩。",
+          "coverImage": "/images/journal-oct-2024.jpg",
+          "date": "2024-10-01",
+          "highlights": [
+            "南瓜园参观",
+            "万圣节装扮游行",
+            "苹果采摘与品尝",
+            "叶片压印艺术"
+          ],
+          "activities": [
+            "南瓜雕刻（教师示范）",
+            "故事时间",
+            "秋季感官探索",
+            "收获节准备"
+          ]
+        }
+      ]
+    },
+    "todaysStory": {
+      "meta": {
+        "title": "今日故事",
+        "description": "每日冒险与温馨故事，陪伴孩子成长。"
+      },
+      "hero": {
+        "title": "今日故事",
+        "subtitle": "每日冒险、学习时刻与温馨故事"
+      },
+      "weekly": {
+        "title": "本周冒险",
+        "subtitle": "每周一更新，适合3-6岁"
+      },
+      "videos": {
+        "goodSamaritan": {
+          "title": "善良的撒玛利亚人",
+          "description": "关于善良与帮助他人的美好故事。"
+        },
+        "davidGoliath": {
+          "title": "大卫与歌利亚",
+          "description": "勇气与信心的故事。"
+        },
+        "noahArk": {
+          "title": "诺亚方舟",
+          "description": "与诺亚和动物们一起冒险！"
+        }
+      },
+      "lessonCards": {
+        "kind": {
+          "title": "要善良",
+          "description": "带着微笑帮助别人"
+        },
+        "helpful": {
+          "title": "乐于助人",
+          "description": "向朋友伸出援手"
+        },
+        "love": {
+          "title": "传递爱",
+          "description": "关爱身边每一个人"
+        }
+      },
+      "calendar": {
+        "title": "故事日历",
+        "subtitle": "每周都有新的故事与人生课程！"
+      },
+      "cta": {
+        "title": "加入我们的奇妙学习旅程！",
+        "subtitle": "让故事与蒙特梭利魔法相遇，孩子每天都在成长。",
+        "primary": "预约参观",
+        "secondary": "查看课程"
+      }
+    }
   }
 }

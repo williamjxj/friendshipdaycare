@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import { Newspaper, Calendar, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { AnimatedPlaceholder } from '@/components/ui/AnimatedPlaceholder';
+import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 
 // Sample journal data
 const sampleJournals = [
@@ -81,7 +82,13 @@ const sampleJournals = [
 ];
 
 export default function JournalPage() {
-  const { t } = useLanguage();
+  const { t, messages } = useLanguage();
+  const journals = (messages.community?.journal?.samples ?? sampleJournals) as typeof sampleJournals;
+
+  useLocalizedMetadata({
+    title: t('community.journal.meta.title'),
+    description: t('community.journal.meta.description'),
+  });
 
   return (
     <Suspense fallback={<LoadingSpinner message="Loading journal..." />}>
@@ -89,8 +96,8 @@ export default function JournalPage() {
 
         {/* Hero Section */}
         <PageHero
-          title="Monthly Journal"
-          subtitle="Explore our monthly updates, learning highlights, and special moments from our Montessori classroom"
+          title={t('community.journal.hero.title')}
+          subtitle={t('community.journal.hero.subtitle')}
           backgroundSvg={getImageUrl('/imgs/community/community_journal_hero_1.gif')}
           enableScrollTrigger={true}
           hideTitle={true}
@@ -100,9 +107,9 @@ export default function JournalPage() {
         {/* Journals Grid */}
         <section className="py-20 bg-background relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {sampleJournals.length > 0 ? (
+            {journals.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {sampleJournals.map((journal, index) => (
+                {journals.map((journal, index) => (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -137,7 +144,7 @@ export default function JournalPage() {
                         </p>
 
                         <div className="pt-4 mt-auto">
-                          <h4 className="text-xs font-bold text-foreground mb-2 uppercase tracking-wide">Highlights:</h4>
+                          <h4 className="text-xs font-bold text-foreground mb-2 uppercase tracking-wide">{t('community.journal.labels.highlights')}</h4>
                           <ul className="space-y-1.5">
                             {journal.highlights.slice(0, 3).map((highlight, idx) => (
                               <li key={idx} className="flex items-start gap-2 text-xs text-muted-foreground">
@@ -154,7 +161,7 @@ export default function JournalPage() {
                           href={`/community/journal/${journal.id}`}
                           className="inline-flex items-center justify-center w-full gap-2 bg-muted hover:bg-muted/80 text-foreground px-4 py-3 rounded-lg font-bold text-sm transition-colors group/btn min-h-[44px]"
                         >
-                          Read Full Entry
+                          {t('community.journal.actions.readFull')}
                           <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                         </Link>
                       </CardFooter>
@@ -166,10 +173,10 @@ export default function JournalPage() {
               <div className="text-center py-20 bg-muted/30 rounded-3xl border border-dashed border-border">
                 <div className="text-6xl mb-6 opacity-50">📝</div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">
-                  No Journal Entries Yet
+                  {t('community.journal.empty.title')}
                 </h3>
                 <p className="text-muted-foreground">
-                  Check back soon for updates from our classroom!
+                  {t('community.journal.empty.subtitle')}
                 </p>
               </div>
             )}

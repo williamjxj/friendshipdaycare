@@ -187,7 +187,7 @@ export function Header() {
       about: t('navigation.about'),
       programs: t('navigation.programs'),
       enrollment: t('navigation.enrollment'),
-      community: "Community", // Fallback or add to json
+      community: t('navigation.community'),
       'todays-story': t('navigation.todaysStory'),
       journal: t('navigation.journal'),
       gallery: t('navigation.gallery'),
@@ -274,7 +274,7 @@ export function Header() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500 bg-[length:200%_auto] group-hover/cta:animate-[gradient_3s_linear_infinite]" />
               <Calendar className="relative z-10 w-6 h-6 shrink-0 transition-transform group-hover/cta:rotate-12" />
-              <span className="relative z-10 font-bold">Book a Tour</span>
+              <span className="relative z-10 font-bold">{t('header.bookTour')}</span>
             </Link>
           </div>
 
@@ -358,7 +358,7 @@ export function Header() {
                   className="block w-full text-center warm-button min-h-[44px] py-2 flex items-center justify-center gap-2 shadow-md text-sm"
                 >
                   <Calendar className="w-4 h-4" />
-                  <span>Book a Tour</span>
+                  <span>{t('header.bookTour')}</span>
                 </Link>
               </div>
             </div>

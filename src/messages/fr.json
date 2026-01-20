@@ -3,10 +3,12 @@
     "home": "Accueil",
     "about": "À propos",
     "programs": "Programmes",
+    "enrollment": "Inscription",
     "gallery": "Galerie",
     "todaysStory": "Histoire du Jour",
     "journal": "Journal",
-    "contact": "Contact"
+    "contact": "Contact",
+    "community": "Communauté"
   },
   "hero": {
     "title": "Nourrir les jeunes esprits grâce à l'excellence Montessori",
@@ -72,6 +74,41 @@
     }
   },
   "footer": {
+    "brandName": "Friendship Corner",
+    "brandTagline": "Garderie Montessori",
+    "about": "Nous nourrissons les jeunes esprits grâce à la méthode Montessori. Un environnement chaleureux et sûr où chaque enfant grandit et apprend.",
+    "quickLinks": {
+      "title": "Liens Rapides",
+      "programs": "Nos Programmes",
+      "about": "À propos",
+      "enrollment": "Inscription",
+      "todaysStory": "Histoire du Jour",
+      "journal": "Journal"
+    },
+    "resources": {
+      "title": "Ressources",
+      "canva1": "Canva 1",
+      "canva2": "Canva 2",
+      "gamma": "Gamma",
+      "slideDeck": "Slide Deck",
+      "notebookSlides": "Diapositives NotebookLM"
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "hoursWeekdays": "Lun - Ven : 7h00 - 18h00",
+      "hoursWeekend": "Sam - Dim : Fermé"
+    },
+    "mobileAccess": {
+      "title": "Accès Mobile",
+      "scan": "Scannez pour voir sur mobile"
+    },
+    "rightsReserved": "Tous droits réservés.",
+    "siteBy": "Site réalisé par",
+    "links": {
+      "privacy": "Politique de Confidentialité",
+      "terms": "Conditions d'utilisation",
+      "sitemap": "Plan du site"
+    },
     "copyright": "© 2024 Garderie Friendship Corner. Tous droits réservés.",
     "phone": "604.945.8504"
   },
@@ -103,6 +140,9 @@
   },
   "home": {
     "hero": {
+      "badge": "Depuis 2008 • Coquitlam, BC",
+      "headline": "Garderie Montessori",
+      "highlight": "à Coquitlam, BC",
       "title": "Où les Jeunes Esprits S'épanouissent",
       "subtitle": "Un environnement Montessori sûr et bienveillant où chaque enfant découvre ses superpouvoirs uniques.",
       "scheduleTour": "Planifier une Visite",
@@ -166,7 +206,9 @@
     },
     "dailyAdventures": {
       "title": "Aventures Quotidiennes",
-      "subtitle": "Un aperçu de notre classe"
+      "subtitle": "Un aperçu de notre classe",
+      "videoTitle": "Aventures Quotidiennes",
+      "videoDescription": "Un aperçu de notre classe : joie, apprentissage et croissance chaque jour."
     },
     "readyToVisit": {
       "title": "Prêt à Visiter?",
@@ -177,6 +219,463 @@
   "common": {
     "loading": "Chargement...",
     "error": "Une erreur s'est produite",
-    "retry": "Réessayer"
+    "retry": "Réessayer",
+    "translationFallback": "Traduction indisponible.",
+    "cta": {
+      "contact": "Contactez-nous",
+      "callNow": "Appeler Maintenant"
+    },
+    "hours": {
+      "weekdays": "Lun - Ven : 7h00 - 18h00"
+    }
+  },
+  "header": {
+    "brandName": "Friendship Corner",
+    "brandTagline": "Garderie Montessori",
+    "bookTour": "Réserver une Visite"
+  },
+  "aboutPage": {
+    "hero": {
+      "title": "À propos de Friendship Corner Daycare à Coquitlam",
+      "subtitle": "Soins Montessori pour les familles de Tri-Cities depuis 2008"
+    },
+    "story": {
+      "title": "Notre Histoire",
+      "paragraphs": {
+        "one": "Friendship Corner Daycare (Montessori) a ouvert en janvier 2008 comme organisme sans but lucratif à Coquitlam, C.-B.",
+        "two": "Nous sommes une garderie de groupe agréée pour les enfants de 30 mois à l'âge scolaire.",
+        "three": "Nous offrons un environnement sûr, propre et stimulant pour aider les enfants à grandir et à s'épanouir."
+      },
+      "ctaPrograms": "Explorer les Programmes",
+      "ctaVisit": "Planifier une Visite",
+      "statsValue": "16+",
+      "statsLabel": "Années d'Excellence"
+    },
+    "values": {
+      "title": "Notre Mission et Nos Valeurs",
+      "subtitle": "Bâtir une base d'apprentissage durable avec Montessori et une communauté bienveillante.",
+      "items": [
+        {
+          "title": "Apprentissage Centré sur l'Enfant",
+          "description": "Nous suivons la curiosité naturelle de l'enfant pour favoriser l'indépendance et la confiance.",
+          "icon": "🌱",
+          "color": "primary"
+        },
+        {
+          "title": "Sûr et Bienveillant",
+          "description": "Un établissement agréé offrant un environnement sécuritaire et propre.",
+          "icon": "🛡️",
+          "color": "secondary"
+        },
+        {
+          "title": "Lien Communautaire",
+          "description": "Nous collaborons avec les familles pour soutenir le développement de chaque enfant.",
+          "icon": "❤️",
+          "color": "accent"
+        }
+      ]
+    },
+    "montessori": {
+      "title": "La Différence Montessori",
+      "paragraphs": {
+        "one": "L'approche Montessori encourage l'apprentissage pratique dans un environnement préparé.",
+        "two": "Les enfants développent l'indépendance, la concentration et l'amour d'apprendre.",
+        "three": "Cette méthode soutient le développement cognitif, social et émotionnel."
+      }
+    }
+  },
+  "programsPage": {
+    "hero": {
+      "title": "Programmes Montessori à Coquitlam",
+      "subtitle": "Programmes pour tout-petits, préscolaire et pré-maternelle"
+    },
+    "overview": {
+      "title": "Programmes Montessori à Coquitlam",
+      "subtitle": "Des programmes adaptés à l'âge qui soutiennent la croissance de chaque enfant."
+    },
+    "programDetail": {
+      "keyFeatures": "Points Clés"
+    },
+    "programs": {
+      "toddler": {
+        "title": "Programme Tout-Petits",
+        "age": "30 mois - 3 ans",
+        "description": "Une introduction douce à l'apprentissage structuré avec un accent sur l'indépendance et les compétences sociales.",
+        "features": [
+          "Développement des compétences sociales",
+          "Développement de l'indépendance",
+          "Exploration sensorielle",
+          "Développement du langage",
+          "Motricité fine",
+          "Régulation émotionnelle"
+        ],
+        "dailySchedule": [
+          { "time": "6:30 - 8:00", "activity": "Arrivée et jeu libre" },
+          { "time": "8:00 - 8:30", "activity": "Collation du matin" },
+          { "time": "8:30 - 10:00", "activity": "Travail Montessori" },
+          { "time": "10:00 - 11:00", "activity": "Jeu extérieur" },
+          { "time": "11:00 - 12:00", "activity": "Déjeuner" },
+          { "time": "12:00 - 2:30", "activity": "Temps de repos" },
+          { "time": "2:30 - 3:00", "activity": "Collation de l'après-midi" },
+          { "time": "3:00 - 5:00", "activity": "Activités et jeux" },
+          { "time": "5:00 - 6:30", "activity": "Départ" }
+        ]
+      },
+      "preschool": {
+        "title": "Programme Préscolaire",
+        "age": "3 - 4 ans",
+        "description": "Programme basé sur Montessori avec apprentissage pratique et expression créative.",
+        "features": [
+          "Expression créative",
+          "Apprentissage pratique",
+          "Pré-mathématiques",
+          "Pré-lecture",
+          "Exploration scientifique",
+          "Études culturelles"
+        ],
+        "dailySchedule": [
+          { "time": "6:30 - 8:00", "activity": "Arrivée et choix libre" },
+          { "time": "8:00 - 8:30", "activity": "Cercle du matin" },
+          { "time": "8:30 - 10:30", "activity": "Cycle de travail Montessori" },
+          { "time": "10:30 - 11:30", "activity": "Exploration extérieure" },
+          { "time": "11:30 - 12:30", "activity": "Déjeuner et socialisation" },
+          { "time": "12:30 - 2:30", "activity": "Temps calme/repos" },
+          { "time": "2:30 - 3:00", "activity": "Collation de l'après-midi" },
+          { "time": "3:00 - 5:30", "activity": "Art et activités" },
+          { "time": "5:30 - 6:30", "activity": "Départ" }
+        ]
+      },
+      "prekindergarten": {
+        "title": "Pré-maternelle",
+        "age": "4 - 5 ans",
+        "description": "Préparation à l'école avec du matériel Montessori avancé.",
+        "features": [
+          "Préparation à l'école",
+          "Concepts avancés",
+          "Lecture et écriture",
+          "Mathématiques",
+          "Pensée critique",
+          "Leadership"
+        ],
+        "dailySchedule": [
+          { "time": "6:30 - 8:00", "activity": "Arrivée et travail du matin" },
+          { "time": "8:00 - 8:30", "activity": "Réunion du matin" },
+          { "time": "8:30 - 11:00", "activity": "Période de travail prolongée" },
+          { "time": "11:00 - 12:00", "activity": "Apprentissage extérieur" },
+          { "time": "12:00 - 1:00", "activity": "Déjeuner et communauté" },
+          { "time": "1:00 - 2:30", "activity": "Repos/activités calmes" },
+          { "time": "2:30 - 3:00", "activity": "Collation de l'après-midi" },
+          { "time": "3:00 - 6:00", "activity": "Projets et jeux" },
+          { "time": "6:00 - 6:30", "activity": "Départ" }
+        ]
+      }
+    },
+    "dailySchedule": {
+      "title": "Une Journée dans Notre Classe Montessori",
+      "subtitle": "Un rythme quotidien équilibré pour apprendre, jouer et se reposer."
+    },
+    "cta": {
+      "title": "Prêt à rejoindre notre communauté Montessori?",
+      "subtitle": "Contactez-nous pour planifier une visite ou en savoir plus sur l'inscription.",
+      "primary": "Planifier une Visite",
+      "secondary": "Détails d'Inscription"
+    }
+  },
+  "enrollmentPage": {
+    "hero": {
+      "title": "Inscription Montessori à Coquitlam",
+      "subtitle": "Étapes et exigences pour s'inscrire"
+    },
+    "process": {
+      "title": "Processus d'Inscription",
+      "subtitle": "Suivez ces étapes pour commencer le parcours Montessori."
+    },
+    "steps": [
+      {
+        "title": "Soumettre la Demande",
+        "description": "Remplissez le formulaire d'inscription avec les détails de votre enfant."
+      },
+      {
+        "title": "Planifier une Visite",
+        "description": "Visitez la garderie pour rencontrer notre équipe."
+      },
+      {
+        "title": "Révision et Approbation",
+        "description": "Nous examinerons votre demande et confirmerons la disponibilité."
+      },
+      {
+        "title": "Date de Début",
+        "description": "Finalisez les documents et commencez la première journée."
+      }
+    ],
+    "requirements": {
+      "title": "Exigences d'Inscription",
+      "subtitle": "Veuillez préparer les documents suivants.",
+      "items": [
+        "Formulaire d'inscription complété",
+        "Certificat de naissance ou passeport",
+        "Dossiers de vaccination",
+        "Informations de contact d'urgence",
+        "Informations médicales et allergies",
+        "Dépôt des frais mensuels"
+      ]
+    },
+    "cta": {
+      "title": "Prêt à vous inscrire?",
+      "subtitle": "Contactez-nous pour commencer ou planifier une visite.",
+      "primary": "Contactez-nous",
+      "secondary": "Appelez le 604.945.8504"
+    }
+  },
+  "galleryPage": {
+    "hero": {
+      "title": "Galerie de la Garderie à Coquitlam",
+      "subtitle": "Découvrez nos classes, activités et espaces"
+    },
+    "gallery": {
+      "title": "Moments Montessori",
+      "subtitle": "Voyez comment notre garderie inspire curiosité et apprentissage."
+    },
+    "categories": [
+      { "id": "all", "name": "Tout" },
+      { "id": "classroom", "name": "Classe" },
+      { "id": "playground", "name": "Cour" },
+      { "id": "activities", "name": "Activités" }
+    ],
+    "categoriesFallback": {
+      "all": "Tout",
+      "classroom": "Classe",
+      "playground": "Cour",
+      "activities": "Activités"
+    },
+    "video": {
+      "title": "Aventures Quotidiennes",
+      "description": "Un aperçu de la joie et de l'apprentissage quotidien."
+    },
+    "videoSection": {
+      "title": "Voyez Notre Garderie en Action",
+      "subtitle": "Découvrez les routines et moments d'apprentissage."
+    },
+    "cta": {
+      "title": "Envie de le voir en personne?",
+      "subtitle": "Planifiez une visite et vivez l'expérience.",
+      "primary": "Planifier une Visite",
+      "secondary": "Voir les Programmes"
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "title": "Contactez Friendship Corner Daycare",
+      "subtitle": "Planifiez une visite, posez des questions ou commencez l'inscription"
+    },
+    "info": {
+      "title": "Entrer en Contact",
+      "description": "Nous sommes là pour répondre à vos questions et organiser une visite."
+    },
+    "cards": {
+      "phone": {
+        "title": "Téléphone",
+        "subtitle": "Lun - Ven : 7h00 - 18h00"
+      },
+      "location": {
+        "title": "Emplacement",
+        "subtitle": "Accès pratique aux transports en commun"
+      },
+      "hours": {
+        "title": "Heures",
+        "weekdays": "Lun - Ven",
+        "hours": "7h00 - 18h00",
+        "subtitle": "Fermé les week-ends et jours fériés"
+      },
+      "email": {
+        "title": "Courriel",
+        "subtitle": "Réponse sous 24 heures"
+      }
+    },
+    "quickActions": {
+      "title": "Actions Rapides",
+      "call": "Appeler Maintenant",
+      "email": "Envoyer un Courriel",
+      "programs": "Voir les Programmes"
+    },
+    "form": {
+      "title": "Envoyez-nous un Message",
+      "success": "Merci ! Nous vous répondrons sous 24 heures.",
+      "submit": "Envoyer le Message",
+      "submitting": "Envoi...",
+      "fields": {
+        "name": "Nom complet",
+        "email": "Adresse e-mail",
+        "phone": "Numéro de téléphone",
+        "childAge": "Âge de l'enfant",
+        "message": "Message"
+      },
+      "placeholders": {
+        "name": "Votre nom complet",
+        "email": "your.email@example.com",
+        "phone": "604.945.8504",
+        "message": "Parlez-nous de votre enfant et de vos questions..."
+      },
+      "options": {
+        "agePlaceholder": "Sélectionnez la tranche d'âge",
+        "ageToddler": "30 mois - 3 ans",
+        "agePreschool": "3 - 4 ans",
+        "agePreK": "4 - 5 ans",
+        "ageOther": "Autre"
+      },
+      "validation": {
+        "nameRequired": "Le nom est obligatoire",
+        "emailRequired": "L'e-mail est obligatoire",
+        "emailInvalid": "Veuillez saisir un e-mail valide",
+        "messageRequired": "Le message est obligatoire",
+        "messageMin": "Le message doit contenir au moins 10 caractères",
+        "formError": "Corrigez les erreurs et réessayez.",
+        "submitError": "Échec de l'envoi. Veuillez réessayer.",
+        "networkError": "Erreur réseau. Vérifiez votre connexion."
+      }
+    },
+    "map": {
+      "title": "Visitez Notre Emplacement",
+      "subtitle": "Près de la station de Coquitlam avec accès aux transports en commun"
+    }
+  },
+  "community": {
+    "journal": {
+      "meta": {
+        "title": "Journal Mensuel de la Garderie",
+        "description": "Découvrez les mises à jour mensuelles et les moments forts de notre classe Montessori."
+      },
+      "hero": {
+        "title": "Journal Mensuel",
+        "subtitle": "Explorez nos mises à jour et moments spéciaux"
+      },
+      "labels": {
+        "highlights": "Points Forts :"
+      },
+      "actions": {
+        "readFull": "Lire l'Entrée Complète"
+      },
+      "empty": {
+        "title": "Aucune Entrée",
+        "subtitle": "Revenez bientôt !"
+      },
+      "samples": [
+        {
+          "id": 1,
+          "month": "Décembre",
+          "year": 2024,
+          "title": "Aventures d'Hiver",
+          "excerpt": "Ce mois-ci, nous avons exploré la magie de l'hiver à travers des activités Montessori.",
+          "coverImage": "/images/journal-dec-2024.jpg",
+          "date": "2024-12-01",
+          "highlights": [
+            "Bacs sensoriels neige et glace",
+            "Traditions des fêtes du monde",
+            "Vie pratique : chocolat chaud",
+            "Promenades pour observer l'hiver"
+          ],
+          "activities": [
+            "Découpage de flocons et symétrie",
+            "Études d'habitats d'hiver",
+            "Cuisine saisonnière",
+            "Cartes pour les familles"
+          ]
+        },
+        {
+          "id": 2,
+          "month": "Novembre",
+          "year": 2024,
+          "title": "Gratitude et Récolte",
+          "excerpt": "Nous avons exploré la gratitude et les saisons avec des expériences Montessori.",
+          "coverImage": "/images/journal-nov-2024.jpg",
+          "date": "2024-11-01",
+          "highlights": [
+            "Préparation du repas de Thanksgiving",
+            "Arbre de gratitude en classe",
+            "Collecte et classification des feuilles",
+            "Semaine des aides communautaires"
+          ],
+          "activities": [
+            "Étude du cycle de la citrouille",
+            "Fabrication de pain traditionnel",
+            "Art nature d'automne",
+            "Écriture de cartes de remerciement"
+          ]
+        },
+        {
+          "id": 3,
+          "month": "Octobre",
+          "year": 2024,
+          "title": "Découvertes d'Automne",
+          "excerpt": "Octobre a été rempli d'explorations et de festivités.",
+          "coverImage": "/images/journal-oct-2024.jpg",
+          "date": "2024-10-01",
+          "highlights": [
+            "Visite du champ de citrouilles",
+            "Défilé de costumes",
+            "Récolte de pommes",
+            "Création artistique avec feuilles"
+          ],
+          "activities": [
+            "Sculpture de citrouille (démonstration)",
+            "Séances de contes",
+            "Exploration sensorielle d'automne",
+            "Préparation du festival"
+          ]
+        }
+      ]
+    },
+    "todaysStory": {
+      "meta": {
+        "title": "Histoire du Jour",
+        "description": "Aventures quotidiennes et moments d'apprentissage en classe Montessori."
+      },
+      "hero": {
+        "title": "Histoire du Jour",
+        "subtitle": "Aventures quotidiennes et moments chaleureux"
+      },
+      "weekly": {
+        "title": "Aventure de la Semaine",
+        "subtitle": "Mise à jour chaque lundi pour les 3-6 ans"
+      },
+      "videos": {
+        "goodSamaritan": {
+          "title": "Le Bon Samaritain",
+          "description": "Une belle histoire sur la bonté."
+        },
+        "davidGoliath": {
+          "title": "David et Goliath",
+          "description": "Découvrez le courage du jeune David."
+        },
+        "noahArk": {
+          "title": "L'Arche de Noé",
+          "description": "Rejoignez Noé et les animaux dans leur aventure."
+        }
+      },
+      "lessonCards": {
+        "kind": {
+          "title": "Sois Gentil",
+          "description": "Aide les autres avec le sourire"
+        },
+        "helpful": {
+          "title": "Sois Serviable",
+          "description": "Tends la main à tes amis"
+        },
+        "love": {
+          "title": "Montre de l'Amour",
+          "description": "Prends soin de tout le monde"
+        }
+      },
+      "calendar": {
+        "title": "Calendrier des Histoires",
+        "subtitle": "Chaque semaine une nouvelle aventure et des leçons de vie !"
+      },
+      "cta": {
+        "title": "Rejoignez Notre Aventure Magique !",
+        "subtitle": "Où les histoires rencontrent la magie Montessori.",
+        "primary": "Planifier une Visite",
+        "secondary": "Voir les Programmes"
+      }
+    }
   }
 }

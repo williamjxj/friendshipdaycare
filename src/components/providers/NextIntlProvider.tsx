@@ -26,12 +26,20 @@ const messagesMap = {
  * Wraps children with NextIntlClientProvider to enable useTranslations hook
  * Note: This provider should be wrapped by LanguageProvider to sync language
  */
-export function NextIntlProvider({ children }: NextIntlProviderProps) {
-  // Default to English, will be updated by NextIntlProviderSync
-  const messages = enMessages;
+export function NextIntlProvider({ children, locale = 'en' }: NextIntlProviderProps) {
+  const messages = messagesMap[locale as keyof typeof messagesMap] || enMessages;
+  const fallbackMessage =
+    messages.common?.translationFallback ||
+    enMessages.common?.translationFallback ||
+    'Translation unavailable.';
 
   return (
-    <NextIntlClientProvider locale="en" messages={messages}>
+    <NextIntlClientProvider
+      locale={locale}
+      messages={messages}
+      getMessageFallback={() => fallbackMessage}
+      onError={() => undefined}
+    >
       {children}
     </NextIntlClientProvider>
   );

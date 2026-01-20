@@ -11,11 +11,20 @@ import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { businessProfile } from '@/lib/business-profile';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 
 /**
  * Contact page client component with form and business details.
  */
 export function ContactPageClient() {
+  const { t } = useLanguage();
+
+  useLocalizedMetadata({
+    title: t('seo.contact.title'),
+    description: t('seo.contact.description'),
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,19 +41,19 @@ export function ContactPageClient() {
     const errors: Record<string, string> = {};
 
     if (!formData.name.trim()) {
-      errors.name = 'Full name is required';
+      errors.name = t('contactPage.form.validation.nameRequired');
     }
 
     if (!formData.email.trim()) {
-      errors.email = 'Email address is required';
+      errors.email = t('contactPage.form.validation.emailRequired');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = 'Please enter a valid email address';
+      errors.email = t('contactPage.form.validation.emailInvalid');
     }
 
     if (!formData.message.trim()) {
-      errors.message = 'Message is required';
+      errors.message = t('contactPage.form.validation.messageRequired');
     } else if (formData.message.trim().length < 10) {
-      errors.message = 'Message must be at least 10 characters long';
+      errors.message = t('contactPage.form.validation.messageMin');
     }
 
     setFieldErrors(errors);
@@ -59,7 +68,7 @@ export function ContactPageClient() {
     // Validate form before submission
     if (!validateForm()) {
       setSubmitStatus('error');
-      setErrorMessage('Please correct the errors below and try again.');
+      setErrorMessage(t('contactPage.form.validation.formError'));
       return;
     }
 
@@ -85,12 +94,12 @@ export function ContactPageClient() {
         setTimeout(() => setSubmitStatus('idle'), 5000);
       } else {
         setSubmitStatus('error');
-        setErrorMessage(result.message || 'Failed to send message. Please try again.');
+        setErrorMessage(result.message || t('contactPage.form.validation.submitError'));
       }
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
-      setErrorMessage('Network error. Please check your connection and try again.');
+      setErrorMessage(t('contactPage.form.validation.networkError'));
     } finally {
       setIsSubmitting(false);
     }
@@ -108,8 +117,8 @@ export function ContactPageClient() {
       <main className="flex-1">
         {/* Hero Section */}
         <PageHero
-          title="Contact Friendship Corner Daycare in Coquitlam"
-          subtitle="Schedule a tour, ask questions, or start enrollment today"
+          title={t('contactPage.hero.title')}
+          subtitle={t('contactPage.hero.subtitle')}
           backgroundSvg={getImageUrl('/imgs/contact/contact_hero_1.gif')}
           enableScrollTrigger={true}
           hideTitle={true}
@@ -130,10 +139,10 @@ export function ContactPageClient() {
               <div className="space-y-8">
                 <div>
                   <h2 className="text-3xl font-display font-bold text-foreground mb-6">
-                    Get in Touch
+                    {t('contactPage.info.title')}
                   </h2>
                   <p className="text-muted-foreground leading-relaxed mb-8">
-                    We&apos;d love to hear from you! Whether you have questions about our programs, want to schedule a visit, or are ready to enroll your child, we&apos;re here to help.
+                    {t('contactPage.info.description')}
                   </p>
                 </div>
 
@@ -143,9 +152,9 @@ export function ContactPageClient() {
                       <PhoneIcon className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <CardTitle className="font-bold text-foreground mb-1 text-lg">Phone</CardTitle>
+                      <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.phone.title')}</CardTitle>
                       <p className="text-muted-foreground font-medium">{businessProfile.telephone}</p>
-                      <CardDescription className="text-sm text-muted-foreground mt-1">Monday - Friday: 7:00 AM - 6:00 PM</CardDescription>
+                      <CardDescription className="text-sm text-muted-foreground mt-1">{t('contactPage.cards.phone.subtitle')}</CardDescription>
                     </div>
                   </Card>
 
@@ -154,10 +163,10 @@ export function ContactPageClient() {
                       <MapPinIcon className="h-6 w-6 text-secondary" />
                     </div>
                     <div>
-                      <CardTitle className="font-bold text-foreground mb-1 text-lg">Location</CardTitle>
+                      <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.location.title')}</CardTitle>
                       <p className="text-muted-foreground font-medium">{businessProfile.address.streetAddress}</p>
                       <p className="text-muted-foreground font-medium">{businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode} {businessProfile.address.addressCountry}</p>
-                      <CardDescription className="text-sm text-muted-foreground mt-1">Convenient public transit access</CardDescription>
+                      <CardDescription className="text-sm text-muted-foreground mt-1">{t('contactPage.cards.location.subtitle')}</CardDescription>
                     </div>
                   </Card>
 
@@ -166,10 +175,10 @@ export function ContactPageClient() {
                       <ClockIcon className="h-6 w-6 text-accent" />
                     </div>
                     <div>
-                      <CardTitle className="font-bold text-foreground mb-1 text-lg">Hours</CardTitle>
-                      <p className="text-muted-foreground font-medium">Monday - Friday</p>
-                      <p className="text-muted-foreground font-medium">7:00 AM - 6:00 PM</p>
-                      <CardDescription className="text-sm text-muted-foreground mt-1">Closed weekends and holidays</CardDescription>
+                      <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.hours.title')}</CardTitle>
+                      <p className="text-muted-foreground font-medium">{t('contactPage.cards.hours.weekdays')}</p>
+                      <p className="text-muted-foreground font-medium">{t('contactPage.cards.hours.hours')}</p>
+                      <CardDescription className="text-sm text-muted-foreground mt-1">{t('contactPage.cards.hours.subtitle')}</CardDescription>
                     </div>
                   </Card>
 
@@ -178,16 +187,16 @@ export function ContactPageClient() {
                       <EnvelopeIcon className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <CardTitle className="font-bold text-foreground mb-1 text-lg">Email</CardTitle>
+                      <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.email.title')}</CardTitle>
                       <p className="text-muted-foreground font-medium">{businessProfile.email}</p>
-                      <CardDescription className="text-sm text-muted-foreground mt-1">We&apos;ll respond within 24 hours</CardDescription>
+                      <CardDescription className="text-sm text-muted-foreground mt-1">{t('contactPage.cards.email.subtitle')}</CardDescription>
                     </div>
                   </Card>
                 </div>
 
                 {/* Quick Actions */}
                 <Card variant="interactive" className="bg-muted/30 p-6 border-none">
-                  <CardTitle className="font-bold text-foreground mb-4 text-xl">Quick Actions</CardTitle>
+                  <CardTitle className="font-bold text-foreground mb-4 text-xl">{t('contactPage.quickActions.title')}</CardTitle>
                   <div className="space-y-4">
                     <a
                       href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
@@ -196,7 +205,7 @@ export function ContactPageClient() {
                       <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                         <PhoneIcon className="h-4 w-4" />
                       </div>
-                      <span className="font-medium">Call Now</span>
+                      <span className="font-medium">{t('contactPage.quickActions.call')}</span>
                     </a>
                     <a
                       href={`mailto:${businessProfile.email}`}
@@ -205,7 +214,7 @@ export function ContactPageClient() {
                       <div className="w-8 h-8 bg-secondary/10 rounded-full flex items-center justify-center">
                         <EnvelopeIcon className="h-4 w-4" />
                       </div>
-                      <span className="font-medium">Send Email</span>
+                      <span className="font-medium">{t('contactPage.quickActions.email')}</span>
                     </a>
                     <Link
                       href="/programs"
@@ -214,7 +223,7 @@ export function ContactPageClient() {
                       <div className="w-8 h-8 bg-accent/10 rounded-full flex items-center justify-center">
                         <span className="text-xs">📚</span>
                       </div>
-                      <span className="font-medium">View Programs</span>
+                      <span className="font-medium">{t('contactPage.quickActions.programs')}</span>
                     </Link>
                   </div>
                 </Card>
@@ -224,13 +233,13 @@ export function ContactPageClient() {
               <Card className="bg-muted/30 p-4 sm:p-8 scroll-mt-20 border-none shadow-sm">
                 <CardHeader className="p-0 mb-6">
                   <CardTitle className="text-2xl font-display font-bold text-foreground">
-                    Send us a Message
+                    {t('contactPage.form.title')}
                   </CardTitle>
                 </CardHeader>
 
                 {submitStatus === 'success' && (
                   <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                    <p className="text-green-800 font-bold">Thank you! We&apos;ll get back to you within 24 hours.</p>
+                    <p className="text-green-800 font-bold">{t('contactPage.form.success')}</p>
                   </div>
                 )}
 
@@ -244,7 +253,7 @@ export function ContactPageClient() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="name" className="block text-sm font-bold text-foreground">
-                        Full Name *
+                        {t('contactPage.form.fields.name')} *
                       </label>
                       <input
                         type="text"
@@ -257,7 +266,7 @@ export function ContactPageClient() {
                         aria-describedby={fieldErrors.name ? 'name-error' : undefined}
                         className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium ${fieldErrors.name ? 'border-red-500 focus:ring-red-500' : 'border-border'
                           }`}
-                        placeholder="Your full name"
+                        placeholder={t('contactPage.form.placeholders.name')}
                       />
                       {fieldErrors.name && (
                         <p id="name-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
@@ -267,7 +276,7 @@ export function ContactPageClient() {
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="block text-sm font-bold text-foreground">
-                        Email Address *
+                        {t('contactPage.form.fields.email')} *
                       </label>
                       <input
                         type="email"
@@ -280,7 +289,7 @@ export function ContactPageClient() {
                         aria-describedby={fieldErrors.email ? 'email-error' : undefined}
                         className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium ${fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-border'
                           }`}
-                        placeholder="your.email@example.com"
+                        placeholder={t('contactPage.form.placeholders.email')}
                       />
                       {fieldErrors.email && (
                         <p id="email-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
@@ -293,7 +302,7 @@ export function ContactPageClient() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="phone" className="block text-sm font-bold text-foreground">
-                        Phone Number
+                        {t('contactPage.form.fields.phone')}
                       </label>
                       <input
                         type="tel"
@@ -302,12 +311,12 @@ export function ContactPageClient() {
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium"
-                        placeholder="604.945.8504"
+                        placeholder={t('contactPage.form.placeholders.phone')}
                       />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="childAge" className="block text-sm font-bold text-foreground">
-                        Child&apos;s Age
+                        {t('contactPage.form.fields.childAge')}
                       </label>
                       <select
                         id="childAge"
@@ -316,18 +325,18 @@ export function ContactPageClient() {
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium cursor-pointer"
                       >
-                        <option value="">Select age range</option>
-                        <option value="30months-3years">30 months - 3 years</option>
-                        <option value="3-4years">3 - 4 years</option>
-                        <option value="4-5years">4 - 5 years</option>
-                        <option value="other">Other</option>
+                        <option value="">{t('contactPage.form.options.agePlaceholder')}</option>
+                        <option value="30months-3years">{t('contactPage.form.options.ageToddler')}</option>
+                        <option value="3-4years">{t('contactPage.form.options.agePreschool')}</option>
+                        <option value="4-5years">{t('contactPage.form.options.agePreK')}</option>
+                        <option value="other">{t('contactPage.form.options.ageOther')}</option>
                       </select>
                     </div>
                   </div>
 
                   <div className="space-y-2">
                     <label htmlFor="message" className="block text-sm font-bold text-foreground">
-                      Message *
+                      {t('contactPage.form.fields.message')} *
                     </label>
                     <textarea
                       id="message"
@@ -340,7 +349,7 @@ export function ContactPageClient() {
                       aria-describedby={fieldErrors.message ? 'message-error' : undefined}
                       className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none min-h-[132px] text-base font-medium ${fieldErrors.message ? 'border-red-500 focus:ring-red-500' : 'border-border'
                         }`}
-                      placeholder="Tell us about your child and what you&apos;d like to know about our programs..."
+                      placeholder={t('contactPage.form.placeholders.message')}
                     />
                     {fieldErrors.message && (
                       <p id="message-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
@@ -354,7 +363,7 @@ export function ContactPageClient() {
                     disabled={isSubmitting}
                     className="w-full bg-primary text-primary-foreground px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg min-h-[44px] flex items-center justify-center"
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    {isSubmitting ? t('contactPage.form.submitting') : t('contactPage.form.submit')}
                   </button>
                 </form>
               </Card>
@@ -373,10 +382,10 @@ export function ContactPageClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                Visit Our Location
+                {t('contactPage.map.title')}
               </h2>
               <p className="text-lg text-muted-foreground">
-                Conveniently located near Coquitlam Station with easy access to public transit
+                {t('contactPage.map.subtitle')}
               </p>
             </div>
 

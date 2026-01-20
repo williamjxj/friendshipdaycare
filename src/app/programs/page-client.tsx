@@ -14,98 +14,57 @@ import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { textReveal, textRevealItem } from '@/lib/magicui-animations';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 
 /**
  * Programs page client component with interactive sections.
  */
 export function ProgramsPageClient() {
+  const { t, messages } = useLanguage();
+
+  useLocalizedMetadata({
+    title: t('seo.programs.title'),
+    description: t('seo.programs.description'),
+  });
+
+  const programMessages = messages.programsPage?.programs;
   const programs = [
     {
       id: 'toddler',
-      title: 'Toddler Program',
-      age: '30 months - 3 years',
+      title: t('programsPage.programs.toddler.title'),
+      age: t('programsPage.programs.toddler.age'),
       color: 'primary',
       icon: 'T',
       image: getImageUrl('/images/practical-life-shelf-1.jpg'),
       video: '/imgs/programs/toddler.mp4',
-      description: 'Our toddler program provides a gentle introduction to structured learning with a focus on independence and social skills development.',
-      features: [
-        'Social Skills Development',
-        'Independence Building',
-        'Sensory Exploration',
-        'Language Development',
-        'Fine Motor Skills',
-        'Emotional Regulation'
-      ],
-      dailySchedule: [
-        { time: '6:30 - 8:00', activity: 'Arrival & Free Play' },
-        { time: '8:00 - 8:30', activity: 'Morning Snack' },
-        { time: '8:30 - 10:00', activity: 'Montessori Work Time' },
-        { time: '10:00 - 11:00', activity: 'Outdoor Play' },
-        { time: '11:00 - 12:00', activity: 'Lunch' },
-        { time: '12:00 - 2:30', activity: 'Rest Time' },
-        { time: '2:30 - 3:00', activity: 'Afternoon Snack' },
-        { time: '3:00 - 5:00', activity: 'Activities & Play' },
-        { time: '5:00 - 6:30', activity: 'Departure' }
-      ]
+      description: t('programsPage.programs.toddler.description'),
+      features: (programMessages?.toddler?.features ?? []) as string[],
+      dailySchedule: (programMessages?.toddler?.dailySchedule ?? []) as { time: string; activity: string }[],
     },
     {
       id: 'preschool',
-      title: 'Preschool Program',
-      age: '3 - 4 years',
+      title: t('programsPage.programs.preschool.title'),
+      age: t('programsPage.programs.preschool.age'),
       color: 'secondary',
       icon: 'P',
       image: getImageUrl('/images/sensorial-shelf.jpg'),
       video: '/imgs/programs/preschool.mp4',
-      description: 'Our preschool program uses Montessori-based curriculum emphasizing hands-on learning and creative expression.',
-      features: [
-        'Creative Expression',
-        'Hands-on Learning',
-        'Pre-Math Concepts',
-        'Pre-Reading Skills',
-        'Science Exploration',
-        'Cultural Studies'
-      ],
-      dailySchedule: [
-        { time: '6:30 - 8:00', activity: 'Arrival & Free Choice' },
-        { time: '8:00 - 8:30', activity: 'Morning Circle' },
-        { time: '8:30 - 10:30', activity: 'Montessori Work Cycle' },
-        { time: '10:30 - 11:30', activity: 'Outdoor Exploration' },
-        { time: '11:30 - 12:30', activity: 'Lunch & Social Time' },
-        { time: '12:30 - 2:30', activity: 'Quiet Time/Rest' },
-        { time: '2:30 - 3:00', activity: 'Afternoon Snack' },
-        { time: '3:00 - 5:30', activity: 'Art & Activities' },
-        { time: '5:30 - 6:30', activity: 'Departure' }
-      ]
+      description: t('programsPage.programs.preschool.description'),
+      features: (programMessages?.preschool?.features ?? []) as string[],
+      dailySchedule: (programMessages?.preschool?.dailySchedule ?? []) as { time: string; activity: string }[],
     },
     {
       id: 'prekindergarten',
-      title: 'Pre-Kindergarten',
-      age: '4 - 5 years',
+      title: t('programsPage.programs.prekindergarten.title'),
+      age: t('programsPage.programs.prekindergarten.age'),
       color: 'accent',
       icon: 'K',
       image: getImageUrl('/images/language-shelf.jpg'),
       video: '/imgs/programs/pre-kindergarten.mp4',
-      description: 'Our pre-kindergarten program focuses on school readiness preparation with advanced Montessori materials and concepts.',
-      features: [
-        'School Readiness',
-        'Advanced Concepts',
-        'Reading & Writing',
-        'Mathematics',
-        'Critical Thinking',
-        'Leadership Skills'
-      ],
-      dailySchedule: [
-        { time: '6:30 - 8:00', activity: 'Arrival & Morning Work' },
-        { time: '8:00 - 8:30', activity: 'Morning Meeting' },
-        { time: '8:30 - 11:00', activity: 'Extended Work Period' },
-        { time: '11:00 - 12:00', activity: 'Outdoor Learning' },
-        { time: '12:00 - 1:00', activity: 'Lunch & Community' },
-        { time: '1:00 - 2:30', activity: 'Rest/Quiet Activities' },
-        { time: '2:30 - 3:00', activity: 'Afternoon Snack' },
-        { time: '3:00 - 6:00', activity: 'Project Time & Play' },
-        { time: '6:00 - 6:30', activity: 'Departure' }
-      ]
+      description: t('programsPage.programs.prekindergarten.description'),
+      features: (programMessages?.prekindergarten?.features ?? []) as string[],
+      dailySchedule: (programMessages?.prekindergarten?.dailySchedule ?? []) as { time: string; activity: string }[],
     }
   ];
 
@@ -114,8 +73,8 @@ export function ProgramsPageClient() {
       <main className="flex-1">
         {/* Hero Section */}
         <PageHero
-          title="Montessori Programs in Coquitlam"
-          subtitle="Toddler, preschool, and pre-kindergarten programs for Tri-Cities families"
+          title={t('programsPage.hero.title')}
+          subtitle={t('programsPage.hero.subtitle')}
           backgroundSvg={getImageUrl('/imgs/programs/programs_hero_1.gif')}
           enableScrollTrigger={true}
           hideSubtitle={true}
@@ -135,10 +94,10 @@ export function ProgramsPageClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-16">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                Montessori Programs in Coquitlam
+                {t('programsPage.overview.title')}
               </h2>
               <p className="text-xl text-muted-foreground w-full max-w-none">
-                Our age-appropriate programs support each child&apos;s growth with hands-on Montessori learning in Coquitlam, BC.
+                {t('programsPage.overview.subtitle')}
               </p>
             </div>
 
@@ -204,7 +163,7 @@ export function ProgramsPageClient() {
                   </p>
 
                   <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-foreground">Key Features</h3>
+                    <h3 className="text-xl font-semibold text-foreground">{t('programsPage.programDetail.keyFeatures')}</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {program.features.map((feature, idx) => (
                         <div key={idx} className="flex items-center space-x-2">
@@ -244,10 +203,10 @@ export function ProgramsPageClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-16">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                A Day in Our Montessori Classroom
+                {t('programsPage.dailySchedule.title')}
               </h2>
               <p className="text-xl text-muted-foreground w-full max-w-none">
-                A structured yet flexible daily rhythm designed to support learning, play, and rest.
+                {t('programsPage.dailySchedule.subtitle')}
               </p>
             </div>
 
@@ -291,23 +250,23 @@ export function ProgramsPageClient() {
         >
           <div className="max-w-4xl mx-auto px-4 text-center space-y-8">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
-              Ready to Join Our Montessori Community?
+              {t('programsPage.cta.title')}
             </h2>
             <p className="text-xl text-primary-foreground/90">
-              Contact us today to schedule a tour or learn more about enrollment in Coquitlam.
+              {t('programsPage.cta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary-foreground text-primary rounded-lg font-semibold hover:bg-primary-foreground/90 transition-colors"
               >
-                Schedule a Tour
+                {t('programsPage.cta.primary')}
               </Link>
               <Link
                 href="/enrollment"
                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary-foreground text-primary-foreground rounded-lg font-semibold hover:bg-primary-foreground/10 transition-colors"
               >
-                Enrollment Details
+                {t('programsPage.cta.secondary')}
               </Link>
             </div>
           </div>

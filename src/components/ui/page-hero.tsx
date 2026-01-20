@@ -145,6 +145,7 @@ export function PageHero({
         className
       )}
       aria-label={`${title}${subtitle ? `: ${subtitle}` : ''}`}
+      suppressHydrationWarning
     >
       {/* Background Layer */}
       <div className="absolute inset-0 hero-bg">
@@ -247,9 +248,9 @@ export function PageHero({
           )}
           {/* Hidden title/subtitle for SEO when visually hidden */}
           {(hideTitle || hideSubtitle) && (
-            <div className="sr-only">
-              {hideTitle && <h1>{title}</h1>}
-              {hideSubtitle && subtitle && <p>{subtitle}</p>}
+            <div className="sr-only" suppressHydrationWarning>
+              {hideTitle && <h1 suppressHydrationWarning>{title}</h1>}
+              {hideSubtitle && subtitle && <p suppressHydrationWarning>{subtitle}</p>}
             </div>
           )}
           {children && (

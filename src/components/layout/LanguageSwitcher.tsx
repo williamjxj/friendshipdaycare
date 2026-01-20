@@ -1,30 +1,32 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useLocale } from 'next-intl';
 import { ChevronDownIcon, LanguageIcon } from '@heroicons/react/24/outline';
-import { locales } from '@/i18n/config';
-
-const languageNames = {
-  en: 'English',
-  zh: '中文',
-  fr: 'Français',
-  es: 'Español',
-  ko: '한국어'
-};
+import { locales, type Locale } from '@/i18n/config';
+import { languageConfig, useLanguage } from '@/contexts/LanguageContext';
 
 export function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const locale = useLocale();
+  const { language, setLanguage } = useLanguage();
 
-  const handleLanguageChange = (newLocale: string) => {
-    // Remove the current locale from the pathname
-    const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
-    // Navigate to the new locale
-    router.push(`/${newLocale}${pathWithoutLocale}`);
+  const languageNames = useMemo(() => {
+    return languageConfig.reduce<Record<string, string>>((acc, lang) => {
+      acc[lang.code] = lang.name;
+      return acc;
+    }, {});
+  }, []);
+
+  const handleLanguageChange = (newLocale: Locale) => {
+    setLanguage(newLocale);
+
+    const pathSegments = pathname.split('/').filter(Boolean);
+    if (pathSegments.length > 0 && locales.includes(pathSegments[0] as typeof locales[number])) {
+      pathSegments[0] = newLocale;
+      router.push(`/${pathSegments.join('/')}`);
+    }
     setIsOpen(false);
   };
 
@@ -35,7 +37,7 @@ export function LanguageSwitcher() {
         className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
       >
         <LanguageIcon className="h-4 w-4" />
-        <span className="hidden sm:inline">{languageNames[locale as keyof typeof languageNames]}</span>
+        <span className="hidden sm:inline">{languageNames[language]}</span>
         <ChevronDownIcon className="h-4 w-4" />
       </button>
 
@@ -55,7 +57,7 @@ export function LanguageSwitcher() {
                   key={lang}
                   onClick={() => handleLanguageChange(lang)}
                   className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                    locale === lang
+                    language === lang
                       ? 'bg-primary/10 text-primary'
                       : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                   }`}

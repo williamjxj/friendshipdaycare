@@ -11,19 +11,29 @@ import Image from 'next/image';
 import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 
 /**
  * Gallery page client component showcasing photos and videos.
  */
 export function GalleryPageClient() {
+  const { t, messages } = useLanguage();
+  const categoryMessages = (messages.galleryPage?.categories ?? []) as Array<{ id: string; name: string }>;
+
+  useLocalizedMetadata({
+    title: t('seo.gallery.title'),
+    description: t('seo.gallery.description'),
+  });
+
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  const categories = [
-    { id: 'all', name: 'All' },
-    { id: 'classroom', name: 'Classroom' },
-    { id: 'playground', name: 'Playground' },
-    { id: 'activities', name: 'Activities' },
+  const categories = categoryMessages.length > 0 ? categoryMessages : [
+    { id: 'all', name: t('galleryPage.categoriesFallback.all') },
+    { id: 'classroom', name: t('galleryPage.categoriesFallback.classroom') },
+    { id: 'playground', name: t('galleryPage.categoriesFallback.playground') },
+    { id: 'activities', name: t('galleryPage.categoriesFallback.activities') },
   ];
 
   const galleryImages = [
@@ -72,8 +82,8 @@ export function GalleryPageClient() {
   const videoItems = [
     {
       url: '/videos/friendship-daycare.mp4',
-      title: 'Daily Adventures',
-      description: 'A peek into our classroom - see the joy, learning, and growth happening every day at Friendship Corner Daycare.'
+      title: t('galleryPage.video.title'),
+      description: t('galleryPage.video.description'),
     }
   ];
 
@@ -102,8 +112,8 @@ export function GalleryPageClient() {
       <main className="flex-1">
         {/* Hero Section */}
         <PageHero
-          title="Daycare Gallery in Coquitlam"
-          subtitle="Explore our Montessori classrooms, activities, and spaces"
+          title={t('galleryPage.hero.title')}
+          subtitle={t('galleryPage.hero.subtitle')}
           backgroundSvg={getImageUrl('/imgs/gallery/gallery_hero_1.gif')}
           enableScrollTrigger={true}
           hideSubtitle={true}
@@ -123,10 +133,10 @@ export function GalleryPageClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                Montessori Daycare Moments
+                {t('galleryPage.gallery.title')}
               </h2>
               <p className="text-lg text-muted-foreground w-full max-w-none">
-                See how our Coquitlam Montessori daycare inspires curiosity and joyful learning.
+                {t('galleryPage.gallery.subtitle')}
               </p>
             </div>
 
@@ -187,10 +197,10 @@ export function GalleryPageClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                See Our Montessori Daycare in Action
+                {t('galleryPage.videoSection.title')}
               </h2>
               <p className="text-lg text-muted-foreground w-full max-w-none">
-                Watch a glimpse of daily routines and learning moments at our Coquitlam daycare.
+                {t('galleryPage.videoSection.subtitle')}
               </p>
             </div>
 
@@ -208,23 +218,23 @@ export function GalleryPageClient() {
         >
           <div className="max-w-4xl mx-auto px-4 text-center space-y-8">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
-              Want to See It In Person?
+              {t('galleryPage.cta.title')}
             </h2>
             <p className="text-xl text-primary-foreground/90">
-              Schedule a tour and experience our Coquitlam Montessori daycare firsthand.
+              {t('galleryPage.cta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary-foreground text-primary rounded-lg font-semibold hover:bg-primary-foreground/90 transition-colors"
               >
-                Schedule a Tour
+                {t('galleryPage.cta.primary')}
               </Link>
               <Link
                 href="/programs"
                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary-foreground text-primary-foreground rounded-lg font-semibold hover:bg-primary-foreground/10 transition-colors"
               >
-                View Programs
+                {t('galleryPage.cta.secondary')}
               </Link>
             </div>
           </div>

@@ -3,10 +3,12 @@
     "home": "홈",
     "about": "소개",
     "programs": "프로그램",
+    "enrollment": "등록",
     "gallery": "갤러리",
     "todaysStory": "오늘의 이야기",
     "journal": "저널",
-    "contact": "연락처"
+    "contact": "연락처",
+    "community": "커뮤니티"
   },
   "hero": {
     "title": "몬테소리 교육의 우수성을 통해 어린 마음을 키워나가기",
@@ -72,6 +74,41 @@
     }
   },
   "footer": {
+    "brandName": "프렌드십 코너",
+    "brandTagline": "몬테소리 어린이집",
+    "about": "몬테소리 방식으로 어린 마음을 키웁니다. 따뜻하고 안전한 환경에서 모든 아이가 성장하고 배울 수 있도록 돕습니다.",
+    "quickLinks": {
+      "title": "빠른 링크",
+      "programs": "프로그램",
+      "about": "소개",
+      "enrollment": "등록",
+      "todaysStory": "오늘의 이야기",
+      "journal": "저널"
+    },
+    "resources": {
+      "title": "자료",
+      "canva1": "Canva 1",
+      "canva2": "Canva 2",
+      "gamma": "Gamma",
+      "slideDeck": "Slide Deck",
+      "notebookSlides": "NotebookLM 슬라이드"
+    },
+    "contact": {
+      "title": "문의하기",
+      "hoursWeekdays": "월 - 금: 오전 7:00 - 오후 6:00",
+      "hoursWeekend": "토 - 일: 휴무"
+    },
+    "mobileAccess": {
+      "title": "모바일 접속",
+      "scan": "모바일로 보려면 스캔하세요"
+    },
+    "rightsReserved": "모든 권리 보유.",
+    "siteBy": "웹사이트 제작",
+    "links": {
+      "privacy": "개인정보 처리방침",
+      "terms": "이용약관",
+      "sitemap": "사이트맵"
+    },
     "copyright": "© 2024 프렌드십 코너 어린이집. 모든 권리 보유.",
     "phone": "604.945.8504"
   },
@@ -103,6 +140,9 @@
   },
   "home": {
     "hero": {
+      "badge": "2008년 설립 • 코퀴틀람, BC",
+      "headline": "몬테소리 어린이집",
+      "highlight": "코퀴틀람, BC",
       "title": "젊은 마음이 꽃피는 곳",
       "subtitle": "모든 아이가 자신만의 독특한 능력을 발견할 수 있는 안전하고 따뜻한 몬테소리 환경입니다.",
       "scheduleTour": "견학 예약",
@@ -166,7 +206,9 @@
     },
     "dailyAdventures": {
       "title": "일일 모험",
-      "subtitle": "우리 교실 엿보기"
+      "subtitle": "우리 교실 엿보기",
+      "videoTitle": "일일 모험",
+      "videoDescription": "교실에서 매일 일어나는 즐거움과 배움을 확인하세요."
     },
     "readyToVisit": {
       "title": "방문할 준비가 되셨나요?",
@@ -177,6 +219,463 @@
   "common": {
     "loading": "로딩 중...",
     "error": "오류가 발생했습니다",
-    "retry": "다시 시도"
+    "retry": "다시 시도",
+    "translationFallback": "번역을 사용할 수 없습니다.",
+    "cta": {
+      "contact": "문의하기",
+      "callNow": "지금 전화하기"
+    },
+    "hours": {
+      "weekdays": "월 - 금: 오전 7:00 - 오후 6:00"
+    }
+  },
+  "header": {
+    "brandName": "프렌드십 코너",
+    "brandTagline": "몬테소리 어린이집",
+    "bookTour": "견학 예약"
+  },
+  "aboutPage": {
+    "hero": {
+      "title": "코퀴틀람 프렌드십 코너 어린이집 소개",
+      "subtitle": "2008년부터 트라이시티 가족을 위한 따뜻한 몬테소리 돌봄"
+    },
+    "story": {
+      "title": "우리의 이야기",
+      "paragraphs": {
+        "one": "프렌드십 코너 어린이집(몬테소리)은 2008년 1월 코퀴틀람에서 비영리 단체로 시작되었습니다.",
+        "two": "저희는 30개월부터 취학 연령까지의 아이들을 위한 허가받은 그룹 어린이집입니다.",
+        "three": "안전하고 깨끗하며 따뜻한 환경에서 아이들이 성장하고 탐구하며 자신감을 키울 수 있도록 돕습니다."
+      },
+      "ctaPrograms": "프로그램 살펴보기",
+      "ctaVisit": "방문 예약",
+      "statsValue": "16+",
+      "statsLabel": "년의 경험"
+    },
+    "values": {
+      "title": "우리의 사명과 가치",
+      "subtitle": "몬테소리 원칙과 사랑이 넘치는 공동체로 평생 학습의 기반을 만듭니다.",
+      "items": [
+        {
+          "title": "아이 중심 학습",
+          "description": "아이의 호기심과 발달 속도에 맞춘 학습으로 독립성과 자신감을 키웁니다.",
+          "icon": "🌱",
+          "color": "primary"
+        },
+        {
+          "title": "안전하고 따뜻한 환경",
+          "description": "아이들이 안정감을 느끼는 깨끗하고 안전한 공간을 제공합니다.",
+          "icon": "🛡️",
+          "color": "secondary"
+        },
+        {
+          "title": "가족과의 연결",
+          "description": "가정과의 파트너십을 통해 아이의 성장을 함께 지원합니다.",
+          "icon": "❤️",
+          "color": "accent"
+        }
+      ]
+    },
+    "montessori": {
+      "title": "몬테소리의 차별점",
+      "paragraphs": {
+        "one": "준비된 환경에서 아이가 스스로 탐구하며 배울 수 있도록 돕습니다.",
+        "two": "자기 주도 활동을 통해 집중력, 독립성, 배움의 즐거움을 키웁니다.",
+        "three": "중요한 유아기 발달을 전인적으로 지원하는 교육 방식입니다."
+      }
+    }
+  },
+  "programsPage": {
+    "hero": {
+      "title": "코퀴틀람 몬테소리 프로그램",
+      "subtitle": "유아, 프리스쿨, 프리킨더가든 프로그램"
+    },
+    "overview": {
+      "title": "코퀴틀람 몬테소리 프로그램",
+      "subtitle": "연령에 맞춘 프로그램으로 아이들의 성장을 돕습니다."
+    },
+    "programDetail": {
+      "keyFeatures": "주요 특징"
+    },
+    "programs": {
+      "toddler": {
+        "title": "유아 프로그램",
+        "age": "30개월 - 3세",
+        "description": "독립성과 사회성 발달에 초점을 둔 부드러운 학습 시작.",
+        "features": [
+          "사회성 발달",
+          "독립심 향상",
+          "감각 탐색",
+          "언어 발달",
+          "소근육 발달",
+          "감정 조절"
+        ],
+        "dailySchedule": [
+          { "time": "6:30 - 8:00", "activity": "등원 및 자유 놀이" },
+          { "time": "8:00 - 8:30", "activity": "아침 간식" },
+          { "time": "8:30 - 10:00", "activity": "몬테소리 활동" },
+          { "time": "10:00 - 11:00", "activity": "야외 놀이" },
+          { "time": "11:00 - 12:00", "activity": "점심" },
+          { "time": "12:00 - 2:30", "activity": "휴식 시간" },
+          { "time": "2:30 - 3:00", "activity": "오후 간식" },
+          { "time": "3:00 - 5:00", "activity": "활동 및 놀이" },
+          { "time": "5:00 - 6:30", "activity": "하원" }
+        ]
+      },
+      "preschool": {
+        "title": "유치원 프로그램",
+        "age": "3 - 4세",
+        "description": "체험 중심의 몬테소리 교육과 창의적 표현.",
+        "features": [
+          "창의적 표현",
+          "체험 학습",
+          "기초 수학 개념",
+          "읽기 준비",
+          "과학 탐구",
+          "문화 이해"
+        ],
+        "dailySchedule": [
+          { "time": "6:30 - 8:00", "activity": "등원 및 자유 선택 활동" },
+          { "time": "8:00 - 8:30", "activity": "모닝 서클" },
+          { "time": "8:30 - 10:30", "activity": "몬테소리 작업 시간" },
+          { "time": "10:30 - 11:30", "activity": "야외 탐색" },
+          { "time": "11:30 - 12:30", "activity": "점심 및 교류" },
+          { "time": "12:30 - 2:30", "activity": "휴식/조용한 시간" },
+          { "time": "2:30 - 3:00", "activity": "오후 간식" },
+          { "time": "3:00 - 5:30", "activity": "미술 및 활동" },
+          { "time": "5:30 - 6:30", "activity": "하원" }
+        ]
+      },
+      "prekindergarten": {
+        "title": "예비 초등학교",
+        "age": "4 - 5세",
+        "description": "고급 몬테소리 교구로 학교 준비를 돕습니다.",
+        "features": [
+          "학교 준비",
+          "심화 개념",
+          "읽기와 쓰기",
+          "수학",
+          "비판적 사고",
+          "리더십"
+        ],
+        "dailySchedule": [
+          { "time": "6:30 - 8:00", "activity": "등원 및 아침 활동" },
+          { "time": "8:00 - 8:30", "activity": "모닝 미팅" },
+          { "time": "8:30 - 11:00", "activity": "집중 작업 시간" },
+          { "time": "11:00 - 12:00", "activity": "야외 학습" },
+          { "time": "12:00 - 1:00", "activity": "점심 및 공동체 시간" },
+          { "time": "1:00 - 2:30", "activity": "휴식/조용한 활동" },
+          { "time": "2:30 - 3:00", "activity": "오후 간식" },
+          { "time": "3:00 - 6:00", "activity": "프로젝트 및 놀이" },
+          { "time": "6:00 - 6:30", "activity": "하원" }
+        ]
+      }
+    },
+    "dailySchedule": {
+      "title": "몬테소리 교실의 하루",
+      "subtitle": "배움과 놀이, 휴식을 돕는 균형 잡힌 일과"
+    },
+    "cta": {
+      "title": "몬테소리 공동체에 함께하세요",
+      "subtitle": "견학을 예약하거나 등록에 대해 문의해 주세요.",
+      "primary": "견학 예약",
+      "secondary": "등록 안내"
+    }
+  },
+  "enrollmentPage": {
+    "hero": {
+      "title": "코퀴틀람 몬테소리 등록",
+      "subtitle": "등록 절차와 준비 사항"
+    },
+    "process": {
+      "title": "등록 절차",
+      "subtitle": "간단한 단계로 등록을 시작하세요."
+    },
+    "steps": [
+      {
+        "title": "신청서 제출",
+        "description": "아이 정보와 함께 등록 신청서를 작성하세요."
+      },
+      {
+        "title": "견학 일정 예약",
+        "description": "시설을 방문하여 교실과 팀을 만나보세요."
+      },
+      {
+        "title": "검토 및 승인",
+        "description": "신청서를 검토하고 가능 여부를 안내드립니다."
+      },
+      {
+        "title": "시작일 확정",
+        "description": "서류를 마무리하고 첫 등원일을 확정합니다."
+      }
+    ],
+    "requirements": {
+      "title": "등록 준비물",
+      "subtitle": "원활한 등록을 위해 아래 서류를 준비해 주세요.",
+      "items": [
+        "등록 신청서",
+        "아이의 출생증명서 또는 여권",
+        "예방접종 기록",
+        "비상 연락처 정보",
+        "의료 및 알레르기 정보",
+        "월 등록금 보증금"
+      ]
+    },
+    "cta": {
+      "title": "등록할 준비가 되셨나요?",
+      "subtitle": "등록을 시작하거나 견학을 예약해 주세요.",
+      "primary": "문의하기",
+      "secondary": "전화 604.945.8504"
+    }
+  },
+  "galleryPage": {
+    "hero": {
+      "title": "코퀴틀람 어린이집 갤러리",
+      "subtitle": "교실, 활동, 공간을 살펴보세요"
+    },
+    "gallery": {
+      "title": "몬테소리 순간들",
+      "subtitle": "아이들의 호기심과 즐거운 학습을 확인해 보세요."
+    },
+    "categories": [
+      { "id": "all", "name": "전체" },
+      { "id": "classroom", "name": "교실" },
+      { "id": "playground", "name": "놀이터" },
+      { "id": "activities", "name": "활동" }
+    ],
+    "categoriesFallback": {
+      "all": "전체",
+      "classroom": "교실",
+      "playground": "놀이터",
+      "activities": "활동"
+    },
+    "video": {
+      "title": "일상 모험",
+      "description": "교실에서 매일 일어나는 즐거움과 배움을 확인하세요."
+    },
+    "videoSection": {
+      "title": "몬테소리 하루를 만나보세요",
+      "subtitle": "코퀴틀람 데이케어의 일상과 학습 순간을 확인하세요."
+    },
+    "cta": {
+      "title": "직접 보고 싶으신가요?",
+      "subtitle": "견학을 예약하고 현장을 경험해 보세요.",
+      "primary": "견학 예약",
+      "secondary": "프로그램 보기"
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "title": "코퀴틀람 프렌드십 코너 어린이집 문의",
+      "subtitle": "견학 예약, 문의, 등록을 시작하세요"
+    },
+    "info": {
+      "title": "문의하기",
+      "description": "프로그램 문의, 방문 예약, 등록 등 무엇이든 도와드리겠습니다."
+    },
+    "cards": {
+      "phone": {
+        "title": "전화",
+        "subtitle": "월 - 금: 오전 7:00 - 오후 6:00"
+      },
+      "location": {
+        "title": "위치",
+        "subtitle": "대중교통 이용이 편리합니다"
+      },
+      "hours": {
+        "title": "운영시간",
+        "weekdays": "월 - 금",
+        "hours": "오전 7:00 - 오후 6:00",
+        "subtitle": "주말 및 공휴일 휴무"
+      },
+      "email": {
+        "title": "이메일",
+        "subtitle": "24시간 내 답변드립니다"
+      }
+    },
+    "quickActions": {
+      "title": "빠른 실행",
+      "call": "전화하기",
+      "email": "이메일 보내기",
+      "programs": "프로그램 보기"
+    },
+    "form": {
+      "title": "메시지 보내기",
+      "success": "감사합니다! 24시간 내에 연락드리겠습니다.",
+      "submit": "메시지 보내기",
+      "submitting": "전송 중...",
+      "fields": {
+        "name": "이름",
+        "email": "이메일 주소",
+        "phone": "전화번호",
+        "childAge": "아이 나이",
+        "message": "메시지"
+      },
+      "placeholders": {
+        "name": "성명",
+        "email": "your.email@example.com",
+        "phone": "604.945.8504",
+        "message": "자녀에 대해 알려주시고 궁금한 점을 적어주세요..."
+      },
+      "options": {
+        "agePlaceholder": "연령 선택",
+        "ageToddler": "30개월 - 3세",
+        "agePreschool": "3 - 4세",
+        "agePreK": "4 - 5세",
+        "ageOther": "기타"
+      },
+      "validation": {
+        "nameRequired": "이름을 입력해 주세요",
+        "emailRequired": "이메일을 입력해 주세요",
+        "emailInvalid": "유효한 이메일을 입력해 주세요",
+        "messageRequired": "메시지를 입력해 주세요",
+        "messageMin": "메시지는 최소 10자 이상이어야 합니다",
+        "formError": "오류를 확인한 후 다시 시도해 주세요.",
+        "submitError": "메시지 전송에 실패했습니다. 다시 시도해 주세요.",
+        "networkError": "네트워크 오류입니다. 연결을 확인해 주세요."
+      }
+    },
+    "map": {
+      "title": "찾아오시는 길",
+      "subtitle": "코퀴틀람 스테이션 근처로 대중교통 접근이 좋습니다"
+    }
+  },
+  "community": {
+    "journal": {
+      "meta": {
+        "title": "월간 어린이집 저널",
+        "description": "몬테소리 교실의 월간 소식과 하이라이트를 확인하세요."
+      },
+      "hero": {
+        "title": "월간 저널",
+        "subtitle": "월간 소식과 학습 하이라이트를 확인하세요"
+      },
+      "labels": {
+        "highlights": "하이라이트:"
+      },
+      "actions": {
+        "readFull": "전체 보기"
+      },
+      "empty": {
+        "title": "아직 저널이 없습니다",
+        "subtitle": "곧 업데이트됩니다!"
+      },
+      "samples": [
+        {
+          "id": 1,
+          "month": "12월",
+          "year": 2024,
+          "title": "겨울 원더랜드 모험",
+          "excerpt": "이번 달에는 겨울을 주제로 한 몬테소리 활동과 계절 공예, 따뜻한 이야기 시간을 즐겼습니다.",
+          "coverImage": "/images/journal-dec-2024.jpg",
+          "date": "2024-12-01",
+          "highlights": [
+            "눈과 얼음을 활용한 감각 놀이",
+            "세계의 겨울 전통",
+            "실생활 활동: 핫초코 만들기",
+            "자연 산책으로 겨울 변화 관찰"
+          ],
+          "activities": [
+            "눈송이 오리기와 대칭 탐구",
+            "겨울 동물 서식지 공부",
+            "계절 요리 활동",
+            "가족을 위한 카드 만들기"
+          ]
+        },
+        {
+          "id": 2,
+          "month": "11월",
+          "year": 2024,
+          "title": "감사와 수확 축제",
+          "excerpt": "감사와 계절 변화에 대해 배우는 의미 있는 몬테소리 경험을 했습니다.",
+          "coverImage": "/images/journal-nov-2024.jpg",
+          "date": "2024-11-01",
+          "highlights": [
+            "추수감사 준비",
+            "감사 나무 프로젝트",
+            "낙엽 수집과 분류",
+            "커뮤니티 감사 주간"
+          ],
+          "activities": [
+            "호박 생애주기 학습",
+            "전통 빵 만들기",
+            "가을 자연 미술 활동",
+            "감사 카드 쓰기"
+          ]
+        },
+        {
+          "id": 3,
+          "month": "10월",
+          "year": 2024,
+          "title": "가을 탐험과 할로윈",
+          "excerpt": "가을 탐험과 할로윈을 통해 계절의 변화를 즐겼습니다.",
+          "coverImage": "/images/journal-oct-2024.jpg",
+          "date": "2024-10-01",
+          "highlights": [
+            "호박밭 견학",
+            "할로윈 의상 퍼레이드",
+            "사과 수확과 시식",
+            "낙엽 프레스와 예술 활동"
+          ],
+          "activities": [
+            "호박 조각(교사 시연)",
+            "무서운 이야기 시간",
+            "가을 감각 탐구",
+            "수확 축제 준비"
+          ]
+        }
+      ]
+    },
+    "todaysStory": {
+      "meta": {
+        "title": "오늘의 이야기",
+        "description": "몬테소리 교실의 따뜻한 이야기와 학습 순간을 만나보세요."
+      },
+      "hero": {
+        "title": "오늘의 이야기",
+        "subtitle": "매일의 모험과 따뜻한 이야기"
+      },
+      "weekly": {
+        "title": "이번 주 모험",
+        "subtitle": "3-6세를 위한 월요일 업데이트"
+      },
+      "videos": {
+        "goodSamaritan": {
+          "title": "선한 사마리아인",
+          "description": "친절과 이웃 사랑의 아름다운 이야기."
+        },
+        "davidGoliath": {
+          "title": "다윗과 골리앗",
+          "description": "용기와 믿음을 보여준 다윗 이야기."
+        },
+        "noahArk": {
+          "title": "노아의 방주",
+          "description": "노아와 동물들의 모험을 만나보세요."
+        }
+      },
+      "lessonCards": {
+        "kind": {
+          "title": "친절하기",
+          "description": "미소로 도움을 주세요"
+        },
+        "helpful": {
+          "title": "도와주기",
+          "description": "친구에게 손을 내밀어요"
+        },
+        "love": {
+          "title": "사랑 나누기",
+          "description": "모두를 배려해요"
+        }
+      },
+      "calendar": {
+        "title": "이야기 달력",
+        "subtitle": "매주 새로운 이야기와 삶의 교훈을 만나요!"
+      },
+      "cta": {
+        "title": "마법 같은 배움에 함께하세요!",
+        "subtitle": "성경 이야기와 몬테소리의 만남. 아이들의 지혜와 친절을 키웁니다.",
+        "primary": "방문 예약",
+        "secondary": "프로그램 보기"
+      }
+    }
   }
 }

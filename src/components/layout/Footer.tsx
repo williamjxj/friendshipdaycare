@@ -50,8 +50,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Nurturing young minds through the Montessori method. We create a warm,
-              safe, and inspiring environment where every child can grow, learn, and flourish.
+              {t('footer.about')}
             </p>
             <div className="flex items-center space-x-4">
               <Link
@@ -87,36 +86,36 @@ export function Footer() {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="font-bold text-foreground mb-6 uppercase tracking-wider text-sm">Quick Links</h3>
+            <h3 className="font-bold text-foreground mb-6 uppercase tracking-wider text-sm">{t('footer.quickLinks.title')}</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="/programs" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  Our Programs
+                  {t('footer.quickLinks.programs')}
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  About Us
+                  {t('footer.quickLinks.about')}
                 </Link>
               </li>
               <li>
                 <Link href="/enrollment" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  Enrollment
+                  {t('footer.quickLinks.enrollment')}
                 </Link>
               </li>
               <li>
                 <Link href="/community/todays-story" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  Today's Story
+                  {t('footer.quickLinks.todaysStory')}
                 </Link>
               </li>
               <li>
                 <Link href="/community/journal" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  Journal
+                  {t('footer.quickLinks.journal')}
                 </Link>
               </li>
             </ul>
@@ -124,30 +123,30 @@ export function Footer() {
 
           {/* Column 3: Resources */}
           <div>
-            <h3 className="font-bold text-foreground mb-6 uppercase tracking-wider text-sm">Resources</h3>
+            <h3 className="font-bold text-foreground mb-6 uppercase tracking-wider text-sm">{t('footer.resources.title')}</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="/canva" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  Canva 1
+                  {t('footer.resources.canva1')}
                 </Link>
               </li>
               <li>
                 <Link href="/canva2" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  Canva 2
+                  {t('footer.resources.canva2')}
                 </Link>
               </li>
               <li>
                 <Link href="/gamma" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  Gamma
+                  {t('footer.resources.gamma')}
                 </Link>
               </li>
               <li>
                 <Link href="/slide-deck" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  Slide Deck
+                  {t('footer.resources.slideDeck')}
                 </Link>
               </li>
               <li>
@@ -158,7 +157,7 @@ export function Footer() {
                   className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  NotebookLM Slides
+                  {t('footer.resources.notebookSlides')}
                 </a>
               </li>
             </ul>
@@ -166,7 +165,7 @@ export function Footer() {
 
           {/* Column 4: Contact Info */}
           <div>
-            <h3 className="font-bold text-foreground mb-6 uppercase tracking-wider text-sm">Contact Us</h3>
+            <h3 className="font-bold text-foreground mb-6 uppercase tracking-wider text-sm">{t('footer.contact.title')}</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <MapPin className="w-5 h-5 text-primary shrink-0" />
@@ -190,8 +189,8 @@ export function Footer() {
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <Clock className="w-5 h-5 text-primary shrink-0" />
                 <span>
-                  Mon - Fri: 7:00 AM - 6:00 PM<br />
-                  Sat - Sun: Closed
+                  {t('footer.contact.hoursWeekdays')}<br />
+                  {t('footer.contact.hoursWeekend')}
                 </span>
               </li>
             </ul>
@@ -201,7 +200,7 @@ export function Footer() {
           <div className="text-center md:text-left">
             <h3 className="font-bold text-foreground mb-4 uppercase tracking-wider text-sm flex items-center justify-center md:justify-start gap-2">
               <Smartphone className="w-5 h-5 text-primary" />
-              Mobile Access
+              {t('footer.mobileAccess.title')}
             </h3>
             <div className="bg-white p-2 rounded-lg inline-block shadow-sm mx-auto md:mx-0">
               <QRCode
@@ -212,17 +211,17 @@ export function Footer() {
               />
             </div>
             <p className="text-[10px] text-muted-foreground/60 mt-2">
-              Scan to view on mobile
+              {t('footer.mobileAccess.scan')}
             </p>
           </div>
         </div>
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-            <p>&copy; {currentYear} Friendship Corner Daycare. All rights reserved.</p>
+            <p>&copy; {currentYear} {t('footer.brandName')}. {t('footer.rightsReserved')}</p>
             <span className="hidden md:inline text-muted-foreground/40">|</span>
             <p className="flex items-center gap-1">
-              Website by <a
+              {t('footer.siteBy')} <a
                 href="https://www.bestitconsulting.ca"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -245,19 +244,19 @@ export function Footer() {
               href="/privacy"
               className="hover:text-primary transition-colors min-h-[44px] flex items-center"
             >
-              Privacy Policy
+              {t('footer.links.privacy')}
             </Link>
             <Link
               href="/terms"
               className="hover:text-primary transition-colors min-h-[44px] flex items-center"
             >
-              Terms of Service
+              {t('footer.links.terms')}
             </Link>
             <Link
               href="/sitemap"
               className="hover:text-primary transition-colors min-h-[44px] flex items-center"
             >
-              Sitemap
+              {t('footer.links.sitemap')}
             </Link>
           </div>
         </div>
