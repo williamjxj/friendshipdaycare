@@ -25,6 +25,7 @@ interface PageHeroProps {
   staggerDelay?: number;
   fullScreen?: boolean; // true for landing page, false for other pages
   backgroundPosition?: 'center' | 'top' | 'bottom' | 'left' | 'right' | string; // Image positioning for cropping
+  unoptimized?: boolean;
 }
 
 export function PageHero({
@@ -41,6 +42,7 @@ export function PageHero({
   hideSubtitle = false,
   hideTitle = false,
   showCurve = true,
+  unoptimized = false,
 }: PageHeroProps & { hideSubtitle?: boolean; hideTitle?: boolean; showCurve?: boolean }) {
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -180,6 +182,7 @@ export function PageHero({
               )}
               priority
               aria-hidden="true"
+              unoptimized={unoptimized}
             />
           </div>
         ) : backgroundImage ? (
@@ -207,6 +210,7 @@ export function PageHero({
               )}
               priority
               aria-hidden="true"
+              unoptimized={unoptimized}
             />
           </div>
         ) : (

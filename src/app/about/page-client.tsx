@@ -43,6 +43,7 @@ export function AboutPageClient() {
           enableScrollTrigger={true}
           hideSubtitle={true}
           hideTitle={true}
+          unoptimized={true}
         >
           <HeroCTAButtons variant="outlined" />
         </PageHero>
