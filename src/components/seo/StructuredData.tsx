@@ -54,12 +54,47 @@ export function LocalBusinessSchema({
       "postalCode": address.postalCode,
       "addressCountry": address.addressCountry
     },
-    "openingHoursSpecification": openingHours.map(hours => ({
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": hours.split(" ")[0].split("-"),
-      "opens": hours.split(" ")[1].split("-")[0],
-      "closes": hours.split(" ")[1].split("-")[1]
-    })),
+    "openingHoursSpecification": openingHours.map(hours => {
+      // Parse format like "Mo-Fr 07:00-18:00"
+      const [dayRange, timeRange] = hours.split(" ");
+      const [opens, closes] = timeRange.split("-");
+      const days = dayRange.split("-");
+      
+      // Convert day abbreviations to full day names
+      const dayMap: Record<string, string> = {
+        "Mo": "Monday",
+        "Tu": "Tuesday", 
+        "We": "Wednesday",
+        "Th": "Thursday",
+        "Fr": "Friday",
+        "Sa": "Saturday",
+        "Su": "Sunday"
+      };
+      
+      // Handle day ranges (e.g., "Mo-Fr" becomes ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"])
+      const dayList: string[] = [];
+      if (days.length === 2) {
+        const startDay = dayMap[days[0]] || days[0];
+        const endDay = dayMap[days[1]] || days[1];
+        const allDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        const startIndex = allDays.indexOf(startDay);
+        const endIndex = allDays.indexOf(endDay);
+        if (startIndex !== -1 && endIndex !== -1) {
+          for (let i = startIndex; i <= endIndex; i++) {
+            dayList.push(allDays[i]);
+          }
+        }
+      } else {
+        dayList.push(dayMap[days[0]] || days[0]);
+      }
+      
+      return {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": dayList,
+        "opens": opens,
+        "closes": closes
+      };
+    }),
     "sameAs": [
       // Add social media URLs when available
     ]

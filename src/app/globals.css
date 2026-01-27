@@ -574,6 +574,7 @@ textarea:focus-visible {
   padding: 1.5rem;
   /* p-6 */
   box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
 }
 
 .card-feature {
@@ -583,22 +584,109 @@ textarea:focus-visible {
   padding: 2rem;
   /* p-8 */
   box-shadow: var(--shadow-lg);
-  transition: box-shadow 0.3s ease;
+  border: 1px solid var(--border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-feature:hover {
   box-shadow: var(--shadow-xl);
+  transform: translateY(-4px);
+  border-color: var(--primary);
 }
 
 .card-gradient {
-  background: linear-gradient(to bottom right,
-      color-mix(in srgb, var(--primary), transparent 90%),
-      color-mix(in srgb, var(--secondary), transparent 90%));
+  background: linear-gradient(135deg,
+      color-mix(in srgb, var(--primary), transparent 95%),
+      color-mix(in srgb, var(--secondary), transparent 95%));
   border-radius: var(--radius-2xl);
   /* rounded-2xl */
   padding: 2rem;
   /* p-8 */
+  border: 1px solid color-mix(in srgb, var(--primary), transparent 80%);
 }
+
+.card-premium {
+  background: color-mix(in srgb, var(--card), transparent 20%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1.5rem; /* rounded-3xl approx */
+  border: 1px solid color-mix(in srgb, var(--foreground), transparent 90%);
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.05),
+    0 4px 6px -4px rgba(0, 0, 0, 0.05); /* Soft, layered shadow */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-premium::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg, 
+    color-mix(in srgb, var(--primary), transparent 95%), 
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card-premium:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 
+    0 20px 40px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  border-color: color-mix(in srgb, var(--primary), transparent 70%);
+}
+
+.card-premium:hover::before {
+  opacity: 1;
+}
+
+/* Glassmorphism that respects themes */
+.glass-panel {
+  background: color-mix(in srgb, var(--background), transparent 30%); /* Adaptive base */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--foreground), transparent 90%);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+}
+
+.dark .glass-panel {
+  background: color-mix(in srgb, var(--card), transparent 40%);
+  border: 1px solid color-mix(in srgb, var(--foreground), transparent 85%);
+}
+
+/* Text Gradients for Headings */
+.text-gradient-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Button Upgrades */
+.btn-premium {
+  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary), black 10%));
+  color: var(--primary-foreground);
+  padding: 1rem 2.5rem;
+  border-radius: 9999px; /* Pill shape standard for modern premium */
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 15px color-mix(in srgb, var(--primary), transparent 60%);
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px color-mix(in srgb, var(--primary), transparent 50%);
+  filter: brightness(1.1);
+}
+
 
 /* Consistent Hover States */
 .hover-lift {

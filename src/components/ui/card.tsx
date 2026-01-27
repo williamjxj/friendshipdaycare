@@ -14,6 +14,7 @@ const cardVariants = cva(
         feature: "rounded-[var(--radius-lg)] shadow-lg border-none bg-card p-1",
         data: "rounded-md border border-border/50 bg-muted/20 shadow-none",
         interactive: "group border border-border cursor-pointer hover:shadow-lg hover:border-primary/30 active:scale-[0.98]",
+        premium: "card-premium", // Uses the new global utility class
       },
     },
     defaultVariants: {

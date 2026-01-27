@@ -5,5 +5,6 @@ Allow: /
 Sitemap: https://friendshipdaycare.com/sitemap.xml
 
 # Disallow admin or private areas (if any)
-# Disallow: /admin/
-# Disallow: /private/
+Disallow: /api/
+Disallow: /(unused)/
+Disallow: /(presentations)/

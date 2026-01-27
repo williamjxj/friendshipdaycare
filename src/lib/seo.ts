@@ -14,7 +14,7 @@ export const SEO_DEFAULT_KEYWORDS = [
   "Tri-Cities daycare",
   "early learning Coquitlam"
 ];
-export const SEO_DEFAULT_IMAGE = "/logo.png";
+export const SEO_DEFAULT_IMAGE = `${SEO_BASE_URL}/logo.png`;
 
 /**
  * Base metadata shared across all public pages.
@@ -28,23 +28,24 @@ export const defaultSiteMetadata: Metadata = {
   description: SEO_DEFAULT_DESCRIPTION,
   keywords: SEO_DEFAULT_KEYWORDS,
   alternates: {
-    canonical: "/"
+    canonical: SEO_BASE_URL
   },
   openGraph: {
-    title: SEO_DEFAULT_TITLE,
-    description: SEO_DEFAULT_DESCRIPTION,
-    url: SEO_BASE_URL,
-    siteName: SEO_SITE_NAME,
-    type: "website",
-    images: [
-      {
-        url: SEO_DEFAULT_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: SEO_SITE_NAME
-      }
-    ]
-  },
+      title: SEO_DEFAULT_TITLE,
+      description: SEO_DEFAULT_DESCRIPTION,
+      url: SEO_BASE_URL,
+      siteName: SEO_SITE_NAME,
+      type: "website",
+      locale: "en_CA",
+      images: [
+        {
+          url: SEO_DEFAULT_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: SEO_SITE_NAME
+        }
+      ]
+    },
   twitter: {
     card: "summary_large_image",
     title: SEO_DEFAULT_TITLE,
@@ -76,20 +77,27 @@ export function buildPageMetadata({
   path,
   image
 }: PageMetadataInput): Metadata {
-  const shareImage = image || SEO_DEFAULT_IMAGE;
+  // Ensure image URLs are absolute
+  const shareImage = image 
+    ? (image.startsWith('http') ? image : `${SEO_BASE_URL}${image}`)
+    : SEO_DEFAULT_IMAGE;
+  
+  // Ensure path is absolute URL for canonical and OpenGraph
+  const canonicalUrl = path.startsWith('http') ? path : `${SEO_BASE_URL}${path}`;
 
   return {
     title,
     description,
     alternates: {
-      canonical: path
+      canonical: canonicalUrl
     },
     openGraph: {
       title,
       description,
-      url: path,
+      url: canonicalUrl,
       siteName: SEO_SITE_NAME,
       type: "website",
+      locale: "en_CA",
       images: [
         {
           url: shareImage,

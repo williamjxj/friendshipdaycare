@@ -34,13 +34,13 @@
       "description": "Gentle introduction to structured learning with focus on independence and social skills."
     },
     "preschool": {
-      "title": "Preschool Program", 
+      "title": "Preschool Program",
       "age": "3 - 4 years",
       "description": "Montessori-based curriculum emphasizing hands-on learning and creative expression."
     },
     "prekindergarten": {
       "title": "Pre-Kindergarten",
-      "age": "4 - 5 years", 
+      "age": "4 - 5 years",
       "description": "School readiness preparation with advanced Montessori materials and concepts."
     }
   },
@@ -152,22 +152,22 @@
     },
     "discoverDifference": {
       "title": "Discover Our Difference",
-      "subtitle": "Why families have trusted us for over 16 years",
+      "subtitle": "Discover why families in Coquitlam have trusted our nurturing approach for over 16 years.",
       "authenticMontessori": {
         "title": "Authentic Montessori",
-        "description": "Child-centered learning that fosters independence and natural curiosity."
+        "description": "Experience a child-centered journey that ignites natural curiosity and fosters deep independence through hands-on exploration."
       },
       "lovingCommunity": {
         "title": "A Loving Community",
-        "description": "More than just a daycare, we are a family where everyone belongs."
+        "description": "We are more than a daycare; we are a vibrant family where every child is seen, heard, and cherished for who they are."
       },
       "safetyFirst": {
         "title": "Safety First",
-        "description": "Licensed facility complying with all health and safety regulations."
+        "description": "Your peace of mind is paramount. Our fully licensed facility exceeds health guidelines to ensure a pristine, secure haven."
       },
       "dedicatedEducators": {
         "title": "Dedicated Educators",
-        "description": "Experienced, certified teachers who truly care."
+        "description": "Our certified, passionate teachers are dedicated mentors who guide each child's unique path with patience and love."
       }
     },
     "programs": {
@@ -341,15 +341,42 @@
           "Emotional Regulation"
         ],
         "dailySchedule": [
-          { "time": "6:30 - 8:00", "activity": "Arrival & Free Play" },
-          { "time": "8:00 - 8:30", "activity": "Morning Snack" },
-          { "time": "8:30 - 10:00", "activity": "Montessori Work Time" },
-          { "time": "10:00 - 11:00", "activity": "Outdoor Play" },
-          { "time": "11:00 - 12:00", "activity": "Lunch" },
-          { "time": "12:00 - 2:30", "activity": "Rest Time" },
-          { "time": "2:30 - 3:00", "activity": "Afternoon Snack" },
-          { "time": "3:00 - 5:00", "activity": "Activities & Play" },
-          { "time": "5:00 - 6:30", "activity": "Departure" }
+          {
+            "time": "6:30 - 8:00",
+            "activity": "Arrival & Free Play"
+          },
+          {
+            "time": "8:00 - 8:30",
+            "activity": "Morning Snack"
+          },
+          {
+            "time": "8:30 - 10:00",
+            "activity": "Montessori Work Time"
+          },
+          {
+            "time": "10:00 - 11:00",
+            "activity": "Outdoor Play"
+          },
+          {
+            "time": "11:00 - 12:00",
+            "activity": "Lunch"
+          },
+          {
+            "time": "12:00 - 2:30",
+            "activity": "Rest Time"
+          },
+          {
+            "time": "2:30 - 3:00",
+            "activity": "Afternoon Snack"
+          },
+          {
+            "time": "3:00 - 5:00",
+            "activity": "Activities & Play"
+          },
+          {
+            "time": "5:00 - 6:30",
+            "activity": "Departure"
+          }
         ]
       },
       "preschool": {
@@ -365,15 +392,42 @@
           "Cultural Studies"
         ],
         "dailySchedule": [
-          { "time": "6:30 - 8:00", "activity": "Arrival & Free Choice" },
-          { "time": "8:00 - 8:30", "activity": "Morning Circle" },
-          { "time": "8:30 - 10:30", "activity": "Montessori Work Cycle" },
-          { "time": "10:30 - 11:30", "activity": "Outdoor Exploration" },
-          { "time": "11:30 - 12:30", "activity": "Lunch & Social Time" },
-          { "time": "12:30 - 2:30", "activity": "Quiet Time/Rest" },
-          { "time": "2:30 - 3:00", "activity": "Afternoon Snack" },
-          { "time": "3:00 - 5:30", "activity": "Art & Activities" },
-          { "time": "5:30 - 6:30", "activity": "Departure" }
+          {
+            "time": "6:30 - 8:00",
+            "activity": "Arrival & Free Choice"
+          },
+          {
+            "time": "8:00 - 8:30",
+            "activity": "Morning Circle"
+          },
+          {
+            "time": "8:30 - 10:30",
+            "activity": "Montessori Work Cycle"
+          },
+          {
+            "time": "10:30 - 11:30",
+            "activity": "Outdoor Exploration"
+          },
+          {
+            "time": "11:30 - 12:30",
+            "activity": "Lunch & Social Time"
+          },
+          {
+            "time": "12:30 - 2:30",
+            "activity": "Quiet Time/Rest"
+          },
+          {
+            "time": "2:30 - 3:00",
+            "activity": "Afternoon Snack"
+          },
+          {
+            "time": "3:00 - 5:30",
+            "activity": "Art & Activities"
+          },
+          {
+            "time": "5:30 - 6:30",
+            "activity": "Departure"
+          }
         ]
       },
       "prekindergarten": {
@@ -389,15 +443,42 @@
           "Leadership Skills"
         ],
         "dailySchedule": [
-          { "time": "6:30 - 8:00", "activity": "Arrival & Morning Work" },
-          { "time": "8:00 - 8:30", "activity": "Morning Meeting" },
-          { "time": "8:30 - 11:00", "activity": "Extended Work Period" },
-          { "time": "11:00 - 12:00", "activity": "Outdoor Learning" },
-          { "time": "12:00 - 1:00", "activity": "Lunch & Community" },
-          { "time": "1:00 - 2:30", "activity": "Rest/Quiet Activities" },
-          { "time": "2:30 - 3:00", "activity": "Afternoon Snack" },
-          { "time": "3:00 - 6:00", "activity": "Project Time & Play" },
-          { "time": "6:00 - 6:30", "activity": "Departure" }
+          {
+            "time": "6:30 - 8:00",
+            "activity": "Arrival & Morning Work"
+          },
+          {
+            "time": "8:00 - 8:30",
+            "activity": "Morning Meeting"
+          },
+          {
+            "time": "8:30 - 11:00",
+            "activity": "Extended Work Period"
+          },
+          {
+            "time": "11:00 - 12:00",
+            "activity": "Outdoor Learning"
+          },
+          {
+            "time": "12:00 - 1:00",
+            "activity": "Lunch & Community"
+          },
+          {
+            "time": "1:00 - 2:30",
+            "activity": "Rest/Quiet Activities"
+          },
+          {
+            "time": "2:30 - 3:00",
+            "activity": "Afternoon Snack"
+          },
+          {
+            "time": "3:00 - 6:00",
+            "activity": "Project Time & Play"
+          },
+          {
+            "time": "6:00 - 6:30",
+            "activity": "Departure"
+          }
         ]
       }
     },
@@ -468,10 +549,22 @@
       "subtitle": "See how our Coquitlam Montessori daycare inspires curiosity and joyful learning."
     },
     "categories": [
-      { "id": "all", "name": "All" },
-      { "id": "classroom", "name": "Classroom" },
-      { "id": "playground", "name": "Playground" },
-      { "id": "activities", "name": "Activities" }
+      {
+        "id": "all",
+        "name": "All"
+      },
+      {
+        "id": "classroom",
+        "name": "Classroom"
+      },
+      {
+        "id": "playground",
+        "name": "Playground"
+      },
+      {
+        "id": "activities",
+        "name": "Activities"
+      }
     ],
     "categoriesFallback": {
       "all": "All",

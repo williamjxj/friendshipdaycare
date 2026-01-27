@@ -221,58 +221,70 @@ export function RealEnvironmentShowcase() {
   const categories = useMemo(() => getCategories(t), [t]);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-background via-muted/30 to-background overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <section className="py-24 lg:py-32 bg-gradient-to-b from-background via-muted/30 to-background overflow-hidden relative">
+      {/* Enhanced background pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_0%,black_70%,transparent_100%)] pointer-events-none" />
+      
+      {/* Decorative gradient blobs */}
+      <div className="absolute top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-10 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center space-y-6 mb-16">
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
+        <div className="text-center space-y-6 mb-20">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-foreground drop-shadow-sm bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
             {t('home.realEnvironment.title')}
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-medium px-4">
             {t('home.realEnvironment.subtitle')}
           </p>
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-20">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id as any)}
-              className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium text-sm transition-all duration-200 ${selectedCategory === category.id
-                ? 'bg-primary text-primary-foreground shadow-lg scale-105'
-                : 'bg-card text-muted-foreground hover:bg-muted hover:text-foreground hover:scale-102'
-                }`}
+              className={`flex items-center space-x-3 px-8 py-4 rounded-full font-bold text-sm md:text-base transition-all duration-300 border-2 cursor-pointer ${
+                selectedCategory === category.id
+                  ? 'bg-primary text-primary-foreground border-primary shadow-xl scale-105 ring-4 ring-primary/20 hover:ring-primary/30'
+                  : 'bg-white/70 dark:bg-card/70 backdrop-blur-md text-muted-foreground border-border/50 hover:bg-white dark:hover:bg-card hover:border-primary/50 hover:shadow-lg hover:scale-105'
+              }`}
             >
-              <span className="text-lg"><category.icon className="w-5 h-5" /></span>
+              <span className="text-xl"><category.icon className="w-5 h-5 md:w-6 md:h-6" /></span>
               <span>{category.name}</span>
             </button>
           ))}
         </div>
 
         {/* Images Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {filteredData.map((item, index) => (
             <div
               key={`${item.title}-${index}`}
-              className="group/card bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full"
+              className="group/card rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col h-full hover:-translate-y-3 bg-white dark:bg-card border-2 border-border/50 hover:border-primary/40 cursor-pointer"
               style={{
                 animationDelay: `${index * 100}ms`
               }}
             >
-              <div className="relative h-64 overflow-hidden flex-shrink-0">
+              <div className="relative h-80 lg:h-96 overflow-hidden flex-shrink-0">
                 <CardCarousel images={item.images} category={item.category} />
               </div>
 
-              <div className="p-6 space-y-3 flex flex-col flex-grow">
-                <h3 className="font-semibold text-lg text-foreground group-hover/card:text-gray-800 dark:group-hover/card:text-gray-200 transition-colors duration-300">
+              <div className="p-8 lg:p-10 space-y-5 flex flex-col flex-grow relative bg-gradient-to-b from-white to-muted/20 dark:from-card dark:to-muted/10">
+                <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary via-secondary to-accent opacity-60 group-hover/card:opacity-100 transition-opacity duration-300" />
+                <h3 className="font-display font-bold text-2xl lg:text-3xl text-foreground group-hover/card:text-primary transition-colors duration-300">
                   {item.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed flex-grow">
+                <p className="text-muted-foreground leading-relaxed flex-grow text-base lg:text-lg font-medium">
                   {item.description}
                 </p>
-                <div className="flex items-center space-x-2 text-xs text-muted-foreground pt-4 border-t border-muted">
-                  <span className="w-2 h-2 bg-primary rounded-full"></span>
+                <div className="flex items-center space-x-3 text-xs font-bold text-muted-foreground/70 uppercase tracking-widest pt-6 border-t-2 border-muted/50">
+                  <span className={`w-3 h-3 rounded-full shadow-sm ${item.category === 'montessori' ? 'bg-primary ring-2 ring-primary/30' :
+                    item.category === 'outdoor' ? 'bg-secondary ring-2 ring-secondary/30' : 'bg-accent ring-2 ring-accent/30'
+                    }`}></span>
                   <span className="capitalize">{item.category.replace('-', ' ')}</span>
                 </div>
               </div>
@@ -281,24 +293,32 @@ export function RealEnvironmentShowcase() {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="bg-card rounded-2xl p-8 shadow-lg border border-muted/50">
-            <h3 className="text-2xl font-display font-bold text-foreground mb-4">
+        <div className="text-center mt-28">
+          <div className="glass-panel rounded-3xl p-12 lg:p-16 max-w-5xl mx-auto shadow-2xl relative overflow-hidden group border-2 border-border/50 hover:border-primary/30 transition-all duration-500">
+            {/* Decorative background pattern */}
+            <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
+              <svg width="200" height="200" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z" /></svg>
+            </div>
+            
+            {/* Gradient overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+            <h3 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
               {t('home.realEnvironment.cta.title')}
             </h3>
-            <p className="text-muted-foreground mb-6 w-full text-center">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-12 w-full max-w-3xl mx-auto leading-relaxed font-medium">
               {t('home.realEnvironment.cta.description')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
                 href="/contact"
-                className="btn-clay inline-block px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90"
+                className="btn-premium text-lg px-10 py-5 hover:scale-105 transition-transform duration-300"
               >
                 {t('home.realEnvironment.cta.scheduleVisit')}
               </a>
               <a
                 href="/gallery"
-                className="inline-block border-2 border-primary text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary hover:text-primary-foreground transition-all shadow-sm hover:shadow-md active:scale-95"
+                className="inline-flex items-center justify-center px-10 py-5 rounded-full border-2 border-primary text-primary font-bold text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 {t('home.realEnvironment.cta.viewGallery')}
               </a>

@@ -200,11 +200,6 @@ export function GoogleMap({ className = '' }: GoogleMapProps) {
               • Serving Tri-Cities area<br />
               • Convenient for commuters
             </p>
-            <div className="mt-3">
-              <p className="text-xs text-muted-foreground">
-                Coordinates: {mapData.location.lat.toFixed(4)}, {mapData.location.lng.toFixed(4)}
-              </p>
-            </div>
           </div>
         </div>
       </div>

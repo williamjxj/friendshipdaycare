@@ -118,6 +118,7 @@ export function GalleryPageClient() {
           enableScrollTrigger={true}
           hideSubtitle={true}
           hideTitle={true}
+          unoptimized={true}
         >
           <HeroCTAButtons variant="outlined" />
         </PageHero>
@@ -141,15 +142,15 @@ export function GalleryPageClient() {
             </div>
 
             {/* Category Filters */}
-            <div className="flex flex-wrap justify-center gap-3 mb-10">
+            <div className="flex flex-wrap justify-center gap-4 mb-12">
               {categories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+                  className={`px-6 py-3 rounded-full text-sm md:text-base font-bold transition-all duration-300 border-2 cursor-pointer ${
                     selectedCategory === category.id
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                      ? 'bg-primary text-primary-foreground border-primary shadow-xl scale-105 ring-4 ring-primary/20'
+                      : 'bg-muted/70 text-muted-foreground border-border/50 hover:bg-muted hover:border-primary/50 hover:shadow-lg hover:scale-105'
                   }`}
                 >
                   {category.name}
@@ -158,27 +159,28 @@ export function GalleryPageClient() {
             </div>
 
             {/* Image Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {filteredImages.map((image, index) => (
                 <motion.div
                   key={image.id}
-                  className="relative group cursor-pointer overflow-hidden rounded-xl shadow-md"
+                  className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl border-2 border-border/50 hover:border-primary/40 transition-all duration-500"
                   onClick={() => handleImageClick(index)}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.03, y: -4 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="relative h-64 w-full">
+                  <div className="relative h-72 lg:h-80 w-full">
                     <Image
                       src={image.src}
                       alt={image.alt}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 group-hover:from-black/80 transition-all duration-500" />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-white font-medium">{image.alt}</p>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <p className="text-white font-semibold text-lg drop-shadow-lg">{image.alt}</p>
                   </div>
                 </motion.div>
               ))}
@@ -210,29 +212,33 @@ export function GalleryPageClient() {
 
         {/* CTA Section */}
         <motion.section
-          className="py-20 bg-primary"
+          className="py-24 bg-gradient-to-br from-primary via-primary/95 to-secondary/85 relative overflow-hidden"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeIn}
         >
-          <div className="max-w-4xl mx-auto px-4 text-center space-y-8">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/20 rounded-full blur-3xl" />
+          
+          <div className="max-w-4xl mx-auto px-4 text-center space-y-10 relative z-10">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white drop-shadow-2xl">
               {t('galleryPage.cta.title')}
             </h2>
-            <p className="text-xl text-primary-foreground/90">
+            <p className="text-xl md:text-2xl text-white/95 font-medium leading-relaxed">
               {t('galleryPage.cta.subtitle')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary-foreground text-primary rounded-lg font-semibold hover:bg-primary-foreground/90 transition-colors"
+                className="inline-flex items-center justify-center px-10 py-5 bg-white text-primary rounded-full font-bold text-lg hover:bg-white/95 hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-white/50 ring-4 ring-white/30"
               >
                 {t('galleryPage.cta.primary')}
               </Link>
               <Link
                 href="/programs"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary-foreground text-primary-foreground rounded-lg font-semibold hover:bg-primary-foreground/10 transition-colors"
+                className="inline-flex items-center justify-center px-10 py-5 border-3 border-white text-white rounded-full font-bold text-lg hover:bg-white/15 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-xl"
               >
                 {t('galleryPage.cta.secondary')}
               </Link>
