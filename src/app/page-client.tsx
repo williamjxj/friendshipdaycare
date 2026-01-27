@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { getImageUrl } from '@/lib/image-utils';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Star } from 'lucide-react';
 import { AnimatedPlaceholder } from '@/components/ui/AnimatedPlaceholder';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { businessProfile } from '@/lib/business-profile';
@@ -113,7 +114,7 @@ export function HomePageClient() {
 
   const videos = useMemo(() => [
     {
-      url: '/videos/friendship-daycare.mp4',
+      url: getImageUrl('/videos/friendship-daycare.mp4'),
       title: t('home.dailyAdventures.videoTitle'),
       description: t('home.dailyAdventures.videoDescription'),
     }
@@ -329,7 +330,7 @@ export function HomePageClient() {
             <p>
               {businessProfile.address.streetAddress}, {businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode}
             </p>
-              <p>{t('common.hours.weekdays')}</p>
+            <p>{t('common.hours.weekdays')}</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
             <a href="/contact" className="bg-accent text-white px-10 py-5 rounded-xl font-bold text-xl hover:bg-white hover:text-accent transition-colors shadow-xl">

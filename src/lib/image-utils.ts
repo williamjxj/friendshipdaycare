@@ -11,8 +11,10 @@ import { generateImageUrl } from './r2';
  * - /images/logo.svg → images/logo.svg
  * - /static/new-logo.svg → static/new-logo.svg
  * - /collects/notebooklm-slides.pdf → collects/notebooklm-slides.pdf
+ * - /imgs/home/1.jpeg → imgs/home/1.jpeg
+ * - /videos/intro.mp4 → videos/intro.mp4
  * 
- * @param localPath - Local path starting with /images/, /static/, or /collects/
+ * @param localPath - Local path starting with /images/, /static/, /collects/, /imgs/, or /videos/
  * @returns R2 bucket URL (CDN, public, or direct R2 URL)
  * @throws Error if path doesn't match expected format or R2 config is missing
  */
@@ -20,10 +22,12 @@ export function getR2ImageUrl(localPath: string): string {
   // Remove leading slash if present
   const normalizedPath = localPath.startsWith('/') ? localPath.slice(1) : localPath;
   
-  // Validate that path starts with images/, static/, or collects/
+  // Validate that path starts with recognized prefixes
   if (!normalizedPath.startsWith('images/') && 
       !normalizedPath.startsWith('static/') && 
-      !normalizedPath.startsWith('collects/')) {
+      !normalizedPath.startsWith('collects/') &&
+      !normalizedPath.startsWith('imgs/') &&
+      !normalizedPath.startsWith('videos/')) {
     // If it's not a recognized path, try to use it as-is (might be external URL)
     if (normalizedPath.startsWith('http://') || normalizedPath.startsWith('https://')) {
       return normalizedPath;
@@ -45,7 +49,9 @@ export function getR2ImageUrl(localPath: string): string {
 export function shouldUseR2(path: string): boolean {
   return path.startsWith('/images/') || 
          path.startsWith('/static/') || 
-         path.startsWith('/collects/');
+         path.startsWith('/collects/') ||
+         path.startsWith('/imgs/') ||
+         path.startsWith('/videos/');
 }
 
 /**

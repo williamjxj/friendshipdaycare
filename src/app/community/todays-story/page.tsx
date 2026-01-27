@@ -25,11 +25,11 @@ export default function TodaysStoryPage() {
   const weeklyItems = ((messages.community?.todaysStory?.calendar?.length ?? 0) > 0
     ? messages.community?.todaysStory?.calendar
     : fallbackWeeklyItems) as Array<{
-    week: number;
-    title: string;
-    theme: string;
-    color: 'primary' | 'secondary' | 'accent';
-  }>;
+      week: number;
+      title: string;
+      theme: string;
+      color: 'primary' | 'secondary' | 'accent';
+    }>;
 
   useLocalizedMetadata({
     title: t('community.todaysStory.meta.title'),
@@ -127,18 +127,34 @@ export default function TodaysStoryPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {weeklyItems.map((item) => (
-                <Card key={item.week} className="text-center group p-6">
-                  <div className={cn("w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-4 transition-transform duration-500 group-hover:scale-[1.2]",
-                    item.color === 'primary' ? 'bg-primary' :
-                      item.color === 'secondary' ? 'bg-secondary' : 'bg-accent')}>
-                    {item.week}
+                <Card key={item.week} className="text-left group p-5 bg-card hover:shadow-lg transition-all duration-300 border border-border/50">
+                  <div className="flex items-start gap-4">
+                    <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-sm transition-transform duration-500 group-hover:scale-110",
+                      item.color === 'primary' ? 'bg-primary' :
+                        item.color === 'secondary' ? 'bg-secondary' : 'bg-accent')}>
+                      <span className="text-sm">{item.week}</span>
+                    </div>
+                    <div className="space-y-1">
+                      <CardTitle className="font-bold text-[#0f2d52] leading-tight text-lg">
+                        {item.title}
+                      </CardTitle>
+                      <div className="flex items-center gap-1 text-amber-500 text-sm">
+                        <span className="font-bold">5.0</span>
+                        <div className="flex">
+                          {[1, 2, 3, 4, 5].map((i) => (
+                            <Star key={i} className="w-3 h-3 fill-current" />
+                          ))}
+                        </div>
+                        <span className="text-muted-foreground ml-1">({item.theme})</span>
+                      </div>
+                      <CardDescription className="text-sm text-foreground/80 font-medium pt-1">
+                        Week {item.week} of the curriculum
+                      </CardDescription>
+                      <p className="text-xs text-muted-foreground">
+                        +1 (604) 945-8504
+                      </p>
+                    </div>
                   </div>
-                  <CardTitle className="font-bold text-foreground mb-1 text-lg">
-                    {item.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm text-muted-foreground p-0">
-                    {item.theme}
-                  </CardDescription>
                 </Card>
               ))}
             </div>

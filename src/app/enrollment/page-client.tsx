@@ -77,22 +77,21 @@ export function EnrollmentPageClient() {
                   variants={slideUp}
                   custom={index}
                 >
-                  <Card variant="interactive" className="p-6 h-full">
-                    <CardHeader className="p-0 mb-4">
-                      <div className={cn(
-                        "w-12 h-12 rounded-xl flex items-center justify-center mb-4",
-                        index % 3 === 0 ? 'bg-primary/10 text-primary' :
-                          index % 3 === 1 ? 'bg-secondary/10 text-secondary' : 'bg-accent/10 text-accent'
-                      )}>
+                  <Card
+                    variant="interactive"
+                    className="h-full rounded-2xl border border-border/60 bg-card/95 p-6 shadow-lg shadow-black/5 transition-shadow hover:shadow-xl"
+                  >
+                    <CardHeader className="p-0 mb-4 space-y-3">
+                      <div className="w-11 h-11 rounded-full flex items-center justify-center bg-muted text-foreground">
                         {index === 0 && <ClipboardDocumentListIcon className="h-6 w-6" />}
                         {index === 1 && <CalendarDaysIcon className="h-6 w-6" />}
                         {index === 2 && <DocumentCheckIcon className="h-6 w-6" />}
                         {index === 3 && <UserGroupIcon className="h-6 w-6" />}
                       </div>
-                      <CardTitle className="text-lg font-bold">{step.title}</CardTitle>
+                      <CardTitle className="text-lg font-semibold text-foreground">{step.title}</CardTitle>
                     </CardHeader>
                     <CardContent className="p-0">
-                      <CardDescription className="text-muted-foreground">
+                      <CardDescription className="text-muted-foreground leading-relaxed">
                         {step.description}
                       </CardDescription>
                     </CardContent>

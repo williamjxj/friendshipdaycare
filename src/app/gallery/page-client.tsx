@@ -81,7 +81,7 @@ export function GalleryPageClient() {
 
   const videoItems = [
     {
-      url: '/videos/friendship-daycare.mp4',
+      url: getImageUrl('/videos/friendship-daycare.mp4'),
       title: t('galleryPage.video.title'),
       description: t('galleryPage.video.description'),
     }

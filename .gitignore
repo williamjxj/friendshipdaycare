@@ -91,3 +91,8 @@ env/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# R2 migration artifacts
+scripts/r2/.migration-manifest.json
+scripts/r2/.migration-log.jsonl
+scripts/r2/.verification-report.json
