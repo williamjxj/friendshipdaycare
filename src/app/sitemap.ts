@@ -53,6 +53,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.6
-    }
+    },
+    // NOTE:
+    // We intentionally do not include `/community/journal/[id]` entries here yet.
+    // Those pages are currently driven by in-code sample content and may change structure.
   ];
 }

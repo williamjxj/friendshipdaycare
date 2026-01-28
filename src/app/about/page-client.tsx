@@ -13,12 +13,18 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
+import { usePathname } from 'next/navigation';
+import { BreadcrumbSchema } from '@/components/seo/StructuredData';
+import { Breadcrumbs } from '@/components/ui/breadcrumbs';
+import { getBreadcrumbs, toBreadcrumbSchemaItems } from '@/lib/breadcrumbs';
 
 /**
  * About page client component with interactive sections.
  */
 export function AboutPageClient() {
   const { t, messages } = useLanguage();
+  const pathname = usePathname();
+  const breadcrumbs = getBreadcrumbs(pathname);
 
   useLocalizedMetadata({
     title: t('seo.about.title'),
@@ -35,6 +41,10 @@ export function AboutPageClient() {
   return (
     <Suspense fallback={<LoadingSpinner message="Loading about us..." />}>
       <main className="flex-1">
+        <BreadcrumbSchema items={toBreadcrumbSchemaItems(breadcrumbs)} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
         {/* Hero Section */}
         <PageHero
           title={t('aboutPage.hero.title')}

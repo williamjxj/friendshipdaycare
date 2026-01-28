@@ -5,7 +5,7 @@ import { EnrollmentPageClient } from "@/app/enrollment/page-client";
 export const metadata: Metadata = buildPageMetadata({
   title: "Daycare Enrollment in Coquitlam",
   description:
-    "Learn how to enroll at Friendship Corner Daycare, a Montessori daycare in Coquitlam, BC. Review steps and requirements.",
+    "Learn how to enroll at Friendship Corner Daycare, a Montessori daycare in Coquitlam, BC serving Tri-Cities families. Review steps and requirements.",
   path: "/enrollment"
 });
 

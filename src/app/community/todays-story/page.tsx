@@ -1,5 +1,7 @@
 'use client';
 
+import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import { Suspense } from 'react';
 import { PageLoader, LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { PageHero } from '@/components/ui/page-hero';
@@ -13,6 +15,14 @@ import { BookOpen, Star, Heart, Calendar, Sparkles } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
+import { businessProfile } from '@/lib/business-profile';
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Today's Story – Weekly Bible Stories at Friendship Daycare",
+  description:
+    'Watch weekly Bible story videos and see how Friendship Corner Daycare in Coquitlam weaves kindness, courage, and love into our curriculum.',
+  path: '/community/todays-story',
+});
 
 export default function TodaysStoryPage() {
   const { t, messages } = useLanguage();
@@ -55,7 +65,7 @@ export default function TodaysStoryPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Card
               variant="elevated"
-              className="p-6 md:p-12 border-t-4 border-t-primary rounded-[var(--radius-lg)]"
+              className="p-6 md:p-12 border-t-4 border-t-primary rounded-lg"
             >
               <CardHeader className="p-0 text-center mb-8 space-y-2">
                 <CardTitle className="text-3xl font-display font-bold text-foreground flex items-center justify-center gap-3">
@@ -151,7 +161,7 @@ export default function TodaysStoryPage() {
                         Week {item.week} of the curriculum
                       </CardDescription>
                       <p className="text-xs text-muted-foreground">
-                        +1 (604) 945-8504
+                        {businessProfile.telephone}
                       </p>
                     </div>
                   </div>

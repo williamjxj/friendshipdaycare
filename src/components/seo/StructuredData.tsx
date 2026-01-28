@@ -21,6 +21,8 @@ interface LocalBusinessSchemaProps {
   image?: string;
   priceRange?: string;
   openingHours?: string[];
+  serviceArea?: string;
+  sameAs?: string[];
 }
 
 export function LocalBusinessSchema({
@@ -34,7 +36,9 @@ export function LocalBusinessSchema({
   priceRange = "$$",
   openingHours = [
     "Mo-Fr 07:30-17:30"
-  ]
+  ],
+  serviceArea,
+  sameAs = [],
 }: LocalBusinessSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
@@ -54,6 +58,14 @@ export function LocalBusinessSchema({
       "postalCode": address.postalCode,
       "addressCountry": address.addressCountry
     },
+    ...(serviceArea
+      ? {
+          areaServed: {
+            "@type": "Place",
+            name: serviceArea,
+          },
+        }
+      : {}),
     "openingHoursSpecification": openingHours.map(hours => {
       // Parse format like "Mo-Fr 07:00-18:00"
       const [dayRange, timeRange] = hours.split(" ");
@@ -95,9 +107,52 @@ export function LocalBusinessSchema({
         "closes": closes
       };
     }),
-    "sameAs": [
-      // Add social media URLs when available
-    ]
+    ...(sameAs.length > 0 ? { sameAs } : {}),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+interface WebSiteSchemaProps {
+  name: string;
+  url: string;
+  description: string;
+  searchUrlTemplate?: string;
+}
+
+/**
+ * WebSite schema (homepage/global).
+ * Can enable sitelinks search box eligibility when a site search exists.
+ */
+export function WebSiteSchema({
+  name,
+  url,
+  description,
+  searchUrlTemplate,
+}: WebSiteSchemaProps) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name,
+    url,
+    description,
+    ...(searchUrlTemplate
+      ? {
+          potentialAction: {
+            "@type": "SearchAction",
+            target: {
+              "@type": "EntryPoint",
+              urlTemplate: searchUrlTemplate,
+            },
+            "query-input": "required name=search_term_string",
+          },
+        }
+      : {}),
   };
 
   return (

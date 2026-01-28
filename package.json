@@ -7,7 +7,7 @@
     "dev:turbo": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "migrate:r2": "tsx scripts/r2/migrate-to-r2.ts",
     "verify:r2": "tsx scripts/r2/verify-migration.ts",
     "rollback:r2": "tsx scripts/r2/rollback-migration.ts"
@@ -52,7 +52,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "eslint": "^9.39.2",
     "eslint-config-next": "^16.0.10",
     "tailwindcss": "^4.1.18",
     "tsx": "^4.21.0",

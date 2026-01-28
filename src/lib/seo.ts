@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { businessProfile } from "@/lib/business-profile";
+import { getOgImagePath } from "@/lib/og-images";
 
-export const SEO_BASE_URL = "https://friendshipdaycare.com";
+export const SEO_BASE_URL = businessProfile.url;
 export const SEO_SITE_NAME = "Friendship Corner Daycare";
 export const SEO_DEFAULT_TITLE = "Friendship Corner Daycare | Montessori Daycare in Coquitlam, BC";
 export const SEO_TITLE_TEMPLATE = "%s | Friendship Corner Daycare";
@@ -77,10 +79,11 @@ export function buildPageMetadata({
   path,
   image
 }: PageMetadataInput): Metadata {
+  const ogPath = image ?? getOgImagePath(path);
+
   // Ensure image URLs are absolute
-  const shareImage = image 
-    ? (image.startsWith('http') ? image : `${SEO_BASE_URL}${image}`)
-    : SEO_DEFAULT_IMAGE;
+  const shareImage =
+    ogPath.startsWith("http") ? ogPath : `${SEO_BASE_URL}${ogPath.startsWith("/") ? ogPath : `/${ogPath}`}`;
   
   // Ensure path is absolute URL for canonical and OpenGraph
   const canonicalUrl = path.startsWith('http') ? path : `${SEO_BASE_URL}${path}`;
@@ -89,7 +92,11 @@ export function buildPageMetadata({
     title,
     description,
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        "x-default": canonicalUrl,
+        en: canonicalUrl,
+      },
     },
     openGraph: {
       title,

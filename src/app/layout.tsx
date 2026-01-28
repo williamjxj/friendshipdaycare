@@ -9,7 +9,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SkipNavigation } from "@/components/ui/SkipNavigation";
 import { Toaster } from "@/components/ui/toaster";
-import { LocalBusinessSchema, OrganizationSchema } from "@/components/seo/StructuredData";
+import { LocalBusinessSchema, OrganizationSchema, WebSiteSchema } from "@/components/seo/StructuredData";
 import { businessProfile } from "@/lib/business-profile";
 import { defaultSiteMetadata } from "@/lib/seo";
 import "./globals.css";
@@ -55,6 +55,11 @@ export default function RootLayout({
         <link rel="icon" href="/favicon_io/favicon.ico" />
         
         {/* Structured Data for SEO */}
+        <WebSiteSchema
+          name={businessProfile.name}
+          url={businessProfile.url}
+          description="Licensed Montessori daycare in Coquitlam, BC serving Tri-Cities families."
+        />
         <LocalBusinessSchema
           name={businessProfile.name}
           description="Licensed Montessori daycare in Coquitlam offering quality early childhood education for children aged 30 months to school age. Established in 2008."
@@ -65,6 +70,7 @@ export default function RootLayout({
           image={`${businessProfile.url}/logo.png`}
           priceRange="$$"
           openingHours={businessProfile.openingHours}
+          serviceArea={businessProfile.serviceArea}
         />
         <OrganizationSchema
           name={businessProfile.name}

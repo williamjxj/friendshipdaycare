@@ -1,5 +1,7 @@
 'use client';
 
+import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { PageHero } from '@/components/ui/page-hero';
@@ -13,6 +15,13 @@ import { Newspaper, Calendar, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { AnimatedPlaceholder } from '@/components/ui/AnimatedPlaceholder';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
+
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Friendship Daycare Journal – Monthly Highlights in Coquitlam',
+  description:
+    'Read Friendship Corner Daycare’s monthly journal to see Montessori activities, seasonal themes, and highlights from our Coquitlam classrooms.',
+  path: '/community/journal',
+});
 
 // Sample journal data
 const sampleJournals = [

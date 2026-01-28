@@ -19,12 +19,19 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
+import { FAQSchema } from '@/components/seo/StructuredData';
+import { usePathname } from 'next/navigation';
+import { BreadcrumbSchema } from '@/components/seo/StructuredData';
+import { Breadcrumbs } from '@/components/ui/breadcrumbs';
+import { getBreadcrumbs, toBreadcrumbSchemaItems } from '@/lib/breadcrumbs';
 
 /**
  * Enrollment page client component with steps and requirements.
  */
 export function EnrollmentPageClient() {
   const { t, messages } = useLanguage();
+  const pathname = usePathname();
+  const breadcrumbs = getBreadcrumbs(pathname);
 
   useLocalizedMetadata({
     title: t('seo.enrollment.title'),
@@ -37,9 +44,41 @@ export function EnrollmentPageClient() {
   }>;
   const requirements = (messages.enrollmentPage?.requirements?.items ?? []) as string[];
 
+  const faqItems = [
+    {
+      question: t('enrollmentPage.faq.questions.ageRange') ?? 'What ages do you accept?',
+      answer:
+        t('enrollmentPage.faq.answers.ageRange') ??
+        'We primarily accept children from 30 months to school age. Please contact us if you have specific age questions.',
+    },
+    {
+      question: t('enrollmentPage.faq.questions.hours') ?? 'What are your hours of operation?',
+      answer:
+        t('enrollmentPage.faq.answers.hours') ??
+        'Our typical hours are Monday to Friday, 7:00am–6:00pm to support working families in the Tri-Cities area.',
+    },
+    {
+      question: t('enrollmentPage.faq.questions.waitlist') ?? 'Is there a waitlist?',
+      answer:
+        t('enrollmentPage.faq.answers.waitlist') ??
+        'Some programs and age groups may have a waitlist. We encourage families to contact us early to discuss availability and next steps.',
+    },
+    {
+      question: t('enrollmentPage.faq.questions.tours') ?? 'How do I book a tour?',
+      answer:
+        t('enrollmentPage.faq.answers.tours') ??
+        'You can book a tour by using our contact form, calling us directly, or requesting a visit through our enrollment page. We will confirm your time by phone or email.',
+    },
+  ];
+
   return (
     <Suspense fallback={<LoadingSpinner message="Loading enrollment..." />}>
       <main className="flex-1">
+        <FAQSchema questions={faqItems} />
+        <BreadcrumbSchema items={toBreadcrumbSchemaItems(breadcrumbs)} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
         {/* Hero Section */}
         <PageHero
           title={t('enrollmentPage.hero.title')}
@@ -131,6 +170,42 @@ export function EnrollmentPageClient() {
                   <CheckCircleIcon className="h-6 w-6 text-primary shrink-0 mt-1" />
                   <p className="text-muted-foreground">{requirement}</p>
                 </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Enrollment FAQ */}
+        <motion.section
+          className="py-20 bg-background"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center space-y-4 mb-10">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+                {t('enrollmentPage.faq.title') ?? 'Enrollment FAQ'}
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                {t('enrollmentPage.faq.subtitle') ?? 'Quick answers to the most common enrollment questions from families.'}
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {faqItems.map((item, idx) => (
+                <div
+                  key={`${idx}-${item.question}`}
+                  className="rounded-xl border border-border bg-card/80 p-5 shadow-sm"
+                >
+                  <h3 className="font-semibold text-foreground text-lg mb-2">
+                    {item.question}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {item.answer}
+                  </p>
+                </div>
               ))}
             </div>
           </div>

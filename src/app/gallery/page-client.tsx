@@ -13,6 +13,10 @@ import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
+import { usePathname } from 'next/navigation';
+import { BreadcrumbSchema } from '@/components/seo/StructuredData';
+import { Breadcrumbs } from '@/components/ui/breadcrumbs';
+import { getBreadcrumbs, toBreadcrumbSchemaItems } from '@/lib/breadcrumbs';
 
 /**
  * Gallery page client component showcasing photos and videos.
@@ -20,6 +24,8 @@ import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 export function GalleryPageClient() {
   const { t, messages } = useLanguage();
   const categoryMessages = (messages.galleryPage?.categories ?? []) as Array<{ id: string; name: string }>;
+  const pathname = usePathname();
+  const breadcrumbs = getBreadcrumbs(pathname);
 
   useLocalizedMetadata({
     title: t('seo.gallery.title'),
@@ -110,6 +116,10 @@ export function GalleryPageClient() {
   return (
     <Suspense fallback={<LoadingSpinner message="Loading gallery..." />}>
       <main className="flex-1">
+        <BreadcrumbSchema items={toBreadcrumbSchemaItems(breadcrumbs)} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
         {/* Hero Section */}
         <PageHero
           title={t('galleryPage.hero.title')}

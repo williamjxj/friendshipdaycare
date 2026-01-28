@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { MapPinIcon } from '@heroicons/react/24/outline';
+import { businessProfile } from '@/lib/business-profile';
 
 interface GoogleMapProps {
   className?: string;
@@ -48,7 +49,7 @@ export function GoogleMap({ className = '' }: GoogleMapProps) {
     fetchMapData();
   }, []);
 
-  const fallbackAddress = "2950 Dewdney Trunk Road, Coquitlam, BC V3C 2J4, Canada";
+  const fallbackAddress = `${businessProfile.address.streetAddress}, ${businessProfile.address.addressLocality}, ${businessProfile.address.addressRegion} ${businessProfile.address.postalCode}, ${businessProfile.address.addressCountry}`;
   const encodedAddress = encodeURIComponent(fallbackAddress);
 
   // Loading state
@@ -97,10 +98,10 @@ export function GoogleMap({ className = '' }: GoogleMapProps) {
             <MapPinIcon className="w-16 h-16 text-primary mx-auto mb-4" />
             <h4 className="text-xl font-semibold text-foreground mb-2">Visit Our Location</h4>
             <p className="text-sm text-muted-foreground mb-4">
-              Friendship Corner Daycare<br />
-              2950 Dewdney Trunk Road<br />
-              Coquitlam, BC V3C 2J4<br />
-              Canada
+              {businessProfile.name}<br />
+              {businessProfile.address.streetAddress}<br />
+              {businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode}<br />
+              {businessProfile.address.addressCountry}
             </p>
             <a
               href={`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`}
@@ -119,10 +120,10 @@ export function GoogleMap({ className = '' }: GoogleMapProps) {
             <div>
               <h4 className="font-semibold text-foreground mb-2">Address</h4>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Friendship Corner Daycare<br />
-                2950 Dewdney Trunk Road<br />
-                Coquitlam, BC V3C 2J4<br />
-                Canada
+                {businessProfile.name}<br />
+                {businessProfile.address.streetAddress}<br />
+                {businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode}<br />
+                {businessProfile.address.addressCountry}
               </p>
             </div>
             <div>

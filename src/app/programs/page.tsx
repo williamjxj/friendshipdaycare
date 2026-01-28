@@ -5,7 +5,7 @@ import { ProgramsPageClient } from "@/app/programs/page-client";
 export const metadata: Metadata = buildPageMetadata({
   title: "Montessori Programs in Coquitlam",
   description:
-    "Explore toddler, preschool, and pre-kindergarten Montessori programs at Friendship Corner Daycare in Coquitlam, BC.",
+    "Explore toddler, preschool, and pre-kindergarten Montessori programs at Friendship Corner Daycare in Coquitlam, BC serving Tri-Cities families.",
   path: "/programs"
 });
 
