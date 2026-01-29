@@ -94,7 +94,10 @@ All images have been successfully downloaded to `public/images/`:
 
 1. **download_all_images.js** - Node.js script to download all images
 2. **download_all_images.py** - Python script with BeautifulSoup for comprehensive scraping
-3. **download_gallery_images.sh** - Bash script for gallery images specifically
+3. **create_video_thumbnails.py** - Python script to generate video thumbnail placeholders
+4. **generate-placeholders.sh** - Bash script to generate SVG placeholder images
+
+**Note**: Deprecated scripts (`download_gallery_images.*`, `update_logos.sh`) have been removed. All image downloads now use the `images/` folder convention.
 
 ## 📱 **Mobile Optimization**
 

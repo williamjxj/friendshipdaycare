@@ -133,13 +133,16 @@ See `GOOGLE_MAPS_SETUP.md` for detailed instructions.
 
 ## 📸 Gallery Setup
 
-The gallery supports both photos and videos. To add content:
+The gallery supports both photos and videos. Images are stored in **Cloudflare R2** (not locally).
 
-1. **Photos**: Add images to `/public/images/`
-2. **Update** image arrays in gallery components
+**To add content:**
+
+1. **Photos**: Upload images to R2 `images/` folder via Cloudflare dashboard
+2. **Update** image arrays in gallery components using `/images/` paths
 3. **Videos**: Update video URLs in the VideoPlayer components
+4. **Access**: Use `getImageUrl('/images/filename.jpg')` helper function
 
-See `docs/images-readme.md` for image requirements.
+See `docs/images-readme.md` and `docs/images-videos-usage-analysis.md` for details.
 
 ## 🛠️ Technology Stack
 

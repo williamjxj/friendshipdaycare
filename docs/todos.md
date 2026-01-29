@@ -7,3 +7,12 @@ bottom resources, add 1 more entry: present 4, links to https://pub-fafb0f1d538f
 
 
 https://pub-fafb0f1d538f40ebb6fdd21bb5041a1c.r2.dev/collects/notebooklm-slides.pdf
+
+
+
+## 0128
+
+- slidetop-bg.jpg
+- images/playground.jpg
+- toys.jpg
+- circle-time-area.jpg

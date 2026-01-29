@@ -1,5 +1,8 @@
 # Image Placeholder Guidance
 
+**Last Updated**: 2026-01-29  
+**Storage**: Images are stored in R2 (Cloudflare) bucket, not locally
+
 This document lists image placeholders expected by the UI so real assets can replace them.
 
 ## Placeholder Inventory
@@ -17,5 +20,7 @@ This document lists image placeholders expected by the UI so real assets can rep
 
 1. Capture real daycare photos.
 2. Optimize for web (size + compression).
-3. Store in `public/images/`.
-4. Update component paths to the new filenames.
+3. Upload to R2 `images/` folder via Cloudflare dashboard or R2 API tools.
+4. Use `/images/` path convention in code (e.g., `getImageUrl('/images/playground.jpg')`).
+
+**Note**: Images are served from R2 CDN, not from local `public/images/` folder. See `docs/images-videos-usage-analysis.md` for details.
