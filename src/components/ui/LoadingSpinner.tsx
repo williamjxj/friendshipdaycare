@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useMemo, useState, useEffect } from 'react';
 
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
@@ -19,6 +20,22 @@ export function LoadingSpinner({ size = 'md', message = 'Loading...' }: LoadingS
     md: 'w-20 h-20',
     lg: 'w-28 h-28'
   };
+
+  // Generate stable random values for hearts
+  const heartAnimations = useMemo(() => {
+    return [...Array(3)].map((_, i) => ({
+      left: `${20 + i * 30}%`,
+      top: `${10 + i * 20}%`,
+      delay: i * 0.5
+    }));
+  }, []);
+
+  // Generate stable random values for the loading message dots
+  const dotAnimations = useMemo(() => {
+    return [...Array(3)].map((_, i) => ({
+      delay: i * 0.2
+    }));
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
@@ -40,7 +57,7 @@ export function LoadingSpinner({ size = 'md', message = 'Loading...' }: LoadingS
             ease: "linear"
           }}
         />
-        
+
         {/* Inner bouncing dots */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="flex space-x-1">
@@ -69,13 +86,13 @@ export function LoadingSpinner({ size = 'md', message = 'Loading...' }: LoadingS
         {/* Floating hearts */}
         {size === 'lg' && (
           <>
-            {[...Array(3)].map((_, i) => (
+            {heartAnimations.map((anim, i) => (
               <motion.div
                 key={i}
                 className="absolute text-pink-400 text-lg"
                 style={{
-                  left: `${20 + i * 30}%`,
-                  top: `${10 + i * 20}%`
+                  left: anim.left,
+                  top: anim.top
                 }}
                 animate={{
                   y: [-10, -20, -10],
@@ -85,7 +102,7 @@ export function LoadingSpinner({ size = 'md', message = 'Loading...' }: LoadingS
                 transition={{
                   duration: 2,
                   repeat: Infinity,
-                  delay: i * 0.5,
+                  delay: anim.delay,
                   ease: "easeInOut"
                 }}
               >
@@ -111,7 +128,7 @@ export function LoadingSpinner({ size = 'md', message = 'Loading...' }: LoadingS
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          {[...Array(3)].map((_, i) => (
+          {dotAnimations.map((anim, i) => (
             <motion.div
               key={i}
               className="w-2 h-2 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full"
@@ -119,7 +136,7 @@ export function LoadingSpinner({ size = 'md', message = 'Loading...' }: LoadingS
               transition={{
                 duration: 1,
                 repeat: Infinity,
-                delay: i * 0.2
+                delay: anim.delay
               }}
             />
           ))}
@@ -131,11 +148,32 @@ export function LoadingSpinner({ size = 'md', message = 'Loading...' }: LoadingS
 
 // Full page loading component
 export function PageLoader({ message = 'Loading magical content...' }: { message?: string }) {
+  // Use state to store random values after mount to avoid hydration mismatch
+  const [floatingElements, setFloatingElements] = useState<Array<{
+    left: string;
+    top: string;
+    duration: number;
+    delay: number;
+    char: string;
+  }>>([]);
+
+  useEffect(() => {
+    const chars = ['🎨', '📚', '🧸', '🌈', '⭐', '🎈'];
+    const elements = [...Array(6)].map((_, i) => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      duration: 4 + Math.random() * 2,
+      delay: Math.random() * 2,
+      char: chars[i]
+    }));
+    setFloatingElements(elements);
+  }, []);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
       <div className="text-center space-y-8 p-8">
         <LoadingSpinner size="lg" message={message} />
-        
+
         {/* Fun loading messages */}
         <motion.div
           className="space-y-2"
@@ -150,13 +188,13 @@ export function PageLoader({ message = 'Loading magical content...' }: { message
 
         {/* Floating elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(6)].map((_, i) => (
+          {floatingElements.map((el, i) => (
             <motion.div
               key={i}
               className="absolute text-4xl opacity-20"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`
+                left: el.left,
+                top: el.top
               }}
               animate={{
                 y: [-20, 20, -20],
@@ -165,13 +203,13 @@ export function PageLoader({ message = 'Loading magical content...' }: { message
                 scale: [1, 1.2, 1]
               }}
               transition={{
-                duration: 4 + Math.random() * 2,
+                duration: el.duration,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: el.delay,
                 ease: "easeInOut"
               }}
             >
-              {['🎨', '📚', '🧸', '🌈', '⭐', '🎈'][i]}
+              {el.char}
             </motion.div>
           ))}
         </div>

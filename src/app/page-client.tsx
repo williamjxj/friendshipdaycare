@@ -183,7 +183,7 @@ export function HomePageClient() {
       <section id="about" className="py-24 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16 section-header">
             {/* Logo Display */}
@@ -202,7 +202,7 @@ export function HomePageClient() {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
               {t('home.discoverDifference.title')}
             </h2>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium">
+            <p className="text-xl md:text-2xl text-muted-foreground w-full max-w-5xl mx-auto leading-relaxed font-medium">
               {t('home.discoverDifference.subtitle')}
             </p>
           </div>
@@ -286,13 +286,13 @@ export function HomePageClient() {
         {/* Decorative background elements */}
         <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-6 mb-20 section-header">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
               {t('home.programs.title')}
             </h2>
-            <p className="text-xl md:text-2xl text-muted-foreground w-full max-w-4xl mx-auto leading-relaxed font-medium">
+            <p className="text-xl md:text-2xl text-muted-foreground w-full max-w-5xl mx-auto leading-relaxed font-medium">
               {t('home.programs.subtitle')}
             </p>
           </div>
@@ -304,9 +304,9 @@ export function HomePageClient() {
               { id: 'preschool', key: 'preschool', color: 'secondary', icon: '🎨', gradient: 'from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/20' },
               { id: 'prek', key: 'prek', color: 'accent', icon: '🚀', gradient: 'from-yellow-50 to-amber-50 dark:from-yellow-950/30 dark:to-amber-950/20' },
             ].map((prog) => (
-              <Card 
-                key={prog.id} 
-                variant="premium" 
+              <Card
+                key={prog.id}
+                variant="premium"
                 className={cn(
                   "p-8 lg:p-10 flex flex-col h-full section-header group cursor-pointer",
                   "hover:shadow-2xl hover:-translate-y-2 transition-all duration-500",
@@ -320,8 +320,8 @@ export function HomePageClient() {
                     "group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl",
                     "bg-white/80 dark:bg-card/80 backdrop-blur-sm",
                     prog.color === 'primary' ? 'bg-gradient-to-br from-primary/20 to-primary/10' :
-                      prog.color === 'secondary' ? 'bg-gradient-to-br from-secondary/20 to-secondary/10' : 
-                      'bg-gradient-to-br from-accent/20 to-accent/10'
+                      prog.color === 'secondary' ? 'bg-gradient-to-br from-secondary/20 to-secondary/10' :
+                        'bg-gradient-to-br from-accent/20 to-accent/10'
                   )}>
                     {prog.icon}
                   </div>
@@ -338,17 +338,17 @@ export function HomePageClient() {
                   </p>
                 </CardContent>
                 <div className="mt-auto pt-4 border-t border-border/50">
-                  <a 
-                    href="/programs" 
+                  <a
+                    href="/programs"
                     className={cn(
                       "inline-flex items-center font-bold text-lg group/link",
                       "hover:translate-x-2 transition-all duration-300",
                       prog.color === 'primary' ? 'text-primary hover:text-primary/80' :
-                        prog.color === 'secondary' ? 'text-secondary hover:text-secondary/80' : 
-                        'text-accent-foreground hover:text-accent-foreground/80'
+                        prog.color === 'secondary' ? 'text-secondary hover:text-secondary/80' :
+                          'text-accent-foreground hover:text-accent-foreground/80'
                     )}
                   >
-                    {t('home.programs.learnDetails')} 
+                    {t('home.programs.learnDetails')}
                     <svg className="w-5 h-5 ml-2 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
@@ -372,7 +372,7 @@ export function HomePageClient() {
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
               {t('home.dailyAdventures.title')}
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground w-full max-w-5xl mx-auto">
               {t('home.dailyAdventures.subtitle')}
             </p>
           </div>
@@ -385,7 +385,7 @@ export function HomePageClient() {
       <section id="contact" className="py-32 relative overflow-hidden">
         {/* Premium Gradient Background with Animation */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-secondary/85 z-0" />
-        
+
         {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-10"
           style={{
@@ -409,11 +409,11 @@ export function HomePageClient() {
             {t('home.readyToVisit.title')}
           </h2>
 
-          <p className="text-2xl md:text-3xl lg:text-4xl text-white/95 max-w-4xl mx-auto font-medium leading-relaxed drop-shadow-lg px-4">
+          <p className="text-2xl md:text-3xl lg:text-4xl text-white/95 w-full max-w-6xl mx-auto font-medium leading-relaxed drop-shadow-lg px-4">
             {t('home.readyToVisit.subtitle')}
           </p>
 
-          <div className="text-white/90 text-lg md:text-xl space-y-4 bg-white/15 backdrop-blur-md rounded-3xl p-8 lg:p-10 inline-block border-2 border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300 max-w-2xl">
+          <div className="text-white/90 text-lg md:text-xl space-y-4 bg-white/15 backdrop-blur-md rounded-3xl p-8 lg:p-10 inline-block border-2 border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300 w-full max-w-4xl">
             <p className="flex items-center justify-center gap-3 font-semibold">
               <span className="text-accent text-2xl drop-shadow-lg">📍</span>
               <span className="text-left">
@@ -427,8 +427,8 @@ export function HomePageClient() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
-            <a 
-              href="/contact" 
+            <a
+              href="/contact"
               className="bg-white text-primary text-xl md:text-2xl px-12 py-6 rounded-full font-bold hover:bg-white/95 transition-all hover:scale-110 shadow-2xl hover:shadow-white/50 ring-4 ring-white/40 min-h-[60px] flex items-center justify-center group"
             >
               {t('home.readyToVisit.bookTour')}
@@ -436,8 +436,8 @@ export function HomePageClient() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
-            <a 
-              href="tel:6049458504" 
+            <a
+              href="tel:6049458504"
               className="bg-transparent border-3 border-white text-white px-10 py-6 rounded-full font-bold text-xl md:text-2xl hover:bg-white/15 transition-all hover:scale-110 backdrop-blur-sm shadow-xl hover:shadow-white/30 min-h-[60px] flex items-center justify-center"
             >
               604.945.8504

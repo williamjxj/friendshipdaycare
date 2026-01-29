@@ -73,12 +73,7 @@ export function GalleryPageClient() {
       alt: 'Language materials',
       category: 'activities'
     },
-    {
-      id: 6,
-      src: getImageUrl('/images/school-outside.jpg'),
-      alt: 'Daycare exterior',
-      category: 'playground'
-    }
+
   ];
 
   const filteredImages = selectedCategory === 'all'
@@ -157,11 +152,10 @@ export function GalleryPageClient() {
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`px-6 py-3 rounded-full text-sm md:text-base font-bold transition-all duration-300 border-2 cursor-pointer ${
-                    selectedCategory === category.id
+                  className={`px-6 py-3 rounded-full text-sm md:text-base font-bold transition-all duration-300 border-2 cursor-pointer ${selectedCategory === category.id
                       ? 'bg-primary text-primary-foreground border-primary shadow-xl scale-105 ring-4 ring-primary/20'
                       : 'bg-muted/70 text-muted-foreground border-border/50 hover:bg-muted hover:border-primary/50 hover:shadow-lg hover:scale-105'
-                  }`}
+                    }`}
                 >
                   {category.name}
                 </button>
@@ -231,7 +225,7 @@ export function GalleryPageClient() {
           {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/20 rounded-full blur-3xl" />
-          
+
           <div className="max-w-4xl mx-auto px-4 text-center space-y-10 relative z-10">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white drop-shadow-2xl">
               {t('galleryPage.cta.title')}

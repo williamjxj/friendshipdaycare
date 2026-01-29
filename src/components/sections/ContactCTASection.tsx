@@ -47,7 +47,7 @@ export function ContactCTASection() {
         variants={floatingVariants}
         animate="animate"
       />
-      
+
       <motion.div
         className="absolute bottom-24 left-16 w-16 h-16 bg-primary-foreground/15 rounded-lg"
         variants={floatingVariants}
@@ -68,10 +68,10 @@ export function ContactCTASection() {
           >
             {t('contact.subtitle')}
           </motion.h2>
-          
+
           <motion.p
             variants={slideUp}
-            className="text-xl text-primary-foreground/90 max-w-2xl mx-auto leading-relaxed"
+            className="text-xl text-primary-foreground/90 w-full max-w-4xl mx-auto leading-relaxed"
           >
             Ready to give your child the best start? Contact us today to learn more about our Montessori programs and schedule a visit.
           </motion.p>
@@ -158,7 +158,7 @@ export function ContactCTASection() {
                 {t('navigation.contact')}
               </Link>
             </motion.div>
-            
+
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

@@ -225,7 +225,7 @@ export function RealEnvironmentShowcase() {
     <section className="py-24 lg:py-32 bg-gradient-to-b from-background via-muted/30 to-background overflow-hidden relative">
       {/* Enhanced background pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_0%,black_70%,transparent_100%)] pointer-events-none" />
-      
+
       {/* Decorative gradient blobs */}
       <div className="absolute top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-10 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" />
@@ -236,7 +236,7 @@ export function RealEnvironmentShowcase() {
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-foreground drop-shadow-sm bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
             {t('home.realEnvironment.title')}
           </h2>
-          <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-medium px-4">
+          <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground w-full max-w-5xl mx-auto leading-relaxed font-medium px-4">
             {t('home.realEnvironment.subtitle')}
           </p>
         </div>
@@ -247,11 +247,10 @@ export function RealEnvironmentShowcase() {
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id as any)}
-              className={`flex items-center space-x-3 px-8 py-4 rounded-full font-bold text-sm md:text-base transition-all duration-300 border-2 cursor-pointer ${
-                selectedCategory === category.id
-                  ? 'bg-primary text-primary-foreground border-primary shadow-xl scale-105 ring-4 ring-primary/20 hover:ring-primary/30'
-                  : 'bg-white/70 dark:bg-card/70 backdrop-blur-md text-muted-foreground border-border/50 hover:bg-white dark:hover:bg-card hover:border-primary/50 hover:shadow-lg hover:scale-105'
-              }`}
+              className={`flex items-center space-x-3 px-8 py-4 rounded-full font-bold text-sm md:text-base transition-all duration-300 border-2 cursor-pointer ${selectedCategory === category.id
+                ? 'bg-primary text-primary-foreground border-primary shadow-xl scale-105 ring-4 ring-primary/20 hover:ring-primary/30'
+                : 'bg-white/70 dark:bg-card/70 backdrop-blur-md text-muted-foreground border-border/50 hover:bg-white dark:hover:bg-card hover:border-primary/50 hover:shadow-lg hover:scale-105'
+                }`}
             >
               <span className="text-xl"><category.icon className="w-5 h-5 md:w-6 md:h-6" /></span>
               <span>{category.name}</span>
@@ -299,14 +298,14 @@ export function RealEnvironmentShowcase() {
             <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
               <svg width="200" height="200" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z" /></svg>
             </div>
-            
+
             {/* Gradient overlay on hover */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
             <h3 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
               {t('home.realEnvironment.cta.title')}
             </h3>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-12 w-full max-w-3xl mx-auto leading-relaxed font-medium">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-12 w-full max-w-5xl mx-auto leading-relaxed font-medium">
               {t('home.realEnvironment.cta.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">

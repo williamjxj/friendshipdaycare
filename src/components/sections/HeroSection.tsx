@@ -35,7 +35,7 @@ export function HeroSection() {
           variants={staggerContainerMagic}
           initial="hidden"
           animate="visible"
-          className="w-full max-w-2xl mx-auto flex flex-col gap-6"
+          className="w-full max-w-4xl mx-auto flex flex-col gap-6"
         >
           {/* Badge */}
           <motion.div variants={scaleInMagic} className="flex justify-center">
