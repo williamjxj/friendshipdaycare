@@ -140,10 +140,10 @@ export function PageHero({
     <section
       ref={heroRef}
       className={cn(
-        'relative flex items-center justify-center overflow-hidden',
+        'relative flex items-center justify-center',
         fullScreen
-          ? 'h-screen min-h-[600px]'
-          : 'aspect-[21/8] min-h-[300px] py-10',
+          ? 'h-screen min-h-[600px] overflow-hidden'
+          : 'min-h-[320px] sm:min-h-[380px] md:aspect-[21/8] md:min-h-[360px] py-8 sm:py-10 overflow-x-hidden overflow-y-visible',
         className
       )}
       aria-label={`${title}${subtitle ? `: ${subtitle}` : ''}`}
@@ -223,16 +223,16 @@ export function PageHero({
         )}
       </div>
 
-      {/* Content Layer */}
+      {/* Content Layer - min-w-0 and overflow-hidden prevent mobile overflow */}
       <div
         ref={contentRef}
-        className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center hero-text"
+        className="relative z-30 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 text-center hero-text min-w-0 w-full overflow-hidden"
       >
-        <div className="space-y-6">
+        <div className="space-y-6 min-w-0">
           {!hideTitle && (
             <h1
               ref={titleRef}
-              className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight drop-shadow-lg"
+              className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight drop-shadow-lg break-words"
             >
               {title}
             </h1>
@@ -240,7 +240,7 @@ export function PageHero({
           {subtitle && !hideSubtitle && (
             <p
               ref={subtitleRef}
-              className="text-lg md:text-xl lg:text-2xl font-light text-white/95 w-full max-w-4xl mx-auto leading-relaxed drop-shadow-lg tracking-wide hero-subtitle"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl font-light text-white/95 w-full max-w-4xl mx-auto leading-relaxed drop-shadow-lg tracking-wide hero-subtitle break-words"
               style={{
                 fontFamily: 'var(--font-sans)',
                 letterSpacing: '0.02em',
@@ -258,7 +258,7 @@ export function PageHero({
             </div>
           )}
           {children && (
-            <div className="pt-4 hero-children">
+            <div className="pt-4 hero-children w-full max-w-full min-w-0">
               {children}
             </div>
           )}

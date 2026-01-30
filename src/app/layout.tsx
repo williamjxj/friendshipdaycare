@@ -112,7 +112,7 @@ export default async function RootLayout({
           <LanguageAwareHtml>
             <NextIntlProviderSync>
               <ThemeProvider>
-                <div className="min-h-screen flex flex-col">
+                <div className="min-h-screen flex flex-col overflow-x-hidden">
                   <SkipNavigation />
                   <Header />
                   <Suspense fallback={<PageLoader message="Loading magical content..." />}>

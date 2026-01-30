@@ -148,6 +148,12 @@
       "highlight": "in Coquitlam, BC",
       "title": "Where Young Minds Flourish",
       "subtitle": "A safe, nurturing Montessori environment where every child discovers their unique superpowers.",
+      "slides": [
+        { "tagline": "Nurturing young minds through the Montessori method. We create a warm, safe, and inspiring environment where every child can grow, learn, and flourish." },
+        { "tagline": "Hands-on learning and purposeful play in a prepared environment. Where curiosity leads and every child thrives at their own pace." },
+        { "tagline": "A welcoming space where children build independence, confidence, and kindness. Montessori principles and a caring community in Coquitlam." },
+        { "tagline": "Quality early childhood education since 2008. Safe, licensed care and a nurturing team dedicated to your child's growth and joy." }
+      ],
       "scheduleTour": "Schedule a Tour",
       "viewPrograms": "View Programs"
     },

@@ -199,13 +199,13 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 glass-panel border-b border-border/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 min-w-0">
+        <div className="flex justify-between items-center h-16 gap-2 min-w-0">
 
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2 group">
-              <div className="relative w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110">
+          {/* Logo - takes remaining space on mobile and clips so menu button is never hidden */}
+          <div className="flex-1 min-w-0 overflow-hidden lg:flex-initial">
+            <Link href="/" className="flex items-center space-x-2 group min-w-0">
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
                 <Image
                   src={"/logo.png"}
                   alt="Friendship Corner Daycare"
@@ -214,11 +214,11 @@ export function Header() {
                   priority
                 />
               </div>
-              <div className="flex flex-col justify-center -space-y-1">
-                <span className="font-display font-bold text-lg md:text-xl text-primary leading-tight group-hover:text-secondary transition-colors duration-300 whitespace-nowrap">
+              <div className="flex flex-col justify-center -space-y-1 min-w-0">
+                <span className="font-display font-bold text-base sm:text-lg md:text-xl text-primary leading-tight group-hover:text-secondary transition-colors duration-300 truncate">
                   Friendship Corner
                 </span>
-                <span className="text-[0.6rem] md:text-[0.65rem] text-muted-foreground uppercase tracking-[0.18em] font-semibold whitespace-nowrap leading-tight">
+                <span className="text-[0.55rem] sm:text-[0.6rem] md:text-[0.65rem] text-muted-foreground uppercase tracking-[0.18em] font-semibold leading-tight truncate">
                   Montessori Daycare
                 </span>
               </div>
@@ -279,19 +279,20 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="lg:hidden flex items-center space-x-2">
+          {/* Mobile: Language, Theme, then prominent menu button - never clipped */}
+          <div className="lg:hidden flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
             <LanguageToggle />
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-primary hover:bg-primary/5 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="p-2.5 rounded-lg bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 hover:border-primary/30 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shadow-sm"
               aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? (
-                <XMarkIcon className="h-6 w-6" />
+                <XMarkIcon className="h-6 w-6" aria-hidden />
               ) : (
-                <Bars3Icon className="h-6 w-6" />
+                <Bars3Icon className="h-6 w-6" aria-hidden />
               )}
             </button>
           </div>

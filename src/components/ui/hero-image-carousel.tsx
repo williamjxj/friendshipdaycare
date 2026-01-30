@@ -10,6 +10,8 @@ export interface HeroImageCarouselProps {
   intervalMs?: number;
   overlayColor?: string;
   className?: string;
+  /** Called when the visible slide index changes (for syncing hero text with carousel). */
+  onIndexChange?: (index: number) => void;
 }
 
 /**
@@ -21,8 +23,13 @@ export function HeroImageCarousel({
   intervalMs = 5000,
   overlayColor = 'bg-black/30',
   className,
+  onIndexChange,
 }: HeroImageCarouselProps) {
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    onIndexChange?.(index);
+  }, [index, onIndexChange]);
 
   useEffect(() => {
     if (images.length <= 1) return;
@@ -38,10 +45,12 @@ export function HeroImageCarousel({
         <div
           key={src}
           className={cn(
-            'absolute inset-0 bg-cover bg-center transition-opacity duration-1000',
+            'absolute inset-0 min-w-full min-h-full bg-no-repeat bg-center transition-opacity duration-1000 bg-cover max-sm:bg-contain',
             i === index ? 'opacity-100' : 'opacity-0'
           )}
-          style={{ backgroundImage: `url(${src})` }}
+          style={{
+            backgroundImage: `url(${src})`,
+          }}
           aria-hidden={i !== index}
         />
       ))}

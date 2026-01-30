@@ -909,6 +909,29 @@ textarea:focus-visible {
 
 }
 
+/* Footer section titles: explicit font-size so it applies on mobile (avoids Tailwind purge / browser quirks) */
+footer .footer-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0.05em;
+}
+@media (min-width: 640px) {
+  footer .footer-section-title {
+    font-size: 15px;
+  }
+}
+@media (min-width: 768px) {
+  footer .footer-section-title {
+    font-size: 16px;
+  }
+}
+@media (min-width: 1024px) {
+  footer .footer-section-title {
+    font-size: 17px;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

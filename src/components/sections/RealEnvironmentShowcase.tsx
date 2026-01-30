@@ -150,19 +150,19 @@ function CardCarousel({ images, category }: { images: { src: string; alt: string
 
   return (
     <div
-      className="relative h-full w-full group/carousel"
+      className="relative h-full w-full min-w-0 group/carousel"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="overflow-hidden h-full" ref={emblaRef}>
-        <div className="flex h-full">
+      <div className="overflow-hidden h-full min-w-0 w-full" ref={emblaRef}>
+        <div className="flex h-full min-w-0">
           {images.map((image, idx) => (
-            <div key={idx} className="flex-[0_0_100%] min-w-0 relative h-full w-full">
+            <div key={idx} className="flex-[0_0_100%] min-w-0 relative h-full w-full overflow-hidden">
               <OptimizedImage
                 src={getPlaceholderUrl(image.src)}
                 alt={image.alt}
                 fill
-                className="!h-full transition-transform duration-700 group-hover/image:scale-110 object-cover origin-center"
+                className="h-full w-full object-cover object-center transition-transform duration-500 ease-out scale-100 group-hover/image:scale-[1.2]"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
@@ -230,7 +230,7 @@ export function RealEnvironmentShowcase() {
       <div className="absolute top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-10 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 min-w-0">
         {/* Header */}
         <div className="text-center space-y-6 mb-20">
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-foreground drop-shadow-sm bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
@@ -258,17 +258,17 @@ export function RealEnvironmentShowcase() {
           ))}
         </div>
 
-        {/* Images Grid */}
+        {/* Images Grid - min-w-0 on grid children to prevent carousel overflow on mobile */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {filteredData.map((item, index) => (
             <div
               key={`${item.title}-${index}`}
-              className="group/card rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500 flex flex-col h-full bg-white dark:bg-card border-2 border-border/50 hover:border-primary/40 cursor-pointer"
+              className="group/card rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500 flex flex-col h-full bg-white dark:bg-card border-2 border-border/50 hover:border-primary/40 cursor-pointer min-w-0"
               style={{
                 animationDelay: `${index * 100}ms`
               }}
             >
-              <div className="relative h-80 lg:h-96 overflow-hidden shrink-0 group/image">
+              <div className="relative h-80 lg:h-96 overflow-hidden shrink-0 group/image min-w-0">
                 <CardCarousel images={item.images} category={item.category} />
               </div>
 

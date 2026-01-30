@@ -146,6 +146,12 @@
       "highlight": "en Coquitlam, BC",
       "title": "Donde las Mentes Jóvenes Florecen",
       "subtitle": "Un ambiente seguro y acogedor Montessori donde cada niño descubre sus superpoderes únicos.",
+      "slides": [
+        { "tagline": "Nutriendo mentes jóvenes con el método Montessori. Creamos un entorno cálido, seguro e inspirador donde cada niño puede crecer y aprender." },
+        { "tagline": "Aprendizaje práctico y juego con propósito en un ambiente preparado. La curiosidad guía; cada niño prospera a su propio ritmo." },
+        { "tagline": "Un espacio acogedor donde los niños desarrollan independencia, confianza y amabilidad. Principios Montessori y una comunidad en Coquitlam." },
+        { "tagline": "Educación infantil de calidad desde 2008. Cuidado con licencia y un equipo dedicado al crecimiento y la alegría de su hijo." }
+      ],
       "scheduleTour": "Programar una Visita",
       "viewPrograms": "Ver Programas"
     },

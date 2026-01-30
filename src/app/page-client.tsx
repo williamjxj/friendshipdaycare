@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useMemo, useRef } from 'react';
+import { Suspense, useMemo, useRef, useState, useCallback } from 'react';
 import { RealEnvironmentShowcase } from '@/components/sections/RealEnvironmentShowcase';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import dynamic from 'next/dynamic';
@@ -34,6 +34,10 @@ export function HomePageClient() {
   const readyHoursRef = useRef<HTMLParagraphElement>(null);
   const readyCTAsRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
+  const [heroSlideIndex, setHeroSlideIndex] = useState(0);
+
+  const heroTaglineKey = `home.hero.slides.${heroSlideIndex}.tagline` as const;
+  const heroTagline = t(heroTaglineKey) !== heroTaglineKey ? t(heroTaglineKey) : t('home.hero.slides.0.tagline');
 
   /** Fixed gradient for hero title (theme-independent). Same as former "in Coquitlam, BC" style. */
   const heroTitleGradientStyle = {
@@ -195,12 +199,13 @@ export function HomePageClient() {
   return (
     <main id="main-content" ref={mainRef} className="flex-1 overflow-x-hidden">
       {/* Magical Hero Section - Full viewport height minus header height (4rem/64px) */}
-      <section id="home" className="relative h-[calc(100vh-4rem)] min-h-[600px] flex items-center justify-center overflow-hidden">
+      <section id="home" className="relative h-[calc(100vh-4rem)] min-h-[480px] sm:min-h-[600px] flex items-center justify-center overflow-hidden w-full">
 
         <HeroImageCarousel
           images={heroCarouselImages}
           intervalMs={5000}
           overlayColor="bg-gradient-to-br from-blue-900/40 via-blue-600/40 to-sky-400/30"
+          onIndexChange={setHeroSlideIndex}
         />
 
         {/* Floating Logo - Top Left - Enhanced Size */}
@@ -217,27 +222,29 @@ export function HomePageClient() {
           </div>
         </div>
 
-        {/* Animated Decorative Elements - Subtle for Video BG */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-pink-400/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        {/* Animated Decorative Elements - Subtle for Video BG (contained so no horizontal overflow) */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-20 left-4 sm:left-10 w-32 h-32 bg-pink-400/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-4 sm:right-10 w-40 h-40 bg-blue-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center hero-content">
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <span className="hero-badge inline-block px-6 py-3 rounded-full bg-white/15 backdrop-blur-lg border border-white/30 text-white font-bold text-sm tracking-widest uppercase shadow-xl hover:bg-white/20 transition-all duration-300">
-                {t('home.hero.badgePrefix')}
-                <span className="mx-1" aria-hidden="true">•</span>
-                <a href={`tel:${businessProfile.telephone.replace(/\s/g, '')}`} className="text-white hover:underline underline-offset-2 transition-colors" aria-label={t('contact.phone')}>
-                  {businessProfile.telephone}
-                </a>
-                <span className="mx-1" aria-hidden="true">•</span>
-                <a href={`mailto:${businessProfile.email}`} className="text-white hover:underline underline-offset-2 transition-colors break-all" aria-label={t('contact.form.email')}>
-                  {businessProfile.email}
-                </a>
+        <div className="relative z-10 max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 text-center hero-content min-w-0 w-full">
+          <div className="space-y-5 sm:space-y-8">
+            <div className="space-y-4 sm:space-y-6">
+              <span className="hero-badge inline-block px-3 py-1.5 sm:px-6 sm:py-3 rounded-full bg-white/15 backdrop-blur-lg border border-white/30 text-white font-bold text-[0.65rem] sm:text-sm tracking-widest uppercase shadow-xl hover:bg-white/20 transition-all duration-300 max-w-[min(100%,28rem)] text-center mx-auto">
+                <span className="inline-flex flex-wrap justify-center items-center gap-x-1 gap-y-0.5">
+                  <span>{t('home.hero.badgePrefix')}</span>
+                  <span className="mx-0.5 sm:mx-1" aria-hidden="true">•</span>
+                  <a href={`tel:${businessProfile.telephone.replace(/\s/g, '')}`} className="text-white hover:underline underline-offset-2 transition-colors whitespace-nowrap" aria-label={t('contact.phone')}>
+                    {businessProfile.telephone}
+                  </a>
+                  <span className="mx-0.5 sm:mx-1" aria-hidden="true">•</span>
+                  <a href={`mailto:${businessProfile.email}`} className="text-white hover:underline underline-offset-2 transition-colors break-all" aria-label={t('contact.form.email')}>
+                    {businessProfile.email}
+                  </a>
+                </span>
               </span>
-              <h1 ref={heroTitleRef} className="text-5xl md:text-7xl lg:text-8xl font-display font-bold drop-shadow-2xl leading-tight tracking-tight">
+              <h1 ref={heroTitleRef} className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold drop-shadow-2xl leading-tight tracking-tight px-1">
                 <span className="hero-headline-line block" style={heroTitleGradientStyle}>
                   {t('home.hero.headline')}
                 </span>
@@ -247,7 +254,7 @@ export function HomePageClient() {
               </h1>
               <p
                 ref={subtitleRef}
-                className="hero-subtitle w-full max-w-5xl mx-auto px-4 text-2xl md:text-4xl lg:text-5xl xl:text-[2.75rem] font-medium leading-snug md:leading-relaxed tracking-tight"
+                className="hero-subtitle w-full max-w-5xl mx-auto px-2 sm:px-4 text-base sm:text-2xl md:text-4xl lg:text-5xl xl:text-[2.75rem] font-medium leading-snug md:leading-relaxed tracking-tight"
                 style={{
                   color: '#ffffff',
                   fontFamily: 'var(--font-sans)',
@@ -257,22 +264,33 @@ export function HomePageClient() {
               >
                 {t('home.hero.subtitle')}
               </p>
+              <p
+                className="hero-tagline w-full max-w-5xl mx-auto px-2 sm:px-4 text-xl sm:text-2xl md:text-3xl text-white font-medium leading-snug mt-4 text-center whitespace-normal"
+                style={{
+                  color: '#ffffff',
+                  fontFamily: 'var(--font-sans)',
+                  letterSpacing: '0.02em',
+                  textShadow: '0 1px 4px rgba(0,0,0,0.5)',
+                }}
+              >
+                {heroTagline}
+              </p>
             </div>
 
-            <div className="hero-cta-buttons flex flex-col sm:flex-row gap-6 justify-center pt-8">
-              <a href="/contact" className="btn-clay px-12 py-5 text-xl font-bold rounded-full shadow-2xl ring-4 ring-white/40 hover:ring-white/60 hover:scale-105 transition-all min-h-[56px] flex items-center justify-center" aria-label={t('home.hero.scheduleTour')}>
+            <div className="hero-cta-buttons flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4 sm:pt-5 w-full max-w-[min(100%,18rem)] sm:max-w-none mx-auto min-w-0 px-1 sm:px-0">
+              <a href="/contact" className="btn-clay w-full sm:w-auto sm:max-w-fit min-w-0 px-3 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-bold rounded-full shadow-lg ring-2 sm:ring-[3px] ring-white/40 hover:ring-white/60 hover:scale-105 transition-all min-h-[40px] sm:min-h-[44px] flex items-center justify-center shrink-0" aria-label={t('home.hero.scheduleTour')}>
                 {t('home.hero.scheduleTour')}
               </a>
-              <a href="/programs" className="px-10 py-4 rounded-full bg-white/10 backdrop-blur-md border border-white/40 text-white font-bold text-lg hover:bg-white/20 transition-all hover:scale-105 shadow-xl flex items-center justify-center">
+              <a href="/programs" className="w-full sm:w-auto sm:max-w-fit min-w-0 px-3 sm:px-4 py-2.5 sm:py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/40 text-white font-bold text-sm sm:text-base hover:bg-white/20 transition-all hover:scale-105 shadow-lg flex items-center justify-center shrink-0">
                 {t('home.hero.viewPrograms')}
               </a>
             </div>
           </div>
         </div>
 
-        {/* Scroll Down Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/70">
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+        {/* Scroll Down Indicator - higher on short viewports so it doesn't overlap content */}
+        <div className="absolute bottom-4 sm:bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/70 pointer-events-none">
+          <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
         </div>
       </section>
 

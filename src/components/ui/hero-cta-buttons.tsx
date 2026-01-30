@@ -26,11 +26,11 @@ export function HeroCTAButtons({
 }: HeroCTAButtonsProps) {
   const { t } = useLanguage();
   const baseButtonClasses = cn(
-    'inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-lg transition-all duration-200 min-h-[44px]',
-    'hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl',
+    'inline-flex items-center justify-center gap-1.5 px-2 sm:px-2.5 py-2 sm:py-2.5 rounded-lg font-bold text-sm transition-all duration-200 min-h-[34px] sm:min-h-[38px] min-w-0 w-full sm:w-auto sm:max-w-fit',
+    'hover:scale-105 active:scale-95 shadow-md hover:shadow-lg box-border',
     variant === 'default'
       ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-      : 'bg-primary/95 backdrop-blur-sm border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary shadow-xl ring-2 ring-primary/20'
+      : 'bg-primary/95 backdrop-blur-sm border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary shadow-md ring-2 ring-primary/20'
   );
 
   // Handle hash links for smooth scrolling
@@ -45,13 +45,13 @@ export function HeroCTAButtons({
   };
 
   return (
-    <div className={cn('flex flex-col sm:flex-row gap-4 justify-center pt-4', className)}>
+    <div className={cn('flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center pt-2 w-full max-w-[min(100%,14rem)] sm:max-w-none min-w-0 px-2 sm:px-0 mx-auto', className)}>
       <Link
         href={contactLink}
         onClick={handleContactClick}
         className={baseButtonClasses}
       >
-        <EnvelopeIcon className="w-5 h-5" />
+        <EnvelopeIcon className="w-4 h-4 shrink-0" />
         <span>{t('common.cta.contact')}</span>
       </Link>
       <a
@@ -59,7 +59,7 @@ export function HeroCTAButtons({
         className={baseButtonClasses}
         aria-label={`Call us at ${phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1.$2.$3')}`}
       >
-        <PhoneIcon className="w-5 h-5" />
+        <PhoneIcon className="w-4 h-4 shrink-0" />
         <span>{t('common.cta.callNow')}</span>
       </a>
     </div>

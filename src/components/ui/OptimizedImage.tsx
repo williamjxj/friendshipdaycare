@@ -62,7 +62,7 @@ export function OptimizedImage({
   }
 
   return (
-    <div className={`relative ${className}`}>
+    <div className="relative size-full">
       {isLoading && (
         <div className="absolute inset-0 bg-muted animate-pulse rounded-lg flex items-center justify-center">
           <div className="w-8 h-8 bg-muted-foreground/20 rounded-full animate-spin">
@@ -84,7 +84,7 @@ export function OptimizedImage({
         placeholder={placeholder}
         blurDataURL={blurDataURL}
         className={`transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'
-          } ${fill ? 'object-cover' : ''}`}
+          } ${fill ? 'object-cover size-full' : ''} ${className}`}
         onLoad={handleLoad}
         onError={handleError}
       />
