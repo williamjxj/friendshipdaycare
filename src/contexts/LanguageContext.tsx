@@ -30,8 +30,25 @@ const messages = {
   fr: frMessages,
 };
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en');
+const LANGUAGE_COOKIE_NAME = 'language';
+const LANGUAGE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 year
+
+function setLanguageCookie(lang: Language) {
+  if (typeof document === 'undefined') return;
+  document.cookie = `${LANGUAGE_COOKIE_NAME}=${lang}; path=/; max-age=${LANGUAGE_COOKIE_MAX_AGE}; SameSite=Lax`;
+}
+
+export function LanguageProvider({
+  children,
+  initialLocale = 'en',
+}: {
+  children: React.ReactNode;
+  /** Server-provided locale from cookie so first paint matches and avoids hydration mismatch */
+  initialLocale?: Language;
+}) {
+  const [language, setLanguage] = useState<Language>(() =>
+    initialLocale && messages[initialLocale] ? initialLocale : 'en'
+  );
   const [isHydrated, setIsHydrated] = useState(false);
 
   const resolveValue = (source: Record<string, any>, key: string) => {
@@ -69,9 +86,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // Save language to localStorage when it changes
+  // Save language to localStorage and cookie when it changes (cookie keeps server/client in sync)
   useEffect(() => {
     localStorage.setItem('language', language);
+    setLanguageCookie(language);
   }, [language]);
 
   // Translation function

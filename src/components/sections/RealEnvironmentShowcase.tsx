@@ -5,7 +5,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react';
 import { getPlaceholderUrl } from '@/lib/image-utils';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { School, BookOpen, TreeDeciduous, Palette } from 'lucide-react';
+import { School, BookOpen, TreeDeciduous, Palette, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface EnvironmentImageSet {
@@ -162,7 +162,7 @@ function CardCarousel({ images, category }: { images: { src: string; alt: string
                 src={getPlaceholderUrl(image.src)}
                 alt={image.alt}
                 fill
-                className="!h-full transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40 object-cover"
+                className="!h-full transition-transform duration-700 group-hover/image:scale-110 object-cover origin-center"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
@@ -263,12 +263,12 @@ export function RealEnvironmentShowcase() {
           {filteredData.map((item, index) => (
             <div
               key={`${item.title}-${index}`}
-              className="group/card rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col h-full hover:-translate-y-3 bg-white dark:bg-card border-2 border-border/50 hover:border-primary/40 cursor-pointer"
+              className="group/card rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500 flex flex-col h-full bg-white dark:bg-card border-2 border-border/50 hover:border-primary/40 cursor-pointer"
               style={{
                 animationDelay: `${index * 100}ms`
               }}
             >
-              <div className="relative h-80 lg:h-96 overflow-hidden flex-shrink-0">
+              <div className="relative h-80 lg:h-96 overflow-hidden shrink-0 group/image">
                 <CardCarousel images={item.images} category={item.category} />
               </div>
 
@@ -280,27 +280,25 @@ export function RealEnvironmentShowcase() {
                 <p className="text-muted-foreground leading-relaxed flex-grow text-base lg:text-lg font-medium">
                   {item.description}
                 </p>
-                <div className="flex items-center space-x-3 text-xs font-bold text-muted-foreground/70 uppercase tracking-widest pt-6 border-t-2 border-muted/50">
-                  <span className={`w-3 h-3 rounded-full shadow-sm ${item.category === 'montessori' ? 'bg-primary ring-2 ring-primary/30' :
-                    item.category === 'outdoor' ? 'bg-secondary ring-2 ring-secondary/30' : 'bg-accent ring-2 ring-accent/30'
-                    }`}></span>
-                  <span className="capitalize">{item.category.replace('-', ' ')}</span>
-                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Call to Action */}
+        {/* Call to Action - Experience Our Environment in Person */}
         <div className="text-center mt-28">
-          <div className="glass-panel rounded-3xl p-12 lg:p-16 max-w-5xl mx-auto shadow-2xl relative overflow-hidden group border-2 border-border/50 hover:border-primary/30 transition-all duration-500">
+          <div className="glass-panel rounded-3xl p-12 lg:p-16 max-w-5xl mx-auto shadow-2xl relative overflow-hidden group/cta border-2 border-border/50 hover:border-primary/30 transition-all duration-500">
+            {/* Lucide icon on hover */}
+            <div className="absolute top-8 right-8 opacity-0 group-hover/cta:opacity-100 scale-75 group-hover/cta:scale-100 transition-all duration-300 pointer-events-none text-primary">
+              <MapPin className="w-12 h-12" aria-hidden />
+            </div>
             {/* Decorative background pattern */}
-            <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
+            <div className="absolute top-0 right-0 p-12 opacity-5 group-hover/cta:opacity-10 transition-opacity duration-700 pointer-events-none">
               <svg width="200" height="200" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z" /></svg>
             </div>
 
             {/* Gradient overlay on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
             <h3 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
               {t('home.realEnvironment.cta.title')}

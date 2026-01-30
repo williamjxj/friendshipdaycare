@@ -142,7 +142,8 @@
   },
   "home": {
     "hero": {
-      "badge": "Est. 2008 • Coquitlam, BC",
+      "badge": "since 2008 • Coquitlam • 604.945.8504 • friendship.care@live.ca",
+      "badgePrefix": "since 2008 • COQUITLAM, BC",
       "headline": "Montessori Daycare",
       "highlight": "in Coquitlam, BC",
       "title": "Where Young Minds Flourish",
@@ -155,19 +156,19 @@
       "subtitle": "Discover why families in Coquitlam have trusted our nurturing approach for over 16 years.",
       "authenticMontessori": {
         "title": "Authentic Montessori",
-        "description": "Experience a child-centered journey that ignites natural curiosity and fosters deep independence through hands-on exploration."
+        "description": "Experience a child-centered journey that ignites natural curiosity and fosters deep independence. Our prepared environment and hands-on materials help every child discover their potential at their own pace."
       },
       "lovingCommunity": {
         "title": "A Loving Community",
-        "description": "We are more than a daycare; we are a vibrant family where every child is seen, heard, and cherished for who they are."
+        "description": "We are more than a daycare; we are a vibrant family where every child is seen, heard, and cherished. Strong relationships and a warm, inclusive atmosphere make our centre feel like home."
       },
       "safetyFirst": {
         "title": "Safety First",
-        "description": "Your peace of mind is paramount. Our fully licensed facility exceeds health guidelines to ensure a pristine, secure haven."
+        "description": "Your peace of mind is paramount. Our fully licensed facility exceeds health guidelines with secure access, clean spaces, and attentive care so your child thrives in a safe haven."
       },
       "dedicatedEducators": {
         "title": "Dedicated Educators",
-        "description": "Our certified, passionate teachers are dedicated mentors who guide each child's unique path with patience and love."
+        "description": "Our certified, passionate teachers are dedicated mentors who guide each child's unique path with patience and love. Small ratios and ongoing training ensure every child receives the attention they deserve."
       }
     },
     "programs": {

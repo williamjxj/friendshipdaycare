@@ -23,9 +23,7 @@ import {
   FolderOpen,
   UserCircle,
   Star,
-  Calendar,
-  Phone,
-  Mail
+  Calendar
 } from 'lucide-react';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
@@ -269,20 +267,6 @@ export function Header() {
 
           {/* Desktop Controls */}
           <div className="hidden lg:flex items-center space-x-4">
-            <a
-              href={`tel:${businessProfile.telephone.replace(/\s/g, '')}`}
-              className="text-muted-foreground hover:text-primary text-sm font-medium transition-colors whitespace-nowrap"
-              aria-label={t('contact.phone')}
-            >
-              {businessProfile.telephone}
-            </a>
-            <a
-              href={`mailto:${businessProfile.email}`}
-              className="text-muted-foreground hover:text-primary text-sm font-medium transition-colors truncate max-w-[180px]"
-              aria-label={t('contactPage.quickActions.email')}
-            >
-              {businessProfile.email}
-            </a>
             <LanguageToggle />
             <ThemeToggle />
             <Link
@@ -370,22 +354,6 @@ export function Header() {
               })}
               <div className="pt-4 px-4 space-y-3 sticky bottom-0 bg-background pb-4 border-t border-border">
                 <div className="flex flex-col gap-2 text-sm">
-                  <a
-                    href={`tel:${businessProfile.telephone.replace(/\s/g, '')}`}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center gap-3 px-4 py-2 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground min-h-[44px]"
-                  >
-                    <Phone className="w-4 h-4 shrink-0" />
-                    {businessProfile.telephone}
-                  </a>
-                  <a
-                    href={`mailto:${businessProfile.email}`}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center gap-3 px-4 py-2 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground min-h-[44px] break-all"
-                  >
-                    <Mail className="w-4 h-4 shrink-0" />
-                    {businessProfile.email}
-                  </a>
                   <p className="px-4 py-2 text-muted-foreground text-xs leading-snug">
                     {businessProfile.address.streetAddress}, {businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode} {businessProfile.address.addressCountry === 'CA' ? 'Canada' : businessProfile.address.addressCountry}
                   </p>

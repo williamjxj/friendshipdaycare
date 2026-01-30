@@ -1,4 +1,5 @@
 import { Nunito, Fredoka, Baloo_2, Comic_Neue } from "next/font/google";
+import { cookies } from "next/headers";
 import { Suspense } from "react";
 import { PageLoader } from "@/components/ui/LoadingSpinner";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -48,16 +49,27 @@ export const viewport = {
   userScalable: true, // Allow user scaling for accessibility
 };
 
+const LOCALES = ['en', 'zh', 'ko', 'es', 'fr'] as const;
+type Locale = (typeof LOCALES)[number];
+
+function isValidLocale(value: string | undefined): value is Locale {
+  return value !== undefined && LOCALES.includes(value as Locale);
+}
+
 /**
  * Global root layout for the application.
  */
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get('language')?.value;
+  const initialLocale: Locale = isValidLocale(localeCookie) ? localeCookie : 'en';
+
   return (
-    <html lang="en">
+    <html lang={initialLocale}>
       <head>
         {/* Favicon Links */}
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
@@ -96,7 +108,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${nunito.variable} ${fredoka.variable} ${baloo.variable} ${comic.variable} antialiased font-sans`} suppressHydrationWarning>
-        <LanguageProvider>
+        <LanguageProvider initialLocale={initialLocale}>
           <LanguageAwareHtml>
             <NextIntlProviderSync>
               <ThemeProvider>

@@ -8,11 +8,10 @@ import { HeroImageCarousel } from '@/components/ui/hero-image-carousel';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { Leaf, Heart, Shield, GraduationCap } from 'lucide-react';
 import { getImageUrl } from '@/lib/image-utils';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Star } from 'lucide-react';
+import { Card } from '@/components/ui/card';
 import { AnimatedPlaceholder } from '@/components/ui/AnimatedPlaceholder';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { businessProfile } from '@/lib/business-profile';
@@ -31,6 +30,9 @@ export function HomePageClient() {
   const mainRef = useRef<HTMLElement>(null);
   const heroTitleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const readyAddressRef = useRef<HTMLParagraphElement>(null);
+  const readyHoursRef = useRef<HTMLParagraphElement>(null);
+  const readyCTAsRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
   /** Fixed gradient for hero title (theme-independent). Same as former "in Coquitlam, BC" style. */
@@ -134,6 +136,45 @@ export function HomePageClient() {
       });
     });
 
+    // Ready to Visit: scroll-driven staggered reveal (address, hours, CTAs)
+    const readySection = mainRef.current?.querySelector('#contact');
+    if (readySection) {
+      const els = [readyAddressRef.current, readyHoursRef.current, readyCTAsRef.current].filter(Boolean) as HTMLElement[];
+      if (els.length) {
+        gsap.fromTo(els, { y: 24, opacity: 0 }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: readySection,
+            start: 'top 75%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+      }
+    }
+
+    // Discover Our Difference: subtle card stagger on scroll (does not block core value/CTA)
+    const aboutSection = mainRef.current?.querySelector('#about');
+    if (aboutSection) {
+      const cards = aboutSection.querySelectorAll('.grid.max-w-6xl > *');
+      if (cards.length) {
+        gsap.fromTo(cards, { y: 20, opacity: 0 }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: aboutSection,
+            start: 'top 78%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+      }
+    }
   }, { scope: mainRef });
 
   const heroCarouselImages = useMemo(() => [
@@ -186,7 +227,15 @@ export function HomePageClient() {
           <div className="space-y-8">
             <div className="space-y-6">
               <span className="hero-badge inline-block px-6 py-3 rounded-full bg-white/15 backdrop-blur-lg border border-white/30 text-white font-bold text-sm tracking-widest uppercase shadow-xl hover:bg-white/20 transition-all duration-300">
-                {t('home.hero.badge')}
+                {t('home.hero.badgePrefix')}
+                <span className="mx-1" aria-hidden="true">•</span>
+                <a href={`tel:${businessProfile.telephone.replace(/\s/g, '')}`} className="text-white hover:underline underline-offset-2 transition-colors" aria-label={t('contact.phone')}>
+                  {businessProfile.telephone}
+                </a>
+                <span className="mx-1" aria-hidden="true">•</span>
+                <a href={`mailto:${businessProfile.email}`} className="text-white hover:underline underline-offset-2 transition-colors break-all" aria-label={t('contact.form.email')}>
+                  {businessProfile.email}
+                </a>
               </span>
               <h1 ref={heroTitleRef} className="text-5xl md:text-7xl lg:text-8xl font-display font-bold drop-shadow-2xl leading-tight tracking-tight">
                 <span className="hero-headline-line block" style={heroTitleGradientStyle}>
@@ -196,11 +245,6 @@ export function HomePageClient() {
                   {t('home.hero.highlight')}
                 </span>
               </h1>
-              <p className="block drop-shadow-lg mt-1 text-3xl md:text-5xl lg:text-6xl font-display font-bold leading-tight tracking-tight text-center" style={{ color: '#ffffff' }}>
-                <a href={`tel:${businessProfile.telephone.replace(/\s/g, '')}`} className="hover:underline underline-offset-2" style={{ color: '#ffffff' }}>{businessProfile.telephone}</a>
-                <span className="mx-2" aria-hidden="true">,</span>
-                <a href={`mailto:${businessProfile.email}`} className="hover:underline underline-offset-2 break-all" style={{ color: '#ffffff' }}>{businessProfile.email}</a>
-              </p>
               <p
                 ref={subtitleRef}
                 className="hero-subtitle w-full max-w-5xl mx-auto px-4 text-2xl md:text-4xl lg:text-5xl xl:text-[2.75rem] font-medium leading-snug md:leading-relaxed tracking-tight"
@@ -216,7 +260,7 @@ export function HomePageClient() {
             </div>
 
             <div className="hero-cta-buttons flex flex-col sm:flex-row gap-6 justify-center pt-8">
-              <a href="/contact" className="btn-clay">
+              <a href="/contact" className="btn-clay px-12 py-5 text-xl font-bold rounded-full shadow-2xl ring-4 ring-white/40 hover:ring-white/60 hover:scale-105 transition-all min-h-[56px] flex items-center justify-center" aria-label={t('home.hero.scheduleTour')}>
                 {t('home.hero.scheduleTour')}
               </a>
               <a href="/programs" className="px-10 py-4 rounded-full bg-white/10 backdrop-blur-md border border-white/40 text-white font-bold text-lg hover:bg-white/20 transition-all hover:scale-105 shadow-xl flex items-center justify-center">
@@ -236,6 +280,8 @@ export function HomePageClient() {
       <section id="about" className="py-24 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+        {/* R2 collects decorative background - key must match R2 bucket (e.g. collects/decoration.png) */}
+        <div className="absolute inset-0 opacity-[0.07] pointer-events-none bg-cover bg-center bg-no-repeat" aria-hidden="true" style={{ backgroundImage: `url(${getImageUrl('/collects/decoration.png')})` }} />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16 section-header">
@@ -249,32 +295,53 @@ export function HomePageClient() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
-            {/* Item 1: Montessori Method */}
-            <Card variant="clay" className="p-8 lg:p-10 group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-primary/30">
-              <div className="bg-gradient-to-br from-green-100 to-emerald-50 dark:from-green-900/40 dark:to-emerald-900/20 w-20 h-20 rounded-3xl flex items-center justify-center text-5xl mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">🌱</div>
-              <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
-                {t('home.discoverDifference.authenticMontessori.title')}
-              </h3>
-              <p className="text-base lg:text-lg text-muted-foreground leading-relaxed font-medium">
-                {t('home.discoverDifference.authenticMontessori.description')}
-              </p>
+            {/* Item 1: Montessori Method - with image for consistency */}
+            <Card variant="clay" className="p-0 overflow-visible group cursor-pointer hover:shadow-2xl transition-shadow duration-500 border-2 border-transparent hover:border-primary/30">
+              <div className="relative h-56 lg:h-64 w-full overflow-hidden group/image">
+                <AnimatedPlaceholder className="absolute inset-0 z-0" />
+                <Image
+                  src={getImageUrl('/images/sensorial-shelf.jpg')}
+                  alt="Montessori sensorial materials"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover group-hover/image:scale-110 transition-transform duration-700 z-10 origin-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-20" />
+              </div>
+              <div className="relative -mt-6 flex justify-center z-30">
+                <div className="rounded-full bg-background dark:bg-card border-2 border-primary/30 shadow-lg p-2.5 group-hover:border-primary transition-colors duration-300">
+                  <Leaf className="w-10 h-10 text-primary" aria-hidden />
+                </div>
+              </div>
+              <div className="p-8 lg:p-10 pt-4">
+                <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
+                  {t('home.discoverDifference.authenticMontessori.title')}
+                </h3>
+                <p className="text-base lg:text-lg text-muted-foreground leading-relaxed font-medium">
+                  {t('home.discoverDifference.authenticMontessori.description')}
+                </p>
+              </div>
             </Card>
 
             {/* Item 2: Community */}
-            <Card variant="clay" className="p-0 overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-secondary/30">
-              <div className="relative h-56 lg:h-64 w-full overflow-hidden">
+            <Card variant="clay" className="p-0 overflow-visible group cursor-pointer hover:shadow-2xl transition-shadow duration-500 border-2 border-transparent hover:border-secondary/30">
+              <div className="relative h-56 lg:h-64 w-full overflow-hidden group/image">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
                 <Image
                   src={getImageUrl("/images/circle-time-board-2.jpg")}
                   alt="Circle Time"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-700 z-10"
+                  className="object-cover group-hover/image:scale-110 transition-transform duration-700 z-10 origin-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-20" />
-                <div className="absolute bottom-6 left-6 text-5xl z-30 drop-shadow-lg">❤️</div>
               </div>
-              <div className="p-8 lg:p-10 pt-6">
+              <div className="relative -mt-6 flex justify-center z-30">
+                <div className="rounded-full bg-background dark:bg-card border-2 border-secondary/30 shadow-lg p-2.5 group-hover:border-secondary transition-colors duration-300">
+                  <Heart className="w-10 h-10 text-secondary" aria-hidden />
+                </div>
+              </div>
+              <div className="p-8 lg:p-10 pt-4">
                 <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-secondary transition-colors duration-300">
                   {t('home.discoverDifference.lovingCommunity.title')}
                 </h3>
@@ -285,20 +352,24 @@ export function HomePageClient() {
             </Card>
 
             {/* Item 3: Safety */}
-            <Card variant="clay" className="p-0 overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-accent/30">
-              <div className="relative h-56 lg:h-64 w-full overflow-hidden">
+            <Card variant="clay" className="p-0 overflow-visible group cursor-pointer hover:shadow-2xl transition-shadow duration-500 border-2 border-transparent hover:border-accent/30">
+              <div className="relative h-56 lg:h-64 w-full overflow-hidden group/image">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
                 <Image
                   src={getImageUrl("/images/playground.jpg")}
                   alt="Playground"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-700 z-10"
+                  className="object-cover group-hover/image:scale-110 transition-transform duration-700 z-10 origin-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-20" />
-                <div className="absolute bottom-6 left-6 text-5xl z-30 drop-shadow-lg">🛡️</div>
               </div>
-              <div className="p-8 lg:p-10 pt-6">
+              <div className="relative -mt-6 flex justify-center z-30">
+                <div className="rounded-full bg-background dark:bg-card border-2 border-accent/30 shadow-lg p-2.5 group-hover:border-accent transition-colors duration-300">
+                  <Shield className="w-10 h-10 text-accent" aria-hidden />
+                </div>
+              </div>
+              <div className="p-8 lg:p-10 pt-4">
                 <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-accent transition-colors duration-300">
                   {t('home.discoverDifference.safetyFirst.title')}
                 </h3>
@@ -308,26 +379,40 @@ export function HomePageClient() {
               </div>
             </Card>
 
-            {/* Item 4: Teachers */}
-            <Card variant="clay" className="p-8 lg:p-10 group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-primary/30">
-              <div className="bg-gradient-to-br from-blue-100 to-cyan-50 dark:from-blue-900/40 dark:to-cyan-900/20 w-20 h-20 rounded-3xl flex items-center justify-center text-5xl mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">👩‍🏫</div>
-              <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
-                {t('home.discoverDifference.dedicatedEducators.title')}
-              </h3>
-              <p className="text-base lg:text-lg text-muted-foreground leading-relaxed font-medium">
-                {t('home.discoverDifference.dedicatedEducators.description')}
-              </p>
+            {/* Item 4: Teachers - with image for consistency */}
+            <Card variant="clay" className="p-0 overflow-visible group cursor-pointer hover:shadow-2xl transition-shadow duration-500 border-2 border-transparent hover:border-primary/30">
+              <div className="relative h-56 lg:h-64 w-full overflow-hidden group/image">
+                <AnimatedPlaceholder className="absolute inset-0 z-0" />
+                <Image
+                  src={getImageUrl('/images/language-shelf.jpg')}
+                  alt="Language and learning materials"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover group-hover/image:scale-110 transition-transform duration-700 z-10 origin-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-20" />
+              </div>
+              <div className="relative -mt-6 flex justify-center z-30">
+                <div className="rounded-full bg-background dark:bg-card border-2 border-primary/30 shadow-lg p-2.5 group-hover:border-primary transition-colors duration-300">
+                  <GraduationCap className="w-10 h-10 text-primary" aria-hidden />
+                </div>
+              </div>
+              <div className="p-8 lg:p-10 pt-4">
+                <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
+                  {t('home.discoverDifference.dedicatedEducators.title')}
+                </h3>
+                <p className="text-base lg:text-lg text-muted-foreground leading-relaxed font-medium">
+                  {t('home.discoverDifference.dedicatedEducators.description')}
+                </p>
+              </div>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Programs Section */}
+      {/* Programs Section - Hidden: daycare open to all suitable ages; View Programs link in hero */}
+      {false && (
       <section id="programs" className="py-24 bg-gradient-to-b from-background to-muted/30 relative overflow-hidden">
-        {/* Decorative background elements */}
-        <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-6 mb-20 section-header">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
@@ -337,69 +422,9 @@ export function HomePageClient() {
               {t('home.programs.subtitle')}
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-            {/* Program Cards with Enhanced Styling */}
-            {[
-              { id: 'toddler', key: 'toddler', color: 'primary', icon: '🧸', gradient: 'from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/20' },
-              { id: 'preschool', key: 'preschool', color: 'secondary', icon: '🎨', gradient: 'from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/20' },
-              { id: 'prek', key: 'prek', color: 'accent', icon: '🚀', gradient: 'from-yellow-50 to-amber-50 dark:from-yellow-950/30 dark:to-amber-950/20' },
-            ].map((prog) => (
-              <Card
-                key={prog.id}
-                variant="clay"
-                className={cn(
-                  "p-8 lg:p-10 flex flex-col h-full section-header group cursor-pointer",
-                  "hover:shadow-2xl hover:-translate-y-2 transition-all duration-500",
-                  "border-2 border-transparent hover:border-primary/40",
-                  `bg-gradient-to-br ${prog.gradient}`
-                )}
-              >
-                <CardHeader className="p-0 mb-6">
-                  <div className={cn(
-                    "w-24 h-24 rounded-3xl flex items-center justify-center text-6xl",
-                    "group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl",
-                    "bg-white/80 dark:bg-card/80 backdrop-blur-sm",
-                    prog.color === 'primary' ? 'bg-gradient-to-br from-primary/20 to-primary/10' :
-                      prog.color === 'secondary' ? 'bg-gradient-to-br from-secondary/20 to-secondary/10' :
-                        'bg-gradient-to-br from-accent/20 to-accent/10'
-                  )}>
-                    {prog.icon}
-                  </div>
-                </CardHeader>
-                <CardContent className="p-0 flex-grow space-y-4">
-                  <CardTitle className="text-2xl lg:text-3xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                    {t(`home.programs.${prog.key}.title`)}
-                  </CardTitle>
-                  <CardDescription className="text-xs font-bold text-foreground/70 uppercase tracking-widest mb-4 bg-white/60 dark:bg-card/60 backdrop-blur-sm inline-block px-4 py-2 rounded-full border border-border/50 shadow-sm">
-                    {t(`home.programs.${prog.key}.range`)}
-                  </CardDescription>
-                  <p className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8 font-medium">
-                    {t(`home.programs.${prog.key}.description`)}
-                  </p>
-                </CardContent>
-                <div className="mt-auto pt-4 border-t border-border/50">
-                  <a
-                    href="/programs"
-                    className={cn(
-                      "inline-flex items-center font-bold text-lg group/link",
-                      "hover:translate-x-2 transition-all duration-300",
-                      prog.color === 'primary' ? 'text-primary hover:text-primary/80' :
-                        prog.color === 'secondary' ? 'text-secondary hover:text-secondary/80' :
-                          'text-accent-foreground hover:text-accent-foreground/80'
-                    )}
-                  >
-                    {t('home.programs.learnDetails')}
-                    <svg className="w-5 h-5 ml-2 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </a>
-                </div>
-              </Card>
-            ))}
-          </div>
         </div>
       </section>
+      )}
 
       {/* Real Environment Showcase */}
       <Suspense fallback={<div className="h-96 flex items-center justify-center"><LoadingSpinner /></div>}>
@@ -454,20 +479,20 @@ export function HomePageClient() {
             {t('home.readyToVisit.subtitle')}
           </p>
 
-          <div className="text-white/90 text-lg md:text-xl space-y-4 bg-white/15 backdrop-blur-md rounded-3xl p-8 lg:p-10 inline-block border-2 border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300 w-full max-w-4xl">
-            <p className="flex items-center justify-center gap-3 font-semibold">
-              <span className="text-accent text-2xl drop-shadow-lg">📍</span>
-              <span className="text-left">
+          <div className="flex flex-col items-center gap-6 text-white/95 text-lg md:text-xl">
+            <p ref={readyAddressRef} className="flex items-center justify-center gap-3 font-semibold drop-shadow-lg">
+              <span className="text-accent text-2xl" aria-hidden="true">📍</span>
+              <span className="text-center">
                 {businessProfile.address.streetAddress}, {businessProfile.address.addressLocality}, {businessProfile.address.addressRegion}
               </span>
             </p>
-            <p className="flex items-center justify-center gap-3 font-semibold">
-              <span className="text-accent text-2xl drop-shadow-lg">🕒</span>
+            <p ref={readyHoursRef} className="flex items-center justify-center gap-3 font-semibold drop-shadow-lg">
+              <span className="text-accent text-2xl" aria-hidden="true">🕒</span>
               <span>{t('common.hours.weekdays')}</span>
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
+          <div ref={readyCTAsRef} className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <a
               href="/contact"
               className="bg-white text-primary text-xl md:text-2xl px-12 py-6 rounded-full font-bold hover:bg-white/95 transition-all hover:scale-110 shadow-2xl hover:shadow-white/50 ring-4 ring-white/40 min-h-[60px] flex items-center justify-center group"
