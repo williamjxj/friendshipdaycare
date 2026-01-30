@@ -45,7 +45,7 @@ python3 scripts/create_video_thumbnails.py
 
 The download scripts download the following images from `http://www.friendshipdaycare.com`:
 
-1. `friendship-corner-daycare-logo.png` - The daycare logo
+1. `daycare-logo.png` - The daycare logo
 2. `playground.jpg` - Outdoor playground area
 3. `circle-time-area.jpg` - Circle time learning area
 4. `sensorial-shelf.jpg` - Montessori sensorial materials

@@ -5,7 +5,7 @@
 ### From Original Site (`http://www.friendshipdaycare.com/images`)
 All images have been successfully downloaded to `public/images/`:
 
-1. **friendship-corner-daycare-logo.png** - Official daycare logo
+1. **daycare-logo.png** - Official daycare logo
 2. **playground.jpg** - Outdoor playground area
 3. **circle-time-area.jpg** - Circle time learning space
 4. **sensorial-shelf.jpg** - Montessori sensorial materials
@@ -66,7 +66,7 @@ All images have been successfully downloaded to `public/images/`:
 
 ### Original Site → Modern App
 ```
-/images/friendship-corner-daycare-logo.png → Headers/Footers (all pages)
+/images/daycare-logo.png → Headers/Footers (all pages)
 /images/playground.jpg → Gallery, Environment Showcase
 /images/circle-time-area.jpg → Gallery, Environment Showcase
 /images/sensorial-shelf.jpg → Gallery, Environment Showcase, Programs

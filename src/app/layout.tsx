@@ -1,4 +1,4 @@
-import { Nunito, Fredoka } from "next/font/google";
+import { Nunito, Fredoka, Baloo_2, Comic_Neue } from "next/font/google";
 import { Suspense } from "react";
 import { PageLoader } from "@/components/ui/LoadingSpinner";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -24,6 +24,18 @@ const fredoka = Fredoka({
   variable: "--font-fredoka",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+});
+
+const baloo = Baloo_2({
+  variable: "--font-baloo",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const comic = Comic_Neue({
+  variable: "--font-comic",
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
 });
 
 export const metadata = defaultSiteMetadata;
@@ -53,7 +65,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="icon" href="/favicon_io/favicon.ico" />
-        
+
         {/* Structured Data for SEO */}
         <WebSiteSchema
           name={businessProfile.name}
@@ -83,7 +95,7 @@ export default function RootLayout({
           address={businessProfile.address}
         />
       </head>
-      <body className={`${nunito.variable} ${fredoka.variable} antialiased font-sans`} suppressHydrationWarning>
+      <body className={`${nunito.variable} ${fredoka.variable} ${baloo.variable} ${comic.variable} antialiased font-sans`} suppressHydrationWarning>
         <LanguageProvider>
           <LanguageAwareHtml>
             <NextIntlProviderSync>

@@ -1,0 +1,35 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:0.1" />
+      <stop offset="50%" style="stop-color:#f59e0b;stop-opacity:0.05" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  
+  <!-- Decorative elements representing children and learning -->
+  <circle cx="200" cy="150" r="40" fill="#4f46e5" opacity="0.2"/>
+  <circle cx="300" cy="200" r="30" fill="#f59e0b" opacity="0.3"/>
+  <circle cx="150" cy="250" r="25" fill="#10b981" opacity="0.25"/>
+  
+  <circle cx="1000" cy="100" r="35" fill="#ec4899" opacity="0.2"/>
+  <circle cx="1100" cy="180" r="28" fill="#8b5cf6" opacity="0.3"/>
+  <circle cx="950" cy="220" r="32" fill="#06b6d4" opacity="0.25"/>
+  
+  <!-- Abstract shapes representing toys and learning materials -->
+  <rect x="100" y="400" width="60" height="60" rx="10" fill="#4f46e5" opacity="0.15"/>
+  <rect x="180" y="420" width="40" height="40" rx="8" fill="#f59e0b" opacity="0.2"/>
+  <rect x="240" y="380" width="50" height="50" rx="12" fill="#10b981" opacity="0.18"/>
+  
+  <rect x="900" y="350" width="55" height="55" rx="10" fill="#ec4899" opacity="0.15"/>
+  <rect x="980" y="380" width="45" height="45" rx="8" fill="#8b5cf6" opacity="0.2"/>
+  <rect x="1040" y="320" width="50" height="50" rx="12" fill="#06b6d4" opacity="0.18"/>
+  
+  <!-- Playful triangular shapes -->
+  <polygon points="400,500 450,450 500,500" fill="#4f46e5" opacity="0.1"/>
+  <polygon points="600,480 640,440 680,480" fill="#f59e0b" opacity="0.15"/>
+  <polygon points="750,460 780,420 810,460" fill="#10b981" opacity="0.12"/>
+</svg>

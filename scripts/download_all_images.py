@@ -103,7 +103,7 @@ def main():
     
     # Known images from our previous analysis
     known_images = [
-        "/images/friendship-corner-daycare-logo.png",
+        "/images/daycare-logo.png",
         "/images/Playground.jpg",
         "/images/Circle-Time-Area.jpg",
         "/images/Sensorial-Shelf.jpg",
@@ -178,7 +178,7 @@ def main():
         print("\n🎉 Images are now available for use in your app!")
         print("💡 You can reference them in your components like:")
         print("   /images/filename.jpg")
-        print("   /images/friendship-corner-daycare-logo.png")
+        print("   /images/daycare-logo.png")
         print("   etc.")
 
 if __name__ == "__main__":

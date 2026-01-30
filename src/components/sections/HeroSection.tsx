@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
-import { getImageUrl } from '@/lib/image-utils';
 import { scaleInMagic, slideIn, staggerContainerMagic } from '@/lib/magicui-animations';
 
 /**
@@ -20,7 +19,7 @@ export function HeroSection() {
       {/* Background Image & Overlay (DaisyUI .hero-overlay equivalent) */}
       <div className="absolute inset-0 z-0 grid place-items-center w-full h-full">
         <Image
-          src={getImageUrl("/images/hero-bg.svg")}
+          src="/hero-bg.svg"
           alt="Daycare background"
           fill
           className="object-cover opacity-30"

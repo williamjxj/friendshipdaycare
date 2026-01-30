@@ -4,7 +4,7 @@ import { Suspense, useMemo, useRef } from 'react';
 import { RealEnvironmentShowcase } from '@/components/sections/RealEnvironmentShowcase';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import dynamic from 'next/dynamic';
-import { HeroVideoBackground } from '@/components/ui/hero-video-background';
+import { HeroImageCarousel } from '@/components/ui/hero-image-carousel';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -29,71 +29,95 @@ const VideoPlayer = dynamic(() => import('@/components/ui/VideoPlayer').then(mod
  */
 export function HomePageClient() {
   const mainRef = useRef<HTMLElement>(null);
+  const heroTitleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const { t } = useLanguage();
+
+  /** Fixed gradient for hero title (theme-independent). Same as former "in Coquitlam, BC" style. */
+  const heroTitleGradientStyle = {
+    backgroundImage: 'linear-gradient(135deg, rgb(184, 134, 11) 0%, rgb(205, 133, 63) 20%, rgb(212, 175, 55) 40%, rgb(255, 215, 0) 50%, rgb(212, 175, 55) 60%, rgb(205, 133, 63) 80%, rgb(184, 134, 11) 100%)',
+    WebkitBackgroundClip: 'text' as const,
+    WebkitTextFillColor: 'transparent' as const,
+    backgroundClip: 'text' as const,
+    color: 'transparent' as const,
+  };
 
   useLocalizedMetadata({
     title: t('seo.home.title'),
     description: t('seo.home.description'),
   });
 
-  // Animations
+  // Hero title + subtitle GSAP text animation (on load)
   useGSAP(() => {
-    // Animate Hero Content (badge and title)
-    gsap.from('.hero-content > div:first-child > *', {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.2,
-      ease: 'power3.out',
-      delay: 0.5
-    });
+    const titleEl = heroTitleRef.current;
+    const subtitleEl = subtitleRef.current;
 
-    // Animate subtitle with word-by-word effect
-    if (subtitleRef.current) {
-      // Wait a bit to ensure DOM is ready and text is visible
-      setTimeout(() => {
-        if (subtitleRef.current) {
-          const subtitleText = subtitleRef.current.textContent || subtitleRef.current.innerText || '';
-          if (subtitleText.trim()) {
-            const words = subtitleText.split(' ').filter(w => w.trim());
-
-            // Split into words for animation - keep visible initially
-            subtitleRef.current.innerHTML = words
-              .map((word, i) => `<span class="hero-subtitle-word inline-block" style="opacity: 1; transform: translateY(0);">${word}${i < words.length - 1 ? '&nbsp;' : ''}</span>`)
-              .join('');
-
-            const wordElements = subtitleRef.current.querySelectorAll('.hero-subtitle-word');
-            if (wordElements.length > 0) {
-              // Reset to initial state for animation
-              gsap.set(wordElements, {
-                y: 30,
-                opacity: 0,
-                immediateRender: false,
-              });
-
-              // Animate to visible
-              gsap.to(wordElements, {
-                y: 0,
-                opacity: 1,
-                duration: 0.8,
-                stagger: 0.06,
-                ease: 'power2.out',
-                delay: 1.0,
-              });
-            }
-          }
-        }
-      }, 100);
-    }
-
-    // Animate buttons
-    gsap.from('.hero-content > div:last-child', {
+    // Badge: fade/slide in
+    gsap.from('.hero-badge', {
       y: 40,
       opacity: 0,
-      duration: 1,
+      duration: 0.8,
       ease: 'power3.out',
-      delay: 1.4,
+      delay: 0.3,
+    });
+
+    // Title: two-line stagger (runs on load so headlines show on first paint)
+    if (titleEl) {
+      const headlineLine = titleEl.querySelector('.hero-headline-line');
+      const highlightLine = titleEl.querySelector('.hero-highlight-line');
+      const lines = [headlineLine, highlightLine].filter(Boolean) as HTMLElement[];
+      gsap.fromTo(
+        lines,
+        { y: 56, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.18,
+          ease: 'power3.out',
+          delay: 0.5,
+        }
+      );
+    }
+
+    // Subtitle: word-by-word text reveal (runs on load)
+    if (subtitleEl) {
+      const text = subtitleEl.textContent || subtitleEl.innerText || '';
+      if (text.trim()) {
+        const words = text.split(/\s+/).filter(Boolean);
+        subtitleEl.innerHTML = words
+          .map((word, i) => `<span class="hero-subtitle-word inline-block">${word}${i < words.length - 1 ? '\u00A0' : ''}</span>`)
+          .join('');
+        const wordEls = subtitleEl.querySelectorAll('.hero-subtitle-word');
+        gsap.set(wordEls, { y: 24, opacity: 0, immediateRender: false });
+        gsap.to(wordEls, {
+          y: 0,
+          opacity: 1,
+          duration: 0.55,
+          stagger: 0.045,
+          ease: 'power2.out',
+          delay: 1.0,
+        });
+      }
+    }
+
+    // Buttons: fade in after title/subtitle
+    gsap.from('.hero-cta-buttons', {
+      y: 30,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      delay: 1.2,
+    });
+
+    // Floating Logo Animation - Enhanced
+    gsap.to('.floating-logo', {
+      y: 25,
+      rotation: 12,
+      duration: 3.5,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
     });
 
     // Animate Section Headers
@@ -112,6 +136,13 @@ export function HomePageClient() {
 
   }, { scope: mainRef });
 
+  const heroCarouselImages = useMemo(() => [
+    getImageUrl('/images/slidetop-bg.jpg'),
+    getImageUrl('/images/playground.jpg'),
+    getImageUrl('/images/toys.jpg'),
+    getImageUrl('/images/circle-time-area.jpg'),
+  ], []);
+
   const videos = useMemo(() => [
     {
       url: getImageUrl('/videos/friendship-daycare.mp4'),
@@ -122,14 +153,28 @@ export function HomePageClient() {
 
   return (
     <main id="main-content" ref={mainRef} className="flex-1 overflow-x-hidden">
-      {/* Magical Hero Section */}
-      <section id="home" className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+      {/* Magical Hero Section - Full viewport height minus header height (4rem/64px) */}
+      <section id="home" className="relative h-[calc(100vh-4rem)] min-h-[600px] flex items-center justify-center overflow-hidden">
 
-        <HeroVideoBackground
-          videoId="jNQXAC9IVRw" // Montessori sample video
-          fallbackImage={getImageUrl("/images/slidetop-bg.jpg")}
+        <HeroImageCarousel
+          images={heroCarouselImages}
+          intervalMs={5000}
           overlayColor="bg-gradient-to-br from-blue-900/40 via-blue-600/40 to-sky-400/30"
         />
+
+        {/* Floating Logo - Top Left - Enhanced Size */}
+        <div className="absolute top-6 left-6 md:top-10 md:left-10 z-20 floating-logo hidden sm:block">
+          <div className="relative w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 filter drop-shadow-2xl">
+            <Image
+              src="/daycare-logo.png"
+              alt="Friendship Daycare Logo"
+              fill
+              className="object-contain"
+              priority
+              sizes="(max-width: 768px) 96px, (max-width: 1024px) 128px, 160px"
+            />
+          </div>
+        </div>
 
         {/* Animated Decorative Elements - Subtle for Video BG */}
         <div className="absolute inset-0 pointer-events-none">
@@ -140,30 +185,38 @@ export function HomePageClient() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center hero-content">
           <div className="space-y-8">
             <div className="space-y-6">
-              <span className="inline-block px-6 py-3 rounded-full bg-white/15 backdrop-blur-lg border border-white/30 text-white font-bold text-sm tracking-widest uppercase shadow-xl hover:bg-white/20 transition-all duration-300">
+              <span className="hero-badge inline-block px-6 py-3 rounded-full bg-white/15 backdrop-blur-lg border border-white/30 text-white font-bold text-sm tracking-widest uppercase shadow-xl hover:bg-white/20 transition-all duration-300">
                 {t('home.hero.badge')}
               </span>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white drop-shadow-2xl leading-tight tracking-tight">
-                {t('home.hero.headline')} <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-white to-yellow-200 drop-shadow-lg">
+              <h1 ref={heroTitleRef} className="text-5xl md:text-7xl lg:text-8xl font-display font-bold drop-shadow-2xl leading-tight tracking-tight">
+                <span className="hero-headline-line block" style={heroTitleGradientStyle}>
+                  {t('home.hero.headline')}
+                </span>
+                <span className="hero-highlight-line block drop-shadow-lg mt-1" style={{ color: '#ffffff' }}>
                   {t('home.hero.highlight')}
                 </span>
               </h1>
+              <p className="block drop-shadow-lg mt-1 text-3xl md:text-5xl lg:text-6xl font-display font-bold leading-tight tracking-tight text-center" style={{ color: '#ffffff' }}>
+                <a href={`tel:${businessProfile.telephone.replace(/\s/g, '')}`} className="hover:underline underline-offset-2" style={{ color: '#ffffff' }}>{businessProfile.telephone}</a>
+                <span className="mx-2" aria-hidden="true">,</span>
+                <a href={`mailto:${businessProfile.email}`} className="hover:underline underline-offset-2 break-all" style={{ color: '#ffffff' }}>{businessProfile.email}</a>
+              </p>
               <p
                 ref={subtitleRef}
-                className="text-xl md:text-3xl lg:text-4xl font-medium text-white/95 w-full max-w-4xl mx-auto drop-shadow-lg leading-relaxed px-4"
+                className="hero-subtitle w-full max-w-5xl mx-auto px-4 text-2xl md:text-4xl lg:text-5xl xl:text-[2.75rem] font-medium leading-snug md:leading-relaxed tracking-tight"
                 style={{
+                  color: '#ffffff',
                   fontFamily: 'var(--font-sans)',
-                  letterSpacing: '0.01em',
-                  textShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                  letterSpacing: '0.02em',
+                  textShadow: '0 2px 4px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.3)',
                 }}
               >
                 {t('home.hero.subtitle')}
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
-              <a href="/contact" className="btn-premium">
+            <div className="hero-cta-buttons flex flex-col sm:flex-row gap-6 justify-center pt-8">
+              <a href="/contact" className="btn-clay">
                 {t('home.hero.scheduleTour')}
               </a>
               <a href="/programs" className="px-10 py-4 rounded-full bg-white/10 backdrop-blur-md border border-white/40 text-white font-bold text-lg hover:bg-white/20 transition-all hover:scale-105 shadow-xl flex items-center justify-center">
@@ -186,19 +239,7 @@ export function HomePageClient() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16 section-header">
-            {/* Logo Display */}
-            <div className="flex justify-center mb-8">
-              <div className="relative w-48 h-32 md:w-64 md:h-40 lg:w-80 lg:h-48 transition-transform duration-500 hover:scale-105">
-                <Image
-                  src="/friendship-corner-daycare-logo.png"
-                  alt="Friendship Corner Daycare Logo"
-                  fill
-                  sizes="(max-width: 768px) 192px, (max-width: 1024px) 256px, 320px"
-                  className="object-contain drop-shadow-lg"
-                  priority
-                />
-              </div>
-            </div>
+            {/* Logo Display REMOVED */}
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
               {t('home.discoverDifference.title')}
             </h2>
@@ -209,7 +250,7 @@ export function HomePageClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
             {/* Item 1: Montessori Method */}
-            <Card variant="premium" className="p-8 lg:p-10 group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-primary/30">
+            <Card variant="clay" className="p-8 lg:p-10 group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-primary/30">
               <div className="bg-gradient-to-br from-green-100 to-emerald-50 dark:from-green-900/40 dark:to-emerald-900/20 w-20 h-20 rounded-3xl flex items-center justify-center text-5xl mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">🌱</div>
               <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
                 {t('home.discoverDifference.authenticMontessori.title')}
@@ -220,7 +261,7 @@ export function HomePageClient() {
             </Card>
 
             {/* Item 2: Community */}
-            <Card variant="premium" className="p-0 overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-secondary/30">
+            <Card variant="clay" className="p-0 overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-secondary/30">
               <div className="relative h-56 lg:h-64 w-full overflow-hidden">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
                 <Image
@@ -244,7 +285,7 @@ export function HomePageClient() {
             </Card>
 
             {/* Item 3: Safety */}
-            <Card variant="premium" className="p-0 overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-accent/30">
+            <Card variant="clay" className="p-0 overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-accent/30">
               <div className="relative h-56 lg:h-64 w-full overflow-hidden">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
                 <Image
@@ -268,7 +309,7 @@ export function HomePageClient() {
             </Card>
 
             {/* Item 4: Teachers */}
-            <Card variant="premium" className="p-8 lg:p-10 group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-primary/30">
+            <Card variant="clay" className="p-8 lg:p-10 group cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-primary/30">
               <div className="bg-gradient-to-br from-blue-100 to-cyan-50 dark:from-blue-900/40 dark:to-cyan-900/20 w-20 h-20 rounded-3xl flex items-center justify-center text-5xl mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">👩‍🏫</div>
               <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
                 {t('home.discoverDifference.dedicatedEducators.title')}
@@ -306,7 +347,7 @@ export function HomePageClient() {
             ].map((prog) => (
               <Card
                 key={prog.id}
-                variant="premium"
+                variant="clay"
                 className={cn(
                   "p-8 lg:p-10 flex flex-col h-full section-header group cursor-pointer",
                   "hover:shadow-2xl hover:-translate-y-2 transition-all duration-500",

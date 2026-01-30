@@ -228,12 +228,11 @@ export function Footer() {
                 className="hover:text-primary transition-colors font-medium inline-flex items-center gap-1 min-h-[44px]"
               >
                 <Image
-                  src="/bestit-favicon.ico"
-                  alt=""
-                  aria-hidden="true"
-                  width={16}
-                  height={16}
-                  className="w-4 h-4"
+                  src="/bestit-11.ico"
+                  alt="Best IT Consulting"
+                  width={24}
+                  height={24}
+                  className="h-5 w-auto object-contain shrink-0"
                 />
                 Best IT Consulting
               </a>

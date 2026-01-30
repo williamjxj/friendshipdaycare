@@ -6,39 +6,42 @@
 /* Theme Variables */
 /* Theme Variables */
 :root {
-  /* Default Theme - Montessori (Warm & Cozy) */
-  --primary: #2C5F4D;
-  /* Deep Forest Green - Trust, Nature */
+  /* Default Theme - Claymorphism (Playful & Soft) */
+  --primary: #3B82F6;
+  /* Blue - Trust, Calm */
   --primary-foreground: #FFFFFF;
 
-  --secondary: #D98C5F;
-  /* Terracotta/Warm Earth - Creativity, Warmth */
+  --secondary: #60A5FA;
+  /* Light Blue - Soft, airy */
   --secondary-foreground: #FFFFFF;
 
-  --accent: #E8C547;
-  /* Muted Sunshine - Energy, distinct from secondary */
-  --accent-foreground: #374151;
+  --accent: #F97316;
+  /* Orange CTA - Warm, action-oriented */
+  --accent-foreground: #FFFFFF;
 
-  --background: #FDFBF7;
-  /* Warm Cream (Paper-like) */
-  --foreground: #2D3339;
-  /* Soft Charcoal - High readability */
+  --background: #F8FAFC;
+  /* Slate 50 - Very light cool grey */
+  --foreground: #1E293B;
+  /* Slate 800 - High contrast text */
 
-  --muted: #F3F0E6;
-  /* Light Beige/Stone */
-  --muted-foreground: #6B7280;
+  --muted: #F1F5F9;
+  /* Slate 100 */
+  --muted-foreground: #64748B;
+  /* Slate 500 */
 
-  --border: #E5E0D5;
-  /* Warm Grey/Beige border */
+  --border: #CBD5E1;
+  /* Slate 300 */
   --card: #FFFFFF;
-  --card-foreground: #2D3339;
+  --card-foreground: #1E293B;
 
   --popover: #FFFFFF;
-  --popover-foreground: #2D3339;
-  --destructive: oklch(0.577 0.245 27.325);
-  --input: #E5E0D5;
-  --ring: #2C5F4D;
-  --radius: 0.625rem;
+  --popover-foreground: #1E293B;
+  --destructive: #EF4444;
+  --input: #E2E8F0;
+  --ring: #3B82F6;
+  --radius: 1rem; /* 16px */
+  --radius-lg: 1.5rem; /* 24px */
+  --radius-xl: 2rem; /* 32px */
 
   /* shadcn/ui specific variables mapped to Montessori colors or defaults */
   --chart-1: oklch(0.646 0.222 41.116);
@@ -48,25 +51,24 @@
   --chart-5: oklch(0.769 0.188 70.08);
 
   /* Sidebar configuration */
-  --sidebar: #FDFBF7;
-  --sidebar-foreground: #2D3339;
-  --sidebar-primary: #2C5F4D;
+  --sidebar: #F8FAFC;
+  --sidebar-foreground: #1E293B;
+  --sidebar-primary: #3B82F6;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F3F0E6;
-  --sidebar-accent-foreground: #2C5F4D;
-  --sidebar-border: #E5E0D5;
-  --sidebar-ring: #2C5F4D;
+  --sidebar-accent: #F1F5F9;
+  --sidebar-accent-foreground: #3B82F6;
+  --sidebar-border: #CBD5E1;
+  --sidebar-ring: #3B82F6;
 
   /* Radius - Soft, organic curves */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1.0rem;
-  --radius-xl: 1.5rem;
-
-  /* Shadows - Layered, soft diffusion shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(44 95 77 / 0.1), 0 2px 4px -2px rgb(44 95 77 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(44 95 77 / 0.1), 0 4px 6px -4px rgb(44 95 77 / 0.1);
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  
+  /* Shadows - Claymorphism Soft 3D */
+  --shadow-sm: 4px 4px 8px #d1d9e6, -4px -4px 8px #ffffff;
+  --shadow-md: 6px 6px 12px #b8b9be, -6px -6px 12px #ffffff;
+  --shadow-lg: 8px 8px 16px #a3b1c6, -8px -8px 16px #ffffff;
+  --shadow-inner: inset 4px 4px 8px #b8b9be, inset -4px -4px 8px #ffffff;
 }
 
 /* Professional Theme (Clean Corporate Blue) */
@@ -190,9 +192,9 @@
   --color-card-foreground: var(--card-foreground);
 
   /* Font families */
-  --font-sans: var(--font-sans);
-  --font-display: var(--font-display);
-  --font-accent: var(--font-accent);
+  --font-sans: var(--font-comic), var(--font-nunito), system-ui, sans-serif;
+  --font-display: var(--font-baloo), var(--font-fredoka), system-ui, sans-serif;
+  --font-accent: var(--font-baloo), var(--font-fredoka), system-ui, sans-serif;
   --font-rubik: var(--font-rubik);
 
   /* Spacing scale - Standardizing nice gaps */
@@ -206,10 +208,10 @@
 }
 
 body {
-  /* Font families - mapping Next.js variables to theme variables locally in body */
-  --font-sans: var(--font-nunito), system-ui, sans-serif;
-  --font-display: var(--font-fredoka), system-ui, sans-serif;
-  --font-accent: var(--font-fredoka), system-ui, sans-serif;
+  /* Font families */
+  --font-sans: var(--font-comic), var(--font-nunito), system-ui, sans-serif;
+  --font-display: var(--font-baloo), var(--font-fredoka), system-ui, sans-serif;
+  --font-accent: var(--font-baloo), var(--font-fredoka), system-ui, sans-serif;
 
   font-family: var(--font-sans);
   line-height: 1.6;
@@ -223,76 +225,63 @@ body {
   /* Removed color transition on everything to prevent weird text scaling/jumps, kept bg/border */
 }
 
-/* Montessori / Premium Component Classes */
+/* Claymorphism Components */
 
-/* Legacy Support (Mapping old classes to new styles) */
-.montessori-card,
-.child-friendly-card {
+.clay-card {
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  box-shadow: 
+    8px 8px 16px color-mix(in srgb, var(--primary), white 80%), 
+    -8px -8px 16px #ffffff;
+  border: 4px solid var(--background);
   transition: all 0.3s ease;
 }
 
-.montessori-card:hover,
-.child-friendly-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--primary);
+.clay-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    12px 12px 20px color-mix(in srgb, var(--primary), white 70%), 
+    -12px -12px 20px #ffffff;
 }
 
-/* Standardized Button Styles */
+/* Override existing button classes to match Clay style */
 .warm-button,
 .playful-button,
-.btn-primary {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-  padding: 1rem 2rem;
-  /* px-8 py-4 */
-  border-radius: var(--radius-lg);
-  /* rounded-lg */
-  font-weight: 600;
-  /* font-semibold */
-  font-size: 1.125rem;
-  /* text-lg */
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  /* Mobile touch target */
-  box-shadow: var(--shadow-sm);
-}
-
+.btn-primary,
 .btn-clay {
   background-color: var(--primary);
   color: var(--primary-foreground);
-  transition: all 0.1s;
-  box-shadow: 
-    0 4px 0 color-mix(in srgb, var(--primary), black 20%), /* Deep edge */
-    0 5px 10px rgba(0,0,0,0.1);     /* Drop shadow */
-  transform: translateY(0);
+  padding: 1rem 2rem;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.125rem;
   border: none;
   cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 4px 0 color-mix(in srgb, var(--primary), black 20%), 
+    0 8px 12px rgba(0,0,0,0.15);
+  transform: translateY(0);
 }
 
+.warm-button:active,
+.playful-button:active,
+.btn-primary:active,
 .btn-clay:active {
-  box-shadow: 0 0 0 color-mix(in srgb, var(--primary), black 20%);
   transform: translateY(4px);
-}
-
-/* Override playful button specific weirdness if any, mainly shadow */
-.playful-button {
-  box-shadow: none !important;
+  box-shadow: 0 0 0 color-mix(in srgb, var(--primary), black 20%);
 }
 
 .warm-button:hover,
-.btn-primary:hover {
-  background-color: color-mix(in srgb, var(--primary), black 10%);
-  /* Darken slightly for better hover feedback */
+.playful-button:hover,
+.btn-primary:hover,
+.btn-clay:hover {
+  filter: brightness(1.05);
 }
 
 .warm-button-secondary,

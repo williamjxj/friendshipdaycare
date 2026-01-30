@@ -1,7 +1,6 @@
 'use client';
 
-import { Suspense, useState } from 'react';
-import { VideoPlayer } from '@/components/ui/VideoPlayer';
+import { Suspense, useState, useCallback, useEffect, useRef } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { PageHero } from '@/components/ui/page-hero';
 import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
@@ -10,13 +9,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
-import { fadeIn, slideUp } from '@/lib/animations';
+import { fadeIn } from '@/lib/animations';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 import { usePathname } from 'next/navigation';
 import { BreadcrumbSchema } from '@/components/seo/StructuredData';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { getBreadcrumbs, toBreadcrumbSchemaItems } from '@/lib/breadcrumbs';
+import { Skeleton } from '@/components/ui/skeleton';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Gallery page client component showcasing photos and videos.
@@ -34,6 +39,23 @@ export function GalleryPageClient() {
 
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [carouselSelectedIndex, setCarouselSelectedIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<Record<number, boolean>>({});
+  const [isCarouselHoveredOrFocused, setIsCarouselHoveredOrFocused] = useState(false);
+  const carouselContainerRef = useRef<HTMLDivElement>(null);
+  const gallerySectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const slideWidthRef = useRef(950);
+  const dragRef = useRef({ isDragging: false, startX: 0, startTrackX: 0 });
+  const justDraggedRef = useRef(false);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
+  const indexRef = useRef(carouselSelectedIndex);
+  indexRef.current = carouselSelectedIndex;
+
+  const handleImageLoaded = useCallback((index: number) => {
+    setLoadedImages((prev) => ({ ...prev, [index]: true }));
+  }, []);
 
   const categories = categoryMessages.length > 0 ? categoryMessages : [
     { id: 'all', name: t('galleryPage.categoriesFallback.all') },
@@ -42,55 +64,187 @@ export function GalleryPageClient() {
     { id: 'activities', name: t('galleryPage.categoriesFallback.activities') },
   ];
 
-  const galleryImages = [
-    {
-      id: 1,
-      src: getImageUrl('/images/circle-time-board-2.jpg'),
-      alt: 'Circle time activities',
-      category: 'classroom'
-    },
-    {
-      id: 2,
-      src: getImageUrl('/images/practical-life-shelf-1.jpg'),
-      alt: 'Practical life materials',
-      category: 'classroom'
-    },
-    {
-      id: 3,
-      src: getImageUrl('/images/sensorial-shelf.jpg'),
-      alt: 'Sensorial learning',
-      category: 'classroom'
-    },
-    {
-      id: 4,
-      src: getImageUrl('/images/playground.jpg'),
-      alt: 'Playground activities',
-      category: 'playground'
-    },
-    {
-      id: 5,
-      src: getImageUrl('/images/language-shelf.jpg'),
-      alt: 'Language materials',
-      category: 'activities'
-    },
-
+  /** Aspect ratio = width/height; e.g. 4/3 ≈ 1.33 for photo-like proportion. Omit to use 4/3. */
+  const galleryImages: Array<{
+    id: number;
+    src: string;
+    alt: string;
+    category: string;
+    aspectRatio?: number;
+  }> = [
+    { id: 1, src: getImageUrl('/images/circle-time-board-2.jpg'), alt: 'Circle time activities', category: 'classroom', aspectRatio: 4 / 3 },
+    { id: 2, src: getImageUrl('/images/circle-time-area.jpg'), alt: 'Circle time learning space', category: 'classroom', aspectRatio: 4 / 3 },
+    { id: 3, src: getImageUrl('/images/practical-life-shelf-1.jpg'), alt: 'Practical life materials', category: 'classroom', aspectRatio: 4 / 3 },
+    { id: 4, src: getImageUrl('/images/practical-life-shelf-2.jpg'), alt: 'Practical life activities', category: 'classroom', aspectRatio: 4 / 3 },
+    { id: 5, src: getImageUrl('/images/sensorial-shelf.jpg'), alt: 'Sensorial learning', category: 'classroom', aspectRatio: 4 / 3 },
+    { id: 6, src: getImageUrl('/images/language-shelf.jpg'), alt: 'Language materials', category: 'activities', aspectRatio: 4 / 3 },
+    { id: 7, src: getImageUrl('/images/math-shelf.jpg'), alt: 'Mathematics learning materials', category: 'activities', aspectRatio: 4 / 3 },
+    { id: 8, src: getImageUrl('/images/culture-shelf.jpg'), alt: 'Cultural studies materials', category: 'activities', aspectRatio: 4 / 3 },
+    { id: 9, src: getImageUrl('/images/art-themed-board-2.jpg'), alt: 'Art-themed display board', category: 'classroom', aspectRatio: 4 / 3 },
+    { id: 10, src: getImageUrl('/images/toys.jpg'), alt: 'Toys and pretend play area', category: 'activities', aspectRatio: 4 / 3 },
+    { id: 11, src: getImageUrl('/images/playground.jpg'), alt: 'Playground activities', category: 'playground', aspectRatio: 4 / 3 },
+    { id: 12, src: getImageUrl('/images/slidetop-bg.jpg'), alt: 'Daycare environment', category: 'classroom', aspectRatio: 16 / 9 },
   ];
 
   const filteredImages = selectedCategory === 'all'
     ? galleryImages
     : galleryImages.filter(img => img.category === selectedCategory);
 
-  const videoItems = [
-    {
-      url: getImageUrl('/videos/friendship-daycare.mp4'),
-      title: t('galleryPage.video.title'),
-      description: t('galleryPage.video.description'),
+  const goToSlide = useCallback((index: number, animate = true) => {
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    const n = filteredImages.length;
+    if (!viewport || !track || n === 0) return;
+    const safeIndex = ((index % n) + n) % n;
+    slideWidthRef.current = viewport.offsetWidth;
+    const x = -safeIndex * slideWidthRef.current;
+    if (tweenRef.current) tweenRef.current.kill();
+    if (animate) {
+      tweenRef.current = gsap.to(track, {
+        x,
+        duration: 0.5,
+        ease: 'power2.out',
+        onComplete: () => { tweenRef.current = null; },
+      });
+    } else {
+      gsap.set(track, { x });
     }
-  ];
+    setCarouselSelectedIndex(safeIndex);
+  }, [filteredImages.length]);
+
+  // Reset to first slide when category changes
+  useEffect(() => {
+    setCarouselSelectedIndex(0);
+    setLoadedImages({});
+    const track = trackRef.current;
+    if (track) gsap.set(track, { x: 0 });
+  }, [selectedCategory, filteredImages.length]);
+
+  // Measure viewport and update slide width + track position on resize + initial position
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
+    // Set initial position
+    slideWidthRef.current = viewport.offsetWidth;
+    gsap.set(track, { x: 0 });
+    const ro = new ResizeObserver(() => {
+      slideWidthRef.current = viewport.offsetWidth;
+      const idx = indexRef.current;
+      gsap.set(track, { x: -idx * slideWidthRef.current });
+    });
+    ro.observe(viewport);
+    return () => ro.disconnect();
+  }, [filteredImages.length]);
+
+  // Autoplay: advance every 6s when not hovered/focused
+  useEffect(() => {
+    if (filteredImages.length <= 1 || isCarouselHoveredOrFocused) return;
+    const id = setInterval(() => {
+      goToSlide(indexRef.current + 1);
+    }, 6000);
+    return () => clearInterval(id);
+  }, [filteredImages.length, isCarouselHoveredOrFocused, goToSlide]);
+
+  // Pointer drag + snap (GSAP Option B: manual drag)
+  const onPointerDown = useCallback((e: React.PointerEvent) => {
+    if (filteredImages.length <= 1) return;
+    const track = trackRef.current;
+    const viewport = viewportRef.current;
+    if (!track || !viewport) return;
+    const currentX = gsap.getProperty(track, 'x');
+    dragRef.current = { isDragging: true, startX: e.clientX, startTrackX: (currentX as number) ?? 0 };
+    (viewport as HTMLElement).setPointerCapture?.(e.pointerId);
+  }, [filteredImages.length]);
+
+  useEffect(() => {
+    if (filteredImages.length <= 1) return;
+    const track = trackRef.current;
+    const viewport = viewportRef.current;
+    if (!track || !viewport) return;
+    const n = filteredImages.length;
+
+    const onMove = (e: PointerEvent) => {
+      if (!dragRef.current.isDragging) return;
+      const sw = slideWidthRef.current;
+      const minX = -(n - 1) * sw;
+      const maxX = 0;
+      const dx = e.clientX - dragRef.current.startX;
+      let x = dragRef.current.startTrackX + dx;
+      x = Math.max(minX, Math.min(maxX, x));
+      gsap.set(track, { x });
+    };
+    const onUp = (e: PointerEvent) => {
+      if (!dragRef.current.isDragging) return;
+      const moved = Math.abs((gsap.getProperty(track, 'x') as number) - dragRef.current.startTrackX) > 5;
+      dragRef.current.isDragging = false;
+      const viewport = viewportRef.current;
+      if (viewport) (viewport as HTMLElement).releasePointerCapture?.(e.pointerId);
+      const currentX = gsap.getProperty(track, 'x') as number;
+      const sw = slideWidthRef.current;
+      const nearest = Math.round(-currentX / sw);
+      const idx = Math.max(0, Math.min(n - 1, nearest));
+      if (moved) {
+        justDraggedRef.current = true;
+        setTimeout(() => { justDraggedRef.current = false; }, 100);
+      }
+      goToSlide(idx);
+    };
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    return () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+    };
+  }, [filteredImages.length, goToSlide]);
 
   const handleImageClick = (index: number) => {
+    if (justDraggedRef.current) return;
     setSelectedImage(index);
   };
+
+  // GSAP Option A: entrance when gallery section enters view + slide transition on index change
+  useGSAP(
+    () => {
+      const section = gallerySectionRef.current;
+      if (!section) return;
+      const title = section.querySelector('.gallery-section-title');
+      const carouselWrap = section.querySelector('.gallery-carousel-wrap');
+      const dotsWrap = section.querySelector('.gallery-carousel-dots');
+      const els = [title, carouselWrap, dotsWrap].filter(Boolean) as HTMLElement[];
+      gsap.fromTo(
+        els,
+        { y: 36, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 82%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    },
+    { scope: gallerySectionRef }
+  );
+
+  // Slide transition: subtle scale/opacity when active slide changes (skip on mount)
+  const prevSlideIndexRef = useRef(carouselSelectedIndex);
+  useEffect(() => {
+    if (prevSlideIndexRef.current === carouselSelectedIndex) return;
+    const container = carouselContainerRef.current;
+    if (!container) return;
+    const slides = container.querySelectorAll<HTMLElement>('.gallery-carousel-slide');
+    if (slides.length === 0) return;
+    const activeIndex = carouselSelectedIndex % slides.length;
+    gsap.to(slides, { scale: 0.98, opacity: 0.88, duration: 0.35, ease: 'power2.out' });
+    gsap.to(slides[activeIndex], { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' });
+    prevSlideIndexRef.current = carouselSelectedIndex;
+  }, [carouselSelectedIndex]);
 
   const closeModal = () => {
     setSelectedImage(null);
@@ -130,6 +284,7 @@ export function GalleryPageClient() {
 
         {/* Gallery Section */}
         <motion.section
+          ref={gallerySectionRef}
           className="py-20 bg-card"
           initial="hidden"
           whileInView="visible"
@@ -137,7 +292,7 @@ export function GalleryPageClient() {
           variants={fadeIn}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center space-y-4 mb-12">
+            <div className="gallery-section-title text-center space-y-4 mb-12">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
                 {t('galleryPage.gallery.title')}
               </h2>
@@ -162,56 +317,111 @@ export function GalleryPageClient() {
               ))}
             </div>
 
-            {/* Image Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {filteredImages.map((image, index) => (
-                <motion.div
-                  key={image.id}
-                  className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl border-2 border-border/50 hover:border-primary/40 transition-all duration-500"
-                  onClick={() => handleImageClick(index)}
-                  whileHover={{ scale: 1.03, y: -4 }}
-                  transition={{ duration: 0.3 }}
+            {/* Gallery Carousel or Empty State */}
+              <div
+                ref={carouselContainerRef}
+                className="gallery-carousel-wrap relative w-full max-w-[950px] mx-auto"
+                onMouseEnter={() => setIsCarouselHoveredOrFocused(true)}
+                onMouseLeave={() => setIsCarouselHoveredOrFocused(false)}
+                onFocusCapture={() => setIsCarouselHoveredOrFocused(true)}
+                onBlurCapture={(e) => {
+                  if (!carouselContainerRef.current?.contains(e.relatedTarget as Node)) {
+                    setIsCarouselHoveredOrFocused(false);
+                  }
+                }}
+              >
+                <div
+                  ref={viewportRef}
+                  className="overflow-hidden w-full touch-pan-y select-none cursor-grab active:cursor-grabbing"
+                  style={{ touchAction: 'pan-y pinch-zoom' }}
+                  onPointerDown={onPointerDown}
+                  onKeyDown={(e) => {
+                    if (filteredImages.length <= 1) return;
+                    if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(carouselSelectedIndex - 1); }
+                    if (e.key === 'ArrowRight') { e.preventDefault(); goToSlide(carouselSelectedIndex + 1); }
+                  }}
+                  tabIndex={0}
+                  role="region"
+                  aria-roledescription="carousel"
+                  aria-label={t('galleryPage.gallery.title')}
                 >
-                  <div className="relative h-72 lg:h-80 w-full">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 group-hover:from-black/80 transition-all duration-500" />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
+                  <div
+                    ref={trackRef}
+                    className="flex flex-nowrap will-change-transform"
+                    style={{ width: `${filteredImages.length * 100}%` }}
+                  >
+                    {filteredImages.map((image, index) => (
+                      <div
+                        key={image.id}
+                        className="gallery-carousel-slide flex-shrink-0 w-full px-0"
+                        style={{ width: `${100 / filteredImages.length}%`, minWidth: `${100 / filteredImages.length}%` }}
+                      >
+                        <div
+                          className="relative group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl border-2 border-border/50 hover:border-primary/40 transition-all duration-500 w-full"
+                          style={{ aspectRatio: image.aspectRatio ?? 4 / 3 }}
+                          role="button"
+                          tabIndex={0}
+                          onClick={() => handleImageClick(index)}
+                          onKeyDown={(e) => e.key === 'Enter' && handleImageClick(index)}
+                          aria-label={image.alt}
+                        >
+                          {!loadedImages[index] && (
+                            <Skeleton className="absolute inset-0 w-full h-full" />
+                          )}
+                          <Image
+                            src={image.src}
+                            alt={image.alt}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 950px"
+                            className="object-contain"
+                            onLoad={() => handleImageLoaded(index)}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 group-hover:from-black/80 transition-all duration-500" />
+                          <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p className="text-white font-semibold text-lg drop-shadow-lg">{image.alt}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <p className="text-white font-semibold text-lg drop-shadow-lg">{image.alt}</p>
-                  </div>
-                </motion.div>
-              ))}
+                </div>
+                {filteredImages.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => goToSlide(carouselSelectedIndex - 1)}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 z-10 md:left-4 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors"
+                      aria-label="Previous slide"
+                    >
+                      <ChevronLeftIcon className="h-6 w-6" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => goToSlide(carouselSelectedIndex + 1)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 z-10 md:right-4 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors"
+                      aria-label="Next slide"
+                    >
+                      <ChevronRightIcon className="h-6 w-6" />
+                    </button>
+                    <div className="gallery-carousel-dots flex justify-center gap-2 mt-4">
+                      {filteredImages.map((_, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          className={`h-3 w-3 rounded-full transition-all duration-200 ${
+                            index === carouselSelectedIndex
+                              ? 'bg-primary scale-110'
+                              : 'bg-muted-foreground/40 hover:bg-muted-foreground/60'
+                          }`}
+                          onClick={() => goToSlide(index)}
+                          aria-label={`Go to slide ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-        </motion.section>
-
-        {/* Video Section */}
-        <motion.section
-          className="py-20 bg-muted/30"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeIn}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center space-y-4 mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                {t('galleryPage.videoSection.title')}
-              </h2>
-              <p className="text-lg text-muted-foreground w-full max-w-none">
-                {t('galleryPage.videoSection.subtitle')}
-              </p>
-            </div>
-
-            <VideoPlayer videos={videoItems} />
-          </div>
         </motion.section>
 
         {/* CTA Section */}

@@ -80,7 +80,7 @@ async function main() {
     
     // Known images from our analysis
     const knownImages = [
-        "/images/friendship-corner-daycare-logo.png",
+        "/images/daycare-logo.png",
         "/images/Playground.jpg",
         "/images/Circle-Time-Area.jpg",
         "/images/Sensorial-Shelf.jpg",
@@ -130,7 +130,7 @@ async function main() {
         console.log("\n🎉 Images are now available for use in your app!");
         console.log("💡 You can reference them in your components like:");
         console.log("   /images/filename.jpg");
-        console.log("   /images/friendship-corner-daycare-logo.png");
+        console.log("   /images/daycare-logo.png");
         console.log("   etc.");
     }
 }

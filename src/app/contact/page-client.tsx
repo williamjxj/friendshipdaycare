@@ -154,7 +154,7 @@ export function ContactPageClient() {
                   <div className="flex justify-start mb-6">
                     <div className="relative w-48 h-32 md:w-56 md:h-36 transition-transform duration-500 hover:scale-105">
                       <Image
-                        src="/friendship-corner-daycare-logo.png"
+                        src="/daycare-logo.png"
                         alt="Friendship Corner Daycare Logo"
                         fill
                         sizes="(max-width: 768px) 192px, 224px"
