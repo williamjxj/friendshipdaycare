@@ -115,6 +115,18 @@ export function Footer() {
                   {t('footer.quickLinks.journal')}
                 </Link>
               </li>
+              <li>
+                <Link href="/community/montessori" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  {t('footer.quickLinks.montessori')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/community/ece" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  {t('footer.quickLinks.bcEarlyLearning')}
+                </Link>
+              </li>
             </ul>
           </div>
 

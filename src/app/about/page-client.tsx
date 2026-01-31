@@ -240,13 +240,15 @@ export function AboutPageClient() {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              <motion.div variants={slideUp} className="flex items-center gap-6 rounded-2xl bg-card p-8 border border-border/60 shadow-lg">
-                <div className="text-4xl font-bold text-primary shrink-0">
-                  {t('aboutPage.team.fullTimeCount')}+{t('aboutPage.team.partTimeCount')}
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Full-time and part-time teachers
-                </p>
+              <motion.div variants={slideUp} className="flex flex-col justify-center gap-4 rounded-2xl bg-card p-8 border border-border/60 shadow-lg h-full">
+                {((messages.aboutPage as any)?.team?.highlights || []).map((highlight: string, i: number) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      {i === 2 ? '🎓' : '👩‍🏫'}
+                    </div>
+                    <span className="font-medium text-foreground">{highlight}</span>
+                  </div>
+                ))}
               </motion.div>
               <motion.div variants={slideUp} className="space-y-4 rounded-2xl bg-card p-8 border border-border/60 shadow-lg">
                 <p className="text-muted-foreground leading-relaxed">

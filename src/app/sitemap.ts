@@ -54,6 +54,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.6
     },
+    {
+      url: `${baseUrl}/community/montessori`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6
+    },
+    {
+      url: `${baseUrl}/community/ece`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6
+    },
     // NOTE:
     // We intentionally do not include `/community/journal/[id]` entries here yet.
     // Those pages are currently driven by in-code sample content and may change structure.

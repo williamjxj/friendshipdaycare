@@ -9,6 +9,8 @@
     "gallery": "Gallery",
     "todaysStory": "Story",
     "journal": "Journal",
+    "montessori": "Montessori Education",
+    "bcEarlyLearning": "BC ECE",
     "contact": "Contact",
     "community": "Community"
   },
@@ -85,7 +87,9 @@
       "about": "About Us",
       "enrollment": "Enrollment",
       "todaysStory": "Today's Story",
-      "journal": "Journal"
+      "journal": "Journal",
+      "montessori": "Montessori Education",
+      "bcEarlyLearning": "BC ECE (Early Childhood Education)"
     },
     "resources": {
       "title": "Resources",
@@ -149,10 +153,18 @@
       "title": "Where Young Minds Flourish",
       "subtitle": "A safe, nurturing Montessori environment where every child discovers their unique superpowers.",
       "slides": [
-        { "tagline": "Nurturing young minds through the Montessori method. We create a warm, safe, and inspiring environment where every child can grow, learn, and flourish." },
-        { "tagline": "Hands-on learning and purposeful play in a prepared environment. Where curiosity leads and every child thrives at their own pace." },
-        { "tagline": "A welcoming space where children build independence, confidence, and kindness. Montessori principles and a caring community in Coquitlam." },
-        { "tagline": "Quality early childhood education since 2008. Safe, licensed care and a nurturing team dedicated to your child's growth and joy." }
+        {
+          "tagline": "Nurturing young minds through the Montessori method. We create a warm, safe, and inspiring environment where every child can grow, learn, and flourish."
+        },
+        {
+          "tagline": "Hands-on learning and purposeful play in a prepared environment. Where curiosity leads and every child thrives at their own pace."
+        },
+        {
+          "tagline": "A welcoming space where children build independence, confidence, and kindness. Montessori principles and a caring community in Coquitlam."
+        },
+        {
+          "tagline": "Quality early childhood education since 2008. Safe, licensed care and a nurturing team dedicated to your child's growth and joy."
+        }
       ],
       "scheduleTour": "Schedule a Tour",
       "viewPrograms": "View Programs"
@@ -324,9 +336,12 @@
     "team": {
       "title": "Our Team",
       "subtitle": "Dedicated educators who nurture every child's potential.",
-      "fullTimeCount": "3",
-      "partTimeCount": "3",
-      "qualifications": "All our teachers hold BC Early Childhood Education (ECE) licenses and Montessori teacher certification. We maintain a 1:8 staff-to-child ratio with experienced, caring educators.",
+      "highlights": [
+        "3 Full-Time Teachers",
+        "3 Part-Time Teachers",
+        "Manager Ingrid Yuan: ECE & Montessori Licensed (15+ Years Exp.)"
+      ],
+      "qualifications": "All our teachers are qualified as Early Childhood Educators (ECE) and hold Montessori Licenses. We maintain a 1:8 staff-to-child ratio with experienced, caring educators.",
       "experience": "Our team brings rich experience in early childhood development, Montessori practice, and creating a safe, stimulating environment where children thrive."
     }
   },
@@ -800,6 +815,115 @@
           ]
         }
       ]
+    },
+    "montessori": {
+      "meta": {
+        "title": "Montessori Education at Friendship Corner",
+        "description": "Learn about Montessori principles, benefits, and how we apply them at our licensed Coquitlam daycare."
+      },
+      "hero": {
+        "title": "Montessori Education",
+        "subtitle": "Child-centered learning that nurtures independence, curiosity, and lifelong skills"
+      },
+      "intro": "Montessori education was developed by Dr. Maria Montessori, an Italian physician who observed how children learn naturally. Rather than traditional teacher-led instruction, the method is built around each child's interests, hands-on materials, and mixed-age classrooms. At Friendship Corner Daycare, we bring these principles to life every day for children from 30 months to school age.",
+      "principles": {
+        "title": "Core Principles",
+        "items": [
+          "Child-centered learning — children choose activities and learn at their own pace",
+          "Hands-on materials — math, language, and sensorial learning through concrete objects",
+          "The absorbent mind — ages 0–6 learn effortlessly from their environment",
+          "Mixed-age classrooms — younger children learn from older peers; older children reinforce by teaching",
+          "Extended work periods — long blocks for deep concentration",
+          "Whole-child development — intellectual, physical, emotional, and social growth together",
+          "Teacher as guide — educators facilitate rather than lecture"
+        ]
+      },
+      "benefits": {
+        "title": "Benefits for Children",
+        "items": [
+          "Independence and self-confidence",
+          "Strong concentration and focus",
+          "Love of learning and curiosity",
+          "Respect for self, others, and the environment",
+          "Practical life and academic readiness for school"
+        ]
+      },
+      "atOurDaycare": {
+        "title": "At Friendship Corner",
+        "body": "We are a Licensed Group Daycare in Coquitlam, BC, serving children from 30 months to school age. Our program blends Montessori principles with BC's early learning framework: prepared environments, choice within structure, and close partnership with families. Children experience practical life, sensorial, language, math, and cultural activities in a warm, inclusive setting."
+      },
+      "furtherReading": {
+        "title": "Further Reading",
+        "links": [
+          {
+            "label": "Montessori Foundation — About Montessori",
+            "url": "https://www.montessori.org/about-montessori/"
+          },
+          {
+            "label": "Montessori.com — What Makes a Montessori Education?",
+            "url": "https://www.montessori.com/montessori-education/"
+          },
+          {
+            "label": "Global Montessori Network — 12 Principles",
+            "url": "https://theglobalmontessorinetwork.org/12-select-principles-of-montessori-education/"
+          }
+        ]
+      },
+      "seeAlso": "See also: BC Early Childhood Education (ECE)"
+    },
+    "bcEarlyLearning": {
+      "meta": {
+        "title": "BC Early Childhood Education (ECE) at Friendship Corner",
+        "description": "Learn about BC's Early Learning Framework, licensing, and how our Coquitlam daycare aligns with provincial standards."
+      },
+      "hero": {
+        "title": "BC Early Childhood Education (ECE)",
+        "subtitle": "British Columbia's Early Learning Framework, and how we put it into practice"
+      },
+      "intro": "British Columbia's Early Learning Framework guides early learning from birth to age 8. It applies to child care, preschools, StrongStart BC programs, and primary classrooms. The framework supports well-being, belonging, exploration, communication, and positive identities — and it shapes how licensed daycares like Friendship Corner deliver care and learning.",
+      "whatItIs": {
+        "title": "What It Is",
+        "body": "The BC Early Learning Framework is a guide for educators, families, and professionals. It encourages dialogue with families about their child's learning, shapes professional development, and creates a shared understanding of the importance of early years. It recognizes families as the first teachers and primary caregivers of their children."
+      },
+      "learningAreas": {
+        "title": "Key Learning Areas",
+        "items": [
+          "Well-being and belonging — feeling safe, valued, and connected",
+          "Exploration and play — engaging with others, materials, and the world",
+          "Communication and literacies — language, expression, and multiple ways of knowing",
+          "Identities, social responsibility, and diversity — respect, inclusion, and community"
+        ]
+      },
+      "licensingQuality": {
+        "title": "Licensing & Quality",
+        "body": "Friendship Corner is a Licensed Group Daycare under BC's child care licensing regulations. Our practices align with the Early Learning Framework: we support play-based learning, family partnership, and the holistic development of each child in a safe, inclusive environment."
+      },
+      "howWeAlign": {
+        "title": "How We Align",
+        "body": "We combine the Early Learning Framework with Montessori education. Our prepared environment, mixed-age groups, and focus on independence and respect support the framework's goals. We work closely with families and maintain high standards for health, safety, and development."
+      },
+      "furtherReading": {
+        "title": "Further Reading",
+        "links": [
+          {
+            "label": "BC Gov — Early Learning Framework",
+            "url": "https://www2.gov.bc.ca/gov/content/education-training/early-learning/teach/early-learning-framework"
+          },
+          {
+            "label": "BC Gov — Early Learning (Overview)",
+            "url": "https://www2.gov.bc.ca/gov/content/education-training/early-learning"
+          },
+          {
+            "label": "BC Gov — Information for Parents and Guardians",
+            "url": "https://www2.gov.bc.ca/gov/content/education-training/early-learning/support"
+          },
+          {
+            "label": "BC Early Learning Framework (PDF)",
+            "url": "https://www2.gov.bc.ca/assets/gov/education/early-learning/teach/earlylearning/early_learning_framework.pdf"
+          }
+        ]
+      },
+      "seeAlso": "See also: Montessori Education"
     },
     "todaysStory": {
       "meta": {

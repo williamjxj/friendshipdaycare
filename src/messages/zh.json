@@ -7,6 +7,8 @@
     "gallery": "图片展示",
     "todaysStory": "今日故事",
     "journal": "月刊",
+    "montessori": "蒙特梭利教育",
+    "bcEarlyLearning": "BC 幼儿教育 (ECE)",
     "contact": "联系我们",
     "community": "社区"
   },
@@ -83,7 +85,9 @@
       "about": "关于我们",
       "enrollment": "报名",
       "todaysStory": "今日故事",
-      "journal": "月刊"
+      "journal": "月刊",
+      "montessori": "蒙特梭利教育",
+      "bcEarlyLearning": "BC 幼儿教育 (ECE)"
     },
     "resources": {
       "title": "资源",
@@ -705,6 +709,27 @@
           ]
         }
       ]
+    },
+    "montessori": {
+      "meta": { "title": "Montessori Education at Friendship Corner", "description": "Learn about Montessori principles, benefits, and how we apply them at our licensed Coquitlam daycare." },
+      "hero": { "title": "Montessori Education", "subtitle": "Child-centered learning that nurtures independence, curiosity, and lifelong skills" },
+      "intro": "Montessori education was developed by Dr. Maria Montessori. At Friendship Corner Daycare, we bring these principles to life for children from 30 months to school age.",
+      "principles": { "title": "Core Principles", "items": ["Child-centered learning", "Hands-on materials", "The absorbent mind (0–6)", "Mixed-age classrooms", "Extended work periods", "Whole-child development", "Teacher as guide"] },
+      "benefits": { "title": "Benefits for Children", "items": ["Independence and self-confidence", "Strong concentration", "Love of learning", "Respect for self and others", "Academic readiness"] },
+      "atOurDaycare": { "title": "At Friendship Corner", "body": "We are a Licensed Group Daycare in Coquitlam, BC, serving children from 30 months to school age. Our program blends Montessori principles with BC's early learning framework." },
+      "furtherReading": { "title": "Further Reading", "links": [{ "label": "Montessori Foundation", "url": "https://www.montessori.org/about-montessori/" }, { "label": "Montessori.com", "url": "https://www.montessori.com/montessori-education/" }] },
+      "seeAlso": "See also: BC Early Childhood Education (ECE)"
+    },
+    "bcEarlyLearning": {
+      "meta": { "title": "BC Early Childhood Education (ECE) at Friendship Corner", "description": "Learn about BC's Early Learning Framework and how our daycare aligns with provincial standards." },
+      "hero": { "title": "BC Early Childhood Education (ECE)", "subtitle": "British Columbia's Early Learning Framework, and how we put it into practice" },
+      "intro": "British Columbia's Early Learning Framework guides early learning from birth to age 8. It shapes how licensed daycares like Friendship Corner deliver care and learning.",
+      "whatItIs": { "title": "What It Is", "body": "The BC Early Learning Framework is a guide for educators, families, and professionals. It recognizes families as the first teachers of their children." },
+      "learningAreas": { "title": "Key Learning Areas", "items": ["Well-being and belonging", "Exploration and play", "Communication and literacies", "Identities, social responsibility, and diversity"] },
+      "licensingQuality": { "title": "Licensing & Quality", "body": "Friendship Corner is a Licensed Group Daycare under BC's child care licensing regulations. Our practices align with the Early Learning Framework." },
+      "howWeAlign": { "title": "How We Align", "body": "We combine the Early Learning Framework with Montessori education. We work closely with families and maintain high standards for health, safety, and development." },
+      "furtherReading": { "title": "Further Reading", "links": [{ "label": "BC Gov — Early Learning Framework", "url": "https://www2.gov.bc.ca/gov/content/education-training/early-learning/teach/early-learning-framework" }, { "label": "BC Gov — Information for Parents", "url": "https://www2.gov.bc.ca/gov/content/education-training/early-learning/support" }] },
+      "seeAlso": "See also: Montessori Education"
     },
     "todaysStory": {
       "meta": {

@@ -15,6 +15,8 @@ import {
   MessageCircle,
   BookMarked,
   Newspaper,
+  GraduationCap,
+  Landmark,
   ChevronDown,
   FileText,
   HelpCircle,
@@ -169,8 +171,8 @@ export function Header() {
       children: [
         { key: 'todays-story', href: '/community/todays-story', icon: BookMarked },
         { key: 'journal', href: '/community/journal', icon: Newspaper },
-        // Note: Other items (blog, faq, policies, pricing, resources, team, testimonials) 
-        // are in (unused) folder and can be accessed directly via URL if needed
+        { key: 'montessori', href: '/community/montessori', icon: GraduationCap },
+        { key: 'ece', href: '/community/ece', icon: Landmark },
       ]
     },
     { key: 'gallery', href: '/gallery', icon: Images },
@@ -191,6 +193,8 @@ export function Header() {
       community: t('navigation.community'),
       'todays-story': t('navigation.todaysStory'),
       journal: t('navigation.journal'),
+      montessori: t('navigation.montessori'),
+      ece: t('navigation.bcEarlyLearning'),
       gallery: t('navigation.gallery'),
       contact: t('navigation.contact'),
     };
