@@ -31,6 +31,11 @@ import { getBreadcrumbs, toBreadcrumbSchemaItems } from '@/lib/breadcrumbs';
 export function EnrollmentPageClient() {
   const { t, messages } = useLanguage();
   const pathname = usePathname();
+  const translationFallback = t('common.translationFallback');
+  const safeT = (key: string, defaultEn: string) => {
+    const v = t(key);
+    return v === translationFallback ? defaultEn : v;
+  };
   const breadcrumbs = getBreadcrumbs(pathname);
 
   useLocalizedMetadata({
@@ -46,28 +51,20 @@ export function EnrollmentPageClient() {
 
   const faqItems = [
     {
-      question: t('enrollmentPage.faq.questions.ageRange') ?? 'What ages do you accept?',
-      answer:
-        t('enrollmentPage.faq.answers.ageRange') ??
-        'We primarily accept children from 30 months to school age. Please contact us if you have specific age questions.',
+      question: safeT('enrollmentPage.faq.questions.ageRange', 'What ages do you accept?'),
+      answer: safeT('enrollmentPage.faq.answers.ageRange', "We primarily accept children from 30 months to school age. Please contact us if you have specific age questions."),
     },
     {
-      question: t('enrollmentPage.faq.questions.hours') ?? 'What are your hours of operation?',
-      answer:
-        t('enrollmentPage.faq.answers.hours') ??
-        'Our typical hours are Monday to Friday, 7:00am–6:00pm to support working families in the Tri-Cities area.',
+      question: safeT('enrollmentPage.faq.questions.hours', 'What are your hours of operation?'),
+      answer: safeT('enrollmentPage.faq.answers.hours', 'Our typical hours are Monday to Friday, 7:00am–6:00pm to support working families in the Tri-Cities area.'),
     },
     {
-      question: t('enrollmentPage.faq.questions.waitlist') ?? 'Is there a waitlist?',
-      answer:
-        t('enrollmentPage.faq.answers.waitlist') ??
-        'Some programs and age groups may have a waitlist. We encourage families to contact us early to discuss availability and next steps.',
+      question: safeT('enrollmentPage.faq.questions.waitlist', 'Is there a waitlist?'),
+      answer: safeT('enrollmentPage.faq.answers.waitlist', 'Some programs and age groups may have a waitlist. We encourage families to contact us early to discuss availability and next steps.'),
     },
     {
-      question: t('enrollmentPage.faq.questions.tours') ?? 'How do I book a tour?',
-      answer:
-        t('enrollmentPage.faq.answers.tours') ??
-        'You can book a tour by using our contact form, calling us directly, or requesting a visit through our enrollment page. We will confirm your time by phone or email.',
+      question: safeT('enrollmentPage.faq.questions.tours', 'How do I book a tour?'),
+      answer: safeT('enrollmentPage.faq.answers.tours', 'You can book a tour by using our contact form, calling us directly, or requesting a visit through our enrollment page. We will confirm your time by phone or email.'),
     },
   ];
 
@@ -81,8 +78,8 @@ export function EnrollmentPageClient() {
         </div>
         {/* Hero Section */}
         <PageHero
-          title={t('enrollmentPage.hero.title')}
-          subtitle={t('enrollmentPage.hero.subtitle')}
+          title={safeT('enrollmentPage.hero.title', 'Montessori Enrollment in Coquitlam')}
+          subtitle={safeT('enrollmentPage.hero.subtitle', 'Steps and requirements to enroll at Friendship Corner Daycare')}
           backgroundSvg={getImageUrl('/imgs/enrollment/enrollment_hero_1.gif')}
           enableScrollTrigger={true}
           hideSubtitle={true}
@@ -102,10 +99,10 @@ export function EnrollmentPageClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-16">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                {t('enrollmentPage.process.title')}
+                {safeT('enrollmentPage.process.title', 'Enrollment Process')}
               </h2>
-              <p className="text-xl text-muted-foreground w-full max-w-none">
-                {t('enrollmentPage.process.subtitle')}
+              <p className="text-xl text-muted-foreground w-full max-w-5xl mx-auto text-balance">
+                {safeT('enrollmentPage.process.subtitle', "Follow these simple steps to begin your child's Montessori journey in Coquitlam.")}
               </p>
             </div>
 
@@ -152,10 +149,10 @@ export function EnrollmentPageClient() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                {t('enrollmentPage.requirements.title')}
+                {safeT('enrollmentPage.requirements.title', 'Enrollment Requirements')}
               </h2>
-              <p className="text-xl text-muted-foreground">
-                {t('enrollmentPage.requirements.subtitle')}
+              <p className="text-xl text-muted-foreground w-full max-w-5xl mx-auto text-balance">
+                {safeT('enrollmentPage.requirements.subtitle', 'Please prepare the following documents for a smooth enrollment process.')}
               </p>
             </div>
 
@@ -175,6 +172,35 @@ export function EnrollmentPageClient() {
           </div>
         </motion.section>
 
+        {/* Fees & Hours */}
+        <motion.section
+          className="py-20 bg-card"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center space-y-4 mb-12">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+                {safeT('enrollmentPage.feesHours.title', 'Fees & Hours')}
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <motion.div variants={slideUp} className="space-y-4 bg-muted/30 p-6 rounded-xl">
+                <h3 className="text-lg font-semibold text-foreground">{safeT('enrollmentPage.feesHours.hours', 'Monday to Friday, 7:00 a.m. to 6:00 p.m.')}</h3>
+                <p className="text-sm text-muted-foreground">{safeT('enrollmentPage.feesHours.closures', 'We are closed on all Statutory Holidays, weekends, and days when the managers choose to close due to unsafe conditions.')}</p>
+              </motion.div>
+              <motion.div variants={slideUp} className="space-y-4 bg-muted/30 p-6 rounded-xl">
+                <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.subsidy', 'Affordable Child Care Benefits available for qualified families.')}</p>
+                <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.registrationFee', 'A non-refundable registration fee applies.')}</p>
+                <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.deposit', "A deposit fee secures your child's space.")}</p>
+                <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.monthlyFees', 'Please inquire by email or phone regarding current monthly fees.')}</p>
+              </motion.div>
+            </div>
+          </div>
+        </motion.section>
+
         {/* Enrollment FAQ */}
         <motion.section
           className="py-20 bg-background"
@@ -183,13 +209,13 @@ export function EnrollmentPageClient() {
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeIn}
         >
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-10">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-                {t('enrollmentPage.faq.title') ?? 'Enrollment FAQ'}
+                {safeT('enrollmentPage.faq.title', 'Enrollment FAQ')}
               </h2>
-              <p className="text-lg text-muted-foreground">
-                {t('enrollmentPage.faq.subtitle') ?? 'Quick answers to the most common enrollment questions from families.'}
+              <p className="text-lg text-muted-foreground w-full max-w-5xl mx-auto text-balance">
+                {safeT('enrollmentPage.faq.subtitle', 'Quick answers to the most common enrollment questions from families.')}
               </p>
             </div>
 
@@ -219,25 +245,25 @@ export function EnrollmentPageClient() {
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeIn}
         >
-          <div className="max-w-4xl mx-auto px-4 text-center space-y-8">
+          <div className="max-w-5xl mx-auto px-4 text-center space-y-8">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
-              {t('enrollmentPage.cta.title')}
+              {safeT('enrollmentPage.cta.title', 'Ready to Apply?')}
             </h2>
-            <p className="text-xl text-primary-foreground/90">
-              {t('enrollmentPage.cta.subtitle')}
+            <p className="text-xl text-primary-foreground/90 w-full max-w-5xl mx-auto text-balance">
+              {safeT('enrollmentPage.cta.subtitle', 'Contact us to begin the enrollment process or schedule a tour of our Coquitlam Montessori daycare.')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary-foreground text-primary rounded-lg font-semibold hover:bg-primary-foreground/90 transition-colors"
               >
-                {t('enrollmentPage.cta.primary')}
+                {safeT('enrollmentPage.cta.primary', 'Contact Us')}
               </Link>
               <a
                 href="tel:6049458504"
                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary-foreground text-primary-foreground rounded-lg font-semibold hover:bg-primary-foreground/10 transition-colors"
               >
-                {t('enrollmentPage.cta.secondary')}
+                {safeT('enrollmentPage.cta.secondary', 'Call 604.945.8504')}
               </a>
             </div>
           </div>

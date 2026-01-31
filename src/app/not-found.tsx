@@ -3,13 +3,13 @@ import Link from 'next/link';
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center space-y-6 max-w-md mx-auto px-4">
+      <div className="text-center space-y-6 max-w-3xl mx-auto px-4">
         <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto">
           <span className="text-primary-foreground font-bold text-2xl">?</span>
         </div>
         <div className="space-y-2">
           <h2 className="text-2xl font-bold text-foreground">Page Not Found</h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-balance">
             Sorry, we couldn&apos;t find the page you&apos;re looking for.
           </p>
         </div>

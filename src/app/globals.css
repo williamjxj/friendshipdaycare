@@ -619,6 +619,7 @@ textarea:focus-visible {
   );
   opacity: 0;
   transition: opacity 0.4s ease;
+  pointer-events: none; /* allow form inputs and links inside the card to receive focus/click */
 }
 
 .card-premium:hover {

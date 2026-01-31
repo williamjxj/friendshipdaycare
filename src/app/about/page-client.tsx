@@ -221,6 +221,58 @@ export function AboutPageClient() {
             </div>
           </div>
         </motion.section>
+
+        {/* Our Team */}
+        <motion.section
+          className="py-20 bg-muted/30"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center space-y-4 mb-12">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+                {t('aboutPage.team.title')}
+              </h2>
+              <p className="text-xl text-muted-foreground w-full max-w-5xl mx-auto text-balance">
+                {t('aboutPage.team.subtitle')}
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              <motion.div variants={slideUp} className="flex items-center gap-6 rounded-2xl bg-card p-8 border border-border/60 shadow-lg">
+                <div className="text-4xl font-bold text-primary shrink-0">
+                  {t('aboutPage.team.fullTimeCount')}+{t('aboutPage.team.partTimeCount')}
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Full-time and part-time teachers
+                </p>
+              </motion.div>
+              <motion.div variants={slideUp} className="space-y-4 rounded-2xl bg-card p-8 border border-border/60 shadow-lg">
+                <p className="text-muted-foreground leading-relaxed">
+                  {t('aboutPage.team.qualifications')}
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  {t('aboutPage.team.experience')}
+                </p>
+              </motion.div>
+            </div>
+            <div className="flex flex-wrap gap-4 justify-center mt-10">
+              <Link
+                href="/programs"
+                className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+              >
+                {t('aboutPage.story.ctaPrograms')}
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
+              >
+                {t('aboutPage.story.ctaVisit')}
+              </Link>
+            </div>
+          </div>
+        </motion.section>
       </main>
     </Suspense>
   );

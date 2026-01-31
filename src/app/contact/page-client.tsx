@@ -5,12 +5,10 @@ import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { PageHero } from '@/components/ui/page-hero';
 import { GoogleMap } from '@/components/ui/GoogleMap';
 import { getImageUrl } from '@/lib/image-utils';
-import Link from 'next/link';
-import Image from 'next/image';
 import { PhoneIcon, MapPinIcon, ClockIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
-import { fadeIn, slideUp } from '@/lib/animations';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { fadeIn } from '@/lib/animations';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { businessProfile } from '@/lib/business-profile';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
@@ -23,9 +21,11 @@ import { getBreadcrumbs, toBreadcrumbSchemaItems } from '@/lib/breadcrumbs';
  * Contact page client component with form and business details.
  */
 export function ContactPageClient() {
-  const { t } = useLanguage();
+  const { t, messages } = useLanguage();
   const pathname = usePathname();
   const breadcrumbs = getBreadcrumbs(pathname);
+
+  const contactFaqItems = (messages.contactPage?.faq?.items ?? []) as Array<{ question: string; answer: string }>;
 
   useLocalizedMetadata({
     title: t('seo.contact.title'),
@@ -137,7 +137,7 @@ export function ContactPageClient() {
           unoptimized={true}
         />
 
-        {/* Contact Information */}
+        {/* 1. Contact Form (primary) */}
         <motion.section
           className="py-20 bg-card"
           initial="hidden"
@@ -145,119 +145,10 @@ export function ContactPageClient() {
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeIn}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Contact Info */}
-              <div className="space-y-8">
-                <div>
-                  {/* Logo Display */}
-                  <div className="flex justify-start mb-6">
-                    <div className="relative w-48 h-32 md:w-56 md:h-36 transition-transform duration-500 hover:scale-105">
-                      <Image
-                        src="/daycare-logo.png"
-                        alt="Friendship Corner Daycare Logo"
-                        fill
-                        sizes="(max-width: 768px) 192px, 224px"
-                        className="object-contain drop-shadow-md"
-                        priority
-                      />
-                    </div>
-                  </div>
-                  <h2 className="text-3xl font-display font-bold text-foreground mb-6">
-                    {t('contactPage.info.title')}
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed mb-8">
-                    {t('contactPage.info.description')}
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  <Card variant="premium" className="flex items-start space-x-6 p-8 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 cursor-pointer border-2 border-transparent hover:border-primary/30 group">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg">
-                      <PhoneIcon className="h-8 w-8 text-primary" />
-                    </div>
-                    <div className="flex-grow">
-                      <CardTitle className="font-bold text-foreground mb-2 text-xl group-hover:text-primary transition-colors">{t('contactPage.cards.phone.title')}</CardTitle>
-                      <p className="text-muted-foreground font-semibold text-lg">{businessProfile.telephone}</p>
-                      <CardDescription className="text-sm text-muted-foreground mt-2 font-medium">{t('contactPage.cards.phone.subtitle')}</CardDescription>
-                    </div>
-                  </Card>
-
-                  <Card variant="premium" className="flex items-start space-x-6 p-8 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 cursor-pointer border-2 border-transparent hover:border-secondary/30 group">
-                    <div className="w-16 h-16 bg-gradient-to-br from-secondary/20 to-secondary/10 rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg">
-                      <MapPinIcon className="h-8 w-8 text-secondary" />
-                    </div>
-                    <div className="flex-grow">
-                      <CardTitle className="font-bold text-foreground mb-2 text-xl group-hover:text-secondary transition-colors">{t('contactPage.cards.location.title')}</CardTitle>
-                      <p className="text-muted-foreground font-semibold text-lg">{businessProfile.address.streetAddress}</p>
-                      <p className="text-muted-foreground font-semibold text-lg">{businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode} {businessProfile.address.addressCountry}</p>
-                      <CardDescription className="text-sm text-muted-foreground mt-2 font-medium">{t('contactPage.cards.location.subtitle')}</CardDescription>
-                    </div>
-                  </Card>
-
-                  <Card variant="premium" className="flex items-start space-x-6 p-8 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 cursor-pointer border-2 border-transparent hover:border-accent/30 group">
-                    <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-accent/10 rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg">
-                      <ClockIcon className="h-8 w-8 text-accent" />
-                    </div>
-                    <div className="flex-grow">
-                      <CardTitle className="font-bold text-foreground mb-2 text-xl group-hover:text-accent transition-colors">{t('contactPage.cards.hours.title')}</CardTitle>
-                      <p className="text-muted-foreground font-semibold text-lg">{t('contactPage.cards.hours.weekdays')}</p>
-                      <p className="text-muted-foreground font-semibold text-lg">{t('contactPage.cards.hours.hours')}</p>
-                      <CardDescription className="text-sm text-muted-foreground mt-2 font-medium">{t('contactPage.cards.hours.subtitle')}</CardDescription>
-                    </div>
-                  </Card>
-
-                  <Card variant="premium" className="flex items-start space-x-6 p-8 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 cursor-pointer border-2 border-transparent hover:border-primary/30 group">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg">
-                      <EnvelopeIcon className="h-8 w-8 text-primary" />
-                    </div>
-                    <div className="flex-grow">
-                      <CardTitle className="font-bold text-foreground mb-2 text-xl group-hover:text-primary transition-colors">{t('contactPage.cards.email.title')}</CardTitle>
-                      <p className="text-muted-foreground font-semibold text-lg">{businessProfile.email}</p>
-                      <CardDescription className="text-sm text-muted-foreground mt-2 font-medium">{t('contactPage.cards.email.subtitle')}</CardDescription>
-                    </div>
-                  </Card>
-                </div>
-
-                {/* Quick Actions */}
-                <Card variant="premium" className="bg-gradient-to-br from-muted/50 to-muted/30 p-8 border-2 border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-xl">
-                  <CardTitle className="font-bold text-foreground mb-6 text-2xl">{t('contactPage.quickActions.title')}</CardTitle>
-                  <div className="space-y-5">
-                    <a
-                      href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
-                      className="flex items-center space-x-4 text-primary hover:text-primary/80 transition-all duration-300 font-bold group/link hover:translate-x-2"
-                    >
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center group-hover/link:scale-110 group-hover/link:rotate-3 transition-transform duration-300 shadow-md">
-                        <PhoneIcon className="h-6 w-6" />
-                      </div>
-                      <span className="font-semibold text-lg">{t('contactPage.quickActions.call')}</span>
-                    </a>
-                    <a
-                      href={`mailto:${businessProfile.email}`}
-                      className="flex items-center space-x-4 text-secondary hover:text-secondary/80 transition-all duration-300 font-bold group/link hover:translate-x-2"
-                    >
-                      <div className="w-12 h-12 bg-gradient-to-br from-secondary/20 to-secondary/10 rounded-xl flex items-center justify-center group-hover/link:scale-110 group-hover/link:rotate-3 transition-transform duration-300 shadow-md">
-                        <EnvelopeIcon className="h-6 w-6" />
-                      </div>
-                      <span className="font-semibold text-lg">{t('contactPage.quickActions.email')}</span>
-                    </a>
-                    <Link
-                      href="/programs"
-                      className="flex items-center space-x-4 text-accent hover:text-accent/80 transition-all duration-300 font-bold group/link hover:translate-x-2"
-                    >
-                      <div className="w-12 h-12 bg-gradient-to-br from-accent/20 to-accent/10 rounded-xl flex items-center justify-center group-hover/link:scale-110 group-hover/link:rotate-3 transition-transform duration-300 shadow-md">
-                        <span className="text-xl">📚</span>
-                      </div>
-                      <span className="font-semibold text-lg">{t('contactPage.quickActions.programs')}</span>
-                    </Link>
-                  </div>
-                </Card>
-              </div>
-
-              {/* Contact Form */}
-              <Card variant="premium" className="bg-gradient-to-br from-card to-muted/30 p-6 sm:p-10 scroll-mt-20 border-2 border-border/50 shadow-xl hover:shadow-2xl transition-all duration-500">
+          <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
+            <Card variant="premium" className="w-full min-w-0 bg-gradient-to-br from-card to-muted/30 p-6 sm:p-10 scroll-mt-20 border-2 border-border/50 shadow-xl hover:shadow-2xl transition-all duration-500">
                 <CardHeader className="p-0 mb-8">
-                  <CardTitle className="text-3xl font-display font-bold text-foreground bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  <CardTitle className="text-3xl font-display font-bold text-foreground bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent break-words">
                     {t('contactPage.form.title')}
                   </CardTitle>
                 </CardHeader>
@@ -391,12 +282,115 @@ export function ContactPageClient() {
                     {isSubmitting ? t('contactPage.form.submitting') : t('contactPage.form.submit')}
                   </button>
                 </form>
+            </Card>
+          </div>
+        </motion.section>
+
+        {/* 2. Get in Touch (phone, location, hours, email in one block) */}
+        <motion.section
+          className="py-20 bg-muted/30"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">
+              {t('contactPage.info.title')}
+            </h2>
+            <p className="text-muted-foreground text-center mb-10 max-w-5xl mx-auto text-balance">
+              {t('contactPage.info.description')}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card variant="premium" className="flex flex-col items-start p-6 border-2 border-transparent hover:border-primary/30 transition-all duration-500 hover:shadow-xl group">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <PhoneIcon className="h-7 w-7 text-primary" />
+                </div>
+                <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.phone.title')}</CardTitle>
+                <a href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`} className="text-muted-foreground font-semibold hover:text-primary transition-colors">
+                  {businessProfile.telephone}
+                </a>
+                <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.phone.subtitle')}</CardDescription>
               </Card>
+              <Card variant="premium" className="flex flex-col items-start p-6 border-2 border-transparent hover:border-secondary/30 transition-all duration-500 hover:shadow-xl group">
+                <div className="w-14 h-14 bg-gradient-to-br from-secondary/20 to-secondary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <MapPinIcon className="h-7 w-7 text-secondary" />
+                </div>
+                <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.location.title')}</CardTitle>
+                <p className="text-muted-foreground font-semibold">{businessProfile.address.streetAddress}</p>
+                <p className="text-muted-foreground font-semibold text-sm">{businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode}</p>
+                <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.location.subtitle')}</CardDescription>
+              </Card>
+              <Card variant="premium" className="flex flex-col items-start p-6 border-2 border-transparent hover:border-accent/30 transition-all duration-500 hover:shadow-xl group">
+                <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <ClockIcon className="h-7 w-7 text-accent" />
+                </div>
+                <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.hours.title')}</CardTitle>
+                <p className="text-muted-foreground font-semibold">{t('contactPage.cards.hours.weekdays')}</p>
+                <p className="text-muted-foreground font-semibold">{t('contactPage.cards.hours.hours')}</p>
+                <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.hours.subtitle')}</CardDescription>
+              </Card>
+              <Card variant="premium" className="flex flex-col items-start p-6 border-2 border-transparent hover:border-primary/30 transition-all duration-500 hover:shadow-xl group">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <EnvelopeIcon className="h-7 w-7 text-primary" />
+                </div>
+                <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.email.title')}</CardTitle>
+                <a href={`mailto:${businessProfile.email}`} className="text-muted-foreground font-semibold hover:text-primary transition-colors break-all">
+                  {businessProfile.email}
+                </a>
+                <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.email.subtitle')}</CardDescription>
+              </Card>
+            </div>
+            <div className="flex flex-wrap gap-4 justify-center mt-8">
+              <a
+                href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors min-h-[44px]"
+              >
+                <PhoneIcon className="h-5 w-5" />
+                {t('contactPage.quickActions.call')}
+              </a>
+              <a
+                href={`mailto:${businessProfile.email}`}
+                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors min-h-[44px]"
+              >
+                <EnvelopeIcon className="h-5 w-5" />
+                {t('contactPage.quickActions.email')}
+              </a>
             </div>
           </div>
         </motion.section>
 
-        {/* Map Section */}
+        {/* 3. Contact FAQ */}
+        <motion.section
+          className="py-20 bg-card"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+        >
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">
+              {t('contactPage.faq.title')}
+            </h2>
+            <div className="space-y-4">
+              {contactFaqItems.map((item, idx) => (
+                <div
+                  key={`${idx}-${item.question}`}
+                  className="rounded-xl border border-border bg-muted/30 p-5 shadow-sm"
+                >
+                  <h3 className="font-semibold text-foreground text-lg mb-2">
+                    {item.question}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
+                    {item.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* 4. Our Location (map) */}
         <motion.section
           className="py-20 bg-muted/30"
           initial="hidden"

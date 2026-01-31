@@ -318,6 +318,14 @@
         "two": "자기 주도 활동을 통해 집중력, 독립성, 배움의 즐거움을 키웁니다.",
         "three": "중요한 유아기 발달을 전인적으로 지원하는 교육 방식입니다."
       }
+    },
+    "team": {
+      "title": "Our Team",
+      "subtitle": "Dedicated educators who nurture every child's potential.",
+      "fullTimeCount": "3",
+      "partTimeCount": "3",
+      "qualifications": "All our teachers hold BC Early Childhood Education (ECE) licenses and Montessori teacher certification. We maintain a 1:8 staff-to-child ratio with experienced, caring educators.",
+      "experience": "Our team brings rich experience in early childhood development, Montessori practice, and creating a safe, stimulating environment where children thrive."
     }
   },
   "programsPage": {
@@ -328,6 +336,21 @@
     "overview": {
       "title": "코퀴틀람 몬테소리 프로그램",
       "subtitle": "연령에 맞춘 프로그램으로 아이들의 성장을 돕습니다."
+    },
+    "program": {
+      "title": "Our Program",
+      "ageRange": "30 months to kindergarten",
+      "description": "Friendship Corner Daycare offers a developmentally appropriate program for 30 months to kindergarten. A Montessori approach provides daily circle time, followed by hands-on learning choices in practical life, sensory skills, math, language, nature, and geography. In addition, the children are exposed to cooking, dancing, music, Mandarin and Japanese.",
+      "dailyFlow": "Our regular day includes: free play; Montessori circle and hands-on learning; healthy snacks; time on the safe, new outdoor playground or gym; lunch (brought from home); storytime; art time; rest time.",
+      "ctaRegistration": "Download our Registration Form"
+    },
+    "eceBenefits": {
+      "title": "BC Early Childhood Education Benefits",
+      "description": "Our educators hold BC Early Childhood Education (ECE) licenses, ensuring developmentally appropriate practice, alignment with provincial standards, and a focus on the whole child."
+    },
+    "montessoriBenefits": {
+      "title": "Montessori Benefits",
+      "description": "The Montessori approach fosters independence, hands-on learning, and self-paced discovery. Mixed-age groupings allow younger children to learn from older peers and older children to reinforce skills."
     },
     "programDetail": {
       "keyFeatures": "주요 특징"
@@ -453,8 +476,17 @@
         "예방접종 기록",
         "비상 연락처 정보",
         "의료 및 알레르기 정보",
-        "월 등록금 보증금"
+        "월 이용료 보증금"
       ]
+    },
+    "feesHours": {
+      "title": "Fees & Hours",
+      "hours": "Monday to Friday, 7:00 a.m. to 6:00 p.m.",
+      "closures": "We are closed on all Statutory Holidays, weekends, and days when the managers choose to close due to unsafe conditions (e.g. snow, ice, blackout) in compliance with CCAL Act 7(1)(b).",
+      "subsidy": "Affordable Child Care Benefits available for qualified families.",
+      "registrationFee": "A non-refundable registration fee applies.",
+      "deposit": "A deposit fee secures your child's space.",
+      "monthlyFees": "Please inquire by email or phone regarding current monthly fees."
     },
     "cta": {
       "title": "등록할 준비가 되셨나요?",
@@ -573,6 +605,19 @@
     "map": {
       "title": "찾아오시는 길",
       "subtitle": "코퀴틀람 스테이션 근처로 대중교통 접근이 좋습니다"
+    },
+    "faq": {
+      "title": "Contact FAQ",
+      "items": [
+        {
+          "question": "How can I reach you?",
+          "answer": "You can reach us by phone during business hours (Mon–Fri 7:00 AM–6:00 PM), by email anytime, or by filling out the contact form above. We aim to respond within 24 hours."
+        },
+        {
+          "question": "How do I book a tour?",
+          "answer": "Use the contact form above, call us at 604.945.8504, or email friendship.care@live.ca. We'll confirm your tour time by phone or email."
+        }
+      ]
     }
   },
   "community": {

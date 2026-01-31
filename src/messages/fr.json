@@ -318,6 +318,14 @@
         "two": "Les enfants développent l'indépendance, la concentration et l'amour d'apprendre.",
         "three": "Cette méthode soutient le développement cognitif, social et émotionnel."
       }
+    },
+    "team": {
+      "title": "Notre Équipe",
+      "subtitle": "Des éducateurs dévoués qui nourrissent le potentiel de chaque enfant.",
+      "fullTimeCount": "3",
+      "partTimeCount": "3",
+      "qualifications": "Toutes nos enseignantes détiennent une licence ECE de la Colombie-Britannique et une certification Montessori. Nous maintenons un ratio 1:8 avec des éducateurs expérimentés.",
+      "experience": "Notre équipe apporte une riche expérience en développement de la petite enfance et en pratique Montessori."
     }
   },
   "programsPage": {
@@ -328,6 +336,21 @@
     "overview": {
       "title": "Programmes Montessori à Coquitlam",
       "subtitle": "Des programmes adaptés à l'âge qui soutiennent la croissance de chaque enfant."
+    },
+    "program": {
+      "title": "Notre Programme",
+      "ageRange": "30 mois à la maternelle",
+      "description": "Friendship Corner Daycare offre un programme adapté au développement de 30 mois à la maternelle. Approche Montessori avec cercle quotidien et apprentissage pratique (vie pratique, sensoriel, mathématiques, langage, nature, géographie). Les enfants découvrent aussi la cuisine, la danse, la musique, le mandarin et le japonais.",
+      "dailyFlow": "Notre journée inclut : jeu libre ; cercle Montessori et apprentissage pratique ; collations ; temps au terrain de jeux ou au gymnase ; déjeuner (apporté) ; contes ; arts ; repos.",
+      "ctaRegistration": "Télécharger le formulaire d'inscription"
+    },
+    "eceBenefits": {
+      "title": "Avantages de l'éducation à la petite enfance (ECE) en C.-B.",
+      "description": "Nos éducatrices détiennent une licence ECE de la C.-B., garantissant une pratique adaptée au développement et conforme aux normes provinciales."
+    },
+    "montessoriBenefits": {
+      "title": "Avantages Montessori",
+      "description": "L'approche Montessori favorise l'indépendance, l'apprentissage pratique et la découverte à son rythme. Les groupes d'âges mixtes permettent l'apprentissage entre pairs."
     },
     "programDetail": {
       "keyFeatures": "Points Clés"
@@ -456,6 +479,15 @@
         "Dépôt des frais mensuels"
       ]
     },
+    "feesHours": {
+      "title": "Tarifs et Heures",
+      "hours": "Lundi au vendredi, 7 h à 18 h",
+      "closures": "Fermé les jours fériés, week-ends et jours de fermeture pour conditions dangereuses (neige, glace, blackout) conformément à la Loi CCAL 7(1)(b).",
+      "subsidy": "Prestations de garde abordable pour les familles admissibles.",
+      "registrationFee": "Frais d'inscription non remboursables.",
+      "deposit": "Un dépôt garantit la place de votre enfant.",
+      "monthlyFees": "Veuillez nous contacter par courriel ou téléphone pour les tarifs mensuels."
+    },
     "cta": {
       "title": "Prêt à vous inscrire?",
       "subtitle": "Contactez-nous pour commencer ou planifier une visite.",
@@ -573,6 +605,19 @@
     "map": {
       "title": "Visitez Notre Emplacement",
       "subtitle": "Près de la station de Coquitlam avec accès aux transports en commun"
+    },
+    "faq": {
+      "title": "FAQ Contact",
+      "items": [
+        {
+          "question": "Comment vous joindre?",
+          "answer": "Par téléphone en heures d'ouverture (lun–ven 7 h–18 h), par courriel à tout moment, ou via le formulaire de contact. Nous répondons sous 24 h."
+        },
+        {
+          "question": "Comment réserver une visite?",
+          "answer": "Utilisez le formulaire de contact, appelez le 604.945.8504 ou écrivez à friendship.care@live.ca. Nous confirmerons votre visite par téléphone ou courriel."
+        }
+      ]
     }
   },
   "community": {
