@@ -11,6 +11,7 @@
     "journal": "Journal",
     "montessori": "Montessori Education",
     "bcEarlyLearning": "BC ECE",
+    "resources": "Resources",
     "contact": "Contact",
     "community": "Community"
   },
@@ -717,7 +718,7 @@
       "subtitle": "Conveniently located near Coquitlam Station with easy access to public transit"
     },
     "faq": {
-      "title": "Contact FAQ",
+      "title": "Frequently Asked Questions",
       "items": [
         {
           "question": "How can I reach you?",
@@ -726,6 +727,26 @@
         {
           "question": "How do I book a tour?",
           "answer": "Use the contact form above, call us at 604.945.8504, or email friendship.care@live.ca. We'll confirm your tour time by phone or email."
+        },
+        {
+          "question": "What is included in the monthly tuition?",
+          "answer": "Monthly tuition includes all Montessori materials and learning resources, nutritious morning and afternoon snacks, outdoor play time, art supplies, and regular communication with families through our daily reports."
+        },
+        {
+          "question": "Do I need to pay for months my child is absent?",
+          "answer": "Yes, tuition is required for all enrolled months to hold your child's spot, regardless of absences due to vacation, illness, or holidays. This ensures we maintain appropriate staffing ratios and can keep your child's place secured."
+        },
+        {
+          "question": "Is there a waitlist deposit?",
+          "answer": "No, there is no fee to join our waitlist. However, once a spot becomes available and you accept, the $200 registration fee is due within 48 hours to secure your child's enrollment."
+        },
+        {
+          "question": "What is your refund policy?",
+          "answer": "We require 30 days written notice for withdrawal. Registration fees are non-refundable. Tuition paid for the notice period is non-refundable, but your child may continue to attend during this time."
+        },
+        {
+          "question": "Can I switch from part-time to full-time?",
+          "answer": "Yes! Schedule changes are subject to availability. Please provide at least 2 weeks notice for any schedule changes. We'll do our best to accommodate your family's needs."
         }
       ]
     }

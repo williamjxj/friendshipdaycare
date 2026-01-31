@@ -9,6 +9,7 @@
     "journal": "Journal",
     "montessori": "Éducation Montessori",
     "bcEarlyLearning": "BC EPE (Éducation à la petite enfance)",
+    "resources": "Ressources",
     "contact": "Contact",
     "community": "Communauté"
   },
@@ -611,7 +612,7 @@
       "subtitle": "Près de la station de Coquitlam avec accès aux transports en commun"
     },
     "faq": {
-      "title": "FAQ Contact",
+      "title": "Questions Fréquentes",
       "items": [
         {
           "question": "Comment vous joindre?",
@@ -620,7 +621,12 @@
         {
           "question": "Comment réserver une visite?",
           "answer": "Utilisez le formulaire de contact, appelez le 604.945.8504 ou écrivez à friendship.care@live.ca. Nous confirmerons votre visite par téléphone ou courriel."
-        }
+        },
+        { "question": "What is included in the monthly tuition?", "answer": "Monthly tuition includes all Montessori materials and learning resources, nutritious morning and afternoon snacks, outdoor play time, art supplies, and regular communication with families through our daily reports." },
+        { "question": "Do I need to pay for months my child is absent?", "answer": "Yes, tuition is required for all enrolled months to hold your child's spot, regardless of absences due to vacation, illness, or holidays." },
+        { "question": "Is there a waitlist deposit?", "answer": "No, there is no fee to join our waitlist. However, once a spot becomes available and you accept, the $200 registration fee is due within 48 hours to secure your child's enrollment." },
+        { "question": "What is your refund policy?", "answer": "We require 30 days written notice for withdrawal. Registration fees are non-refundable. Tuition paid for the notice period is non-refundable, but your child may continue to attend during this time." },
+        { "question": "Can I switch from part-time to full-time?", "answer": "Yes! Schedule changes are subject to availability. Please provide at least 2 weeks notice for any schedule changes. We'll do our best to accommodate your family's needs." }
       ]
     }
   },

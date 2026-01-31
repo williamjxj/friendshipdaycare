@@ -9,6 +9,7 @@
     "journal": "月刊",
     "montessori": "蒙特梭利教育",
     "bcEarlyLearning": "BC 幼儿教育 (ECE)",
+    "resources": "资源",
     "contact": "联系我们",
     "community": "社区"
   },
@@ -611,7 +612,7 @@
       "subtitle": "靠近高贵林站，公共交通便利"
     },
     "faq": {
-      "title": "联系常见问题",
+      "title": "常见问题",
       "items": [
         {
           "question": "如何联系你们？",
@@ -620,7 +621,12 @@
         {
           "question": "如何预约参观？",
           "answer": "使用上方联系表单、致电 604.945.8504 或发邮件至 friendship.care@live.ca。我们会通过电话或邮件确认参观时间。"
-        }
+        },
+        { "question": "What is included in the monthly tuition?", "answer": "Monthly tuition includes all Montessori materials and learning resources, nutritious morning and afternoon snacks, outdoor play time, art supplies, and regular communication with families through our daily reports." },
+        { "question": "Do I need to pay for months my child is absent?", "answer": "Yes, tuition is required for all enrolled months to hold your child's spot, regardless of absences due to vacation, illness, or holidays." },
+        { "question": "Is there a waitlist deposit?", "answer": "No, there is no fee to join our waitlist. However, once a spot becomes available and you accept, the $200 registration fee is due within 48 hours to secure your child's enrollment." },
+        { "question": "What is your refund policy?", "answer": "We require 30 days written notice for withdrawal. Registration fees are non-refundable. Tuition paid for the notice period is non-refundable, but your child may continue to attend during this time." },
+        { "question": "Can I switch from part-time to full-time?", "answer": "Yes! Schedule changes are subject to availability. Please provide at least 2 weeks notice for any schedule changes. We'll do our best to accommodate your family's needs." }
       ]
     }
   },

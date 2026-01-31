@@ -66,8 +66,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6
     },
-    // NOTE:
-    // We intentionally do not include `/community/journal/[id]` entries here yet.
-    // Those pages are currently driven by in-code sample content and may change structure.
+    {
+      url: `${baseUrl}/resources`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6
+    },
+    {
+      url: `${baseUrl}/resources/faq`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.5
+    },
+    {
+      url: `${baseUrl}/resources/canva`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.4
+    },
+    {
+      url: `${baseUrl}/resources/canva2`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.4
+    },
+    {
+      url: `${baseUrl}/resources/gamma`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.4
+    },
+    {
+      url: `${baseUrl}/resources/slide-deck`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.4
+    }
   ];
 }

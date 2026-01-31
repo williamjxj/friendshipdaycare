@@ -5,7 +5,6 @@ import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { PageHero } from '@/components/ui/page-hero';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getImageUrl } from '@/lib/image-utils';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Calendar, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
@@ -155,13 +154,10 @@ export default function JournalPageClient() {
                                             </CardContent>
 
                                             <CardFooter className="p-6 pt-0 mt-auto">
-                                                <Link
-                                                    href={`/community/journal/${journal.id}`}
-                                                    className="inline-flex items-center justify-center w-full gap-2 bg-muted hover:bg-muted/80 text-foreground px-4 py-3 rounded-lg font-bold text-sm transition-colors group/btn min-h-[44px]"
-                                                >
+                                                <span className="inline-flex items-center justify-center w-full gap-2 bg-muted text-muted-foreground px-4 py-3 rounded-lg font-bold text-sm min-h-[44px] cursor-default">
                                                     {t('community.journal.actions.readFull')}
-                                                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                                                </Link>
+                                                    <ArrowRight className="w-4 h-4" />
+                                                </span>
                                             </CardFooter>
                                         </Card>
                                     </motion.div>

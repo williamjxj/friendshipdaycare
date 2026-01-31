@@ -135,25 +135,31 @@ export function Footer() {
             <h3 className="footer-section-title text-foreground mb-2 sm:mb-6">{t('footer.resources.title')}</h3>
             <ul className="space-y-2 sm:space-y-3">
               <li>
-                <Link href="/canva" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/resources" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  {t('footer.resources.title')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/resources/canva" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.resources.canva1')}
                 </Link>
               </li>
               <li>
-                <Link href="/canva2" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/resources/canva2" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.resources.canva2')}
                 </Link>
               </li>
               <li>
-                <Link href="/gamma" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/resources/gamma" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.resources.gamma')}
                 </Link>
               </li>
               <li>
-                <Link href="/slide-deck" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/resources/slide-deck" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.resources.slideDeck')}
                 </Link>

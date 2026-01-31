@@ -26,21 +26,19 @@ export default function Error({
             We&apos;re sorry, but something unexpected happened. Please try again.
           </p>
         </div>
-        <div className="space-y-3">
+        <div className="flex flex-row flex-wrap items-center justify-center gap-4">
           <button
             onClick={reset}
             className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
           >
             Try again
           </button>
-          <div>
-            <Link
-              href="/"
-              className="text-primary hover:text-primary/80 font-medium"
-            >
-              Go back to home
-            </Link>
-          </div>
+          <Link
+            href="/"
+            className="text-primary hover:text-primary/80 font-medium"
+          >
+            Go back to home
+          </Link>
         </div>
       </div>
     </div>

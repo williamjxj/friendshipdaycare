@@ -94,7 +94,7 @@ export function trackEvent({
  * Usage:
  * import { trackPageView } from '@/components/analytics/GoogleAnalytics';
  * 
- * trackPageView('/pricing');
+ * trackPageView('/contact');
  */
 export function trackPageView(url: string) {
   if (typeof window !== 'undefined' && (window as any).gtag) {

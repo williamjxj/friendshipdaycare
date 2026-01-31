@@ -18,13 +18,7 @@ import {
   GraduationCap,
   Landmark,
   ChevronDown,
-  FileText,
-  HelpCircle,
-  Shield,
-  DollarSign,
   FolderOpen,
-  UserCircle,
-  Star,
   Calendar
 } from 'lucide-react';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
@@ -173,6 +167,7 @@ export function Header() {
         { key: 'journal', href: '/community/journal', icon: Newspaper },
         { key: 'montessori', href: '/community/montessori', icon: GraduationCap },
         { key: 'ece', href: '/community/ece', icon: Landmark },
+        { key: 'resources', href: '/resources', icon: FolderOpen },
       ]
     },
     { key: 'gallery', href: '/gallery', icon: Images },
@@ -195,6 +190,7 @@ export function Header() {
       journal: t('navigation.journal'),
       montessori: t('navigation.montessori'),
       ece: t('navigation.bcEarlyLearning'),
+      resources: t('navigation.resources'),
       gallery: t('navigation.gallery'),
       contact: t('navigation.contact'),
     };

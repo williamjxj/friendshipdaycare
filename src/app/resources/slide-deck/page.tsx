@@ -28,7 +28,7 @@ export default function SlideDeckPage() {
         {/* PDF Embed Section */}
         <section className="py-12 pt-2 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div 
+            <div
               className="w-full h-[calc(100vh-200px)] min-h-[600px] rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700"
             >
               <iframe
@@ -56,4 +56,3 @@ export default function SlideDeckPage() {
     </Suspense>
   );
 }
-
