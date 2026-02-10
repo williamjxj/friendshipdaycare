@@ -4,18 +4,36 @@ import { getOgImagePath } from "@/lib/og-images";
 
 export const SEO_BASE_URL = businessProfile.url;
 export const SEO_SITE_NAME = "Friendship Corner Daycare";
-export const SEO_DEFAULT_TITLE = "Friendship Corner Daycare | Montessori Daycare in Coquitlam, BC";
+export const SEO_DEFAULT_TITLE = "Friendship Corner Montessori Daycare | Coquitlam, BC";
 export const SEO_TITLE_TEMPLATE = "%s | Friendship Corner Daycare";
 export const SEO_DEFAULT_DESCRIPTION =
   "Licensed Montessori daycare in Coquitlam, BC serving Tri-Cities families. Safe, nurturing programs for children 30 months to school age.";
 export const SEO_DEFAULT_KEYWORDS = [
   "Montessori daycare Coquitlam",
   "Coquitlam daycare",
+  "Coquiltam child care",
+  "Coquitlam montessori",
+  "Coquitlam preschool",
+  "Port Coquitlam daycare",
+  "Port Coquiltam child care",
+  "Port Coquitlam montessori",
+  "preschool",
+  "Coquitlam",
+  "Coquitlam Centre",
+  "Coquitlam Station",
+  "Port Coquitlam",
+  "Port Moody",
+  "Mandarin",
+  "Japanese",
+  "music",
+  "Christian daycare",
   "preschool Coquitlam",
   "childcare Coquitlam",
   "Tri-Cities daycare",
   "early learning Coquitlam"
 ];
+
+
 export const SEO_DEFAULT_IMAGE = `${SEO_BASE_URL}/logo.png`;
 
 /**

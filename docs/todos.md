@@ -16,3 +16,9 @@ https://pub-fafb0f1d538f40ebb6fdd21bb5041a1c.r2.dev/collects/notebooklm-slides.p
 - images/playground.jpg
 - toys.jpg
 - circle-time-area.jpg
+
+
+
+### 
+
+- description: Friendship Corner Daycare (Montessori) is a Licensed Group Daycare near Coquitlam Centre for children from 30 months to school age. 
