@@ -25,6 +25,20 @@ const nextConfig: NextConfig = {
       // },
     ],
   },
+  // Fix watchpack errors by ignoring system directories
+  webpack: (config) => {
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: [
+        '**/node_modules',
+        '**/.git',
+        '**/.next',
+        '**/Applications/**',
+        '/Applications/**',
+      ],
+    };
+    return config;
+  },
 };
 
 export default withNextIntl(nextConfig);

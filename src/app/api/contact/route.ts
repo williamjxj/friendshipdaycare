@@ -44,22 +44,14 @@ export async function POST(request: NextRequest) {
 
     const { name, email, phone, childAge, message } = validatedData;
 
-    // Email configuration options
+    // Get from email from environment variable
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'noreply@friendshipdaycare.com';
+    
+    // Email configuration
     const emailConfig = {
-      // Option 1: Resend's default domain (current - no verification needed)
-      resendDefault: {
-        businessFrom: 'Contact Form <onboarding@resend.dev>',
-        customerFrom: 'Friendship Corner Daycare <onboarding@resend.dev>'
-      },
-      // Option 2: Custom domain (requires domain verification in Resend)
-      customDomain: {
-        businessFrom: 'Contact Form <friendship.care@live.ca>',
-        customerFrom: 'Friendship Corner Daycare <friendship.care@live.ca>'
-      }
+      businessFrom: `Friendship Corner Daycare <${fromEmail}>`,
+      customerFrom: `Friendship Corner Daycare <${fromEmail}>`
     };
-
-    // Current configuration - switch between 'resendDefault' and 'customDomain'
-    const currentConfig = emailConfig.resendDefault;
 
     // Create email content
     const emailHtml = `
@@ -106,7 +98,7 @@ Please respond to this inquiry within 24 hours.
 
     // Send email using Resend
     const emailResult = await resend.emails.send({
-      from: currentConfig.businessFrom,
+      from: emailConfig.businessFrom,
       to: ['friendship.care@live.ca'], // Your business email
       replyTo: email, // Allow replying directly to the customer
       subject: `New Contact Form Submission from ${name}`,
@@ -159,8 +151,9 @@ Please respond to this inquiry within 24 hours.
     `;
 
     await resend.emails.send({
-      from: currentConfig.customerFrom,
+      from: emailConfig.customerFrom,
       to: [email],
+      replyTo: 'friendship.care@live.ca', // Customer replies go to your business email
       subject: 'Thank you for contacting Friendship Corner Daycare',
       html: confirmationEmailHtml,
       text: `Hi ${name},
