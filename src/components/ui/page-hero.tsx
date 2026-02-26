@@ -26,6 +26,7 @@ interface PageHeroProps {
   fullScreen?: boolean; // true for landing page, false for other pages
   backgroundPosition?: 'center' | 'top' | 'bottom' | 'left' | 'right' | string; // Image positioning for cropping
   unoptimized?: boolean;
+  topContent?: ReactNode;
 }
 
 export function PageHero({
@@ -43,6 +44,7 @@ export function PageHero({
   hideTitle = false,
   showCurve = true,
   unoptimized = false,
+  topContent,
 }: PageHeroProps & { hideSubtitle?: boolean; hideTitle?: boolean; showCurve?: boolean }) {
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -74,10 +76,10 @@ export function PageHero({
             // Split subtitle into words for word-by-word animation - keep visible initially
             const words = originalText.split(' ').filter(w => w.trim());
 
-            // Clear and rebuild with word spans (preserve spaces)
+            // Clear and rebuild with word spans (preserve spaces outside spans)
             subtitleRef.current.innerHTML = words
-              .map((word, index) => `<span class="hero-subtitle-word inline-block" style="opacity: 1; transform: translateY(0);">${word}${index < words.length - 1 ? ' ' : ''}</span>`)
-              .join('');
+              .map((word) => `<span class="hero-subtitle-word inline-block mr-[0.25em]" style="opacity: 1; transform: translateY(0);">${word}</span>`)
+              .join(' ');
 
             const wordElements = subtitleRef.current.querySelectorAll('.hero-subtitle-word');
             if (wordElements.length > 0) {
@@ -226,30 +228,46 @@ export function PageHero({
       {/* Content Layer - min-w-0 and overflow-hidden prevent mobile overflow */}
       <div
         ref={contentRef}
-        className="relative z-30 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 text-center hero-text min-w-0 w-full overflow-hidden"
+        className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hero-text min-w-0 w-full overflow-hidden h-full flex flex-col justify-center text-center"
       >
-        <div className="space-y-6 min-w-0">
+        {/* Top-positioned Breadcrumbs */}
+        {topContent && (
+          <div className="absolute top-4 sm:top-8 left-4 sm:left-6 lg:left-8 z-40">
+            {topContent}
+          </div>
+        )}
+
+        <div className="space-y-10 md:space-y-16 min-w-0 text-center lg:text-center max-w-7xl mx-auto">
           {!hideTitle && (
             <h1
               ref={titleRef}
-              className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight drop-shadow-lg break-words"
+              className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-display font-bold text-white leading-[1.05] drop-shadow-2xl break-words tracking-tight"
+              style={{ fontFamily: 'var(--font-baloo)' }}
             >
-              {title}
+              <span className="block mb-2">{title}</span>
             </h1>
           )}
+
           {subtitle && !hideSubtitle && (
-            <p
+            <h2
               ref={subtitleRef}
-              className="text-base sm:text-lg md:text-xl lg:text-2xl font-light text-white/95 w-full max-w-4xl mx-auto leading-relaxed drop-shadow-lg tracking-wide hero-subtitle break-words"
+              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-medium text-white/95 leading-snug drop-shadow-lg hero-subtitle break-words max-w-6xl mx-auto"
               style={{
-                fontFamily: 'var(--font-sans)',
-                letterSpacing: '0.02em',
-                opacity: 1, // Ensure visible by default
+                fontFamily: 'var(--font-fredoka)',
+                letterSpacing: '0.01em',
+                opacity: 1,
               }}
             >
               {subtitle}
-            </p>
+            </h2>
           )}
+
+          {children && (
+            <div className="pt-6 md:pt-10 hero-children w-full max-w-full min-w-0 flex justify-center">
+              {children}
+            </div>
+          )}
+
           {/* Hidden title/subtitle for SEO when visually hidden */}
           {(hideTitle || hideSubtitle) && (
             <div className="sr-only" suppressHydrationWarning>
@@ -257,19 +275,16 @@ export function PageHero({
               {hideSubtitle && subtitle && <p suppressHydrationWarning>{subtitle}</p>}
             </div>
           )}
-          {children && (
-            <div className="pt-4 hero-children w-full max-w-full min-w-0">
-              {children}
-            </div>
-          )}
         </div>
       </div>
 
       {/* Curved bottom divider - only for non-fullScreen heroes */}
-      {!fullScreen && (
-        <HeroCurveDivider color="fill-card" height="lg" />
-      )}
-    </section>
+      {
+        !fullScreen && (
+          <HeroCurveDivider color="fill-card" height="lg" />
+        )
+      }
+    </section >
   );
 }
 

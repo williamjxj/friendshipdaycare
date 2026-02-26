@@ -92,8 +92,8 @@ export function HomePageClient() {
       if (text.trim()) {
         const words = text.split(/\s+/).filter(Boolean);
         subtitleEl.innerHTML = words
-          .map((word, i) => `<span class="hero-subtitle-word inline-block">${word}${i < words.length - 1 ? '\u00A0' : ''}</span>`)
-          .join('');
+          .map((word) => `<span class="hero-subtitle-word inline-block mr-[0.25em]">${word}</span>`)
+          .join(' ');
         const wordEls = subtitleEl.querySelectorAll('.hero-subtitle-word');
         gsap.set(wordEls, { y: 24, opacity: 0, immediateRender: false });
         gsap.to(wordEls, {
@@ -228,60 +228,63 @@ export function HomePageClient() {
           <div className="absolute bottom-20 right-4 sm:right-10 w-40 h-40 bg-blue-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 text-center hero-content min-w-0 w-full">
-          <div className="space-y-5 sm:space-y-8">
-            <div className="space-y-4 sm:space-y-6">
-              <span className="hero-badge inline-block px-3 py-1.5 sm:px-6 sm:py-3 rounded-full bg-white/15 backdrop-blur-lg border border-white/30 text-white font-bold text-[0.65rem] sm:text-sm tracking-widest uppercase shadow-xl hover:bg-white/20 transition-all duration-300 max-w-[min(100%,28rem)] text-center mx-auto">
-                <span className="inline-flex flex-wrap justify-center items-center gap-x-1 gap-y-0.5">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 hero-content min-w-0 w-full text-center">
+          <div className="space-y-12 sm:space-y-20">
+            <div className="space-y-6 sm:space-y-10 max-w-7xl mx-auto">
+              <span className="hero-badge inline-block px-4 py-2 sm:px-8 sm:py-4 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white font-bold text-[0.7rem] sm:text-base tracking-widest uppercase shadow-2xl hover:bg-white/20 transition-all duration-300 w-fit mx-auto">
+                <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
                   <span>{t('home.hero.badgePrefix')}</span>
-                  <span className="mx-0.5 sm:mx-1" aria-hidden="true">•</span>
+                  <span className="mx-1" aria-hidden="true">•</span>
                   <a href={`tel:${businessProfile.telephone.replace(/\s/g, '')}`} className="text-white hover:underline underline-offset-2 transition-colors whitespace-nowrap" aria-label={t('contact.phone')}>
                     {businessProfile.telephone}
                   </a>
-                  <span className="mx-0.5 sm:mx-1" aria-hidden="true">•</span>
+                  <span className="mx-1" aria-hidden="true">•</span>
                   <a href={`mailto:${businessProfile.email}`} className="text-white hover:underline underline-offset-2 transition-colors break-all" aria-label={t('contact.form.email')}>
                     {businessProfile.email}
                   </a>
                 </span>
               </span>
-              <h1 ref={heroTitleRef} className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold drop-shadow-2xl leading-tight tracking-tight px-1">
-                <span className="hero-headline-line block" style={heroTitleGradientStyle}>
+
+              <h1 ref={heroTitleRef} className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-bold drop-shadow-2xl leading-[1.05] tracking-tight px-1">
+                <span className="hero-headline-line block mb-4" style={{ ...heroTitleGradientStyle, fontFamily: 'var(--font-baloo)' }}>
                   {t('home.hero.headline')}
                 </span>
-                <span className="hero-highlight-line block drop-shadow-lg mt-1" style={{ color: '#ffffff' }}>
+                <span className="hero-highlight-line block drop-shadow-lg" style={{ color: '#ffffff', fontFamily: 'var(--font-baloo)' }}>
                   {t('home.hero.highlight')}
                 </span>
               </h1>
-              <p
+
+              <h2
                 ref={subtitleRef}
-                className="hero-subtitle w-full max-w-5xl mx-auto px-2 sm:px-4 text-base sm:text-2xl md:text-4xl lg:text-5xl xl:text-[2.75rem] font-medium leading-snug md:leading-relaxed tracking-tight"
+                className="hero-subtitle w-full max-w-6xl mx-auto text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight mt-10"
                 style={{
                   color: '#ffffff',
-                  fontFamily: 'var(--font-sans)',
-                  letterSpacing: '0.02em',
-                  textShadow: '0 2px 4px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.3)',
+                  fontFamily: 'var(--font-fredoka)',
+                  letterSpacing: '0.01em',
+                  textShadow: '0 2px 12px rgba(0,0,0,0.4), 0 4px 20px rgba(0,0,0,0.3)',
                 }}
               >
                 {t('home.hero.subtitle')}
-              </p>
-              <p
-                className="hero-tagline w-full max-w-5xl mx-auto px-2 sm:px-4 text-xl sm:text-2xl md:text-3xl text-white font-medium leading-snug mt-4 text-center whitespace-normal"
+              </h2>
+
+              <h3
+                className="hero-tagline w-full max-w-4xl mx-auto text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white/85 font-medium leading-relaxed mt-10 text-center whitespace-normal italic"
                 style={{
                   color: '#ffffff',
-                  fontFamily: 'var(--font-sans)',
+                  fontFamily: 'var(--font-fredoka)',
                   letterSpacing: '0.02em',
-                  textShadow: '0 1px 4px rgba(0,0,0,0.5)',
+                  textShadow: '0 1px 6px rgba(0,0,0,0.5)',
                 }}
               >
                 {heroTagline}
-              </p>
+              </h3>
             </div>
 
-            <div className="hero-cta-buttons flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4 sm:pt-5 w-full max-w-[min(100%,18rem)] sm:max-w-none mx-auto min-w-0 px-1 sm:px-0">
-              <a href="/contact" className="btn-clay w-full sm:w-auto sm:max-w-fit min-w-0 px-3 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-bold rounded-full shadow-lg ring-2 sm:ring-[3px] ring-white/40 hover:ring-white/60 hover:scale-105 transition-all min-h-[40px] sm:min-h-[44px] flex items-center justify-center shrink-0" aria-label={t('home.hero.scheduleTour')}>
+            <div className="hero-cta-buttons flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center pt-6 w-full max-w-[20rem] sm:max-w-none mx-auto">
+              <a href="/contact#contact-form" className="btn-clay w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 text-lg sm:text-xl font-bold rounded-full shadow-2xl ring-4 ring-white/30 hover:ring-white/50 hover:scale-110 transition-all flex items-center justify-center" aria-label={t('home.hero.scheduleTour')}>
                 {t('home.hero.scheduleTour')}
               </a>
-              <a href="/programs" className="w-full sm:w-auto sm:max-w-fit min-w-0 px-3 sm:px-4 py-2.5 sm:py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/40 text-white font-bold text-sm sm:text-base hover:bg-white/20 transition-all hover:scale-105 shadow-lg flex items-center justify-center shrink-0">
+              <a href="/programs" className="w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 rounded-full bg-white/10 backdrop-blur-xl border-2 border-white/30 text-white font-bold text-lg sm:text-xl hover:bg-white/20 transition-all hover:scale-110 shadow-2xl flex items-center justify-center">
                 {t('home.hero.viewPrograms')}
               </a>
             </div>
@@ -314,112 +317,112 @@ export function HomePageClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
             {/* Item 1: Montessori Method - with image for consistency */}
-            <Card variant="clay" className="p-0 overflow-visible group cursor-pointer hover:shadow-2xl transition-shadow duration-500 border-2 border-transparent hover:border-primary/30">
-              <div className="relative h-56 lg:h-64 w-full overflow-hidden group/image">
+            <Card variant="clay" className="group">
+              <div className="relative h-64 sm:h-72 w-full overflow-hidden">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
                 <Image
                   src={getImageUrl('/images/sensorial-shelf.jpg')}
                   alt="Montessori sensorial materials"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover/image:scale-110 transition-transform duration-700 z-10 origin-center"
+                  className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out z-10"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-20" />
               </div>
-              <div className="relative -mt-6 flex justify-center z-30">
-                <div className="rounded-full bg-background dark:bg-card border-2 border-primary/30 shadow-lg p-2.5 group-hover:border-primary transition-colors duration-300">
+              <div className="relative -mt-8 flex justify-center z-30">
+                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-500">
                   <Leaf className="w-10 h-10 text-primary" aria-hidden />
                 </div>
               </div>
-              <div className="p-8 lg:p-10 pt-4">
+              <div className="p-8 sm:p-10 pt-4 text-center">
                 <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
                   {t('home.discoverDifference.authenticMontessori.title')}
                 </h3>
-                <p className="text-base lg:text-lg text-muted-foreground leading-relaxed font-medium">
+                <p className="text-lg text-muted-foreground leading-relaxed font-medium">
                   {t('home.discoverDifference.authenticMontessori.description')}
                 </p>
               </div>
             </Card>
 
             {/* Item 2: Community */}
-            <Card variant="clay" className="p-0 overflow-visible group cursor-pointer hover:shadow-2xl transition-shadow duration-500 border-2 border-transparent hover:border-secondary/30">
-              <div className="relative h-56 lg:h-64 w-full overflow-hidden group/image">
+            <Card variant="clay" className="group">
+              <div className="relative h-64 sm:h-72 w-full overflow-hidden">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
                 <Image
                   src={getImageUrl("/images/circle-time-board-2.jpg")}
                   alt="Circle Time"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover/image:scale-110 transition-transform duration-700 z-10 origin-center"
+                  className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out z-10"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-20" />
               </div>
-              <div className="relative -mt-6 flex justify-center z-30">
-                <div className="rounded-full bg-background dark:bg-card border-2 border-secondary/30 shadow-lg p-2.5 group-hover:border-secondary transition-colors duration-300">
+              <div className="relative -mt-8 flex justify-center z-30">
+                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-500">
                   <Heart className="w-10 h-10 text-secondary" aria-hidden />
                 </div>
               </div>
-              <div className="p-8 lg:p-10 pt-4">
+              <div className="p-8 sm:p-10 pt-4 text-center">
                 <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-secondary transition-colors duration-300">
                   {t('home.discoverDifference.lovingCommunity.title')}
                 </h3>
-                <p className="text-base lg:text-lg text-muted-foreground leading-relaxed font-medium">
+                <p className="text-lg text-muted-foreground leading-relaxed font-medium">
                   {t('home.discoverDifference.lovingCommunity.description')}
                 </p>
               </div>
             </Card>
 
             {/* Item 3: Safety */}
-            <Card variant="clay" className="p-0 overflow-visible group cursor-pointer hover:shadow-2xl transition-shadow duration-500 border-2 border-transparent hover:border-accent/30">
-              <div className="relative h-56 lg:h-64 w-full overflow-hidden group/image">
+            <Card variant="clay" className="group">
+              <div className="relative h-64 sm:h-72 w-full overflow-hidden">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
                 <Image
                   src={getImageUrl("/images/playground.jpg")}
                   alt="Playground"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover/image:scale-110 transition-transform duration-700 z-10 origin-center"
+                  className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out z-10"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-20" />
               </div>
-              <div className="relative -mt-6 flex justify-center z-30">
-                <div className="rounded-full bg-background dark:bg-card border-2 border-accent/30 shadow-lg p-2.5 group-hover:border-accent transition-colors duration-300">
+              <div className="relative -mt-8 flex justify-center z-30">
+                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-500">
                   <Shield className="w-10 h-10 text-accent" aria-hidden />
                 </div>
               </div>
-              <div className="p-8 lg:p-10 pt-4">
+              <div className="p-8 sm:p-10 pt-4 text-center">
                 <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-accent transition-colors duration-300">
                   {t('home.discoverDifference.safetyFirst.title')}
                 </h3>
-                <p className="text-base lg:text-lg text-muted-foreground leading-relaxed font-medium">
+                <p className="text-lg text-muted-foreground leading-relaxed font-medium">
                   {t('home.discoverDifference.safetyFirst.description')}
                 </p>
               </div>
             </Card>
 
             {/* Item 4: Teachers - with image for consistency */}
-            <Card variant="clay" className="p-0 overflow-visible group cursor-pointer hover:shadow-2xl transition-shadow duration-500 border-2 border-transparent hover:border-primary/30">
-              <div className="relative h-56 lg:h-64 w-full overflow-hidden group/image">
+            <Card variant="clay" className="group">
+              <div className="relative h-64 sm:h-72 w-full overflow-hidden">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
                 <Image
                   src={getImageUrl('/images/language-shelf.jpg')}
                   alt="Language and learning materials"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover/image:scale-110 transition-transform duration-700 z-10 origin-center"
+                  className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out z-10"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-20" />
               </div>
-              <div className="relative -mt-6 flex justify-center z-30">
-                <div className="rounded-full bg-background dark:bg-card border-2 border-primary/30 shadow-lg p-2.5 group-hover:border-primary transition-colors duration-300">
+              <div className="relative -mt-8 flex justify-center z-30">
+                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-500">
                   <GraduationCap className="w-10 h-10 text-primary" aria-hidden />
                 </div>
               </div>
-              <div className="p-8 lg:p-10 pt-4">
+              <div className="p-8 sm:p-10 pt-4 text-center">
                 <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
                   {t('home.discoverDifference.dedicatedEducators.title')}
                 </h3>
-                <p className="text-base lg:text-lg text-muted-foreground leading-relaxed font-medium">
+                <p className="text-lg text-muted-foreground leading-relaxed font-medium">
                   {t('home.discoverDifference.dedicatedEducators.description')}
                 </p>
               </div>
@@ -430,18 +433,18 @@ export function HomePageClient() {
 
       {/* Programs Section - Hidden: daycare open to all suitable ages; View Programs link in hero */}
       {false && (
-      <section id="programs" className="py-24 bg-gradient-to-b from-background to-muted/30 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center space-y-6 mb-20 section-header">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
-              {t('home.programs.title')}
-            </h2>
-            <p className="text-xl md:text-2xl text-muted-foreground w-full max-w-5xl mx-auto leading-relaxed font-medium">
-              {t('home.programs.subtitle')}
-            </p>
+        <section id="programs" className="py-24 bg-gradient-to-b from-background to-muted/30 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center space-y-6 mb-20 section-header">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
+                {t('home.programs.title')}
+              </h2>
+              <p className="text-xl md:text-2xl text-muted-foreground w-full max-w-5xl mx-auto leading-relaxed font-medium">
+                {t('home.programs.subtitle')}
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       )}
 
       {/* Real Environment Showcase */}
@@ -512,7 +515,7 @@ export function HomePageClient() {
 
           <div ref={readyCTAsRef} className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <a
-              href="/contact"
+              href="/contact#contact-form"
               className="bg-white text-primary text-xl md:text-2xl px-12 py-6 rounded-full font-bold hover:bg-white/95 transition-all hover:scale-110 shadow-2xl hover:shadow-white/50 ring-4 ring-white/40 min-h-[60px] flex items-center justify-center group"
             >
               {t('home.readyToVisit.bookTour')}

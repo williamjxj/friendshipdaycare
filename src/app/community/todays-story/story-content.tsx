@@ -166,7 +166,7 @@ export default function TodaysStoryContent() {
                         <h2 className="text-3xl md:text-5xl font-bold">{t('community.todaysStory.cta.title')}</h2>
                         <p className="text-xl opacity-90">{t('community.todaysStory.cta.subtitle')}</p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-                            <Link href="/contact" className="bg-background text-foreground px-8 py-4 rounded-lg font-bold text-lg hover:brightness-110 transition-all shadow-lg hover:shadow-xl">
+                            <Link href="/contact#contact-form" className="bg-background text-foreground px-8 py-4 rounded-lg font-bold text-lg hover:brightness-110 transition-all shadow-lg hover:shadow-xl">
                                 {t('community.todaysStory.cta.primary')}
                             </Link>
                             <Link href="/programs" className="inline-flex items-center justify-center bg-primary-foreground/10 border-2 border-primary-foreground/30 px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-foreground/20 transition-all min-h-[44px]">

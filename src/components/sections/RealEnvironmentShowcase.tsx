@@ -308,7 +308,7 @@ export function RealEnvironmentShowcase() {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
-                href="/contact"
+                href="/contact#contact-form"
                 className="btn-premium text-lg px-10 py-5 hover:scale-105 transition-transform duration-300"
               >
                 {t('home.realEnvironment.cta.scheduleVisit')}

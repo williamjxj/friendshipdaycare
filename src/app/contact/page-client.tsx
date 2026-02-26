@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, useState, useEffect, useRef } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { PageHero } from '@/components/ui/page-hero';
 import { GoogleMap } from '@/components/ui/GoogleMap';
@@ -8,6 +8,7 @@ import { getImageUrl } from '@/lib/image-utils';
 import { PhoneIcon, MapPinIcon, ClockIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { fadeIn } from '@/lib/animations';
+import { scaleInMagic, shimmer, staggerContainerMagic } from '@/lib/magicui-animations';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { businessProfile } from '@/lib/business-profile';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -16,6 +17,12 @@ import { usePathname } from 'next/navigation';
 import { BreadcrumbSchema } from '@/components/seo/StructuredData';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { getBreadcrumbs, toBreadcrumbSchemaItems } from '@/lib/breadcrumbs';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 /**
  * Contact page client component with form and business details.
@@ -43,6 +50,29 @@ export function ContactPageClient() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [highlightForm, setHighlightForm] = useState(false);
+  const formRef = useRef<HTMLDivElement>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+
+  // Handle navigation from CTA buttons with hash
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash === '#contact-form') {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        if (formRef.current) {
+          formRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setHighlightForm(true);
+          // Remove highlight after animation
+          setTimeout(() => setHighlightForm(false), 2000);
+        }
+        // Focus the name input field
+        if (nameInputRef.current) {
+          setTimeout(() => nameInputRef.current?.focus(), 500);
+        }
+      }, 100);
+    }
+  }, []);
 
   const validateForm = (): boolean => {
     const errors: Record<string, string> = {};
@@ -123,22 +153,23 @@ export function ContactPageClient() {
     <Suspense fallback={<LoadingSpinner message="Loading contact page..." />}>
       <main className="flex-1">
         <BreadcrumbSchema items={toBreadcrumbSchemaItems(breadcrumbs)} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
+
         {/* Hero Section */}
         <PageHero
           title={t('contactPage.hero.title')}
           subtitle={t('contactPage.hero.subtitle')}
           backgroundSvg={getImageUrl('/imgs/contact/contact_hero_1.gif')}
           enableScrollTrigger={true}
-          hideTitle={true}
-          hideSubtitle={true}
+          hideTitle={false}
+          hideSubtitle={false}
           unoptimized={true}
+          topContent={<Breadcrumbs items={breadcrumbs} />}
         />
 
         {/* 1. Contact Form (primary) */}
         <motion.section
+          id="contact-form"
+          ref={formRef}
           className="py-20 bg-card"
           initial="hidden"
           whileInView="visible"
@@ -146,142 +177,149 @@ export function ContactPageClient() {
           variants={fadeIn}
         >
           <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
-            <Card variant="premium" className="w-full min-w-0 bg-gradient-to-br from-card to-muted/30 p-6 sm:p-10 scroll-mt-20 border-2 border-border/50 shadow-xl hover:shadow-2xl transition-all duration-500">
-                <CardHeader className="p-0 mb-8">
-                  <CardTitle className="text-3xl font-display font-bold text-foreground bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent break-words">
-                    {t('contactPage.form.title')}
-                  </CardTitle>
-                </CardHeader>
+            <Card
+              variant="premium"
+              className={`w-full min-w-0 bg-gradient-to-br from-card to-muted/30 p-6 sm:p-10 scroll-mt-20 border-2 shadow-xl hover:shadow-2xl transition-all duration-500 ${highlightForm
+                ? 'border-primary/80 ring-4 ring-primary/30 animate-pulse'
+                : 'border-border/50'
+                }`}
+            >
+              <CardHeader className="p-0 mb-8">
+                <h2 className="text-3xl font-display font-bold text-foreground bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent break-words">
+                  {t('contactPage.form.title')}
+                </h2>
+              </CardHeader>
 
-                {submitStatus === 'success' && (
-                  <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                    <p className="text-green-800 font-bold">{t('contactPage.form.success')}</p>
-                  </div>
-                )}
+              {submitStatus === 'success' && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <p className="text-green-800 font-bold">{t('contactPage.form.success')}</p>
+                </div>
+              )}
 
-                {submitStatus === 'error' && (
-                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                    <p className="text-red-800 font-bold">{errorMessage}</p>
-                  </div>
-                )}
+              {submitStatus === 'error' && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-red-800 font-bold">{errorMessage}</p>
+                </div>
+              )}
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="block text-sm font-bold text-foreground">
-                        {t('contactPage.form.fields.name')} *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                        aria-invalid={fieldErrors.name ? 'true' : 'false'}
-                        aria-describedby={fieldErrors.name ? 'name-error' : undefined}
-                        className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium ${fieldErrors.name ? 'border-red-500 focus:ring-red-500' : 'border-border'
-                          }`}
-                        placeholder={t('contactPage.form.placeholders.name')}
-                      />
-                      {fieldErrors.name && (
-                        <p id="name-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
-                          {fieldErrors.name}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="block text-sm font-bold text-foreground">
-                        {t('contactPage.form.fields.email')} *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        aria-invalid={fieldErrors.email ? 'true' : 'false'}
-                        aria-describedby={fieldErrors.email ? 'email-error' : undefined}
-                        className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium ${fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-border'
-                          }`}
-                        placeholder={t('contactPage.form.placeholders.email')}
-                      />
-                      {fieldErrors.email && (
-                        <p id="email-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
-                          {fieldErrors.email}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="phone" className="block text-sm font-bold text-foreground">
-                        {t('contactPage.form.fields.phone')}
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium"
-                        placeholder={t('contactPage.form.placeholders.phone')}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="childAge" className="block text-sm font-bold text-foreground">
-                        {t('contactPage.form.fields.childAge')}
-                      </label>
-                      <select
-                        id="childAge"
-                        name="childAge"
-                        value={formData.childAge}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium cursor-pointer"
-                      >
-                        <option value="">{t('contactPage.form.options.agePlaceholder')}</option>
-                        <option value="30months-3years">{t('contactPage.form.options.ageToddler')}</option>
-                        <option value="3-4years">{t('contactPage.form.options.agePreschool')}</option>
-                        <option value="4-5years">{t('contactPage.form.options.agePreK')}</option>
-                        <option value="other">{t('contactPage.form.options.ageOther')}</option>
-                      </select>
-                    </div>
-                  </div>
-
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label htmlFor="message" className="block text-sm font-bold text-foreground">
-                      {t('contactPage.form.fields.message')} *
+                    <label htmlFor="name" className="block text-sm font-bold text-foreground">
+                      {t('contactPage.form.fields.name')} *
                     </label>
-                    <textarea
-                      id="message"
-                      name="message"
+                    <input
+                      ref={nameInputRef}
+                      type="text"
+                      id="name"
+                      name="name"
                       required
-                      rows={5}
-                      value={formData.message}
+                      value={formData.name}
                       onChange={handleChange}
-                      aria-invalid={fieldErrors.message ? 'true' : 'false'}
-                      aria-describedby={fieldErrors.message ? 'message-error' : undefined}
-                      className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none min-h-[132px] text-base font-medium ${fieldErrors.message ? 'border-red-500 focus:ring-red-500' : 'border-border'
+                      aria-invalid={fieldErrors.name ? 'true' : 'false'}
+                      aria-describedby={fieldErrors.name ? 'name-error' : undefined}
+                      className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium ${fieldErrors.name ? 'border-red-500 focus:ring-red-500' : 'border-border'
                         }`}
-                      placeholder={t('contactPage.form.placeholders.message')}
+                      placeholder={t('contactPage.form.placeholders.name')}
                     />
-                    {fieldErrors.message && (
-                      <p id="message-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
-                        {fieldErrors.message}
+                    {fieldErrors.name && (
+                      <p id="name-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
+                        {fieldErrors.name}
                       </p>
                     )}
                   </div>
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="block text-sm font-bold text-foreground">
+                      {t('contactPage.form.fields.email')} *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      aria-invalid={fieldErrors.email ? 'true' : 'false'}
+                      aria-describedby={fieldErrors.email ? 'email-error' : undefined}
+                      className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium ${fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-border'
+                        }`}
+                      placeholder={t('contactPage.form.placeholders.email')}
+                    />
+                    {fieldErrors.email && (
+                      <p id="email-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
+                        {fieldErrors.email}
+                      </p>
+                    )}
+                  </div>
+                </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-primary text-primary-foreground px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg min-h-[44px] flex items-center justify-center"
-                  >
-                    {isSubmitting ? t('contactPage.form.submitting') : t('contactPage.form.submit')}
-                  </button>
-                </form>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label htmlFor="phone" className="block text-sm font-bold text-foreground">
+                      {t('contactPage.form.fields.phone')}
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium"
+                      placeholder={t('contactPage.form.placeholders.phone')}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="childAge" className="block text-sm font-bold text-foreground">
+                      {t('contactPage.form.fields.childAge')}
+                    </label>
+                    <select
+                      id="childAge"
+                      name="childAge"
+                      value={formData.childAge}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors min-h-[44px] text-base font-medium cursor-pointer"
+                    >
+                      <option value="">{t('contactPage.form.options.agePlaceholder')}</option>
+                      <option value="30months-3years">{t('contactPage.form.options.ageToddler')}</option>
+                      <option value="3-4years">{t('contactPage.form.options.agePreschool')}</option>
+                      <option value="4-5years">{t('contactPage.form.options.agePreK')}</option>
+                      <option value="other">{t('contactPage.form.options.ageOther')}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="message" className="block text-sm font-bold text-foreground">
+                    {t('contactPage.form.fields.message')} *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    aria-invalid={fieldErrors.message ? 'true' : 'false'}
+                    aria-describedby={fieldErrors.message ? 'message-error' : undefined}
+                    className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none min-h-[132px] text-base font-medium ${fieldErrors.message ? 'border-red-500 focus:ring-red-500' : 'border-border'
+                      }`}
+                    placeholder={t('contactPage.form.placeholders.message')}
+                  />
+                  {fieldErrors.message && (
+                    <p id="message-error" className="mt-1 text-sm text-red-600 font-bold" role="alert">
+                      {fieldErrors.message}
+                    </p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-primary text-primary-foreground px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg min-h-[44px] flex items-center justify-center"
+                >
+                  {isSubmitting ? t('contactPage.form.submitting') : t('contactPage.form.submit')}
+                </button>
+              </form>
             </Card>
           </div>
         </motion.section>
@@ -292,10 +330,10 @@ export function ContactPageClient() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={fadeIn}
+          variants={staggerContainerMagic}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-8 text-center">
               {t('contactPage.info.title')}
             </h2>
             <p className="text-muted-foreground text-center mb-10 max-w-5xl mx-auto text-balance">
@@ -306,7 +344,7 @@ export function ContactPageClient() {
                 <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
                   <PhoneIcon className="h-7 w-7 text-primary" />
                 </div>
-                <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.phone.title')}</CardTitle>
+                <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.phone.title')}</h3>
                 <a href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`} className="text-muted-foreground font-semibold hover:text-primary transition-colors">
                   {businessProfile.telephone}
                 </a>
@@ -316,7 +354,7 @@ export function ContactPageClient() {
                 <div className="w-14 h-14 bg-gradient-to-br from-secondary/20 to-secondary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
                   <MapPinIcon className="h-7 w-7 text-secondary" />
                 </div>
-                <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.location.title')}</CardTitle>
+                <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.location.title')}</h3>
                 <p className="text-muted-foreground font-semibold">{businessProfile.address.streetAddress}</p>
                 <p className="text-muted-foreground font-semibold text-sm">{businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode}</p>
                 <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.location.subtitle')}</CardDescription>
@@ -325,7 +363,7 @@ export function ContactPageClient() {
                 <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
                   <ClockIcon className="h-7 w-7 text-accent" />
                 </div>
-                <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.hours.title')}</CardTitle>
+                <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.hours.title')}</h3>
                 <p className="text-muted-foreground font-semibold">{t('contactPage.cards.hours.weekdays')}</p>
                 <p className="text-muted-foreground font-semibold">{t('contactPage.cards.hours.hours')}</p>
                 <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.hours.subtitle')}</CardDescription>
@@ -334,7 +372,7 @@ export function ContactPageClient() {
                 <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
                   <EnvelopeIcon className="h-7 w-7 text-primary" />
                 </div>
-                <CardTitle className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.email.title')}</CardTitle>
+                <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.email.title')}</h3>
                 <a href={`mailto:${businessProfile.email}`} className="text-muted-foreground font-semibold hover:text-primary transition-colors break-all">
                   {businessProfile.email}
                 </a>
@@ -369,24 +407,25 @@ export function ContactPageClient() {
           variants={fadeIn}
         >
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-8 text-center">
               {t('contactPage.faq.title')}
             </h2>
-            <div className="space-y-4">
+            <Accordion type="single" collapsible className="w-full space-y-2">
               {contactFaqItems.map((item, idx) => (
-                <div
+                <AccordionItem
                   key={`${idx}-${item.question}`}
-                  className="rounded-xl border border-border bg-muted/30 p-5 shadow-sm"
+                  value={`item-${idx}`}
+                  className="rounded-xl border border-border bg-muted/30 px-5 shadow-sm data-[state=open]:shadow-md transition-shadow"
                 >
-                  <h3 className="font-semibold text-foreground text-lg mb-2">
+                  <AccordionTrigger className="font-semibold text-foreground text-lg hover:no-underline hover:text-primary">
                     {item.question}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed text-sm">
                     {item.answer}
-                  </p>
-                </div>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </div>
         </motion.section>
 
@@ -400,7 +439,7 @@ export function ContactPageClient() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
                 {t('contactPage.map.title')}
               </h2>
               <p className="text-lg text-muted-foreground">

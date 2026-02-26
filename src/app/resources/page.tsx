@@ -212,7 +212,7 @@ export default function ResourcesPage() {
               <Link href="/resources/faq" className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">
                 View FAQ
               </Link>
-              <Link href="/contact" className="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">
+              <Link href="/contact#contact-form" className="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">
                 Contact Us
               </Link>
               <Link href="/enrollment" className="bg-white text-pink-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">

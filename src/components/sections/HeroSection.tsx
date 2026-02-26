@@ -68,7 +68,7 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 justify-center pt-2"
           >
             <Link
-              href="/contact"
+              href="/contact#contact-form"
               className={cn(
                 "inline-flex items-center justify-center h-14 px-8",
                 "rounded-lg font-bold text-lg transition-all duration-200",

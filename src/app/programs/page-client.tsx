@@ -34,17 +34,16 @@ export function ProgramsPageClient() {
     <Suspense fallback={<LoadingSpinner message="Loading programs..." />}>
       <main className="flex-1">
         <BreadcrumbSchema items={toBreadcrumbSchemaItems(breadcrumbs)} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
+
         {/* Hero Section */}
         <PageHero
           title={t('programsPage.hero.title')}
           subtitle={t('programsPage.hero.subtitle')}
           backgroundSvg={getImageUrl('/imgs/programs/programs_hero_1.gif')}
           enableScrollTrigger={true}
-          hideSubtitle={true}
-          hideTitle={true}
+          hideSubtitle={false}
+          hideTitle={false}
+          topContent={<Breadcrumbs items={breadcrumbs} />}
         >
           <HeroCTAButtons variant="default" />
         </PageHero>
@@ -61,7 +60,7 @@ export function ProgramsPageClient() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div variants={slideUp} className="space-y-6">
                 <div className="space-y-2">
-                  <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+                  <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
                     {t('programsPage.program.title')}
                   </h2>
                   <Badge variant="secondary" className="w-fit">
@@ -107,7 +106,7 @@ export function ProgramsPageClient() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6">
                 {t('programsPage.eceBenefits.title')}
               </h2>
               <p className="text-muted-foreground leading-relaxed text-balance">
@@ -127,7 +126,7 @@ export function ProgramsPageClient() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6">
                 {t('programsPage.montessoriBenefits.title')}
               </h2>
               <p className="text-muted-foreground leading-relaxed text-balance">
@@ -146,7 +145,7 @@ export function ProgramsPageClient() {
           variants={fadeIn}
         >
           <div className="max-w-5xl mx-auto px-4 text-center space-y-8">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground">
               {t('programsPage.cta.title')}
             </h2>
             <p className="text-xl text-primary-foreground/90 w-full max-w-5xl mx-auto text-balance">
@@ -154,7 +153,7 @@ export function ProgramsPageClient() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/contact"
+                href="/contact#contact-form"
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary-foreground text-primary rounded-lg font-semibold hover:bg-primary-foreground/90 transition-colors"
               >
                 {t('programsPage.cta.primary')}

@@ -42,18 +42,17 @@ export function AboutPageClient() {
     <Suspense fallback={<LoadingSpinner message="Loading about us..." />}>
       <main className="flex-1">
         <BreadcrumbSchema items={toBreadcrumbSchemaItems(breadcrumbs)} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
+
         {/* Hero Section */}
         <PageHero
           title={t('aboutPage.hero.title')}
           subtitle={t('aboutPage.hero.subtitle')}
           backgroundSvg={getImageUrl('/imgs/about/about_hero_1.gif')}
           enableScrollTrigger={true}
-          hideSubtitle={true}
-          hideTitle={true}
+          hideSubtitle={false}
+          hideTitle={false}
           unoptimized={true}
+          topContent={<Breadcrumbs items={breadcrumbs} />}
         >
           <HeroCTAButtons variant="outlined" />
         </PageHero>
@@ -75,7 +74,7 @@ export function AboutPageClient() {
               viewport={{ once: true }}
             >
               <motion.div className="space-y-6" variants={slideUp}>
-                <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+                <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
                   {t('aboutPage.story.title')}
                 </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -97,7 +96,7 @@ export function AboutPageClient() {
                     {t('aboutPage.story.ctaPrograms')}
                   </Link>
                   <Link
-                    href="/contact"
+                    href="/contact#contact-form"
                     className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
                   >
                     {t('aboutPage.story.ctaVisit')}
@@ -143,7 +142,7 @@ export function AboutPageClient() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-16">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
                 {t('aboutPage.values.title')}
               </h2>
               <p className="text-xl text-muted-foreground w-full max-w-none">
@@ -167,7 +166,7 @@ export function AboutPageClient() {
                       )}>
                         {value.icon}
                       </div>
-                      <CardTitle className="text-xl font-bold">{value.title}</CardTitle>
+                      <h3 className="text-xl font-bold">{value.title}</h3>
                     </CardHeader>
                     <CardContent className="p-0">
                       <CardDescription className="text-muted-foreground leading-relaxed">
@@ -192,7 +191,7 @@ export function AboutPageClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div variants={slideUp} className="space-y-6">
-                <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+                <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
                   {t('aboutPage.montessori.title')}
                 </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -232,7 +231,7 @@ export function AboutPageClient() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
                 {t('aboutPage.team.title')}
               </h2>
               <p className="text-xl text-muted-foreground w-full max-w-5xl mx-auto text-balance">
@@ -267,7 +266,7 @@ export function AboutPageClient() {
                 {t('aboutPage.story.ctaPrograms')}
               </Link>
               <Link
-                href="/contact"
+                href="/contact#contact-form"
                 className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 {t('aboutPage.story.ctaVisit')}

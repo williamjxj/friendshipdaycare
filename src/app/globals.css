@@ -230,19 +230,20 @@ body {
 .clay-card {
   background: var(--card);
   border-radius: var(--radius-xl);
-  padding: 1.5rem;
+  padding: 0;
   box-shadow: 
     8px 8px 16px color-mix(in srgb, var(--primary), white 80%), 
     -8px -8px 16px #ffffff;
-  border: 4px solid var(--background);
-  transition: all 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border: none;
 }
 
 .clay-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px) scale(1.02);
   box-shadow: 
-    12px 12px 20px color-mix(in srgb, var(--primary), white 70%), 
-    -12px -12px 20px #ffffff;
+    15px 15px 30px color-mix(in srgb, var(--primary), white 70%), 
+    -15px -15px 30px #ffffff;
 }
 
 /* Override existing button classes to match Clay style */

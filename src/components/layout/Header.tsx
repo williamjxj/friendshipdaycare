@@ -270,7 +270,7 @@ export function Header() {
             <LanguageToggle />
             <ThemeToggle />
             <Link
-              href="/contact"
+              href="/contact#contact-form"
               className="relative overflow-hidden warm-button text-[0.6rem] px-2 py-2 flex items-center gap-1.5 group/cta shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap !h-[26px] !min-h-0 !rounded-md"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500 bg-[length:200%_auto] group-hover/cta:animate-[gradient_3s_linear_infinite]" />
@@ -360,7 +360,7 @@ export function Header() {
                   </p>
                 </div>
                 <Link
-                  href="/contact"
+                  href="/contact#contact-form"
                   onClick={() => setIsMenuOpen(false)}
                   className="block w-full text-center warm-button min-h-[44px] py-2 flex items-center justify-center gap-2 shadow-md text-sm"
                 >

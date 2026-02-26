@@ -157,10 +157,10 @@ export default function FAQPage() {
               <Link href="/enrollment" className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">
                 Enrollment Process
               </Link>
-              <Link href="/contact" className="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">
+              <Link href="/contact#contact-form" className="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">
                 Contact & Tuition
               </Link>
-              <Link href="/contact" className="bg-white text-pink-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">
+              <Link href="/contact#contact-form" className="bg-white text-pink-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">
                 Schedule a Tour
               </Link>
             </div>

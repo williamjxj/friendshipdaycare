@@ -15,14 +15,14 @@ interface HeroCTAButtonsProps {
 
 /**
  * CTA buttons for hero sections
- * - Contact form link
+ * - Contact form link (defaults to contact page with form anchor)
  * - Phone call button
  */
 export function HeroCTAButtons({
   className,
   variant = 'default',
   phoneNumber = '6049458504',
-  contactLink = '/contact',
+  contactLink = '/contact#contact-form',
 }: HeroCTAButtonsProps) {
   const { t } = useLanguage();
   const baseButtonClasses = cn(

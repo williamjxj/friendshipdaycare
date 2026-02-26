@@ -152,7 +152,7 @@ export function ContactCTASection() {
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                href="/contact"
+                href="/contact#contact-form"
                 className="inline-block bg-primary-foreground text-primary px-8 py-4 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow"
               >
                 {t('navigation.contact')}

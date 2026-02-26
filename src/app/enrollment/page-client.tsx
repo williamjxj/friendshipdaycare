@@ -15,7 +15,14 @@ import {
 } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
+import { scaleInMagic, slideIn, staggerContainerMagic } from '@/lib/magicui-animations';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from '@/components/ui/accordion';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
@@ -73,17 +80,16 @@ export function EnrollmentPageClient() {
       <main className="flex-1">
         <FAQSchema questions={faqItems} />
         <BreadcrumbSchema items={toBreadcrumbSchemaItems(breadcrumbs)} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
+
         {/* Hero Section */}
         <PageHero
           title={safeT('enrollmentPage.hero.title', 'Montessori Enrollment in Coquitlam')}
           subtitle={safeT('enrollmentPage.hero.subtitle', 'Steps and requirements to enroll at Friendship Corner Daycare')}
           backgroundSvg={getImageUrl('/imgs/enrollment/enrollment_hero_1.gif')}
           enableScrollTrigger={true}
-          hideSubtitle={true}
-          hideTitle={true}
+          hideSubtitle={false}
+          hideTitle={false}
+          topContent={<Breadcrumbs items={breadcrumbs} />}
         >
           <HeroCTAButtons variant="default" />
         </PageHero>
@@ -94,11 +100,11 @@ export function EnrollmentPageClient() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={fadeIn}
+          variants={staggerContainerMagic}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-16">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
                 {safeT('enrollmentPage.process.title', 'Enrollment Process')}
               </h2>
               <p className="text-xl text-muted-foreground w-full max-w-5xl mx-auto text-balance">
@@ -110,12 +116,12 @@ export function EnrollmentPageClient() {
               {steps.map((step, index) => (
                 <motion.div
                   key={step.title}
-                  variants={slideUp}
+                  variants={scaleInMagic}
                   custom={index}
                 >
                   <Card
                     variant="interactive"
-                    className="h-full rounded-2xl border border-border/60 bg-card/95 p-6 shadow-lg shadow-black/5 transition-shadow hover:shadow-xl"
+                    className="h-full rounded-2xl border border-border/60 bg-card/95 p-6 shadow-lg shadow-black/5 transition-all hover:shadow-xl hover:scale-105 duration-300"
                   >
                     <CardHeader className="p-0 mb-4 space-y-3">
                       <div className="w-11 h-11 rounded-full flex items-center justify-center bg-muted text-foreground">
@@ -124,7 +130,7 @@ export function EnrollmentPageClient() {
                         {index === 2 && <DocumentCheckIcon className="h-6 w-6" />}
                         {index === 3 && <UserGroupIcon className="h-6 w-6" />}
                       </div>
-                      <CardTitle className="text-lg font-semibold text-foreground">{step.title}</CardTitle>
+                      <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
                     </CardHeader>
                     <CardContent className="p-0">
                       <CardDescription className="text-muted-foreground leading-relaxed">
@@ -148,7 +154,7 @@ export function EnrollmentPageClient() {
         >
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
                 {safeT('enrollmentPage.requirements.title', 'Enrollment Requirements')}
               </h2>
               <p className="text-xl text-muted-foreground w-full max-w-5xl mx-auto text-balance">
@@ -182,13 +188,13 @@ export function EnrollmentPageClient() {
         >
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
                 {safeT('enrollmentPage.feesHours.title', 'Fees & Hours')}
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <motion.div variants={slideUp} className="space-y-4 bg-muted/30 p-6 rounded-xl">
-                <h3 className="text-lg font-semibold text-foreground">{safeT('enrollmentPage.feesHours.hours', 'Monday to Friday, 7:00 a.m. to 6:00 p.m.')}</h3>
+                <h3 className="text-xl font-bold text-foreground">{safeT('enrollmentPage.feesHours.hours', 'Monday to Friday, 7:00 a.m. to 6:00 p.m.')}</h3>
                 <p className="text-sm text-muted-foreground">{safeT('enrollmentPage.feesHours.closures', 'We are closed on all Statutory Holidays, weekends, and days when the managers choose to close due to unsafe conditions.')}</p>
               </motion.div>
               <motion.div variants={slideUp} className="space-y-4 bg-muted/30 p-6 rounded-xl">
@@ -211,7 +217,7 @@ export function EnrollmentPageClient() {
         >
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-10">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
                 {safeT('enrollmentPage.faq.title', 'Enrollment FAQ')}
               </h2>
               <p className="text-lg text-muted-foreground w-full max-w-5xl mx-auto text-balance">
@@ -219,21 +225,22 @@ export function EnrollmentPageClient() {
               </p>
             </div>
 
-            <div className="space-y-4">
+            <Accordion type="single" collapsible className="w-full space-y-2">
               {faqItems.map((item, idx) => (
-                <div
+                <AccordionItem
                   key={`${idx}-${item.question}`}
-                  className="rounded-xl border border-border bg-card/80 p-5 shadow-sm"
+                  value={`item-${idx}`}
+                  className="rounded-xl border border-border bg-card/80 px-5 shadow-sm data-[state=open]:shadow-md transition-shadow"
                 >
-                  <h3 className="font-semibold text-foreground text-lg mb-2">
+                  <AccordionTrigger className="font-semibold text-foreground text-lg hover:no-underline hover:text-primary">
                     {item.question}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
                     {item.answer}
-                  </p>
-                </div>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </div>
         </motion.section>
 
@@ -246,7 +253,7 @@ export function EnrollmentPageClient() {
           variants={fadeIn}
         >
           <div className="max-w-5xl mx-auto px-4 text-center space-y-8">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground">
               {safeT('enrollmentPage.cta.title', 'Ready to Apply?')}
             </h2>
             <p className="text-xl text-primary-foreground/90 w-full max-w-5xl mx-auto text-balance">
@@ -254,7 +261,7 @@ export function EnrollmentPageClient() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/contact"
+                href="/contact#contact-form"
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary-foreground text-primary rounded-lg font-semibold hover:bg-primary-foreground/90 transition-colors"
               >
                 {safeT('enrollmentPage.cta.primary', 'Contact Us')}

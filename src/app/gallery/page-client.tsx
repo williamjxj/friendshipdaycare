@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { fadeIn } from '@/lib/animations';
+import { scaleInMagic, shimmer, staggerContainerMagic } from '@/lib/magicui-animations';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 import { usePathname } from 'next/navigation';
@@ -17,6 +18,7 @@ import { BreadcrumbSchema } from '@/components/seo/StructuredData';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { getBreadcrumbs, toBreadcrumbSchemaItems } from '@/lib/breadcrumbs';
 import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/lib/utils';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -72,19 +74,19 @@ export function GalleryPageClient() {
     category: string;
     aspectRatio?: number;
   }> = [
-    { id: 1, src: getImageUrl('/images/circle-time-board-2.jpg'), alt: 'Circle time activities', category: 'classroom', aspectRatio: 4 / 3 },
-    { id: 2, src: getImageUrl('/images/circle-time-area.jpg'), alt: 'Circle time learning space', category: 'classroom', aspectRatio: 4 / 3 },
-    { id: 3, src: getImageUrl('/images/practical-life-shelf-1.jpg'), alt: 'Practical life materials', category: 'classroom', aspectRatio: 4 / 3 },
-    { id: 4, src: getImageUrl('/images/practical-life-shelf-2.jpg'), alt: 'Practical life activities', category: 'classroom', aspectRatio: 4 / 3 },
-    { id: 5, src: getImageUrl('/images/sensorial-shelf.jpg'), alt: 'Sensorial learning', category: 'classroom', aspectRatio: 4 / 3 },
-    { id: 6, src: getImageUrl('/images/language-shelf.jpg'), alt: 'Language materials', category: 'activities', aspectRatio: 4 / 3 },
-    { id: 7, src: getImageUrl('/images/math-shelf.jpg'), alt: 'Mathematics learning materials', category: 'activities', aspectRatio: 4 / 3 },
-    { id: 8, src: getImageUrl('/images/culture-shelf.jpg'), alt: 'Cultural studies materials', category: 'activities', aspectRatio: 4 / 3 },
-    { id: 9, src: getImageUrl('/images/art-themed-board-2.jpg'), alt: 'Art-themed display board', category: 'classroom', aspectRatio: 4 / 3 },
-    { id: 10, src: getImageUrl('/images/toys.jpg'), alt: 'Toys and pretend play area', category: 'activities', aspectRatio: 4 / 3 },
-    { id: 11, src: getImageUrl('/images/playground.jpg'), alt: 'Playground activities', category: 'playground', aspectRatio: 4 / 3 },
-    { id: 12, src: getImageUrl('/images/slidetop-bg.jpg'), alt: 'Daycare environment', category: 'classroom', aspectRatio: 16 / 9 },
-  ];
+      { id: 1, src: getImageUrl('/images/circle-time-board-2.jpg'), alt: 'Circle time activities', category: 'classroom', aspectRatio: 4 / 3 },
+      { id: 2, src: getImageUrl('/images/circle-time-area.jpg'), alt: 'Circle time learning space', category: 'classroom', aspectRatio: 4 / 3 },
+      { id: 3, src: getImageUrl('/images/practical-life-shelf-1.jpg'), alt: 'Practical life materials', category: 'classroom', aspectRatio: 4 / 3 },
+      { id: 4, src: getImageUrl('/images/practical-life-shelf-2.jpg'), alt: 'Practical life activities', category: 'classroom', aspectRatio: 4 / 3 },
+      { id: 5, src: getImageUrl('/images/sensorial-shelf.jpg'), alt: 'Sensorial learning', category: 'classroom', aspectRatio: 4 / 3 },
+      { id: 6, src: getImageUrl('/images/language-shelf.jpg'), alt: 'Language materials', category: 'activities', aspectRatio: 4 / 3 },
+      { id: 7, src: getImageUrl('/images/math-shelf.jpg'), alt: 'Mathematics learning materials', category: 'activities', aspectRatio: 4 / 3 },
+      { id: 8, src: getImageUrl('/images/culture-shelf.jpg'), alt: 'Cultural studies materials', category: 'activities', aspectRatio: 4 / 3 },
+      { id: 9, src: getImageUrl('/images/art-themed-board-2.jpg'), alt: 'Art-themed display board', category: 'classroom', aspectRatio: 4 / 3 },
+      { id: 10, src: getImageUrl('/images/toys.jpg'), alt: 'Toys and pretend play area', category: 'activities', aspectRatio: 4 / 3 },
+      { id: 11, src: getImageUrl('/images/playground.jpg'), alt: 'Playground activities', category: 'playground', aspectRatio: 4 / 3 },
+      { id: 12, src: getImageUrl('/images/slidetop-bg.jpg'), alt: 'Daycare environment', category: 'classroom', aspectRatio: 16 / 9 },
+    ];
 
   const filteredImages = selectedCategory === 'all'
     ? galleryImages
@@ -125,17 +127,41 @@ export function GalleryPageClient() {
     const viewport = viewportRef.current;
     const track = trackRef.current;
     if (!viewport || !track) return;
-    // Set initial position
-    slideWidthRef.current = viewport.offsetWidth;
-    gsap.set(track, { x: 0 });
-    const ro = new ResizeObserver(() => {
+
+    const updateSlideWidth = () => {
       slideWidthRef.current = viewport.offsetWidth;
       const idx = indexRef.current;
       gsap.set(track, { x: -idx * slideWidthRef.current });
-    });
+    };
+
+    updateSlideWidth();
+    const ro = new ResizeObserver(updateSlideWidth);
     ro.observe(viewport);
     return () => ro.disconnect();
   }, [filteredImages.length]);
+
+  // Update slide visuals whenever selected index changes
+  useGSAP(() => {
+    const slides = gsap.utils.toArray('.gallery-carousel-slide');
+    if (!slides.length) return;
+
+    slides.forEach((slide: any, i) => {
+      const distance = i - carouselSelectedIndex;
+      const isActive = i === carouselSelectedIndex;
+
+      gsap.to(slide, {
+        scale: isActive ? 1.1 : 0.85,
+        opacity: isActive ? 1 : 0.4,
+        filter: isActive ? 'blur(0px)' : 'blur(6px)',
+        rotationY: distance * -15,
+        z: isActive ? 100 : -150,
+        x: distance * (typeof window !== 'undefined' && window.innerWidth < 640 ? 0 : 20),
+        duration: 0.8,
+        ease: 'expo.out',
+        overwrite: 'auto'
+      });
+    });
+  }, [carouselSelectedIndex, filteredImages.length]);
 
   // Autoplay: advance every 6s when not hovered/focused
   useEffect(() => {
@@ -266,18 +292,17 @@ export function GalleryPageClient() {
     <Suspense fallback={<LoadingSpinner message="Loading gallery..." />}>
       <main className="flex-1">
         <BreadcrumbSchema items={toBreadcrumbSchemaItems(breadcrumbs)} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
+
         {/* Hero Section */}
         <PageHero
           title={t('galleryPage.hero.title')}
           subtitle={t('galleryPage.hero.subtitle')}
           backgroundSvg={getImageUrl('/imgs/gallery/gallery_hero_1.gif')}
           enableScrollTrigger={true}
-          hideSubtitle={true}
-          hideTitle={true}
+          hideSubtitle={false}
+          hideTitle={false}
           unoptimized={true}
+          topContent={<Breadcrumbs items={breadcrumbs} />}
         >
           <HeroCTAButtons variant="outlined" />
         </PageHero>
@@ -293,7 +318,7 @@ export function GalleryPageClient() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="gallery-section-title text-center space-y-4 mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
                 {t('galleryPage.gallery.title')}
               </h2>
               <p className="text-lg text-muted-foreground w-full max-w-none">
@@ -308,8 +333,8 @@ export function GalleryPageClient() {
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
                   className={`px-6 py-3 rounded-full text-sm md:text-base font-bold transition-all duration-300 border-2 cursor-pointer ${selectedCategory === category.id
-                      ? 'bg-primary text-primary-foreground border-primary shadow-xl scale-105 ring-4 ring-primary/20'
-                      : 'bg-muted/70 text-muted-foreground border-border/50 hover:bg-muted hover:border-primary/50 hover:shadow-lg hover:scale-105'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-xl scale-105 ring-4 ring-primary/20'
+                    : 'bg-muted/70 text-muted-foreground border-border/50 hover:bg-muted hover:border-primary/50 hover:shadow-lg hover:scale-105'
                     }`}
                 >
                   {category.name}
@@ -318,52 +343,50 @@ export function GalleryPageClient() {
             </div>
 
             {/* Gallery Carousel or Empty State */}
+            <div
+              ref={carouselContainerRef}
+              className="gallery-carousel-wrap relative w-full h-[300px] sm:h-[450px] md:h-[600px] mx-auto perspective-[1500px]"
+              onMouseEnter={() => setIsCarouselHoveredOrFocused(true)}
+              onMouseLeave={() => setIsCarouselHoveredOrFocused(false)}
+            >
               <div
-                ref={carouselContainerRef}
-                className="gallery-carousel-wrap relative w-full max-w-[950px] mx-auto"
-                onMouseEnter={() => setIsCarouselHoveredOrFocused(true)}
-                onMouseLeave={() => setIsCarouselHoveredOrFocused(false)}
-                onFocusCapture={() => setIsCarouselHoveredOrFocused(true)}
-                onBlurCapture={(e) => {
-                  if (!carouselContainerRef.current?.contains(e.relatedTarget as Node)) {
-                    setIsCarouselHoveredOrFocused(false);
-                  }
-                }}
+                ref={viewportRef}
+                className="relative w-full h-full overflow-hidden touch-pan-y select-none"
+                style={{ touchAction: 'pan-y pinch-zoom' }}
+                onPointerDown={onPointerDown}
+                tabIndex={0}
+                role="region"
+                aria-roledescription="carousel"
+                aria-label={t('galleryPage.gallery.title')}
               >
                 <div
-                  ref={viewportRef}
-                  className="overflow-hidden w-full touch-pan-y select-none cursor-grab active:cursor-grabbing"
-                  style={{ touchAction: 'pan-y pinch-zoom' }}
-                  onPointerDown={onPointerDown}
-                  onKeyDown={(e) => {
-                    if (filteredImages.length <= 1) return;
-                    if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(carouselSelectedIndex - 1); }
-                    if (e.key === 'ArrowRight') { e.preventDefault(); goToSlide(carouselSelectedIndex + 1); }
-                  }}
-                  tabIndex={0}
-                  role="region"
-                  aria-roledescription="carousel"
-                  aria-label={t('galleryPage.gallery.title')}
+                  ref={trackRef}
+                  className="flex h-full will-change-transform"
+                  style={{ width: `${filteredImages.length * 100}%` }}
+                  suppressHydrationWarning
                 >
-                  <div
-                    ref={trackRef}
-                    className="flex flex-nowrap will-change-transform"
-                    style={{ width: `${filteredImages.length * 100}%` }}
-                  >
-                    {filteredImages.map((image, index) => (
+                  {filteredImages.map((image, index) => {
+                    const isActive = index === carouselSelectedIndex;
+                    const isPrev = index === (carouselSelectedIndex - 1 + filteredImages.length) % filteredImages.length;
+                    const isNext = index === (carouselSelectedIndex + 1) % filteredImages.length;
+
+                    return (
                       <div
                         key={image.id}
-                        className="gallery-carousel-slide flex-shrink-0 w-full px-0"
-                        style={{ width: `${100 / filteredImages.length}%`, minWidth: `${100 / filteredImages.length}%` }}
+                        className={cn(
+                          "gallery-carousel-slide flex-shrink-0 h-full flex items-center justify-center p-2 sm:p-4 perspective-[1000px] [transform-style:preserve-3d]"
+                        )}
+                        style={{
+                          width: `${(100 / filteredImages.length).toFixed(5)}%`,
+                        }}
+                        suppressHydrationWarning
                       >
                         <div
-                          className="relative group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl border-2 border-border/50 hover:border-primary/40 transition-all duration-500 w-full"
-                          style={{ aspectRatio: image.aspectRatio ?? 4 / 3 }}
-                          role="button"
-                          tabIndex={0}
+                          className={cn(
+                            "relative h-full w-full rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-2 sm:border-4 border-white/20 group cursor-pointer transition-all duration-500",
+                            isActive ? "shadow-primary/20" : "shadow-black/50"
+                          )}
                           onClick={() => handleImageClick(index)}
-                          onKeyDown={(e) => e.key === 'Enter' && handleImageClick(index)}
-                          aria-label={image.alt}
                         >
                           {!loadedImages[index] && (
                             <Skeleton className="absolute inset-0 w-full h-full" />
@@ -372,56 +395,77 @@ export function GalleryPageClient() {
                             src={image.src}
                             alt={image.alt}
                             fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 950px"
-                            className="object-contain"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1200px"
+                            className="object-cover transition-transform duration-1000 group-hover:scale-110"
                             onLoad={() => handleImageLoaded(index)}
+                            priority={isActive}
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 group-hover:from-black/80 transition-all duration-500" />
-                          <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            <p className="text-white font-semibold text-lg drop-shadow-lg">{image.alt}</p>
+
+                          {/* Premium Overlay and Caption */}
+                          <div className={cn(
+                            "absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500",
+                            isActive ? "opacity-100" : "opacity-0"
+                          )} />
+
+                          <div className={cn(
+                            "absolute bottom-0 left-0 right-0 p-8 sm:p-12 transition-all duration-700 delay-100 transform",
+                            isActive ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                          )}>
+                            <h3 className="text-white text-2xl sm:text-4xl font-display font-bold mb-2 drop-shadow-2xl">
+                              {image.alt}
+                            </h3>
+                            <div className="h-1 w-20 bg-primary rounded-full shadow-lg" />
                           </div>
                         </div>
                       </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Enhanced Controls */}
+              {filteredImages.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => goToSlide(carouselSelectedIndex - 1)}
+                    className="absolute -left-6 md:-left-12 top-1/2 -translate-y-1/2 z-40 p-4 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white shadow-2xl hover:bg-white/20 hover:scale-110 transition-all group lg:block hidden"
+                    aria-label="Previous slide"
+                  >
+                    <ChevronLeftIcon className="h-8 w-8 group-hover:-translate-x-1 transition-transform" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => goToSlide(carouselSelectedIndex + 1)}
+                    className="absolute -right-6 md:-right-12 top-1/2 -translate-y-1/2 z-40 p-4 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white shadow-2xl hover:bg-white/20 hover:scale-110 transition-all group lg:block hidden"
+                    aria-label="Next slide"
+                  >
+                    <ChevronRightIcon className="h-8 w-8 group-hover:translate-x-1 transition-transform" />
+                  </button>
+
+                  {/* Modern Indicators */}
+                  <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-4">
+                    {filteredImages.map((_, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        className="relative group p-2"
+                        onClick={() => goToSlide(index)}
+                        aria-label={`Go to slide ${index + 1}`}
+                      >
+                        <div className={cn(
+                          "transition-all duration-500 rounded-full",
+                          index === carouselSelectedIndex
+                            ? "w-10 h-3 bg-primary shadow-[0_0_15px_rgba(var(--primary-rgb),0.5)]"
+                            : "w-3 h-3 bg-muted-foreground/30 group-hover:bg-muted-foreground/50"
+                        )} />
+                      </button>
                     ))}
                   </div>
-                </div>
-                {filteredImages.length > 1 && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => goToSlide(carouselSelectedIndex - 1)}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 z-10 md:left-4 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors"
-                      aria-label="Previous slide"
-                    >
-                      <ChevronLeftIcon className="h-6 w-6" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => goToSlide(carouselSelectedIndex + 1)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 z-10 md:right-4 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors"
-                      aria-label="Next slide"
-                    >
-                      <ChevronRightIcon className="h-6 w-6" />
-                    </button>
-                    <div className="gallery-carousel-dots flex justify-center gap-2 mt-4">
-                      {filteredImages.map((_, index) => (
-                        <button
-                          key={index}
-                          type="button"
-                          className={`h-3 w-3 rounded-full transition-all duration-200 ${
-                            index === carouselSelectedIndex
-                              ? 'bg-primary scale-110'
-                              : 'bg-muted-foreground/40 hover:bg-muted-foreground/60'
-                          }`}
-                          onClick={() => goToSlide(index)}
-                          aria-label={`Go to slide ${index + 1}`}
-                        />
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
+                </>
+              )}
             </div>
+          </div>
         </motion.section>
 
         {/* CTA Section */}
@@ -437,7 +481,7 @@ export function GalleryPageClient() {
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/20 rounded-full blur-3xl" />
 
           <div className="max-w-4xl mx-auto px-4 text-center space-y-10 relative z-10">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white drop-shadow-2xl">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white drop-shadow-2xl">
               {t('galleryPage.cta.title')}
             </h2>
             <p className="text-xl md:text-2xl text-white/95 font-medium leading-relaxed">
@@ -445,7 +489,7 @@ export function GalleryPageClient() {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
-                href="/contact"
+                href="/contact#contact-form"
                 className="inline-flex items-center justify-center px-10 py-5 bg-white text-primary rounded-full font-bold text-lg hover:bg-white/95 hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-white/50 ring-4 ring-white/30"
               >
                 {t('galleryPage.cta.primary')}
@@ -462,35 +506,46 @@ export function GalleryPageClient() {
 
         {/* Image Modal */}
         {selectedImage !== null && (
-          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+            animate={{ opacity: 1, backdropFilter: 'blur(16px)' }}
+            exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+            className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
+          >
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-white p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors"
+              className="absolute top-4 right-4 text-white z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all"
             >
               <XMarkIcon className="h-6 w-6" />
             </button>
             <button
               onClick={prevImage}
-              className="absolute left-4 text-white p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all"
             >
-              <ChevronLeftIcon className="h-6 w-6" />
+              <ChevronLeftIcon className="h-8 w-8" />
             </button>
             <button
               onClick={nextImage}
-              className="absolute right-4 text-white p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all"
             >
-              <ChevronRightIcon className="h-6 w-6" />
+              <ChevronRightIcon className="h-8 w-8" />
             </button>
-            <div className="relative max-w-4xl w-full h-[70vh]">
+
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="relative max-w-5xl w-full h-[75vh]"
+            >
               <Image
                 src={filteredImages[selectedImage].src}
                 alt={filteredImages[selectedImage].alt}
                 fill
                 sizes="100vw"
-                className="object-contain"
+                className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         )}
       </main>
     </Suspense>
