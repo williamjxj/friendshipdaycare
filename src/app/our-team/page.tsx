@@ -4,7 +4,7 @@ import { OurTeamPageClient } from './page-client';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Our Team',
-  description: 'Meet the educators at Friendship Corner Daycare in Coquitlam. Our dedicated ECE-certified team provides quality Montessori care.',
+  description: 'Meet the educators at Friendship Corner Daycare in Coquitlam, BC. ECE-certified team providing quality Montessori care since 2008. Book a tour to meet us.',
   path: '/our-team'
 });
 

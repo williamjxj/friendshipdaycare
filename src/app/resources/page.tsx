@@ -1,10 +1,12 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Parent Resources & Handbook | Friendship Corner Daycare',
-  description: 'Access our parent handbook, policies, downloadable resources, and helpful guides for families at Friendship Corner Daycare.',
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Parent Resources & Handbook',
+  description: 'Parent resources at Friendship Corner Daycare in Coquitlam: handbook, policies, subsidy guides & Montessori reading. Helpful for Tri-Cities families.',
+  path: '/resources',
+});
 
 interface Resource {
   title: string;

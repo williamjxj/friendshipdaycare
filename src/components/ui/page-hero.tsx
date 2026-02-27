@@ -18,6 +18,8 @@ interface PageHeroProps {
   title: string;
   subtitle?: string;
   description?: string;
+  /** Custom ReactNode for animated description (e.g. flip carousel, marquee). Overrides description when set. */
+  descriptionContent?: ReactNode;
   backgroundImage?: string;
   backgroundSvg?: string;
   className?: string;
@@ -34,6 +36,7 @@ export function PageHero({
   title,
   subtitle,
   description,
+  descriptionContent,
   backgroundImage,
   backgroundSvg,
   className,
@@ -294,15 +297,19 @@ export function PageHero({
             </h2>
           )}
 
-          {description && (
-            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-white/90 leading-relaxed drop-shadow-md max-w-4xl mx-auto"
-              style={{
-                fontFamily: 'var(--font-fredoka)',
-                letterSpacing: '0.01em',
-              }}
-            >
-              {description}
-            </h3>
+          {(description || descriptionContent) && (
+            descriptionContent ? (
+              descriptionContent
+            ) : (
+              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-white/90 leading-relaxed drop-shadow-md max-w-4xl mx-auto"
+                style={{
+                  fontFamily: 'var(--font-fredoka)',
+                  letterSpacing: '0.01em',
+                }}
+              >
+                {description}
+              </h3>
+            )
           )}
 
           {children && (

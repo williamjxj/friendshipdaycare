@@ -13,6 +13,7 @@ import { MobileCtaBar } from "@/components/ui/MobileCtaBar";
 import { Toaster } from "@/components/ui/toaster";
 import { LocalBusinessSchema, OrganizationSchema, WebSiteSchema } from "@/components/seo/StructuredData";
 import { businessProfile } from "@/lib/business-profile";
+import { getAggregateRating } from "@/data/testimonials";
 import { defaultSiteMetadata } from "@/lib/seo";
 import "./globals.css";
 
@@ -68,6 +69,7 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const localeCookie = cookieStore.get('language')?.value;
   const initialLocale: Locale = isValidLocale(localeCookie) ? localeCookie : 'en';
+  const aggregateRating = getAggregateRating();
 
   return (
     <html lang={initialLocale}>
@@ -97,6 +99,7 @@ export default async function RootLayout({
           openingHours={businessProfile.openingHours}
           serviceArea={businessProfile.serviceArea}
           sameAs={businessProfile.sameAs}
+          aggregateRating={aggregateRating ?? undefined}
         />
         <OrganizationSchema
           name={businessProfile.name}

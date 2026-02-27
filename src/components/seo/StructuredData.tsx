@@ -23,6 +23,8 @@ interface LocalBusinessSchemaProps {
   openingHours?: string[];
   serviceArea?: string;
   sameAs?: string[];
+  /** Schema.org AggregateRating; only added when reviewCount >= 1 */
+  aggregateRating?: { ratingValue: number; reviewCount: number };
 }
 
 export function LocalBusinessSchema({
@@ -39,6 +41,7 @@ export function LocalBusinessSchema({
   ],
   serviceArea,
   sameAs = [],
+  aggregateRating,
 }: LocalBusinessSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
@@ -108,6 +111,17 @@ export function LocalBusinessSchema({
       };
     }),
     ...(sameAs.length > 0 ? { sameAs } : {}),
+    ...(aggregateRating && aggregateRating.reviewCount >= 1
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: String(aggregateRating.ratingValue),
+            reviewCount: aggregateRating.reviewCount,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }
+      : {}),
   };
 
   return (

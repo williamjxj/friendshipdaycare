@@ -11,11 +11,11 @@ export const SEO_DEFAULT_DESCRIPTION =
 export const SEO_DEFAULT_KEYWORDS = [
   "Montessori daycare Coquitlam",
   "Coquitlam daycare",
-  "Coquiltam child care",
+  "Coquitlam child care",
   "Coquitlam montessori",
   "Coquitlam preschool",
   "Tri-Cities daycare",
-  "Port Coquiltam daycare",
+  "Port Coquitlam daycare",
   "Port Coquitlam montessori",
   "preschool",
   "Coquitlam",

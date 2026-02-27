@@ -7,10 +7,9 @@ import { HeroCTAButtons } from '@/components/ui/hero-cta-buttons';
 import { getImageUrl } from '@/lib/image-utils';
 import Link from 'next/link';
 import Image from 'next/image';
-import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { motion } from 'framer-motion';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { fadeIn } from '@/lib/animations';
-import { scaleInMagic, shimmer, staggerContainerMagic } from '@/lib/magicui-animations';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 import { usePathname } from 'next/navigation';
@@ -18,6 +17,7 @@ import { BreadcrumbSchema } from '@/components/seo/StructuredData';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { getBreadcrumbs, toBreadcrumbSchemaItems } from '@/lib/breadcrumbs';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -140,21 +140,7 @@ export function GalleryPageClient() {
     return () => ro.disconnect();
   }, [filteredImages.length]);
 
-  // Update slide visuals - BestIT flat style: no 3D, no scale/blur
-  useGSAP(() => {
-    const slides = gsap.utils.toArray('.gallery-carousel-slide');
-    if (!slides.length) return;
-
-    slides.forEach((slide: any, i) => {
-      const isActive = i === carouselSelectedIndex;
-      gsap.to(slide, {
-        opacity: isActive ? 1 : 0.5,
-        duration: 0.3,
-        ease: 'power2.out',
-        overwrite: 'auto'
-      });
-    });
-  }, [carouselSelectedIndex, filteredImages.length]);
+  // Slide visuals use CSS classes (no GSAP on cards) to avoid hydration mismatch
 
   // Autoplay: advance every 6s when not hovered/focused
   useEffect(() => {
@@ -222,27 +208,27 @@ export function GalleryPageClient() {
     setSelectedImage(index);
   };
 
-  // GSAP Option A: entrance when gallery section enters view + slide transition on index change
+  // GSAP ScrollTrigger: entrance animation when gallery section enters view
   useGSAP(
     () => {
       const section = gallerySectionRef.current;
       if (!section) return;
       const title = section.querySelector('.gallery-section-title');
+      const filters = section.querySelector('.gallery-category-filters');
       const carouselWrap = section.querySelector('.gallery-carousel-wrap');
-      const dotsWrap = section.querySelector('.gallery-carousel-dots');
-      const els = [title, carouselWrap, dotsWrap].filter(Boolean) as HTMLElement[];
+      const els = [title, filters, carouselWrap].filter(Boolean) as HTMLElement[];
       gsap.fromTo(
         els,
-        { y: 36, opacity: 0 },
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.12,
+          duration: 0.8,
+          stagger: 0.15,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: section,
-            start: 'top 82%',
+            start: 'top 85%',
             toggleActions: 'play none none none',
           },
         }
@@ -258,9 +244,23 @@ export function GalleryPageClient() {
     prevSlideIndexRef.current = carouselSelectedIndex;
   }, [carouselSelectedIndex]);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setSelectedImage(null);
-  };
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeModal();
+    };
+    if (selectedImage !== null) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [selectedImage, closeModal]);
 
   const nextImage = () => {
     if (selectedImage !== null) {
@@ -313,19 +313,20 @@ export function GalleryPageClient() {
               </p>
             </div>
 
-            {/* Category Filters */}
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {/* Category Filters - shadcn Button variants */}
+            <div className="gallery-category-filters flex flex-wrap justify-center gap-3 mb-12">
               {categories.map((category) => (
-                <button
+                <Button
                   key={category.id}
+                  variant={selectedCategory === category.id ? 'default' : 'outline'}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`px-6 py-3 rounded-full text-sm md:text-base font-bold transition-all duration-300 border-2 cursor-pointer ${selectedCategory === category.id
-                    ? 'bg-primary text-primary-foreground border-primary shadow-xl ring-4 ring-primary/20'
-                    : 'bg-muted/70 text-muted-foreground border-border/50 hover:bg-muted hover:border-primary/50 hover:shadow-xl transition-all duration-300'
-                    }`}
+                  className={cn(
+                    'rounded-full px-6 py-3 font-bold transition-all duration-300',
+                    selectedCategory === category.id && 'ring-2 ring-primary/30 shadow-lg'
+                  )}
                 >
                   {category.name}
-                </button>
+                </Button>
               ))}
             </div>
 
@@ -354,14 +355,13 @@ export function GalleryPageClient() {
                 >
                   {filteredImages.map((image, index) => {
                     const isActive = index === carouselSelectedIndex;
-                    const isPrev = index === (carouselSelectedIndex - 1 + filteredImages.length) % filteredImages.length;
-                    const isNext = index === (carouselSelectedIndex + 1) % filteredImages.length;
 
                     return (
                       <div
                         key={image.id}
                         className={cn(
-                          "gallery-carousel-slide flex-shrink-0 h-full flex items-center justify-center p-2 sm:p-4"
+                          "gallery-carousel-slide shrink-0 h-full flex items-center justify-center p-2 sm:p-4 transition-opacity duration-300",
+                          isActive ? "opacity-100" : "opacity-40"
                         )}
                         style={{
                           width: `${(100 / filteredImages.length).toFixed(5)}%`,
@@ -370,15 +370,15 @@ export function GalleryPageClient() {
                       >
                         <div
                           className={cn(
-                            "relative h-full w-full rounded-xl overflow-hidden shadow hover:shadow-xl bg-white/50 dark:bg-card/80 backdrop-blur-sm border-0 group cursor-pointer transition-all duration-300",
-                            isActive ? "shadow-xl" : "shadow"
+                            "gallery-carousel-card relative h-full w-full rounded-xl overflow-hidden shadow hover:shadow-xl bg-white/50 dark:bg-card/80 backdrop-blur-sm border-0 cursor-pointer transition-all duration-300 origin-center",
+                            isActive ? "shadow-xl ring-2 ring-primary/30 scale-[1.02]" : "shadow scale-[0.98]"
                           )}
                           onClick={() => handleImageClick(index)}
                         >
                           {!loadedImages[index] && (
                             <Skeleton className="absolute inset-0 w-full h-full" />
                           )}
-                          <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
+                          <div className="absolute inset-0">
                             <Image
                               src={image.src}
                               alt={image.alt}
@@ -390,20 +390,15 @@ export function GalleryPageClient() {
                             />
                           </div>
 
-                          {/* Premium Overlay and Caption */}
+                          {/* Caption on active slide only - no hover overlay */}
                           <div className={cn(
-                            "absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500",
-                            isActive ? "opacity-100" : "opacity-0"
-                          )} />
-
-                          <div className={cn(
-                            "absolute bottom-0 left-0 right-0 p-8 sm:p-12 transition-all duration-700 delay-100 transform",
-                            isActive ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                            "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-6 sm:p-8 transition-all duration-500",
+                            isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                           )}>
-                            <h3 className="text-white text-2xl sm:text-4xl font-display font-bold mb-2 drop-shadow-2xl">
+                            <h3 className="text-white text-xl sm:text-3xl font-display font-bold drop-shadow-2xl">
                               {image.alt}
                             </h3>
-                            <div className="h-1 w-20 bg-primary rounded-full shadow-lg" />
+                            <div className="h-1 w-16 bg-primary rounded-full shadow-lg mt-2" />
                           </div>
                         </div>
                       </div>
@@ -412,43 +407,51 @@ export function GalleryPageClient() {
                 </div>
               </div>
 
-              {/* Enhanced Controls */}
+              {/* shadcn Button nav controls */}
               {filteredImages.length > 1 && (
                 <>
-                  <button
+                  <Button
                     type="button"
+                    variant="outline"
+                    size="icon"
                     onClick={() => goToSlide(carouselSelectedIndex - 1)}
-                    className="absolute -left-6 md:-left-12 top-1/2 -translate-y-1/2 z-40 p-4 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white shadow-2xl hover:bg-white/20 hover:scale-110 transition-all group lg:block hidden"
+                    className="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 z-40 h-12 w-12 rounded-full bg-background/90 backdrop-blur-md border-border shadow-xl hover:bg-background hover:scale-110 transition-all lg:flex hidden"
                     aria-label="Previous slide"
                   >
-                    <ChevronLeftIcon className="h-8 w-8 group-hover:-translate-x-1 transition-transform" />
-                  </button>
-                  <button
+                    <ChevronLeft className="h-6 w-6" />
+                  </Button>
+                  <Button
                     type="button"
+                    variant="outline"
+                    size="icon"
                     onClick={() => goToSlide(carouselSelectedIndex + 1)}
-                    className="absolute -right-6 md:-right-12 top-1/2 -translate-y-1/2 z-40 p-4 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white shadow-2xl hover:bg-white/20 hover:scale-110 transition-all group lg:block hidden"
+                    className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 z-40 h-12 w-12 rounded-full bg-background/90 backdrop-blur-md border-border shadow-xl hover:bg-background hover:scale-110 transition-all lg:flex hidden"
                     aria-label="Next slide"
                   >
-                    <ChevronRightIcon className="h-8 w-8 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                    <ChevronRight className="h-6 w-6" />
+                  </Button>
 
-                  {/* Modern Indicators */}
-                  <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-4">
+                  {/* Pill-style dot indicators */}
+                  <div className="absolute -bottom-14 left-1/2 -translate-x-1/2 flex items-center gap-2">
                     {filteredImages.map((_, index) => (
-                      <button
+                      <Button
                         key={index}
-                        type="button"
-                        className="relative group p-2"
+                        variant="ghost"
+                        size="icon-sm"
+                        className="h-auto p-1.5"
                         onClick={() => goToSlide(index)}
                         aria-label={`Go to slide ${index + 1}`}
+                        aria-current={index === carouselSelectedIndex ? 'true' : undefined}
                       >
-                        <div className={cn(
-                          "transition-all duration-500 rounded-full",
-                          index === carouselSelectedIndex
-                            ? "w-10 h-3 bg-primary shadow-[0_0_15px_rgba(var(--primary-rgb),0.5)]"
-                            : "w-3 h-3 bg-muted-foreground/30 group-hover:bg-muted-foreground/50"
-                        )} />
-                      </button>
+                        <span
+                          className={cn(
+                            "block rounded-full transition-all duration-300",
+                            index === carouselSelectedIndex
+                              ? "w-8 h-2.5 bg-primary"
+                              : "w-2.5 h-2.5 bg-muted-foreground/40 hover:bg-muted-foreground/60"
+                          )}
+                        />
+                      </Button>
                     ))}
                   </div>
                 </>
@@ -493,49 +496,70 @@ export function GalleryPageClient() {
           </div>
         </motion.section>
 
-        {/* Image Modal */}
-        {selectedImage !== null && (
-          <motion.div
-            initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-            animate={{ opacity: 1, backdropFilter: 'blur(16px)' }}
-            exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-            className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
-          >
-            <button
-              onClick={closeModal}
-              className="absolute top-4 right-4 text-white z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all"
-            >
-              <XMarkIcon className="h-6 w-6" />
-            </button>
-            <button
-              onClick={prevImage}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all"
-            >
-              <ChevronLeftIcon className="h-8 w-8" />
-            </button>
-            <button
-              onClick={nextImage}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all"
-            >
-              <ChevronRightIcon className="h-8 w-8" />
-            </button>
-
+        {/* Image Modal - AnimatePresence for exit animation */}
+        <AnimatePresence mode="wait">
+          {selectedImage !== null && (
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative max-w-5xl w-full h-[75vh]"
+              key="gallery-modal"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              onClick={closeModal}
             >
-              <Image
-                src={filteredImages[selectedImage].src}
-                alt={filteredImages[selectedImage].alt}
-                fill
-                sizes="100vw"
-                className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
-              />
+              <div
+                className="absolute inset-4 flex items-center justify-center pointer-events-none"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.95, opacity: 0 }}
+                  transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                  className="relative max-w-5xl w-full h-[75vh] pointer-events-auto"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Image
+                    src={filteredImages[selectedImage!].src}
+                    alt={filteredImages[selectedImage!].alt}
+                    fill
+                    sizes="100vw"
+                    className="object-contain drop-shadow-2xl rounded-lg"
+                  />
+                </motion.div>
+              </div>
+
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={closeModal}
+                className="absolute top-4 right-4 z-50 h-10 w-10 rounded-full bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
+                aria-label="Close"
+              >
+                <X className="h-5 w-5" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-50 h-12 w-12 rounded-full bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-50 h-12 w-12 rounded-full bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </Button>
             </motion.div>
-          </motion.div>
-        )}
+          )}
+        </AnimatePresence>
       </main>
     </Suspense>
   );

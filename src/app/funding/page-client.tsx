@@ -18,12 +18,21 @@ export function FundingPageClient() {
         <section className="space-y-8 mb-12">
           <h2 className="text-2xl font-semibold">BC Affordable Child Care Benefit (ACCB)</h2>
           <p className="text-muted-foreground">
-            Eligible families may receive support through the provincial Affordable Child Care Benefit. We can help you understand the application process.
+            Eligible families may receive support through the provincial Affordable Child Care Benefit. Eligibility is based on family income, family size, and type of care. We can help you understand the application process.
           </p>
+          <a
+            href="https://www2.gov.bc.ca/gov/content/family-social-support/caring-for-young-children/child-care/child-care-benefits"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary font-medium hover:underline inline-flex items-center gap-1"
+          >
+            Apply for ACCB on BC Government website
+            <span aria-hidden>→</span>
+          </a>
 
           <h2 className="text-2xl font-semibold">ChildCareBC $10-a-Day Program</h2>
           <p className="text-muted-foreground">
-            Friendship Corner Daycare participates in the $10-a-day child care program where spaces are available. Contact us for current availability.
+            Friendship Corner Daycare participates in the $10-a-day child care program where spaces are available. Contact us for current availability and eligibility.
           </p>
         </section>
 

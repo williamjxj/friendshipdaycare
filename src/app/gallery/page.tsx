@@ -5,7 +5,7 @@ import { GalleryPageClient } from "@/app/gallery/page-client";
 export const metadata: Metadata = buildPageMetadata({
   title: "Daycare Gallery in Coquitlam",
   description:
-    "Browse photos and videos from Friendship Corner Daycare in Coquitlam, BC. See Montessori classrooms, activities, and spaces.",
+    "Browse photos and videos from Friendship Corner Montessori daycare in Coquitlam, BC. Montessori classrooms, activities & outdoor spaces. Book a tour to visit in person.",
   path: "/gallery"
 });
 

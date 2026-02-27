@@ -20,7 +20,7 @@ const DEFAULT_PROGRAMS: Record<string, ProgramContent> = {
   infant: {
     slug: 'infant',
     title: 'Infant Program',
-    description: 'Montessori infant care at Friendship Corner Daycare in Coquitlam. Nurturing environment for babies with experienced educators.',
+    description: 'Montessori infant care at Friendship Corner Daycare in Coquitlam, BC. Nurturing environment for babies 6-18 months. Experienced educators. Licensed care. Book a tour today.',
     ageRange: '6 months - 18 months',
     locale: 'en',
     content: `
@@ -47,7 +47,7 @@ const DEFAULT_PROGRAMS: Record<string, ProgramContent> = {
   toddler: {
     slug: 'toddler',
     title: 'Toddler Program',
-    description: 'Montessori toddler program in Coquitlam. Ages 30 months to 3 years. Hands-on learning, independence building, and social skills.',
+    description: 'Montessori toddler program at Friendship Corner Daycare in Coquitlam, BC. Ages 30 months to 3 years. Hands-on learning, independence building. Book a free tour today.',
     ageRange: '30 months - 3 years',
     locale: 'en',
     content: `
@@ -74,7 +74,7 @@ const DEFAULT_PROGRAMS: Record<string, ProgramContent> = {
   preschool: {
     slug: 'preschool',
     title: 'Preschool & Pre-Kindergarten Program',
-    description: 'Montessori preschool in Coquitlam for ages 3-5. Pre-kindergarten readiness, hands-on learning, and holistic development.',
+    description: 'Montessori preschool and pre-kindergarten at Friendship Corner Daycare in Coquitlam, BC. Ages 3-5. School readiness, hands-on learning. Book a free tour today.',
     ageRange: '3 - 5 years',
     locale: 'en',
     content: `

@@ -93,10 +93,10 @@
     },
     "resources": {
       "title": "Resources",
-      "canva1": "Canva 1",
-      "canva2": "Canva 2",
-      "gamma": "Gamma",
-      "slideDeck": "Slide Deck",
+      "canva1": "Parent Handbook",
+      "canva2": "Funding Guide",
+      "gamma": "FAQ",
+      "slideDeck": "Activities",
       "notebookSlides": "NotebookLM Slides"
     },
     "contact": {
@@ -117,6 +117,20 @@
     },
     "copyright": "© 2024 Friendship Corner Daycare. All rights reserved.",
     "phone": "604.945.8504"
+  },
+  "testimonials": {
+    "quotes": {
+      "t1": "The facility is very clean, the teachers are responsible, friendly, and communicate well with parents.",
+      "t2": "We moved from Colombia to Coquitlam last year, and we were so fortunate to find this daycare for our son. It's a great place not only for education but for values. The teachers care about the kids, and my son felt loved all the time. He is now in an elementary school, but everyday he passes by the daycare he stops to say hello to the teachers. Also the facilities are very nice and clean. I highly recommend this daycare if you need a place you can trust for your child to go to.",
+      "t3": "We transferred our son to Friendship Corner Daycare at the age of 3, and it turned out to be the best decision that we have made for him. The teachers are all very nice and caring, they gave our son way more attention than his previous daycare, and therefore he was much happier and more confident. They do arts project, drawings and paintings, stories, letters and numbers... my son learned a lot from this daycare! He's always happy to go to daycare every morning and coming back home with a smile on his face. The facilities are very well organized and super clean. My son has never caught any germ or got sick from daycare. He had a very smooth transition to kindergarten thanks to the great experiences he had with Friendship Corner Daycare. I would highly recommend this daycare to anyone!",
+      "t4": "This daycare can be called a second home for my three children( 7yrs, 5yrs, 4yrs)! The facilities are very nice and clean, teachers are very caring and patient! Nothing to complain about for over five years! My kids are always happy to go to daycare, my kindergarten child still loves to come back to the daycare for summer vacation. I highly recommend this daycare if you would like to find a worry free place for your child to go to!",
+      "t5": "The daycare itself is a great place, the insides are sanitary and everything is organized very well. The staff are very caring towards all the children they also plan a lot of small arts and crafts for the child to do each week. I have been a parent of this daycare for over 7 years and I have never once had a problem with leaving my child there while I went to work. My children love it there they always go home with a smile telling me about the great day they've had at daycare.",
+      "t6": "My daughter went to two daycares before she joined Friendship corner, this is the best one, the classroom is always clean, we have never had issues of getting infected with flu or diarrhea, which we had a lot in the previous daycare. Teachers are very professional, my daughter's English improved a lot in short time, she not only learned lower case letters but also phonics and she soon learned to spell the words. The art works are very creative too! Everyday when I go to pick her up she would 'play a little bit longer'. Everything here is well organized and I always know what they are doing. The daycare locates in a church, has its own playground, very safe.",
+      "t7": "Especially good daycare, the teacher is very nice and responsible. My daughter is very happy every day in this daycare and she learned a lot. She can read the words, read some simple sentences and do simple maths. She also learned a lot of knowledge in world, did lot of arts every week .Moreover, she is more independent in life. Thank teachers.",
+      "t8": "We are very blessed to have our son attended this daycare for two years. All the staff are always welcoming and caring to our child. The children learn many life skills and academic skills there, as well as social and emotional learnings. It's a very clean and organized facility. Communication to parents are timely and clear. The staff truly cares about children's development in their tender years. We highly recommend this daycare to anyone.",
+      "t9": "This daycare is awsome. My wife and I had visited more than ten daycares before we decided to send our daughter to this one although it is 17 kms away from our home. The teachers are patient and love children. Each Friday, my daughter will bring home a lot of ARTs she made in the week. You will know what beautiful things she can make. She was always happy to go to the daycare and sing a song she learned at the circle time. She also got good training on letters, numbers, and colors. Her English improved a lot while English is our second language. We are very happy to see her grow and learn in the daycare. Now she entered the kindergarten. Since she had a good performance on an interview before the admission, she was admitted to the class mixture with grade one students. Her transition from daycare to school is very smooth. The daycare is excellent in providing a clean and healthy environment to children. My daughter had never been affected a flu from other kids in the daycare. We highly recommend Friendship daycare if you are looking for a daycare for your loved ones.",
+      "t10": "The teachers there are all very kind and never speak loudly to the children. They genuinely love children, and my child loves this kindergarten. The kindergarten is also very clean every day. Since we switched to this kindergarten, my child has gotten sick less often. The kindergarten often does crafts, which my son especially loves. The kindergarten also has teaching notebooks for each child, recording which letters, numbers, and other knowledge each child has learned. So I highly recommend this kindergarten. My child has received excellent care here, and sometimes when I pick him up in the evening, he even wants to play a little longer."
+    }
   },
   "seo": {
     "home": {
@@ -649,7 +663,8 @@
     "hero": {
       "title": "Get in Touch With Us",
       "subtitle": "Schedule a tour, ask questions, or start enrollment today",
-      "description": "Email: friendship.care@live.ca | Phone: 604-945-8504 | Social Media: @friendshipdaycare"
+      "description": "Email: friendship.care@live.ca | Phone: 604-945-8504 | Social Media: @friendshipdaycare",
+      "phrases": ["Email: friendship.care@live.ca", "Phone: 604-945-8504", "Social Media: @friendshipdaycare"]
     },
     "info": {
       "title": "Get in Touch",

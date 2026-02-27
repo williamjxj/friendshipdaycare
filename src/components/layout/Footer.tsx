@@ -47,6 +47,20 @@ export function Footer() {
                 </span>
               </div>
             </Link>
+            <div className="flex flex-col gap-2">
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0">
+                <Image
+                  src="/daycare-logo.png"
+                  alt="Friendship Corner Daycare"
+                  fill
+                  className="object-contain"
+                  sizes="96px"
+                />
+              </div>
+              <p className="text-sm font-semibold text-muted-foreground leading-tight">
+                {t('home.hero.highlight')}
+              </p>
+            </div>
             <div className="flex items-center space-x-4">
               {businessProfile.sameAs?.map((url) => {
                 const isFb = url.includes('facebook');
@@ -176,7 +190,7 @@ export function Footer() {
                 className="hover:text-primary transition-colors font-medium inline-flex items-center gap-1 min-h-[44px] min-w-[44px] justify-center"
               >
                 <Image
-                  src="/bestit-11.ico"
+                  src="/collects/bit.png"
                   alt="Best IT Consulting"
                   width={24}
                   height={24}

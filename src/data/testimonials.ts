@@ -60,3 +60,12 @@ export const testimonialsByLocale: Record<string, Testimonial[]> = {
   es: testimonialsAll,
   fr: testimonialsAll,
 };
+
+/** Aggregate rating for schema.org; only when we have reviews. */
+export function getAggregateRating(): { ratingValue: number; reviewCount: number } | null {
+  const count = testimonialsAll.length;
+  if (count < 1) return null;
+  const sum = testimonialsAll.reduce((acc, t) => acc + t.rating, 0);
+  const ratingValue = Math.round((sum / count) * 10) / 10; // 1 decimal
+  return { ratingValue, reviewCount: count };
+}

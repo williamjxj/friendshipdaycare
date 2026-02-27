@@ -3,6 +3,7 @@
 import { Suspense, useState, useEffect, useRef } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { PageHero } from '@/components/ui/page-hero';
+import { HeroFlipDescription } from '@/components/ui/hero-flip-description';
 import { GoogleMap } from '@/components/ui/GoogleMap';
 import { getImageUrl } from '@/lib/image-utils';
 import { PhoneIcon, MapPinIcon, ClockIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
@@ -158,7 +159,15 @@ export function ContactPageClient() {
         <PageHero
           title={t('contactPage.hero.title')}
           subtitle={t('contactPage.hero.subtitle')}
-          description={t('contactPage.hero.description')}
+          descriptionContent={
+            <HeroFlipDescription
+              phrases={(messages.contactPage?.hero as { phrases?: string[] })?.phrases ?? [
+                t('contactPage.hero.phrases.0'),
+                t('contactPage.hero.phrases.1'),
+                t('contactPage.hero.phrases.2'),
+              ]}
+            />
+          }
           backgroundSvg={getImageUrl('/imgs/contact/contact_hero_1.gif')}
           enableScrollTrigger={true}
           hideTitle={false}
@@ -352,8 +361,8 @@ export function ContactPageClient() {
                 <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.phone.subtitle')}</CardDescription>
               </Card>
               <Card variant="premium" className="flex flex-col items-start p-6 group">
-                <div className="w-14 h-14 bg-gradient-to-br from-secondary/20 to-secondary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <MapPinIcon className="h-7 w-7 text-secondary" />
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <MapPinIcon className="h-7 w-7 text-primary" />
                 </div>
                 <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.location.title')}</h3>
                 <p className="text-muted-foreground font-semibold">{businessProfile.address.streetAddress}</p>
@@ -361,8 +370,8 @@ export function ContactPageClient() {
                 <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.location.subtitle')}</CardDescription>
               </Card>
               <Card variant="premium" className="flex flex-col items-start p-6 group">
-                <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <ClockIcon className="h-7 w-7 text-accent" />
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <ClockIcon className="h-7 w-7 text-primary" />
                 </div>
                 <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.hours.title')}</h3>
                 <p className="text-muted-foreground font-semibold">{t('contactPage.cards.hours.weekdays')}</p>

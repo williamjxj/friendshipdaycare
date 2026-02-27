@@ -1,8 +1,8 @@
 'use client';
 
-import { Suspense, useMemo, useRef, useState, useCallback } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { RealEnvironmentShowcase } from '@/components/sections/RealEnvironmentShowcase';
-import { TestimonialsCarousel } from '@/components/sections/TestimonialsCarousel';
+import { TestimonialsMarquee } from '@/components/sections/TestimonialsMarquee';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import dynamic from 'next/dynamic';
 import { HeroImageCarousel } from '@/components/ui/hero-image-carousel';
@@ -29,6 +29,9 @@ const VideoPlayer = dynamic(() => import('@/components/ui/VideoPlayer').then(mod
  */
 export function HomePageClient() {
   const mainRef = useRef<HTMLElement>(null);
+  const heroSectionRef = useRef<HTMLElement>(null);
+  const heroLogoRef = useRef<HTMLDivElement>(null);
+  const heroLogoInnerRef = useRef<HTMLDivElement>(null);
   const heroTitleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const readyAddressRef = useRef<HTMLParagraphElement>(null);
@@ -71,8 +74,7 @@ export function HomePageClient() {
     // Title: two-line stagger (runs on load so headlines show on first paint)
     if (titleEl) {
       const headlineLine = titleEl.querySelector('.hero-headline-line');
-      const highlightLine = titleEl.querySelector('.hero-highlight-line');
-      const lines = [headlineLine, highlightLine].filter(Boolean) as HTMLElement[];
+      const lines = [headlineLine].filter(Boolean) as HTMLElement[];
       gsap.fromTo(
         lines,
         { y: 56, opacity: 0 },
@@ -117,15 +119,28 @@ export function HomePageClient() {
       delay: 1.2,
     });
 
-    // Floating Logo Animation - Enhanced
-    gsap.to('.floating-logo', {
-      y: 25,
-      rotation: 12,
-      duration: 3.5,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut"
-    });
+    // Logo: entrance on load; fixed in top-left, never disappears; scroll drives subtle scale
+    const logoOuter = heroLogoRef.current;
+    if (logoOuter && heroSectionRef.current) {
+      gsap.fromTo(logoOuter, { opacity: 0, scale: 0.85 }, {
+        opacity: 1,
+        scale: 1,
+        duration: 1.2,
+        delay: 0.2,
+        ease: 'power2.out',
+      });
+      // Scroll trigger: subtle scale as user scrolls (logo stays visible, follows scroll action)
+      gsap.to(logoOuter, {
+        scale: 0.88,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroSectionRef.current,
+          start: 'top top',
+          end: 'center top',
+          scrub: 1.2,
+        },
+      });
+    }
 
     // Animate Section Headers
     gsap.utils.toArray('.section-header').forEach((header: any) => {
@@ -182,6 +197,44 @@ export function HomePageClient() {
     }
   }, { scope: mainRef });
 
+  // Mouse parallax on hero logo inner - when hovering, inner follows cursor (on top of scroll parallax)
+  useEffect(() => {
+    const hero = heroSectionRef.current;
+    const logoInner = heroLogoInnerRef.current;
+    if (!hero || !logoInner) return;
+
+    const PARALLAX_STRENGTH = 0.04;
+    const quickX = gsap.quickTo(logoInner, 'x', { duration: 0.4, ease: 'power2.out' });
+    const quickY = gsap.quickTo(logoInner, 'y', { duration: 0.4, ease: 'power2.out' });
+    const quickRotate = gsap.quickTo(logoInner, 'rotation', { duration: 0.5, ease: 'power2.out' });
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = hero.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const deltaX = (e.clientX - centerX) * PARALLAX_STRENGTH;
+      const deltaY = (e.clientY - centerY) * PARALLAX_STRENGTH;
+      // Subtle tilt: cursor left/right = logo rotates (max ~8deg)
+      const rotateZ = ((e.clientX - centerX) / rect.width) * 8;
+      quickX(deltaX);
+      quickY(deltaY);
+      quickRotate(rotateZ);
+    };
+
+    const handleMouseLeave = () => {
+      quickX(0);
+      quickY(0);
+      quickRotate(0);
+    };
+
+    hero.addEventListener('mousemove', handleMouseMove, { passive: true });
+    hero.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      hero.removeEventListener('mousemove', handleMouseMove);
+      hero.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
   const heroCarouselImages = useMemo(() => [
     getImageUrl('/images/slidetop-bg.jpg'),
     getImageUrl('/images/playground.jpg'),
@@ -200,7 +253,11 @@ export function HomePageClient() {
   return (
     <main id="main-content" ref={mainRef} className="flex-1 overflow-x-hidden">
       {/* Magical Hero Section - Full viewport height minus header height (4rem/64px) */}
-      <section id="home" className="relative h-[calc(100vh-4rem)] min-h-[480px] sm:min-h-[600px] flex items-center justify-center overflow-hidden w-full">
+      <section
+        id="home"
+        ref={heroSectionRef}
+        className="relative h-[calc(100vh-4rem)] min-h-[480px] sm:min-h-[600px] flex items-center justify-center overflow-hidden w-full"
+      >
 
         <HeroImageCarousel
           images={heroCarouselImages}
@@ -209,9 +266,15 @@ export function HomePageClient() {
           onIndexChange={setHeroSlideIndex}
         />
 
-        {/* Floating Logo - Top Left - Enhanced Size */}
-        <div className="absolute top-6 left-6 md:top-10 md:left-10 z-20 floating-logo hidden sm:block">
-          <div className="relative w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 filter drop-shadow-2xl">
+        {/* Logo - Fixed top-left, never disappears; scroll triggers subtle scale (images-hub style) */}
+        <div
+          ref={heroLogoRef}
+          className="fixed top-20 left-6 md:top-24 md:left-10 z-20 floating-logo hidden sm:block will-change-transform origin-top-left"
+        >
+          <div
+            ref={heroLogoInnerRef}
+            className="relative w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 filter drop-shadow-2xl origin-center"
+          >
             <Image
               src="/daycare-logo.png"
               alt="Friendship Daycare Logo"
@@ -247,11 +310,8 @@ export function HomePageClient() {
               </span>
 
               <h1 ref={heroTitleRef} className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-bold drop-shadow-2xl leading-[1.05] tracking-tight px-1">
-                <span className="hero-headline-line block mb-4" style={{ ...heroTitleGradientStyle, fontFamily: 'var(--font-baloo)' }}>
+                <span className="hero-headline-line block" style={{ ...heroTitleGradientStyle, fontFamily: 'var(--font-baloo)' }}>
                   {t('home.hero.headline')}
-                </span>
-                <span className="hero-highlight-line block drop-shadow-lg" style={{ color: '#ffffff', fontFamily: 'var(--font-baloo)' }}>
-                  {t('home.hero.highlight')}
                 </span>
               </h1>
 
@@ -364,11 +424,11 @@ export function HomePageClient() {
               </div>
               <div className="relative -mt-8 flex justify-center z-30">
                 <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-300">
-                  <Heart className="w-10 h-10 text-secondary" aria-hidden />
+                  <Heart className="w-10 h-10 text-primary" aria-hidden />
                 </div>
               </div>
               <div className="p-8 sm:p-10 pt-4 text-center">
-                <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-secondary transition-colors duration-300">
+                <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
                   {t('home.discoverDifference.lovingCommunity.title')}
                 </h3>
                 <p className="text-lg text-muted-foreground leading-relaxed font-medium">
@@ -394,11 +454,11 @@ export function HomePageClient() {
               </div>
               <div className="relative -mt-8 flex justify-center z-30">
                 <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-300">
-                  <Shield className="w-10 h-10 text-accent" aria-hidden />
+                  <Shield className="w-10 h-10 text-primary" aria-hidden />
                 </div>
               </div>
               <div className="p-8 sm:p-10 pt-4 text-center">
-                <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-accent transition-colors duration-300">
+                <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
                   {t('home.discoverDifference.safetyFirst.title')}
                 </h3>
                 <p className="text-lg text-muted-foreground leading-relaxed font-medium">
@@ -457,7 +517,7 @@ export function HomePageClient() {
       )}
 
       {/* Testimonials */}
-      <TestimonialsCarousel />
+      <TestimonialsMarquee />
 
       {/* Real Environment Showcase */}
       <Suspense fallback={<div className="h-96 flex items-center justify-center"><LoadingSpinner /></div>}>

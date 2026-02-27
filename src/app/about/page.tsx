@@ -5,7 +5,7 @@ import { AboutPageClient } from "@/app/about/page-client";
 export const metadata: Metadata = buildPageMetadata({
   title: "About Friendship Corner Daycare in Coquitlam",
   description:
-    "Learn about Friendship Corner Daycare, a licensed Montessori daycare in Coquitlam, BC serving Tri-Cities families since 2008.",
+    "About Friendship Corner Daycare: licensed Montessori daycare in Coquitlam, BC since 2008. Serving Tri-Cities families. Our mission, team & Montessori approach. Book a tour today.",
   path: "/about"
 });
 

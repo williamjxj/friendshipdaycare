@@ -758,6 +758,49 @@ textarea:focus-visible {
   }
 }
 
+/* Testimonials marquee - infinite scroll */
+@keyframes marquee-ltr {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.marquee-ltr {
+  animation: marquee-ltr 45s linear infinite;
+}
+
+.marquee-rtl {
+  animation: marquee-rtl 45s linear infinite;
+}
+
+.marquee-row:hover .marquee-inner {
+  animation-play-state: paused;
+}
+
+/* Process step connector - flowing dotted line */
+.connector-line-animate {
+  stroke-dashoffset: 0;
+  animation: connector-flow 1.5s linear infinite;
+}
+
+@keyframes connector-flow {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
 /* MagicUI Utility Classes */
 .magic-shimmer {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);

@@ -14,6 +14,7 @@ import {
   CheckCircleIcon,
   DocumentArrowDownIcon
 } from '@heroicons/react/24/outline';
+import { ProcessStepConnector } from '@/components/ui/process-step-connector';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { scaleInMagic, slideIn, staggerContainerMagic } from '@/lib/magicui-animations';
@@ -126,9 +127,9 @@ export function EnrollmentPageClient() {
           </div>
         </PageHero>
 
-        {/* Enrollment Process */}
+        {/* Enrollment Process - animated steps with connecting lines */}
         <motion.section
-          className="py-20 bg-card"
+          className="py-20 bg-card overflow-hidden"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -144,45 +145,119 @@ export function EnrollmentPageClient() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Desktop: horizontal flow with connectors */}
+            <div className="hidden lg:flex items-stretch justify-between gap-0">
               {steps.map((step, index) => (
-                <motion.div
-                  key={step.title}
-                  variants={scaleInMagic}
-                  custom={index}
-                >
-                  <Card
-                    variant="interactive"
-                    className="h-full rounded-xl p-6"
+                <div key={step.title} className="flex items-stretch flex-1 min-w-0">
+                  <motion.div
+                    initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: '-30px' }}
+                    transition={{ duration: 0.5, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex-1 min-w-0"
                   >
-                    <CardHeader className="p-0 mb-4 space-y-3">
-                      <div className="w-11 h-11 rounded-full flex items-center justify-center bg-muted text-foreground">
-                        {index === 0 && <ClipboardDocumentListIcon className="h-6 w-6" />}
-                        {index === 1 && <CalendarDaysIcon className="h-6 w-6" />}
-                        {index === 2 && <DocumentCheckIcon className="h-6 w-6" />}
-                        {index === 3 && <UserGroupIcon className="h-6 w-6" />}
-                      </div>
-                      <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
-                    </CardHeader>
-                    <CardContent className="p-0">
-                      <CardDescription className="text-muted-foreground leading-relaxed">
-                        {step.description}
-                        {index === 0 && (
-                          <span className="block mt-3">
-                            <a
-                              href="/assets/Registration form 2026.pdf"
-                              download
-                              className="inline-flex items-center gap-1.5 text-primary hover:text-primary/80 font-semibold underline underline-offset-2 transition-colors"
-                            >
-                              <DocumentArrowDownIcon className="w-4 h-4" />
-                              {safeT('enrollmentPage.downloadForm', 'Download Registration Form')}
-                            </a>
+                    <Card
+                      variant="interactive"
+                      className="h-full rounded-xl p-6 group hover:shadow-xl hover:scale-[1.02] transition-all duration-300 border-2 border-transparent hover:border-primary/30 hover:-translate-y-1"
+                    >
+                      <CardHeader className="p-0 mb-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <motion.div
+                            className="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 text-primary shrink-0 group-hover:scale-110 transition-transform duration-300"
+                            whileHover={{ rotate: 5 }}
+                          >
+                            {index === 0 && <ClipboardDocumentListIcon className="h-6 w-6" />}
+                            {index === 1 && <CalendarDaysIcon className="h-6 w-6" />}
+                            {index === 2 && <DocumentCheckIcon className="h-6 w-6" />}
+                            {index === 3 && <UserGroupIcon className="h-6 w-6" />}
+                          </motion.div>
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">
+                            {index + 1}
                           </span>
-                        )}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
+                      </CardHeader>
+                      <CardContent className="p-0">
+                        <CardDescription className="text-muted-foreground leading-relaxed">
+                          {step.description}
+                          {index === 0 && (
+                            <span className="block mt-3">
+                              <a
+                                href="/assets/Registration form 2026.pdf"
+                                download
+                                className="inline-flex items-center gap-1.5 text-primary hover:text-primary/80 font-semibold underline underline-offset-2 transition-colors"
+                              >
+                                <DocumentArrowDownIcon className="w-4 h-4" />
+                                {safeT('enrollmentPage.downloadForm', 'Download Registration Form')}
+                              </a>
+                            </span>
+                          )}
+                        </CardDescription>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                  {index < steps.length - 1 && (
+                    <ProcessStepConnector direction="horizontal" animate className="self-center" />
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile/Tablet: stacked with vertical connectors */}
+            <div className="flex flex-col lg:hidden gap-0">
+              {steps.map((step, index) => (
+                <div key={step.title} className="flex flex-col items-center">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20, scale: 0.96 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                    className="w-full max-w-md mx-auto"
+                  >
+                    <Card
+                      variant="interactive"
+                      className="h-full rounded-xl p-6 group hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-primary/30"
+                    >
+                      <CardHeader className="p-0 mb-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <motion.div
+                            className="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 text-primary shrink-0"
+                            whileHover={{ scale: 1.1 }}
+                          >
+                            {index === 0 && <ClipboardDocumentListIcon className="h-6 w-6" />}
+                            {index === 1 && <CalendarDaysIcon className="h-6 w-6" />}
+                            {index === 2 && <DocumentCheckIcon className="h-6 w-6" />}
+                            {index === 3 && <UserGroupIcon className="h-6 w-6" />}
+                          </motion.div>
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">
+                            {index + 1}
+                          </span>
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
+                      </CardHeader>
+                      <CardContent className="p-0">
+                        <CardDescription className="text-muted-foreground leading-relaxed">
+                          {step.description}
+                          {index === 0 && (
+                            <span className="block mt-3">
+                              <a
+                                href="/assets/Registration form 2026.pdf"
+                                download
+                                className="inline-flex items-center gap-1.5 text-primary hover:text-primary/80 font-semibold underline underline-offset-2 transition-colors"
+                              >
+                                <DocumentArrowDownIcon className="w-4 h-4" />
+                                {safeT('enrollmentPage.downloadForm', 'Download Registration Form')}
+                              </a>
+                            </span>
+                          )}
+                        </CardDescription>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                  {index < steps.length - 1 && (
+                    <ProcessStepConnector direction="vertical" animate className="my-2" />
+                  )}
+                </div>
               ))}
             </div>
           </div>

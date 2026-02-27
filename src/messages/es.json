@@ -91,10 +91,10 @@
     },
     "resources": {
       "title": "Recursos",
-      "canva1": "Canva 1",
-      "canva2": "Canva 2",
-      "gamma": "Gamma",
-      "slideDeck": "Slide Deck",
+      "canva1": "Manual para padres",
+      "canva2": "Guía de financiación",
+      "gamma": "Preguntas frecuentes",
+      "slideDeck": "Actividades",
       "notebookSlides": "Diapositivas NotebookLM"
     },
     "contact": {
@@ -115,6 +115,20 @@
     },
     "copyright": "© 2024 Guardería Friendship Corner. Todos los derechos reservados.",
     "phone": "604.945.8504"
+  },
+  "testimonials": {
+    "quotes": {
+      "t1": "Las instalaciones están muy limpias, las maestras son responsables, amigables y se comunican bien con los padres.",
+      "t2": "Nos mudamos de Colombia a Coquitlam el año pasado y fuimos muy afortunados de encontrar esta guardería para nuestro hijo. Es un gran lugar no solo para la educación sino también para los valores. Las maestras cuidan a los niños y mi hijo se sintió amado todo el tiempo. Ahora está en primaria, pero cada día cuando pasa por la guardería se detiene a saludar a las maestras. Las instalaciones son muy bonitas y limpias. Recomiendo mucho esta guardería si necesitan un lugar de confianza para su hijo.",
+      "t3": "Transmitimos a nuestro hijo a Friendship Corner Daycare a los 3 años y resultó ser la mejor decisión que tomamos para él. Las maestras son muy amables y cariñosas, le dieron a nuestro hijo mucha más atención que su guardería anterior, por eso estuvo mucho más feliz y seguro. Hacen proyectos de arte, dibujos, pinturas, historias, letras y números... ¡mi hijo aprendió mucho! Siempre está feliz de ir a la guardería por la mañana y regresa a casa con una sonrisa. Las instalaciones están muy bien organizadas y súper limpias. Mi hijo nunca se contagió ni se enfermó en la guardería. Tuvo una transición muy fluida al kinder gracias a las grandes experiencias en Friendship Corner. ¡Lo recomiendo mucho a todos!",
+      "t4": "¡Esta guardería puede llamarse un segundo hogar para mis tres hijos (7, 5 y 4 años)! Las instalaciones son muy bonitas y limpias, las maestras son muy cariñosas y pacientes. ¡Nada de qué quejarse por más de cinco años! Mis hijos siempre están felices de ir a la guardería, mi hijo de kinder aún le encanta volver en vacaciones. ¡Recomiendo mucho esta guardería si buscan un lugar sin preocupaciones para su hijo!",
+      "t5": "La guardería es un gran lugar, el interior es sanitario y todo está muy bien organizado. El personal es muy cariñoso con todos los niños y planifica muchas manualidades cada semana. He sido padre de esta guardería por más de 7 años y nunca tuve un problema al dejar a mi hijo mientras trabajaba. A mis hijos les encanta, siempre llegan a casa con una sonrisa contándome el gran día que tuvieron.",
+      "t6": "Mi hija fue a dos guarderías antes de unirse a Friendship Corner, esta es la mejor. El aula siempre está limpia, nunca tuvimos problemas de gripe o diarrea, que sí teníamos mucho en la anterior. Las maestras son muy profesionales, el inglés de mi hija mejoró mucho en poco tiempo, aprendió no solo letras minúsculas sino también fonética y pronto a deletrear. ¡Las obras de arte son muy creativas! Cada día cuando voy a recogerla quiere 'jugar un poco más'. Todo aquí está bien organizado y siempre sé qué están haciendo. La guardería está en una iglesia, tiene su propio patio, muy segura.",
+      "t7": "Guardería especialmente buena, la maestra es muy amable y responsable. Mi hija está muy feliz cada día y aprendió mucho. Puede leer palabras, leer oraciones simples y hacer matemáticas simples. También aprendió mucho sobre el mundo y hace mucho arte cada semana. Además, es más independiente en la vida. Gracias maestras.",
+      "t8": "Somos muy bendecidos de que nuestro hijo asistiera a esta guardería por dos años. Todo el personal siempre acoge y cuida a nuestro hijo. Los niños aprenden muchas habilidades de vida y académicas, así como aprendizajes sociales y emocionales. Es una instalación muy limpia y organizada. La comunicación con los padres es oportuna y clara. El personal realmente se preocupa por el desarrollo de los niños. Recomendamos mucho esta guardería.",
+      "t9": "Esta guardería es increíble. Mi esposa y yo visitamos más de diez guarderías antes de decidir enviar a nuestra hija a esta aunque está a 17 km de casa. Las maestras son pacientes y aman a los niños. Cada viernes mi hija trae a casa muchas obras de arte de la semana. Verán qué cosas bonitas puede hacer. Siempre estaba feliz de ir y cantar lo que aprendía en el círculo. También tuvo buena formación en letras, números y colores. Su inglés mejoró mucho aunque es nuestro segundo idioma. Estamos muy felices de verla crecer y aprender. Ahora entró al kinder. Como tuvo buen desempeño en la entrevista, fue admitida a una clase mixta con primer grado. Su transición fue muy fluida. La guardería brinda un ambiente limpio y saludable. Mi hija nunca se contagió de gripe. Recomendamos mucho Friendship daycare si buscan una guardería para sus seres queridos.",
+      "t10": "Las maestras son muy amables y nunca les hablan fuerte a los niños. Aman genuinamente a los niños y mi hijo ama este jardín. El jardín también está muy limpio cada día. Desde que cambiamos, mi hijo se enferma menos. El jardín hace muchas manualidades que a mi hijo le encantan. También tiene cuadernos de enseñanza por niño registrando qué letras, números y conocimientos ha aprendido cada uno. Recomiendo mucho este jardín. Mi hijo recibió excelente cuidado y a veces cuando lo recojo por la tarde quiere jugar un poco más."
+    }
   },
   "seo": {
     "home": {
@@ -538,7 +552,8 @@
   "contactPage": {
     "hero": {
       "title": "Contacta a Friendship Corner Daycare",
-      "subtitle": "Programa una visita, haz preguntas o comienza la inscripción"
+      "subtitle": "Programa una visita, haz preguntas o comienza la inscripción",
+      "phrases": ["Correo: friendship.care@live.ca", "Teléfono: 604-945-8504", "Redes sociales: @friendshipdaycare"]
     },
     "info": {
       "title": "Ponte en Contacto",

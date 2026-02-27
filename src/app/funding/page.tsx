@@ -4,7 +4,7 @@ import { FundingPageClient } from './page-client';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Funding & Subsidies',
-  description: 'BC Affordable Child Care Benefit (ACCB) and ChildCareBC $10/day program. Tuition and funding options at Friendship Corner Daycare.',
+  description: 'BC Affordable Child Care Benefit (ACCB) and ChildCareBC $10/day program at Friendship Corner Daycare in Coquitlam. Tuition & subsidy info. Contact us for rates.',
   path: '/funding'
 });
 

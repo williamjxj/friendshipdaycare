@@ -5,7 +5,7 @@ import JournalPageClient from './page-client';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Friendship Daycare Journal – Monthly Highlights in Coquitlam',
   description:
-    'Read Friendship Corner Daycare’s monthly journal to see Montessori activities, seasonal themes, and highlights from our Coquitlam classrooms.',
+    'Read Friendship Corner Daycare’s monthly journal: Montessori activities, seasonal themes & highlights from our Coquitlam classrooms. Licensed daycare since 2008.',
   path: '/community/journal',
 });
 

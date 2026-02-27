@@ -91,10 +91,10 @@
     },
     "resources": {
       "title": "Ressources",
-      "canva1": "Canva 1",
-      "canva2": "Canva 2",
-      "gamma": "Gamma",
-      "slideDeck": "Slide Deck",
+      "canva1": "Guide des parents",
+      "canva2": "Guide de financement",
+      "gamma": "FAQ",
+      "slideDeck": "Activités",
       "notebookSlides": "Diapositives NotebookLM"
     },
     "contact": {
@@ -115,6 +115,20 @@
     },
     "copyright": "© 2024 Garderie Friendship Corner. Tous droits réservés.",
     "phone": "604.945.8504"
+  },
+  "testimonials": {
+    "quotes": {
+      "t1": "Les installations sont très propres, les enseignants sont responsables, aimables et communiquent bien avec les parents.",
+      "t2": "Nous avons déménagé de Colombie à Coquitlam l'année dernière et nous avons eu la chance de trouver cette garderie pour notre fils. C'est un excellent endroit non seulement pour l'éducation mais aussi pour les valeurs. Les enseignants prennent soin des enfants et mon fils s'est toujours senti aimé. Il est maintenant à l'école primaire mais chaque jour en passant devant la garderie, il s'arrête pour saluer les enseignants. Les installations sont très belles et propres. Je recommande vivement cette garderie si vous cherchez un endroit de confiance pour votre enfant.",
+      "t3": "Nous avons transféré notre fils à Friendship Corner Daycare à 3 ans et c'était la meilleure décision pour lui. Les enseignants sont très gentils et attentionnés, ils ont accordé beaucoup plus d'attention à notre fils qu'à sa garderie précédente, il était donc beaucoup plus heureux et confiant. Ils font des projets d'art, dessins, peintures, histoires, lettres et chiffres... mon fils a beaucoup appris ! Il est toujours content d'aller à la garderie le matin et rentre avec le sourire. Les installations sont très bien organisées et super propres. Mon fils n'a jamais attrapé de germe ni été malade. Sa transition vers la maternelle a été très fluide grâce aux belles expériences vécues. Je recommande vivement à tous !",
+      "t4": "Cette garderie peut s'appeler une seconde maison pour mes trois enfants (7, 5 et 4 ans) ! Les installations sont très belles et propres, les enseignants sont très attentionnés et patients ! Rien à redire depuis plus de cinq ans ! Mes enfants sont toujours contents d'aller à la garderie, mon enfant en maternelle adore encore y retourner pour les vacances. Je recommande vivement cette garderie si vous cherchez un endroit sans souci pour votre enfant !",
+      "t5": "La garderie est un excellent endroit, l'intérieur est sanitaire et tout est très bien organisé. Le personnel est très attentionné envers tous les enfants et planifie beaucoup d'activités manuelles chaque semaine. Je suis parent de cette garderie depuis plus de 7 ans et je n'ai jamais eu de problème à y laisser mon enfant. Mes enfants adorent, ils rentrent toujours avec le sourire en me racontant leur belle journée.",
+      "t6": "Ma fille est allée dans deux garderies avant Friendship Corner, c'est la meilleure. La salle de classe est toujours propre, nous n'avons jamais eu de grippe ou diarrhée, contrairement à la précédente. Les enseignants sont très professionnels, l'anglais de ma fille s'est beaucoup amélioré en peu de temps, elle a appris les minuscules, la phonétique et à épeler. Les œuvres d'art sont très créatives ! Chaque jour quand je viens la chercher elle veut 'jouer un peu plus'. Tout est bien organisé et je sais toujours ce qu'ils font. La garderie est dans une église, a sa propre cour, très sûre.",
+      "t7": "Excellente garderie, l'enseignante est très gentille et responsable. Ma fille est très heureuse chaque jour et a beaucoup appris. Elle peut lire des mots, des phrases simples et faire des maths simples. Elle a aussi appris beaucoup sur le monde et fait beaucoup d'art chaque semaine. De plus, elle est plus indépendante. Merci aux enseignants.",
+      "t8": "Nous sommes très bénis que notre fils ait fréquenté cette garderie pendant deux ans. Tout le personnel accueille et prend soin de notre enfant. Les enfants y apprennent de nombreuses compétences de vie et académiques, ainsi que l'apprentissage social et émotionnel. C'est une installation très propre et organisée. La communication avec les parents est ponctuelle et claire. Le personnel se soucie vraiment du développement des enfants. Nous recommandons vivement cette garderie.",
+      "t9": "Cette garderie est formidable. Ma femme et moi avons visité plus de dix garderies avant de choisir celle-ci bien qu'elle soit à 17 km. Les enseignants sont patients et aiment les enfants. Chaque vendredi ma fille rapporte beaucoup d'œuvres de la semaine. Vous verrez ce qu'elle peut créer. Elle était toujours contente d'y aller et chantait ce qu'elle apprenait au cercle. Elle a bien appris les lettres, chiffres et couleurs. Son anglais s'est beaucoup amélioré bien que ce soit notre deuxième langue. Nous sommes contents de la voir grandir et apprendre. Elle est maintenant à la maternelle. Grâce à une bonne performance à l'entretien, elle a été admise dans une classe mixte avec la 1ère année. Sa transition a été très fluide. La garderie offre un environnement propre et sain. Ma fille n'a jamais attrapé la grippe. Nous recommandons vivement Friendship daycare si vous cherchez une garderie pour vos proches.",
+      "t10": "Les enseignants sont tous très gentils et ne parlent jamais fort aux enfants. Ils aiment sincèrement les enfants et mon enfant adore ce jardin. Le jardin est aussi très propre chaque jour. Depuis que nous avons changé, mon enfant est moins souvent malade. Le jardin fait souvent des bricolages que mon fils adore. Il a aussi des cahiers pour chaque enfant notant quelles lettres, chiffres et connaissances chacun a appris. Je recommande vivement ce jardin. Mon enfant a reçu d'excellents soins et parfois le soir quand je viens le chercher il veut jouer un peu plus."
+    }
   },
   "seo": {
     "home": {
@@ -538,7 +552,8 @@
   "contactPage": {
     "hero": {
       "title": "Contactez Friendship Corner Daycare",
-      "subtitle": "Planifiez une visite, posez des questions ou commencez l'inscription"
+      "subtitle": "Planifiez une visite, posez des questions ou commencez l'inscription",
+      "phrases": ["Courriel: friendship.care@live.ca", "Téléphone: 604-945-8504", "Réseaux sociaux: @friendshipdaycare"]
     },
     "info": {
       "title": "Entrer en Contact",

@@ -1,10 +1,13 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { buildPageMetadata } from '@/lib/seo';
+import { FAQSchema } from '@/components/seo/StructuredData';
 
-export const metadata: Metadata = {
-  title: 'FAQ & Frequently Asked Questions | Friendship Corner Daycare',
-  description: 'Find answers to common questions about enrollment, programs, daily operations, health & safety, tuition, and more at Friendship Corner Daycare.',
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: 'FAQ & Frequently Asked Questions',
+  description: 'FAQ for Friendship Corner Daycare in Coquitlam: enrollment, programs, fees, sick policy, Montessori approach & staff ratio. Get your questions answered.',
+  path: '/resources/faq',
+});
 
 interface FAQItem {
   question: string;
@@ -65,6 +68,7 @@ export default function FAQPage() {
         { question: 'Are staff trained in first aid?', answer: 'Yes! All staff members are certified in Pediatric First Aid and CPR. We maintain current certifications and conduct regular safety drills. We have first aid kits in each classroom and outdoors.' },
         { question: 'What are your emergency procedures?', answer: 'We have comprehensive emergency plans for fire, earthquake, lockdown, and medical emergencies. We conduct monthly fire drills and quarterly earthquake drills. In case of evacuation, our meeting point is clearly marked. Parents will be notified immediately in any emergency.' },
         { question: 'Is your facility licensed?', answer: "Yes, we are a licensed Group Daycare facility regulated by BC's Community Care and Assisted Living Act. We undergo regular inspections and maintain all required standards for health, safety, and programming." },
+        { question: 'What is your staff-to-child ratio?', answer: 'We maintain a 1:8 staff-to-child ratio, meeting or exceeding BC licensing requirements. This allows our educators to provide individual attention and support each child\'s development.' },
       ],
     },
     {
@@ -91,8 +95,13 @@ export default function FAQPage() {
     },
   ];
 
+  const faqSchemaQuestions = faqData.flatMap((cat) =>
+    cat.questions.map((q) => ({ question: q.question, answer: q.answer }))
+  );
+
   return (
     <div className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <FAQSchema questions={faqSchemaQuestions} />
       <main className="flex-grow">
         <section className="relative py-20 px-4">
           <div className="max-w-4xl mx-auto text-center">
