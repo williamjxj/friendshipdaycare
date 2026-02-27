@@ -82,13 +82,12 @@
     "about": "通过蒙特梭利方法培育幼小心灵。我们营造温暖、安全、启发性的环境，让每个孩子都能成长与学习。",
     "quickLinks": {
       "title": "快速链接",
-      "programs": "课程项目",
+      "home": "首页",
       "about": "关于我们",
+      "programs": "课程项目",
       "enrollment": "报名",
-      "todaysStory": "今日故事",
-      "journal": "月刊",
-      "montessori": "蒙特梭利教育",
-      "bcEarlyLearning": "BC 幼儿教育 (ECE)"
+      "gallery": "图片展示",
+      "contact": "联系我们"
     },
     "resources": {
       "title": "资源",
@@ -147,9 +146,9 @@
     "hero": {
       "badge": "自2008年 • 高贵林 • 604.945.8504 • friendship.care@live.ca",
       "badgePrefix": "自2008年 • COQUITLAM, BC",
-      "headline": "蒙特梭利托儿所",
-      "highlight": "高贵林, BC",
-      "title": "让年轻的心灵茁壮成长",
+      "headline": "让年轻的心灵茁壮成长",
+      "highlight": "高贵林首选正宗蒙特梭利托儿所",
+      "title": "让年轻的心灵茁壮成长：高贵林首选正宗蒙特梭利托儿所",
       "subtitle": "一个安全、温馨的蒙特梭利环境，让每个孩子都能发现自己的独特天赋。",
       "slides": [
         { "tagline": "通过蒙特梭利方法培育幼小心灵。我们营造温暖、安全、启发性的环境，让每个孩子都能成长与学习。" },

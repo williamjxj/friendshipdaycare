@@ -15,6 +15,8 @@ export interface BusinessProfile {
   address: BusinessAddress;
   openingHours: string[];
   serviceArea: string;
+  /** Social profile URLs for schema sameAs and Header/Footer links */
+  sameAs?: string[];
 }
 
 /**
@@ -34,5 +36,10 @@ export const businessProfile: BusinessProfile = {
     addressCountry: "CA"
   },
   openingHours: ["Mo-Fr 07:00-18:00"],
-  serviceArea: "Tri-Cities (Coquitlam, Port Coquitlam, Port Moody)"
+  serviceArea: "Tri-Cities (Coquitlam, Port Coquitlam, Port Moody)",
+  /** Update with actual URLs when available - verify on Facebook/Instagram */
+  sameAs: [
+    "https://www.facebook.com/FriendshipCornerDaycare",
+    "https://www.instagram.com/friendshipcornerdaycare"
+  ]
 };

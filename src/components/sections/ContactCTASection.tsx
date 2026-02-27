@@ -7,7 +7,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { PhoneIcon, MapPinIcon, ClockIcon } from '@heroicons/react/24/outline';
 import { businessProfile } from '@/lib/business-profile';
-import { borderBeam, gridPattern, shimmer, slideIn, staggerContainerMagic } from '@/lib/magicui-animations';
+import { borderBeam, gridPattern, slideIn, staggerContainerMagic } from '@/lib/magicui-animations';
 
 /**
  * Primary contact call-to-action section with animated highlights.
@@ -82,61 +82,40 @@ export function ContactCTASection() {
             className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
           >
             <motion.div
-              className="group relative overflow-hidden bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center"
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
-              transition={{ duration: 0.3 }}
+              className="group relative overflow-hidden bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center shadow hover:shadow-xl transition-all duration-300"
+              variants={slideUp}
             >
               <div
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                style={shimmer}
-              />
-              <motion.div
-                className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center mx-auto mb-4"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
+                className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:scale-110"
               >
                 <PhoneIcon className="h-6 w-6 text-primary-foreground" />
-              </motion.div>
+              </div>
               <h3 className="font-semibold text-primary-foreground mb-2">{t('contact.phone')}</h3>
               <p className="text-primary-foreground/90">{businessProfile.telephone}</p>
             </motion.div>
 
             <motion.div
-              className="group relative overflow-hidden bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center"
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
-              transition={{ duration: 0.3 }}
+              className="group relative overflow-hidden bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center shadow hover:shadow-xl transition-all duration-300"
+              variants={slideUp}
             >
               <div
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                style={shimmer}
-              />
-              <motion.div
-                className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center mx-auto mb-4"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
+                className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:scale-110"
               >
                 <MapPinIcon className="h-6 w-6 text-primary-foreground" />
-              </motion.div>
+              </div>
               <h3 className="font-semibold text-primary-foreground mb-2">{t('contact.location')}</h3>
               <p className="text-primary-foreground/90">{formattedAddress}</p>
             </motion.div>
 
             <motion.div
-              className="group relative overflow-hidden bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center"
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
-              transition={{ duration: 0.3 }}
+              className="group relative overflow-hidden bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-6 text-center shadow hover:shadow-xl transition-all duration-300"
+              variants={slideUp}
             >
               <div
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                style={shimmer}
-              />
-              <motion.div
-                className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center mx-auto mb-4"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
+                className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:scale-110"
               >
                 <ClockIcon className="h-6 w-6 text-primary-foreground" />
-              </motion.div>
+              </div>
               <h3 className="font-semibold text-primary-foreground mb-2">{t('contact.hours')}</h3>
               <p className="text-primary-foreground/90">{t('contact.operatingHours')}</p>
             </motion.div>
@@ -147,29 +126,23 @@ export function ContactCTASection() {
             variants={slideUp}
             className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <div>
               <Link
                 href="/contact#contact-form"
                 className="inline-block bg-primary-foreground text-primary px-8 py-4 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow"
               >
                 {t('navigation.contact')}
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <div>
               <a
                 href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
                 className="inline-block border-2 border-primary-foreground text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-foreground hover:text-primary transition-colors"
               >
                 Call Now
               </a>
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* Trust Badge */}

@@ -82,13 +82,12 @@
     "about": "Nutriendo mentes jóvenes con el método Montessori. Creamos un entorno cálido, seguro e inspirador donde cada niño puede crecer y aprender.",
     "quickLinks": {
       "title": "Enlaces Rápidos",
-      "programs": "Nuestros Programas",
+      "home": "Inicio",
       "about": "Acerca de",
+      "programs": "Nuestros Programas",
       "enrollment": "Inscripción",
-      "todaysStory": "Historia de Hoy",
-      "journal": "Diario",
-      "montessori": "Educación Montessori",
-      "bcEarlyLearning": "BC ECE (Educación Infantil)"
+      "gallery": "Galería",
+      "contact": "Contacto"
     },
     "resources": {
       "title": "Recursos",
@@ -147,9 +146,9 @@
     "hero": {
       "badge": "desde 2008 • en Coquitlam • 604.945.8504 • friendship.care@live.ca",
       "badgePrefix": "desde 2008 • COQUITLAM, BC",
-      "headline": "Guardería Montessori",
-      "highlight": "en Coquitlam, BC",
-      "title": "Donde las Mentes Jóvenes Florecen",
+      "headline": "Donde las Mentes Jóvenes Florecen",
+      "highlight": "Guardería Montessori Premium en Coquitlam",
+      "title": "Donde las Mentes Jóvenes Florecen: Guardería Montessori Premium en Coquitlam",
       "subtitle": "Un ambiente seguro y acogedor Montessori donde cada niño descubre sus superpoderes únicos.",
       "slides": [
         { "tagline": "Nutriendo mentes jóvenes con el método Montessori. Creamos un entorno cálido, seguro e inspirador donde cada niño puede crecer y aprender." },

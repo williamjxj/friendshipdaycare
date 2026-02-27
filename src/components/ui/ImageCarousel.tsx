@@ -63,7 +63,7 @@ export function ImageCarousel({ images, className = '' }: ImageCarouselProps) {
                   alt={image.alt}
                   width={800}
                   height={450}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-110"
                 />
                 {image.title && (
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">

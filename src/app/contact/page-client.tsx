@@ -180,7 +180,7 @@ export function ContactPageClient() {
           <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
             <Card
               variant="premium"
-              className={`w-full min-w-0 bg-gradient-to-br from-card to-muted/30 p-6 sm:p-10 scroll-mt-20 border-2 shadow-xl hover:shadow-2xl transition-all duration-500 ${highlightForm
+              className={`w-full min-w-0 bg-white/50 dark:bg-card/80 backdrop-blur-sm p-6 sm:p-10 scroll-mt-20 border-2 shadow hover:shadow-xl transition-all duration-300 ${highlightForm
                 ? 'border-primary/80 ring-4 ring-primary/30 animate-pulse'
                 : 'border-border/50'
                 }`}
@@ -341,8 +341,8 @@ export function ContactPageClient() {
               {t('contactPage.info.description')}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card variant="premium" className="flex flex-col items-start p-6 border-2 border-transparent hover:border-primary/30 transition-all duration-500 hover:shadow-xl group">
-                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
+              <Card variant="premium" className="flex flex-col items-start p-6 group">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <PhoneIcon className="h-7 w-7 text-primary" />
                 </div>
                 <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.phone.title')}</h3>
@@ -351,8 +351,8 @@ export function ContactPageClient() {
                 </a>
                 <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.phone.subtitle')}</CardDescription>
               </Card>
-              <Card variant="premium" className="flex flex-col items-start p-6 border-2 border-transparent hover:border-secondary/30 transition-all duration-500 hover:shadow-xl group">
-                <div className="w-14 h-14 bg-gradient-to-br from-secondary/20 to-secondary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
+              <Card variant="premium" className="flex flex-col items-start p-6 group">
+                <div className="w-14 h-14 bg-gradient-to-br from-secondary/20 to-secondary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <MapPinIcon className="h-7 w-7 text-secondary" />
                 </div>
                 <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.location.title')}</h3>
@@ -360,8 +360,8 @@ export function ContactPageClient() {
                 <p className="text-muted-foreground font-semibold text-sm">{businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode}</p>
                 <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.location.subtitle')}</CardDescription>
               </Card>
-              <Card variant="premium" className="flex flex-col items-start p-6 border-2 border-transparent hover:border-accent/30 transition-all duration-500 hover:shadow-xl group">
-                <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
+              <Card variant="premium" className="flex flex-col items-start p-6 group">
+                <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <ClockIcon className="h-7 w-7 text-accent" />
                 </div>
                 <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.hours.title')}</h3>
@@ -369,8 +369,8 @@ export function ContactPageClient() {
                 <p className="text-muted-foreground font-semibold">{t('contactPage.cards.hours.hours')}</p>
                 <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.hours.subtitle')}</CardDescription>
               </Card>
-              <Card variant="premium" className="flex flex-col items-start p-6 border-2 border-transparent hover:border-primary/30 transition-all duration-500 hover:shadow-xl group">
-                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform shadow-lg">
+              <Card variant="premium" className="flex flex-col items-start p-6 group">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <EnvelopeIcon className="h-7 w-7 text-primary" />
                 </div>
                 <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.email.title')}</h3>

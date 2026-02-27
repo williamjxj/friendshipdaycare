@@ -82,7 +82,7 @@ export function HeroSideBackground({
     );
   }
 
-  // Default: organic variant with soft, flowing shapes
+  // Default: organic variant with warm cream/gold tones (avoids gray cast)
   return (
     <div
       className={cn(
@@ -97,21 +97,21 @@ export function HeroSideBackground({
         viewBox="0 0 1920 600"
       >
         <defs>
-          {/* Left side gradient - Blue sky at top, green grass at bottom */}
+          {/* Left side gradient - Warm cream at top, soft gold at bottom */}
           <linearGradient id="leftGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgb(135, 206, 250)" stopOpacity="0.15" />
-            <stop offset="20%" stopColor="rgb(135, 206, 250)" stopOpacity="0.08" />
-            <stop offset="50%" stopColor="rgb(144, 238, 144)" stopOpacity="0.06" />
-            <stop offset="80%" stopColor="rgb(34, 139, 34)" stopOpacity="0.08" />
+            <stop offset="0%" stopColor="rgb(255, 250, 240)" stopOpacity="0.12" />
+            <stop offset="20%" stopColor="rgb(255, 248, 230)" stopOpacity="0.08" />
+            <stop offset="50%" stopColor="rgb(255, 243, 205)" stopOpacity="0.06" />
+            <stop offset="80%" stopColor="rgb(245, 230, 180)" stopOpacity="0.08" />
             <stop offset="100%" stopColor="transparent" />
           </linearGradient>
           
-          {/* Right side gradient - Blue sky at top, green grass at bottom */}
+          {/* Right side gradient - Warm cream at top, soft gold at bottom */}
           <linearGradient id="rightGradient" x1="100%" y1="0%" x2="0%" y2="0%">
-            <stop offset="0%" stopColor="rgb(135, 206, 250)" stopOpacity="0.15" />
-            <stop offset="20%" stopColor="rgb(135, 206, 250)" stopOpacity="0.08" />
-            <stop offset="50%" stopColor="rgb(144, 238, 144)" stopOpacity="0.06" />
-            <stop offset="80%" stopColor="rgb(34, 139, 34)" stopOpacity="0.08" />
+            <stop offset="0%" stopColor="rgb(255, 250, 240)" stopOpacity="0.12" />
+            <stop offset="20%" stopColor="rgb(255, 248, 230)" stopOpacity="0.08" />
+            <stop offset="50%" stopColor="rgb(255, 243, 205)" stopOpacity="0.06" />
+            <stop offset="80%" stopColor="rgb(245, 230, 180)" stopOpacity="0.08" />
             <stop offset="100%" stopColor="transparent" />
           </linearGradient>
           
@@ -126,13 +126,13 @@ export function HeroSideBackground({
           {/* Base gradient fill */}
           <rect x="0" y="0" width="400" height="600" fill="url(#leftGradient)" />
           
-          {/* Organic blob shapes - Sky blues at top, forest greens at bottom */}
+          {/* Organic blob shapes - Warm cream and soft gold tones */}
           <ellipse
             cx="150"
             cy="120"
             rx="80"
             ry="100"
-            fill="rgb(135, 206, 250)"
+            fill="rgb(255, 250, 240)"
             opacity="0.1"
             filter="url(#softBlur)"
           />
@@ -141,7 +141,7 @@ export function HeroSideBackground({
             cy="200"
             rx="90"
             ry="70"
-            fill="rgb(173, 216, 230)"
+            fill="rgb(255, 245, 220)"
             opacity="0.08"
             filter="url(#softBlur)"
           />
@@ -150,7 +150,7 @@ export function HeroSideBackground({
             cy="400"
             rx="70"
             ry="85"
-            fill="rgb(34, 139, 34)"
+            fill="rgb(245, 222, 179)"
             opacity="0.1"
             filter="url(#softBlur)"
           />
@@ -159,7 +159,7 @@ export function HeroSideBackground({
             cy="480"
             rx="60"
             ry="75"
-            fill="rgb(46, 125, 50)"
+            fill="rgb(238, 232, 205)"
             opacity="0.08"
             filter="url(#softBlur)"
           />
@@ -168,25 +168,25 @@ export function HeroSideBackground({
             cy="350"
             rx="50"
             ry="60"
-            fill="rgb(144, 238, 144)"
+            fill="rgb(255, 248, 220)"
             opacity="0.09"
             filter="url(#softBlur)"
           />
           
-          {/* Subtle wave pattern - Sky to grass transition */}
+          {/* Subtle wave pattern - Warm tones */}
           <path
             d="M0,200 Q100,180 200,200 T400,200 L400,600 L0,600 Z"
-            fill="rgb(135, 206, 250)"
+            fill="rgb(255, 250, 235)"
             opacity="0.06"
           />
           <path
             d="M0,350 Q120,330 240,350 T400,350 L400,600 L0,600 Z"
-            fill="rgb(34, 139, 34)"
+            fill="rgb(245, 222, 179)"
             opacity="0.08"
           />
           <path
             d="M0,500 Q150,480 300,500 T400,500 L400,600 L0,600 Z"
-            fill="rgb(46, 125, 50)"
+            fill="rgb(238, 232, 205)"
             opacity="0.07"
           />
         </g>
@@ -196,13 +196,13 @@ export function HeroSideBackground({
           {/* Base gradient fill */}
           <rect x="1520" y="0" width="400" height="600" fill="url(#rightGradient)" />
           
-          {/* Organic blob shapes - Sky blues at top, forest greens at bottom */}
+          {/* Organic blob shapes - Warm cream and soft gold tones */}
           <ellipse
             cx="1770"
             cy="150"
             rx="85"
             ry="95"
-            fill="rgb(135, 206, 250)"
+            fill="rgb(255, 250, 240)"
             opacity="0.1"
             filter="url(#softBlur)"
           />
@@ -211,7 +211,7 @@ export function HeroSideBackground({
             cy="220"
             rx="90"
             ry="70"
-            fill="rgb(173, 216, 230)"
+            fill="rgb(255, 245, 220)"
             opacity="0.08"
             filter="url(#softBlur)"
           />
@@ -220,7 +220,7 @@ export function HeroSideBackground({
             cy="420"
             rx="75"
             ry="80"
-            fill="rgb(34, 139, 34)"
+            fill="rgb(245, 222, 179)"
             opacity="0.1"
             filter="url(#softBlur)"
           />
@@ -229,7 +229,7 @@ export function HeroSideBackground({
             cy="500"
             rx="65"
             ry="70"
-            fill="rgb(46, 125, 50)"
+            fill="rgb(238, 232, 205)"
             opacity="0.08"
             filter="url(#softBlur)"
           />
@@ -238,25 +238,25 @@ export function HeroSideBackground({
             cy="370"
             rx="50"
             ry="60"
-            fill="rgb(144, 238, 144)"
+            fill="rgb(255, 248, 220)"
             opacity="0.09"
             filter="url(#softBlur)"
           />
           
-          {/* Subtle wave pattern - Sky to grass transition */}
+          {/* Subtle wave pattern - Warm tones */}
           <path
             d="M1520,180 Q1620,200 1720,180 T1920,180 L1920,600 L1520,600 Z"
-            fill="rgb(135, 206, 250)"
+            fill="rgb(255, 250, 235)"
             opacity="0.06"
           />
           <path
             d="M1520,380 Q1640,400 1760,380 T1920,380 L1920,600 L1520,600 Z"
-            fill="rgb(34, 139, 34)"
+            fill="rgb(245, 222, 179)"
             opacity="0.08"
           />
           <path
             d="M1520,530 Q1670,510 1820,530 T1920,530 L1920,600 L1520,600 Z"
-            fill="rgb(46, 125, 50)"
+            fill="rgb(238, 232, 205)"
             opacity="0.07"
           />
         </g>

@@ -2,20 +2,24 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
+/** BestIT Case Studies card style: flat, shadow → shadow-xl on hover, no scale/3D */
+const bestitCardClasses =
+  "rounded-xl shadow group hover:shadow-xl transition-all duration-300 border-0 bg-white/50 dark:bg-card/80 backdrop-blur-sm overflow-hidden";
+
 const cardVariants = cva(
-  "group rounded-[var(--radius-md)] bg-card text-card-foreground shadow-sm transition-all duration-500 cubic-bezier(0.25, 1, 0.5, 1)",
+  "group rounded-xl text-card-foreground shadow transition-all duration-300",
   {
     variants: {
       variant: {
-        default: "border border-border",
-        outlined: "border-2 border-border",
-        elevated: "shadow-md hover:shadow-lg",
+        default: "border border-border bg-card",
+        outlined: "border-2 border-border bg-card",
+        elevated: "shadow-md hover:shadow-xl bg-card",
         gradient: "bg-gradient-to-br from-primary/5 to-secondary/5 border-none",
         feature: "rounded-[var(--radius-lg)] shadow-lg border-none bg-card p-1",
         data: "rounded-md border border-border/50 bg-muted/20 shadow-none",
-        interactive: "group border border-border cursor-pointer hover:shadow-lg hover:border-primary/30 active:scale-[0.98]",
-        premium: "card-premium", // Uses the new global utility class
-        clay: "clay-card", // New Claymorphism style
+        interactive: bestitCardClasses + " cursor-pointer",
+        premium: bestitCardClasses,
+        clay: bestitCardClasses,
       },
     },
     defaultVariants: {

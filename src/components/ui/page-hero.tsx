@@ -155,6 +155,10 @@ export function PageHero({
     >
       {/* Background Layer */}
       <div className="absolute inset-0 hero-bg">
+        {/* Warm base to prevent gray cast - cream/ivory instead of cool gray */}
+        {(backgroundSvg || backgroundImage) && (
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 via-stone-50/60 to-amber-50/70 dark:from-amber-950/20 dark:via-stone-900/30 dark:to-amber-950/20" aria-hidden />
+        )}
         {/* Decorative side backgrounds for left/right blank spaces */}
         {(backgroundSvg || backgroundImage) && (
           <HeroSideBackground variant="organic" />

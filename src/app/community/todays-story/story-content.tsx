@@ -97,17 +97,17 @@ export default function TodaysStoryContent() {
                             {/* Lesson Cards using 'data' variant */}
                             <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <Card variant="data" className="p-6 text-center space-y-3 bg-primary/5 hover:bg-primary/10 border-primary/20 transition-colors">
-                                    <Heart className="w-10 h-10 mx-auto text-primary transition-transform duration-500 group-hover:scale-[1.2]" />
+                                    <Heart className="w-10 h-10 mx-auto text-primary transition-transform duration-300 group-hover:scale-110" />
                                     <CardTitle className="font-bold text-lg text-foreground">{t('community.todaysStory.lessonCards.kind.title')}</CardTitle>
                                     <CardDescription className="text-sm text-muted-foreground p-0">{t('community.todaysStory.lessonCards.kind.description')}</CardDescription>
                                 </Card>
                                 <Card variant="data" className="p-6 text-center space-y-3 bg-secondary/5 hover:bg-secondary/10 border-secondary/20 transition-colors">
-                                    <Sparkles className="w-10 h-10 mx-auto text-secondary transition-transform duration-500 group-hover:scale-[1.2]" />
+                                    <Sparkles className="w-10 h-10 mx-auto text-secondary transition-transform duration-300 group-hover:scale-110" />
                                     <CardTitle className="font-bold text-lg text-foreground">{t('community.todaysStory.lessonCards.helpful.title')}</CardTitle>
                                     <CardDescription className="text-sm text-muted-foreground p-0">{t('community.todaysStory.lessonCards.helpful.description')}</CardDescription>
                                 </Card>
                                 <Card variant="data" className="p-6 text-center space-y-3 bg-accent/5 hover:bg-accent/10 border-accent/20 transition-colors">
-                                    <Star className="w-10 h-10 mx-auto text-accent-foreground transition-transform duration-500 group-hover:scale-[1.2]" />
+                                    <Star className="w-10 h-10 mx-auto text-accent-foreground transition-transform duration-300 group-hover:scale-110" />
                                     <CardTitle className="font-bold text-lg text-foreground">{t('community.todaysStory.lessonCards.love.title')}</CardTitle>
                                     <CardDescription className="text-sm text-muted-foreground p-0">{t('community.todaysStory.lessonCards.love.description')}</CardDescription>
                                 </Card>
@@ -126,9 +126,9 @@ export default function TodaysStoryContent() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {weeklyItems.map((item) => (
-                                <Card key={item.week} className="text-left group p-5 bg-card hover:shadow-lg transition-all duration-300 border border-border/50">
+                                <Card key={item.week} variant="interactive" className="text-left group p-5">
                                     <div className="flex items-start gap-4">
-                                        <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-sm transition-transform duration-500 group-hover:scale-110",
+                                        <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-110",
                                             item.color === 'primary' ? 'bg-primary' :
                                                 item.color === 'secondary' ? 'bg-secondary' : 'bg-accent')}>
                                             <span className="text-sm">{item.week}</span>

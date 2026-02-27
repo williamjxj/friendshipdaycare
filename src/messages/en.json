@@ -84,13 +84,12 @@
     "about": "Nurturing young minds through the Montessori method. We create a warm, safe, and inspiring environment where every child can grow, learn, and flourish.",
     "quickLinks": {
       "title": "Quick Links",
-      "programs": "Our Programs",
+      "home": "Home",
       "about": "About Us",
+      "programs": "Our Programs",
       "enrollment": "Enrollment",
-      "todaysStory": "Today's Story",
-      "journal": "Journal",
-      "montessori": "Montessori Education",
-      "bcEarlyLearning": "BC ECE (Early Childhood Education)"
+      "gallery": "Gallery",
+      "contact": "Contact"
     },
     "resources": {
       "title": "Resources",
@@ -122,36 +121,36 @@
   "seo": {
     "home": {
       "title": "Montessori Daycare in Coquitlam, BC",
-      "description": "Friendship Corner Daycare is a licensed Montessori daycare in Coquitlam, BC serving Tri-Cities families. Schedule a tour today."
+      "description": "Authentic Montessori daycare in Coquitlam, BC. Licensed since 2008. Book a free tour at Friendship Corner Daycare."
     },
     "about": {
       "title": "About Friendship Corner Daycare in Coquitlam",
-      "description": "Learn about Friendship Corner Daycare, a licensed Montessori daycare in Coquitlam, BC serving Tri-Cities families since 2008."
+      "description": "About Friendship Corner Daycare: licensed Montessori daycare in Coquitlam, BC since 2008. Tri-Cities families trust us."
     },
     "programs": {
       "title": "Montessori Programs in Coquitlam",
-      "description": "Explore toddler, preschool, and pre-kindergarten Montessori programs at Friendship Corner Daycare in Coquitlam, BC."
+      "description": "Toddler, preschool, and pre-K Montessori programs at Friendship Corner Daycare in Coquitlam. Schedule a tour today."
     },
     "enrollment": {
       "title": "Daycare Enrollment in Coquitlam",
-      "description": "Learn how to enroll at Friendship Corner Daycare, a Montessori daycare in Coquitlam, BC. Review steps and requirements."
+      "description": "Enroll at Friendship Corner Montessori daycare in Coquitlam. Steps, requirements, and tour booking. Tri-Cities area."
     },
     "contact": {
       "title": "Contact Friendship Corner Daycare",
-      "description": "Contact Friendship Corner Daycare in Coquitlam, BC to schedule a tour, ask questions, or begin enrollment."
+      "description": "Contact Friendship Corner Daycare in Coquitlam. Schedule a tour, ask questions, or begin enrollment. Call 604.945.8504."
     },
     "gallery": {
       "title": "Daycare Gallery in Coquitlam",
-      "description": "Browse photos and videos from Friendship Corner Daycare in Coquitlam, BC. See Montessori classrooms, activities, and spaces."
+      "description": "Photos and videos from Friendship Corner Montessori daycare in Coquitlam. Classrooms, activities, and spaces."
     }
   },
   "home": {
     "hero": {
       "badge": "since 2008 • Coquitlam • 604.945.8504 • friendship.care@live.ca",
       "badgePrefix": "since 2008 • COQUITLAM, BC",
-      "headline": "Where Young Minds",
-      "highlight": "Flourish",
-      "title": "Where Young Minds Flourish",
+      "headline": "Where Young Minds Flourish",
+      "highlight": "Coquitlam's Premier Authentic Montessori Daycare",
+      "title": "Where Young Minds Flourish: Coquitlam's Premier Authentic Montessori Daycare",
       "subtitle": "A safe, nurturing Montessori environment where every child discovers their unique superpowers.",
       "slides": [
         {

@@ -75,8 +75,8 @@ export const BentoGridItem = ({
         >
             <div className="space-y-4">
                 {header}
-                <div className="transition duration-300">
-                    <div className="transition-transform duration-500 group-hover:scale-[1.2] origin-left inline-block">
+                    <div className="transition duration-300">
+                        <div className="transition-transform duration-300 group-hover:scale-110 origin-left inline-block">
                         {icon}
                     </div>
                     <CardTitle className="mb-2 mt-4 text-xl">

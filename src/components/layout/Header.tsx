@@ -19,7 +19,9 @@ import {
   Landmark,
   ChevronDown,
   FolderOpen,
-  Calendar
+  Calendar,
+  Facebook,
+  Instagram
 } from 'lucide-react';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
@@ -268,6 +270,23 @@ export function Header() {
 
           {/* Desktop Controls */}
           <div className="hidden lg:flex items-center space-x-4">
+            {businessProfile.sameAs?.map((url) => {
+              const isFb = url.includes('facebook');
+              const isIg = url.includes('instagram');
+              if (!isFb && !isIg) return null;
+              return (
+                <Link
+                  key={url}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  aria-label={isFb ? 'Facebook' : 'Instagram'}
+                >
+                  {isFb ? <Facebook className="w-5 h-5" /> : <Instagram className="w-5 h-5" />}
+                </Link>
+              );
+            })}
             <LanguageToggle />
             {/* <ThemeToggle /> - Hidden for now */}
             <Link

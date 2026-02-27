@@ -153,7 +153,7 @@ export function EnrollmentPageClient() {
                 >
                   <Card
                     variant="interactive"
-                    className="h-full rounded-2xl border border-border/60 bg-card/95 p-6 shadow-lg shadow-black/5 transition-all hover:shadow-xl hover:scale-105 duration-300"
+                    className="h-full rounded-xl p-6"
                   >
                     <CardHeader className="p-0 mb-4 space-y-3">
                       <div className="w-11 h-11 rounded-full flex items-center justify-center bg-muted text-foreground">

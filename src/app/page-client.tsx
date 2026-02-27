@@ -2,6 +2,7 @@
 
 import { Suspense, useMemo, useRef, useState, useCallback } from 'react';
 import { RealEnvironmentShowcase } from '@/components/sections/RealEnvironmentShowcase';
+import { TestimonialsCarousel } from '@/components/sections/TestimonialsCarousel';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import dynamic from 'next/dynamic';
 import { HeroImageCarousel } from '@/components/ui/hero-image-carousel';
@@ -320,17 +321,19 @@ export function HomePageClient() {
             <Card variant="clay" className="group">
               <div className="relative h-64 sm:h-72 w-full overflow-hidden">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
-                <Image
-                  src={getImageUrl('/images/sensorial-shelf.jpg')}
-                  alt="Montessori sensorial materials"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out z-10"
-                />
+                <div className="absolute inset-0 z-10 transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
+                  <Image
+                    src={getImageUrl('/images/sensorial-shelf.jpg')}
+                    alt="Montessori sensorial materials"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-20" />
               </div>
               <div className="relative -mt-8 flex justify-center z-30">
-                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-500">
+                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-300">
                   <Leaf className="w-10 h-10 text-primary" aria-hidden />
                 </div>
               </div>
@@ -348,17 +351,19 @@ export function HomePageClient() {
             <Card variant="clay" className="group">
               <div className="relative h-64 sm:h-72 w-full overflow-hidden">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
-                <Image
-                  src={getImageUrl("/images/circle-time-board-2.jpg")}
-                  alt="Circle Time"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out z-10"
-                />
+                <div className="absolute inset-0 z-10 transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
+                  <Image
+                    src={getImageUrl("/images/circle-time-board-2.jpg")}
+                    alt="Circle Time"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-20" />
               </div>
               <div className="relative -mt-8 flex justify-center z-30">
-                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-500">
+                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-300">
                   <Heart className="w-10 h-10 text-secondary" aria-hidden />
                 </div>
               </div>
@@ -376,17 +381,19 @@ export function HomePageClient() {
             <Card variant="clay" className="group">
               <div className="relative h-64 sm:h-72 w-full overflow-hidden">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
-                <Image
-                  src={getImageUrl("/images/playground.jpg")}
-                  alt="Playground"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out z-10"
-                />
+                <div className="absolute inset-0 z-10 transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
+                  <Image
+                    src={getImageUrl("/images/playground.jpg")}
+                    alt="Playground"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-20" />
               </div>
               <div className="relative -mt-8 flex justify-center z-30">
-                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-500">
+                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-300">
                   <Shield className="w-10 h-10 text-accent" aria-hidden />
                 </div>
               </div>
@@ -404,17 +411,19 @@ export function HomePageClient() {
             <Card variant="clay" className="group">
               <div className="relative h-64 sm:h-72 w-full overflow-hidden">
                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
-                <Image
-                  src={getImageUrl('/images/language-shelf.jpg')}
-                  alt="Language and learning materials"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out z-10"
-                />
+                <div className="absolute inset-0 z-10 transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
+                  <Image
+                    src={getImageUrl('/images/language-shelf.jpg')}
+                    alt="Language and learning materials"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-20" />
               </div>
               <div className="relative -mt-8 flex justify-center z-30">
-                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-500">
+                <div className="rounded-full bg-white shadow-xl p-4 group-hover:scale-110 transition-transform duration-300">
                   <GraduationCap className="w-10 h-10 text-primary" aria-hidden />
                 </div>
               </div>
@@ -446,6 +455,9 @@ export function HomePageClient() {
           </div>
         </section>
       )}
+
+      {/* Testimonials */}
+      <TestimonialsCarousel />
 
       {/* Real Environment Showcase */}
       <Suspense fallback={<div className="h-96 flex items-center justify-center"><LoadingSpinner /></div>}>

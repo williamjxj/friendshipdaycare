@@ -82,13 +82,12 @@
     "about": "Nous nourrissons les jeunes esprits grâce à la méthode Montessori. Un environnement chaleureux et sûr où chaque enfant grandit et apprend.",
     "quickLinks": {
       "title": "Liens Rapides",
-      "programs": "Nos Programmes",
+      "home": "Accueil",
       "about": "À propos",
+      "programs": "Nos Programmes",
       "enrollment": "Inscription",
-      "todaysStory": "Histoire du Jour",
-      "journal": "Journal",
-      "montessori": "Éducation Montessori",
-      "bcEarlyLearning": "BC EPE (Éducation à la petite enfance)"
+      "gallery": "Galerie",
+      "contact": "Contact"
     },
     "resources": {
       "title": "Ressources",
@@ -147,9 +146,9 @@
     "hero": {
       "badge": "depuis 2008 • a Coquitlam • 604.945.8504 • friendship.care@live.ca",
       "badgePrefix": "depuis 2008 • COQUITLAM, BC",
-      "headline": "Garderie Montessori",
-      "highlight": "à Coquitlam, BC",
-      "title": "Où les Jeunes Esprits S'épanouissent",
+      "headline": "Où les Jeunes Esprits S'épanouissent",
+      "highlight": "Garderie Montessori de Premier Ordre à Coquitlam",
+      "title": "Où les Jeunes Esprits S'épanouissent : Garderie Montessori de Premier Ordre à Coquitlam",
       "subtitle": "Un environnement Montessori sûr et bienveillant où chaque enfant découvre ses superpouvoirs uniques.",
       "slides": [
         { "tagline": "Nous nourrissons les jeunes esprits grâce à la méthode Montessori. Un environnement chaleureux et sûr où chaque enfant grandit et apprend." },

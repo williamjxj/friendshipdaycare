@@ -82,13 +82,12 @@
     "about": "몬테소리 방식으로 어린 마음을 키웁니다. 따뜻하고 안전한 환경에서 모든 아이가 성장하고 배울 수 있도록 돕습니다.",
     "quickLinks": {
       "title": "빠른 링크",
-      "programs": "프로그램",
+      "home": "홈",
       "about": "소개",
+      "programs": "프로그램",
       "enrollment": "등록",
-      "todaysStory": "오늘의 이야기",
-      "journal": "저널",
-      "montessori": "몬테소리 교육",
-      "bcEarlyLearning": "BC 유아 교육 (ECE)"
+      "gallery": "갤러리",
+      "contact": "문의"
     },
     "resources": {
       "title": "자료",
@@ -147,9 +146,9 @@
     "hero": {
       "badge": "2008년부터 • 코퀴틀람 • 604.945.8504 • friendship.care@live.ca",
       "badgePrefix": "2008년부터 • COQUITLAM, BC",
-      "headline": "몬테소리 어린이집",
-      "highlight": "코퀴틀람, BC",
-      "title": "젊은 마음이 꽃피는 곳",
+      "headline": "젊은 마음이 꽃피는 곳",
+      "highlight": "코퀴틀람 최고의 몬테소리 어린이집",
+      "title": "젊은 마음이 꽃피는 곳: 코퀴틀람 최고의 몬테소리 어린이집",
       "subtitle": "모든 아이가 자신만의 독특한 능력을 발견할 수 있는 안전하고 따뜻한 몬테소리 환경입니다.",
       "slides": [
         { "tagline": "몬테소리 방식으로 어린 마음을 키웁니다. 따뜻하고 안전한 환경에서 모든 아이가 성장하고 배울 수 있도록 돕습니다." },

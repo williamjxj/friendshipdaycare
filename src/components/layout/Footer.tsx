@@ -7,8 +7,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Facebook,
   Instagram,
-  Twitter,
-  Linkedin,
   Mail,
   Phone,
   MapPin,
@@ -27,9 +25,9 @@ export function Footer() {
   return (
     <footer className="bg-slate-50 border-t border-border/50 pt-6 sm:pt-16 lg:pt-20 pb-4 sm:pb-8 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-8 lg:gap-12 mb-6 sm:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12 mb-6 sm:mb-12">
 
-          {/* Column 1: Brand & About */}
+          {/* Column 1: Brand & Social */}
           <div className="space-y-3 sm:space-y-6">
             <Link href="/" className="flex items-center space-x-3 group w-fit">
               <div className="relative w-10 h-10 sm:w-12 sm:h-12 shrink-0 transition-transform duration-300 group-hover:scale-110">
@@ -50,45 +48,34 @@ export function Footer() {
               </div>
             </Link>
             <div className="flex items-center space-x-4">
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </Link>
+              {businessProfile.sameAs?.map((url) => {
+                const isFb = url.includes('facebook');
+                const isIg = url.includes('instagram');
+                if (!isFb && !isIg) return null;
+                return (
+                  <Link
+                    key={url}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    aria-label={isFb ? 'Facebook' : 'Instagram'}
+                  >
+                    {isFb ? <Facebook className="w-5 h-5" /> : <Instagram className="w-5 h-5" />}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
+          {/* Column 2: Quick Links (matches top navigation) */}
           <div className="min-w-0">
             <h3 className="footer-section-title text-foreground mb-2 sm:mb-6">{t('footer.quickLinks.title')}</h3>
             <ul className="space-y-2 sm:space-y-3">
               <li>
-                <Link href="/programs" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.quickLinks.programs')}
+                  {t('footer.quickLinks.home')}
                 </Link>
               </li>
               <li>
@@ -98,87 +85,33 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/programs" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  {t('footer.quickLinks.programs')}
+                </Link>
+              </li>
+              <li>
                 <Link href="/enrollment" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.quickLinks.enrollment')}
                 </Link>
               </li>
               <li>
-                <Link href="/community/todays-story" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/gallery" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.quickLinks.todaysStory')}
+                  {t('footer.quickLinks.gallery')}
                 </Link>
               </li>
               <li>
-                <Link href="/community/journal" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.quickLinks.journal')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/community/montessori" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.quickLinks.montessori')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/community/ece" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.quickLinks.bcEarlyLearning')}
+                  {t('footer.quickLinks.contact')}
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Resources */}
-          <div className="min-w-0">
-            <h3 className="footer-section-title text-foreground mb-2 sm:mb-6">{t('footer.resources.title')}</h3>
-            <ul className="space-y-2 sm:space-y-3">
-              <li>
-                <Link href="/resources" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.resources.title')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources/canva" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.resources.canva1')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources/canva2" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.resources.canva2')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources/gamma" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.resources.gamma')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources/slide-deck" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.resources.slideDeck')}
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="https://pub-fafb0f1d538f40ebb6fdd21bb5041a1c.r2.dev/collects/notebooklm-slides.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.resources.notebookSlides')}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Contact Info */}
+          {/* Column 3: Contact Info */}
           <div className="min-w-0">
             <h3 className="footer-section-title text-foreground mb-2 sm:mb-6">{t('footer.contact.title')}</h3>
             <ul className="space-y-2 sm:space-y-4">
@@ -211,7 +144,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 5: Mobile Access (QR Code) */}
+          {/* Column 4: Mobile Access (QR Code) */}
           <div className="text-center md:text-left min-w-0">
             <h3 className="footer-section-title text-foreground mb-2 sm:mb-4 flex items-center justify-center md:justify-start gap-2">
               <Smartphone className="w-5 h-5 text-primary shrink-0" />

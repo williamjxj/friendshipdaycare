@@ -9,6 +9,7 @@ import { LanguageAwareHtml } from "@/components/providers/LanguageAwareHtml";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SkipNavigation } from "@/components/ui/SkipNavigation";
+import { MobileCtaBar } from "@/components/ui/MobileCtaBar";
 import { Toaster } from "@/components/ui/toaster";
 import { LocalBusinessSchema, OrganizationSchema, WebSiteSchema } from "@/components/seo/StructuredData";
 import { businessProfile } from "@/lib/business-profile";
@@ -95,6 +96,7 @@ export default async function RootLayout({
           priceRange="$$"
           openingHours={businessProfile.openingHours}
           serviceArea={businessProfile.serviceArea}
+          sameAs={businessProfile.sameAs}
         />
         <OrganizationSchema
           name={businessProfile.name}
@@ -112,13 +114,14 @@ export default async function RootLayout({
           <LanguageAwareHtml>
             <NextIntlProviderSync>
               <ThemeProvider>
-                <div className="min-h-screen flex flex-col overflow-x-hidden">
+                <div className="min-h-screen flex flex-col overflow-x-hidden pb-24 md:pb-0">
                   <SkipNavigation />
                   <Header />
                   <Suspense fallback={<PageLoader message="Loading magical content..." />}>
                     {children}
                   </Suspense>
                   <Footer />
+                  <MobileCtaBar />
                 </div>
                 <Toaster />
               </ThemeProvider>

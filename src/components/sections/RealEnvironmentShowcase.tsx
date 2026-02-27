@@ -150,7 +150,7 @@ function CardCarousel({ images, category }: { images: { src: string; alt: string
 
   return (
     <div
-      className="relative h-full w-full min-w-0 group/carousel"
+      className="relative h-full w-full min-w-0"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -158,20 +158,20 @@ function CardCarousel({ images, category }: { images: { src: string; alt: string
         <div className="flex h-full min-w-0">
           {images.map((image, idx) => (
             <div key={idx} className="flex-[0_0_100%] min-w-0 relative h-full w-full overflow-hidden">
-              <OptimizedImage
-                src={getPlaceholderUrl(image.src)}
-                alt={image.alt}
-                fill
-                className="h-full w-full object-cover object-center transition-transform duration-500 ease-out scale-100 group-hover/image:scale-[1.2]"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
+              <div className="h-full w-full transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
+                <OptimizedImage
+                  src={getPlaceholderUrl(image.src)}
+                  alt={image.alt}
+                  fill
+                  className="h-full w-full object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 z-[15] pointer-events-none" />
 
       {/* Navigation Buttons - visible only when hovered */}
       {images.length > 1 && (
@@ -248,8 +248,8 @@ export function RealEnvironmentShowcase() {
               key={category.id}
               onClick={() => setSelectedCategory(category.id as any)}
               className={`flex items-center space-x-3 px-8 py-4 rounded-full font-bold text-sm md:text-base transition-all duration-300 border-2 cursor-pointer ${selectedCategory === category.id
-                ? 'bg-primary text-primary-foreground border-primary shadow-xl scale-105 ring-4 ring-primary/20 hover:ring-primary/30'
-                : 'bg-white/70 dark:bg-card/70 backdrop-blur-md text-muted-foreground border-border/50 hover:bg-white dark:hover:bg-card hover:border-primary/50 hover:shadow-lg hover:scale-105'
+                ? 'bg-primary text-primary-foreground border-primary shadow-xl ring-4 ring-primary/20 hover:ring-primary/30'
+                : 'bg-white/70 dark:bg-card/70 backdrop-blur-md text-muted-foreground border-border/50 hover:bg-white dark:hover:bg-card hover:border-primary/50 hover:shadow-xl transition-all duration-300'
                 }`}
             >
               <span className="text-xl"><category.icon className="w-5 h-5 md:w-6 md:h-6" /></span>
@@ -263,7 +263,7 @@ export function RealEnvironmentShowcase() {
           {filteredData.map((item, index) => (
             <div
               key={`${item.title}-${index}`}
-              className="group/card rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500 flex flex-col h-full bg-white dark:bg-card border-2 border-border/50 hover:border-primary/40 cursor-pointer min-w-0"
+              className="group group/card rounded-xl overflow-hidden shadow hover:shadow-xl transition-all duration-300 flex flex-col h-full bg-white/50 dark:bg-card/80 backdrop-blur-sm border-0 cursor-pointer min-w-0"
               style={{
                 animationDelay: `${index * 100}ms`
               }}
@@ -272,7 +272,7 @@ export function RealEnvironmentShowcase() {
                 <CardCarousel images={item.images} category={item.category} />
               </div>
 
-              <div className="p-8 lg:p-10 space-y-5 flex flex-col flex-grow relative bg-gradient-to-b from-white to-muted/20 dark:from-card dark:to-muted/10">
+              <div className="p-8 lg:p-10 space-y-5 flex flex-col flex-grow relative bg-gradient-to-b from-white to-muted/20 dark:from-card dark:to-muted/10 transition-colors duration-300">
                 <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary via-secondary to-accent opacity-60 group-hover/card:opacity-100 transition-opacity duration-300" />
                 <h3 className="font-display font-bold text-2xl lg:text-3xl text-foreground group-hover/card:text-primary transition-colors duration-300">
                   {item.title}
@@ -309,13 +309,13 @@ export function RealEnvironmentShowcase() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
                 href="/contact#contact-form"
-                className="btn-premium text-lg px-10 py-5 hover:scale-105 transition-transform duration-300"
+                className="btn-premium text-lg px-10 py-5 transition-all duration-300"
               >
                 {t('home.realEnvironment.cta.scheduleVisit')}
               </a>
               <a
                 href="/gallery"
-                className="inline-flex items-center justify-center px-10 py-5 rounded-full border-2 border-primary text-primary font-bold text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center px-10 py-5 rounded-full border-2 border-primary text-primary font-bold text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow hover:shadow-xl"
               >
                 {t('home.realEnvironment.cta.viewGallery')}
               </a>

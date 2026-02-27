@@ -225,26 +225,7 @@ body {
   /* Removed color transition on everything to prevent weird text scaling/jumps, kept bg/border */
 }
 
-/* Claymorphism Components */
-
-.clay-card {
-  background: var(--card);
-  border-radius: var(--radius-xl);
-  padding: 0;
-  box-shadow: 
-    8px 8px 16px color-mix(in srgb, var(--primary), white 80%), 
-    -8px -8px 16px #ffffff;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  border: none;
-}
-
-.clay-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    15px 15px 30px color-mix(in srgb, var(--primary), white 70%), 
-    -15px -15px 30px #ffffff;
-}
+/* BestIT flat card style (replaces former clay) - Tailwind handles via card variants */
 
 /* Override existing button classes to match Clay style */
 .warm-button,
@@ -580,7 +561,6 @@ textarea:focus-visible {
 
 .card-feature:hover {
   box-shadow: var(--shadow-xl);
-  transform: translateY(-4px);
   border-color: var(--primary);
 }
 
@@ -595,45 +575,7 @@ textarea:focus-visible {
   border: 1px solid color-mix(in srgb, var(--primary), transparent 80%);
 }
 
-.card-premium {
-  background: color-mix(in srgb, var(--card), transparent 20%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 1.5rem; /* rounded-3xl approx */
-  border: 1px solid color-mix(in srgb, var(--foreground), transparent 90%);
-  box-shadow: 
-    0 10px 30px -5px rgba(0, 0, 0, 0.05),
-    0 4px 6px -4px rgba(0, 0, 0, 0.05); /* Soft, layered shadow */
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.card-premium::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg, 
-    color-mix(in srgb, var(--primary), transparent 95%), 
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none; /* allow form inputs and links inside the card to receive focus/click */
-}
-
-.card-premium:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 
-    0 20px 40px -5px rgba(0, 0, 0, 0.1),
-    0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  border-color: color-mix(in srgb, var(--primary), transparent 70%);
-}
-
-.card-premium:hover::before {
-  opacity: 1;
-}
+/* card-premium: now BestIT flat style via Tailwind in card variants */
 
 /* Glassmorphism that respects themes */
 .glass-panel {
@@ -649,7 +591,6 @@ textarea:focus-visible {
   border: 1px solid color-mix(in srgb, var(--foreground), transparent 85%);
 }
 
-/* Text Gradients for Headings */
 .text-gradient-primary {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
@@ -673,7 +614,6 @@ textarea:focus-visible {
 }
 
 .btn-premium:hover {
-  transform: translateY(-2px);
   box-shadow: 0 8px 25px color-mix(in srgb, var(--primary), transparent 50%);
   filter: brightness(1.1);
 }
@@ -681,20 +621,19 @@ textarea:focus-visible {
 
 /* Consistent Hover States */
 .hover-lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hover-lift:hover {
-  transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
 .hover-scale {
-  transition: transform 0.2s ease;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hover-scale:hover {
-  transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Reduced Motion Support */

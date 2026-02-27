@@ -140,24 +140,17 @@ export function GalleryPageClient() {
     return () => ro.disconnect();
   }, [filteredImages.length]);
 
-  // Update slide visuals whenever selected index changes
+  // Update slide visuals - BestIT flat style: no 3D, no scale/blur
   useGSAP(() => {
     const slides = gsap.utils.toArray('.gallery-carousel-slide');
     if (!slides.length) return;
 
     slides.forEach((slide: any, i) => {
-      const distance = i - carouselSelectedIndex;
       const isActive = i === carouselSelectedIndex;
-
       gsap.to(slide, {
-        scale: isActive ? 1.1 : 0.85,
-        opacity: isActive ? 1 : 0.4,
-        filter: isActive ? 'blur(0px)' : 'blur(6px)',
-        rotationY: distance * -15,
-        z: isActive ? 100 : -150,
-        x: distance * (typeof window !== 'undefined' && window.innerWidth < 640 ? 0 : 20),
-        duration: 0.8,
-        ease: 'expo.out',
+        opacity: isActive ? 1 : 0.5,
+        duration: 0.3,
+        ease: 'power2.out',
         overwrite: 'auto'
       });
     });
@@ -258,17 +251,10 @@ export function GalleryPageClient() {
     { scope: gallerySectionRef }
   );
 
-  // Slide transition: subtle scale/opacity when active slide changes (skip on mount)
+  // Slide transition: BestIT flat - opacity only, no scale
   const prevSlideIndexRef = useRef(carouselSelectedIndex);
   useEffect(() => {
     if (prevSlideIndexRef.current === carouselSelectedIndex) return;
-    const container = carouselContainerRef.current;
-    if (!container) return;
-    const slides = container.querySelectorAll<HTMLElement>('.gallery-carousel-slide');
-    if (slides.length === 0) return;
-    const activeIndex = carouselSelectedIndex % slides.length;
-    gsap.to(slides, { scale: 0.98, opacity: 0.88, duration: 0.35, ease: 'power2.out' });
-    gsap.to(slides[activeIndex], { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' });
     prevSlideIndexRef.current = carouselSelectedIndex;
   }, [carouselSelectedIndex]);
 
@@ -334,8 +320,8 @@ export function GalleryPageClient() {
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
                   className={`px-6 py-3 rounded-full text-sm md:text-base font-bold transition-all duration-300 border-2 cursor-pointer ${selectedCategory === category.id
-                    ? 'bg-primary text-primary-foreground border-primary shadow-xl scale-105 ring-4 ring-primary/20'
-                    : 'bg-muted/70 text-muted-foreground border-border/50 hover:bg-muted hover:border-primary/50 hover:shadow-lg hover:scale-105'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-xl ring-4 ring-primary/20'
+                    : 'bg-muted/70 text-muted-foreground border-border/50 hover:bg-muted hover:border-primary/50 hover:shadow-xl transition-all duration-300'
                     }`}
                 >
                   {category.name}
@@ -346,7 +332,7 @@ export function GalleryPageClient() {
             {/* Gallery Carousel or Empty State */}
             <div
               ref={carouselContainerRef}
-              className="gallery-carousel-wrap relative w-full h-[300px] sm:h-[450px] md:h-[600px] mx-auto perspective-[1500px]"
+              className="gallery-carousel-wrap relative w-full h-[300px] sm:h-[450px] md:h-[600px] mx-auto"
               onMouseEnter={() => setIsCarouselHoveredOrFocused(true)}
               onMouseLeave={() => setIsCarouselHoveredOrFocused(false)}
             >
@@ -375,7 +361,7 @@ export function GalleryPageClient() {
                       <div
                         key={image.id}
                         className={cn(
-                          "gallery-carousel-slide flex-shrink-0 h-full flex items-center justify-center p-2 sm:p-4 perspective-[1000px] [transform-style:preserve-3d]"
+                          "gallery-carousel-slide flex-shrink-0 h-full flex items-center justify-center p-2 sm:p-4"
                         )}
                         style={{
                           width: `${(100 / filteredImages.length).toFixed(5)}%`,
@@ -384,23 +370,25 @@ export function GalleryPageClient() {
                       >
                         <div
                           className={cn(
-                            "relative h-full w-full rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-2 sm:border-4 border-white/20 group cursor-pointer transition-all duration-500",
-                            isActive ? "shadow-primary/20" : "shadow-black/50"
+                            "relative h-full w-full rounded-xl overflow-hidden shadow hover:shadow-xl bg-white/50 dark:bg-card/80 backdrop-blur-sm border-0 group cursor-pointer transition-all duration-300",
+                            isActive ? "shadow-xl" : "shadow"
                           )}
                           onClick={() => handleImageClick(index)}
                         >
                           {!loadedImages[index] && (
                             <Skeleton className="absolute inset-0 w-full h-full" />
                           )}
-                          <Image
-                            src={image.src}
-                            alt={image.alt}
-                            fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1200px"
-                            className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                            onLoad={() => handleImageLoaded(index)}
-                            priority={isActive}
-                          />
+                          <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
+                            <Image
+                              src={image.src}
+                              alt={image.alt}
+                              fill
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1200px"
+                              className="object-cover"
+                              onLoad={() => handleImageLoaded(index)}
+                              priority={isActive}
+                            />
+                          </div>
 
                           {/* Premium Overlay and Caption */}
                           <div className={cn(

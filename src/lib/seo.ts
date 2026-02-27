@@ -7,7 +7,7 @@ export const SEO_SITE_NAME = "Friendship Corner Daycare";
 export const SEO_DEFAULT_TITLE = "Friendship Corner Montessori Daycare | Coquitlam, BC";
 export const SEO_TITLE_TEMPLATE = "%s | Friendship Corner Daycare";
 export const SEO_DEFAULT_DESCRIPTION =
-  "Licensed Montessori daycare in Coquitlam, BC serving Tri-Cities families. Safe, nurturing programs for children 30 months to school age.";
+  "Authentic Montessori daycare in Coquitlam, BC. Licensed since 2008. Book a free tour at Friendship Corner Daycare.";
 export const SEO_DEFAULT_KEYWORDS = [
   "Montessori daycare Coquitlam",
   "Coquitlam daycare",

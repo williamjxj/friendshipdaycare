@@ -68,15 +68,19 @@ export function InteractiveGallery({ images }: InteractiveGalleryProps) {
                 {images.map((image, index) => (
                     <div
                         key={image.id}
-                        className="gallery-item relative flex-none w-[80vw] md:w-[600px] aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group"
+                        className="gallery-item relative flex-none w-[80vw] md:w-[600px] aspect-[4/3] rounded-xl overflow-hidden shadow hover:shadow-xl transition-all duration-300 border-0 group"
                     >
-                        <Image
+                        <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
+                          <Image
                             src={image.src}
                             alt={image.alt}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            sizes="(max-width: 768px) 80vw, 600px"
+                            className="object-cover"
                             priority={index < 3}
-                        />
+                            loading={index >= 3 ? 'lazy' : undefined}
+                          />
+                        </div>
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                             <span className="text-indigo-400 font-medium tracking-wider text-sm uppercase mb-2">{image.category}</span>
                             <h3 className="text-white text-2xl font-bold">{image.alt}</h3>

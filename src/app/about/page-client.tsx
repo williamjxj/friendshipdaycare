@@ -109,7 +109,7 @@ export function AboutPageClient() {
                 className="relative"
                 variants={slideUp}
               >
-                <div className="relative h-96 rounded-2xl overflow-hidden shadow-xl">
+                <div className="relative h-96 rounded-xl overflow-hidden shadow hover:shadow-xl transition-all duration-300">
                   <img
                     src={getImageUrl('/imgs/home/1.jpeg')}
                     alt="Friendship Corner Daycare building"
@@ -120,7 +120,7 @@ export function AboutPageClient() {
 
                 {/* Floating stats card */}
                 <motion.div
-                  className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-lg p-6 border border-border"
+                  className="absolute -bottom-6 -right-6 bg-white/50 dark:bg-card/80 backdrop-blur-sm rounded-xl shadow hover:shadow-xl transition-all duration-300 p-6 border-0"
                   variants={scaleInMagic}
                 >
                   <div className="text-center">
@@ -209,7 +209,7 @@ export function AboutPageClient() {
               </motion.div>
 
               <motion.div variants={slideUp} className="relative">
-                <div className="relative h-80 rounded-2xl overflow-hidden shadow-xl">
+                <div className="relative h-80 rounded-xl overflow-hidden shadow hover:shadow-xl transition-all duration-300">
                   <img
                     src={getImageUrl('/imgs/home/2.jpeg')}
                     alt="Montessori classroom activities"
@@ -240,7 +240,7 @@ export function AboutPageClient() {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              <motion.div variants={slideUp} className="flex flex-col justify-center gap-4 rounded-2xl bg-card p-8 border border-border/60 shadow-lg h-full">
+              <motion.div variants={slideUp} className="flex flex-col justify-center gap-4 rounded-xl bg-white/50 dark:bg-card/80 backdrop-blur-sm p-8 border-0 shadow hover:shadow-xl transition-all duration-300 h-full">
                 {((messages.aboutPage as any)?.team?.highlights || []).map((highlight: string, i: number) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -250,7 +250,7 @@ export function AboutPageClient() {
                   </div>
                 ))}
               </motion.div>
-              <motion.div variants={slideUp} className="space-y-4 rounded-2xl bg-card p-8 border border-border/60 shadow-lg">
+              <motion.div variants={slideUp} className="space-y-4 rounded-xl bg-white/50 dark:bg-card/80 backdrop-blur-sm p-8 border-0 shadow hover:shadow-xl transition-all duration-300">
                 <p className="text-muted-foreground leading-relaxed">
                   {t('aboutPage.team.qualifications')}
                 </p>

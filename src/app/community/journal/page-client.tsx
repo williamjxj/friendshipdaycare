@@ -119,7 +119,7 @@ export default function JournalPageClient() {
                                             {/* Card Header Illustration/Image Placeholder */}
                                             <CardHeader className="p-0 relative h-48 bg-muted grid place-items-center overflow-hidden border-b border-border">
                                                 <AnimatedPlaceholder className="absolute inset-0 z-0" />
-                                                <div className="relative z-10 text-center transition-transform duration-500 group-hover:scale-[1.2]">
+                                                <div className="relative z-10 text-center transition-transform duration-300 group-hover:scale-110">
                                                     <div className="text-4xl mb-2 animate-[magic-float_4s_ease-in-out_infinite]">📖</div>
                                                     <span className="font-bold text-primary text-lg">{journal.month} {journal.year}</span>
                                                 </div>

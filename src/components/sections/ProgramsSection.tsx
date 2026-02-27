@@ -7,7 +7,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getImageUrl } from '@/lib/image-utils';
-import { gridPattern, scaleInMagic, shimmer, staggerContainerMagic } from '@/lib/magicui-animations';
+import { gridPattern, scaleInMagic, staggerContainerMagic } from '@/lib/magicui-animations';
 
 /**
  * Programs overview section with animated cards.
@@ -68,40 +68,32 @@ export function ProgramsSection() {
             <motion.div
               key={program.key}
               variants={scaleInMagic}
-              whileHover={{ 
-                y: -10,
-                transition: { duration: 0.3 }
-              }}
               className="group"
             >
-              <div className="relative bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div
-                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={shimmer}
-                />
+              <div className="relative bg-white/50 dark:bg-card/80 backdrop-blur-sm rounded-xl overflow-hidden shadow hover:shadow-xl transition-all duration-300">
                 {/* Program Image */}
                 <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={getImageUrl(program.image)}
-                    alt={t(`programs.${program.key}.title`)}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  <div className="h-full w-full transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
+                    <Image
+                      src={getImageUrl(program.image)}
+                      alt={t(`programs.${program.key}.title`)}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
                 </div>
 
                 {/* Program Content */}
-                <div className="p-6 space-y-4">
+                <div className="p-6 space-y-4 transition-colors duration-300">
                   <div className="flex items-center space-x-3">
-                    <motion.div
+                    <div
                       className={`w-12 h-12 bg-${program.color}/20 rounded-lg flex items-center justify-center`}
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.5 }}
                     >
                       <span className={`text-${program.color} font-bold text-xl`}>
                         {program.icon}
                       </span>
-                    </motion.div>
+                    </div>
                     <div>
                       <h3 className="text-xl font-semibold text-foreground">
                         {t(`programs.${program.key}.title`)}
@@ -141,11 +133,7 @@ export function ProgramsSection() {
                   </div>
 
                   {/* Learn More Button */}
-                  <motion.div
-                    className="pt-4"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
+                  <div className="pt-4">
                     <Link
                       href="/programs"
                       className={`inline-flex items-center space-x-2 text-${program.color} hover:text-${program.color}/80 font-medium text-sm transition-colors`}
@@ -158,7 +146,7 @@ export function ProgramsSection() {
                         →
                       </motion.span>
                     </Link>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -172,17 +160,14 @@ export function ProgramsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <div>
             <Link
               href="/programs"
               className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow"
             >
               View All Programs
             </Link>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

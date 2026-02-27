@@ -25,6 +25,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9
     },
     {
+      url: `${baseUrl}/programs/infant`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85
+    },
+    {
+      url: `${baseUrl}/programs/toddler`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85
+    },
+    {
+      url: `${baseUrl}/programs/preschool`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85
+    },
+    {
+      url: `${baseUrl}/funding`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.75
+    },
+    {
+      url: `${baseUrl}/our-team`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.75
+    },
+    {
       url: `${baseUrl}/enrollment`,
       lastModified: now,
       changeFrequency: "monthly",
@@ -77,30 +107,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.5
-    },
-    {
-      url: `${baseUrl}/resources/canva`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.4
-    },
-    {
-      url: `${baseUrl}/resources/canva2`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.4
-    },
-    {
-      url: `${baseUrl}/resources/gamma`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.4
-    },
-    {
-      url: `${baseUrl}/resources/slide-deck`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.4
     }
   ];
 }
