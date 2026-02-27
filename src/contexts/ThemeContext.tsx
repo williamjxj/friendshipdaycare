@@ -46,7 +46,7 @@ export const themes = [
 ];
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('professional');
+  const [theme, setTheme] = useState<Theme>('violet');
 
   useEffect(() => {
     // Load theme from localStorage on mount
@@ -54,8 +54,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (savedTheme && themes.some(t => t.value === savedTheme)) {
       setTheme(savedTheme);
     } else {
-      // Set professional as default for new users
-      setTheme('professional');
+      // Set violet as default for new users
+      setTheme('violet');
     }
   }, []);
 

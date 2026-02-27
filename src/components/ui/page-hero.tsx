@@ -17,6 +17,7 @@ if (typeof window !== 'undefined') {
 interface PageHeroProps {
   title: string;
   subtitle?: string;
+  description?: string;
   backgroundImage?: string;
   backgroundSvg?: string;
   className?: string;
@@ -32,6 +33,7 @@ interface PageHeroProps {
 export function PageHero({
   title,
   subtitle,
+  description,
   backgroundImage,
   backgroundSvg,
   className,
@@ -232,26 +234,52 @@ export function PageHero({
       >
         {/* Top-positioned Breadcrumbs */}
         {topContent && (
-          <div className="absolute top-4 sm:top-8 left-4 sm:left-6 lg:left-8 z-40">
+          <div className="absolute left-[2vw] top-[1vh] z-40">
             {topContent}
           </div>
         )}
 
-        <div className="space-y-10 md:space-y-16 min-w-0 text-center lg:text-center max-w-7xl mx-auto">
+        <div className="space-y-6 md:space-y-8 min-w-0 text-center lg:text-center max-w-7xl mx-auto mt-8 md:mt-12">
           {!hideTitle && (
             <h1
               ref={titleRef}
-              className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-display font-bold text-white leading-[1.05] drop-shadow-2xl break-words tracking-tight"
-              style={{ fontFamily: 'var(--font-baloo)' }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] drop-shadow-2xl break-words tracking-tight"
+              style={{
+                fontFamily: 'var(--font-baloo)',
+              }}
             >
-              <span className="block mb-2">{title}</span>
+              <span className="block mb-2">
+                {(() => {
+                  const words = title.split(' ');
+                  const lastWord = words[words.length - 1];
+                  const restOfTitle = words.slice(0, -1).join(' ');
+                  return (
+                    <>
+                      <span
+                        style={{
+                          backgroundImage: 'linear-gradient(135deg, rgb(184, 134, 11) 0%, rgb(205, 133, 63) 20%, rgb(212, 175, 55) 40%, rgb(255, 215, 0) 50%, rgb(212, 175, 55) 60%, rgb(205, 133, 63) 80%, rgb(184, 134, 11) 100%)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          color: 'transparent',
+                        }}
+                      >
+                        {restOfTitle}{' '}
+                      </span>
+                      <span style={{ color: 'white' }}>
+                        {lastWord}
+                      </span>
+                    </>
+                  );
+                })()}
+              </span>
             </h1>
           )}
 
           {subtitle && !hideSubtitle && (
             <h2
               ref={subtitleRef}
-              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-medium text-white/95 leading-snug drop-shadow-lg hero-subtitle break-words max-w-6xl mx-auto"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white/95 leading-snug drop-shadow-lg hero-subtitle break-words max-w-5xl mx-auto"
               style={{
                 fontFamily: 'var(--font-fredoka)',
                 letterSpacing: '0.01em',
@@ -260,6 +288,17 @@ export function PageHero({
             >
               {subtitle}
             </h2>
+          )}
+
+          {description && (
+            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-white/90 leading-relaxed drop-shadow-md max-w-4xl mx-auto"
+              style={{
+                fontFamily: 'var(--font-fredoka)',
+                letterSpacing: '0.01em',
+              }}
+            >
+              {description}
+            </h3>
           )}
 
           {children && (

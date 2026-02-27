@@ -287,8 +287,9 @@
   },
   "aboutPage": {
     "hero": {
-      "title": "About Friendship Corner Daycare in Coquitlam",
-      "subtitle": "Montessori daycare serving Tri-Cities families with nurturing care since 2008"
+      "title": "We are Montessori ECE",
+      "subtitle": "Where Christian values meet Montessori excellence",
+      "description": "Discover our commitment to Montessori excellence and nurturing young minds since 2008"
     },
     "story": {
       "title": "Our Story",
@@ -348,8 +349,9 @@
   },
   "programsPage": {
     "hero": {
-      "title": "Montessori Programs in Coquitlam",
-      "subtitle": "Toddler, preschool, and pre-kindergarten programs for Tri-Cities families"
+      "title": "Nurturing Each Child's Unique Potential",
+      "subtitle": "Toddler through Pre-kindergarten programs",
+      "description": "Age-appropriate Montessori education designed to nurture each child's natural development"
     },
     "overview": {
       "title": "Montessori Programs in Coquitlam",
@@ -541,8 +543,9 @@
   },
   "enrollmentPage": {
     "hero": {
-      "title": "Montessori Enrollment in Coquitlam",
-      "subtitle": "Steps and requirements to enroll at Friendship Corner Daycare"
+      "title": "Begin Your Montessori Journey",
+      "subtitle": "A simple, nurturing path to enrollment",
+      "description": "Welcome to join our caring community! We make enrollment easy and transparent, so you can focus on what matters most — your child's learning journey."
     },
     "process": {
       "title": "Enrollment Process",
@@ -596,8 +599,9 @@
   },
   "galleryPage": {
     "hero": {
-      "title": "Daycare Gallery in Coquitlam",
-      "subtitle": "Explore our Montessori classrooms, activities, and spaces"
+      "title": "Discover Our Learning Environment",
+      "subtitle": "Explore our Montessori classrooms, activities, and vibrant learning spaces",
+      "description": "Take a glimpse into our vibrant learning environment and see how children thrive in our Montessori setting"
     },
     "gallery": {
       "title": "Montessori Daycare Moments",
@@ -644,8 +648,9 @@
   },
   "contactPage": {
     "hero": {
-      "title": "Contact Friendship Corner Daycare in Coquitlam",
-      "subtitle": "Schedule a tour, ask questions, or start enrollment today"
+      "title": "Get in Touch With Us",
+      "subtitle": "Schedule a tour, ask questions, or start enrollment today",
+      "description": "Email: friendship.care@live.ca | Phone: 604-945-8504 | Social Media: @friendshipdaycare"
     },
     "info": {
       "title": "Get in Touch",

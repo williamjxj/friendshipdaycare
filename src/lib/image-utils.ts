@@ -66,6 +66,11 @@ export function getImageUrl(path: string): string {
     return path;
   }
   
+  // TEMPORARY: Use local public/imgs folder instead of R2 for imgs/ paths
+  if (path.startsWith('/imgs/') || path.startsWith('imgs/')) {
+    return path.startsWith('/') ? path : `/${path}`;
+  }
+  
   // If it's a local path that should use R2, convert it
   if (shouldUseR2(path)) {
     return getR2ImageUrl(path);

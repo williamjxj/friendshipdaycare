@@ -11,7 +11,8 @@ import {
   CalendarDaysIcon,
   DocumentCheckIcon,
   UserGroupIcon,
-  CheckCircleIcon
+  CheckCircleIcon,
+  DocumentArrowDownIcon
 } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
@@ -83,15 +84,46 @@ export function EnrollmentPageClient() {
 
         {/* Hero Section */}
         <PageHero
-          title={safeT('enrollmentPage.hero.title', 'Montessori Enrollment in Coquitlam')}
-          subtitle={safeT('enrollmentPage.hero.subtitle', 'Steps and requirements to enroll at Friendship Corner Daycare')}
+          title={safeT('enrollmentPage.hero.title', 'Begin Your Montessori Journey')}
+          subtitle={safeT('enrollmentPage.hero.subtitle', 'A simple, nurturing path to enrollment')}
+          description={safeT('enrollmentPage.hero.description', 'Discover a 4-step process designed with families in mind. Start your child\'s Montessori adventure today.')}
           backgroundSvg={getImageUrl('/imgs/enrollment/enrollment_hero_1.gif')}
           enableScrollTrigger={true}
           hideSubtitle={false}
           hideTitle={false}
           topContent={<Breadcrumbs items={breadcrumbs} />}
         >
-          <HeroCTAButtons variant="default" />
+          <div className="flex flex-col gap-4 items-center w-full mx-auto">
+            {/* Document Downloads - Registration Forms */}
+            <div className="w-full">
+              <p className="text-center text-base sm:text-lg text-muted-foreground mb-2 font-semibold">
+                {safeT('enrollmentPage.hero.documentsLabel', 'Download Our Registration Form')}
+              </p>
+              <p className="text-center text-sm text-muted-foreground/80 mb-4 italic">
+                {safeT('enrollmentPage.hero.formatNote', 'Same form, choose your preferred format')}
+              </p>
+              <div className="flex gap-3 sm:gap-4 justify-center px-2 sm:px-0">
+                <a
+                  href="/assets/Registration form 2026.pdf"
+                  download
+                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg transition-all duration-200 min-h-[44px] sm:min-h-[52px] bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+                  aria-label="Download Registration Form PDF"
+                >
+                  <DocumentArrowDownIcon className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" />
+                  <span>Form (PDF)</span>
+                </a>
+                <a
+                  href="/assets/Registration form 2026.doc"
+                  download
+                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg transition-all duration-200 min-h-[44px] sm:min-h-[52px] bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+                  aria-label="Download Registration Form Word Document"
+                >
+                  <DocumentArrowDownIcon className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" />
+                  <span>Form (Word)</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </PageHero>
 
         {/* Enrollment Process */}
@@ -135,6 +167,18 @@ export function EnrollmentPageClient() {
                     <CardContent className="p-0">
                       <CardDescription className="text-muted-foreground leading-relaxed">
                         {step.description}
+                        {index === 0 && (
+                          <span className="block mt-3">
+                            <a
+                              href="/assets/Registration form 2026.pdf"
+                              download
+                              className="inline-flex items-center gap-1.5 text-primary hover:text-primary/80 font-semibold underline underline-offset-2 transition-colors"
+                            >
+                              <DocumentArrowDownIcon className="w-4 h-4" />
+                              {safeT('enrollmentPage.downloadForm', 'Download Registration Form')}
+                            </a>
+                          </span>
+                        )}
                       </CardDescription>
                     </CardContent>
                   </Card>

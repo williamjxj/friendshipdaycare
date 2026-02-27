@@ -39,6 +39,7 @@ export function ProgramsPageClient() {
         <PageHero
           title={t('programsPage.hero.title')}
           subtitle={t('programsPage.hero.subtitle')}
+          description={t('programsPage.hero.description')}
           backgroundSvg={getImageUrl('/imgs/programs/programs_hero_1.gif')}
           enableScrollTrigger={true}
           hideSubtitle={false}

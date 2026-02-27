@@ -47,6 +47,7 @@ export function AboutPageClient() {
         <PageHero
           title={t('aboutPage.hero.title')}
           subtitle={t('aboutPage.hero.subtitle')}
+          description={t('aboutPage.hero.description')}
           backgroundSvg={getImageUrl('/imgs/about/about_hero_1.gif')}
           enableScrollTrigger={true}
           hideSubtitle={false}

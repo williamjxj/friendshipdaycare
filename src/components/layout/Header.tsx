@@ -159,17 +159,18 @@ export function Header() {
     { key: 'about', href: '/about', icon: Info },
     { key: 'programs', href: '/programs', icon: BookOpen },
     { key: 'enrollment', href: '/enrollment', icon: UserPlus },
-    {
-      key: 'community',
-      icon: Users,
-      children: [
-        { key: 'todays-story', href: '/community/todays-story', icon: BookMarked },
-        { key: 'journal', href: '/community/journal', icon: Newspaper },
-        { key: 'montessori', href: '/community/montessori', icon: GraduationCap },
-        { key: 'ece', href: '/community/ece', icon: Landmark },
-        { key: 'resources', href: '/resources', icon: FolderOpen },
-      ]
-    },
+    // { HIDDEN: Community dropdown }
+    // {
+    //   key: 'community',
+    //   icon: Users,
+    //   children: [
+    //     { key: 'todays-story', href: '/community/todays-story', icon: BookMarked },
+    //     { key: 'journal', href: '/community/journal', icon: Newspaper },
+    //     { key: 'montessori', href: '/community/montessori', icon: GraduationCap },
+    //     { key: 'ece', href: '/community/ece', icon: Landmark },
+    //     { key: 'resources', href: '/resources', icon: FolderOpen },
+    //   ]
+    // },
     { key: 'gallery', href: '/gallery', icon: Images },
     { key: 'contact', href: '/contact', icon: MessageCircle },
   ], []);
@@ -268,7 +269,7 @@ export function Header() {
           {/* Desktop Controls */}
           <div className="hidden lg:flex items-center space-x-4">
             <LanguageToggle />
-            <ThemeToggle />
+            {/* <ThemeToggle /> - Hidden for now */}
             <Link
               href="/contact#contact-form"
               className="relative overflow-hidden warm-button text-[0.6rem] px-2 py-2 flex items-center gap-1.5 group/cta shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap !h-[26px] !min-h-0 !rounded-md"
@@ -282,7 +283,7 @@ export function Header() {
           {/* Mobile: Language, Theme, then prominent menu button - never clipped */}
           <div className="lg:hidden flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
             <LanguageToggle />
-            <ThemeToggle />
+            {/* <ThemeToggle /> - Hidden for now */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2.5 rounded-lg bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 hover:border-primary/30 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shadow-sm"

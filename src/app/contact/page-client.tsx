@@ -158,6 +158,7 @@ export function ContactPageClient() {
         <PageHero
           title={t('contactPage.hero.title')}
           subtitle={t('contactPage.hero.subtitle')}
+          description={t('contactPage.hero.description')}
           backgroundSvg={getImageUrl('/imgs/contact/contact_hero_1.gif')}
           enableScrollTrigger={true}
           hideTitle={false}

@@ -297,6 +297,7 @@ export function GalleryPageClient() {
         <PageHero
           title={t('galleryPage.hero.title')}
           subtitle={t('galleryPage.hero.subtitle')}
+          description={t('galleryPage.hero.description')}
           backgroundSvg={getImageUrl('/imgs/gallery/gallery_hero_1.gif')}
           enableScrollTrigger={true}
           hideSubtitle={false}
