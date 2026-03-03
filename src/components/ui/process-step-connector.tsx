@@ -13,7 +13,7 @@ interface ProcessStepConnectorProps {
 
 /**
  * Animated dotted line / arrow connector between process steps.
- * Flowing dot animation (images-hub style).
+ * Flowing dot animation with a moving indicator along the path.
  */
 export function ProcessStepConnector({
   direction = 'horizontal',
@@ -34,7 +34,7 @@ export function ProcessStepConnector({
 
   return (
     <motion.div
-      className={`process-step-connector flex items-center justify-center shrink-0 ${className}`}
+      className={`process-step-connector flex items-center justify-center shrink-0 overflow-visible ${className}`}
       {...motionProps}
       style={{
         width: isHorizontal ? 40 : 24,
@@ -44,11 +44,10 @@ export function ProcessStepConnector({
     >
       <svg
         viewBox="0 0 40 24"
-        className={isHorizontal ? 'w-10 h-6' : 'w-6 h-10 rotate-90'}
+        className={`${isHorizontal ? 'w-10 h-6' : 'w-6 h-10 rotate-90'} overflow-visible`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Flowing dotted line */}
         <defs>
           <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.4" />
@@ -56,6 +55,7 @@ export function ProcessStepConnector({
             <stop offset="100%" stopColor="var(--primary)" stopOpacity="0.4" />
           </linearGradient>
         </defs>
+        {/* Flowing dotted line */}
         <line
           x1="0"
           y1="12"
@@ -67,6 +67,17 @@ export function ProcessStepConnector({
           strokeLinecap="round"
           className="connector-line-animate"
         />
+        {/* Moving dot indicator - travels along the path (both orientations use cx; SVG rotation handles vertical) */}
+        <motion.circle
+          r="3"
+          fill="var(--primary)"
+          cx={12}
+          cy={12}
+          animate={{
+            cx: [4, 36, 4],
+            transition: { duration: 2, repeat: Infinity, ease: 'linear' },
+          }}
+        />
         {/* Arrow head */}
         <path
           d="M34 6L40 12L34 18"
@@ -75,7 +86,7 @@ export function ProcessStepConnector({
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
-          className="opacity-80"
+          className="opacity-90"
         />
       </svg>
     </motion.div>

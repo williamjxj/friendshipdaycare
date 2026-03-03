@@ -29,6 +29,7 @@
     "gsap": "^3.14.2",
     "lucide-react": "^0.561.0",
     "mime-types": "^3.0.2",
+    "motion": "^12.34.5",
     "next": "^16.0.10",
     "next-intl": "^4.6.0",
     "p-limit": "^7.2.0",
