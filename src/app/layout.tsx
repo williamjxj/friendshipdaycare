@@ -98,7 +98,10 @@ export default async function RootLayout({
           priceRange="$$"
           openingHours={businessProfile.openingHours}
           serviceArea={businessProfile.serviceArea}
-          sameAs={businessProfile.sameAs}
+          sameAs={[
+            ...(businessProfile.sameAs ?? []),
+            ...(businessProfile.googleBusinessProfileUrl ? [businessProfile.googleBusinessProfileUrl] : []),
+          ]}
           aggregateRating={aggregateRating ?? undefined}
         />
         <OrganizationSchema

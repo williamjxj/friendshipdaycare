@@ -20,7 +20,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0 grid place-items-center w-full h-full">
         <Image
           src="/hero-bg.svg"
-          alt="Daycare background"
+          alt="Montessori daycare environment at Friendship Corner Coquitlam - nurturing learning space"
           fill
           className="object-cover opacity-30"
           priority
@@ -76,7 +76,7 @@ export function HeroSection() {
                 "hover:brightness-110 hover:shadow-xl active:scale-95"
               )}
             >
-              {t('hero.enrollNow')}
+              {t('home.hero.scheduleTour')}
             </Link>
 
             <Link

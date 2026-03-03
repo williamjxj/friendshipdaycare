@@ -277,7 +277,7 @@ export function HomePageClient() {
           >
             <Image
               src="/daycare-logo.png"
-              alt="Friendship Daycare Logo"
+              alt="Friendship Corner Daycare logo - Montessori childcare Coquitlam"
               fill
               className="object-contain"
               priority
@@ -384,7 +384,7 @@ export function HomePageClient() {
                 <div className="absolute inset-0 z-10 transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
                   <Image
                     src={getImageUrl('/images/sensorial-shelf.jpg')}
-                    alt="Montessori sensorial materials"
+                    alt="Montessori sensorial materials at Friendship Daycare Coquitlam - prepared learning environment"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
@@ -414,7 +414,7 @@ export function HomePageClient() {
                 <div className="absolute inset-0 z-10 transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
                   <Image
                     src={getImageUrl("/images/circle-time-board-2.jpg")}
-                    alt="Circle Time"
+                    alt="Circle time at Friendship Daycare Coquitlam - Montessori classroom activities"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
@@ -444,7 +444,7 @@ export function HomePageClient() {
                 <div className="absolute inset-0 z-10 transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
                   <Image
                     src={getImageUrl("/images/playground.jpg")}
-                    alt="Playground"
+                    alt="Playground at Friendship Daycare Coquitlam - outdoor play space for children"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
@@ -474,7 +474,7 @@ export function HomePageClient() {
                 <div className="absolute inset-0 z-10 transition-transform duration-500 ease-out group-hover:scale-110 origin-center">
                   <Image
                     src={getImageUrl('/images/language-shelf.jpg')}
-                    alt="Language and learning materials"
+                    alt="Language and learning materials at Friendship Daycare Coquitlam - Montessori literacy"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"

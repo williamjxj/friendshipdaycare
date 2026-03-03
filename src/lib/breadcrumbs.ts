@@ -66,11 +66,6 @@ export function getBreadcrumbs(pathname: string): BreadcrumbItem[] {
       { name: "Home", href: "/" },
       { name: "Resources", href: "/resources" },
     ],
-    "/resources/faq": [
-      { name: "Home", href: "/" },
-      { name: "Resources", href: "/resources" },
-      { name: "FAQ", href: "/resources/faq" },
-    ],
   };
 
   if (map[path]) return map[path];

@@ -17,6 +17,8 @@ export interface BusinessProfile {
   serviceArea: string;
   /** Social profile URLs for schema sameAs and Header/Footer links */
   sameAs?: string[];
+  /** Google Business Profile URL - add when claimed to enable "View on Google" link in footer */
+  googleBusinessProfileUrl?: string;
 }
 
 /**
@@ -41,5 +43,7 @@ export const businessProfile: BusinessProfile = {
   sameAs: [
     "https://www.facebook.com/FriendshipCornerDaycare",
     "https://www.instagram.com/friendshipcornerdaycare"
-  ]
+  ],
+  /** Add when GBP is claimed, e.g. "https://g.page/friendship-corner-daycare" - enables footer link */
+  // googleBusinessProfileUrl: "https://...",
 };

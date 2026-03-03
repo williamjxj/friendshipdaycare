@@ -89,7 +89,8 @@
       "programs": "Our Programs",
       "enrollment": "Enrollment",
       "gallery": "Gallery",
-      "contact": "Contact"
+      "contact": "Contact",
+      "faq": "FAQ"
     },
     "resources": {
       "title": "Resources",
@@ -738,6 +739,7 @@
     },
     "faq": {
       "title": "Frequently Asked Questions",
+      "moreLink": "More questions? Expand",
       "items": [
         {
           "question": "How can I reach you?",

@@ -87,7 +87,8 @@
       "programs": "Nos Programmes",
       "enrollment": "Inscription",
       "gallery": "Galerie",
-      "contact": "Contact"
+      "contact": "Contact",
+      "faq": "FAQ"
     },
     "resources": {
       "title": "Ressources",
@@ -627,6 +628,7 @@
     },
     "faq": {
       "title": "Questions Fréquentes",
+      "moreLink": "Plus de questions ? Développer",
       "items": [
         {
           "question": "Comment vous joindre?",

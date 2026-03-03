@@ -24,6 +24,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { FAQSchema } from '@/components/seo/StructuredData';
+import { faqItems, FAQ_INITIAL_COUNT } from '@/data/faq';
 
 /**
  * Contact page client component with form and business details.
@@ -33,7 +35,10 @@ export function ContactPageClient() {
   const pathname = usePathname();
   const breadcrumbs = getBreadcrumbs(pathname);
 
-  const contactFaqItems = (messages.contactPage?.faq?.items ?? []) as Array<{ question: string; answer: string }>;
+  const [faqExpanded, setFaqExpanded] = useState(false);
+  const showAllFaqs = faqExpanded || faqItems.length <= FAQ_INITIAL_COUNT;
+  const displayedFaqItems = showAllFaqs ? faqItems : faqItems.slice(0, FAQ_INITIAL_COUNT);
+  const hasMoreFaqs = faqItems.length > FAQ_INITIAL_COUNT;
 
   useLocalizedMetadata({
     title: t('seo.contact.title'),
@@ -408,34 +413,50 @@ export function ContactPageClient() {
           </div>
         </motion.section>
 
-        {/* 3. Contact FAQ */}
+        {/* 3. FAQ - all inline, "More" expands (no separate page) */}
         <motion.section
-          className="py-20 bg-card"
+          id="faq"
+          className="py-20 bg-card scroll-mt-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeIn}
         >
+          <FAQSchema questions={faqItems} />
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-8 text-center">
               {t('contactPage.faq.title')}
             </h2>
             <Accordion type="single" collapsible className="w-full space-y-2">
-              {contactFaqItems.map((item, idx) => (
+              {displayedFaqItems.map((item, idx) => (
                 <AccordionItem
                   key={`${idx}-${item.question}`}
                   value={`item-${idx}`}
-                  className="rounded-xl border border-border bg-muted/30 px-5 shadow-sm data-[state=open]:shadow-md transition-shadow"
+                  className="rounded-xl border border-border bg-muted/30 px-4 sm:px-5 shadow-sm data-[state=open]:shadow-md transition-shadow"
                 >
-                  <AccordionTrigger className="font-semibold text-foreground text-lg hover:no-underline hover:text-primary">
+                  <AccordionTrigger className="font-semibold text-foreground text-base sm:text-lg hover:no-underline hover:text-primary py-4 sm:py-5">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed text-sm">
+                  <AccordionContent className="text-muted-foreground leading-relaxed text-sm pb-4">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
+            {hasMoreFaqs && !faqExpanded && (
+              <div className="mt-6 text-center">
+                <button
+                  type="button"
+                  onClick={() => setFaqExpanded(true)}
+                  className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors min-h-[44px]"
+                >
+                  {t('contactPage.faq.moreLink')}
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
         </motion.section>
 

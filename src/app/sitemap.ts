@@ -101,12 +101,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6
-    },
-    {
-      url: `${baseUrl}/resources/faq`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.5
     }
   ];
 }
