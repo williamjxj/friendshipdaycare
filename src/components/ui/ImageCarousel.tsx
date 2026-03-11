@@ -63,6 +63,7 @@ export function ImageCarousel({ images, className = '' }: ImageCarouselProps) {
                   alt={image.alt}
                   width={800}
                   height={450}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 800px"
                   className="w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-110"
                 />
                 {image.title && (

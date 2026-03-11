@@ -52,13 +52,16 @@ export const testimonialsAll: Testimonial[] = raw.reviews
     };
   });
 
+/** Display limit: 3-4 unique testimonials for conciseness per spec */
+const TESTIMONIALS_DISPLAY_LIMIT = 4;
+
 /** Locale maps to same testimonials - all in original language, no translation */
 export const testimonialsByLocale: Record<string, Testimonial[]> = {
-  en: testimonialsAll,
-  zh: testimonialsAll,
-  ko: testimonialsAll,
-  es: testimonialsAll,
-  fr: testimonialsAll,
+  en: testimonialsAll.slice(0, TESTIMONIALS_DISPLAY_LIMIT),
+  zh: testimonialsAll.slice(0, TESTIMONIALS_DISPLAY_LIMIT),
+  ko: testimonialsAll.slice(0, TESTIMONIALS_DISPLAY_LIMIT),
+  es: testimonialsAll.slice(0, TESTIMONIALS_DISPLAY_LIMIT),
+  fr: testimonialsAll.slice(0, TESTIMONIALS_DISPLAY_LIMIT),
 };
 
 /** Aggregate rating for schema.org; only when we have reviews. */

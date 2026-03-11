@@ -32,26 +32,6 @@ export function getBreadcrumbs(pathname: string): BreadcrumbItem[] {
   const path = pathname.split("?")[0].split("#")[0];
 
   const map: Record<string, BreadcrumbItem[]> = {
-    "/about": [
-      { name: "Home", href: "/" },
-      { name: "About", href: "/about" },
-    ],
-    "/programs": [
-      { name: "Home", href: "/" },
-      { name: "Programs", href: "/programs" },
-    ],
-    "/enrollment": [
-      { name: "Home", href: "/" },
-      { name: "Enrollment", href: "/enrollment" },
-    ],
-    "/gallery": [
-      { name: "Home", href: "/" },
-      { name: "Gallery", href: "/gallery" },
-    ],
-    "/contact": [
-      { name: "Home", href: "/" },
-      { name: "Contact", href: "/contact" },
-    ],
     "/community/todays-story": [
       { name: "Home", href: "/" },
       { name: "Community", href: "/community/todays-story" },

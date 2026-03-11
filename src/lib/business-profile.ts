@@ -6,6 +6,12 @@ export interface BusinessAddress {
   addressCountry: string;
 }
 
+/** Geo coordinates for LocalBusiness schema (Coquitlam, BC) */
+export interface BusinessGeo {
+  latitude: number;
+  longitude: number;
+}
+
 export interface BusinessProfile {
   name: string;
   legalName: string;
@@ -19,6 +25,10 @@ export interface BusinessProfile {
   sameAs?: string[];
   /** Google Business Profile URL - add when claimed to enable "View on Google" link in footer */
   googleBusinessProfileUrl?: string;
+  /** Geo coordinates for schema.org LocalBusiness (Maps rich results) */
+  geo?: BusinessGeo;
+  /** Founding year/date for schema (e.g. "2008-01-01") */
+  foundingDate?: string;
 }
 
 /**
@@ -46,4 +56,7 @@ export const businessProfile: BusinessProfile = {
   ],
   /** Add when GBP is claimed, e.g. "https://g.page/friendship-corner-daycare" - enables footer link */
   // googleBusinessProfileUrl: "https://...",
+  /** Geo for LocalBusiness schema - 2950 Dewdney Trunk Road, Coquitlam BC */
+  geo: { latitude: 49.25, longitude: -122.79 },
+  foundingDate: "2008-01-01",
 };

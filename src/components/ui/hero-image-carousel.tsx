@@ -8,7 +8,6 @@ export interface HeroImageCarouselProps {
   images: string[];
   /** Interval in ms between slides. Default 5000. */
   intervalMs?: number;
-  overlayColor?: string;
   className?: string;
   /** Called when the visible slide index changes (for syncing hero text with carousel). */
   onIndexChange?: (index: number) => void;
@@ -21,7 +20,6 @@ export interface HeroImageCarouselProps {
 export function HeroImageCarousel({
   images,
   intervalMs = 5000,
-  overlayColor = 'bg-black/30',
   className,
   onIndexChange,
 }: HeroImageCarouselProps) {
@@ -54,8 +52,6 @@ export function HeroImageCarousel({
           aria-hidden={i !== index}
         />
       ))}
-      <div className={cn('absolute inset-0', overlayColor)} />
-      <div className="absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-background/90" />
     </div>
   );
 }

@@ -42,7 +42,7 @@ export function FundingPageClient() {
             For detailed tuition information and current availability, please contact us via our contact page or call 604.945.8504.
           </p>
           <a
-            href="/contact#contact-form"
+            href="/#contact-form"
             className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity"
           >
             Contact Us

@@ -2,7 +2,6 @@
 
 import { Suspense } from 'react';
 import { PageLoader, LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { PageHero } from '@/components/ui/page-hero';
 import { VideoPlayer } from '@/components/ui/VideoPlayer';
 import { getImageUrl } from '@/lib/image-utils';
 import Link from 'next/link';
@@ -39,18 +38,20 @@ export default function TodaysStoryContent() {
         <Suspense fallback={<PageLoader message="Loading today's magical story..." />}>
             <main className="flex-1 bg-background">
 
-                {/* Hero Section */}
-                <PageHero
-                    title={t('community.todaysStory.hero.title')}
-                    subtitle={t('community.todaysStory.hero.subtitle')}
-                    backgroundSvg={getImageUrl('/imgs/community/community_story_1.gif')}
-                    enableScrollTrigger={true}
-                    hideTitle={true}
-                    hideSubtitle={true}
-                />
+                {/* Page Header - no decorative hero */}
+                <section className="py-12 sm:py-16 bg-muted/20">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground">
+                            {t('community.todaysStory.hero.title')}
+                        </h1>
+                        <p className="mt-2 text-lg text-muted-foreground">
+                            {t('community.todaysStory.hero.subtitle')}
+                        </p>
+                    </div>
+                </section>
 
                 {/* Video Section */}
-                <section className="py-20 relative z-10 -mt-20">
+                <section className="py-20 relative z-10">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <Card
                             variant="elevated"
@@ -166,10 +167,10 @@ export default function TodaysStoryContent() {
                         <h2 className="text-3xl md:text-5xl font-bold">{t('community.todaysStory.cta.title')}</h2>
                         <p className="text-xl opacity-90">{t('community.todaysStory.cta.subtitle')}</p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-                            <Link href="/contact#contact-form" className="bg-background text-foreground px-8 py-4 rounded-lg font-bold text-lg hover:brightness-110 transition-all shadow-lg hover:shadow-xl">
+                            <Link href="/#contact-form" className="bg-background text-foreground px-8 py-4 rounded-lg font-bold text-lg hover:brightness-110 transition-all shadow-lg hover:shadow-xl">
                                 {t('community.todaysStory.cta.primary')}
                             </Link>
-                            <Link href="/programs" className="inline-flex items-center justify-center bg-primary-foreground/10 border-2 border-primary-foreground/30 px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-foreground/20 transition-all min-h-[44px]">
+                            <Link href="/#programs" className="inline-flex items-center justify-center bg-primary-foreground/10 border-2 border-primary-foreground/30 px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-foreground/20 transition-all min-h-[44px]">
                                 {t('community.todaysStory.cta.secondary')}
                             </Link>
                         </div>

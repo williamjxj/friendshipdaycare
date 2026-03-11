@@ -2,7 +2,6 @@
 
 import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { PageHero } from '@/components/ui/page-hero';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getImageUrl } from '@/lib/image-utils';
 import Link from 'next/link';
@@ -34,12 +33,16 @@ export default function BCEarlyLearningPageClient() {
           style={{ backgroundImage: `url(${getImageUrl('/collects/decoration.png')})` }}
         />
 
-        <PageHero
-          title={t('community.bcEarlyLearning.hero.title')}
-          subtitle={t('community.bcEarlyLearning.hero.subtitle')}
-          backgroundSvg={getImageUrl('/imgs/community/community_journal_hero_1.gif')}
-          enableScrollTrigger
-        />
+        <section className="py-12 sm:py-16 bg-muted/20 relative z-10">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground">
+              {t('community.bcEarlyLearning.hero.title')}
+            </h1>
+            <p className="mt-2 text-lg text-muted-foreground">
+              {t('community.bcEarlyLearning.hero.subtitle')}
+            </p>
+          </div>
+        </section>
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-14">
           <section>

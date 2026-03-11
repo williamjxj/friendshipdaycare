@@ -109,37 +109,37 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/#about" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.quickLinks.about')}
                 </Link>
               </li>
               <li>
-                <Link href="/programs" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/#programs" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.quickLinks.programs')}
                 </Link>
               </li>
               <li>
-                <Link href="/enrollment" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/#enrollment" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.quickLinks.enrollment')}
                 </Link>
               </li>
               <li>
-                <Link href="/gallery" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/#gallery" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.quickLinks.gallery')}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/#contact" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.quickLinks.contact')}
                 </Link>
               </li>
               <li>
-                <Link href="/contact#faq" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <Link href="/#faq" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.quickLinks.faq')}
                 </Link>

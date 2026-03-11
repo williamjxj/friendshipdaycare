@@ -23,6 +23,10 @@ interface LocalBusinessSchemaProps {
   openingHours?: string[];
   serviceArea?: string;
   sameAs?: string[];
+  /** Schema.org GeoCoordinates for Maps */
+  geo?: { latitude: number; longitude: number };
+  /** Schema.org foundingDate (YYYY-MM-DD) */
+  foundingDate?: string;
   /** Schema.org AggregateRating; only added when reviewCount >= 1 */
   aggregateRating?: { ratingValue: number; reviewCount: number };
 }
@@ -41,11 +45,13 @@ export function LocalBusinessSchema({
   ],
   serviceArea,
   sameAs = [],
+  geo,
+  foundingDate,
   aggregateRating,
 }: LocalBusinessSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "ChildCare",
+    "@type": ["ChildCare", "LocalBusiness"],
     "name": name,
     "description": description,
     "url": url,
@@ -53,6 +59,16 @@ export function LocalBusinessSchema({
     "email": email,
     "image": image,
     "priceRange": priceRange,
+    ...(foundingDate ? { foundingDate } : {}),
+    ...(geo
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: geo.latitude,
+            longitude: geo.longitude,
+          },
+        }
+      : {}),
     "address": {
       "@type": "PostalAddress",
       "streetAddress": address.streetAddress,

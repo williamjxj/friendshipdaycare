@@ -13,36 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1
     },
     {
-      url: `${baseUrl}/about`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8
-    },
-    {
-      url: `${baseUrl}/programs`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9
-    },
-    {
-      url: `${baseUrl}/programs/infant`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.85
-    },
-    {
-      url: `${baseUrl}/programs/toddler`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.85
-    },
-    {
-      url: `${baseUrl}/programs/preschool`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.85
-    },
-    {
       url: `${baseUrl}/funding`,
       lastModified: now,
       changeFrequency: "monthly",
@@ -53,24 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.75
-    },
-    {
-      url: `${baseUrl}/enrollment`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.85
-    },
-    {
-      url: `${baseUrl}/gallery`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.7
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8
     },
     {
       url: `${baseUrl}/community/todays-story`,
@@ -101,6 +53,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6
+    },
+    {
+      url: `${baseUrl}/policies`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.5
     }
   ];
 }

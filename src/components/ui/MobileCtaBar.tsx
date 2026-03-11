@@ -42,7 +42,7 @@ export function MobileCtaBar() {
         <span>Call Us</span>
       </a>
       <Link
-        href="/contact#contact-form"
+        href="/#contact-form"
         className={cn(
           'flex-1 flex items-center justify-center gap-2',
           'bg-primary text-primary-foreground font-semibold rounded-lg py-3 px-4',

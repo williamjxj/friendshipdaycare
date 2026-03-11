@@ -295,59 +295,48 @@ body {
   /* Light primary background on hover */
 }
 
-/* 3. Text & Headings - Standardized Typography Hierarchy */
+/* 3. Text & Headings - Match reference frienddaycare-hbvktcxj.manus.space */
 h1 {
   font-size: 2.25rem;
-  /* text-4xl */
   line-height: 1.2;
-  /* leading-tight */
   font-family: var(--font-display);
   font-weight: 700;
-  /* font-bold */
-  color: var(--foreground);
+  color: #000000;
   letter-spacing: -0.02em;
 }
 
 @media (min-width: 768px) {
   h1 {
     font-size: 3.75rem;
-    /* md:text-6xl */
   }
 }
 
 @media (min-width: 1024px) {
   h1 {
     font-size: 4.5rem;
-    /* lg:text-7xl */
   }
 }
 
 h2 {
   font-size: 1.875rem;
-  /* text-3xl */
   line-height: 1.2;
-  /* leading-tight */
   font-family: var(--font-display);
   font-weight: 700;
-  /* font-bold */
-  color: var(--foreground);
+  color: #000000;
   letter-spacing: -0.02em;
 }
 
 @media (min-width: 768px) {
   h2 {
     font-size: 2.25rem;
-    /* md:text-4xl */
   }
 }
 
 h3 {
   font-size: 1.5rem;
-  /* text-2xl */
   line-height: 1.3;
   font-weight: 600;
-  /* font-semibold */
-  color: var(--foreground);
+  color: #000000;
 }
 
 h4 {

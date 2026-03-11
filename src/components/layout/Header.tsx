@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, memo, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useScrollSpy } from '@/hooks/useScrollSpy';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import {
   Home,
@@ -21,7 +22,9 @@ import {
   FolderOpen,
   Calendar,
   Facebook,
-  Instagram
+  Instagram,
+  Phone,
+  Mail
 } from 'lucide-react';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
@@ -145,39 +148,43 @@ const NavDropdown = memo(function NavDropdown({
 });
 
 
+const HOMEPAGE_SECTION_IDS = ['home', 'about', 'programs', 'gallery', 'testimonials', 'videos', 'enrollment', 'contact'] as const;
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
   const { t } = useLanguage();
   const pathname = usePathname();
+  const scrollSpyActiveId = useScrollSpy([...HOMEPAGE_SECTION_IDS], 80);
 
   useEffect(() => {
     setIsHydrated(true);
   }, []);
 
-  // Updated Navigation Structure - Standard items + Community dropdown with Story and Journal only
+  // Navigation: single-page app — all links are anchors
   const navigationConfig: NavItem[] = useMemo(() => [
-    { key: 'home', href: '/', icon: Home },
-    { key: 'about', href: '/about', icon: Info },
-    { key: 'programs', href: '/programs', icon: BookOpen },
-    { key: 'enrollment', href: '/enrollment', icon: UserPlus },
-    // { HIDDEN: Community dropdown }
-    // {
-    //   key: 'community',
-    //   icon: Users,
-    //   children: [
-    //     { key: 'todays-story', href: '/community/todays-story', icon: BookMarked },
-    //     { key: 'journal', href: '/community/journal', icon: Newspaper },
-    //     { key: 'montessori', href: '/community/montessori', icon: GraduationCap },
-    //     { key: 'ece', href: '/community/ece', icon: Landmark },
-    //     { key: 'resources', href: '/resources', icon: FolderOpen },
-    //   ]
-    // },
-    { key: 'gallery', href: '/gallery', icon: Images },
-    { key: 'contact', href: '/contact', icon: MessageCircle },
+    { key: 'home', href: '/#home', icon: Home },
+    { key: 'about', href: '/#about', icon: Info },
+    { key: 'programs', href: '/#programs', icon: BookOpen },
+    { key: 'gallery', href: '/#gallery', icon: Images },
+    { key: 'enrollment', href: '/#enrollment', icon: UserPlus },
+    { key: 'contact', href: '/#contact', icon: MessageCircle },
   ], []);
 
   // Translations
+  const getNavItemIsActive = useCallback((item: NavItem) => {
+    if (item.children) return false;
+    const key = item.key;
+    return (
+      (key === 'home' && (scrollSpyActiveId === 'home' || !scrollSpyActiveId)) ||
+      (key === 'about' && scrollSpyActiveId === 'about') ||
+      (key === 'programs' && scrollSpyActiveId === 'programs') ||
+      (key === 'gallery' && scrollSpyActiveId === 'gallery') ||
+      (key === 'enrollment' && scrollSpyActiveId === 'enrollment') ||
+      (key === 'contact' && scrollSpyActiveId === 'contact')
+    );
+  }, [scrollSpyActiveId]);
+
   const getTransName = useCallback((key: string) => {
     if (!isHydrated) return key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' ');
 
@@ -201,7 +208,7 @@ export function Header() {
   }, [isHydrated, t]);
 
   return (
-    <header className="sticky top-0 z-50 glass-panel border-b border-border/50">
+    <header className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-border/50 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 min-w-0">
         <div className="flex justify-between items-center h-16 gap-2 min-w-0">
 
@@ -213,6 +220,7 @@ export function Header() {
                   src={"/logo.png"}
                   alt="Friendship Corner Daycare"
                   fill
+                  sizes="(max-width: 640px) 120px, 160px"
                   className="object-contain"
                   priority
                 />
@@ -254,8 +262,7 @@ export function Header() {
                 );
               }
 
-              // Normal Link Logic
-              const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href!);
+              const isActive = getNavItemIsActive(item);
               return (
                 <NavLink
                   key={item.key}
@@ -268,8 +275,22 @@ export function Header() {
             })}
           </nav>
 
-          {/* Desktop Controls */}
-          <div className="hidden lg:flex items-center space-x-4">
+          {/* Desktop Controls - contact links + social */}
+          <div className="hidden lg:flex items-center space-x-3 sm:space-x-4">
+            <a
+              href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
+              className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label={t('contact.phone')}
+            >
+              <Phone className="w-5 h-5" />
+            </a>
+            <a
+              href={`mailto:${businessProfile.email}`}
+              className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label={t('contact.form.email')}
+            >
+              <Mail className="w-5 h-5" />
+            </a>
             {businessProfile.sameAs?.map((url) => {
               const isFb = url.includes('facebook');
               const isIg = url.includes('instagram');
@@ -290,7 +311,7 @@ export function Header() {
             <LanguageToggle />
             {/* <ThemeToggle /> - Hidden for now */}
             <Link
-              href="/contact#contact-form"
+              href="/#contact-form"
               className="relative overflow-hidden warm-button text-[0.6rem] px-2 py-2 flex items-center gap-1.5 group/cta shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap !h-[26px] !min-h-0 !rounded-md"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500 bg-[length:200%_auto] group-hover/cta:animate-[gradient_3s_linear_infinite]" />
@@ -355,6 +376,7 @@ export function Header() {
                   );
                 }
 
+                const isActive = getNavItemIsActive(item);
                 return (
                   <Link
                     key={item.key}
@@ -363,7 +385,7 @@ export function Header() {
                     className={cn(
                       "flex items-center gap-3 px-4 py-3 rounded-md text-base font-medium transition-colors border-l-4",
                       "min-h-[44px]", // Mobile touch target
-                      (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href!))
+                      isActive
                         ? 'border-primary text-primary bg-primary/5'
                         : 'border-transparent text-muted-foreground hover:text-foreground hover:bg-muted'
                     )}
@@ -375,12 +397,20 @@ export function Header() {
               })}
               <div className="pt-4 px-4 space-y-3 sticky bottom-0 bg-background pb-4 border-t border-border">
                 <div className="flex flex-col gap-2 text-sm">
+                  <a href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`} className="flex items-center gap-2 text-muted-foreground hover:text-primary px-4 py-2">
+                    <Phone className="w-4 h-4 shrink-0" />
+                    {businessProfile.telephone}
+                  </a>
+                  <a href={`mailto:${businessProfile.email}`} className="flex items-center gap-2 text-muted-foreground hover:text-primary px-4 py-2 break-all">
+                    <Mail className="w-4 h-4 shrink-0" />
+                    {businessProfile.email}
+                  </a>
                   <p className="px-4 py-2 text-muted-foreground text-xs leading-snug">
                     {businessProfile.address.streetAddress}, {businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode} {businessProfile.address.addressCountry === 'CA' ? 'Canada' : businessProfile.address.addressCountry}
                   </p>
                 </div>
                 <Link
-                  href="/contact#contact-form"
+                  href="/#contact-form"
                   onClick={() => setIsMenuOpen(false)}
                   className="block w-full text-center warm-button min-h-[44px] py-2 flex items-center justify-center gap-2 shadow-md text-sm"
                 >

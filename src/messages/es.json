@@ -159,20 +159,23 @@
   },
   "home": {
     "hero": {
-      "badge": "desde 2008 • en Coquitlam • 604.945.8504 • friendship.care@live.ca",
+      "badge": "desde 2008 • Coquitlam • 604.945.8504 • friendship.care@live.ca",
       "badgePrefix": "desde 2008 • COQUITLAM, BC",
-      "headline": "Donde las Mentes Jóvenes Florecen",
+      "headline": "Guardería Montessori Coquitlam",
+      "headlineBefore": "Donde las ",
+      "headlineHighlight": "Mentes",
+      "headlineAfter": " Jóvenes Florecen",
+      "headlineTagline": "Donde las Mentes Jóvenes Florecen",
       "highlight": "Guardería Montessori Premium en Coquitlam",
-      "title": "Donde las Mentes Jóvenes Florecen: Guardería Montessori Premium en Coquitlam",
-      "subtitle": "Un ambiente seguro y acogedor Montessori donde cada niño descubre sus superpoderes únicos.",
-      "slides": [
-        { "tagline": "Nutriendo mentes jóvenes con el método Montessori. Creamos un entorno cálido, seguro e inspirador donde cada niño puede crecer y aprender." },
-        { "tagline": "Aprendizaje práctico y juego con propósito en un ambiente preparado. La curiosidad guía; cada niño prospera a su propio ritmo." },
-        { "tagline": "Un espacio acogedor donde los niños desarrollan independencia, confianza y amabilidad. Principios Montessori y una comunidad en Coquitlam." },
-        { "tagline": "Educación infantil de calidad desde 2008. Cuidado con licencia y un equipo dedicado al crecimiento y la alegría de su hijo." }
-      ],
+      "title": "Guardería Montessori Coquitlam | Friendship Corner - Donde las Mentes Jóvenes Florecen",
+      "subtitle": "Guardería Montessori con licencia en Coquitlam, BC. Cuidado seguro y cariñoso para 30 meses a 5 años. Reserve una visita.",
+      "slides": [{ "tagline": "Guardería Montessori con licencia. Cuidado seguro para 30 meses a 5 años." }],
       "scheduleTour": "Programar una Visita",
-      "viewPrograms": "Ver Programas"
+      "viewPrograms": "Ver Programas",
+      "formSubtitle": "Responderemos en 24 horas",
+      "formYourName": "Su nombre",
+      "orCallUs": "O llámenos directamente",
+      "scrollToAbout": "Ver Sobre Nosotros"
     },
     "discoverDifference": {
       "title": "Descubre Nuestra Diferencia",
@@ -332,11 +335,12 @@
     },
     "montessori": {
       "title": "La Diferencia Montessori",
-      "paragraphs": {
-        "one": "El enfoque Montessori impulsa el aprendizaje práctico en un entorno preparado.",
-        "two": "Los niños desarrollan independencia, concentración y amor por aprender.",
-        "three": "Este método apoya el desarrollo cognitivo, social y emocional."
-      }
+      "summary": "Aprendizaje práctico en un entorno preparado—los niños desarrollan independencia, concentración y amor por aprender a su ritmo.",
+      "bullets": [
+        "Actividades guiadas por educadoras formadas",
+        "Desarrollo cognitivo, social y emocional",
+        "Grupos de edades mixtas; enfoque integral"
+      ]
     },
     "team": {
       "title": "Nuestro Equipo",
@@ -363,13 +367,13 @@
       "dailyFlow": "Nuestro día incluye: juego libre; círculo Montessori y aprendizaje práctico; refrigerios; tiempo en el patio o gimnasio; almuerzo (desde casa); cuentos; arte; descanso.",
       "ctaRegistration": "Descargar formulario de inscripción"
     },
-    "eceBenefits": {
-      "title": "Beneficios de la Educación Infantil (ECE) de BC",
-      "description": "Nuestras educadoras tienen licencia ECE de BC, con práctica apropiada al desarrollo y estándares provinciales. La formación ECE asegura desarrollo integral, seguridad e inclusión."
-    },
-    "montessoriBenefits": {
-      "title": "Beneficios Montessori",
-      "description": "El enfoque Montessori fomenta independencia, aprendizaje práctico y descubrimiento a su ritmo. Los grupos de edades mixtas permiten aprender entre pares. Nuestro entorno preparado y personal formado apoyan el desarrollo único de cada niño."
+    "benefits": {
+      "title": "Por qué elegirnos",
+      "bullets": [
+        "Educadoras ECE con licencia de BC",
+        "Montessori: independencia, aprendizaje práctico",
+        "Grupos de edades mixtas; desarrollo integral"
+      ]
     },
     "programDetail": {
       "keyFeatures": "Características Clave"

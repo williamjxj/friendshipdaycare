@@ -1,4 +1,4 @@
-import { Nunito, Fredoka, Baloo_2, Comic_Neue } from "next/font/google";
+import { Nunito, Fredoka, Baloo_2, Comic_Neue, DM_Sans, Source_Sans_3 } from "next/font/google";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 import { PageLoader } from "@/components/ui/LoadingSpinner";
@@ -39,6 +39,18 @@ const comic = Comic_Neue({
   variable: "--font-comic",
   subsets: ["latin"],
   weight: ["300", "400", "700"],
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const sourceSans = Source_Sans_3({
+  variable: "--font-source-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata = defaultSiteMetadata;
@@ -102,6 +114,8 @@ export default async function RootLayout({
             ...(businessProfile.sameAs ?? []),
             ...(businessProfile.googleBusinessProfileUrl ? [businessProfile.googleBusinessProfileUrl] : []),
           ]}
+          geo={businessProfile.geo}
+          foundingDate={businessProfile.foundingDate}
           aggregateRating={aggregateRating ?? undefined}
         />
         <OrganizationSchema
@@ -115,7 +129,7 @@ export default async function RootLayout({
           address={businessProfile.address}
         />
       </head>
-      <body className={`${nunito.variable} ${fredoka.variable} ${baloo.variable} ${comic.variable} antialiased font-sans`} suppressHydrationWarning>
+      <body className={`${nunito.variable} ${fredoka.variable} ${baloo.variable} ${comic.variable} ${dmSans.variable} ${sourceSans.variable} antialiased font-sans`} suppressHydrationWarning>
         <LanguageProvider initialLocale={initialLocale}>
           <LanguageAwareHtml>
             <NextIntlProviderSync>
@@ -123,9 +137,11 @@ export default async function RootLayout({
                 <div className="min-h-screen flex flex-col overflow-x-hidden pb-24 md:pb-0">
                   <SkipNavigation />
                   <Header />
-                  <Suspense fallback={<PageLoader message="Loading magical content..." />}>
-                    {children}
-                  </Suspense>
+                  <main className="pt-16 flex-1" role="main">
+                    <Suspense fallback={<PageLoader message="Loading magical content..." />}>
+                      {children}
+                    </Suspense>
+                  </main>
                   <Footer />
                   <MobileCtaBar />
                 </div>

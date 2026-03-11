@@ -2,7 +2,6 @@
 
 import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { PageHero } from '@/components/ui/page-hero';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getImageUrl } from '@/lib/image-utils';
 import { motion } from 'framer-motion';
@@ -91,15 +90,17 @@ export default function JournalPageClient() {
         <Suspense fallback={<LoadingSpinner message="Loading journal..." />}>
             <main className="flex-1 bg-background">
 
-                {/* Hero Section */}
-                <PageHero
-                    title={t('community.journal.hero.title')}
-                    subtitle={t('community.journal.hero.subtitle')}
-                    backgroundSvg={getImageUrl('/imgs/community/community_journal_hero_1.gif')}
-                    enableScrollTrigger={true}
-                    hideTitle={true}
-                    hideSubtitle={true}
-                />
+                {/* Page Header - no decorative hero */}
+                <section className="py-12 sm:py-16 bg-muted/20">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground">
+                            {t('community.journal.hero.title')}
+                        </h1>
+                        <p className="mt-2 text-lg text-muted-foreground">
+                            {t('community.journal.hero.subtitle')}
+                        </p>
+                    </div>
+                </section>
 
                 {/* Journals Grid */}
                 <section className="py-20 bg-background relative z-10">
