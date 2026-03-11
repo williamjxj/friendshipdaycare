@@ -42,7 +42,9 @@ next-env.d.ts
 
 # William added
 .obsidian/
-specs/ 
+specs/
+.github/agents/
+.github/prompts/ 
 
 # python
 __pycache__/
