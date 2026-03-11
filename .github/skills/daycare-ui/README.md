@@ -1,6 +1,6 @@
 # Daycare UI Skill
 
-A comprehensive skill for building UI components, sections, and pages for the Friendship Corner Daycare website.
+A comprehensive skill for building and recreating UI components, sections, and pages for the Friendship Corner Daycare website.
 
 ## Usage
 
@@ -9,10 +9,20 @@ Invoke this skill in Copilot Chat:
 ```
 /daycare-ui create a new testimonials section
 /daycare-ui build a programs card component
+/daycare-ui recreate the hero section from [design] keeping our carousel ⭐
 /daycare-ui add a new staff page
 ```
 
 Or mention what you want to build and the skill will be automatically invoked if relevant.
+
+**For detailed animation workflows**, use the complementary **`/web-animations`** skill.
+
+## Skill Relationship
+
+This skill works together with `/web-animations`:
+
+- **daycare-ui**: Comprehensive UI development (components, sections, pages, UI recreation)
+- **web-animations**: Specialized animation workflows (scroll effects, hover states, parallax, etc.)
 
 ## What This Skill Covers
 
@@ -20,8 +30,9 @@ This skill helps you build UI elements that follow all the established patterns:
 
 - ✅ **5 Theme Support** - Professional, Nature, Playful, Dark, Violet
 - ✅ **5 Language Support** - English, Chinese, French, Spanish, Korean
-- ✅ **Animations** - Framer Motion & GSAP patterns
+- ✅ **Basic Animations** - Common patterns (see `/web-animations` for advanced)
 - ✅ **Responsive Design** - Mobile-first approach
+- ✅ **UI Recreation** ⭐ - Recreate layouts from design inspiration
 - ✅ **SEO Optimization** - Metadata, structured data, performance
 - ✅ **Design System** - Consistent tokens and styling
 - ✅ **shadcn/ui Patterns** - Component variants and composition
@@ -62,9 +73,21 @@ The skill will:
 
 The skill will:
 1. Create section in `/src/components/sections/`
-2. Add animations (fadeIn, staggerContainer)
+2. Add basic animations (for advanced animations, use `/web-animations`)
 3. Create translation keys in all 5 language files
 4. Make it responsive
+
+### Recreating UI from Design Inspiration ⭐
+```bash
+/daycare-ui recreate hero section from [design description] keeping carousel background
+```
+
+The skill will:
+1. Analyze the design pattern you describe
+2. Break it down into components
+3. Implement using your tech stack
+4. Maintain existing functionality (like carousel)
+5. Ensure theme and i18n compatibility
 
 ### Creating a Page
 ```bash

@@ -1,7 +1,7 @@
 ---
 name: daycare-ui
-description: 'Build UI components, sections, and pages for the Friendship Corner Daycare website with proper theming, animations, i18n, SEO, and responsive design. Use for: creating new components, adding page sections, building new pages, ensuring theme compatibility across 5 themes, adding GSAP/Framer Motion animations, integrating i18n for 5 languages (en, zh, fr, es, ko), implementing responsive layouts.'
-argument-hint: 'Describe what UI element to create (component/section/page)'
+description: 'Build UI components, sections, and pages for the Friendship Corner Daycare website with proper theming, animations, i18n, SEO, and responsive design. Use for: creating new components, adding page sections, building new pages, recreating UI layouts from design inspiration, ensuring theme compatibility across 5 themes, integrating i18n for 5 languages (en, zh, fr, es, ko), implementing responsive layouts. For detailed animation workflows, use /web-animations skill.'
+argument-hint: 'Describe what UI element to create/recreate (component/section/page) or design pattern to implement'
 ---
 
 # Daycare UI Development Skill
@@ -13,6 +13,7 @@ Build UI elements for the Friendship Corner Daycare website following establishe
 - Creating new UI components (buttons, cards, forms, etc.)
 - Adding page sections (hero, features, testimonials, etc.)
 - Building complete new pages
+- **Recreating UI layouts from design inspiration** (analyzing and rebuilding sections)
 - Adding animations to existing components
 - Ensuring multi-theme compatibility (Professional, Nature, Playful, Dark, Violet)
 - Integrating internationalization (English, Chinese, French, Spanish, Korean)
@@ -321,7 +322,280 @@ Add animations consistently:
 - Add `margin: "-100px"` to trigger animations slightly before element enters viewport
 - Keep durations between 0.3-0.8 seconds
 - Use `ease: 'easeOut'` for natural feel
+UI Recreation from Design Inspiration
 
+**Scenario**: You want to recreate a UI section from another design (e.g., hero section, feature grid, testimonial layout) while maintaining your existing functionality and tech stack.
+
+**Step 1: Analyze the Design Pattern**
+
+When viewing a design you want to recreate, identify:
+
+**Layout Structure:**
+- Container width (full-width, constrained, max-width)
+- Sections/rows arrangement (stacked vertically, side-by-side)
+- Grid system (2-column, 3-column, asymmetric)
+- Spacing between elements (tight, comfortable, spacious)
+
+**Visual Elements:**
+- Heading hierarchy (h1, h2, sizes, weights)
+- Text alignment (left, center, right)
+- Image placement (background, inline, overlapping)
+- Color usage (backgrounds, accents, text colors)
+- Borders, shadows, rounded corners
+
+**Interactive Elements:**
+- Buttons (sizes, styles, positions)
+- Hover states
+- Animations (entrance effects, scroll triggers)
+- Forms or inputs
+
+**Step 2: Break Down into Components**
+
+Decompose the section into reusable pieces:
+
+```
+Hero Section
+├── Background (image carousel or static)
+├── Content Container
+│   ├── Headline (h1)
+│   ├── Subheading (p)
+│   ├── CTA Buttons
+│   └── Additional Elements (badges, stats, etc.)
+└── Decorative Elements (shapes, overlays, patterns)
+```
+
+**Step 3: Map to Your Tech Stack**
+
+Translate the design into your project's patterns:
+
+**For a Hero Section:**
+```tsx
+'use client';
+
+import { motion } from 'framer-motion';
+import { slideUp, fadeIn, staggerContainer } from '@/lib/animations';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { HeroImageCarousel } from '@/components/ui/hero-image-carousel';
+
+export function RecreatedHeroSection() {
+  const { t } = useLanguage();
+
+  return (
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background - Keep existing carousel */}
+      <div className="absolute inset-0 -z-10">
+        <HeroImageCarousel images={yourExistingImages} />
+        <div className="absolute inset-0 bg-black/40" /> {/* Overlay for text contrast */}
+      </div>
+
+      {/* Content */}
+      <motion.div
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Headline */}
+        <motion.h1
+          variants={slideUp}
+          className="text-5xl md:text-7xl font-display font-bold text-white text-center"
+        >
+          {t('home.hero.title')}
+        </motion.h1>
+
+        {/* Subheading */}
+        <motion.p
+          variants={slideUp}
+          className="mt-6 text-xl md:text-2xl text-white/90 text-center max-w-3xl mx-auto"
+        >
+          {t('home.hero.subtitle')}
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          variants={fadeIn}
+          className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+        >
+          <button className="px-8 py-4 bg-primary text-primary-foreground rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">
+            {t('home.hero.primaryCta')}
+          </button>
+          <button className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-lg text-lg font-semibold hover:bg-white/20 transition-colors">
+            {t('home.hero.secondaryCta')}
+          </button>
+        </motion.div>
+
+        {/* Additional Elements - Example: Stats or Badges */}
+        <motion.div
+          variants={fadeIn}
+          className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
+        >
+          {['stat1', 'stat2', 'stat3'].map((key) => (
+            <div key={key} className="text-center">
+              <div className="text-3xl font-bold text-white">
+                {t(`home.hero.stats.${key}.value`)}
+              </div>
+              <div className="text-sm text-white/80 mt-1">
+                {t(`home.hero.stats.${key}.label`)}
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}
+```
+
+**Step 4: Adapt Design Patterns**
+
+Common patterns and how to implement them:
+
+**Full-Width Background with Content Overlay:**
+```tsx
+<section className="relative">
+  <div className="absolute inset-0 -z-10">
+    {/* Background image/carousel */}
+  </div>
+  <div className="relative z-10 max-w-7xl mx-auto px-4">
+    {/* Content */}
+  </div>
+</section>
+```
+
+**Split Layout (50/50):**
+```tsx
+<section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+  <div>{/* Left content */}</div>
+  <div>{/* Right content */}</div>
+</section>
+```
+
+**Card Grid:**
+```tsx
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {items.map(item => <Card key={item.id} {...item} />)}
+</div>
+```
+
+**Centered Content Block:**
+```tsx
+<div className="max-w-4xl mx-auto px-4 text-center">
+  <h2 className="text-4xl font-bold">{title}</h2>
+  <p className="mt-4 text-lg text-muted-foreground">{description}</p>
+</div>
+```
+
+**Step 5: Maintain Existing Functionality**
+
+When replacing sections, preserve:
+- ✅ Existing data sources (carousel images, content from CMS)
+- ✅ i18n integration (all text uses `t()`)
+- ✅ Theme compatibility (use CSS variables)
+- ✅ Responsive behavior (mobile-first)
+- ✅ Animations (consistent with rest of site)
+
+**Example: Keeping Carousel While Changing Layout:**
+```tsx
+// Before: Old hero section
+<HeroImageCarousel images={images} />
+
+// After: New hero with carousel background
+<section className="relative min-h-screen">
+  {/* Keep carousel, change how it's positioned */}
+  <div className="absolute inset-0 -z-10">
+    <HeroImageCarousel images={images} />  {/* Same component */}
+  </div>
+  {/* New content layout on top */}
+  <div className="relative z-10">
+    {/* Your new hero content */}
+  </div>
+</section>
+```
+
+**Step 6: Refine Visual Details**
+
+Match the design aesthetics:
+
+**Spacing (Tailwind):**
+```tsx
+py-4   // 16px padding vertical
+py-20  // 80px padding vertical
+gap-6  // 24px gap between grid items
+space-y-8  // 32px vertical spacing between children
+```
+
+**Typography:**
+```tsx
+text-5xl md:text-7xl  // Responsive heading size
+font-display font-bold  // Display font family + bold
+text-center  // Centered text
+leading-tight  // Tight line-height
+```
+
+**Colors (Theme Variables):**
+```tsx
+bg-primary  // Brand color
+text-foreground  // Main text color
+bg-card  // Card backgrounds
+border-border  // Borders
+text-muted-foreground  // Secondary text
+```
+
+**Effects:**
+```tsx
+backdrop-blur-sm  // Glassmorphism effect
+shadow-2xl  // Large shadow
+rounded-2xl  // Large border radius
+hover:scale-105 transition-transform  // Hover animation
+```
+
+**Step 7: Test & Iterate**
+
+After implementing:
+1. **Test responsiveness**: Check mobile (375px), tablet (768px), desktop (1440px)
+2. **Test themes**: Cycle through all 5 themes
+3. **Test languages**: Switch languages to verify text fits
+4. **Test animations**: Ensure smooth, not jarring
+5. **Compare**: Does it match the intended design feel?
+
+**Step 8: Add Translations**
+
+Add all text to i18n files:
+
+```json
+// /src/messages/en.json
+{
+  "home": {
+    "hero": {
+      "title": "Welcome to Friendship Corner",
+      "subtitle": "Where Learning Meets Play",
+      "primaryCta": "Enroll Now",
+      "secondaryCta": "Learn More",
+      "stats": {
+        "stat1": { "value": "15+", "label": "Years Experience" },
+        "stat2": { "value": "500+", "label": "Happy Families" },
+        "stat3": { "value": "5★", "label": "Rated" }
+      }
+    }
+  }
+}
+```
+
+Repeat for all 5 languages.
+
+**Common Recreation Scenarios:**
+
+| Design Element | Implementation Approach |
+|---------------|------------------------|
+| Hero with center content | Flexbox with `items-center justify-center` |
+| Overlapping sections | Absolute positioning with negative margins |
+| Parallax backgrounds | GSAP ScrollTrigger or Framer Motion `useScroll` |
+| Gradient overlays | `bg-gradient-to-r from-black/60 to-transparent` |
+| Glassmorphism | `backdrop-blur-lg bg-white/10` |
+| Card hover effects | `/web-animations` skill templates |
+| Staggered animations | `staggerContainer` + `staggerItem` variants |
+
+### 7. 
 ### 6. Internationalization Integration
 
 Support all 5 languages:

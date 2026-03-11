@@ -41,10 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 # William added
-.agent/
-.cursor/
 .obsidian/
-.specify/
 specs/ 
 
 # python
