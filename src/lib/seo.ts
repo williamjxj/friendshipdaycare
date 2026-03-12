@@ -9,28 +9,54 @@ export const SEO_TITLE_TEMPLATE = "%s | Friendship Corner Daycare";
 export const SEO_DEFAULT_DESCRIPTION =
   "Authentic Montessori daycare in Coquitlam, BC. Licensed since 2008. Book a free tour at Friendship Corner Daycare.";
 export const SEO_DEFAULT_KEYWORDS = [
-  "Montessori daycare Coquitlam",
+  // Primary keywords - Most searched
+  "daycare Coquitlam",
   "Coquitlam daycare",
-  "Coquitlam child care",
-  "Coquitlam montessori",
+  "Montessori daycare Coquitlam",
+  "Coquitlam childcare",
+  "childcare Coquitlam",
+  "preschool Coquitlam",
   "Coquitlam preschool",
+  
+  // Location-specific
+  "Coquitlam Centre daycare",
+  "Coquitlam Station daycare",
+  "daycare near Coquitlam Centre",
+  "daycare near me Coquitlam",
   "Tri-Cities daycare",
   "Port Coquitlam daycare",
-  "Port Coquitlam montessori",
-  "preschool",
-  "Coquitlam",
-  "Coquitlam Centre Daycare",
-  "Coquitlam Station Daycare",
-  "Port Coquitlam",
-  "Port Moody",
+  "Port Moody daycare",
+  "Coquitlam West daycare",
+  
+  // Program-specific
+  "Montessori Coquitlam",
+  "Coquitlam Montessori",
+  "Montessori preschool Coquitlam",
+  "toddler daycare Coquitlam",
+  "infant daycare Coquitlam",
+  "licensed daycare Coquitlam",
+  "ECE daycare Coquitlam",
+  
+  // Competitive edge
+  "best daycare Coquitlam",
+  "top daycare Coquitlam",
+  "affordable daycare Coquitlam",
+  "quality childcare Coquitlam",
+  "early learning Coquitlam",
+  "daycare with ECE teachers Coquitlam",
+  
+  // Chinese keywords for SEO
   "高贵林日托",
-  "高贵林 Daycare",
-  "高贵林 Montessori",
-  "Christian daycare",
-  "preschool Coquitlam",
-  "childcare Coquitlam",
-  "Tri-Cities daycare",
-  "early learning Coquitlam"
+  "高贵林幼儿园",
+  "Coquitlam 日托",
+  "Coquitlam Montessori 学校",
+  
+  // Additional search terms
+  "Christian daycare Coquitlam",
+  "faith-based daycare Coquitlam",
+  "full-time daycare Coquitlam",
+  "part-time daycare Coquitlam",
+  "daycare enrollment Coquitlam",
 ];
 
 

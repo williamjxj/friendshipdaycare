@@ -766,12 +766,40 @@ textarea:focus-visible {
   }
 }
 
+/* Hero marquee - slower, subtle horizontal scroll */
+@keyframes marquee-slow {
+  0% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(10%);
+  }
+}
+
+/* Hero marquee - seamless infinite scroll */
+@keyframes marquee-infinite {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
 .marquee-ltr {
   animation: marquee-ltr 45s linear infinite;
 }
 
 .marquee-rtl {
   animation: marquee-rtl 45s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation: marquee-slow 15s ease-in-out infinite alternate;
+}
+
+.animate-marquee-infinite {
+  animation: marquee-infinite 25s linear infinite;
 }
 
 .marquee-row:hover .marquee-inner {

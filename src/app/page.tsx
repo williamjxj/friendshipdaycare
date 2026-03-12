@@ -3,9 +3,9 @@ import { buildPageMetadata } from "@/lib/seo";
 import { HomePageClient } from "@/app/page-client";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Montessori Daycare in Coquitlam, BC | Friendship Corner – Nurturing Young Minds",
+  title: "Best Montessori Daycare in Coquitlam BC | Licensed Childcare Since 2008",
   description:
-    "Discover licensed Montessori childcare in Coquitlam for ages 30mo–5. Book a tour today. Trusted since 2008. Tri-Cities families choose Friendship Corner.",
+    "Top-rated Montessori daycare in Coquitlam for ages 30mo–5. Licensed childcare near Coquitlam Centre. ECE-certified teachers, 1:8 ratio. Book your free tour today! Serving Tri-Cities families since 2008.",
   path: "/"
 });
 

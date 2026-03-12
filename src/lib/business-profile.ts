@@ -49,9 +49,9 @@ export const businessProfile: BusinessProfile = {
   },
   openingHours: ["Mo-Fr 07:00-18:00"],
   serviceArea: "Tri-Cities (Coquitlam, Port Coquitlam, Port Moody)",
-  /** Update with actual URLs when available - verify on Facebook/Instagram */
+  /** Verified social media URLs */
   sameAs: [
-    "https://www.facebook.com/FriendshipCornerDaycare",
+    "https://www.facebook.com/FriendshipDaycareCoquitlam",
     "https://www.instagram.com/friendshipcornerdaycare"
   ],
   /** Add when GBP is claimed, e.g. "https://g.page/friendship-corner-daycare" - enables footer link */
