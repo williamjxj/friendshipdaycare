@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Phone, Calendar } from 'lucide-react';
 import { businessProfile } from '@/lib/business-profile';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -11,12 +12,19 @@ const TOUCH_MIN = 'min-h-[44px] min-w-[44px]';
 
 /**
  * Sticky mobile CTA bar: Call Us + Book a Tour.
- * Visible on viewports <768px. FR-007: primary actions reachable.
+ * Visible on viewports <768px. Hidden on homepage (/) since hero has its own CTAs.
+ * FR-007: primary actions reachable.
  */
 export function MobileCtaBar() {
   const { t } = useLanguage();
+  const pathname = usePathname();
   const digits = businessProfile.telephone.replace(/\D/g, '');
   const tel = digits.length === 10 ? `tel:+1${digits}` : `tel:+${digits}`;
+
+  // Homepage hero already has Call Now + Schedule a Tour; avoid duplicate CTAs
+  if (pathname === '/' || pathname === '/en' || pathname?.match(/^\/[a-z]{2}\/?$/)) {
+    return null;
+  }
 
   return (
     <div

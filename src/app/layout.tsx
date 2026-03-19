@@ -97,16 +97,16 @@ export default async function RootLayout({
         <WebSiteSchema
           name={businessProfile.name}
           url={businessProfile.url}
-          description="Licensed Montessori daycare in Coquitlam, BC serving Tri-Cities families."
+          description="Licensed Montessori daycare in Coquitlam, BC serving children 30 months to 5 years across Coquitlam, Port Coquitlam, and Port Moody."
         />
         <LocalBusinessSchema
           name={businessProfile.name}
-          description="Licensed Montessori daycare in Coquitlam offering quality early childhood education for children aged 30 months to school age. Established in 2008."
+          description="Licensed Montessori daycare in Coquitlam, BC offering early childhood education for children aged 30 months to 5 years near 2950 Dewdney Trunk Road. Serving Tri-Cities families since 2008."
           address={businessProfile.address}
           telephone={businessProfile.telephone}
           email={businessProfile.email}
           url={businessProfile.url}
-          image={`${businessProfile.url}/logo.png`}
+          image={`${businessProfile.url}/images/slidetop-bg.jpg`}
           priceRange="$$"
           openingHours={businessProfile.openingHours}
           serviceArea={businessProfile.serviceArea}
@@ -126,6 +126,7 @@ export default async function RootLayout({
           foundingDate="2008-01-01"
           telephone={businessProfile.telephone}
           email={businessProfile.email}
+          sameAs={businessProfile.sameAs}
           address={businessProfile.address}
         />
       </head>

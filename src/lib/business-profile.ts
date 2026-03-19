@@ -37,7 +37,7 @@ export interface BusinessProfile {
 export const businessProfile: BusinessProfile = {
   name: "Friendship Corner Daycare",
   legalName: "Friendship Corner Daycare (Montessori)",
-  url: "https://friendshipdaycare.com",
+  url: "https://www.friendshipdaycare.com",
   telephone: "604.945.8504",
   email: "friendship.care@live.ca",
   address: {
@@ -51,7 +51,7 @@ export const businessProfile: BusinessProfile = {
   serviceArea: "Tri-Cities (Coquitlam, Port Coquitlam, Port Moody)",
   /** Verified social media URLs */
   sameAs: [
-    "https://www.facebook.com/FriendshipDaycareCoquitlam",
+    "https://www.facebook.com/friendshipcornerdaycare",
     "https://www.instagram.com/friendshipcornerdaycare"
   ],
   /** Add when GBP is claimed, e.g. "https://g.page/friendship-corner-daycare" - enables footer link */

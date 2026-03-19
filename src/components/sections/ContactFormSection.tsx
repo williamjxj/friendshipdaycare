@@ -4,12 +4,14 @@ import { useState, useEffect, useRef } from 'react';
 import { GoogleMap } from '@/components/ui/GoogleMap';
 import { PhoneIcon, MapPinIcon, ClockIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { fadeIn } from '@/lib/animations';
 import { staggerContainerMagic } from '@/lib/magicui-animations';
 import { Card, CardDescription } from '@/components/ui/card';
 import { ContactForm } from '@/components/ui/contact-form';
 import { businessProfile } from '@/lib/business-profile';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Facebook, Instagram } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
@@ -24,6 +26,8 @@ import { faqItems, FAQ_INITIAL_COUNT } from '@/data/faq';
  */
 export function ContactFormSection() {
   const { t } = useLanguage();
+  const facebookUrl = businessProfile.sameAs?.find((url) => url.includes('facebook'));
+  const instagramUrl = businessProfile.sameAs?.find((url) => url.includes('instagram'));
 
   const [faqExpanded, setFaqExpanded] = useState(false);
   const showAllFaqs = faqExpanded || faqItems.length <= FAQ_INITIAL_COUNT;
@@ -89,7 +93,7 @@ export function ContactFormSection() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card variant="premium" className="flex flex-col items-start p-6 group">
-              <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="w-14 h-14 bg-linear-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <PhoneIcon className="h-7 w-7 text-primary" />
               </div>
               <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.phone.title')}</h3>
@@ -99,7 +103,7 @@ export function ContactFormSection() {
               <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.phone.subtitle')}</CardDescription>
             </Card>
             <Card variant="premium" className="flex flex-col items-start p-6 group">
-              <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="w-14 h-14 bg-linear-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <MapPinIcon className="h-7 w-7 text-primary" />
               </div>
               <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.location.title')}</h3>
@@ -108,7 +112,7 @@ export function ContactFormSection() {
               <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.location.subtitle')}</CardDescription>
             </Card>
             <Card variant="premium" className="flex flex-col items-start p-6 group">
-              <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="w-14 h-14 bg-linear-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <ClockIcon className="h-7 w-7 text-primary" />
               </div>
               <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.hours.title')}</h3>
@@ -117,7 +121,7 @@ export function ContactFormSection() {
               <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.hours.subtitle')}</CardDescription>
             </Card>
             <Card variant="premium" className="flex flex-col items-start p-6 group">
-              <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="w-14 h-14 bg-linear-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <EnvelopeIcon className="h-7 w-7 text-primary" />
               </div>
               <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.email.title')}</h3>
@@ -130,18 +134,40 @@ export function ContactFormSection() {
           <div className="flex flex-wrap gap-4 justify-center mt-8">
             <a
               href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors min-h-[44px]"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors min-h-11"
             >
               <PhoneIcon className="h-5 w-5" />
               {t('contactPage.quickActions.call')}
             </a>
             <a
               href={`mailto:${businessProfile.email}`}
-              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors min-h-[44px]"
+              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors min-h-11"
             >
               <EnvelopeIcon className="h-5 w-5" />
               {t('contactPage.quickActions.email')}
             </a>
+            {facebookUrl && (
+              <Link
+                href={facebookUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors min-h-11"
+              >
+                <Facebook className="h-5 w-5" />
+                Facebook
+              </Link>
+            )}
+            {instagramUrl && (
+              <Link
+                href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors min-h-11"
+              >
+                <Instagram className="h-5 w-5" />
+                Instagram
+              </Link>
+            )}
           </div>
         </div>
       </motion.section>
@@ -181,7 +207,7 @@ export function ContactFormSection() {
               <button
                 type="button"
                 onClick={() => setFaqExpanded(true)}
-                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors min-h-[44px]"
+                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors min-h-11"
               >
                 {t('contactPage.faq.moreLink')}
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>

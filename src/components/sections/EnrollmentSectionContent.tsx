@@ -115,6 +115,14 @@ export function EnrollmentSectionContent() {
     },
   ];
 
+  const EnrollmentGridBackground = () => (
+    <>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_60%_60%_at_50%_0%,black_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-10 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" />
+    </>
+  );
+
   return (
     <>
       {/* Enrollment Process - animated steps with connecting lines */}
@@ -154,7 +162,7 @@ export function EnrollmentSectionContent() {
                     <CardHeader className="p-0 mb-4 space-y-3">
                       <div className="flex items-center gap-3">
                         <motion.div
-                          className="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 text-primary shrink-0 group-hover:scale-110 transition-transform duration-300"
+                          className="w-12 h-12 rounded-full flex items-center justify-center bg-linear-to-br from-primary/20 to-primary/10 text-primary shrink-0 group-hover:scale-110 transition-transform duration-300"
                           whileHover={{ rotate: 5 }}
                         >
                           {index === 0 && <ClipboardDocumentListIcon className="h-6 w-6" />}
@@ -169,17 +177,17 @@ export function EnrollmentSectionContent() {
                       <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
                     </CardHeader>
                     <CardContent className="p-0 min-w-0">
-                      <CardDescription className="text-muted-foreground leading-relaxed break-words">
+                      <CardDescription className="text-muted-foreground leading-relaxed wrap-break-word">
                         {step.description}
                         {index === 0 && (
                           <span className="block mt-3">
                             <a
                               href="/assets/Registration form 2026.pdf"
                               download
-                              className="inline-flex items-center gap-1.5 text-primary hover:text-primary/80 font-semibold underline underline-offset-2 transition-colors break-words min-w-0"
+                              className="inline-flex items-center gap-1.5 text-primary hover:text-primary/80 font-semibold underline underline-offset-2 transition-colors wrap-break-word min-w-0"
                             >
                               <DocumentArrowDownIcon className="w-4 h-4 shrink-0" />
-                              <span className="break-words">{safeT('enrollmentPage.downloadForm', 'Download Registration Form')}</span>
+                              <span className="wrap-break-word">{safeT('enrollmentPage.downloadForm', 'Download Registration Form')}</span>
                             </a>
                           </span>
                         )}
@@ -204,7 +212,7 @@ export function EnrollmentSectionContent() {
                 >
                   <CardHeader className="p-0 mb-4 space-y-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 text-primary shrink-0">
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center bg-linear-to-br from-primary/20 to-primary/10 text-primary shrink-0">
                         {index === 0 && <ClipboardDocumentListIcon className="h-6 w-6" />}
                         {index === 1 && <CalendarDaysIcon className="h-6 w-6" />}
                         {index === 2 && <DocumentCheckIcon className="h-6 w-6" />}
@@ -241,8 +249,9 @@ export function EnrollmentSectionContent() {
       </motion.section>
 
       {/* Requirements */}
-      <section className="py-20 bg-muted/30">
-        <div ref={requirementsRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-muted/30 overflow-hidden relative">
+        <EnrollmentGridBackground>
+        <div ref={requirementsRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
               {safeT('enrollmentPage.requirements.title', 'Enrollment Requirements')}
@@ -259,16 +268,18 @@ export function EnrollmentSectionContent() {
                 className="requirement-card flex items-start space-x-3 bg-card p-5 sm:p-6 rounded-xl shadow-md border border-border/50 hover:shadow-lg hover:border-primary/20 transition-all duration-300 min-w-0"
               >
                 <CheckCircleIcon className="h-6 w-6 text-primary shrink-0 mt-1" />
-                <p className="text-muted-foreground break-words min-w-0">{requirement}</p>
+                <p className="text-muted-foreground wrap-break-word min-w-0">{requirement}</p>
               </div>
             ))}
           </div>
         </div>
+        </EnrollmentGridBackground>
       </section>
 
       {/* Fees & Hours */}
-      <section className="py-20 bg-card">
-        <div ref={feesHoursRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-card overflow-hidden relative">
+        <EnrollmentGridBackground>
+        <div ref={feesHoursRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
               {safeT('enrollmentPage.feesHours.title', 'Fees & Hours')}
@@ -287,17 +298,19 @@ export function EnrollmentSectionContent() {
             </div>
           </div>
         </div>
+        </EnrollmentGridBackground>
       </section>
 
       {/* Enrollment FAQ */}
       <motion.section
-        className="py-20 bg-background"
+        className="py-20 bg-background overflow-hidden relative"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
       >
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <EnrollmentGridBackground />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-4 mb-10">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
               {safeT('enrollmentPage.faq.title', 'Enrollment FAQ')}
@@ -328,13 +341,14 @@ export function EnrollmentSectionContent() {
 
       {/* CTA */}
       <motion.section
-        className="py-20 bg-primary"
+        className="py-20 bg-primary overflow-hidden relative"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
       >
-        <div className="max-w-5xl mx-auto px-4 text-center space-y-8">
+        <EnrollmentGridBackground />
+        <div className="max-w-5xl mx-auto px-4 text-center space-y-8 relative z-10">
           <h2 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground">
             {safeT('enrollmentPage.cta.title', 'Ready to Apply?')}
           </h2>

@@ -201,6 +201,7 @@ interface OrganizationSchemaProps {
   foundingDate?: string;
   telephone: string;
   email: string;
+  sameAs?: string[];
   address: {
     streetAddress: string;
     addressLocality: string;
@@ -218,6 +219,7 @@ export function OrganizationSchema({
   foundingDate = "2008-01-01",
   telephone,
   email,
+  sameAs = [],
   address
 }: OrganizationSchemaProps) {
   const schema = {
@@ -230,6 +232,7 @@ export function OrganizationSchema({
     "foundingDate": foundingDate,
     "telephone": telephone,
     "email": email,
+    ...(sameAs.length > 0 ? { sameAs } : {}),
     "address": {
       "@type": "PostalAddress",
       "streetAddress": address.streetAddress,

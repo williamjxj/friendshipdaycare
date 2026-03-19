@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useMemo, useRef, useState } from 'react';
 import { TestimonialsMarquee } from '@/components/sections/TestimonialsMarquee';
 import { AboutSection } from '@/components/sections/AboutSection';
 import { ProgramsSection } from '@/components/sections/ProgramsSection';
@@ -15,7 +16,8 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Download, Sparkles, Heart, Shield, Star } from 'lucide-react';
+import { Download, Sparkles, Heart, Shield, Star, PhoneCall, ArrowRight, BookOpen, Facebook, Instagram, Calendar } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { getImageUrl } from '@/lib/image-utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { businessProfile } from '@/lib/business-profile';
@@ -38,7 +40,9 @@ export function HomePageClient() {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
-  const [heroSlideIndex, setHeroSlideIndex] = useState(0);
+  const [, setHeroSlideIndex] = useState(0);
+  const facebookUrl = businessProfile.sameAs?.find((url) => url.includes('facebook'));
+  const instagramUrl = businessProfile.sameAs?.find((url) => url.includes('instagram'));
 
   useLocalizedMetadata({
     title: t('seo.home.title'),
@@ -47,17 +51,6 @@ export function HomePageClient() {
 
   // GSAP animations for scroll-triggered sections and hero text effects
   useGSAP(() => {
-    // Logo gentle float animation (continuous) - subtle for top-left position
-    if (heroLogoRef.current) {
-      gsap.to(heroLogoRef.current, {
-        y: -5,
-        duration: 2.5,
-        ease: 'power1.inOut',
-        yoyo: true,
-        repeat: -1,
-      });
-    }
-
     // Headline text split animation
     if (heroTitleRef.current) {
       const words = heroTitleRef.current.querySelectorAll('.word');
@@ -73,7 +66,7 @@ export function HomePageClient() {
     }
 
     // Animate Section Headers on scroll
-    gsap.utils.toArray('.section-header').forEach((header: any) => {
+    gsap.utils.toArray<HTMLElement>('.section-header').forEach((header) => {
       gsap.from(header, {
         scrollTrigger: {
           trigger: header,
@@ -109,40 +102,123 @@ export function HomePageClient() {
       <section
         id="home"
         ref={heroSectionRef}
-        className="relative min-h-screen flex items-start w-full overflow-hidden -mt-16 pt-16"
+        className="relative min-h-svh md:min-h-screen flex items-start w-full overflow-hidden -mt-16 pt-16"
       >
         <HeroImageCarousel
           images={heroCarouselImages}
           intervalMs={5000}
           onIndexChange={setHeroSlideIndex}
         />
+        
+        {/* Playful Floating Shapes - Childlike Background Elements */}
+        <div className="absolute inset-0 z-5 pointer-events-none overflow-hidden hidden md:block">
+          {/* Colorful Circles */}
+          <motion.div 
+            className="absolute top-[15%] right-[10%] w-20 h-20 rounded-full bg-yellow-400/30 blur-2xl"
+            animate={{ 
+              y: [0, -30, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div 
+            className="absolute bottom-[20%] left-[15%] w-32 h-32 rounded-full bg-pink-400/25 blur-2xl"
+            animate={{ 
+              y: [0, 40, 0],
+              scale: [1, 1.3, 1],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          />
+          <motion.div 
+            className="absolute top-[40%] left-[8%] w-24 h-24 rounded-full bg-blue-400/20 blur-xl"
+            animate={{ 
+              y: [0, -25, 0],
+              x: [0, 15, 0],
+            }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          />
+          <motion.div 
+            className="absolute top-[25%] right-[25%] w-16 h-16 rounded-full bg-green-400/25 blur-xl"
+            animate={{ 
+              y: [0, 35, 0],
+              scale: [1, 1.15, 1],
+            }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          />
+          
+          {/* Playful Stars */}
+          <motion.div
+            className="absolute top-[30%] right-[20%]"
+            animate={{ 
+              rotate: [0, 360],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          >
+            <Sparkles className="w-8 h-8 text-yellow-300/40" />
+          </motion.div>
+          <motion.div
+            className="absolute bottom-[30%] right-[12%]"
+            animate={{ 
+              rotate: [0, -360],
+              y: [0, -20, 0],
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Star className="w-6 h-6 text-pink-300/40" />
+          </motion.div>
+          <motion.div
+            className="absolute top-[50%] left-[20%]"
+            animate={{ 
+              rotate: [0, 360],
+              scale: [1, 1.3, 1],
+            }}
+            transition={{ duration: 18, repeat: Infinity, ease: "linear", delay: 3 }}
+          >
+            <Heart className="w-7 h-7 text-red-300/30" />
+          </motion.div>
+        </div>
 
-        {/* Logo - Top Left Corner (no wrapper) */}
+        {/* Logo - Top Left Corner (below header, fully visible) */}
         <motion.div
           ref={heroLogoRef}
-          className="absolute top-20 left-4 sm:left-6 lg:left-8 z-20 w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44"
+          className="absolute top-20 left-4 sm:top-24 sm:left-8 lg:left-10 z-20 w-16 h-16 sm:w-28 sm:h-28 md:w-40 md:h-40 shrink-0"
           initial={{ scale: 0.8, opacity: 0, x: -50 }}
-          animate={{ scale: 1, opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            scale: [1, 1.08, 0.96, 1.05, 1],
+            rotate: [0, 360],
+            y: [0, -14, 5, -10, 0],
+          }}
+          transition={{
+            opacity: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+            x: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+            scale: { duration: 6, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' },
+            rotate: { duration: 12, repeat: Infinity, ease: 'linear' },
+            y: { duration: 8, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' },
+          }}
         >
-          <Image
-            src="/daycare-logo.png"
-            alt={businessProfile.name}
-            fill
-            className="object-contain"
-            sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 176px"
-            priority
-          />
+          <div className="relative w-full h-full">
+            <Image
+              src="/daycare-logo.png"
+              alt={businessProfile.name}
+              fill
+              className="object-contain"
+              sizes="(max-width: 640px) 64px, (max-width: 768px) 112px, 160px"
+              priority
+            />
+          </div>
         </motion.div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-start md:gap-12 gap-8 pt-8 pb-12 lg:pt-12 lg:pb-20">
-          {/* Left Content Section */}
-          <div className="min-w-0 flex-1 order-1 flex flex-col items-start mt-24 sm:mt-28 md:mt-8">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-start gap-3 md:gap-12 pt-4 pb-12 sm:pt-8 sm:pb-12 lg:pt-12 lg:pb-20">
+          {/* Left Content Section - minimal on mobile: logo, h1, badge, CTAs */}
+          <div className="min-w-0 flex-1 order-1 flex flex-col items-start mt-10 sm:mt-20 md:mt-8 w-full">
             {/* Badge - Enrollment Status with Download */}
             <motion.a
               href="/assets/Registration form 2026.pdf"
               download="Friendship-Corner-Daycare-Registration-2026.pdf"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full mb-4 border-2 border-white/30 cursor-pointer group relative shadow-2xl"
+              className="inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-3 rounded-full mb-2 sm:mb-4 border-2 border-white/30 cursor-pointer group relative shadow-2xl"
               style={{
                 backgroundColor: 'rgba(15, 23, 42, 0.85)',
                 backdropFilter: 'blur(16px)'
@@ -167,7 +243,7 @@ export function HomePageClient() {
             {/* Main Title with GSAP word animation */}
             <h1
               ref={heroTitleRef}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-4"
+              className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-3 sm:mb-4"
               style={{
                 textShadow: '0 2px 4px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.4), 0 8px 16px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.2)'
               }}
@@ -177,10 +253,10 @@ export function HomePageClient() {
               <span className="word inline-block text-white" style={{ WebkitTextStroke: '1px rgba(0,0,0,0.3)' }}>{t('home.hero.headlineAfter')}</span>
             </h1>
 
-            {/* Subtitle - Bluish gray like reference site screenshot */}
+            {/* Subtitle - Desktop only; mobile hero is minimal */}
             <motion.h2
               ref={subtitleRef}
-              className="text-lg sm:text-xl md:text-2xl mb-8 font-semibold leading-relaxed w-full"
+              className="hidden md:block text-sm sm:text-xl md:text-2xl mb-4 sm:mb-8 font-semibold leading-relaxed w-full"
               style={{ 
                 color: '#f1f5f9',
                 fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)',
@@ -196,9 +272,9 @@ export function HomePageClient() {
               {t('home.hero.subtitle')}
             </motion.h2>
 
-            {/* Stats Row - Clean horizontal layout like reference site */}
+            {/* Stats Row - Desktop only; mobile hero is minimal */}
             <motion.div
-              className="flex flex-wrap gap-4 mb-8"
+              className="hidden md:grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-4 mb-5 sm:mb-8 w-full"
               initial="hidden"
               animate="visible"
               variants={{
@@ -213,7 +289,7 @@ export function HomePageClient() {
               }}
             >
               <motion.div
-                className="px-6 py-3 rounded-lg border-2 border-white/30 shadow-2xl"
+                className="w-full sm:w-auto px-2.5 sm:px-6 py-2 sm:py-3 rounded-lg border-2 border-white/30 shadow-2xl"
                 style={{
                   backgroundColor: 'rgba(15, 23, 42, 0.85)',
                   backdropFilter: 'blur(16px)'
@@ -225,12 +301,15 @@ export function HomePageClient() {
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(15, 23, 42, 0.95)', y: -2 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="text-2xl font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.years')}</div>
-                <div className="text-sm text-white/90 font-semibold drop-shadow-md">{t('home.hero.stats.yearsLabel')}</div>
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="text-lg sm:text-2xl">🎂</span>
+                  <div className="text-lg sm:text-2xl font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.years')}</div>
+                </div>
+                <div className="text-xs sm:text-sm text-white/90 font-semibold drop-shadow-md">{t('home.hero.stats.yearsLabel')}</div>
               </motion.div>
 
               <motion.div
-                className="px-6 py-3 rounded-lg border-2 border-white/30 shadow-2xl"
+                className="w-full sm:w-auto px-2.5 sm:px-6 py-2 sm:py-3 rounded-lg border-2 border-white/30 shadow-2xl"
                 style={{
                   backgroundColor: 'rgba(15, 23, 42, 0.85)',
                   backdropFilter: 'blur(16px)'
@@ -242,12 +321,15 @@ export function HomePageClient() {
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(15, 23, 42, 0.95)', y: -2 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="text-2xl font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.ageRange')}</div>
-                <div className="text-sm text-white/90 font-semibold drop-shadow-md">{t('home.hero.stats.ageRangeLabel')}</div>
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="text-lg sm:text-2xl">👶</span>
+                  <div className="text-lg sm:text-2xl font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.ageRange')}</div>
+                </div>
+                <div className="text-xs sm:text-sm text-white/90 font-semibold drop-shadow-md">{t('home.hero.stats.ageRangeLabel')}</div>
               </motion.div>
 
               <motion.div
-                className="px-6 py-3 rounded-lg border-2 border-white/30 shadow-2xl"
+                className="w-full sm:w-auto px-2.5 sm:px-6 py-2 sm:py-3 rounded-lg border-2 border-white/30 shadow-2xl"
                 style={{
                   backgroundColor: 'rgba(15, 23, 42, 0.85)',
                   backdropFilter: 'blur(16px)'
@@ -259,12 +341,15 @@ export function HomePageClient() {
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(15, 23, 42, 0.95)', y: -2 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="text-2xl font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.staffRatio')}</div>
-                <div className="text-sm text-white/90 font-semibold drop-shadow-md">{t('home.hero.stats.staffRatioLabel')}</div>
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="text-lg sm:text-2xl">👨‍👩‍👧‍👦</span>
+                  <div className="text-lg sm:text-2xl font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.staffRatio')}</div>
+                </div>
+                <div className="text-xs sm:text-sm text-white/90 font-semibold drop-shadow-md">{t('home.hero.stats.staffRatioLabel')}</div>
               </motion.div>
 
               <motion.div
-                className="px-6 py-3 rounded-lg border-2 border-white/30 shadow-2xl"
+                className="col-span-2 sm:col-span-1 w-full sm:w-auto px-2.5 sm:px-6 py-2 sm:py-3 rounded-lg border-2 border-white/30 shadow-2xl"
                 style={{
                   backgroundColor: 'rgba(15, 23, 42, 0.85)',
                   backdropFilter: 'blur(16px)'
@@ -276,57 +361,162 @@ export function HomePageClient() {
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(15, 23, 42, 0.95)', y: -2 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="text-base font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.eceLicensed')}</div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">✅</span>
+                  <div className="text-sm sm:text-base font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.eceLicensed')}</div>
+                </div>
               </motion.div>
             </motion.div>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - Simple on mobile, animated on desktop */}
             <motion.div
-              className="flex flex-wrap gap-4"
+              className="grid w-full min-w-0 max-w-xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              <motion.a
+              {/* Call Now - simple link on mobile to avoid icon/rendering issues */}
+              <a
                 href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-lg bg-blue-600 text-white text-lg font-bold shadow-2xl"
-                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}
-                whileHover={{ scale: 1.05, backgroundColor: '#1d4ed8' }}
-                whileTap={{ scale: 0.95 }}
+                className="flex sm:hidden items-center justify-center gap-2 w-full min-w-0 rounded-xl border-2 border-white/30 bg-slate-900/90 px-4 py-3.5 font-bold text-white backdrop-blur-xl transition-all hover:bg-slate-800/95 active:scale-[0.98]"
+                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.35)' }}
+              >
+                <PhoneCall className="h-5 w-5 shrink-0" aria-hidden />
+                <span className="text-center">{t('home.hero.callNow')}</span>
+              </a>
+              <motion.div
+                className="hidden sm:block group relative overflow-hidden rounded-2xl p-px"
+                whileHover={{ y: -4, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.2 }}
               >
-                {t('home.hero.callNow')}
-              </motion.a>
+                <motion.div
+                  className="absolute -inset-[140%] bg-[conic-gradient(from_0deg,rgba(59,130,246,0),rgba(56,189,248,0.95),rgba(59,130,246,0.15),rgba(59,130,246,0))]"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+                />
+                <div className="relative rounded-[15px] border border-white/20 bg-slate-900/85 p-1 backdrop-blur-xl shadow-[0_20px_60px_rgba(2,6,23,0.55)]">
+                  <Button
+                    asChild
+                    variant="ghost"
+                    className="h-auto w-full justify-between rounded-xl px-4 py-3 text-white hover:bg-white/10"
+                  >
+                    <a href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}>
+                      <span className="flex items-center gap-3 text-base font-bold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.35)' }}>
+                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-400/20 ring-1 ring-cyan-200/60">
+                          <PhoneCall className="h-4 w-4 text-cyan-100" />
+                        </span>
+                        {t('home.hero.callNow')}
+                      </span>
+                      <ArrowRight className="h-4 w-4 text-cyan-100 transition-transform duration-300 group-hover:translate-x-1" />
+                    </a>
+                  </Button>
+                </div>
+              </motion.div>
 
-              <motion.a
+              {/* View Programs */}
+              <Link
                 href="/#programs"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-white/40 text-white text-lg font-bold shadow-2xl"
-                style={{
-                  backgroundColor: 'rgba(15, 23, 42, 0.85)',
-                  backdropFilter: 'blur(16px)',
-                  textShadow: '0 2px 4px rgba(0,0,0,0.3)'
-                }}
-                whileHover={{ scale: 1.05, backgroundColor: 'rgba(15, 23, 42, 0.95)' }}
-                whileTap={{ scale: 0.95 }}
+                className="flex sm:hidden items-center justify-center gap-2 w-full min-w-0 rounded-xl border-2 border-white/30 bg-slate-900/90 px-4 py-3.5 font-bold text-white backdrop-blur-xl transition-all hover:bg-slate-800/95 active:scale-[0.98]"
+                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.35)' }}
+              >
+                <BookOpen className="h-5 w-5 shrink-0" aria-hidden />
+                <span className="text-center">{t('home.hero.viewPrograms')}</span>
+              </Link>
+              <motion.div
+                className="hidden sm:block group relative overflow-hidden rounded-2xl p-px"
+                whileHover={{ y: -4, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.2 }}
               >
-                {t('home.hero.viewPrograms')}
-              </motion.a>
+                <motion.div
+                  className="absolute -inset-[140%] bg-[conic-gradient(from_0deg,rgba(244,114,182,0),rgba(251,146,60,0.95),rgba(244,114,182,0.2),rgba(244,114,182,0))]"
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 7, repeat: Infinity, ease: 'linear' }}
+                />
+                <div className="relative rounded-[15px] border border-white/20 bg-slate-900/85 p-1 backdrop-blur-xl shadow-[0_20px_60px_rgba(2,6,23,0.55)]">
+                  <Button
+                    asChild
+                    variant="ghost"
+                    className="h-auto w-full justify-between rounded-xl px-4 py-3 text-white hover:bg-white/10"
+                  >
+                    <Link href="/#programs">
+                      <span className="flex items-center gap-3 text-base font-bold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.35)' }}>
+                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-orange-400/20 ring-1 ring-orange-200/60">
+                          <BookOpen className="h-4 w-4 text-orange-100" />
+                        </span>
+                        {t('home.hero.viewPrograms')}
+                      </span>
+                      <ArrowRight className="h-4 w-4 text-orange-100 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
+                </div>
+              </motion.div>
+
+              {/* Schedule a Tour - mobile only */}
+              <Link
+                href="/#contact-form"
+                className="flex sm:hidden items-center justify-center gap-2 w-full min-w-0 rounded-xl border-2 border-white/30 bg-slate-900/90 px-4 py-3.5 font-bold text-white backdrop-blur-xl transition-all hover:bg-slate-800/95 active:scale-[0.98]"
+                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.35)' }}
+              >
+                <Calendar className="h-5 w-5 shrink-0" aria-hidden />
+                <span className="text-center">{t('home.hero.scheduleTour')}</span>
+              </Link>
             </motion.div>
+
+            {(facebookUrl || instagramUrl) && (
+              <motion.div
+                className="hidden md:flex mt-4 sm:mt-6 flex-wrap items-center gap-2 sm:gap-3"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.95, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span
+                  className="text-xs sm:text-sm font-semibold text-white/90"
+                  style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)' }}
+                >
+                  Follow daily classroom moments:
+                </span>
+                {facebookUrl && (
+                  <a
+                    href={facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-slate-900/75 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-slate-900/90"
+                  >
+                    <Facebook className="h-4 w-4" />
+                    Facebook
+                  </a>
+                )}
+                {instagramUrl && (
+                  <a
+                    href={instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-slate-900/75 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-slate-900/90"
+                  >
+                    <Instagram className="h-4 w-4" />
+                    Instagram
+                  </a>
+                )}
+              </motion.div>
+            )}
           </div>
 
-          <div className="relative z-20 order-2 w-full max-w-sm md:max-w-90 mx-auto md:mx-0 shrink-0">
+          {/* Contact form: desktop only; mobile uses Schedule a Tour link above */}
+          <div className="relative z-20 order-2 hidden md:block w-full max-w-sm md:max-w-90 mx-auto md:mx-0 shrink-0 mt-1 md:mt-0">
             <HeroContactForm />
           </div>
         </div>
 
         {/* Marquee Feature Cards - Infinite scrolling marquee */}
-        <div className="absolute bottom-32 left-0 right-0 w-full overflow-hidden z-10 pointer-events-none">
-          <div className="relative w-full flex">
+        <div className="absolute bottom-32 left-0 right-0 z-10 pointer-events-none hidden md:block">
+          <div className="relative w-full max-w-7xl mx-auto overflow-hidden px-4 sm:px-6 lg:px-8">
+            <div className="flex w-max min-w-full">
             {/* First marquee track */}
             <div 
               ref={marqueeRef}
-              className="flex items-center gap-4 px-4 animate-marquee-infinite"
+              className="flex items-center gap-4 animate-marquee-infinite pr-4"
               style={{ width: 'max-content' }}
             >
               {/* Feature Card 1 - Montessori */}
@@ -338,7 +528,7 @@ export function HomePageClient() {
               {/* Feature Card 2 - Safety */}
               <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(6, 182, 212, 0.95))' }}>
                 <Shield className="w-4 h-4 text-white group-hover:animate-pulse drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>BC Licensed & Safe</span>
+                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>ECE Licensed</span>
               </div>
 
               {/* Feature Card 3 - Love */}
@@ -350,13 +540,13 @@ export function HomePageClient() {
               {/* Feature Card 4 - Excellence */}
               <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(249, 115, 22, 0.95))' }}>
                 <Star className="w-4 h-4 text-white group-hover:animate-spin fill-white/50 drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>16+ Years Excellence</span>
+                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Since 2008</span>
               </div>
             </div>
             
             {/* Duplicate marquee track for seamless loop */}
             <div 
-              className="flex items-center gap-4 px-4 animate-marquee-infinite"
+              className="flex items-center gap-4 animate-marquee-infinite pr-4"
               style={{ width: 'max-content' }}
               aria-hidden="true"
             >
@@ -366,7 +556,7 @@ export function HomePageClient() {
               </div>
               <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(6, 182, 212, 0.95))' }}>
                 <Shield className="w-4 h-4 text-white group-hover:animate-pulse drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>BC Licensed & Safe</span>
+                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>ECE Licensed</span>
               </div>
               <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(236, 72, 153, 0.95))' }}>
                 <Heart className="w-4 h-4 text-white group-hover:animate-bounce fill-white/50 drop-shadow-lg" />
@@ -374,16 +564,17 @@ export function HomePageClient() {
               </div>
               <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(249, 115, 22, 0.95))' }}>
                 <Star className="w-4 h-4 text-white group-hover:animate-spin fill-white/50 drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>16+ Years Excellence</span>
+                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Since 2008</span>
               </div>
+            </div>
             </div>
           </div>
         </div>
 
-        <a href="/#about" className="absolute bottom-16 left-1/2 -translate-x-1/2 text-white hover:text-white text-xs uppercase tracking-widest font-bold flex flex-col items-center gap-1 z-20" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.6)' }}>
+        <Link href="/#about" className="absolute bottom-8 sm:bottom-16 left-1/2 -translate-x-1/2 text-white hover:text-white text-xs uppercase tracking-widest font-bold flex flex-col items-center gap-1 z-20" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.6)' }}>
           {t('home.hero.scrollToAbout')}
           <svg className="w-5 h-5 animate-bounce drop-shadow-2xl" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
-        </a>
+        </Link>
 
         {/* Curved bottom edge - reference clone */}
         <div className="absolute bottom-0 left-0 right-0 w-full h-24 overflow-visible pointer-events-none" aria-hidden>
@@ -397,14 +588,13 @@ export function HomePageClient() {
 
       <ProgramsSection />
 
+      {/* Gallery Section - Prominently placed for visual impact */}
       <GallerySectionContent />
 
       {/* Testimonials */}
       <TestimonialsMarquee />
-
-      <EnrollmentSectionContent />
-
-      {/* Daily Videos Section */}
+      
+      {/* Daily Videos Section - Moved up for more dynamic content */}
       <section id="videos" className="py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16 section-header">
@@ -419,6 +609,8 @@ export function HomePageClient() {
           <VideoPlayer videos={videos} />
         </div>
       </section>
+
+      <EnrollmentSectionContent />
 
       <ContactFormSection />
     </main>

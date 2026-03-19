@@ -787,11 +787,11 @@ textarea:focus-visible {
 }
 
 .marquee-ltr {
-  animation: marquee-ltr 45s linear infinite;
+  animation: marquee-ltr 40s linear infinite;
 }
 
 .marquee-rtl {
-  animation: marquee-rtl 45s linear infinite;
+  animation: marquee-rtl 40s linear infinite;
 }
 
 .animate-marquee-slow {

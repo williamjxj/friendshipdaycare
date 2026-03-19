@@ -43,7 +43,7 @@ export function HeroImageCarousel({
         <div
           key={src}
           className={cn(
-            'absolute inset-0 min-w-full min-h-full bg-no-repeat bg-center transition-opacity duration-1000 bg-cover max-sm:bg-contain',
+            'absolute inset-0 min-w-full min-h-full bg-no-repeat bg-center transition-opacity duration-1000 bg-cover',
             i === index ? 'opacity-100' : 'opacity-0'
           )}
           style={{
@@ -52,9 +52,14 @@ export function HeroImageCarousel({
           aria-hidden={i !== index}
         />
       ))}
-      {/* Dark gradient overlay for better text contrast */}
-      <div 
-        className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"
+      {/* Gradient overlay: on mobile, blend with image (warm tones); on desktop, darken for text contrast */}
+      <div
+        className="absolute inset-0 md:bg-linear-to-b md:from-black/50 md:via-black/40 md:to-black/60"
+        aria-hidden="true"
+      />
+      {/* Mobile: gradient that blends with daycare imagery (warm greens, ambers) to hide any letterboxing */}
+      <div
+        className="absolute inset-0 bg-linear-to-b from-slate-900/70 via-amber-950/30 to-slate-900/80 md:hidden"
         aria-hidden="true"
       />
     </div>

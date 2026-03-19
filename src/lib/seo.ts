@@ -4,12 +4,12 @@ import { getOgImagePath } from "@/lib/og-images";
 
 export const SEO_BASE_URL = businessProfile.url;
 export const SEO_SITE_NAME = "Friendship Corner Daycare";
-export const SEO_DEFAULT_TITLE = "Friendship Corner Montessori Daycare | Coquitlam, BC";
-export const SEO_TITLE_TEMPLATE = "%s | Friendship Corner Daycare";
+export const SEO_DEFAULT_TITLE = "Coquitlam Montessori Daycare | Friendship Corner Daycare Since 2008";
+export const SEO_TITLE_TEMPLATE = "%s | Friendship Corner Daycare Coquitlam";
 export const SEO_DEFAULT_DESCRIPTION =
-  "Authentic Montessori daycare in Coquitlam, BC. Licensed since 2008. Book a free tour at Friendship Corner Daycare.";
+  "Licensed Montessori daycare in Coquitlam, BC for children ages 30 months to 5 years. Friendship Corner Daycare has served Tri-Cities families since 2008 near 2950 Dewdney Trunk Road.";
 export const SEO_DEFAULT_KEYWORDS = [
-  // Primary keywords - Most searched
+  // Primary local keywords
   "daycare Coquitlam",
   "Coquitlam daycare",
   "Montessori daycare Coquitlam",
@@ -17,50 +17,47 @@ export const SEO_DEFAULT_KEYWORDS = [
   "childcare Coquitlam",
   "preschool Coquitlam",
   "Coquitlam preschool",
-  
+
   // Location-specific
   "Coquitlam Centre daycare",
-  "Coquitlam Station daycare",
+  "daycare near Coquitlam Station",
   "daycare near Coquitlam Centre",
-  "daycare near me Coquitlam",
   "Tri-Cities daycare",
   "Port Coquitlam daycare",
   "Port Moody daycare",
-  "Coquitlam West daycare",
-  
+  "2950 Dewdney Trunk Road daycare",
+
   // Program-specific
   "Montessori Coquitlam",
   "Coquitlam Montessori",
   "Montessori preschool Coquitlam",
   "toddler daycare Coquitlam",
-  "infant daycare Coquitlam",
   "licensed daycare Coquitlam",
+  "licensed daycare BC",
   "ECE daycare Coquitlam",
-  
-  // Competitive edge
-  "best daycare Coquitlam",
-  "top daycare Coquitlam",
-  "affordable daycare Coquitlam",
+
+  // Parent intent keywords
+  "book daycare tour Coquitlam",
+  "Montessori childcare Coquitlam",
   "quality childcare Coquitlam",
   "early learning Coquitlam",
   "daycare with ECE teachers Coquitlam",
-  
+
   // Chinese keywords for SEO
   "高贵林日托",
   "高贵林幼儿园",
   "Coquitlam 日托",
   "Coquitlam Montessori 学校",
-  
+
   // Additional search terms
-  "Christian daycare Coquitlam",
-  "faith-based daycare Coquitlam",
   "full-time daycare Coquitlam",
-  "part-time daycare Coquitlam",
   "daycare enrollment Coquitlam",
+  "child care Coquitlam BC",
+  "Montessori daycare Tri-Cities",
 ];
 
 
-export const SEO_DEFAULT_IMAGE = `${SEO_BASE_URL}/logo.png`;
+export const SEO_DEFAULT_IMAGE = `${SEO_BASE_URL}/images/slidetop-bg.jpg`;
 
 /**
  * Base metadata shared across all public pages.
@@ -100,8 +97,16 @@ export const defaultSiteMetadata: Metadata = {
   },
   robots: {
     index: true,
-    follow: true
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    }
   },
+  category: "education",
   authors: [{ name: SEO_SITE_NAME }],
   creator: SEO_SITE_NAME,
   publisher: SEO_SITE_NAME

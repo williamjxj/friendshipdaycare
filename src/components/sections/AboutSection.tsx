@@ -87,6 +87,7 @@ export function AboutSection() {
               variants={slideUp}
             >
               <div className="flex flex-col items-center gap-2">
+                <span className="text-3xl mb-1">🎂</span>
                 <div className="text-4xl font-extrabold bg-linear-to-br from-primary to-primary/70 bg-clip-text text-transparent">
                   16+
                 </div>
@@ -101,6 +102,7 @@ export function AboutSection() {
               variants={slideUp}
             >
               <div className="flex flex-col items-center gap-2">
+                <span className="text-3xl mb-1">👶</span>
                 <div className="text-4xl font-extrabold bg-linear-to-br from-primary to-primary/70 bg-clip-text text-transparent">
                   30mo
                 </div>
@@ -115,6 +117,7 @@ export function AboutSection() {
               variants={slideUp}
             >
               <div className="flex flex-col items-center gap-2">
+                <span className="text-3xl mb-1">👨‍🏫</span>
                 <div className="text-4xl font-extrabold bg-linear-to-br from-primary to-primary/70 bg-clip-text text-transparent">
                   6
                 </div>
@@ -129,6 +132,7 @@ export function AboutSection() {
               variants={slideUp}
             >
               <div className="flex flex-col items-center gap-2">
+                <span className="text-3xl mb-1">👨‍👩‍👧‍👦</span>
                 <div className="text-4xl font-extrabold bg-linear-to-br from-primary to-primary/70 bg-clip-text text-transparent">
                   1:8
                 </div>

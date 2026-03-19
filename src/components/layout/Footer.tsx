@@ -98,8 +98,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Quick Links (matches top navigation) */}
-          <div className="min-w-0">
+          {/* Column 2: Quick Links (matches top navigation) - hidden on mobile */}
+          <div className="hidden md:block min-w-0">
             <h3 className="footer-section-title text-foreground mb-2 sm:mb-6">{t('footer.quickLinks.title')}</h3>
             <ul className="space-y-2 sm:space-y-3">
               <li>

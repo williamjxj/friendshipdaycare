@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import Image from 'next/image';
 import { Heart, Quote } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { testimonialsByLocale } from '@/data/testimonials';
+import { testimonialsByLocaleAll } from '@/data/testimonials';
 
 const TRUNCATE_LENGTH = 120;
 
@@ -162,7 +162,7 @@ function MarqueeRow({
  */
 export function TestimonialsMarquee() {
   const { language, t } = useLanguage();
-  const testimonials = testimonialsByLocale[language] ?? testimonialsByLocale.en ?? [];
+  const testimonials = testimonialsByLocaleAll[language] ?? testimonialsByLocaleAll.en ?? [];
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
   const getTranslatedQuote = useCallback((id: string) => {
@@ -181,11 +181,12 @@ export function TestimonialsMarquee() {
 
   if (testimonials.length === 0) return null;
 
-  const row1 = testimonials.slice(0, Math.ceil(testimonials.length / 2));
-  const row2 = testimonials.slice(Math.ceil(testimonials.length / 2));
+  // Row 1: first 6, Row 2: remaining
+  const row1 = testimonials.slice(0, 6);
+  const row2 = testimonials.slice(6);
 
   return (
-    <section id="testimonials" className="py-24 bg-muted/30" aria-label="Parent testimonials">
+    <section id="testimonials" className="py-24 bg-muted/30 overflow-hidden" aria-label="Parent testimonials">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mb-12 w-full">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground text-center mb-4 whitespace-nowrap">
@@ -195,23 +196,24 @@ export function TestimonialsMarquee() {
             Families in Coquitlam and the Tri-Cities trust Friendship Corner Daycare
           </p>
         </header>
+      </div>
 
-        <div className="space-y-2">
-          <MarqueeRow
-            testimonials={row1.length > 0 ? row1 : testimonials}
-            direction="ltr"
-            expandedIds={expandedIds}
-            onToggleExpand={toggleExpand}
-            getTranslatedQuote={getTranslatedQuote}
-          />
-          <MarqueeRow
-            testimonials={row2.length > 0 ? row2 : testimonials}
-            direction="rtl"
-            expandedIds={expandedIds}
-            onToggleExpand={toggleExpand}
-            getTranslatedQuote={getTranslatedQuote}
-          />
-        </div>
+      {/* Full-width marquee rows — outside the max-w container so they span the section edge-to-edge */}
+      <div className="space-y-2">
+        <MarqueeRow
+          testimonials={row1}
+          direction="ltr"
+          expandedIds={expandedIds}
+          onToggleExpand={toggleExpand}
+          getTranslatedQuote={getTranslatedQuote}
+        />
+        <MarqueeRow
+          testimonials={row2.length > 0 ? row2 : testimonials}
+          direction="rtl"
+          expandedIds={expandedIds}
+          onToggleExpand={toggleExpand}
+          getTranslatedQuote={getTranslatedQuote}
+        />
       </div>
     </section>
   );

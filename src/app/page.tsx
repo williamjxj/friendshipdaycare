@@ -3,9 +3,9 @@ import { buildPageMetadata } from "@/lib/seo";
 import { HomePageClient } from "@/app/page-client";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Best Montessori Daycare in Coquitlam BC | Licensed Childcare Since 2008",
+  title: "Coquitlam Montessori Daycare | Licensed Child Care Since 2008",
   description:
-    "Top-rated Montessori daycare in Coquitlam for ages 30mo–5. Licensed childcare near Coquitlam Centre. ECE-certified teachers, 1:8 ratio. Book your free tour today! Serving Tri-Cities families since 2008.",
+    "Licensed Montessori daycare in Coquitlam for children ages 30 months to 5 years. Visit Friendship Corner Daycare near 2950 Dewdney Trunk Road and book a tour for your family.",
   path: "/"
 });
 
