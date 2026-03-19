@@ -11,6 +11,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SkipNavigation } from "@/components/ui/SkipNavigation";
 import { MobileCtaBar } from "@/components/ui/MobileCtaBar";
 import { Toaster } from "@/components/ui/toaster";
+import DaycareAdPopup from "@/components/ui/DaycareAdPopup";
 import { LocalBusinessSchema, OrganizationSchema, WebSiteSchema } from "@/components/seo/StructuredData";
 import { businessProfile } from "@/lib/business-profile";
 import { getAggregateRating } from "@/data/testimonials";
@@ -145,6 +146,7 @@ export default async function RootLayout({
                   </main>
                   <Footer />
                   <MobileCtaBar />
+                    <DaycareAdPopup />
                 </div>
                 <Toaster />
               </ThemeProvider>

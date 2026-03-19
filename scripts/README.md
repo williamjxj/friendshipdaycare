@@ -9,30 +9,38 @@ For placeholder guidance and expected filenames, see `docs/images-readme.md`.
 ## Available Scripts
 
 ### 1. Download Images from R2 (Node.js)
+
 ```bash
 node scripts/download_all_images.js
 ```
-- **Requirements**: 
+
+- **Requirements**:
   - Node.js
   - `.env.local` file with R2 credentials
   - Packages: `@aws-sdk/client-s3`, `dotenv`
+
 - **Install dependencies**: `npm install @aws-sdk/client-s3 dotenv`
 - **Output**: `public/images/` folder
 - **Purpose**: Downloads all images from Cloudflare R2 `images/` folder to local `public/images/` for development
 
 ### 2. Download Images from R2 (Python)
+
 ```bash
 python3 scripts/download_all_images.py
 ```
-- **Requirements**: 
+
+- **Requirements**:
   - Python 3
   - `.env.local` file with R2 credentials
   - Packages: `boto3`, `python-dotenv`
+
 - **Install packages**: `pip install boto3 python-dotenv`
 - **Output**: `public/images/` folder
 - **Purpose**: Downloads all images from Cloudflare R2 `images/` folder to local `public/images/` for development
 
+
 ### 3. Bidirectional Sync for imgs/ Folder (Node.js)
+
 ```bash
 # Download from R2 to local
 node scripts/sync_imgs.js download
@@ -40,29 +48,38 @@ node scripts/sync_imgs.js download
 # Upload from local to R2 (overwrites originals)
 node scripts/sync_imgs.js upload
 ```
-- **Requirements**: 
+
+- **Requirements**:
   - Node.js
   - `.env.local` file with R2 credentials
   - Packages: `@aws-sdk/client-s3`, `dotenv`
+
 - **Install dependencies**: `npm install @aws-sdk/client-s3 dotenv`
-- **Purpose**: 
+- **Purpose**:
   - **Download**: Recursively downloads all files from R2 `imgs/` folder to local `public/imgs/`, preserving folder structure
   - **Upload**: Recursively uploads all files from local `public/imgs/` to R2 `imgs/` folder (overwrites originals)
+
 - **Workflow**: Download → Edit locally → Upload back to R2
 
 ### 4. Create Video Thumbnails
+
 ```bash
 python3 scripts/create_video_thumbnails.py
 ```
+
 - **Requirements**: Python 3 with PIL/Pillow library
 - **Output**: `public/images/` folder
 - **Purpose**: Creates 3 video thumbnail placeholders with emojis, text, and play buttons for gallery video section
 
 ### 5. Generate Placeholders
+
 ```bash
 ./scripts/generate-placeholders.sh [page-name] [section-name] [sequence-number]
 ```
+
 - **Requirements**: Bash
+- **Output**: `public/placeholders/` folder
+- **Purpose**: Creates basic SVG placeholder images for hero sections
 - **Output**: `public/placeholders/` folder
 - **Purpose**: Creates basic SVG placeholder images for hero sections
 
@@ -119,20 +136,29 @@ import { getImageUrl } from '@/lib/image-utils';
 />
 ```
 
-**Important**: 
+
+
+**Important**:
+
 - **Production**: Images are served from R2 CDN via `getImageUrl()` helper
 - **Local Development**: Download images from R2 to `public/images/` using these scripts
 - **Path Convention**: Always use `/images/` paths in code (works for both local and production)
 
 ## Workflow
 
+
+
 ### For Local Development
+
 1. Ensure you have `.env.local` file with R2 credentials
 2. Run download script: `node scripts/download_all_images.js` or `python3 scripts/download_all_images.py`
 3. Images are downloaded to `public/images/` for local development
 4. Use `getImageUrl('/images/filename.jpg')` in your components
 
+
+
 ### For Production
+
 - Images are automatically served from R2 CDN
 - No local images needed in production
 - `getImageUrl()` helper resolves to R2 CDN URL
@@ -158,7 +184,7 @@ import { getImageUrl } from '@/lib/image-utils';
 ## Script Reference Table
 
 | Script | Language | Purpose | Output Directory | Description |
-|--------|----------|---------|------------------|-------------|
+| -------- | ---------- | --------- | ------------------ | ------------- |
 | `create_video_thumbnails.py` | Python | Generate thumbnails | `public/images/` | Creates 3 video thumbnail placeholders with emojis, text, and play buttons for gallery video section |
 | `download_all_images.js` | Node.js | Download images | `public/images/` | Downloads 12 known images from the original website (for upload to R2 `images/` folder) |
 | `download_all_images.py` | Python | Download images | `public/images/` | Comprehensive script that scans multiple pages and downloads all images found (uses BeautifulSoup for HTML parsing) |

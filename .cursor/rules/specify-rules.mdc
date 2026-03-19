@@ -32,4 +32,12 @@ TypeScript 5.9, React 19, Next.js 16: Follow standard conventions
 - 004-website-optimization: Added TypeScript 5.9, React 19, Next.js 16 + Tailwind CSS 4, Framer Motion, GSAP, react-hook-form, zod, Resend, next-intl
 
 <!-- MANUAL ADDITIONS START -->
+
+## Layout: Paragraphs and Lists
+
+- **Horizontal extension, not vertical**: For paragraphs, lists, and text content, always prefer horizontal layout extension over vertical column alignment.
+- **Avoid**: CSS `columns` (e.g. `columns-2`) that force narrow vertical columns; flex/grid layouts that squeeze content into tall, narrow strips.
+- **Prefer**: Full-width containers (`w-full`, `min-w-0` where needed), normal text flow, flex-wrap for inline items, and explicit `min-width` / `shrink-0` on modals/cards to prevent unwanted shrinking.
+- **Modals and cards**: Use `min-w-[280px]` or similar, plus `shrink-0` when inside flex parents, so content extends horizontally and reads naturally.
+
 <!-- MANUAL ADDITIONS END -->
