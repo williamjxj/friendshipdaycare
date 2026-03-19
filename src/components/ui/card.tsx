@@ -1,10 +1,11 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
+import { MagneticButton } from "./magnetic-button"
 
 /** BestIT Case Studies card style: flat, shadow → shadow-xl on hover, no scale/3D */
 const bestitCardClasses =
-  "rounded-xl shadow group hover:shadow-xl transition-all duration-300 border-0 bg-white/50 dark:bg-card/80 backdrop-blur-sm overflow-hidden";
+  "rounded-xl shadow group hover:shadow-2xl hover:scale-[1.035] hover:bg-white/70 dark:hover:bg-card/90 transition-all duration-300 border-0 bg-white/50 dark:bg-card/80 backdrop-blur-sm overflow-hidden relative overflow-hidden";
 
 const cardVariants = cva(
   "group rounded-xl text-card-foreground shadow transition-all duration-300",
@@ -33,12 +34,22 @@ interface CardProps
   VariantProps<typeof cardVariants> { }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, ...props }, ref) => (
+  ({ className, variant, children, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(cardVariants({ variant, className }))}
       {...props}
-    />
+    >
+      {/* MagneticButton demo for interactive cards */}
+      {variant === "interactive" && (
+        <div className="absolute top-4 right-4 z-10">
+          <MagneticButton strength={0.5} className="px-4 py-2 bg-primary text-primary-foreground rounded-full shadow-lg">
+            Try Me
+          </MagneticButton>
+        </div>
+      )}
+      {children}
+    </div>
   )
 )
 Card.displayName = "Card"

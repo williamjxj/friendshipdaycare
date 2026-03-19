@@ -15,7 +15,7 @@ const SPA_REDIRECTS: Record<string, string> = {
  * Redirects old multi-route paths to single-page anchor links.
  * Keeps URLs like /programs/toddler -> /#programs (program slug pages become programs section).
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Exact match (includes /resources/faq -> /#faq)

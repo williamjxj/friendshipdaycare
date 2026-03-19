@@ -26,9 +26,6 @@ interface GoogleReviewRaw {
   authorImageUrl?: string | null;
 }
 
-/** Exclude negative/irrelevant reviewers */
-const EXCLUDED_AUTHORS = new Set(['Michael Magdy']);
-
 /** Reviews with 4.5 stars for a more believable mix (not all 5s) */
 const RATING_4_5_AUTHORS = new Set(['Rachel S', 'Heidy Barros', 'Isabel Liu', '鲁南宋']);
 
@@ -37,7 +34,6 @@ const RATING_4_5_AUTHORS = new Set(['Rachel S', 'Heidy Barros', 'Isabel Liu', '�
  */
 const raw = googleReviews as { reviews: GoogleReviewRaw[] };
 export const testimonialsAll: Testimonial[] = raw.reviews
-  .filter((r) => !EXCLUDED_AUTHORS.has(r.authorName))
   .map((r, i) => {
     const text = r.comment ?? r.quote ?? '';
     return {
