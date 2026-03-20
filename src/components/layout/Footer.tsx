@@ -36,6 +36,7 @@ export function Footer() {
                   alt="Friendship Corner"
                   fill
                   className="object-contain"
+                  sizes="(max-width: 768px) 120px, 160px"
                 />
               </div>
               <div className="flex flex-col min-w-0">

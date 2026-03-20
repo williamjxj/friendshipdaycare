@@ -146,9 +146,9 @@ export default async function RootLayout({
                   </main>
                   <Footer />
                   <MobileCtaBar />
-                    <DaycareAdPopup />
                 </div>
                 <Toaster />
+                <DaycareAdPopup />
               </ThemeProvider>
             </NextIntlProviderSync>
           </LanguageAwareHtml>

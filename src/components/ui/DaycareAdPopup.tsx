@@ -3,37 +3,44 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
+
 const LOGO_IMAGE = '/daycare-logo.png';
-const POPUP_KEY = 'daycare_ad_popup_closed';
+const POPUP_KEY = 'daycare_ad_popup_closed_v2'; // versioned key for easy reset
 const POPUP_DELAY = 2000;
 
+
 export default function DaycareAdPopup() {
-  const [open, setOpen] = useState(false);
+  // null = not yet decided (SSR), true = open, false = closed
+  const [open, setOpen] = useState<null | boolean>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (sessionStorage.getItem(POPUP_KEY)) return;
+    // Always show on every page load (remove sessionStorage check)
     const timer = setTimeout(() => setOpen(true), POPUP_DELAY);
     return () => clearTimeout(timer);
   }, []);
 
   const handleClose = () => {
     setOpen(false);
+    // Optionally: set sessionStorage for manual testing, but not used for gating
     if (typeof window !== 'undefined') sessionStorage.setItem(POPUP_KEY, '1');
   };
+
+  // Don't render anything until client decides (prevents hydration flash)
+  if (open === null) return null;
 
   return (
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/50 px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={handleClose}
         >
           <motion.div
-            className="relative bg-white rounded-2xl shadow-xl w-[95vw] min-w-[320px] max-w-5xl shrink-0 overflow-y-auto max-h-[90vh]"
+            className="relative bg-white rounded-2xl shadow-xl w-[95vw] min-w-80 max-w-5xl shrink-0 overflow-y-auto max-h-[90vh]"
             initial={{ scale: 0.85, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.85, opacity: 0 }}
@@ -55,6 +62,7 @@ export default function DaycareAdPopup() {
                     src={LOGO_IMAGE}
                     alt="Friendship Corner Daycare Logo"
                     fill
+                    sizes="80px"
                     style={{ objectFit: 'contain' }}
                     priority
                   />

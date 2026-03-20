@@ -223,6 +223,7 @@ export function Header() {
                   sizes="(max-width: 640px) 160px, 200px"
                   className="object-contain"
                   priority
+                  unoptimized
                 />
               </div>
               <div className="flex flex-col justify-center min-w-0 w-full h-full group">
