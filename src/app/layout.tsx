@@ -12,6 +12,7 @@ import { SkipNavigation } from "@/components/ui/SkipNavigation";
 import { MobileCtaBar } from "@/components/ui/MobileCtaBar";
 import { Toaster } from "@/components/ui/toaster";
 import DaycareAdPopup from "@/components/ui/DaycareAdPopup";
+import { ScrollToTopButton } from "@/components/ui/scroll-to-top-button";
 import { LocalBusinessSchema, OrganizationSchema, WebSiteSchema } from "@/components/seo/StructuredData";
 import { businessProfile } from "@/lib/business-profile";
 import { getAggregateRating } from "@/data/testimonials";
@@ -146,6 +147,7 @@ export default async function RootLayout({
                   </main>
                   <Footer />
                   <MobileCtaBar />
+                  <ScrollToTopButton />
                 </div>
                 <Toaster />
                 <DaycareAdPopup />

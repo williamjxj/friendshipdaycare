@@ -119,6 +119,9 @@
     "copyright": "© 2024 Friendship Corner Daycare. All rights reserved.",
     "phone": "604.945.8504"
   },
+  "scrollToTop": {
+    "ariaLabel": "Scroll to top"
+  },
   "testimonials": {
     "quotes": {
       "t1": "The facility is very clean, the teachers are responsible, friendly, and communicate well with parents.",

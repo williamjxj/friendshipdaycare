@@ -117,6 +117,9 @@
     "copyright": "© 2024 友谊角托儿所。保留所有权利。",
     "phone": "604.945.8504"
   },
+  "scrollToTop": {
+    "ariaLabel": "回到顶部"
+  },
   "testimonials": {
     "quotes": {
       "t1": "设施非常干净，老师们负责任、友善，并与家长沟通良好。",

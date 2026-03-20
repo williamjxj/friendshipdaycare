@@ -117,6 +117,9 @@
     "copyright": "© 2024 Guardería Friendship Corner. Todos los derechos reservados.",
     "phone": "604.945.8504"
   },
+  "scrollToTop": {
+    "ariaLabel": "Volver arriba"
+  },
   "testimonials": {
     "quotes": {
       "t1": "Las instalaciones están muy limpias, las maestras son responsables, amigables y se comunican bien con los padres.",
