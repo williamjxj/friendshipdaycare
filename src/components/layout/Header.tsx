@@ -212,24 +212,24 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 min-w-0">
         <div className="flex justify-between items-center h-16 gap-2 min-w-0">
 
-          {/* Logo - takes remaining space on mobile and clips so menu button is never hidden */}
-          <div className="flex-1 min-w-0 overflow-hidden lg:flex-initial">
-            <Link href="/" className="flex items-center space-x-2 group min-w-0">
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
+          {/* Logo and Title - full width, never truncated */}
+          <div className="flex-shrink-0 min-w-fit flex items-center ml-3 sm:ml-6 md:ml-10 mr-10">
+            <Link href="/" className="flex items-center gap-0.5 min-w-0">
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 shrink-0 transition-transform duration-300 flex items-center">
                 <Image
-                  src={"/logo.png"}
+                  src={"/fsd.gif"}
                   alt="Friendship Corner Daycare"
                   fill
-                  sizes="(max-width: 640px) 120px, 160px"
+                  sizes="(max-width: 640px) 160px, 200px"
                   className="object-contain"
                   priority
                 />
               </div>
-              <div className="flex flex-col justify-center -space-y-1 min-w-0">
-                <span className="font-display font-bold text-base sm:text-lg md:text-xl text-primary leading-tight group-hover:text-secondary transition-colors duration-300 truncate">
+              <div className="flex flex-col justify-center min-w-0 w-full h-full group">
+                <span className="font-display font-bold text-base sm:text-lg md:text-xl text-primary leading-tight group-hover:text-secondary transition-colors duration-300 whitespace-nowrap w-full">
                   Friendship Corner
                 </span>
-                <span className="text-[0.55rem] sm:text-[0.6rem] md:text-[0.65rem] text-muted-foreground uppercase tracking-[0.18em] font-semibold leading-tight truncate">
+                <span className="text-[0.48rem] sm:text-[0.6rem] md:text-[0.7rem] text-primary/80 uppercase tracking-[0.18em] font-semibold leading-tight whitespace-nowrap w-full">
                   Montessori Daycare
                 </span>
               </div>
@@ -237,7 +237,7 @@ export function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1" suppressHydrationWarning>
+          <nav className="hidden lg:flex items-center gap-1 ml-8 flex-shrink-0" suppressHydrationWarning>
             {navigationConfig.map((item) => {
               const name = getTransName(item.key);
 

@@ -12,16 +12,20 @@ import dynamic from 'next/dynamic';
 import { HeroImageCarousel } from '@/components/ui/hero-image-carousel';
 import { HeroContactForm } from '@/components/ui/hero-contact-form';
 import { motion } from 'framer-motion';
+import { gridPattern } from '@/lib/magicui-animations';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Download, Sparkles, Heart, Shield, Star, PhoneCall, ArrowRight, BookOpen, Facebook, Instagram, Calendar } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getImageUrl } from '@/lib/image-utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { businessProfile } from '@/lib/business-profile';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
+import { BorderBeam } from '@/components/ui/border-beam';
+import { AuroraBackground } from '@/components/ui/aurora-background';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -218,26 +222,24 @@ export function HomePageClient() {
             <motion.a
               href="/assets/Registration form 2026.pdf"
               download="Friendship-Corner-Daycare-Registration-2026.pdf"
-              className="inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-3 rounded-full mb-2 sm:mb-4 border-2 border-white/30 cursor-pointer group relative shadow-2xl"
-              style={{
-                backgroundColor: 'rgba(15, 23, 42, 0.85)',
-                backdropFilter: 'blur(16px)'
-              }}
+              className="inline-flex items-center gap-2 px-3 sm:px-6 py-2.5 sm:py-4 rounded-full mb-2 sm:mb-4 border-2 border-white/30 cursor-pointer group relative shadow-2xl overflow-visible"
+              style={{ background: 'none', backdropFilter: 'none' }}
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(15, 23, 42, 0.95)' }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.07 }}
+              whileTap={{ scale: 0.97 }}
               title="Click to Download Enrollment Application Form"
             >
-              <span className="relative flex h-2.5 w-2.5">
+              <AuroraBackground className="z-0! rounded-full!" />
+              <span className="relative flex h-2.5 w-2.5 z-10">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
               </span>
-              <span className="text-sm md:text-base font-semibold text-white drop-shadow-lg">
+              <span className="relative z-10 text-sm md:text-base font-extrabold text-white drop-shadow-lg tracking-wide uppercase" style={{ letterSpacing: '0.04em', textShadow: '0 2px 8px #000, 0 4px 16px #0006' }}>
                 {t('home.hero.badge')}
               </span>
-              <Download className="w-4 h-4 text-white group-hover:animate-bounce drop-shadow-lg" />
+              <Download className="w-4 h-4 text-white group-hover:animate-bounce drop-shadow-lg relative z-10" />
             </motion.a>
 
             {/* Main Title with GSAP word animation */}
@@ -250,20 +252,21 @@ export function HomePageClient() {
             >
               <span className="word inline-block text-white" style={{ WebkitTextStroke: '1px rgba(0,0,0,0.3)' }}>{t('home.hero.headlineBefore')}</span>{' '}
               <span className="word inline-block" style={{ color: '#fbbf24', WebkitTextStroke: '1px rgba(0,0,0,0.3)' }}>{t('home.hero.headlineHighlight')}</span>{' '}
-              <span className="word inline-block text-white" style={{ WebkitTextStroke: '1px rgba(0,0,0,0.3)' }}>{t('home.hero.headlineAfter')}</span>
+              <span className="word inline-block" style={{ color: '#fbbf24', WebkitTextStroke: '1px rgba(0,0,0,0.3)' }}>{t('home.hero.headlineAfter')}</span>
             </h1>
 
             {/* Subtitle - Desktop only; mobile hero is minimal */}
             <motion.h2
               ref={subtitleRef}
-              className="hidden md:block text-sm sm:text-xl md:text-2xl mb-4 sm:mb-8 font-semibold leading-relaxed w-full"
+              className="hidden md:block text-sm sm:text-xl md:text-2xl mb-4 sm:mb-8 font-semibold leading-relaxed w-full vivid-children-font"
               style={{ 
-                color: '#f1f5f9',
+                color: '#fbbf24',
+                fontFamily: 'var(--font-display), var(--font-accent), "Comic Sans MS", "Comic Sans", "Baloo", "Fredoka", cursive, sans-serif',
                 fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)',
                 lineHeight: '1.6',
                 letterSpacing: '0.01em',
-                fontWeight: '600',
-                textShadow: '0 2px 4px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.4)'
+                fontWeight: '700',
+                textShadow: '0 2px 8px #000, 0 4px 16px #0006'
               }}
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -274,7 +277,7 @@ export function HomePageClient() {
 
             {/* Stats Row - Desktop only; mobile hero is minimal */}
             <motion.div
-              className="hidden md:grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-4 mb-5 sm:mb-8 w-full"
+              className="hidden md:grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3 mb-4 sm:mb-6 w-full"
               initial="hidden"
               animate="visible"
               variants={{
@@ -288,83 +291,87 @@ export function HomePageClient() {
                 }
               }}
             >
+              {/* Address Card */}
               <motion.div
-                className="w-full sm:w-auto px-2.5 sm:px-6 py-2 sm:py-3 rounded-lg border-2 border-white/30 shadow-2xl"
-                style={{
-                  backgroundColor: 'rgba(15, 23, 42, 0.85)',
-                  backdropFilter: 'blur(16px)'
-                }}
+                className="w-full sm:w-auto px-2 sm:px-4 py-2 sm:py-3 rounded-lg border border-orange-400/30 shadow-md bg-linear-to-br from-orange-100/60 to-orange-200/40 flex flex-col justify-center"
                 variants={{
-                  hidden: { y: 20, opacity: 0 },
-                  visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
+                  hidden: { y: 16, opacity: 0 },
+                  visible: { y: 0, opacity: 1, transition: { duration: 0.4 } }
                 }}
-                whileHover={{ scale: 1.05, backgroundColor: 'rgba(15, 23, 42, 0.95)', y: -2 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <span className="text-lg sm:text-2xl">🎂</span>
-                  <div className="text-lg sm:text-2xl font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.years')}</div>
-                </div>
-                <div className="text-xs sm:text-sm text-white/90 font-semibold drop-shadow-md">{t('home.hero.stats.yearsLabel')}</div>
-              </motion.div>
-
-              <motion.div
-                className="w-full sm:w-auto px-2.5 sm:px-6 py-2 sm:py-3 rounded-lg border-2 border-white/30 shadow-2xl"
-                style={{
-                  backgroundColor: 'rgba(15, 23, 42, 0.85)',
-                  backdropFilter: 'blur(16px)'
-                }}
-                variants={{
-                  hidden: { y: 20, opacity: 0 },
-                  visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
-                }}
-                whileHover={{ scale: 1.05, backgroundColor: 'rgba(15, 23, 42, 0.95)', y: -2 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <span className="text-lg sm:text-2xl">👶</span>
-                  <div className="text-lg sm:text-2xl font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.ageRange')}</div>
-                </div>
-                <div className="text-xs sm:text-sm text-white/90 font-semibold drop-shadow-md">{t('home.hero.stats.ageRangeLabel')}</div>
-              </motion.div>
-
-              <motion.div
-                className="w-full sm:w-auto px-2.5 sm:px-6 py-2 sm:py-3 rounded-lg border-2 border-white/30 shadow-2xl"
-                style={{
-                  backgroundColor: 'rgba(15, 23, 42, 0.85)',
-                  backdropFilter: 'blur(16px)'
-                }}
-                variants={{
-                  hidden: { y: 20, opacity: 0 },
-                  visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
-                }}
-                whileHover={{ scale: 1.05, backgroundColor: 'rgba(15, 23, 42, 0.95)', y: -2 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <span className="text-lg sm:text-2xl">👨‍👩‍👧‍👦</span>
-                  <div className="text-lg sm:text-2xl font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.staffRatio')}</div>
-                </div>
-                <div className="text-xs sm:text-sm text-white/90 font-semibold drop-shadow-md">{t('home.hero.stats.staffRatioLabel')}</div>
-              </motion.div>
-
-              <motion.div
-                className="col-span-2 sm:col-span-1 w-full sm:w-auto px-2.5 sm:px-6 py-2 sm:py-3 rounded-lg border-2 border-white/30 shadow-2xl"
-                style={{
-                  backgroundColor: 'rgba(15, 23, 42, 0.85)',
-                  backdropFilter: 'blur(16px)'
-                }}
-                variants={{
-                  hidden: { y: 20, opacity: 0 },
-                  visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
-                }}
-                whileHover={{ scale: 1.05, backgroundColor: 'rgba(15, 23, 42, 0.95)', y: -2 }}
-                transition={{ duration: 0.2 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                transition={{ duration: 0.18 }}
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">✅</span>
-                  <div className="text-sm sm:text-base font-extrabold text-white drop-shadow-lg">{t('home.hero.stats.eceLicensed')}</div>
+                  <MapPin className="w-5 h-5 text-orange-700" />
+                  <div className="text-base sm:text-lg font-bold text-orange-900 drop-shadow">{t('home.hero.address')}</div>
                 </div>
+              </motion.div>
+
+              {/* Phone/Email Card */}
+              <motion.div
+                className="w-full sm:w-auto px-2 sm:px-4 py-2 sm:py-3 rounded-lg border border-green-400/30 shadow-md bg-linear-to-br from-green-100/60 to-green-200/40 flex flex-col justify-center"
+                variants={{
+                  hidden: { y: 16, opacity: 0 },
+                  visible: { y: 0, opacity: 1, transition: { duration: 0.4 } }
+                }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                transition={{ duration: 0.18 }}
+              >
+                <div className="flex items-center gap-2">
+                  <PhoneCall className="w-5 h-5 text-green-700" />
+                  <div className="text-base sm:text-lg font-bold text-green-900 drop-shadow">{businessProfile.telephone} &nbsp;|&nbsp; {businessProfile.email}</div>
+                </div>
+              </motion.div>
+
+              {/* Age Range Card */}
+              <motion.div
+                className="w-full sm:w-auto px-2 sm:px-4 py-2 sm:py-3 rounded-lg border border-primary/30 shadow-md bg-linear-to-br from-blue-100/60 to-blue-200/40 flex flex-col justify-center"
+                variants={{
+                  hidden: { y: 16, opacity: 0 },
+                  visible: { y: 0, opacity: 1, transition: { duration: 0.4 } }
+                }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                transition={{ duration: 0.18 }}
+              >
+                <div className="flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-blue-700" />
+                  <div className="text-base sm:text-lg font-bold text-blue-900 drop-shadow">Age 2.5 - 5 years old</div>
+                </div>
+              </motion.div>
+
+              {/* Social Links Card */}
+              <motion.div
+                className="w-full sm:w-auto px-2 sm:px-4 py-2 sm:py-3 rounded-lg border border-purple-400/30 shadow-md bg-gradient-to-br from-purple-700/80 to-purple-400/60 flex flex-row items-center gap-3 justify-center"
+                variants={{
+                  hidden: { y: 16, opacity: 0 },
+                  visible: { y: 0, opacity: 1, transition: { duration: 0.4 } }
+                }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                transition={{ duration: 0.18 }}
+              >
+                <span className="text-base sm:text-lg font-bold text-white drop-shadow">Follow us:</span>
+                {facebookUrl && (
+                  <a
+                    href={facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-blue-700 shadow transition-colors duration-150 w-8 h-8 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    aria-label="Facebook"
+                  >
+                    <Facebook className="h-5 w-5" />
+                  </a>
+                )}
+                {instagramUrl && (
+                  <a
+                    href={instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-pink-600 shadow transition-colors duration-150 w-8 h-8 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                    aria-label="Instagram"
+                  >
+                    <Instagram className="h-5 w-5" />
+                  </a>
+                )}
               </motion.div>
             </motion.div>
 
@@ -464,48 +471,15 @@ export function HomePageClient() {
               </Link>
             </motion.div>
 
-            {(facebookUrl || instagramUrl) && (
-              <motion.div
-                className="hidden md:flex mt-4 sm:mt-6 flex-wrap items-center gap-2 sm:gap-3"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.95, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <span
-                  className="text-xs sm:text-sm font-semibold text-white/90"
-                  style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)' }}
-                >
-                  Follow daily classroom moments:
-                </span>
-                {facebookUrl && (
-                  <a
-                    href={facebookUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-slate-900/75 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-slate-900/90"
-                  >
-                    <Facebook className="h-4 w-4" />
-                    Facebook
-                  </a>
-                )}
-                {instagramUrl && (
-                  <a
-                    href={instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-slate-900/75 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-slate-900/90"
-                  >
-                    <Instagram className="h-4 w-4" />
-                    Instagram
-                  </a>
-                )}
-              </motion.div>
-            )}
+            {/* Social links row removed; now in card above */}
           </div>
 
           {/* Contact form: desktop only; mobile uses Schedule a Tour link above */}
           <div className="relative z-20 order-2 hidden md:block w-full max-w-sm md:max-w-90 mx-auto md:mx-0 shrink-0 mt-1 md:mt-0">
-            <HeroContactForm />
+            <div className="relative overflow-hidden rounded-2xl">
+              <HeroContactForm />
+              <BorderBeam size={60} duration={7} colorFrom="#6366f1" colorTo="#f472b6" borderWidth={3} />
+            </div>
           </div>
         </div>
 
@@ -520,28 +494,72 @@ export function HomePageClient() {
               style={{ width: 'max-content' }}
             >
               {/* Feature Card 1 - Montessori */}
-              <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.95), rgba(244, 63, 94, 0.95))' }}>
+              <motion.div
+                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
+                style={{ 
+                  ...gridPattern, 
+                  background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.95), rgba(244, 63, 94, 0.95))',
+                  position: 'relative',
+                  zIndex: 1
+                }}
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
+              >
                 <Sparkles className="w-4 h-4 text-white group-hover:animate-spin drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Authentic Montessori</span>
-              </div>
+                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Authentic Montessori</span>
+              </motion.div>
 
               {/* Feature Card 2 - Safety */}
-              <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(6, 182, 212, 0.95))' }}>
+              <motion.div
+                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
+                style={{ 
+                  ...gridPattern, 
+                  background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(6, 182, 212, 0.95))',
+                  position: 'relative',
+                  zIndex: 1
+                }}
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
+              >
                 <Shield className="w-4 h-4 text-white group-hover:animate-pulse drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>ECE Licensed</span>
-              </div>
+                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>ECE Licensed</span>
+              </motion.div>
 
               {/* Feature Card 3 - Love */}
-              <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(236, 72, 153, 0.95))' }}>
+              <motion.div
+                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
+                style={{ 
+                  ...gridPattern, 
+                  background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(236, 72, 153, 0.95))',
+                  position: 'relative',
+                  zIndex: 1
+                }}
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
+              >
                 <Heart className="w-4 h-4 text-white group-hover:animate-bounce fill-white/50 drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Loving Community</span>
-              </div>
+                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Loving Community</span>
+              </motion.div>
 
               {/* Feature Card 4 - Excellence */}
-              <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(249, 115, 22, 0.95))' }}>
+              <motion.div
+                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
+                style={{ 
+                  ...gridPattern, 
+                  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(249, 115, 22, 0.95))',
+                  position: 'relative',
+                  zIndex: 1
+                }}
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
+              >
                 <Star className="w-4 h-4 text-white group-hover:animate-spin fill-white/50 drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Since 2008</span>
-              </div>
+                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Since 2008</span>
+              </motion.div>
             </div>
             
             {/* Duplicate marquee track for seamless loop */}
@@ -550,22 +568,70 @@ export function HomePageClient() {
               style={{ width: 'max-content' }}
               aria-hidden="true"
             >
-              <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.95), rgba(244, 63, 94, 0.95))' }}>
+              {/* Feature Card 1 - Montessori (duplicate) */}
+              <motion.div
+                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
+                style={{ 
+                  ...gridPattern, 
+                  background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.95), rgba(244, 63, 94, 0.95))',
+                  position: 'relative',
+                  zIndex: 1
+                }}
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
+              >
                 <Sparkles className="w-4 h-4 text-white group-hover:animate-spin drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Authentic Montessori</span>
-              </div>
-              <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(6, 182, 212, 0.95))' }}>
+                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Authentic Montessori</span>
+              </motion.div>
+              {/* Feature Card 2 - Safety (duplicate) */}
+              <motion.div
+                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
+                style={{ 
+                  ...gridPattern, 
+                  background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(6, 182, 212, 0.95))',
+                  position: 'relative',
+                  zIndex: 1
+                }}
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
+              >
                 <Shield className="w-4 h-4 text-white group-hover:animate-pulse drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>ECE Licensed</span>
-              </div>
-              <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(236, 72, 153, 0.95))' }}>
+                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>ECE Licensed</span>
+              </motion.div>
+              {/* Feature Card 3 - Love (duplicate) */}
+              <motion.div
+                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
+                style={{ 
+                  ...gridPattern, 
+                  background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(236, 72, 153, 0.95))',
+                  position: 'relative',
+                  zIndex: 1
+                }}
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
+              >
                 <Heart className="w-4 h-4 text-white group-hover:animate-bounce fill-white/50 drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Loving Community</span>
-              </div>
-              <div className="shrink-0 px-5 py-3 rounded-full backdrop-blur-sm border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform" style={{ background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(249, 115, 22, 0.95))' }}>
+                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Loving Community</span>
+              </motion.div>
+              {/* Feature Card 4 - Excellence (duplicate) */}
+              <motion.div
+                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
+                style={{ 
+                  ...gridPattern, 
+                  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(249, 115, 22, 0.95))',
+                  position: 'relative',
+                  zIndex: 1
+                }}
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
+              >
                 <Star className="w-4 h-4 text-white group-hover:animate-spin fill-white/50 drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Since 2008</span>
-              </div>
+                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Since 2008</span>
+              </motion.div>
             </div>
             </div>
           </div>
