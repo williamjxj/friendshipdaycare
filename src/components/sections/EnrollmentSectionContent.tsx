@@ -249,8 +249,7 @@ export function EnrollmentSectionContent() {
       </motion.section>
 
       {/* Requirements */}
-      <section className="py-20 bg-muted/30 overflow-hidden relative">
-        <EnrollmentGridBackground>
+      <section className="py-8 bg-muted/30 overflow-hidden relative">
         <div ref={requirementsRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
@@ -273,12 +272,11 @@ export function EnrollmentSectionContent() {
             ))}
           </div>
         </div>
-        </EnrollmentGridBackground>
+        
       </section>
 
       {/* Fees & Hours */}
-      <section className="py-20 bg-card overflow-hidden relative">
-        <EnrollmentGridBackground>
+      <section className="py-8 bg-card overflow-hidden relative">
         <div ref={feesHoursRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
@@ -298,7 +296,7 @@ export function EnrollmentSectionContent() {
             </div>
           </div>
         </div>
-        </EnrollmentGridBackground>
+        
       </section>
 
       {/* Enrollment FAQ */}
@@ -309,7 +307,7 @@ export function EnrollmentSectionContent() {
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
       >
-        <EnrollmentGridBackground />
+        {/* <EnrollmentGridBackground /> removed as per request */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-4 mb-10">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">

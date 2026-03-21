@@ -217,7 +217,7 @@ export function Header() {
             <Link href="/" className="flex items-center gap-0.5 min-w-0">
               <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 shrink-0 transition-transform duration-300 flex items-center">
                 <Image
-                  src={"/fsd.gif"}
+                  src={"/logo.png"}
                   alt="Friendship Corner Daycare"
                   fill
                   sizes="(max-width: 640px) 160px, 200px"

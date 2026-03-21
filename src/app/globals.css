@@ -5,7 +5,13 @@
 
 /* Theme Variables */
 /* Theme Variables */
+/* Friendship Corner Daycare Brand Blue */
 :root {
+  --color-brand: oklch(64% 0.09 220); /* Friendship Corner blue */
+  /* Utility class for brand background */
+  .bg-brand {
+    background-color: var(--color-brand) !important;
+  }
   /* Default Theme - Claymorphism (Playful & Soft) */
   --primary: #3B82F6;
   /* Blue - Trust, Calm */
