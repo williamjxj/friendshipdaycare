@@ -25,7 +25,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { businessProfile } from '@/lib/business-profile';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 import { BorderBeam } from '@/components/ui/border-beam';
-import { AuroraBackground } from '@/components/ui/aurora-background';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -231,7 +230,6 @@ export function HomePageClient() {
               whileTap={{ scale: 0.97 }}
               title="Click to Download Enrollment Application Form"
             >
-              <AuroraBackground className="z-0! rounded-full!" />
               <span className="relative flex h-2.5 w-2.5 z-10">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>

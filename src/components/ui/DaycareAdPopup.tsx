@@ -14,7 +14,6 @@ const slideUp = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { type: 'spring' as AnimationGeneratorType, duration: 0.7 } },
 };
-import { AuroraBackground } from '@/components/ui/aurora-background';
 import { useTranslations } from 'next-intl';
 
 // const LOGO_IMAGE = '/logo.png';
@@ -63,10 +62,6 @@ export default function DaycareAdPopup() {
             variants={scaleIn}
             onClick={e => e.stopPropagation()}
           >
-            {/* AuroraBackground moved behind Card for correct stacking */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <AuroraBackground className="rounded-3xl" />
-            </div>
             <Card variant="elevated" className="relative p-0 overflow-visible shadow-2xl rounded-3xl bg-white/95 backdrop-blur-lg border-2 border-brand z-10">
               <Button
                 onClick={handleClose}
@@ -165,8 +160,12 @@ export default function DaycareAdPopup() {
                       size="lg"
                       className="w-full sm:w-auto px-8 text-base font-bold shadow-md"
                     >
-                      <a href="mailto:friendship.care@live.ca?subject=Daycare%20Enrollment%20Inquiry" tabIndex={0}>
-                        Secure Your Spot Today
+                      <a
+                        href="/assets/Registration form 2026.doc"
+                        download="Friendship-Corner-Daycare-Registration-2026.doc"
+                        tabIndex={0}
+                      >
+                        Secure Your spot today, Download Registration Form!
                       </a>
                     </Button>
                     <p className="mt-2 text-xs text-muted-foreground text-center sm:text-left">Spaces are limited—don't wait!</p>
