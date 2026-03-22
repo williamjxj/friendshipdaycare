@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useMemo, useRef, useState } from 'react';
 import { TestimonialsMarquee } from '@/components/sections/TestimonialsMarquee';
 import { AboutSection } from '@/components/sections/AboutSection';
+import { OurMissionValuesSection } from '@/components/sections/OurMissionValuesSection';
 import { ProgramsSection } from '@/components/sections/ProgramsSection';
 import { GallerySectionContent } from '@/components/sections/GallerySectionContent';
 import { EnrollmentSectionContent } from '@/components/sections/EnrollmentSectionContent';
@@ -12,6 +13,7 @@ import dynamic from 'next/dynamic';
 import { HeroImageCarousel } from '@/components/ui/hero-image-carousel';
 import { HeroContactForm } from '@/components/ui/hero-contact-form';
 import { motion } from 'framer-motion';
+import { textReveal } from '@/lib/magicui-animations';
 import { gridPattern } from '@/lib/magicui-animations';
 import Image from 'next/image';
 import gsap from 'gsap';
@@ -258,7 +260,7 @@ export function HomePageClient() {
               ref={subtitleRef}
               className="hidden md:block text-sm sm:text-xl md:text-2xl mb-4 sm:mb-8 font-semibold leading-relaxed w-full vivid-children-font"
               style={{ 
-                color: '#fbbf24',
+                color: '#ffffff',
                 fontFamily: 'var(--font-display), var(--font-accent), "Comic Sans MS", "Comic Sans", "Baloo", "Fredoka", cursive, sans-serif',
                 fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)',
                 lineHeight: '1.6',
@@ -289,71 +291,48 @@ export function HomePageClient() {
                 }
               }}
             >
-              {/* Address Card */}
+              {/* Address */}
+
               <motion.div
-                className="w-full sm:w-auto px-2 sm:px-4 py-2 sm:py-3 rounded-lg border border-orange-400/30 shadow-md bg-linear-to-br from-orange-100/60 to-orange-200/40 flex flex-col justify-center"
-                variants={{
-                  hidden: { y: 16, opacity: 0 },
-                  visible: { y: 0, opacity: 1, transition: { duration: 0.4 } }
-                }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                transition={{ duration: 0.18 }}
+                className="flex items-center gap-2 px-1 py-1"
+                variants={{ hidden: { y: 16, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.4 } } }}
               >
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-orange-700" />
-                  <div className="text-base sm:text-lg font-bold text-orange-900 drop-shadow">{t('home.hero.address')}</div>
-                </div>
+                <MapPin className="w-5 h-5 text-white" />
+                <motion.span
+                  className="text-base sm:text-lg font-bold text-white drop-shadow"
+                  initial="hidden"
+                  animate="visible"
+                  variants={textReveal}
+                >
+                  {t('home.hero.address')}
+                </motion.span>
               </motion.div>
 
-              {/* Phone/Email Card */}
+              {/* Age Range */}
+
               <motion.div
-                className="w-full sm:w-auto px-2 sm:px-4 py-2 sm:py-3 rounded-lg border border-green-400/30 shadow-md bg-linear-to-br from-green-100/60 to-green-200/40 flex flex-col justify-center"
-                variants={{
-                  hidden: { y: 16, opacity: 0 },
-                  visible: { y: 0, opacity: 1, transition: { duration: 0.4 } }
-                }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                transition={{ duration: 0.18 }}
+                className="flex items-center gap-2 px-1 py-1"
+                variants={{ hidden: { y: 16, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.4 } } }}
               >
-                <div className="flex items-center gap-2">
-                  <PhoneCall className="w-5 h-5 text-green-700" />
-                  <div className="text-base sm:text-lg font-bold text-green-900 drop-shadow">{businessProfile.telephone} &nbsp;|&nbsp; {businessProfile.email}</div>
-                </div>
+                <BookOpen className="w-5 h-5 text-white" />
+                <motion.span
+                  className="text-base sm:text-lg font-bold text-white drop-shadow"
+                  initial="hidden"
+                  animate="visible"
+                  variants={textReveal}
+                >
+                  Age 2.5 - 5 years old
+                </motion.span>
               </motion.div>
 
-              {/* Age Range Card */}
-              <motion.div
-                className="w-full sm:w-auto px-2 sm:px-4 py-2 sm:py-3 rounded-lg border border-primary/30 shadow-md bg-linear-to-br from-blue-100/60 to-blue-200/40 flex flex-col justify-center"
-                variants={{
-                  hidden: { y: 16, opacity: 0 },
-                  visible: { y: 0, opacity: 1, transition: { duration: 0.4 } }
-                }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                transition={{ duration: 0.18 }}
-              >
-                <div className="flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-blue-700" />
-                  <div className="text-base sm:text-lg font-bold text-blue-900 drop-shadow">Age 2.5 - 5 years old</div>
-                </div>
-              </motion.div>
-
-              {/* Social Links Card */}
-              <motion.div
-                className="w-full sm:w-auto px-2 sm:px-4 py-2 sm:py-3 rounded-lg border border-purple-400/30 shadow-md bg-gradient-to-br from-purple-700/80 to-purple-400/60 flex flex-row items-center gap-3 justify-center"
-                variants={{
-                  hidden: { y: 16, opacity: 0 },
-                  visible: { y: 0, opacity: 1, transition: { duration: 0.4 } }
-                }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                transition={{ duration: 0.18 }}
-              >
-                <span className="text-base sm:text-lg font-bold text-white drop-shadow">Follow us:</span>
+              {/* Social Links Row - Facebook/Instagram */}
+              <div className="flex items-center gap-3 px-1 py-1">
                 {facebookUrl && (
                   <a
                     href={facebookUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-blue-700 shadow transition-colors duration-150 w-8 h-8 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-blue-600 shadow transition-colors duration-150 w-8 h-8 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     aria-label="Facebook"
                   >
                     <Facebook className="h-5 w-5" />
@@ -370,7 +349,7 @@ export function HomePageClient() {
                     <Instagram className="h-5 w-5" />
                   </a>
                 )}
-              </motion.div>
+              </div>
             </motion.div>
 
             {/* CTA Buttons - Simple on mobile, animated on desktop */}
@@ -648,7 +627,9 @@ export function HomePageClient() {
         </div>
       </section>
 
+
       <AboutSection />
+      <OurMissionValuesSection />
 
       <ProgramsSection />
 
@@ -658,21 +639,23 @@ export function HomePageClient() {
       {/* Testimonials */}
       <TestimonialsMarquee />
       
-      {/* Daily Videos Section - Moved up for more dynamic content */}
-      <section id="videos" className="py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16 section-header">
-            <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
-              {t('home.dailyAdventures.title')}
-            </h2>
-            <p className="text-xl text-muted-foreground w-full max-w-5xl mx-auto">
-              {t('home.dailyAdventures.subtitle')}
-            </p>
-          </div>
+      {/* Daily Videos Section - hidden per request */}
+      {/* 
+        <section id="videos" className="py-24 bg-muted/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center space-y-4 mb-16 section-header">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
+                {t('home.dailyAdventures.title')}
+              </h2>
+              <p className="text-xl text-muted-foreground w-full max-w-5xl mx-auto">
+                {t('home.dailyAdventures.subtitle')}
+              </p>
+            </div>
 
-          <VideoPlayer videos={videos} />
-        </div>
-      </section>
+            <VideoPlayer videos={videos} />
+          </div>
+        </section>
+      */}
 
       <EnrollmentSectionContent />
 

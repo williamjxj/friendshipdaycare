@@ -5,6 +5,11 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { cn } from '@/lib/utils';
+import {
+  GridAndDotBackgrounds,
+  sectionGridDotPresets,
+  useSectionGridDotHover,
+} from '@/components/ui/GridAndDotBackgrounds';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Sparkles, Shield, Heart, Award, Users, Home, Target } from 'lucide-react';
 
@@ -13,6 +18,7 @@ import { Sparkles, Shield, Heart, Award, Users, Home, Target } from 'lucide-reac
  */
 export function AboutSection() {
   const { t, messages } = useLanguage();
+  const { isSectionHovered, gridDotSectionHoverProps } = useSectionGridDotHover();
 
   // Feature cards matching manus site
   const features = [
@@ -55,13 +61,19 @@ export function AboutSection() {
       {/* Stats Badges Section - Manus Style */}
       <motion.section
         id="about"
-        className="pt-20 pb-12 bg-card"
+        className="relative pt-20 pb-12 bg-card overflow-hidden"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
+        {...gridDotSectionHoverProps}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">  
+        <GridAndDotBackgrounds
+          backdropOnly
+          isSectionHovered={isSectionHovered}
+          {...sectionGridDotPresets.about}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">  
           <motion.div 
             className="text-center mb-16"
             variants={slideUp}

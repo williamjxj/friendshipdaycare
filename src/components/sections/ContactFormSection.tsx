@@ -19,6 +19,11 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { FAQSchema } from '@/components/seo/StructuredData';
+import {
+  GridAndDotBackgrounds,
+  sectionGridDotPresets,
+  useSectionGridDotHover,
+} from '@/components/ui/GridAndDotBackgrounds';
 import { faqItems, FAQ_INITIAL_COUNT } from '@/data/faq';
 
 /**
@@ -36,6 +41,14 @@ export function ContactFormSection() {
 
   const [highlightForm, setHighlightForm] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
+  const {
+    isSectionHovered: contactFormBgHovered,
+    gridDotSectionHoverProps: contactFormGridDotHoverProps,
+  } = useSectionGridDotHover();
+  const {
+    isSectionHovered: contactInfoBgHovered,
+    gridDotSectionHoverProps: contactInfoGridDotHoverProps,
+  } = useSectionGridDotHover();
 
   // Handle navigation from CTA buttons with hash
   useEffect(() => {
@@ -57,13 +70,19 @@ export function ContactFormSection() {
       <motion.section
         id="contact-form"
         ref={formRef}
-        className="py-20 bg-card"
+        className="relative py-20 bg-card overflow-hidden"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
+        {...contactFormGridDotHoverProps}
       >
-        <div className="w-full max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
+        <GridAndDotBackgrounds
+          backdropOnly
+          isSectionHovered={contactFormBgHovered}
+          {...sectionGridDotPresets.contactForm}
+        />
+        <div className="relative z-10 w-full max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
           <Card
             variant="premium"
             className={`w-full min-w-0 bg-white/50 dark:bg-card/80 backdrop-blur-sm p-8 sm:p-12 lg:p-14 scroll-mt-20 border-2 shadow-xl hover:shadow-2xl transition-all duration-300 ${highlightForm
@@ -78,13 +97,19 @@ export function ContactFormSection() {
 
       {/* 2. Get in Touch (phone, location, hours, email in one block) */}
       <motion.section
-        className="py-20 bg-muted/30"
+        className="relative py-20 bg-muted/30 overflow-hidden"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainerMagic}
+        {...contactInfoGridDotHoverProps}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <GridAndDotBackgrounds
+          backdropOnly
+          isSectionHovered={contactInfoBgHovered}
+          {...sectionGridDotPresets.contactInfo}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-8 text-center">
             {t('contactPage.info.title')}
           </h2>

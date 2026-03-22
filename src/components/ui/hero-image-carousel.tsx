@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export interface HeroImageCarouselProps {
   /** Image URLs to cycle through (e.g. from getImageUrl). */
@@ -25,10 +27,12 @@ export function HeroImageCarousel({
 }: HeroImageCarouselProps) {
   const [index, setIndex] = useState(0);
 
+
   useEffect(() => {
     onIndexChange?.(index);
   }, [index, onIndexChange]);
 
+  // Auto-advance
   useEffect(() => {
     if (images.length <= 1) return;
     const id = setInterval(() => {
@@ -37,31 +41,59 @@ export function HeroImageCarousel({
     return () => clearInterval(id);
   }, [images.length, intervalMs]);
 
+
   return (
     <div className={cn('absolute inset-0 overflow-hidden -z-10', className)}>
-      {images.map((src, i) => (
-        <div
-          key={src}
-          className={cn(
-            'absolute inset-0 min-w-full min-h-full bg-no-repeat bg-center transition-opacity duration-1000 bg-cover',
-            i === index ? 'opacity-100' : 'opacity-0'
-          )}
-          style={{
-            backgroundImage: `url(${src})`,
-          }}
-          aria-hidden={i !== index}
-        />
-      ))}
+      <AnimatePresence initial={false}>
+        {images.map((src, i) =>
+          i === index ? (
+            <motion.div
+              key={src}
+              className="absolute inset-0 min-w-full min-h-full bg-no-repeat bg-center bg-cover"
+              style={{
+                backgroundImage: `url(${src})`,
+              }}
+              initial={{ scale: 1, opacity: 0 }}
+              animate={{ scale: 1.2, opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ scale: { duration: 3, ease: 'easeInOut' }, opacity: { duration: 1 } }}
+              aria-hidden={false}
+            />
+          ) : null
+        )}
+      </AnimatePresence>
       {/* Gradient overlay: on mobile, blend with image (warm tones); on desktop, darken for text contrast */}
       <div
-        className="absolute inset-0 md:bg-linear-to-b md:from-black/50 md:via-black/40 md:to-black/60"
+        className="absolute inset-0 md:bg-linear-to-b md:from-black/20 md:via-black/10 md:to-black/30"
         aria-hidden="true"
       />
       {/* Mobile: gradient that blends with daycare imagery (warm greens, ambers) to hide any letterboxing */}
       <div
-        className="absolute inset-0 bg-linear-to-b from-slate-900/70 via-amber-950/30 to-slate-900/80 md:hidden"
+        className="absolute inset-0 bg-linear-to-b from-slate-900/30 via-amber-950/10 to-slate-900/40 md:hidden"
         aria-hidden="true"
       />
+
+      {/* Manual Controls */}
+      {images.length > 1 && (
+        <>
+          <button
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-12 h-12 rounded-full bg-black/30 hover:bg-black/60 transition-colors border-2 border-white/60"
+            aria-label="Previous background image"
+            onClick={() => setIndex((i) => (i - 1 + images.length) % images.length)}
+            style={{ color: 'white' }}
+          >
+            <ChevronLeft className="w-8 h-8" />
+          </button>
+          <button
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-12 h-12 rounded-full bg-black/30 hover:bg-black/60 transition-colors border-2 border-white/60"
+            aria-label="Next background image"
+            onClick={() => setIndex((i) => (i + 1) % images.length)}
+            style={{ color: 'white' }}
+          >
+            <ChevronRight className="w-8 h-8" />
+          </button>
+        </>
+      )}
     </div>
   );
 }

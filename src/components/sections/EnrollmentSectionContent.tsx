@@ -27,12 +27,18 @@ import {
   AccordionTrigger
 } from '@/components/ui/accordion';
 import { useLanguage } from '@/contexts/LanguageContext';
+import {
+  GridAndDotBackgrounds,
+  sectionGridDotPresets,
+  useSectionGridDotHover,
+} from '@/components/ui/GridAndDotBackgrounds';
 
 /**
  * Enrollment section for single-page app: steps, requirements, accordion, CTA.
  */
 export function EnrollmentSectionContent() {
   const { t, messages } = useLanguage();
+  const { isSectionHovered, gridDotSectionHoverProps } = useSectionGridDotHover();
   const requirementsRef = useRef<HTMLDivElement>(null);
   const feesHoursRef = useRef<HTMLDivElement>(null);
   const translationFallback = t('common.translationFallback');
@@ -128,13 +134,19 @@ export function EnrollmentSectionContent() {
       {/* Enrollment Process - animated steps with connecting lines */}
       <motion.section
         id="enrollment"
-        className="py-20 bg-card overflow-x-hidden"
+        className="relative py-20 bg-card overflow-x-hidden"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainerMagic}
+        {...gridDotSectionHoverProps}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <GridAndDotBackgrounds
+          backdropOnly
+          isSectionHovered={isSectionHovered}
+          {...sectionGridDotPresets.enrollment}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-display font-bold text-foreground px-2">
               {safeT('enrollmentPage.process.title', 'Enrollment Process')}

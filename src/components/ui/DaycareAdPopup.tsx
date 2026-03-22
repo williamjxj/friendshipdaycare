@@ -1,6 +1,19 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+// Inject shimmer keyframes for MagicUI shiny button effect (only once)
+function useInjectShimmerKeyframes() {
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const shimmerId = 'magicui-shimmer-keyframes';
+    if (!document.getElementById(shimmerId)) {
+      const style = document.createElement('style');
+      style.id = shimmerId;
+      style.innerHTML = `@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }`;
+      document.head.appendChild(style);
+    }
+  }, []);
+}
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,6 +36,7 @@ const POPUP_DELAY = 2000;
 
 
 export default function DaycareAdPopup() {
+  useInjectShimmerKeyframes();
   const t = useTranslations();
   // null = not yet decided (SSR), true = open, false = closed
   const [open, setOpen] = useState<null | boolean>(null);
@@ -55,7 +69,8 @@ export default function DaycareAdPopup() {
           onClick={handleClose}
         >
           <motion.div
-            className="relative w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto"
+            className="relative w-full max-w-[95vw] sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto px-2 sm:px-0"
+            style={{ minWidth: 'min(95vw, 320px)' }}
             initial="hidden"
             animate="visible"
             exit="hidden"
@@ -102,7 +117,7 @@ export default function DaycareAdPopup() {
                   {/* Title and subtitle */}
                   <div className="text-center md:text-left">
                     <h1
-                      className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display font-bold leading-[1.1] wrap-break-word tracking-tight mb-2"
+                      className="text-base sm:text-lg md:text-xl lg:text-2xl font-display font-bold leading-[1.1] wrap-break-word tracking-tight mb-2"
                       style={{ fontFamily: 'var(--font-baloo)' }}
                     >
                       <span className="block mb-2">
@@ -158,16 +173,30 @@ export default function DaycareAdPopup() {
                     <Button
                       asChild
                       size="lg"
-                      className="w-full sm:w-auto px-8 text-base font-bold shadow-md"
+                      className="w-full sm:w-auto px-8 text-base font-bold shadow-md relative overflow-hidden group"
                     >
                       <a
                         href="/assets/Registration form 2026.doc"
                         download="Friendship-Corner-Daycare-Registration-2026.doc"
                         tabIndex={0}
+                        className="relative z-10"
                       >
                         Secure Your spot today, Download Registration Form!
+                        <span
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-0 z-20"
+                          style={{
+                            background: 'linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.25) 40%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.25) 60%, transparent 100%)',
+                            backgroundSize: '200% 100%',
+                            animation: 'shimmer 2.5s linear infinite',
+                            mixBlendMode: 'lighten',
+                            opacity: 0.7,
+                            borderRadius: 'inherit',
+                          }}
+                        />
                       </a>
                     </Button>
+
                     <p className="mt-2 text-xs text-muted-foreground text-center sm:text-left">Spaces are limited—don't wait!</p>
                   </div>
                 </motion.div>

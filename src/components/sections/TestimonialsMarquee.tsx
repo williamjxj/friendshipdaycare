@@ -42,8 +42,8 @@ function TestimonialCard({
     : `${displayQuoteSource.slice(0, TRUNCATE_LENGTH).trim()}…`;
 
   return (
-    <blockquote className="shrink-0 w-[min(380px,85vw)] bg-white/50 dark:bg-card/80 backdrop-blur-sm border-0 rounded-xl p-6 md:p-8 shadow hover:shadow-xl transition-shadow duration-300">
-      <div className="flex items-center justify-between gap-4 mb-3">
+    <blockquote className="shrink-0 w-[min(300px,75vw)] bg-white/50 dark:bg-card/80 backdrop-blur-sm border-0 rounded-xl p-4 md:p-5 shadow hover:shadow-xl transition-shadow duration-300">
+      <div className="flex items-center justify-between gap-3 mb-2">
         <Image
           src={rating === 4.5 ? '/collects/stars-4.5.png' : '/collects/stars-5.png'}
           alt={`${rating} star rating`}
@@ -54,9 +54,9 @@ function TestimonialCard({
         />
         <Heart className="w-4 h-4 text-rose-400 fill-rose-400/60 shrink-0" aria-hidden />
       </div>
-      <Quote className="w-8 h-8 text-primary/30 mb-2" aria-hidden />
-      <div className="mb-4">
-        <p className="text-base md:text-lg text-foreground leading-relaxed">
+      <Quote className="w-6 h-6 text-primary/30 mb-1" aria-hidden />
+      <div className="mb-2">
+        <p className="text-sm md:text-base text-foreground leading-relaxed">
           &ldquo;{displayQuote}&rdquo;
         </p>
         {showMore && (
@@ -66,36 +66,36 @@ function TestimonialCard({
               e.stopPropagation();
               onToggleExpand(id);
             }}
-            className="mt-2 text-sm font-medium text-primary hover:underline"
+            className="mt-1 text-xs font-medium text-primary hover:underline"
           >
             {isExpanded ? 'Less' : 'More…'}
           </button>
         )}
       </div>
-      <footer className="flex items-center gap-3 pt-3 border-t border-border/50">
+      <footer className="flex items-center gap-2 pt-2 border-t border-border/50">
         {authorImageUrl ? (
           <img
             src={authorImageUrl}
             alt=""
-            className="w-10 h-10 rounded-full object-cover shrink-0 ring-2 ring-primary/10"
-            width={40}
-            height={40}
+            className="w-8 h-8 rounded-full object-cover shrink-0 ring-2 ring-primary/10"
+            width={32}
+            height={32}
           />
         ) : (
           <div
-            className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center bg-primary/20 text-primary font-semibold text-sm ring-2 ring-primary/10"
+            className="w-8 h-8 rounded-full shrink-0 flex items-center justify-center bg-primary/20 text-primary font-semibold text-xs ring-2 ring-primary/10"
             aria-hidden
           >
             {(authorName[0] ?? '?').toUpperCase()}
           </div>
         )}
         <div className="flex-1 min-w-0">
-          <cite className="not-italic font-semibold text-foreground text-sm flex items-center gap-1.5">
+          <cite className="not-italic font-semibold text-foreground text-xs flex items-center gap-1">
             {authorName}
-            <Heart className="w-3 h-3 text-rose-400 fill-rose-400/80 shrink-0" aria-hidden />
+            <Heart className="w-2.5 h-2.5 text-rose-400 fill-rose-400/80 shrink-0" aria-hidden />
           </cite>
           {(authorRole || datePublished) && (
-            <span className="text-muted-foreground text-xs block mt-0.5">
+            <span className="text-muted-foreground text-[10px] block mt-0.5">
               {[authorRole, datePublished].filter(Boolean).join(' · ')}
             </span>
           )}

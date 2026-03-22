@@ -11,6 +11,11 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import {
+  GridAndDotBackgrounds,
+  sectionGridDotPresets,
+  useSectionGridDotHover,
+} from '@/components/ui/GridAndDotBackgrounds';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -22,6 +27,7 @@ gsap.registerPlugin(ScrollTrigger);
  */
 export function GallerySectionContent() {
   const { t, messages } = useLanguage();
+  const { isSectionHovered, gridDotSectionHoverProps } = useSectionGridDotHover();
   const categoryMessages = (messages.galleryPage?.categories ?? []) as Array<{ id: string; name: string }>;
 
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -256,13 +262,19 @@ export function GallerySectionContent() {
       <motion.section
         id="gallery"
         ref={gallerySectionRef}
-        className="py-20 bg-card"
+        className="relative py-20 bg-card overflow-hidden"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
+        {...gridDotSectionHoverProps}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <GridAndDotBackgrounds
+          backdropOnly
+          isSectionHovered={isSectionHovered}
+          {...sectionGridDotPresets.gallery}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="gallery-section-title text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
               {t('galleryPage.gallery.title')}
@@ -347,15 +359,7 @@ export function GallerySectionContent() {
                           />
                         </div>
 
-                        <div className={cn(
-                          "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-6 sm:p-8 transition-all duration-500",
-                          isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                        )}>
-                          <h3 className="text-white text-xl sm:text-3xl font-display font-bold drop-shadow-2xl">
-                            {image.alt}
-                          </h3>
-                          <div className="h-1 w-16 bg-primary rounded-full shadow-lg mt-2" />
-                        </div>
+                        {/* Removed bottom left text description overlay for gallery images */}
                       </div>
                     </div>
                   );

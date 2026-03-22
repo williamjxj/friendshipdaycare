@@ -824,6 +824,52 @@ textarea:focus-visible {
   }
 }
 
+/* Aceternity-style grid & dot backgrounds (GridAndDotBackgrounds.tsx) */
+.fdc-bg-pattern-grid {
+  background-image:
+    linear-gradient(to right, oklch(0 0 0 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0 0 0 / 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.dark .fdc-bg-pattern-grid {
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 0.08) 1px, transparent 1px);
+}
+
+.fdc-bg-pattern-grid-small {
+  background-image:
+    linear-gradient(to right, oklch(0 0 0 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0 0 0 / 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dark .fdc-bg-pattern-grid-small {
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 0.07) 1px, transparent 1px);
+}
+
+.fdc-bg-pattern-dot {
+  background-image: radial-gradient(oklch(0 0 0 / 0.11) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.dark .fdc-bg-pattern-dot {
+  background-image: radial-gradient(oklch(1 0 0 / 0.1) 1px, transparent 1px);
+}
+
+/* Aceternity Dot Background demo — neutral dots, 20px grid */
+.fdc-bg-pattern-dot-fine {
+  background-image: radial-gradient(#d4d4d4 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .fdc-bg-pattern-dot-fine {
+  background-image: radial-gradient(#404040 1px, transparent 1px);
+}
+
 /* MagicUI Utility Classes */
 .magic-shimmer {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);

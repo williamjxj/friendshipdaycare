@@ -8,6 +8,11 @@ import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Baby, Sparkles, GraduationCap, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import {
+  GridAndDotBackgrounds,
+  sectionGridDotPresets,
+  useSectionGridDotHover,
+} from '@/components/ui/GridAndDotBackgrounds';
 
 type ProgramData = {
   features?: string[];
@@ -29,6 +34,7 @@ type ProgramsPageMessages = {
  */
 export function ProgramsSection() {
   const { t, messages } = useLanguage();
+  const { isSectionHovered, gridDotSectionHoverProps } = useSectionGridDotHover();
 
   const programsData = messages.programsPage as ProgramsPageMessages | undefined;
 
@@ -68,13 +74,19 @@ export function ProgramsSection() {
   return (
     <motion.section
       id="programs"
-      className="py-20 bg-muted/30"
+      className="relative py-20 bg-muted/30 overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={fadeIn}
+      {...gridDotSectionHoverProps}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <GridAndDotBackgrounds
+        backdropOnly
+        isSectionHovered={isSectionHovered}
+        {...sectionGridDotPresets.programs}
+      />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center mb-16"
           variants={slideUp}
