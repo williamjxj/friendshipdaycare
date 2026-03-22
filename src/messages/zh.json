@@ -178,7 +178,17 @@
       "formSubtitle": "我们将在24小时内回复",
       "formYourName": "您的姓名",
       "orCallUs": "或直接致电",
-      "scrollToAbout": "查看关于我们"
+      "scrollToAbout": "查看关于我们",
+      "marqueeChips": {
+        "extendedHours": "早7点—晚6点",
+        "bilingual": "中英双语教学",
+        "bibleStories": "圣经故事",
+        "yoga": "儿童瑜伽与运动",
+        "science": "科学探索",
+        "art": "艺术与创意"
+      },
+      "ageRangeChip": "2岁半至5岁",
+      "followUs": "关注我们"
     },
     "discoverDifference": {
       "title": "发现我们的不同",

@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useMemo, useRef, useState } from 'react';
 import { TestimonialsMarquee } from '@/components/sections/TestimonialsMarquee';
 import { AboutSection } from '@/components/sections/AboutSection';
-import { OurMissionValuesSection } from '@/components/sections/OurMissionValuesSection';
 import { ProgramsSection } from '@/components/sections/ProgramsSection';
 import { GallerySectionContent } from '@/components/sections/GallerySectionContent';
 import { EnrollmentSectionContent } from '@/components/sections/EnrollmentSectionContent';
@@ -12,14 +11,13 @@ import { ContactFormSection } from '@/components/sections/ContactFormSection';
 import dynamic from 'next/dynamic';
 import { HeroImageCarousel } from '@/components/ui/hero-image-carousel';
 import { HeroContactForm } from '@/components/ui/hero-contact-form';
-import { motion } from 'framer-motion';
-import { textReveal } from '@/lib/magicui-animations';
-import { gridPattern } from '@/lib/magicui-animations';
+import { motion, type Variants } from 'framer-motion';
+import { getHeroMarqueeChips, HeroMarqueeChipRow } from '@/lib/hero-marquee-chips';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Download, Sparkles, Heart, Shield, Star, PhoneCall, ArrowRight, BookOpen, Facebook, Instagram, Calendar } from 'lucide-react';
+import { Download, Sparkles, Heart, Star, PhoneCall, ArrowRight, BookOpen, Calendar, Mail } from 'lucide-react';
 import { MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getImageUrl } from '@/lib/image-utils';
@@ -27,12 +25,95 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { businessProfile } from '@/lib/business-profile';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 import { BorderBeam } from '@/components/ui/border-beam';
+import { cn } from '@/lib/utils';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
 // Dynamically import VideoPlayer
 const VideoPlayer = dynamic(() => import('@/components/ui/VideoPlayer').then(mod => ({ default: mod.VideoPlayer })), { ssr: false });
+
+/** Matches desktop header Book a Tour: `.warm-button` + gradient shine + lift/shadow (see Header.tsx). */
+const heroInfoWarmChipBase = cn(
+  'warm-button relative overflow-hidden group/cta shadow-md',
+  'hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300',
+  '!inline-flex !h-auto !min-h-0 !items-center !justify-start gap-3',
+  '!rounded-xl !py-3 !px-4 text-sm md:text-[0.9375rem]',
+);
+
+/**
+ * Gradient hover layer — same structure/classes as the Book a Tour CTA.
+ */
+function HeroInfoWarmChipShine() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 transition-opacity duration-500 bg-[length:200%_auto] group-hover/cta:opacity-100 group-hover/cta:animate-[gradient_3s_linear_infinite]"
+      aria-hidden
+    />
+  );
+}
+
+const heroInfoChipVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1],
+      when: 'beforeChildren',
+      staggerChildren: 0.1,
+      delayChildren: 0.04,
+    },
+  },
+};
+
+const heroInfoIconVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.88 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.32, ease: [0.22, 1, 0.36, 1] } },
+};
+
+/** Must define `hidden` so nested word items exit the initial opacity:0 state (empty {} breaks propagation in FM). */
+const heroInfoWordsParentVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.04, delayChildren: 0.05 },
+  },
+};
+
+const heroInfoWordVariants: Variants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.32, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+/**
+ * Staggered word (or single-line) reveal for hero info chips.
+ */
+function AnimatedHeroChipText({
+  text,
+  splitWords,
+  className,
+}: {
+  text: string;
+  splitWords?: boolean;
+  className?: string;
+}) {
+  const tokens = splitWords ? text.split(/(\s+)/) : [text];
+  return (
+    <motion.span className={className} variants={heroInfoWordsParentVariants}>
+      {tokens.map((token, i) => (
+        <motion.span key={i} variants={heroInfoWordVariants} className="inline-block">
+          {token}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
 
 /**
  * Homepage client component with interactive hero and sections.
@@ -46,8 +127,6 @@ export function HomePageClient() {
   const marqueeRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
   const [, setHeroSlideIndex] = useState(0);
-  const facebookUrl = businessProfile.sameAs?.find((url) => url.includes('facebook'));
-  const instagramUrl = businessProfile.sameAs?.find((url) => url.includes('instagram'));
 
   useLocalizedMetadata({
     title: t('seo.home.title'),
@@ -100,6 +179,8 @@ export function HomePageClient() {
       description: t('home.dailyAdventures.videoDescription'),
     }
   ], [t]);
+
+  const heroMarqueeChips = useMemo(() => getHeroMarqueeChips(t), [t]);
 
   return (
     <main id="main-content" ref={mainRef} className="flex-1 overflow-x-hidden">
@@ -275,9 +356,10 @@ export function HomePageClient() {
               {t('home.hero.subtitle')}
             </motion.h2>
 
-            {/* Stats Row - Desktop only; mobile hero is minimal */}
+            {/* Warm-button info chips (parity with header Book a Tour); sm+; data-testid for e2e */}
             <motion.div
-              className="hidden md:grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3 mb-4 sm:mb-6 w-full"
+              data-testid="hero-info-chips"
+              className="mb-4 hidden w-full max-w-4xl min-w-0 grid-cols-2 gap-3 sm:mb-5 sm:grid sm:items-stretch sm:gap-3 md:mb-6"
               initial="hidden"
               animate="visible"
               variants={{
@@ -285,71 +367,79 @@ export function HomePageClient() {
                 visible: {
                   opacity: 1,
                   transition: {
-                    delayChildren: 0.6,
-                    staggerChildren: 0.1
-                  }
-                }
+                    delayChildren: 0.45,
+                    staggerChildren: 0.07,
+                  },
+                },
               }}
             >
-              {/* Address */}
-
               <motion.div
-                className="flex items-center gap-2 px-1 py-1"
-                variants={{ hidden: { y: 16, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.4 } } }}
+                data-testid="hero-info-chip-address"
+                className={cn(heroInfoWarmChipBase, 'min-h-0 min-w-0 w-full')}
+                variants={heroInfoChipVariants}
               >
-                <MapPin className="w-5 h-5 text-white" />
-                <motion.span
-                  className="text-base sm:text-lg font-bold text-white drop-shadow"
-                  initial="hidden"
-                  animate="visible"
-                  variants={textReveal}
-                >
-                  {t('home.hero.address')}
+                <HeroInfoWarmChipShine />
+                <motion.span className="relative z-10 shrink-0" variants={heroInfoIconVariants} aria-hidden>
+                  <MapPin className="h-5 w-5 transition-transform group-hover/cta:rotate-12" strokeWidth={2.5} />
                 </motion.span>
+                <AnimatedHeroChipText
+                  text={t('home.hero.address')}
+                  splitWords
+                  className="relative z-10 min-w-0 flex-1 text-pretty text-left font-bold leading-snug"
+                />
               </motion.div>
 
-              {/* Age Range */}
-
               <motion.div
-                className="flex items-center gap-2 px-1 py-1"
-                variants={{ hidden: { y: 16, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.4 } } }}
+                data-testid="hero-info-chip-age"
+                className={cn(heroInfoWarmChipBase, 'min-w-0 w-full whitespace-nowrap')}
+                variants={heroInfoChipVariants}
               >
-                <BookOpen className="w-5 h-5 text-white" />
-                <motion.span
-                  className="text-base sm:text-lg font-bold text-white drop-shadow"
-                  initial="hidden"
-                  animate="visible"
-                  variants={textReveal}
-                >
-                  Age 2.5 - 5 years old
+                <HeroInfoWarmChipShine />
+                <motion.span className="relative z-10 shrink-0" variants={heroInfoIconVariants} aria-hidden>
+                  <BookOpen className="h-5 w-5 transition-transform group-hover/cta:rotate-12" strokeWidth={2.5} />
                 </motion.span>
+                <AnimatedHeroChipText
+                  text={t('home.hero.ageRangeChip')}
+                  splitWords={false}
+                  className="relative z-10 font-bold"
+                />
               </motion.div>
 
-              {/* Social Links Row - Facebook/Instagram */}
-              <div className="flex items-center gap-3 px-1 py-1">
-                {facebookUrl && (
-                  <a
-                    href={facebookUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-blue-600 shadow transition-colors duration-150 w-8 h-8 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    aria-label="Facebook"
-                  >
-                    <Facebook className="h-5 w-5" />
-                  </a>
-                )}
-                {instagramUrl && (
-                  <a
-                    href={instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-pink-600 shadow transition-colors duration-150 w-8 h-8 focus:outline-none focus:ring-2 focus:ring-pink-400"
-                    aria-label="Instagram"
-                  >
-                    <Instagram className="h-5 w-5" />
-                  </a>
-                )}
-              </div>
+              <motion.a
+                data-testid="hero-info-chip-phone"
+                href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
+                className={cn(heroInfoWarmChipBase, 'min-w-0 w-full no-underline')}
+                variants={heroInfoChipVariants}
+                aria-label={t('contact.phone')}
+              >
+                <HeroInfoWarmChipShine />
+                <motion.span className="relative z-10 shrink-0" variants={heroInfoIconVariants} aria-hidden>
+                  <PhoneCall className="h-5 w-5 transition-transform group-hover/cta:rotate-12" strokeWidth={2.5} />
+                </motion.span>
+                <AnimatedHeroChipText
+                  text={businessProfile.telephone}
+                  splitWords={false}
+                  className="relative z-10 font-bold tabular-nums"
+                />
+              </motion.a>
+
+              <motion.a
+                data-testid="hero-info-chip-email"
+                href={`mailto:${businessProfile.email}`}
+                className={cn(heroInfoWarmChipBase, 'min-w-0 w-full max-w-full no-underline')}
+                variants={heroInfoChipVariants}
+                aria-label={t('contact.form.email')}
+              >
+                <HeroInfoWarmChipShine />
+                <motion.span className="relative z-10 shrink-0" variants={heroInfoIconVariants} aria-hidden>
+                  <Mail className="h-5 w-5 transition-transform group-hover/cta:rotate-12" strokeWidth={2.5} />
+                </motion.span>
+                <AnimatedHeroChipText
+                  text={businessProfile.email}
+                  splitWords={false}
+                  className="relative z-10 min-w-0 max-w-full flex-1 overflow-x-auto overflow-y-hidden whitespace-nowrap text-left font-bold [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                />
+              </motion.a>
             </motion.div>
 
             {/* CTA Buttons - Simple on mobile, animated on desktop */}
@@ -464,152 +554,16 @@ export function HomePageClient() {
         <div className="absolute bottom-32 left-0 right-0 z-10 pointer-events-none hidden md:block">
           <div className="relative w-full max-w-7xl mx-auto overflow-hidden px-4 sm:px-6 lg:px-8">
             <div className="flex w-max min-w-full">
-            {/* First marquee track */}
-            <div 
-              ref={marqueeRef}
-              className="flex items-center gap-4 animate-marquee-infinite pr-4"
-              style={{ width: 'max-content' }}
-            >
-              {/* Feature Card 1 - Montessori */}
-              <motion.div
-                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
-                style={{ 
-                  ...gridPattern, 
-                  background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.95), rgba(244, 63, 94, 0.95))',
-                  position: 'relative',
-                  zIndex: 1
-                }}
-                initial={{ opacity: 0.7 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
-              >
-                <Sparkles className="w-4 h-4 text-white group-hover:animate-spin drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Authentic Montessori</span>
-              </motion.div>
-
-              {/* Feature Card 2 - Safety */}
-              <motion.div
-                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
-                style={{ 
-                  ...gridPattern, 
-                  background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(6, 182, 212, 0.95))',
-                  position: 'relative',
-                  zIndex: 1
-                }}
-                initial={{ opacity: 0.7 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
-              >
-                <Shield className="w-4 h-4 text-white group-hover:animate-pulse drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>ECE Licensed</span>
-              </motion.div>
-
-              {/* Feature Card 3 - Love */}
-              <motion.div
-                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
-                style={{ 
-                  ...gridPattern, 
-                  background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(236, 72, 153, 0.95))',
-                  position: 'relative',
-                  zIndex: 1
-                }}
-                initial={{ opacity: 0.7 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
-              >
-                <Heart className="w-4 h-4 text-white group-hover:animate-bounce fill-white/50 drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Loving Community</span>
-              </motion.div>
-
-              {/* Feature Card 4 - Excellence */}
-              <motion.div
-                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
-                style={{ 
-                  ...gridPattern, 
-                  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(249, 115, 22, 0.95))',
-                  position: 'relative',
-                  zIndex: 1
-                }}
-                initial={{ opacity: 0.7 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
-              >
-                <Star className="w-4 h-4 text-white group-hover:animate-spin fill-white/50 drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Since 2008</span>
-              </motion.div>
-            </div>
-            
-            {/* Duplicate marquee track for seamless loop */}
-            <div 
-              className="flex items-center gap-4 animate-marquee-infinite pr-4"
-              style={{ width: 'max-content' }}
-              aria-hidden="true"
-            >
-              {/* Feature Card 1 - Montessori (duplicate) */}
-              <motion.div
-                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
-                style={{ 
-                  ...gridPattern, 
-                  background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.95), rgba(244, 63, 94, 0.95))',
-                  position: 'relative',
-                  zIndex: 1
-                }}
-                initial={{ opacity: 0.7 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
-              >
-                <Sparkles className="w-4 h-4 text-white group-hover:animate-spin drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Authentic Montessori</span>
-              </motion.div>
-              {/* Feature Card 2 - Safety (duplicate) */}
-              <motion.div
-                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
-                style={{ 
-                  ...gridPattern, 
-                  background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(6, 182, 212, 0.95))',
-                  position: 'relative',
-                  zIndex: 1
-                }}
-                initial={{ opacity: 0.7 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
-              >
-                <Shield className="w-4 h-4 text-white group-hover:animate-pulse drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>ECE Licensed</span>
-              </motion.div>
-              {/* Feature Card 3 - Love (duplicate) */}
-              <motion.div
-                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
-                style={{ 
-                  ...gridPattern, 
-                  background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(236, 72, 153, 0.95))',
-                  position: 'relative',
-                  zIndex: 1
-                }}
-                initial={{ opacity: 0.7 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
-              >
-                <Heart className="w-4 h-4 text-white group-hover:animate-bounce fill-white/50 drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Loving Community</span>
-              </motion.div>
-              {/* Feature Card 4 - Excellence (duplicate) */}
-              <motion.div
-                className="shrink-0 px-5 py-3 rounded-full border-2 border-white/30 shadow-xl flex items-center gap-2 pointer-events-auto group hover:scale-105 transition-transform magic-grid"
-                style={{ 
-                  ...gridPattern, 
-                  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(249, 115, 22, 0.95))',
-                  position: 'relative',
-                  zIndex: 1
-                }}
-                initial={{ opacity: 0.7 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
-              >
-                <Star className="w-4 h-4 text-white group-hover:animate-spin fill-white/50 drop-shadow-lg" />
-                <span className="text-white font-bold text-sm whitespace-nowrap magic-grid-text" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>Since 2008</span>
-              </motion.div>
-            </div>
+              <HeroMarqueeChipRow
+                chips={heroMarqueeChips}
+                trackId="primary"
+                listRef={marqueeRef}
+              />
+              <HeroMarqueeChipRow
+                chips={heroMarqueeChips}
+                trackId="duplicate"
+                ariaHidden
+              />
             </div>
           </div>
         </div>
@@ -629,7 +583,6 @@ export function HomePageClient() {
 
 
       <AboutSection />
-      <OurMissionValuesSection />
 
       <ProgramsSection />
 

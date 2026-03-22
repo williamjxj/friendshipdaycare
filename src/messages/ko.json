@@ -178,7 +178,17 @@
       "formSubtitle": "24시간 내에 답변 드리겠습니다",
       "formYourName": "이름",
       "orCallUs": "또는 직접 전화",
-      "scrollToAbout": "소개로 스크롤"
+      "scrollToAbout": "소개로 스크롤",
+      "marqueeChips": {
+        "extendedHours": "오전 7시 – 오후 6시",
+        "bilingual": "영어·중국어 이중언어",
+        "bibleStories": "성경 이야기",
+        "yoga": "요가와 움직임",
+        "science": "과학 탐구",
+        "art": "미술과 창작"
+      },
+      "ageRangeChip": "만 2.5세–5세",
+      "followUs": "팔로우"
     },
     "discoverDifference": {
       "title": "우리의 차이점 발견하기",

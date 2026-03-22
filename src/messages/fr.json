@@ -178,7 +178,17 @@
       "formSubtitle": "Nous répondrons dans les 24 heures",
       "formYourName": "Votre nom",
       "orCallUs": "Ou appelez-nous directement",
-      "scrollToAbout": "Voir À propos"
+      "scrollToAbout": "Voir À propos",
+      "marqueeChips": {
+        "extendedHours": "7 h – 18 h",
+        "bilingual": "Bilingue anglais et mandarin",
+        "bibleStories": "Histoires bibliques",
+        "yoga": "Yoga et mouvement",
+        "science": "Sciences participatives",
+        "art": "Art et créativité"
+      },
+      "ageRangeChip": "2½ à 5 ans",
+      "followUs": "Suivez-nous"
     },
     "discoverDifference": {
       "title": "Découvrez Notre Différence",
