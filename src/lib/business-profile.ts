@@ -52,7 +52,7 @@ export const businessProfile: BusinessProfile = {
   /** Verified social media URLs */
   sameAs: [
     "https://www.facebook.com/friendshipcornerdaycare",
-    "https://www.instagram.com/friendshipcornerdaycare"
+    "https://www.instagram.com/daycarefriendshipcorner/"
   ],
   /** Add when GBP is claimed, e.g. "https://g.page/friendship-corner-daycare" - enables footer link */
   // googleBusinessProfileUrl: "https://...",

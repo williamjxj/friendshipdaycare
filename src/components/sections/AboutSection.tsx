@@ -42,7 +42,7 @@ export function AboutSection() {
     },
     {
       title: "Certified Educators",
-      description: "All teachers hold BC ECE licenses and Montessori certifications. Manager Ingrid Yuan brings 15+ years of expertise.",
+      description: "Manager Ms. Ingrid brings 15+ years of expertise. All teachers hold BC ECE licenses and Montessori certifications.",
       icon: Award,
       color: "from-amber-500 to-orange-500"
     }

@@ -215,7 +215,7 @@ const localBusinessSchema = {
   },
   sameAs: [
     'https://www.facebook.com/friendshipcornerdaycare', // add real URL
-    'https://www.instagram.com/friendshipcornerdaycare', // add real URL
+    'https://www.instagram.com/daycarefriendshipcorner/', // add real URL
   ],
 }
 
@@ -295,7 +295,7 @@ This is the single highest-ROI action for local SEO. If not done already:
 ```tsx
 const socialLinks = [
   { platform: 'Facebook',  url: 'https://facebook.com/friendshipcornerdaycare', icon: FacebookIcon },
-  { platform: 'Instagram', url: 'https://instagram.com/friendshipcornerdaycare', icon: InstagramIcon },
+  { platform: 'Instagram', url: 'https://instagram.com/daycarefriendshipcorner', icon: InstagramIcon },
   { platform: 'Google',    url: 'https://g.page/friendshipcornerdaycare/review', icon: GoogleIcon },
 ]
 ```

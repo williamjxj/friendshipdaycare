@@ -31,7 +31,7 @@ I have the following questions:
 
 - https://www.facebook.com/FriendshipDaycareCoquitlam/
 - https://www.facebook.com/friendshipcornerdaycare
-- [Instagram](https://www.instagram.com/friendshipcornerdaycare)
+- [Instagram](https://www.instagram.com/daycarefriendshipcorner/)
 
 ## Assets
 
