@@ -89,8 +89,7 @@
       "programs": "Our Programs",
       "enrollment": "Enrollment",
       "gallery": "Gallery",
-      "contact": "Contact",
-      "faq": "FAQ"
+      "contact": "Contact"
     },
     "resources": {
       "title": "Resources",
@@ -165,7 +164,7 @@
   "home": {
     "hero": {
       "badge": "Accepting New Enrollments — Download registration form!",
-      "badgePrefix": "since 2008 • COQUITLAM, BC",
+      "badgePrefix": "Since 2008 • COQUITLAM, BC",
       "address": "2950 Dewdney Trunk Rd, Coquitlam",
       "headline": "Friendship Corner Montessori Daycare",
       "headlineBefore": "Friendship Corner ",
@@ -196,7 +195,7 @@
       "orCallUs": "Or call us directly",
       "scrollToAbout": "Scroll to About",
       "marqueeChips": {
-        "extendedHours": "7 AM – 6 PM",
+        "extendedHours": "Mon to Fri: 7AM – 6PM",
         "bilingual": "Bilingual English & Mandarin",
         "bibleStories": "Bible Stories",
         "yoga": "Yoga & Movement",
@@ -275,6 +274,7 @@
     }
   },
   "common": {
+    "frequentlyAskedQuestions": "Frequently Asked Questions",
     "loading": "Loading...",
     "error": "An error occurred",
     "retry": "Try Again",

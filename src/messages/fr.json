@@ -87,8 +87,7 @@
       "programs": "Nos Programmes",
       "enrollment": "Inscription",
       "gallery": "Galerie",
-      "contact": "Contact",
-      "faq": "FAQ"
+      "contact": "Contact"
     },
     "resources": {
       "title": "Ressources",
@@ -259,6 +258,7 @@
     }
   },
   "common": {
+    "frequentlyAskedQuestions": "Questions fréquentes",
     "loading": "Chargement...",
     "error": "Une erreur s'est produite",
     "retry": "Réessayer",
@@ -644,7 +644,7 @@
       "subtitle": "Près de la station de Coquitlam avec accès aux transports en commun"
     },
     "faq": {
-      "title": "Questions Fréquentes",
+      "title": "Questions fréquentes",
       "moreLink": "Plus de questions ? Développer",
       "items": [
         {

@@ -49,7 +49,6 @@ export function LanguageProvider({
   const [language, setLanguage] = useState<Language>(() =>
     initialLocale && messages[initialLocale] ? initialLocale : 'en'
   );
-  const [isHydrated, setIsHydrated] = useState(false);
 
   const resolveValue = (source: Record<string, any>, key: string) => {
     const keys = key.split('.');
@@ -67,24 +66,30 @@ export function LanguageProvider({
   };
 
   const hasTranslation = (key: string): boolean => {
-    const currentLanguage = isHydrated ? language : 'en';
-    return resolveValue(messages[currentLanguage], key) !== undefined;
+    return resolveValue(messages[language], key) !== undefined;
   };
 
-  // Load saved language from localStorage on mount
+  /**
+   * After hydration: prefer localStorage (explicit user choice), then keep server/cookie
+   * `initialLocale` when it is not the default. Only infer from `navigator.language` when
+   * the app defaulted to English (no cookie) so first-time visitors get a matching locale.
+   */
   useEffect(() => {
-    setIsHydrated(true);
     const savedLanguage = localStorage.getItem('language') as Language | null;
     if (savedLanguage && messages[savedLanguage]) {
       setLanguage(savedLanguage);
       return;
     }
 
+    if (initialLocale !== 'en') {
+      return;
+    }
+
     const browserLanguage = navigator.language?.split('-')[0] as Language | undefined;
-    if (browserLanguage && messages[browserLanguage]) {
+    if (browserLanguage && messages[browserLanguage] && browserLanguage !== 'en') {
       setLanguage(browserLanguage);
     }
-  }, []);
+  }, [initialLocale]);
 
   // Save language to localStorage and cookie when it changes (cookie keeps server/client in sync)
   useEffect(() => {
@@ -92,10 +97,9 @@ export function LanguageProvider({
     setLanguageCookie(language);
   }, [language]);
 
-  // Translation function
+  // Translation function — always use `language` (synced with cookie on first paint via initialLocale)
   const t = (key: string): string => {
-    const currentLanguage = isHydrated ? language : 'en';
-    const localizedValue = resolveValue(messages[currentLanguage], key);
+    const localizedValue = resolveValue(messages[language], key);
 
     if (typeof localizedValue === 'string') {
       return localizedValue;
@@ -107,18 +111,18 @@ export function LanguageProvider({
     }
 
     const fallbackMessage =
-      resolveValue(messages[currentLanguage], 'common.translationFallback') ??
+      resolveValue(messages[language], 'common.translationFallback') ??
       resolveValue(messages.en, 'common.translationFallback');
 
     return typeof fallbackMessage === 'string' ? fallbackMessage : key;
   };
 
   const value = {
-    language: isHydrated ? language : 'en' as Language,
+    language,
     setLanguage,
     t,
     hasTranslation,
-    messages: messages[isHydrated ? language : 'en'],
+    messages: messages[language],
   };
 
   return (

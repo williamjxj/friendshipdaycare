@@ -142,7 +142,7 @@ export function Footer() {
               <li>
                 <Link href="/#faq" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
-                  {t('footer.quickLinks.faq')}
+                  {t('common.frequentlyAskedQuestions')}
                 </Link>
               </li>
             </ul>

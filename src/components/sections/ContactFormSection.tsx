@@ -209,7 +209,7 @@ export function ContactFormSection() {
         <FAQSchema questions={faqItems} />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-8 text-center">
-            {t('contactPage.faq.title')}
+            {t('common.frequentlyAskedQuestions')}
           </h2>
           <Accordion type="single" collapsible className="w-full space-y-2">
             {displayedFaqItems.map((item, idx) => (

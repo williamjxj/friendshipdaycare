@@ -87,8 +87,7 @@
       "programs": "프로그램",
       "enrollment": "등록",
       "gallery": "갤러리",
-      "contact": "문의",
-      "faq": "FAQ"
+      "contact": "문의"
     },
     "resources": {
       "title": "자료",
@@ -259,6 +258,7 @@
     }
   },
   "common": {
+    "frequentlyAskedQuestions": "자주 묻는 질문",
     "loading": "로딩 중...",
     "error": "오류가 발생했습니다",
     "retry": "다시 시도",

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, memo, useCallback } from 'react';
+import { useState, useMemo, memo, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -152,14 +152,9 @@ const HOMEPAGE_SECTION_IDS = ['home', 'about', 'programs', 'gallery', 'testimoni
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isHydrated, setIsHydrated] = useState(false);
   const { t } = useLanguage();
   const pathname = usePathname();
   const scrollSpyActiveId = useScrollSpy([...HOMEPAGE_SECTION_IDS], 80);
-
-  useEffect(() => {
-    setIsHydrated(true);
-  }, []);
 
   // Navigation: single-page app — all links are anchors
   const navigationConfig: NavItem[] = useMemo(() => [
@@ -186,10 +181,6 @@ export function Header() {
   }, [scrollSpyActiveId]);
 
   const getTransName = useCallback((key: string) => {
-    if (!isHydrated) return key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' ');
-
-    // Mapping keys to translation strings
-    // Note: You need to ensure these exist in your en.json/fr.json
     const map: Record<string, string> = {
       home: t('navigation.home'),
       about: t('navigation.about'),
@@ -205,7 +196,7 @@ export function Header() {
       contact: t('navigation.contact'),
     };
     return map[key] || key;
-  }, [isHydrated, t]);
+  }, [t]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-border/50 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80">

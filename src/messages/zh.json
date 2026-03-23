@@ -87,8 +87,7 @@
       "programs": "课程项目",
       "enrollment": "报名",
       "gallery": "图片展示",
-      "contact": "联系我们",
-      "faq": "常见问题"
+      "contact": "联系我们"
     },
     "resources": {
       "title": "资源",
@@ -259,6 +258,7 @@
     }
   },
   "common": {
+    "frequentlyAskedQuestions": "常见问题",
     "loading": "加载中...",
     "error": "发生错误",
     "retry": "重试",
