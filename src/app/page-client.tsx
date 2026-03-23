@@ -19,7 +19,6 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Download, Sparkles, Heart, Star, PhoneCall, ArrowRight, BookOpen, Calendar, Mail } from 'lucide-react';
 import { MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { getImageUrl } from '@/lib/image-utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { businessProfile } from '@/lib/business-profile';
@@ -98,16 +97,18 @@ function AnimatedHeroChipText({
   text,
   splitWords,
   className,
+  tokenClassName,
 }: {
   text: string;
   splitWords?: boolean;
   className?: string;
+  tokenClassName?: string;
 }) {
-  const tokens = splitWords ? text.split(/(\s+)/) : [text];
+  const tokens = splitWords ? text.trim().split(/\s+/) : [text];
   return (
     <motion.span className={className} variants={heroInfoWordsParentVariants}>
       {tokens.map((token, i) => (
-        <motion.span key={i} variants={heroInfoWordVariants} className="inline-block">
+        <motion.span key={i} variants={heroInfoWordVariants} className={cn('inline-block', tokenClassName)}>
           {token}
         </motion.span>
       ))}
@@ -386,6 +387,7 @@ export function HomePageClient() {
                   text={t('home.hero.address')}
                   splitWords
                   className="relative z-10 min-w-0 flex-1 text-pretty text-left font-bold leading-snug"
+                  tokenClassName="mr-[0.18em] last:mr-0"
                 />
               </motion.div>
 
@@ -442,100 +444,58 @@ export function HomePageClient() {
               </motion.a>
             </motion.div>
 
-            {/* CTA Buttons - Simple on mobile, animated on desktop */}
+            {/* Hero CTA buttons (restored): wider + responsive */}
             <motion.div
-              className="grid w-full min-w-0 max-w-xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4"
+              className="grid w-full min-w-0 max-w-5xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Call Now - simple link on mobile to avoid icon/rendering issues */}
-              <a
+              <motion.a
                 href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
-                className="flex sm:hidden items-center justify-center gap-2 w-full min-w-0 rounded-xl border-2 border-white/30 bg-slate-900/90 px-4 py-3.5 font-bold text-white backdrop-blur-xl transition-all hover:bg-slate-800/95 active:scale-[0.98]"
-                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.35)' }}
+                className="group relative flex w-full min-w-0 items-center justify-between gap-3 overflow-hidden rounded-2xl border border-cyan-200/35 bg-[#0f1b2d]/88 px-4 py-3.5 text-white shadow-[0_14px_40px_rgba(2,6,23,0.42)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13233a]/92 hover:shadow-cyan-500/20"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.99 }}
+                aria-label={t('home.hero.callNow')}
               >
-                <PhoneCall className="h-5 w-5 shrink-0" aria-hidden />
-                <span className="text-center">{t('home.hero.callNow')}</span>
-              </a>
-              <motion.div
-                className="hidden sm:block group relative overflow-hidden rounded-2xl p-px"
-                whileHover={{ y: -4, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-              >
-                <motion.div
-                  className="absolute -inset-[140%] bg-[conic-gradient(from_0deg,rgba(59,130,246,0),rgba(56,189,248,0.95),rgba(59,130,246,0.15),rgba(59,130,246,0))]"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
-                />
-                <div className="relative rounded-[15px] border border-white/20 bg-slate-900/85 p-1 backdrop-blur-xl shadow-[0_20px_60px_rgba(2,6,23,0.55)]">
-                  <Button
-                    asChild
-                    variant="ghost"
-                    className="h-auto w-full justify-between rounded-xl px-4 py-3 text-white hover:bg-white/10"
-                  >
-                    <a href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}>
-                      <span className="flex items-center gap-3 text-base font-bold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.35)' }}>
-                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-400/20 ring-1 ring-cyan-200/60">
-                          <PhoneCall className="h-4 w-4 text-cyan-100" />
-                        </span>
-                        {t('home.hero.callNow')}
-                      </span>
-                      <ArrowRight className="h-4 w-4 text-cyan-100 transition-transform duration-300 group-hover:translate-x-1" />
-                    </a>
-                  </Button>
-                </div>
+                <span className="flex min-w-0 items-center gap-3 text-left text-base font-bold">
+                  <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-400/20 ring-1 ring-cyan-200/60">
+                    <PhoneCall className="h-4 w-4 text-cyan-100" aria-hidden />
+                  </span>
+                  <span className="truncate">{t('home.hero.callNow')}</span>
+                </span>
+                <ArrowRight className="h-4 w-4 shrink-0 text-cyan-100 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+              </motion.a>
+
+              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.99 }}>
+                <Link
+                  href="/#programs"
+                  className="group relative flex w-full min-w-0 items-center justify-between gap-3 overflow-hidden rounded-2xl border border-orange-200/35 bg-zinc-900/85 px-4 py-3.5 text-white shadow-[0_14px_40px_rgba(2,6,23,0.42)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13233a]/92 hover:shadow-orange-500/20"
+                >
+                  <span className="flex min-w-0 items-center gap-3 text-left text-base font-bold">
+                    <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-400/20 ring-1 ring-orange-200/60">
+                      <BookOpen className="h-4 w-4 text-orange-100" aria-hidden />
+                    </span>
+                    <span className="truncate">{t('home.hero.viewPrograms')}</span>
+                  </span>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-orange-100 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+                </Link>
               </motion.div>
 
-              {/* View Programs */}
-              <Link
-                href="/#programs"
-                className="flex sm:hidden items-center justify-center gap-2 w-full min-w-0 rounded-xl border-2 border-white/30 bg-slate-900/90 px-4 py-3.5 font-bold text-white backdrop-blur-xl transition-all hover:bg-slate-800/95 active:scale-[0.98]"
-                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.35)' }}
-              >
-                <BookOpen className="h-5 w-5 shrink-0" aria-hidden />
-                <span className="text-center">{t('home.hero.viewPrograms')}</span>
-              </Link>
-              <motion.div
-                className="hidden sm:block group relative overflow-hidden rounded-2xl p-px"
-                whileHover={{ y: -4, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-              >
-                <motion.div
-                  className="absolute -inset-[140%] bg-[conic-gradient(from_0deg,rgba(244,114,182,0),rgba(251,146,60,0.95),rgba(244,114,182,0.2),rgba(244,114,182,0))]"
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 7, repeat: Infinity, ease: 'linear' }}
-                />
-                <div className="relative rounded-[15px] border border-white/20 bg-slate-900/85 p-1 backdrop-blur-xl shadow-[0_20px_60px_rgba(2,6,23,0.55)]">
-                  <Button
-                    asChild
-                    variant="ghost"
-                    className="h-auto w-full justify-between rounded-xl px-4 py-3 text-white hover:bg-white/10"
-                  >
-                    <Link href="/#programs">
-                      <span className="flex items-center gap-3 text-base font-bold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.35)' }}>
-                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-orange-400/20 ring-1 ring-orange-200/60">
-                          <BookOpen className="h-4 w-4 text-orange-100" />
-                        </span>
-                        {t('home.hero.viewPrograms')}
-                      </span>
-                      <ArrowRight className="h-4 w-4 text-orange-100 transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
-                </div>
+              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.99 }}>
+                <Link
+                  href="/#contact-form"
+                  className="group relative flex w-full min-w-0 items-center justify-between gap-3 overflow-hidden rounded-2xl border border-fuchsia-200/35 bg-[#2a1638]/86 px-4 py-3.5 text-white shadow-[0_14px_40px_rgba(2,6,23,0.42)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13233a]/92 hover:shadow-fuchsia-500/20"
+                >
+                  <span className="flex min-w-0 items-center gap-3 text-left text-base font-bold">
+                    <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fuchsia-400/20 ring-1 ring-fuchsia-200/60">
+                      <Calendar className="h-4 w-4 text-fuchsia-100" aria-hidden />
+                    </span>
+                    <span className="truncate">{t('home.hero.scheduleTour')}</span>
+                  </span>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-fuchsia-100 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+                </Link>
               </motion.div>
-
-              {/* Schedule a Tour - mobile only */}
-              <Link
-                href="/#contact-form"
-                className="flex sm:hidden items-center justify-center gap-2 w-full min-w-0 rounded-xl border-2 border-white/30 bg-slate-900/90 px-4 py-3.5 font-bold text-white backdrop-blur-xl transition-all hover:bg-slate-800/95 active:scale-[0.98]"
-                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.35)' }}
-              >
-                <Calendar className="h-5 w-5 shrink-0" aria-hidden />
-                <span className="text-center">{t('home.hero.scheduleTour')}</span>
-              </Link>
             </motion.div>
 
             {/* Social links row removed; now in card above */}

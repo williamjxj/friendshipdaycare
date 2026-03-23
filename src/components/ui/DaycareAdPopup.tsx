@@ -10,7 +10,7 @@ import { CheckCircle } from 'lucide-react';
 import { fadeIn, scaleIn } from '@/lib/animations';
 import { AnimationGeneratorType } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { WobbleCard } from './wobble-card';
+import { getImageUrl } from '@/lib/image-utils';
 
 // Animation variant for slide up effect
 const slideUp = {
@@ -18,8 +18,9 @@ const slideUp = {
   visible: { opacity: 1, y: 0, transition: { type: 'spring' as AnimationGeneratorType, duration: 0.7 } },
 };
 
-// Video file path
-const VIDEO_SRC = "/Friendship_Corner_Daycare_16x9.mp4";
+// Popup media paths (R2 primary with local fallback)
+const VIDEO_SRC = getImageUrl('/videos/enrollment-16x9.mp4');
+const VIDEO_POSTER = getImageUrl('/videos/enrollment-poster.jpg');
 
 const POPUP_KEY = 'daycare_ad_popup_closed_v2';
 const POPUP_DELAY = 2000;
@@ -84,7 +85,7 @@ export default function DaycareAdPopup() {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-2 sm:px-4"
+          className="fixed inset-0 z-9999 flex items-start justify-center overflow-y-auto bg-black/60 px-2 py-4 sm:items-center sm:px-4 sm:py-6"
           initial="hidden"
           animate="visible"
           exit="hidden"
@@ -92,7 +93,7 @@ export default function DaycareAdPopup() {
           onClick={handleClose}
         >
           <motion.div
-            className="relative w-full max-w-[95vw] sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto px-2 sm:px-0"
+            className="relative mx-auto w-full max-w-[95vw] px-2 sm:max-w-xl sm:px-0 md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl"
             style={{ minWidth: 'min(95vw, 320px)' }}
             initial="hidden"
             animate="visible"
@@ -100,13 +101,13 @@ export default function DaycareAdPopup() {
             variants={scaleIn}
             onClick={e => e.stopPropagation()}
           >
-            <Card variant="elevated" className="relative p-0 overflow-visible shadow-2xl rounded-3xl bg-white/95 backdrop-blur-lg border-2 border-brand z-10">
+            <Card variant="elevated" className="relative z-10 max-h-[min(92vh,980px)] overflow-y-auto rounded-3xl border-2 border-brand bg-white/95 p-0 shadow-2xl backdrop-blur-lg">
               <Button
                 onClick={handleClose}
                 variant="ghost"
                 size="icon-lg"
                 aria-label={t('common.close', { default: 'Close' })}
-                className="absolute top-4 right-4 z-20 text-2xl text-muted-foreground hover:text-primary focus:z-30"
+                className="sticky top-2 right-2 ml-auto z-30 mt-2 mr-2 bg-white/90 text-2xl text-muted-foreground shadow-sm hover:text-primary focus:z-40"
               >
                 <span aria-hidden>✕</span>
               </Button>
@@ -139,29 +140,42 @@ export default function DaycareAdPopup() {
                 {/* Video box section */}
                 <motion.div className="w-full flex flex-col md:flex-row gap-6 items-center justify-center" variants={slideUp}>
                   {/* Video Box */}
-                  <div className="w-full md:w-95 lg:w-120 aspect-video rounded-2xl overflow-hidden shadow-lg border-2 border-brand bg-black/80 flex items-center justify-center relative group">
+                  <div
+                    className="w-full md:w-95 lg:w-120 aspect-video rounded-2xl overflow-hidden shadow-lg border-2 border-brand bg-black/80 flex items-center justify-center relative group cursor-pointer"
+                    onClick={() => {
+                      if (!isVideoPlaying) handlePlayVideo();
+                    }}
+                    tabIndex={0}
+                    role="button"
+                    aria-label="Play daycare video"
+                    onKeyDown={e => {
+                      if (!isVideoPlaying && (e.key === 'Enter' || e.key === ' ')) handlePlayVideo();
+                    }}
+                  >
                     {!isVideoPlaying && (
-                      <button
-                        className="absolute inset-0 flex flex-col items-center justify-center w-full h-full bg-black/40 hover:bg-black/20 transition-colors duration-200 z-10 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-                        aria-label="Play daycare video"
-                        onClick={handlePlayVideo}
+                      <div
+                        className="absolute inset-0 flex flex-col items-center justify-center w-full h-full bg-black/40 hover:bg-black/20 transition-colors duration-200 z-10"
+                        style={{ pointerEvents: 'none' }}
+                        aria-hidden="true"
                       >
                         <svg width="64" height="64" viewBox="0 0 64 64" fill="none" className="drop-shadow-xl">
                           <circle cx="32" cy="32" r="32" fill="rgba(255,255,255,0.7)" />
                           <polygon points="26,20 48,32 26,44" fill="#d4af37" />
                         </svg>
                         <span className="mt-2 text-base font-semibold text-white drop-shadow-lg">Watch Video</span>
-                      </button>
+                      </div>
                     )}
                     <video
                       ref={videoRef}
                       src={VIDEO_SRC}
                       className="w-full h-full object-cover rounded-2xl"
                       controls={isVideoPlaying}
-                      tabIndex={0}
+                      tabIndex={-1}
                       aria-label="Friendship Corner Daycare video"
-                      poster="/enrollment-poster.jpg"
+                      poster={VIDEO_POSTER}
                       onEnded={() => setIsVideoPlaying(false)}
+                      // Prevent click from bubbling to parent when already playing
+                      onClick={e => { if (isVideoPlaying) e.stopPropagation(); }}
                     />
                   </div>
 
