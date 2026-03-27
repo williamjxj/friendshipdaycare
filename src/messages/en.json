@@ -173,7 +173,7 @@
       "headlineTagline": "Where Young Minds Flourish",
       "highlight": "Coquitlam's Premier Authentic Montessori Daycare",
       "title": "Montessori Daycare Coquitlam | Friendship Corner - Where Young Minds Flourish",
-      "subtitle": "A safe, nurturing Montessori environment in Coquitlam where every child discovers their unique potential.",
+      "subtitle": "We are non-profit Montessori daycare, we provide a safe, nurturing Montessori environment in Coquitlam where every child discovers their unique potential.",
       "stats": {
         "years": "16+",
         "yearsLabel": "Years of Excellence",
@@ -201,6 +201,8 @@
         "yoga": "Yoga & Movement",
         "science": "Hands-On Science",
         "art": "Art & Creativity"
+        ,
+        "subsidy": "Government childcare subsidy accepted"
       },
       "ageRangeChip": "Ages 2½ – 5 years",
       "followUs": "Follow us"

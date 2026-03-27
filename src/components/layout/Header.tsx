@@ -60,7 +60,7 @@ const NavLink = memo(function NavLink({
       href={href}
       className={cn(
         "flex flex-col items-center justify-center px-3 py-2 text-xs font-semibold transition-colors relative group gap-1",
-        "min-h-[44px] min-w-[44px] lg:min-w-auto", // Mobile touch target
+        "min-h-11 min-w-11 lg:min-w-auto", // Mobile touch target
         isActive ? 'text-primary' : 'text-muted-foreground hover:text-primary'
       )}
     >
@@ -98,7 +98,7 @@ const NavDropdown = memo(function NavDropdown({
       <button
         className={cn(
           "flex flex-col items-center justify-center px-3 py-2 text-xs font-semibold transition-colors gap-1",
-          "min-h-[44px] min-w-[44px] lg:min-w-auto", // Mobile touch target
+          "min-h-11 min-w-11 lg:min-w-auto", // Mobile touch target
           isActiveParent || isOpen ? 'text-primary' : 'text-muted-foreground hover:text-primary'
         )}
       >
@@ -199,12 +199,12 @@ export function Header() {
   }, [t]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-border/50 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
+    <header className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-border/50 bg-background/95 backdrop-blur-md supports-backdrop-filter:bg-background/80">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 min-w-0">
         <div className="flex justify-between items-center h-16 gap-2 min-w-0">
 
           {/* Logo and Title - full width, never truncated */}
-          <div className="flex-shrink-0 min-w-fit flex items-center ml-3 sm:ml-6 md:ml-10 mr-10">
+          <div className="shrink-0 min-w-fit flex items-center ml-3 sm:ml-6 md:ml-10 mr-10">
             <Link href="/" className="flex items-center gap-0.5 min-w-0">
               <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 shrink-0 transition-transform duration-300 flex items-center">
                 <Image
@@ -229,7 +229,7 @@ export function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 ml-8 flex-shrink-0" suppressHydrationWarning>
+          <nav className="hidden lg:flex items-center gap-1 ml-8 shrink-0" suppressHydrationWarning>
             {navigationConfig.map((item) => {
               const name = getTransName(item.key);
 
@@ -271,15 +271,17 @@ export function Header() {
           <div className="hidden lg:flex items-center space-x-3 sm:space-x-4">
             <a
               href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
-              className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="text-cyan-600 hover:text-cyan-800 transition-colors min-h-11 min-w-11 flex items-center justify-center font-semibold"
               aria-label={t('contact.phone')}
+              style={{ background: 'rgba(207,250,254,0.18)', borderRadius: '0.5rem' }}
             >
               <Phone className="w-5 h-5" />
             </a>
             <a
               href={`mailto:${businessProfile.email}`}
-              className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="text-amber-600 hover:text-amber-800 transition-colors min-h-11 min-w-11 flex items-center justify-center font-semibold"
               aria-label={t('contact.form.email')}
+              style={{ background: 'rgba(253,230,138,0.18)', borderRadius: '0.5rem' }}
             >
               <Mail className="w-5 h-5" />
             </a>
@@ -293,8 +295,18 @@ export function Header() {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  className={
+                    isFb
+                      ? "text-blue-600 hover:text-blue-800 transition-colors min-h-11 min-w-11 flex items-center justify-center font-semibold"
+                      : "text-pink-600 hover:text-pink-800 transition-colors min-h-11 min-w-11 flex items-center justify-center font-semibold"
+                  }
                   aria-label={isFb ? 'Facebook' : 'Instagram'}
+                  style={{
+                    background: isFb
+                      ? 'rgba(59,130,246,0.13)'
+                      : 'rgba(236,72,153,0.13)',
+                    borderRadius: '0.5rem',
+                  }}
                 >
                   {isFb ? <Facebook className="w-5 h-5" /> : <Instagram className="w-5 h-5" />}
                 </Link>
@@ -305,21 +317,21 @@ export function Header() {
             <Link
               href="/#contact-form"
               data-testid="header-book-tour"
-              className="relative overflow-hidden warm-button text-[0.6rem] px-2 py-2 flex items-center gap-1.5 group/cta shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap !h-[26px] !min-h-0 !rounded-md"
+              className="relative overflow-hidden warm-button text-[0.6rem] px-2 py-2 flex items-center gap-1.5 group/cta shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap h-6.5! min-h-0! rounded-md!"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500 bg-[length:200%_auto] group-hover/cta:animate-[gradient_3s_linear_infinite]" />
+              <div className="absolute inset-0 bg-linear-to-r from-primary via-secondary to-primary opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500 bg-size-[200%_auto] group-hover/cta:animate-[gradient_3s_linear_infinite]" />
               <Calendar className="relative z-10 w-6 h-6 shrink-0 transition-transform group-hover/cta:rotate-12" />
               <span className="relative z-10 font-bold">{t('header.bookTour')}</span>
             </Link>
           </div>
 
           {/* Mobile: Language, Theme, then prominent menu button - never clipped */}
-          <div className="lg:hidden flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
+          <div className="lg:hidden flex items-center space-x-1 sm:space-x-2 shrink-0">
             <LanguageToggle />
             {/* <ThemeToggle /> - Hidden for now */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2.5 rounded-lg bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 hover:border-primary/30 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shadow-sm"
+              className="p-2.5 rounded-lg bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 hover:border-primary/30 transition-colors min-h-11 min-w-11 flex items-center justify-center shadow-sm"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
@@ -354,7 +366,7 @@ export function Header() {
                             onClick={() => setIsMenuOpen(false)}
                             className={cn(
                               "flex items-center gap-3 px-4 py-3 rounded-md text-sm font-medium transition-colors",
-                              "min-h-[44px]", // Mobile touch target
+                              "min-h-11", // Mobile touch target
                               pathname.startsWith(child.href!)
                                 ? "text-primary bg-primary/5"
                                 : "text-muted-foreground hover:bg-muted"
@@ -377,7 +389,7 @@ export function Header() {
                     onClick={() => setIsMenuOpen(false)}
                     className={cn(
                       "flex items-center gap-3 px-4 py-3 rounded-md text-base font-medium transition-colors border-l-4",
-                      "min-h-[44px]", // Mobile touch target
+                      "min-h-11", // Mobile touch target
                       isActive
                         ? 'border-primary text-primary bg-primary/5'
                         : 'border-transparent text-muted-foreground hover:text-foreground hover:bg-muted'
@@ -405,7 +417,7 @@ export function Header() {
                 <Link
                   href="/#contact-form"
                   onClick={() => setIsMenuOpen(false)}
-                  className="block w-full text-center warm-button min-h-[44px] py-2 flex items-center justify-center gap-2 shadow-md text-sm"
+                  className="w-full text-center warm-button min-h-11 py-2 flex items-center justify-center gap-2 shadow-md text-sm"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>{t('header.bookTour')}</span>

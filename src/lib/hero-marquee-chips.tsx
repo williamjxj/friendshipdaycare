@@ -114,6 +114,13 @@ export const HERO_MARQUEE_CHIP_CONFIGS: HeroMarqueeChipConfig[] = [
     gradient: 'linear-gradient(135deg, rgba(244, 114, 182, 0.95), rgba(217, 70, 239, 0.95))',
     iconClassName: 'w-4 h-4 text-white group-hover:animate-bounce drop-shadow-lg',
   },
+  {
+    id: 'subsidy',
+    labelResolver: (t) => t('home.hero.marqueeChips.subsidy'),
+    Icon: Shield,
+    gradient: 'linear-gradient(135deg, rgba(251, 191, 36, 0.95), rgba(34, 197, 94, 0.95))',
+    iconClassName: 'w-4 h-4 text-white group-hover:animate-pulse drop-shadow-lg',
+  },
 ];
 
 export type ResolvedHeroMarqueeChip = HeroMarqueeChipConfig & { label: string };
