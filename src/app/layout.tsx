@@ -11,7 +11,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SkipNavigation } from "@/components/ui/SkipNavigation";
 import { MobileCtaBar } from "@/components/ui/MobileCtaBar";
 import { Toaster } from "@/components/ui/toaster";
-import DaycareAdPopup from "@/components/ui/DaycareAdPopup";
+// import DaycareAdPopup from "@/components/ui/DaycareAdPopup";
 import { ScrollToTopButton } from "@/components/ui/scroll-to-top-button";
 import { LocalBusinessSchema, OrganizationSchema, WebSiteSchema } from "@/components/seo/StructuredData";
 import { businessProfile } from "@/lib/business-profile";
@@ -150,7 +150,7 @@ export default async function RootLayout({
                   <ScrollToTopButton />
                 </div>
                 <Toaster />
-                <DaycareAdPopup />
+                {/* <DaycareAdPopup /> */}
               </ThemeProvider>
             </NextIntlProviderSync>
           </LanguageAwareHtml>

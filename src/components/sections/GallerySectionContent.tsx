@@ -44,7 +44,6 @@ export function GallerySectionContent() {
   const justDraggedRef = useRef(false);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
   const indexRef = useRef(carouselSelectedIndex);
-  indexRef.current = carouselSelectedIndex;
 
   const handleImageLoaded = useCallback((index: number) => {
     setLoadedImages((prev) => ({ ...prev, [index]: true }));
@@ -222,6 +221,10 @@ export function GallerySectionContent() {
 
   const prevSlideIndexRef = useRef(carouselSelectedIndex);
   useEffect(() => {
+    indexRef.current = carouselSelectedIndex;
+  }, [carouselSelectedIndex]);
+
+  useEffect(() => {
     if (prevSlideIndexRef.current === carouselSelectedIndex) return;
     prevSlideIndexRef.current = carouselSelectedIndex;
   }, [carouselSelectedIndex]);
@@ -279,7 +282,7 @@ export function GallerySectionContent() {
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
               {t('galleryPage.gallery.title')}
             </h2>
-            <p className="text-lg text-muted-foreground w-full max-w-none">
+            <p className="text-base sm:text-lg text-muted-foreground w-full max-w-none">
               {t('galleryPage.gallery.subtitle')}
             </p>
           </div>
@@ -291,7 +294,7 @@ export function GallerySectionContent() {
                 variant={selectedCategory === category.id ? 'default' : 'outline'}
                 onClick={() => setSelectedCategory(category.id)}
                 className={cn(
-                  'rounded-full px-6 py-3 font-bold transition-all duration-300',
+                  'rounded-full px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-bold transition-all duration-300',
                   selectedCategory === category.id && 'ring-2 ring-primary/30 shadow-lg'
                 )}
               >
@@ -302,7 +305,7 @@ export function GallerySectionContent() {
 
           <div
             ref={carouselContainerRef}
-            className="gallery-carousel-wrap relative w-full h-[300px] sm:h-[450px] md:h-[600px] mx-auto"
+            className="gallery-carousel-wrap relative mx-auto w-full h-[260px] sm:h-[450px] md:h-[600px]"
             onMouseEnter={() => setIsCarouselHoveredOrFocused(true)}
             onMouseLeave={() => setIsCarouselHoveredOrFocused(false)}
           >
@@ -390,7 +393,7 @@ export function GallerySectionContent() {
                   <ChevronRight className="h-6 w-6" />
                 </Button>
 
-                <div className="absolute -bottom-14 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                <div className="absolute -bottom-12 sm:-bottom-14 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2">
                   {filteredImages.map((_, index) => (
                     <Button
                       key={index}
@@ -429,23 +432,23 @@ export function GallerySectionContent() {
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/20 rounded-full blur-3xl" />
 
-        <div className="max-w-4xl mx-auto px-4 text-center space-y-10 relative z-10">
+        <div className="max-w-4xl mx-auto px-4 text-center space-y-8 sm:space-y-10 relative z-10">
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white drop-shadow-2xl">
             {t('galleryPage.cta.title')}
           </h2>
-          <p className="text-xl md:text-2xl text-white/95 font-medium leading-relaxed">
+          <p className="text-base sm:text-xl md:text-2xl text-white/95 font-medium leading-relaxed">
             {t('galleryPage.cta.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
               href="/#contact-form"
-              className="inline-flex items-center justify-center px-10 py-5 bg-white text-primary rounded-full font-bold text-lg hover:bg-white/95 hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-white/50 ring-4 ring-white/30"
+              className="inline-flex w-full sm:w-auto items-center justify-center px-6 sm:px-10 py-4 sm:py-5 bg-white text-primary rounded-full font-bold text-base sm:text-lg hover:bg-white/95 hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-white/50 ring-4 ring-white/30"
             >
               {t('galleryPage.cta.primary')}
             </Link>
             <Link
               href="/#programs"
-              className="inline-flex items-center justify-center px-10 py-5 border-3 border-white text-white rounded-full font-bold text-lg hover:bg-white/15 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-xl"
+              className="inline-flex w-full sm:w-auto items-center justify-center px-6 sm:px-10 py-4 sm:py-5 border-3 border-white text-white rounded-full font-bold text-base sm:text-lg hover:bg-white/15 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-xl"
             >
               {t('galleryPage.cta.secondary')}
             </Link>

@@ -13,6 +13,8 @@ import {
   sectionGridDotPresets,
   useSectionGridDotHover,
 } from '@/components/ui/GridAndDotBackgrounds';
+import { BrandAdPromoCard } from '@/components/ui/brand-visual-assets';
+import { AuroraBackground } from '@/components/ui/aurora-background';
 
 type ProgramData = {
   features?: string[];
@@ -81,6 +83,7 @@ export function ProgramsSection() {
       variants={fadeIn}
       {...gridDotSectionHoverProps}
     >
+      <AuroraBackground className="opacity-80" palette="coastal" blur={160} />
       <GridAndDotBackgrounds
         backdropOnly
         isSectionHovered={isSectionHovered}
@@ -94,13 +97,16 @@ export function ProgramsSection() {
           <h2 className="text-3xl md:text-5xl font-display font-extrabold text-foreground mb-4">
             {t('programsPage.overview.title')}
           </h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+          <p className="mx-auto max-w-4xl text-base sm:text-lg md:text-xl text-muted-foreground">
             {t('programsPage.overview.subtitle')}
           </p>
+          <div className="mx-auto mt-10 w-full max-w-3xl px-2">
+            <BrandAdPromoCard />
+          </div>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8"
           variants={staggerContainer}
         >
           {programs.map((program, index) => {
@@ -108,7 +114,9 @@ export function ProgramsSection() {
             return (
               <motion.div
                 key={program.key}
-                className="group relative bg-card border-2 border-border rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group fdc-card-surface relative overflow-hidden rounded-2xl border border-border/80 bg-card shadow-lg transition-[box-shadow,border-color] duration-300"
+                whileHover={{ y: -8 }}
+                transition={{ type: 'spring', stiffness: 280, damping: 24 }}
                 variants={slideUp}
                 custom={index}
               >
@@ -118,10 +126,10 @@ export function ProgramsSection() {
                     src={getImageUrl(program.image)}
                     alt={program.title}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/20 to-transparent" />
                   
                   {/* Icon Badge */}
                   <div className={cn(
@@ -140,8 +148,8 @@ export function ProgramsSection() {
                 </div>
 
                 {/* Program Content */}
-                <div className="p-6 space-y-4">
-                  <h3 className="text-2xl font-bold text-foreground">
+                <div className="p-5 sm:p-6 space-y-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground">
                     {program.title}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -169,7 +177,7 @@ export function ProgramsSection() {
                 </div>
 
                 {/* Hover Effect Overlay */}
-                <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </motion.div>
             );
           })}
@@ -183,16 +191,16 @@ export function ProgramsSection() {
           <p className="text-muted-foreground mb-6">
             Ready to enroll your child in our Montessori program?
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Link
               href="/#enrollment"
-              className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-xl font-bold hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl"
+              className="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-xl font-bold hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl"
             >
               Start Enrollment
             </Link>
             <Link
               href="/#contact-form"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary rounded-xl font-bold hover:bg-primary hover:text-primary-foreground transition-colors"
+              className="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 border-2 border-primary text-primary rounded-xl font-bold hover:bg-primary hover:text-primary-foreground transition-colors"
             >
               Schedule a Visit
             </Link>

@@ -575,7 +575,8 @@
     },
     "info": {
       "title": "문의하기",
-      "description": "프로그램 문의, 방문 예약, 등록 등 무엇이든 도와드리겠습니다."
+      "description": "프로그램 문의, 방문 예약, 등록 등 무엇이든 도와드리겠습니다.",
+      "badgeLabel": "문의: friendship.care@live.ca"
     },
     "cards": {
       "phone": {

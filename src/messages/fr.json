@@ -575,7 +575,8 @@
     },
     "info": {
       "title": "Entrer en Contact",
-      "description": "Nous sommes là pour répondre à vos questions et organiser une visite."
+      "description": "Nous sommes là pour répondre à vos questions et organiser une visite.",
+      "badgeLabel": "Contactez-nous : friendship.care@live.ca"
     },
     "cards": {
       "phone": {

@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useMemo, memo, useCallback } from 'react';
+import { useState, useMemo, memo, useCallback, type ComponentType } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import {
@@ -11,15 +10,8 @@ import {
   Info,
   BookOpen,
   UserPlus,
-  Users,
   Images,
   MessageCircle,
-  BookMarked,
-  Newspaper,
-  GraduationCap,
-  Landmark,
-  ChevronDown,
-  FolderOpen,
   Calendar,
   Facebook,
   Instagram,
@@ -27,18 +19,15 @@ import {
   Mail
 } from 'lucide-react';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
-import { getImageUrl } from '@/lib/image-utils';
 import { businessProfile } from '@/lib/business-profile';
 
 // --- Types ---
 type NavItem = {
   key: string;
   href?: string;
-  icon: any;
-  children?: NavItem[];
+  icon: ComponentType<{ className?: string }>;
 };
 
 // --- Components ---
@@ -52,98 +41,27 @@ const NavLink = memo(function NavLink({
 }: {
   href: string;
   name: string;
-  icon: any;
+  icon: ComponentType<{ className?: string }>;
   isActive: boolean;
 }) {
   return (
     <Link
       href={href}
       className={cn(
-        "flex flex-col items-center justify-center px-3 py-2 text-xs font-semibold transition-colors relative group gap-1",
-        "min-h-11 min-w-11 lg:min-w-auto", // Mobile touch target
-        isActive ? 'text-primary' : 'text-muted-foreground hover:text-primary'
+        "group relative inline-flex min-h-11 items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold transition-all duration-300",
+        isActive
+          ? 'bg-primary text-primary-foreground shadow-[0_12px_28px_rgba(59,130,246,0.24)]'
+          : 'text-muted-foreground hover:bg-white/70 hover:text-foreground'
       )}
     >
-      <Icon className={cn("w-5 h-5 mb-0.5 transition-transform group-hover:-translate-y-1", isActive && "fill-current/10")} />
-      <span>{name}</span>
-      {/* Active Indicator */}
       <span className={cn(
-        "absolute bottom-0 w-8 h-0.5 bg-primary rounded-full transform transition-transform duration-300",
-        isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-75'
-      )} />
+        "inline-flex h-8 w-8 items-center justify-center rounded-full transition-transform duration-300",
+        isActive ? 'bg-white/18' : 'bg-primary/8 group-hover:-translate-y-0.5'
+      )}>
+        <Icon className="h-4.5 w-4.5" />
+      </span>
+      <span>{name}</span>
     </Link>
-  );
-});
-
-// Dropdown Menu for Community
-const NavDropdown = memo(function NavDropdown({
-  name,
-  icon: Icon,
-  items,
-  isActiveParent,
-}: {
-  name: string;
-  icon: any;
-  items: { key: string; name: string; href: string; icon: any; isActive: boolean }[];
-  isActiveParent: boolean;
-}) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div
-      className="relative group"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-    >
-      <button
-        className={cn(
-          "flex flex-col items-center justify-center px-3 py-2 text-xs font-semibold transition-colors gap-1",
-          "min-h-11 min-w-11 lg:min-w-auto", // Mobile touch target
-          isActiveParent || isOpen ? 'text-primary' : 'text-muted-foreground hover:text-primary'
-        )}
-      >
-        <div className="relative">
-          <Icon className={cn("w-5 h-5 mb-0.5 transition-transform group-hover:-translate-y-1", isActiveParent && "fill-current/10")} />
-          {/* Active Dot for Parent */}
-          {isActiveParent && (
-            <span className="absolute -top-1 -right-1 flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
-          )}
-        </div>
-        <div className="flex items-center gap-1">
-          <span>{name}</span>
-          <ChevronDown className={cn("w-3 h-3 transition-transform duration-200", isOpen && "rotate-180")} />
-        </div>
-      </button>
-
-      {/* Dropdown Content */}
-      <div
-        className={cn(
-          "absolute left-1/2 -translate-x-1/2 top-full pt-2 w-48 z-50 transition-all duration-200 origin-top",
-          isOpen ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible"
-        )}
-      >
-        <div className="bg-card/95 backdrop-blur-md border border-border rounded-xl shadow-xl overflow-hidden p-1">
-          {items.map((child) => (
-            <Link
-              key={child.href}
-              href={child.href}
-              className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors",
-                child.isActive
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-              )}
-            >
-              <child.icon className="w-4 h-4" />
-              {child.name}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 });
 
@@ -153,7 +71,6 @@ const HOMEPAGE_SECTION_IDS = ['home', 'about', 'programs', 'gallery', 'testimoni
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useLanguage();
-  const pathname = usePathname();
   const scrollSpyActiveId = useScrollSpy([...HOMEPAGE_SECTION_IDS], 80);
 
   // Navigation: single-page app — all links are anchors
@@ -168,7 +85,6 @@ export function Header() {
 
   // Translations
   const getNavItemIsActive = useCallback((item: NavItem) => {
-    if (item.children) return false;
     const key = item.key;
     return (
       (key === 'home' && (scrollSpyActiveId === 'home' || !scrollSpyActiveId)) ||
@@ -199,233 +115,169 @@ export function Header() {
   }, [t]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-border/50 bg-background/95 backdrop-blur-md supports-backdrop-filter:bg-background/80">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 min-w-0">
-        <div className="flex justify-between items-center h-16 gap-2 min-w-0">
+    <header className="fixed top-0 left-0 right-0 z-50">
+      <div className="mx-auto max-w-7xl px-3 pt-2 sm:px-6 lg:px-8">
+        <div className="glass-panel rounded-[1.35rem] border border-white/65 px-3 sm:px-5">
+          <div className="flex min-w-0 items-center justify-between gap-3 h-16 sm:h-[4.4rem]">
 
-          {/* Logo and Title - full width, never truncated */}
-          <div className="shrink-0 min-w-fit flex items-center ml-3 sm:ml-6 md:ml-10 mr-10">
-            <Link href="/" className="flex items-center gap-0.5 min-w-0">
-              <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 shrink-0 transition-transform duration-300 flex items-center">
-                <Image
-                  src={"/logo.png"}
-                  alt="Friendship Corner Daycare"
-                  fill
-                  sizes="(max-width: 640px) 160px, 200px"
-                  className="object-contain"
-                  priority
-                  unoptimized
-                />
-              </div>
-              <div className="flex flex-col justify-center min-w-0 w-full h-full group">
-                <span className="font-display font-bold text-base sm:text-lg md:text-xl text-primary leading-tight group-hover:text-secondary transition-colors duration-300 whitespace-nowrap w-full">
-                  Friendship Corner
-                </span>
-                <span className="text-[0.48rem] sm:text-[0.6rem] md:text-[0.7rem] text-primary/80 uppercase tracking-[0.18em] font-semibold leading-tight whitespace-nowrap w-full">
-                  Montessori Daycare
-                </span>
-              </div>
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 ml-8 shrink-0" suppressHydrationWarning>
-            {navigationConfig.map((item) => {
-              const name = getTransName(item.key);
-
-              if (item.children) {
-                // Dropdown Logic
-                const childItems = item.children.map(child => ({
-                  ...child,
-                  href: child.href!,
-                  name: getTransName(child.key),
-                  isActive: pathname.startsWith(child.href!)
-                }));
-                const isActiveParent = childItems.some(c => c.isActive);
-
-                return (
-                  <NavDropdown
-                    key={item.key}
-                    name={name}
-                    icon={item.icon}
-                    items={childItems}
-                    isActiveParent={isActiveParent}
+            <div className="shrink-0 min-w-0">
+              <Link href="/" className="group flex items-center gap-2 min-w-0">
+                <div className="relative flex h-11 w-11 shrink-0 items-center transition-transform duration-300 group-hover:rotate-[6deg] group-hover:scale-105 sm:h-12 sm:w-12 md:h-14 md:w-14">
+                  <Image
+                    src={"/logo.png"}
+                    alt="Friendship Corner Daycare"
+                    fill
+                    sizes="(max-width: 640px) 160px, 200px"
+                    className="object-contain"
+                    priority
+                    unoptimized
                   />
-                );
-              }
+                </div>
+                <div className="min-w-0">
+                  <div className="font-display text-sm font-extrabold leading-tight text-primary sm:text-lg md:text-[1.05rem]">
+                    Friendship Corner
+                  </div>
+                  <div className="text-[0.58rem] uppercase tracking-[0.24em] text-primary/75 sm:text-[0.68rem]">
+                    Montessori Daycare
+                  </div>
+                </div>
+              </Link>
+            </div>
 
-              const isActive = getNavItemIsActive(item);
-              return (
+            <nav className="hidden lg:flex items-center rounded-full bg-white/55 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]" suppressHydrationWarning>
+              {navigationConfig.map((item) => (
                 <NavLink
                   key={item.key}
                   href={item.href!}
-                  name={name}
+                  name={getTransName(item.key)}
                   icon={item.icon}
-                  isActive={isActive}
+                  isActive={getNavItemIsActive(item)}
                 />
-              );
-            })}
-          </nav>
+              ))}
+            </nav>
 
-          {/* Desktop Controls - contact links + social */}
-          <div className="hidden lg:flex items-center space-x-3 sm:space-x-4">
-            <a
-              href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
-              className="text-cyan-600 hover:text-cyan-800 transition-colors min-h-11 min-w-11 flex items-center justify-center font-semibold"
-              aria-label={t('contact.phone')}
-              style={{ background: 'rgba(207,250,254,0.18)', borderRadius: '0.5rem' }}
-            >
-              <Phone className="w-5 h-5" />
-            </a>
-            <a
-              href={`mailto:${businessProfile.email}`}
-              className="text-amber-600 hover:text-amber-800 transition-colors min-h-11 min-w-11 flex items-center justify-center font-semibold"
-              aria-label={t('contact.form.email')}
-              style={{ background: 'rgba(253,230,138,0.18)', borderRadius: '0.5rem' }}
-            >
-              <Mail className="w-5 h-5" />
-            </a>
-            {businessProfile.sameAs?.map((url) => {
-              const isFb = url.includes('facebook');
-              const isIg = url.includes('instagram');
-              if (!isFb && !isIg) return null;
-              return (
-                <Link
-                  key={url}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={
-                    isFb
-                      ? "text-blue-600 hover:text-blue-800 transition-colors min-h-11 min-w-11 flex items-center justify-center font-semibold"
-                      : "text-pink-600 hover:text-pink-800 transition-colors min-h-11 min-w-11 flex items-center justify-center font-semibold"
-                  }
-                  aria-label={isFb ? 'Facebook' : 'Instagram'}
-                  style={{
-                    background: isFb
-                      ? 'rgba(59,130,246,0.13)'
-                      : 'rgba(236,72,153,0.13)',
-                    borderRadius: '0.5rem',
-                  }}
-                >
-                  {isFb ? <Facebook className="w-5 h-5" /> : <Instagram className="w-5 h-5" />}
-                </Link>
-              );
-            })}
-            <LanguageToggle />
-            {/* <ThemeToggle /> - Hidden for now */}
-            <Link
-              href="/#contact-form"
-              data-testid="header-book-tour"
-              className="relative overflow-hidden warm-button text-[0.6rem] px-2 py-2 flex items-center gap-1.5 group/cta shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap h-6.5! min-h-0! rounded-md!"
-            >
-              <div className="absolute inset-0 bg-linear-to-r from-primary via-secondary to-primary opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500 bg-size-[200%_auto] group-hover/cta:animate-[gradient_3s_linear_infinite]" />
-              <Calendar className="relative z-10 w-6 h-6 shrink-0 transition-transform group-hover/cta:rotate-12" />
-              <span className="relative z-10 font-bold">{t('header.bookTour')}</span>
-            </Link>
-          </div>
-
-          {/* Mobile: Language, Theme, then prominent menu button - never clipped */}
-          <div className="lg:hidden flex items-center space-x-1 sm:space-x-2 shrink-0">
-            <LanguageToggle />
-            {/* <ThemeToggle /> - Hidden for now */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2.5 rounded-lg bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 hover:border-primary/30 transition-colors min-h-11 min-w-11 flex items-center justify-center shadow-sm"
-              aria-label="Toggle menu"
-              aria-expanded={isMenuOpen}
-            >
-              {isMenuOpen ? (
-                <XMarkIcon className="h-6 w-6" aria-hidden />
-              ) : (
-                <Bars3Icon className="h-6 w-6" aria-hidden />
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation Menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden" suppressHydrationWarning>
-            <div className="px-2 pt-2 pb-6 space-y-1 border-t border-border bg-background/95 backdrop-blur-md max-h-[80vh] overflow-y-auto">
-              {navigationConfig.map((item) => {
-                const name = getTransName(item.key);
-
-                if (item.children) {
-                  return (
-                    <div key={item.key} className="space-y-1">
-                      <div className="px-4 py-2 font-semibold text-muted-foreground flex items-center gap-2">
-                        <item.icon className="w-5 h-5" />
-                        {name}
-                      </div>
-                      <div className="pl-4 border-l-2 border-border ml-6 space-y-1">
-                        {item.children.map(child => (
-                          <Link
-                            key={child.key}
-                            href={child.href!}
-                            onClick={() => setIsMenuOpen(false)}
-                            className={cn(
-                              "flex items-center gap-3 px-4 py-3 rounded-md text-sm font-medium transition-colors",
-                              "min-h-11", // Mobile touch target
-                              pathname.startsWith(child.href!)
-                                ? "text-primary bg-primary/5"
-                                : "text-muted-foreground hover:bg-muted"
-                            )}
-                          >
-                            <child.icon className="w-4 h-4" />
-                            {getTransName(child.key)}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }
-
-                const isActive = getNavItemIsActive(item);
+            <div className="hidden lg:flex items-center gap-2.5">
+              <a
+                href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-cyan-200/70 bg-cyan-50/85 px-3 text-sm font-semibold text-cyan-800 transition-all hover:-translate-y-0.5 hover:bg-cyan-100"
+                aria-label={t('contact.phone')}
+              >
+                <Phone className="h-4 w-4" />
+                <span className="hidden xl:inline">{businessProfile.telephone}</span>
+              </a>
+              <a
+                href={`mailto:${businessProfile.email}`}
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-amber-200/70 bg-amber-50/85 px-3 text-amber-800 transition-all hover:-translate-y-0.5 hover:bg-amber-100"
+                aria-label={t('contact.form.email')}
+              >
+                <Mail className="h-4 w-4" />
+              </a>
+              {businessProfile.sameAs?.map((url) => {
+                const isFb = url.includes('facebook');
+                const isIg = url.includes('instagram');
+                if (!isFb && !isIg) return null;
                 return (
                   <Link
-                    key={item.key}
-                    href={item.href!}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={cn(
-                      "flex items-center gap-3 px-4 py-3 rounded-md text-base font-medium transition-colors border-l-4",
-                      "min-h-11", // Mobile touch target
-                      isActive
-                        ? 'border-primary text-primary bg-primary/5'
-                        : 'border-transparent text-muted-foreground hover:text-foreground hover:bg-muted'
-                    )}
+                    key={url}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-border/70 bg-white/80 text-muted-foreground transition-all hover:-translate-y-0.5 hover:text-primary"
+                    aria-label={isFb ? 'Facebook' : 'Instagram'}
                   >
-                    <item.icon className="w-5 h-5" />
-                    {name}
+                    {isFb ? <Facebook className="h-4.5 w-4.5" /> : <Instagram className="h-4.5 w-4.5" />}
                   </Link>
                 );
               })}
-              <div className="pt-4 px-4 space-y-3 sticky bottom-0 bg-background pb-4 border-t border-border">
-                <div className="flex flex-col gap-2 text-sm">
-                  <a href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`} className="flex items-center gap-2 text-muted-foreground hover:text-primary px-4 py-2">
-                    <Phone className="w-4 h-4 shrink-0" />
-                    {businessProfile.telephone}
-                  </a>
-                  <a href={`mailto:${businessProfile.email}`} className="flex items-center gap-2 text-muted-foreground hover:text-primary px-4 py-2 break-all">
-                    <Mail className="w-4 h-4 shrink-0" />
-                    {businessProfile.email}
-                  </a>
-                  <p className="px-4 py-2 text-muted-foreground text-xs leading-snug">
-                    {businessProfile.address.streetAddress}, {businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode} {businessProfile.address.addressCountry === 'CA' ? 'Canada' : businessProfile.address.addressCountry}
-                  </p>
-                </div>
-                <Link
-                  href="/#contact-form"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="w-full text-center warm-button min-h-11 py-2 flex items-center justify-center gap-2 shadow-md text-sm"
-                >
-                  <Calendar className="w-4 h-4" />
-                  <span>{t('header.bookTour')}</span>
-                </Link>
-              </div>
+              <LanguageToggle />
+              <Link
+                href="/#contact-form"
+                data-testid="header-book-tour"
+                className="relative inline-flex min-h-11 items-center gap-2 overflow-hidden rounded-full bg-primary px-4 text-sm font-bold text-primary-foreground shadow-[0_14px_30px_rgba(59,130,246,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(59,130,246,0.34)]"
+              >
+                <span className="absolute inset-0 bg-linear-to-r from-primary via-secondary to-primary opacity-0 transition-opacity duration-500 hover:opacity-100" />
+                <Calendar className="relative z-10 h-4.5 w-4.5 shrink-0" />
+                <span className="relative z-10 whitespace-nowrap">{t('header.bookTour')}</span>
+              </Link>
+            </div>
+
+            <div className="lg:hidden flex items-center gap-2 shrink-0">
+              <LanguageToggle />
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-primary/15 bg-primary text-primary-foreground shadow-[0_10px_20px_rgba(59,130,246,0.22)] transition-all hover:-translate-y-0.5"
+                aria-label="Toggle menu"
+                aria-expanded={isMenuOpen}
+              >
+                {isMenuOpen ? (
+                  <XMarkIcon className="h-5 w-5" aria-hidden />
+                ) : (
+                  <Bars3Icon className="h-5 w-5" aria-hidden />
+                )}
+              </button>
             </div>
           </div>
-        )}
+
+          {isMenuOpen && (
+            <div className="lg:hidden pb-3" suppressHydrationWarning>
+              <div className="border-t border-border/60 pt-3">
+                <div className="fdc-panel px-3 py-3">
+                  <div className="grid grid-cols-1 gap-2">
+                    {navigationConfig.map((item) => {
+                      const isActive = getNavItemIsActive(item);
+                      return (
+                        <Link
+                          key={item.key}
+                          href={item.href!}
+                          onClick={() => setIsMenuOpen(false)}
+                          className={cn(
+                            "flex min-h-12 items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition-all",
+                            isActive
+                              ? 'bg-primary text-primary-foreground shadow-[0_10px_24px_rgba(59,130,246,0.22)]'
+                              : 'bg-white/70 text-foreground hover:bg-muted'
+                          )}
+                        >
+                          <span className={cn(
+                            "inline-flex h-8 w-8 items-center justify-center rounded-full",
+                            isActive ? 'bg-white/20' : 'bg-primary/8 text-primary'
+                          )}>
+                            <item.icon className="h-4.5 w-4.5" />
+                          </span>
+                          {getTransName(item.key)}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                  <div className="mt-4 grid grid-cols-1 gap-2 text-sm">
+                    <a href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`} className="fdc-link-card items-center">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-cyan-50 text-cyan-700">
+                        <Phone className="h-4.5 w-4.5" />
+                      </span>
+                      <span className="min-w-0 flex-1 truncate font-semibold text-foreground">{businessProfile.telephone}</span>
+                    </a>
+                    <a href={`mailto:${businessProfile.email}`} className="fdc-link-card items-center">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-amber-50 text-amber-700">
+                        <Mail className="h-4.5 w-4.5" />
+                      </span>
+                      <span className="min-w-0 flex-1 break-all font-semibold text-foreground">{businessProfile.email}</span>
+                    </a>
+                  </div>
+                  <p className="mt-4 rounded-2xl bg-white/70 px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+                    {businessProfile.address.streetAddress}, {businessProfile.address.addressLocality}, {businessProfile.address.addressRegion} {businessProfile.address.postalCode} {businessProfile.address.addressCountry === 'CA' ? 'Canada' : businessProfile.address.addressCountry}
+                  </p>
+                  <Link
+                    href="/#contact-form"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-bold text-primary-foreground shadow-[0_16px_32px_rgba(59,130,246,0.28)]"
+                  >
+                    <Calendar className="h-4.5 w-4.5" />
+                    <span>{t('header.bookTour')}</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

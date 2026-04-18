@@ -573,7 +573,8 @@
     },
     "info": {
       "title": "联系我们",
-      "description": "无论是咨询课程、预约参观或报名，我们都乐意协助。"
+      "description": "无论是咨询课程、预约参观或报名，我们都乐意协助。",
+      "badgeLabel": "联系我们：friendship.care@live.ca"
     },
     "cards": {
       "phone": {

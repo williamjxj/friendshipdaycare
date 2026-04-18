@@ -18,8 +18,9 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 import { fadeIn } from '@/lib/animations';
+import { staggerItem } from '@/lib/animations';
 import { staggerContainerMagic } from '@/lib/magicui-animations';
-import { Card, CardHeader, CardDescription, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 import {
   Accordion,
   AccordionContent,
@@ -32,6 +33,100 @@ import {
   sectionGridDotPresets,
   useSectionGridDotHover,
 } from '@/components/ui/GridAndDotBackgrounds';
+import { BrandAdPromoCard } from '@/components/ui/brand-visual-assets';
+
+/** Icon gradients aligned with About "Mission & Values" cards (per-step accent). */
+const ENROLLMENT_STEP_ICON_GRADIENTS = [
+  'from-emerald-500 to-teal-500',
+  'from-blue-500 to-cyan-500',
+  'from-rose-500 to-pink-500',
+  'from-violet-500 to-purple-500',
+] as const;
+
+type EnrollmentStep = { title: string; description: string };
+
+/** Decorative grid + glow behind enrollment CTA band (module scope — static component rule). */
+function EnrollmentCtaBackground() {
+  return (
+    <>
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_60%_60%_at_50%_0%,black_70%,transparent_100%)]" />
+      <div className="pointer-events-none absolute top-20 right-10 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-20 left-10 h-80 w-80 rounded-full bg-secondary/5 blur-3xl" />
+    </>
+  );
+}
+
+/**
+ * Single enrollment process step — matches Mission & Values card hover (shadow + overlay + icon scale).
+ */
+function EnrollmentProcessStepCard({
+  step,
+  index,
+  safeT,
+  className,
+}: {
+  step: EnrollmentStep;
+  index: number;
+  safeT: (key: string, defaultEn: string) => string;
+  className?: string;
+}) {
+  const gradient =
+    ENROLLMENT_STEP_ICON_GRADIENTS[index % ENROLLMENT_STEP_ICON_GRADIENTS.length];
+
+  return (
+    <div
+      className={cn(
+        'group relative h-full w-full min-w-0 overflow-hidden rounded-2xl border-2 border-border bg-card p-5 sm:p-6 shadow-lg transition-all duration-300 hover:shadow-2xl',
+        className,
+      )}
+    >
+      {/* Opaque bg-card blocks section grid; tint is a separate layer (Mission-style cards use solid bg-card). */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-br from-muted/40 via-transparent to-primary/6 dark:from-muted/25 dark:via-transparent dark:to-primary/10"
+        aria-hidden
+      />
+      <div className="relative z-10 min-w-0">
+        <div className="mb-4 space-y-3">
+          <div className="flex items-center gap-3">
+            <div
+              className={cn(
+                'flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-linear-to-br text-white transition-transform duration-300 group-hover:scale-110',
+                gradient,
+              )}
+            >
+              {index === 0 && <ClipboardDocumentListIcon className="h-7 w-7" />}
+              {index === 1 && <CalendarDaysIcon className="h-7 w-7" />}
+              {index === 2 && <DocumentCheckIcon className="h-7 w-7" />}
+              {index === 3 && <UserGroupIcon className="h-7 w-7" />}
+            </div>
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+              {index + 1}
+            </span>
+          </div>
+          <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
+        </div>
+        <p className="wrap-break-word text-sm leading-relaxed text-muted-foreground sm:text-base">
+          {step.description}
+          {index === 0 && (
+            <span className="mt-3 block">
+              <a
+                href="/assets/Registration form 2026.pdf"
+                download
+                className="inline-flex min-w-0 items-center gap-1.5 font-semibold text-primary underline underline-offset-2 transition-colors hover:text-primary/80 wrap-break-word"
+              >
+                <DocumentArrowDownIcon className="h-4 w-4 shrink-0" />
+                <span className="wrap-break-word">
+                  {safeT('enrollmentPage.downloadForm', 'Download Registration Form')}
+                </span>
+              </a>
+            </span>
+          )}
+        </p>
+      </div>
+      <div className="pointer-events-none absolute inset-0 z-1 rounded-2xl bg-linear-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+    </div>
+  );
+}
 
 /**
  * Enrollment section for single-page app: steps, requirements, accordion, CTA.
@@ -40,7 +135,6 @@ export function EnrollmentSectionContent() {
   const { t, messages } = useLanguage();
   const { isSectionHovered, gridDotSectionHoverProps } = useSectionGridDotHover();
   const requirementsRef = useRef<HTMLDivElement>(null);
-  const feesHoursRef = useRef<HTMLDivElement>(null);
   const translationFallback = t('common.translationFallback');
   const safeT = (key: string, defaultEn: string) => {
     const v = t(key);
@@ -77,31 +171,6 @@ export function EnrollmentSectionContent() {
     { scope: requirementsRef, dependencies: [requirements] }
   );
 
-  useGSAP(
-    () => {
-      if (!feesHoursRef.current) return;
-      const cards = gsap.utils.toArray<HTMLElement>(feesHoursRef.current.querySelectorAll('.fee-hour-card'));
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 50, scale: 0.96 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.7,
-          stagger: 0.12,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: feesHoursRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
-    },
-    { scope: feesHoursRef, dependencies: [] }
-  );
-
   const faqItems = [
     {
       question: safeT('enrollmentPage.faq.questions.ageRange', 'What ages do you accept?'),
@@ -120,14 +189,6 @@ export function EnrollmentSectionContent() {
       answer: safeT('enrollmentPage.faq.answers.tours', 'You can book a tour by using our contact form, calling us directly, or requesting a visit through our enrollment page. We will confirm your time by phone or email.'),
     },
   ];
-
-  const EnrollmentGridBackground = () => (
-    <>
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_60%_60%_at_50%_0%,black_70%,transparent_100%)] pointer-events-none" />
-      <div className="absolute top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" />
-    </>
-  );
 
   return (
     <>
@@ -154,6 +215,9 @@ export function EnrollmentSectionContent() {
             <p className="text-base sm:text-xl text-muted-foreground w-full max-w-5xl mx-auto text-balance px-2">
               {safeT('enrollmentPage.process.subtitle', "Follow these simple steps to begin your child's Montessori journey in Coquitlam.")}
             </p>
+            <div className="mx-auto w-full max-w-3xl pt-4">
+              <BrandAdPromoCard className="mx-auto" />
+            </div>
           </div>
 
           {/* Desktop: horizontal flow with connectors */}
@@ -167,45 +231,7 @@ export function EnrollmentSectionContent() {
                   transition={{ duration: 0.5, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
                   className="flex-1 min-w-0"
                 >
-                  <Card
-                    variant="interactive"
-                    className="h-full w-full min-w-0 rounded-xl p-5 sm:p-6 group hover:shadow-lg hover:border-primary/20 transition-all duration-300 border-2 border-border overflow-visible"
-                  >
-                    <CardHeader className="p-0 mb-4 space-y-3">
-                      <div className="flex items-center gap-3">
-                        <motion.div
-                          className="w-12 h-12 rounded-full flex items-center justify-center bg-linear-to-br from-primary/20 to-primary/10 text-primary shrink-0 group-hover:scale-110 transition-transform duration-300"
-                          whileHover={{ rotate: 5 }}
-                        >
-                          {index === 0 && <ClipboardDocumentListIcon className="h-6 w-6" />}
-                          {index === 1 && <CalendarDaysIcon className="h-6 w-6" />}
-                          {index === 2 && <DocumentCheckIcon className="h-6 w-6" />}
-                          {index === 3 && <UserGroupIcon className="h-6 w-6" />}
-                        </motion.div>
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">
-                          {index + 1}
-                        </span>
-                      </div>
-                      <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
-                    </CardHeader>
-                    <CardContent className="p-0 min-w-0">
-                      <CardDescription className="text-muted-foreground leading-relaxed wrap-break-word">
-                        {step.description}
-                        {index === 0 && (
-                          <span className="block mt-3">
-                            <a
-                              href="/assets/Registration form 2026.pdf"
-                              download
-                              className="inline-flex items-center gap-1.5 text-primary hover:text-primary/80 font-semibold underline underline-offset-2 transition-colors wrap-break-word min-w-0"
-                            >
-                              <DocumentArrowDownIcon className="w-4 h-4 shrink-0" />
-                              <span className="wrap-break-word">{safeT('enrollmentPage.downloadForm', 'Download Registration Form')}</span>
-                            </a>
-                          </span>
-                        )}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
+                  <EnrollmentProcessStepCard step={step} index={index} safeT={safeT} />
                 </motion.div>
                 {index < steps.length - 1 && (
                   <ProcessStepConnector direction="horizontal" animate className="self-center shrink-0" />
@@ -218,42 +244,12 @@ export function EnrollmentSectionContent() {
           <div className="flex flex-col lg:hidden gap-4 w-full">
             {steps.map((step, index) => (
               <div key={step.title} className="w-full">
-                <Card
-                  variant="interactive"
-                  className="w-full rounded-xl p-5 sm:p-6 hover:shadow-lg hover:border-primary/20 transition-all duration-300 border-2 border-border overflow-visible"
-                >
-                  <CardHeader className="p-0 mb-4 space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full flex items-center justify-center bg-linear-to-br from-primary/20 to-primary/10 text-primary shrink-0">
-                        {index === 0 && <ClipboardDocumentListIcon className="h-6 w-6" />}
-                        {index === 1 && <CalendarDaysIcon className="h-6 w-6" />}
-                        {index === 2 && <DocumentCheckIcon className="h-6 w-6" />}
-                        {index === 3 && <UserGroupIcon className="h-6 w-6" />}
-                      </div>
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">
-                        {index + 1}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
-                  </CardHeader>
-                  <CardContent className="p-0">
-                    <CardDescription className="text-muted-foreground leading-relaxed text-base">
-                      {step.description}
-                      {index === 0 && (
-                        <span className="block mt-3">
-                          <a
-                            href="/assets/Registration form 2026.pdf"
-                            download
-                            className="inline-flex items-center gap-1.5 text-primary hover:text-primary/80 font-semibold underline underline-offset-2 transition-colors"
-                          >
-                            <DocumentArrowDownIcon className="w-4 h-4 shrink-0" />
-                            {safeT('enrollmentPage.downloadForm', 'Download Registration Form')}
-                          </a>
-                        </span>
-                      )}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
+                <EnrollmentProcessStepCard
+                  step={step}
+                  index={index}
+                  safeT={safeT}
+                  className="w-full"
+                />
               </div>
             ))}
           </div>
@@ -289,24 +285,30 @@ export function EnrollmentSectionContent() {
 
       {/* Fees & Hours */}
       <section className="py-8 bg-card overflow-hidden relative">
-        <div ref={feesHoursRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
               {safeT('enrollmentPage.feesHours.title', 'Fees & Hours')}
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="fee-hour-card space-y-4 bg-muted/30 p-6 sm:p-8 rounded-xl border border-border/50 shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            variants={staggerContainerMagic}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-120px' }}
+          >
+            <motion.div className="fee-hour-card space-y-4 bg-muted/30 p-6 sm:p-8 rounded-xl border border-border/50 shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 transform-gpu will-change-transform" variants={staggerItem}>
               <h3 className="text-xl font-bold text-foreground">{safeT('enrollmentPage.feesHours.hours', 'Monday to Friday, 7:00 a.m. to 6:00 p.m.')}</h3>
               <p className="text-sm text-muted-foreground">{safeT('enrollmentPage.feesHours.closures', 'We are closed on all Statutory Holidays, weekends, and days when the managers choose to close due to unsafe conditions.')}</p>
-            </div>
-            <div className="fee-hour-card space-y-4 bg-muted/30 p-6 sm:p-8 rounded-xl border border-border/50 shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300">
+            </motion.div>
+            <motion.div className="fee-hour-card space-y-4 bg-muted/30 p-6 sm:p-8 rounded-xl border border-border/50 shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 transform-gpu will-change-transform" variants={staggerItem}>
               <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.subsidy', 'Affordable Child Care Benefits available for qualified families.')}</p>
               <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.registrationFee', 'A non-refundable registration fee applies.')}</p>
               <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.deposit', "A deposit fee secures your child's space.")}</p>
               <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.monthlyFees', 'Please inquire by email or phone regarding current monthly fees.')}</p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
         
       </section>
@@ -319,7 +321,6 @@ export function EnrollmentSectionContent() {
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
       >
-        {/* <EnrollmentGridBackground /> removed as per request */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-4 mb-10">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
@@ -357,7 +358,7 @@ export function EnrollmentSectionContent() {
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
       >
-        <EnrollmentGridBackground />
+        <EnrollmentCtaBackground />
         <div className="max-w-5xl mx-auto px-4 text-center space-y-8 relative z-10">
           <h2 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground">
             {safeT('enrollmentPage.cta.title', 'Ready to Apply?')}

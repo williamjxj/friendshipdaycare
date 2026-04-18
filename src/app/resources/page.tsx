@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { ArrowRight, BookOpen, Download, FileText, House, NotebookPen, Sparkles } from 'lucide-react';
+import { BrandResourcesHeroStrip } from '@/components/ui/brand-visual-assets';
 import { buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -50,7 +52,7 @@ export default function ResourcesPage() {
       resources: [
         { title: 'Montessori Activities for Toddlers', description: 'Simple activities you can do at home (Ages 2-3)', type: 'Guide', icon: '👶' },
         { title: 'Practical Life Skills Activities', description: 'Help your child develop independence at home', type: 'Guide', icon: '🧹' },
-        { title: "Creating a Prepared Environment", description: "Set up your home to support your child's development", type: 'Article', icon: '🛋️' },
+        { title: 'Creating a Prepared Environment', description: "Set up your home to support your child's development", type: 'Article', icon: '🛋️' },
         { title: 'Montessori-Inspired Toys & Materials', description: 'Recommended toys that support learning', type: 'Guide', icon: '🧸' },
       ],
     },
@@ -96,150 +98,163 @@ export default function ResourcesPage() {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="fdc-section-shell overflow-x-hidden pb-20 pt-20">
       <main className="flex-grow">
-        <section className="relative py-20 px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Parent Resources & Handbook
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-              Everything you need to support your child&apos;s learning journey
-            </p>
-          </div>
-        </section>
-
-        <section className="py-12 px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 mb-12">
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3">
-                  <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-8 text-white text-center">
-                    <div className="text-6xl mb-4">📖</div>
-                    <h3 className="text-2xl font-bold mb-2">Parent Handbook</h3>
-                    <p className="text-blue-100 mb-4">2024-2025</p>
-                    <button type="button" className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-                      Download PDF
-                    </button>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    Complete Parent Handbook
-                  </h2>
-                  <p className="text-gray-600 dark:text-gray-300 mb-6">
-                    Our comprehensive parent handbook contains all the information you need about our programs,
-                    policies, and procedures. It&apos;s your go-to resource for questions about daily operations,
-                    curriculum, health and safety, and more.
+        <section className="fdc-page-hero px-4 py-14 sm:px-6 sm:py-18 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="fdc-hero-grid">
+              <div className="relative z-10 space-y-6">
+                <span className="fdc-kicker">Parent Resources</span>
+                <div className="space-y-4">
+                  <h1 className="max-w-4xl text-4xl font-display font-bold leading-[0.98] text-slate-900 sm:text-5xl lg:max-w-5xl lg:text-6xl">
+                    Documents, checklists, and practical guidance families can actually use.
+                  </h1>
+                  <p className="max-w-4xl text-base leading-8 text-slate-700 sm:text-lg">
+                    This library is organized for real parent questions: what to read first, what to download, what helps at home, and what supports a smoother start at daycare.
                   </p>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {handbookSections.map((section, index) => (
-                      <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                        <h4 className="font-semibold text-blue-600 dark:text-blue-400 mb-2">{section.title}</h4>
-                        <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
-                          {section.items.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-2">
-                              <span className="text-green-500 mt-0.5">✓</span>
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
                 </div>
+                <div className="flex flex-wrap gap-3">
+                  <span className="fdc-stat-chip">
+                    <FileText className="h-4.5 w-4.5 text-primary" />
+                    <span className="text-sm font-semibold text-foreground">Handbook + forms</span>
+                  </span>
+                  <span className="fdc-stat-chip">
+                    <House className="h-4.5 w-4.5 text-primary" />
+                    <span className="text-sm font-semibold text-foreground">Montessori-at-home ideas</span>
+                  </span>
+                </div>
+              </div>
+              <div className="relative z-10">
+                <BrandResourcesHeroStrip className="mt-0 max-w-none" />
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-12 px-4">
-          <div className="max-w-6xl mx-auto space-y-12">
-            {resourceData.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
-                <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
-                  <span className="text-4xl">{category.icon}</span>
-                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    {category.category}
+        <section className="px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)]">
+            <div className="fdc-panel p-6 sm:p-8">
+              <div className="flex items-start gap-4">
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <BookOpen className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold uppercase tracking-[0.12em] text-primary">Featured Handbook</p>
+                  <h2 className="mt-2 text-3xl font-display font-bold text-foreground">Complete parent handbook</h2>
+                  <p className="mt-3 fdc-prose">
+                    Our handbook collects the policies, routines, and everyday expectations that matter most once your child starts. It is the fastest way to understand how the center runs.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-8 grid gap-4 md:grid-cols-2">
+                {handbookSections.map((section) => (
+                  <div key={section.title} className="rounded-[1.35rem] border border-border/70 bg-white/75 p-5">
+                    <h3 className="text-lg font-display font-bold text-foreground">{section.title}</h3>
+                    <ul className="fdc-dot-list mt-4">
+                      {section.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <aside className="fdc-panel p-6 sm:p-7">
+              <span className="fdc-kicker">Quick Actions</span>
+              <div className="mt-5 space-y-3">
+                <a href="#" className="fdc-link-card">
+                  <div>
+                    <p className="text-base font-bold text-foreground">Download the handbook</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">Start with the core policies and daily expectations.</p>
+                  </div>
+                  <Download className="h-4.5 w-4.5 shrink-0 text-primary" />
+                </a>
+                <a href="#" className="fdc-link-card">
+                  <div>
+                    <p className="text-base font-bold text-foreground">Get the enrollment application</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">Use the latest application form for new families.</p>
+                  </div>
+                  <Download className="h-4.5 w-4.5 shrink-0 text-primary" />
+                </a>
+                <Link href="/#contact-form" className="fdc-link-card">
+                  <div>
+                    <p className="text-base font-bold text-foreground">Need help finding the right resource?</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">Contact us and we’ll point you to the right document or next step.</p>
+                  </div>
+                  <ArrowRight className="h-4.5 w-4.5 shrink-0 text-primary" />
+                </Link>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section className="px-4 py-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl space-y-6">
+            {resourceData.map((category) => (
+              <section key={category.category} className="fdc-panel p-6 sm:p-8">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl">{category.icon}</span>
+                    <h2 className="text-2xl font-display font-bold text-foreground">{category.category}</h2>
+                  </div>
+                  <span className="text-sm font-semibold uppercase tracking-[0.1em] text-muted-foreground">
+                    {category.resources.length} resources
                   </span>
-                </h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {category.resources.map((resource, resourceIndex) => (
-                    <div
-                      key={resourceIndex}
-                      className="border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-700 transition-all group"
-                    >
+                </div>
+                <div className="mt-6 grid gap-4 md:grid-cols-2">
+                  {category.resources.map((resource) => (
+                    <article key={resource.title} className="rounded-[1.35rem] border border-border/70 bg-white/75 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_30px_rgba(15,23,42,0.08)]">
                       <div className="flex items-start gap-4">
-                        <div className="text-4xl flex-shrink-0">{resource.icon}</div>
-                        <div className="flex-grow">
-                          <div className="flex items-start justify-between mb-2">
-                            <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                              {resource.title}
-                            </h3>
-                            <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 px-2 py-1 rounded-full">
+                        <span className="text-3xl">{resource.icon}</span>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-start justify-between gap-2">
+                            <h3 className="text-lg font-bold text-foreground">{resource.title}</h3>
+                            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-primary">
                               {resource.type}
                             </span>
                           </div>
-                          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{resource.description}</p>
+                          <p className="mt-2 text-sm leading-7 text-muted-foreground">{resource.description}</p>
                           {resource.downloadUrl ? (
-                            <a href={resource.downloadUrl} className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold text-sm hover:underline">
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                              </svg>
+                            <a href={resource.downloadUrl} className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                              <Download className="h-4 w-4" />
                               Download
                             </a>
                           ) : (
-                            <span className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold text-sm">
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                              </svg>
-                              View
+                            <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                              <NotebookPen className="h-4 w-4" />
+                              View resource
                             </span>
                           )}
                         </div>
                       </div>
-                    </div>
+                    </article>
                   ))}
                 </div>
-              </div>
+              </section>
             ))}
           </div>
         </section>
 
-        <section className="py-16 px-4 bg-gradient-to-r from-blue-600 to-purple-600">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-8">Need More Information?</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-              <Link href="/#faq" className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">
-                View FAQ
-              </Link>
-              <Link href="/#contact-form" className="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">
-                Contact Us
-              </Link>
-              <Link href="/#enrollment" className="bg-white text-pink-600 px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all text-center">
-                Enroll Now
-              </Link>
+        <section className="px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-5xl">
+            <div className="fdc-panel bg-primary p-8 text-center text-primary-foreground sm:p-10">
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-white">
+                <Sparkles className="h-5 w-5" />
+              </span>
+              <h2 className="mt-5 text-3xl font-display font-bold">Need a resource that isn&apos;t listed yet?</h2>
+              <p className="mx-auto mt-3 max-w-2xl text-base leading-8 text-white/90">
+                Ask us for the form, guide, or answer you need. We can direct you to enrollment materials, policy details, or the right next step for your family.
+              </p>
+              <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+                <Link href="/#contact-form" className="inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-bold text-primary">
+                  Contact Us
+                </Link>
+                <Link href="/#enrollment" className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/35 px-6 text-sm font-bold text-white">
+                  Explore Enrollment
+                </Link>
+              </div>
             </div>
-          </div>
-        </section>
-
-        <section className="py-12 px-4">
-          <div className="max-w-3xl mx-auto bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Subscribe to our newsletter for parenting tips, activity ideas, and center updates
-            </p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-              />
-              <button type="submit" className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap">
-                Subscribe
-              </button>
-            </form>
           </div>
         </section>
       </main>

@@ -37,7 +37,7 @@ const heroInfoWarmChipBase = cn(
   'warm-button relative overflow-hidden group/cta shadow-md',
   'hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300',
   '!inline-flex !h-auto !min-h-0 !items-center !justify-start gap-3',
-  '!rounded-xl !py-3 !px-4 text-sm md:text-[0.9375rem]',
+  '!rounded-xl !py-3 !px-4 text-sm leading-snug md:text-[0.9375rem]',
 );
 
 /**
@@ -298,14 +298,14 @@ export function HomePageClient() {
           </div>
         </motion.div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-start gap-3 md:gap-12 pt-4 pb-12 sm:pt-8 sm:pb-12 lg:pt-12 lg:pb-20">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12 pt-4 pb-20 sm:pt-8 sm:pb-16 lg:pt-12 lg:pb-20">
           {/* Left Content Section - minimal on mobile: logo, h1, badge, CTAs */}
-          <div className="min-w-0 flex-1 order-1 flex flex-col items-start mt-10 sm:mt-20 md:mt-8 w-full">
+          <div className="min-w-0 flex-1 order-1 flex flex-col items-start mt-20 sm:mt-24 md:mt-8 w-full">
             {/* Badge - Enrollment Status with Download */}
             <motion.a
               href="/assets/Registration form 2026.pdf"
               download="Friendship-Corner-Daycare-Registration-2026.pdf"
-              className="inline-flex items-center gap-2 px-3 sm:px-6 py-2.5 sm:py-4 rounded-full mb-2 sm:mb-4 border-2 border-white/30 cursor-pointer group relative shadow-2xl overflow-visible"
+              className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-2xl border-2 border-white/30 px-3 py-2.5 sm:rounded-full sm:px-6 sm:py-4 mb-3 sm:mb-4 cursor-pointer group relative shadow-2xl overflow-visible"
               style={{ background: 'none', backdropFilter: 'none' }}
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -318,7 +318,7 @@ export function HomePageClient() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
               </span>
-              <span className="relative z-10 text-sm md:text-base font-extrabold text-white drop-shadow-lg tracking-wide uppercase" style={{ letterSpacing: '0.04em', textShadow: '0 2px 8px #000, 0 4px 16px #0006' }}>
+              <span className="relative z-10 min-w-0 text-xs sm:text-sm md:text-base font-extrabold text-white drop-shadow-lg tracking-wide uppercase" style={{ letterSpacing: '0.04em', textShadow: '0 2px 8px #000, 0 4px 16px #0006' }}>
                 {t('home.hero.badge')}
               </span>
               <Download className="w-4 h-4 text-white group-hover:animate-bounce drop-shadow-lg relative z-10" />
@@ -327,7 +327,7 @@ export function HomePageClient() {
             {/* Main Title with GSAP word animation */}
             <h1
               ref={heroTitleRef}
-              className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-3 sm:mb-4"
+              className="w-full max-w-4xl text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-3 sm:mb-4"
               style={{
                 textShadow: '0 2px 4px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.4), 0 8px 16px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.2)'
               }}
@@ -340,7 +340,7 @@ export function HomePageClient() {
             {/* Subtitle - Desktop only; mobile hero is minimal */}
             <motion.h2
               ref={subtitleRef}
-              className="hidden md:block text-sm sm:text-xl md:text-2xl mb-4 sm:mb-8 font-semibold leading-relaxed w-full vivid-children-font"
+              className="block text-sm sm:text-xl md:text-2xl mb-4 sm:mb-8 max-w-4xl font-semibold leading-relaxed w-full vivid-children-font"
               style={{ 
                 color: '#ffffff',
                 fontFamily: 'var(--font-display), var(--font-accent), "Comic Sans MS", "Comic Sans", "Baloo", "Fredoka", cursive, sans-serif',
@@ -360,7 +360,7 @@ export function HomePageClient() {
             {/* Warm-button info chips (parity with header Book a Tour); sm+; data-testid for e2e */}
             <motion.div
               data-testid="hero-info-chips"
-              className="mb-4 hidden w-full max-w-4xl min-w-0 grid-cols-2 gap-3 sm:mb-5 sm:grid sm:items-stretch sm:gap-3 md:mb-6"
+              className="mb-4 grid w-full max-w-5xl min-w-0 grid-cols-1 gap-3 sm:mb-5 sm:grid-cols-2 sm:items-stretch md:mb-6"
               initial="hidden"
               animate="visible"
               variants={{
@@ -393,7 +393,7 @@ export function HomePageClient() {
 
               <motion.div
                 data-testid="hero-info-chip-age"
-                className={cn(heroInfoWarmChipBase, 'min-w-0 w-full whitespace-nowrap')}
+                className={cn(heroInfoWarmChipBase, 'min-w-0 w-full')}
                 variants={heroInfoChipVariants}
               >
                 <HeroInfoWarmChipShine />
@@ -403,7 +403,7 @@ export function HomePageClient() {
                 <AnimatedHeroChipText
                   text={t('home.hero.ageRangeChip')}
                   splitWords={false}
-                  className="relative z-10 font-bold"
+                  className="relative z-10 min-w-0 flex-1 text-left font-bold"
                 />
               </motion.div>
 
@@ -421,7 +421,7 @@ export function HomePageClient() {
                 <AnimatedHeroChipText
                   text={businessProfile.telephone}
                   splitWords={false}
-                  className="relative z-10 font-bold tabular-nums"
+                  className="relative z-10 min-w-0 flex-1 break-all text-left font-bold tabular-nums"
                 />
               </motion.a>
 
@@ -439,21 +439,21 @@ export function HomePageClient() {
                 <AnimatedHeroChipText
                   text={businessProfile.email}
                   splitWords={false}
-                  className="relative z-10 min-w-0 max-w-full flex-1 overflow-x-auto overflow-y-hidden whitespace-nowrap text-left font-bold [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                  className="relative z-10 min-w-0 max-w-full flex-1 break-all text-left font-bold"
                 />
               </motion.a>
             </motion.div>
 
             {/* Hero CTA buttons (restored): wider + responsive */}
             <motion.div
-              className="grid w-full min-w-0 max-w-5xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3"
+              className="grid w-full min-w-0 max-w-6xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
               <motion.a
                 href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
-                className="group relative flex w-full min-w-0 items-center justify-between gap-3 overflow-hidden rounded-2xl border border-cyan-200/35 bg-[#0f1b2d]/88 px-4 py-3.5 text-white shadow-[0_14px_40px_rgba(2,6,23,0.42)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13233a]/92 hover:shadow-cyan-500/20"
+                className="group relative flex min-h-14 w-full min-w-0 items-center justify-between gap-3 overflow-hidden rounded-2xl border border-cyan-200/35 bg-[#0f1b2d]/88 px-4 py-3.5 text-white shadow-[0_14px_40px_rgba(2,6,23,0.42)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13233a]/92 hover:shadow-cyan-500/20"
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.99 }}
                 aria-label={t('home.hero.callNow')}
@@ -470,7 +470,7 @@ export function HomePageClient() {
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.99 }}>
                 <Link
                   href="/#programs"
-                  className="group relative flex w-full min-w-0 items-center justify-between gap-3 overflow-hidden rounded-2xl border border-orange-200/35 bg-zinc-900/85 px-4 py-3.5 text-white shadow-[0_14px_40px_rgba(2,6,23,0.42)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13233a]/92 hover:shadow-orange-500/20"
+                  className="group relative flex min-h-14 w-full min-w-0 items-center justify-between gap-3 overflow-hidden rounded-2xl border border-orange-200/35 bg-zinc-900/85 px-4 py-3.5 text-white shadow-[0_14px_40px_rgba(2,6,23,0.42)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13233a]/92 hover:shadow-orange-500/20"
                 >
                   <span className="flex min-w-0 items-center gap-3 text-left text-base font-bold">
                     <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-400/20 ring-1 ring-orange-200/60">
@@ -485,7 +485,7 @@ export function HomePageClient() {
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.99 }}>
                 <Link
                   href="/#contact-form"
-                  className="group relative flex w-full min-w-0 items-center justify-between gap-3 overflow-hidden rounded-2xl border border-fuchsia-200/35 bg-[#2a1638]/86 px-4 py-3.5 text-white shadow-[0_14px_40px_rgba(2,6,23,0.42)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13233a]/92 hover:shadow-fuchsia-500/20"
+                  className="group relative flex min-h-14 w-full min-w-0 items-center justify-between gap-3 overflow-hidden rounded-2xl border border-fuchsia-200/35 bg-[#2a1638]/86 px-4 py-3.5 text-white shadow-[0_14px_40px_rgba(2,6,23,0.42)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13233a]/92 hover:shadow-fuchsia-500/20"
                 >
                   <span className="flex min-w-0 items-center gap-3 text-left text-base font-bold">
                     <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fuchsia-400/20 ring-1 ring-fuchsia-200/60">
@@ -528,7 +528,7 @@ export function HomePageClient() {
           </div>
         </div>
 
-        <Link href="/#about" className="absolute bottom-8 sm:bottom-16 left-1/2 -translate-x-1/2 text-white hover:text-white text-xs uppercase tracking-widest font-bold flex flex-col items-center gap-1 z-20" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.6)' }}>
+        <Link href="/#about" className="absolute bottom-8 sm:bottom-16 left-1/2 hidden -translate-x-1/2 text-white hover:text-white text-xs uppercase tracking-widest font-bold sm:flex flex-col items-center gap-1 z-20" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.6)' }}>
           {t('home.hero.scrollToAbout')}
           <svg className="w-5 h-5 animate-bounce drop-shadow-2xl" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
         </Link>

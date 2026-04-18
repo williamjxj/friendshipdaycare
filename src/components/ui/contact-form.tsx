@@ -87,6 +87,9 @@ export function ContactForm({
   const labelClass = "block text-sm sm:text-base font-bold text-foreground mb-1.5";
 
   const isHero = variant === 'hero';
+  const fieldGridClass = isHero
+    ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4'
+    : 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4';
 
   return (
     <form
@@ -109,7 +112,7 @@ export function ContactForm({
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <div className={fieldGridClass}>
         <div className="space-y-1.5">
           <label htmlFor={`${idPrefix}-name`} className={labelClass}>
             {t('contactPage.form.fields.name')} *
@@ -167,7 +170,7 @@ export function ContactForm({
             name="childAge"
             value={formData.childAge}
             onChange={handleChange}
-            className={`${inputBase} ${inputNormal} cursor-pointer`}
+            className={`${inputBase} ${inputNormal} cursor-pointer !pr-10 sm:!pr-12 text-left max-w-full`}
           >
             <option value="">{t('contactPage.form.options.agePlaceholder')}</option>
             <option value="30months-3years">{t('contactPage.form.options.ageToddler')}</option>

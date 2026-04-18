@@ -693,7 +693,8 @@
     },
     "info": {
       "title": "Get in Touch",
-      "description": "We'd love to hear from you! Whether you have questions about our programs, want to schedule a visit, or are ready to enroll your child, we're here to help."
+      "description": "We'd love to hear from you! Whether you have questions about our programs, want to schedule a visit, or are ready to enroll your child, we're here to help.",
+      "badgeLabel": "Contact us: friendship.care@live.ca"
     },
     "cards": {
       "phone": {

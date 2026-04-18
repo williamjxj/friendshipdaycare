@@ -575,7 +575,8 @@
     },
     "info": {
       "title": "Ponte en Contacto",
-      "description": "Estamos aquí para ayudarte con preguntas, visitas o inscripciones."
+      "description": "Estamos aquí para ayudarte con preguntas, visitas o inscripciones.",
+      "badgeLabel": "Contáctanos: friendship.care@live.ca"
     },
     "cards": {
       "phone": {

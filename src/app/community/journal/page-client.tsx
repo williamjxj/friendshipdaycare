@@ -1,183 +1,179 @@
 'use client';
 
 import { Suspense } from 'react';
-import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { getImageUrl } from '@/lib/image-utils';
 import { motion } from 'framer-motion';
-import { Calendar, ArrowRight } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import { ArrowRight, Calendar, NotebookTabs, Sparkles } from 'lucide-react';
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { AnimatedPlaceholder } from '@/components/ui/AnimatedPlaceholder';
+import { BrandLogoMark } from '@/components/ui/brand-visual-assets';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 
-// Sample journal data
 const sampleJournals = [
-    {
-        id: 1,
-        month: 'December',
-        year: 2024,
-        title: 'Winter Wonderland Adventures',
-        excerpt: 'This month, our little explorers discovered the magic of winter through hands-on Montessori activities, seasonal crafts, and cozy story times.',
-        coverImage: getImageUrl('/images/journal-dec-2024.jpg'),
-        date: '2024-12-01',
-        highlights: [
-            'Winter sensory bins with snow and ice',
-            'Holiday traditions from around the world',
-            'Practical life: Making hot chocolate',
-            'Nature walks to observe winter changes'
-        ],
-        activities: [
-            'Snowflake cutting and symmetry exploration',
-            'Winter animal habitat studies',
-            'Seasonal cooking activities',
-            'Holiday card making for families'
-        ]
-    },
-    {
-        id: 2,
-        month: 'November',
-        year: 2024,
-        title: 'Gratitude and Harvest Celebrations',
-        excerpt: 'November brought us opportunities to explore gratitude, harvest traditions, and the changing seasons through meaningful Montessori experiences.',
-        coverImage: '/images/journal-nov-2024.jpg',
-        date: '2024-11-01',
-        highlights: [
-            'Thanksgiving feast preparation',
-            'Gratitude tree classroom project',
-            'Autumn leaf collection and classification',
-            'Community helper appreciation week'
-        ],
-        activities: [
-            'Pumpkin lifecycle studies',
-            'Traditional bread making',
-            'Fall nature art projects',
-            'Thank you card writing practice'
-        ]
-    },
-    {
-        id: 3,
-        month: 'October',
-        year: 2024,
-        title: 'Autumn Discoveries and Halloween Fun',
-        excerpt: 'October was filled with autumn explorations, Halloween celebrations, and exciting discoveries about the changing world around us.',
-        coverImage: '/images/journal-oct-2024.jpg',
-        date: '2024-10-01',
-        highlights: [
-            'Pumpkin patch field trip',
-            'Halloween costume parade',
-            'Apple harvesting and tasting',
-            'Leaf pressing and art creation'
-        ],
-        activities: [
-            'Pumpkin carving (teacher demonstration)',
-            'Spooky story time sessions',
-            'Autumn sensory exploration',
-            'Harvest festival preparations'
-        ]
-    }
+  {
+    id: 1,
+    month: 'December',
+    year: 2024,
+    title: 'Winter Wonderland Adventures',
+    excerpt: 'This month, our little explorers discovered the magic of winter through hands-on Montessori activities, seasonal crafts, and cozy story times.',
+    date: '2024-12-01',
+    highlights: [
+      'Winter sensory bins with snow and ice',
+      'Holiday traditions from around the world',
+      'Practical life: Making hot chocolate',
+      'Nature walks to observe winter changes'
+    ],
+  },
+  {
+    id: 2,
+    month: 'November',
+    year: 2024,
+    title: 'Gratitude and Harvest Celebrations',
+    excerpt: 'November brought us opportunities to explore gratitude, harvest traditions, and the changing seasons through meaningful Montessori experiences.',
+    date: '2024-11-01',
+    highlights: [
+      'Thanksgiving feast preparation',
+      'Gratitude tree classroom project',
+      'Autumn leaf collection and classification',
+      'Community helper appreciation week'
+    ],
+  },
+  {
+    id: 3,
+    month: 'October',
+    year: 2024,
+    title: 'Autumn Discoveries and Halloween Fun',
+    excerpt: 'October was filled with autumn explorations, Halloween celebrations, and exciting discoveries about the changing world around us.',
+    date: '2024-10-01',
+    highlights: [
+      'Pumpkin patch field trip',
+      'Halloween costume parade',
+      'Apple harvesting and tasting',
+      'Leaf pressing and art creation'
+    ],
+  }
 ];
 
 export default function JournalPageClient() {
-    const { t, messages } = useLanguage();
-    const journals = (messages.community?.journal?.samples ?? sampleJournals) as typeof sampleJournals;
+  const { t, messages } = useLanguage();
+  const journals = (messages.community?.journal?.samples ?? sampleJournals) as typeof sampleJournals;
 
-    useLocalizedMetadata({
-        title: t('community.journal.meta.title'),
-        description: t('community.journal.meta.description'),
-    });
+  useLocalizedMetadata({
+    title: t('community.journal.meta.title'),
+    description: t('community.journal.meta.description'),
+  });
 
-    return (
-        <Suspense fallback={<LoadingSpinner message="Loading journal..." />}>
-            <main className="flex-1 bg-background">
+  return (
+    <Suspense fallback={<LoadingSpinner message="Loading journal..." />}>
+      <main className="fdc-section-shell flex-1 overflow-x-hidden bg-background pb-20 pt-20">
+        <section className="fdc-page-hero px-4 py-14 sm:px-6 sm:py-18 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="fdc-hero-grid">
+              <div className="relative z-10 space-y-6">
+                <span className="fdc-kicker">Community Journal</span>
+                <h1 className="max-w-4xl text-4xl font-display font-bold leading-[0.98] text-slate-900 sm:text-5xl lg:max-w-5xl lg:text-6xl">
+                  A warmer look at what our classrooms feel like month to month.
+                </h1>
+                <p className="max-w-4xl text-base leading-8 text-slate-700 sm:text-lg">
+                  {t('community.journal.hero.subtitle')}
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <span className="fdc-stat-chip">
+                    <NotebookTabs className="h-4.5 w-4.5 text-primary" />
+                    <span className="text-sm font-semibold text-foreground">Monthly snapshots</span>
+                  </span>
+                  <span className="fdc-stat-chip">
+                    <Sparkles className="h-4.5 w-4.5 text-primary" />
+                    <span className="text-sm font-semibold text-foreground">Activities + highlights</span>
+                  </span>
+                </div>
+              </div>
+              <div className="relative z-10 flex justify-center lg:justify-end">
+                <div className="fdc-panel flex items-center gap-5 px-6 py-6 sm:px-8">
+                  <BrandLogoMark size="lg" />
+                  <div className="space-y-2">
+                    <p className="text-sm font-semibold uppercase tracking-[0.12em] text-primary">Inside Friendship Corner</p>
+                    <p className="max-w-xs text-sm leading-7 text-muted-foreground">
+                      Stories, themes, and classroom moments that help families stay connected to the rhythm of the daycare.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                {/* Page Header - no decorative hero */}
-                <section className="py-12 sm:py-16 bg-muted/20">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground">
-                            {t('community.journal.hero.title')}
-                        </h1>
-                        <p className="mt-2 text-lg text-muted-foreground">
-                            {t('community.journal.hero.subtitle')}
+        <section className="px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            {journals.length > 0 ? (
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+                {journals.map((journal, index) => (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.08 }}
+                    key={journal.id}
+                    className="flex"
+                  >
+                    <Card variant="interactive" className="fdc-panel w-full overflow-hidden border-0">
+                      <CardHeader className="relative h-48 overflow-hidden border-b border-border/60 p-0">
+                        <AnimatedPlaceholder className="absolute inset-0 z-0" />
+                        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">
+                          <div className="mb-3 text-4xl animate-[magic-float_4s_ease-in-out_infinite]">📖</div>
+                          <span className="text-lg font-bold text-primary">{journal.month} {journal.year}</span>
+                        </div>
+                      </CardHeader>
+
+                      <CardContent className="flex flex-1 flex-col p-6">
+                        <CardDescription className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-muted-foreground">
+                          <Calendar className="h-3.5 w-3.5" />
+                          {journal.date}
+                        </CardDescription>
+                        <CardTitle className="mt-3 text-2xl font-display font-bold text-foreground">
+                          {journal.title}
+                        </CardTitle>
+                        <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                          {journal.excerpt}
                         </p>
-                    </div>
-                </section>
 
-                {/* Journals Grid */}
-                <section className="py-20 bg-background relative z-10">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        {journals.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {journals.map((journal, index) => (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: index * 0.1 }}
-                                        key={journal.id}
-                                        className="flex"
-                                    >
-                                        <Card variant="interactive" className="overflow-hidden flex flex-col h-full w-full">
-                                            {/* Card Header Illustration/Image Placeholder */}
-                                            <CardHeader className="p-0 relative h-48 bg-muted grid place-items-center overflow-hidden border-b border-border">
-                                                <AnimatedPlaceholder className="absolute inset-0 z-0" />
-                                                <div className="relative z-10 text-center transition-transform duration-300 group-hover:scale-110">
-                                                    <div className="text-4xl mb-2 animate-[magic-float_4s_ease-in-out_infinite]">📖</div>
-                                                    <span className="font-bold text-primary text-lg">{journal.month} {journal.year}</span>
-                                                </div>
-                                            </CardHeader>
+                        <div className="mt-5 rounded-[1.25rem] bg-muted/55 p-4">
+                          <h3 className="text-xs font-bold uppercase tracking-[0.1em] text-foreground">
+                            {t('community.journal.labels.highlights')}
+                          </h3>
+                          <ul className="fdc-dot-list mt-3">
+                            {journal.highlights.slice(0, 3).map((highlight) => (
+                              <li key={highlight}>{highlight}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </CardContent>
 
-                                            <CardContent className="p-6 space-y-4 flex flex-col flex-1">
-                                                <div className="space-y-1">
-                                                    <CardDescription className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                                                        <Calendar className="w-3 h-3" />
-                                                        {journal.date}
-                                                    </CardDescription>
-                                                    <CardTitle className="text-xl font-bold text-foreground">
-                                                        {journal.title}
-                                                    </CardTitle>
-                                                </div>
-
-                                                <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
-                                                    {journal.excerpt}
-                                                </p>
-
-                                                <div className="pt-4 mt-auto">
-                                                    <h4 className="text-xs font-bold text-foreground mb-2 uppercase tracking-wide">{t('community.journal.labels.highlights')}</h4>
-                                                    <ul className="space-y-1.5">
-                                                        {journal.highlights.slice(0, 3).map((highlight, idx) => (
-                                                            <li key={idx} className="flex items-start gap-2 text-xs text-muted-foreground">
-                                                                <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1 shrink-0"></span>
-                                                                <span>{highlight}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            </CardContent>
-
-                                            <CardFooter className="p-6 pt-0 mt-auto">
-                                                <span className="inline-flex items-center justify-center w-full gap-2 bg-muted text-muted-foreground px-4 py-3 rounded-lg font-bold text-sm min-h-[44px] cursor-default">
-                                                    {t('community.journal.actions.readFull')}
-                                                    <ArrowRight className="w-4 h-4" />
-                                                </span>
-                                            </CardFooter>
-                                        </Card>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="text-center py-20 bg-muted/30 rounded-3xl border border-dashed border-border">
-                                <div className="text-6xl mb-6 opacity-50">📝</div>
-                                <h3 className="text-2xl font-bold text-foreground mb-2">
-                                    {t('community.journal.empty.title')}
-                                </h3>
-                                <p className="text-muted-foreground">
-                                    {t('community.journal.empty.subtitle')}
-                                </p>
-                            </div>
-                        )}
-                    </div>
-                </section>
-            </main>
-        </Suspense>
-    );
+                      <CardFooter className="p-6 pt-0">
+                        <span className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-primary/10 px-4 text-sm font-bold text-primary">
+                          {t('community.journal.actions.readFull')}
+                          <ArrowRight className="h-4 w-4" />
+                        </span>
+                      </CardFooter>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
+              <div className="fdc-panel px-6 py-16 text-center">
+                <div className="text-6xl opacity-50">📝</div>
+                <h3 className="mt-6 text-2xl font-display font-bold text-foreground">
+                  {t('community.journal.empty.title')}
+                </h3>
+                <p className="mt-2 text-muted-foreground">
+                  {t('community.journal.empty.subtitle')}
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      </main>
+    </Suspense>
+  );
 }

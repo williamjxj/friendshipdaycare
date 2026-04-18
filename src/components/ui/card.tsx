@@ -1,26 +1,30 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { MagneticButton } from "./magnetic-button"
 
-/** BestIT Case Studies card style: flat, shadow → shadow-xl on hover, no scale/3D */
-const bestitCardClasses =
-  "rounded-xl shadow group hover:shadow-2xl hover:scale-[1.035] hover:bg-white/70 dark:hover:bg-card/90 transition-all duration-300 border-0 bg-white/50 dark:bg-card/80 backdrop-blur-sm overflow-hidden relative overflow-hidden";
+const cardShellClasses =
+  "group fdc-card-surface relative overflow-hidden rounded-xl text-card-foreground shadow-sm transition-[transform,box-shadow,border-color,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform fdc-card-reveal";
+
+const interactiveCardClasses =
+  "cursor-pointer border border-border/80 bg-card/90 backdrop-blur-sm hover:-translate-y-1 hover:border-primary/30 hover:shadow-2xl dark:bg-card/80";
+
+const premiumCardClasses =
+  "border border-border/70 bg-linear-to-br from-primary/[0.06] via-card to-secondary/[0.08] backdrop-blur-md hover:-translate-y-1 hover:border-primary/25 hover:shadow-2xl";
 
 const cardVariants = cva(
-  "group rounded-xl text-card-foreground shadow transition-all duration-300",
+  cardShellClasses,
   {
     variants: {
       variant: {
         default: "border border-border bg-card",
         outlined: "border-2 border-border bg-card",
-        elevated: "shadow-md hover:shadow-xl bg-card",
-        gradient: "bg-gradient-to-br from-primary/5 to-secondary/5 border-none",
-        feature: "rounded-[var(--radius-lg)] shadow-lg border-none bg-card p-1",
+        elevated: "border border-border/80 bg-card shadow-md hover:shadow-xl",
+        gradient: "border border-border/60 bg-linear-to-br from-primary/5 via-card to-secondary/5",
+        feature: "rounded-[var(--radius-lg)] border border-border/60 bg-card p-1 shadow-lg",
         data: "rounded-md border border-border/50 bg-muted/20 shadow-none",
-        interactive: bestitCardClasses + " cursor-pointer",
-        premium: bestitCardClasses,
-        clay: bestitCardClasses,
+        interactive: interactiveCardClasses,
+        premium: premiumCardClasses,
+        clay: premiumCardClasses,
       },
     },
     defaultVariants: {
@@ -37,17 +41,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant, children, ...props }, ref) => (
     <div
       ref={ref}
+      data-variant={variant ?? "default"}
       className={cn(cardVariants({ variant, className }))}
       {...props}
     >
-      {/* MagneticButton demo for interactive cards */}
-      {variant === "interactive" && (
-        <div className="absolute top-4 right-4 z-10">
-          <MagneticButton strength={0.5} className="px-4 py-2 bg-primary text-primary-foreground rounded-full shadow-lg">
-            Try Me
-          </MagneticButton>
-        </div>
-      )}
       {children}
     </div>
   )
@@ -73,7 +70,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-2xl font-semibold leading-none tracking-tight font-rubik transition-colors group-hover:text-primary",
+      "text-2xl font-semibold leading-none tracking-tight font-rubik transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:text-primary",
       className
     )}
     {...props}

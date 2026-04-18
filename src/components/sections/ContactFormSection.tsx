@@ -24,7 +24,10 @@ import {
   sectionGridDotPresets,
   useSectionGridDotHover,
 } from '@/components/ui/GridAndDotBackgrounds';
+import { BrandCanvaClassroomPhoto } from '@/components/ui/brand-visual-assets';
+import { cn } from '@/lib/utils';
 import { faqItems, FAQ_INITIAL_COUNT } from '@/data/faq';
+import { AuroraBackground } from '@/components/ui/aurora-background';
 
 /**
  * Contact section for single-page app: form, map, hours, FAQ.
@@ -70,28 +73,57 @@ export function ContactFormSection() {
       <motion.section
         id="contact-form"
         ref={formRef}
-        className="relative py-20 bg-card overflow-hidden"
+        className="relative py-20 bg-card overflow-visible"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
         {...contactFormGridDotHoverProps}
       >
+        <AuroraBackground className="opacity-70" palette="sunrise" blur={200} />
         <GridAndDotBackgrounds
           backdropOnly
           isSectionHovered={contactFormBgHovered}
           {...sectionGridDotPresets.contactForm}
         />
         <div className="relative z-10 w-full max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
-          <Card
-            variant="premium"
-            className={`w-full min-w-0 bg-white/50 dark:bg-card/80 backdrop-blur-sm p-8 sm:p-12 lg:p-14 scroll-mt-20 border-2 shadow-xl hover:shadow-2xl transition-all duration-300 ${highlightForm
-              ? 'border-primary/80 ring-4 ring-primary/30 animate-pulse'
-              : 'border-border/50'
-              }`}
-          >
-            <ContactForm variant="section" idPrefix="contact" />
-          </Card>
+          <div className="group flex w-full min-w-0 flex-col gap-10 xl:flex-row xl:items-stretch xl:gap-10">
+            {/* Match EnrollmentProcessStepCard: shadow-lg → hover:shadow-2xl, tint + primary wash (no premium scale/blur). */}
+            <div
+              className={cn(
+                'group relative w-full min-w-0 flex-1 overflow-hidden rounded-2xl border-2 bg-card p-8 sm:p-12 lg:p-14 scroll-mt-20 shadow-lg transition-all duration-300 hover:shadow-2xl xl:min-w-0 xl:flex-[1.35]',
+                highlightForm
+                  ? 'border-primary/80 ring-4 ring-primary/30 animate-pulse'
+                  : 'border-border',
+              )}
+            >
+              <div
+                className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-br from-muted/40 via-transparent to-primary/6 dark:from-muted/25 dark:via-transparent dark:to-primary/10"
+                aria-hidden
+              />
+              <div className="relative z-10 min-w-0">
+                <ContactForm variant="section" idPrefix="contact" />
+              </div>
+              <div className="pointer-events-none absolute inset-0 z-1 rounded-2xl bg-linear-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            </div>
+            <div className="flex w-full shrink-0 justify-center max-w-md mx-auto xl:w-[min(100%,340px)] xl:max-w-[min(100%,340px)] xl:flex-none xl:mx-0 xl:justify-end xl:self-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.08 }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full max-w-72 xl:max-w-80"
+              >
+                <BrandCanvaClassroomPhoto
+                  badgeLabel={t('contactPage.info.badgeLabel')}
+                  className="w-full max-w-full"
+                  imageClassName="aspect-3/4 min-h-0 h-72 sm:h-80 w-full"
+                  badgeClassName="bottom-3 right-3 w-auto max-w-[78%] rotate-0 px-3 py-2 ring-2 ring-white/70 shadow-xl"
+                  priority
+                />
+              </motion.div>
+            </div>
+          </div>
         </div>
       </motion.section>
 
@@ -104,6 +136,7 @@ export function ContactFormSection() {
         variants={staggerContainerMagic}
         {...contactInfoGridDotHoverProps}
       >
+        <AuroraBackground className="opacity-80" palette="forest" blur={200} />
         <GridAndDotBackgrounds
           backdropOnly
           isSectionHovered={contactInfoBgHovered}

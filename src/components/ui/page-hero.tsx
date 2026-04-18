@@ -42,12 +42,10 @@ export function PageHero({
   className,
   children,
   enableScrollTrigger = true,
-  staggerDelay = 0.2,
   fullScreen = false,
   backgroundPosition = 'center',
   hideSubtitle = false,
   hideTitle = false,
-  showCurve = true,
   unoptimized = false,
   topContent,
 }: PageHeroProps & { hideSubtitle?: boolean; hideTitle?: boolean; showCurve?: boolean }) {
@@ -147,7 +145,7 @@ export function PageHero({
     <section
       ref={heroRef}
       className={cn(
-        'relative flex items-center justify-center',
+        'fdc-page-hero relative flex items-center justify-center',
         fullScreen
           ? 'h-screen min-h-[600px] overflow-hidden'
           : 'min-h-[320px] sm:min-h-[380px] md:aspect-[21/8] md:min-h-[360px] py-8 sm:py-10 overflow-x-hidden overflow-y-visible',
@@ -230,14 +228,14 @@ export function PageHero({
 
         {/* Overlay for text readability - only show if text is not hidden */}
         {(!hideTitle || !hideSubtitle) && (
-          <div className="absolute inset-0 bg-black/20 z-20" />
+          <div className="absolute inset-0 z-20 bg-[linear-gradient(180deg,rgba(15,23,42,0.1),rgba(15,23,42,0.24))]" />
         )}
       </div>
 
       {/* Content Layer - min-w-0 and overflow-hidden prevent mobile overflow */}
       <div
         ref={contentRef}
-        className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hero-text min-w-0 w-full overflow-hidden h-full flex flex-col justify-center text-center"
+        className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hero-text min-w-0 w-full overflow-hidden h-full flex flex-col justify-center text-center lg:text-left"
       >
         {/* Top-positioned Breadcrumbs */}
         {topContent && (
@@ -246,14 +244,11 @@ export function PageHero({
           </div>
         )}
 
-        <div className="space-y-6 md:space-y-8 min-w-0 text-center lg:text-center max-w-7xl mx-auto mt-8 md:mt-12">
+        <div className="mt-8 max-w-6xl min-w-0 space-y-5 md:mt-12 md:space-y-7 lg:max-w-[72rem]">
           {!hideTitle && (
             <h1
               ref={titleRef}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] drop-shadow-2xl break-words tracking-tight"
-              style={{
-                fontFamily: 'var(--font-baloo)',
-              }}
+              className="max-w-[18ch] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.02] drop-shadow-2xl break-words tracking-tight text-white lg:max-w-none"
             >
               <span className="block mb-2">
                 {(() => {
@@ -286,7 +281,7 @@ export function PageHero({
           {subtitle && !hideSubtitle && (
             <h2
               ref={subtitleRef}
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white/95 leading-snug drop-shadow-lg hero-subtitle break-words max-w-5xl mx-auto"
+              className="hero-subtitle max-w-5xl text-balance text-lg font-medium leading-snug text-white/95 drop-shadow-lg sm:text-xl md:text-2xl lg:max-w-[66rem] lg:text-[1.9rem]"
               style={{
                 fontFamily: 'var(--font-fredoka)',
                 letterSpacing: '0.01em',
@@ -301,7 +296,7 @@ export function PageHero({
             descriptionContent ? (
               descriptionContent
             ) : (
-              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-white/90 leading-relaxed drop-shadow-md max-w-4xl mx-auto"
+              <h3 className="max-w-4xl text-base font-normal leading-relaxed text-white/90 drop-shadow-md sm:text-lg md:text-xl lg:max-w-[60rem] lg:text-2xl"
                 style={{
                   fontFamily: 'var(--font-fredoka)',
                   letterSpacing: '0.01em',
@@ -313,7 +308,7 @@ export function PageHero({
           )}
 
           {children && (
-            <div className="pt-6 md:pt-10 hero-children w-full max-w-full min-w-0 flex justify-center">
+            <div className="hero-children flex w-full max-w-full min-w-0 justify-center pt-6 md:pt-10 lg:justify-start">
               {children}
             </div>
           )}
@@ -337,4 +332,3 @@ export function PageHero({
     </section >
   );
 }
-

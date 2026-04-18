@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Facebook,
@@ -19,16 +18,40 @@ import { businessProfile } from '@/lib/business-profile';
 export function Footer() {
   const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
-  // In a real app, this would be the deployed domain. Using a placeholder or internal logic.
   const siteUrl = businessProfile.url;
 
   return (
-    <footer className="bg-slate-50 border-t border-border/50 pt-6 sm:pt-16 lg:pt-20 pb-4 sm:pb-8 overflow-x-hidden">
+    <footer className="relative overflow-x-hidden border-t border-border/50 bg-[linear-gradient(180deg,rgba(255,255,255,0.55),rgba(241,245,249,0.95))] pt-8 sm:pt-16 lg:pt-20 pb-4 sm:pb-8">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top,rgba(96,165,250,0.18),transparent_58%)]" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12 mb-6 sm:mb-12">
+        <div className="fdc-panel mb-6 px-5 py-6 sm:mb-12 sm:px-8 sm:py-8 lg:px-10">
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,1.6fr)_auto] lg:items-center">
+            <div className="min-w-0 max-w-5xl space-y-2">
+              <span className="fdc-kicker">Tri-Cities Families Since 2008</span>
+              <h2 className="max-w-4xl text-2xl sm:text-3xl lg:text-[2.2rem] font-display font-bold text-foreground leading-tight">
+                Montessori care with clear communication, warm routines, and a campus families remember.
+              </h2>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 lg:justify-self-end">
+              <a
+                href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-bold text-primary-foreground shadow-[0_16px_30px_rgba(59,130,246,0.26)]"
+              >
+                Call {businessProfile.telephone}
+              </a>
+              <Link
+                href="/#contact-form"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary/30 bg-white/80 px-5 text-sm font-bold text-primary"
+              >
+                Book a Tour
+              </Link>
+            </div>
+          </div>
+        </div>
 
-          {/* Column 1: Brand & Social */}
-          <div className="space-y-3 sm:space-y-6">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 sm:gap-8 lg:gap-10 mb-6 sm:mb-12">
+
+          <div className="fdc-panel-soft p-5 sm:p-6 space-y-4 sm:space-y-6">
             <Link href="/" className="flex items-center space-x-3 group w-fit">
               <div className="relative w-10 h-10 sm:w-12 sm:h-12 shrink-0 transition-transform duration-300 group-hover:scale-110">
                 <Image
@@ -53,8 +76,9 @@ export function Footer() {
                 <Image
                   src="/daycare-logo.png"
                   alt="Friendship Corner Daycare"
-                  fill
-                  className="object-contain"
+                  width={96}
+                  height={96}
+                  className="h-auto w-full object-contain"
                   sizes="96px"
                 />
               </div>
@@ -99,8 +123,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Quick Links (matches top navigation) - hidden on mobile */}
-          <div className="hidden md:block min-w-0">
+          <div className="fdc-panel-soft hidden min-w-0 p-5 sm:block sm:p-6">
             <h3 className="footer-section-title text-foreground mb-2 sm:mb-6">{t('footer.quickLinks.title')}</h3>
             <ul className="space-y-2 sm:space-y-3">
               <li>
@@ -148,8 +171,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Contact Info */}
-          <div className="min-w-0">
+          <div className="fdc-panel-soft min-w-0 p-5 sm:p-6">
             <h3 className="footer-section-title text-foreground mb-2 sm:mb-6">{t('footer.contact.title')}</h3>
             <ul className="space-y-2 sm:space-y-4">
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -181,8 +203,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Mobile Access (QR Code) */}
-          <div className="text-center md:text-left min-w-0">
+          <div className="fdc-panel-soft min-w-0 p-5 text-center md:text-left sm:p-6">
             <h3 className="footer-section-title text-foreground mb-2 sm:mb-4 flex items-center justify-center md:justify-start gap-2">
               <Smartphone className="w-5 h-5 text-primary shrink-0" />
               {t('footer.mobileAccess.title')}
@@ -201,7 +222,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-border pt-4 sm:pt-8 flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4 text-xs text-muted-foreground text-center md:text-left">
+        <div className="border-t border-border/70 pt-4 sm:pt-8 flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4 text-xs text-muted-foreground text-center md:text-left">
           <div className="flex flex-col md:flex-row items-center gap-1.5 sm:gap-4">
             <p className="break-words">&copy; {currentYear} {t('footer.brandName')}. {t('footer.rightsReserved')}</p>
             <span className="hidden md:inline text-muted-foreground/40">|</span>
