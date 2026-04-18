@@ -166,7 +166,9 @@ export function PageLoader({ message = 'Loading magical content...' }: { message
       delay: Math.random() * 2,
       char: chars[i]
     }));
-    setFloatingElements(elements);
+    queueMicrotask(() => {
+      setFloatingElements(elements);
+    });
   }, []);
 
   return (

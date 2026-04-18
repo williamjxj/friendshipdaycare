@@ -49,14 +49,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('violet');
 
   useEffect(() => {
-    // Load theme from localStorage on mount
-    const savedTheme = localStorage.getItem('daycare-theme') as Theme;
-    if (savedTheme && themes.some(t => t.value === savedTheme)) {
-      setTheme(savedTheme);
-    } else {
-      // Set violet as default for new users
-      setTheme('violet');
-    }
+    queueMicrotask(() => {
+      const savedTheme = localStorage.getItem('daycare-theme') as Theme;
+      if (savedTheme && themes.some((t) => t.value === savedTheme)) {
+        setTheme(savedTheme);
+      } else {
+        setTheme('violet');
+      }
+    });
   }, []);
 
   useEffect(() => {

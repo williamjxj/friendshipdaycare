@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { getPlaceholderUrl } from '@/lib/image-utils';
@@ -103,9 +104,6 @@ const ENVIRONMENT_DATA: EnvironmentImageSet[] = [
   }
 ];
 
-
-// ... existing imports
-
 const getCategories = (t: (key: string) => string) => [
   { id: 'all', name: t('home.realEnvironment.categories.all'), icon: School },
   { id: 'montessori', name: t('home.realEnvironment.categories.montessori'), icon: BookOpen },
@@ -113,7 +111,7 @@ const getCategories = (t: (key: string) => string) => [
   { id: 'activities', name: t('home.realEnvironment.categories.activities'), icon: Palette }
 ] as const;
 
-function CardCarousel({ images, category }: { images: { src: string; alt: string }[], category: string }) {
+function CardCarousel({ images }: { images: { src: string; alt: string }[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -134,7 +132,9 @@ function CardCarousel({ images, category }: { images: { src: string; alt: string
   useEffect(() => {
     if (!emblaApi) return;
     emblaApi.on('select', onSelect);
-    onSelect();
+    queueMicrotask(() => {
+      onSelect();
+    });
   }, [emblaApi, onSelect]);
 
   // Auto-play functionality - only when hovered
@@ -246,7 +246,7 @@ export function RealEnvironmentShowcase() {
           {categories.map((category) => (
             <button
               key={category.id}
-              onClick={() => setSelectedCategory(category.id as any)}
+              onClick={() => setSelectedCategory(category.id)}
               className={`flex items-center space-x-3 px-8 py-4 rounded-full font-bold text-sm md:text-base transition-all duration-300 border-2 cursor-pointer ${selectedCategory === category.id
                 ? 'bg-primary text-primary-foreground border-primary shadow-xl ring-4 ring-primary/20 hover:ring-primary/30'
                 : 'bg-white/70 dark:bg-card/70 backdrop-blur-md text-muted-foreground border-border/50 hover:bg-white dark:hover:bg-card hover:border-primary/50 hover:shadow-xl transition-all duration-300'
@@ -269,7 +269,7 @@ export function RealEnvironmentShowcase() {
               }}
             >
               <div className="relative h-80 lg:h-96 overflow-hidden shrink-0 group/image min-w-0">
-                <CardCarousel images={item.images} category={item.category} />
+                <CardCarousel images={item.images} />
               </div>
 
               <div className="p-8 lg:p-10 space-y-5 flex flex-col flex-grow relative bg-gradient-to-b from-white to-muted/20 dark:from-card dark:to-muted/10 transition-colors duration-300">
@@ -307,18 +307,18 @@ export function RealEnvironmentShowcase() {
               {t('home.realEnvironment.cta.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a
+              <Link
                 href="/#contact-form"
                 className="btn-premium text-lg px-10 py-5 transition-all duration-300"
               >
                 {t('home.realEnvironment.cta.scheduleVisit')}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#gallery"
                 className="inline-flex items-center justify-center px-10 py-5 rounded-full border-2 border-primary text-primary font-bold text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow hover:shadow-xl"
               >
                 {t('home.realEnvironment.cta.viewGallery')}
-              </a>
+              </Link>
             </div>
           </div>
         </div>

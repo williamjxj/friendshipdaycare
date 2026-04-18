@@ -40,7 +40,9 @@ export function TestimonialsCarousel() {
 
   useEffect(() => {
     if (!emblaApi) return;
-    onSelect();
+    queueMicrotask(() => {
+      onSelect();
+    });
     emblaApi.on('select', onSelect);
     return () => {
       emblaApi.off('select', onSelect);
@@ -119,12 +121,13 @@ export function TestimonialsCarousel() {
                     </div>
                     <footer className="flex items-center gap-3 mt-4 pt-4 border-t border-border/50">
                       {t.authorImageUrl ? (
-                        <img
+                        <Image
                           src={t.authorImageUrl}
                           alt=""
-                          className="w-12 h-12 rounded-full object-cover shrink-0 ring-2 ring-primary/10"
                           width={48}
                           height={48}
+                          unoptimized
+                          className="w-12 h-12 rounded-full object-cover shrink-0 ring-2 ring-primary/10"
                         />
                       ) : (
                         <div

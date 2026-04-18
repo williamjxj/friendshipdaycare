@@ -74,12 +74,13 @@ function TestimonialCard({
       </div>
       <footer className="flex items-center gap-2 pt-2 border-t border-border/50">
         {authorImageUrl ? (
-          <img
+          <Image
             src={authorImageUrl}
             alt=""
-            className="w-8 h-8 rounded-full object-cover shrink-0 ring-2 ring-primary/10"
             width={32}
             height={32}
+            unoptimized
+            className="w-8 h-8 rounded-full object-cover shrink-0 ring-2 ring-primary/10"
           />
         ) : (
           <div

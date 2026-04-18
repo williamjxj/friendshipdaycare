@@ -135,7 +135,8 @@ export function buildPageMetadata({
     ogPath.startsWith("http") ? ogPath : `${SEO_BASE_URL}${ogPath.startsWith("/") ? ogPath : `/${ogPath}`}`;
   
   // Ensure path is absolute URL for canonical and OpenGraph
-  const canonicalUrl = path.startsWith('http') ? path : `${SEO_BASE_URL}${path}`;
+  const pathSegment = path.startsWith('http') ? '' : path.startsWith('/') ? path : `/${path}`;
+  const canonicalUrl = path.startsWith('http') ? path : `${SEO_BASE_URL}${pathSegment}`;
 
   return {
     title,

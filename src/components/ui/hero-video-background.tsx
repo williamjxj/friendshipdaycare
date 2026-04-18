@@ -1,12 +1,23 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, type ComponentType } from 'react';
 import dynamic from 'next/dynamic';
 import { cn } from '@/lib/utils';
 
-// Dynamically import ReactPlayer to avoid hydration mismatch
-// casting to any to avoid strict type mismatch with dynamic loading of sub-package
-const ReactPlayer = dynamic(() => import('react-player'), { ssr: false }) as any;
+type ReactPlayerProps = {
+  url: string;
+  playing?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+  width?: string;
+  height?: string;
+  onReady?: () => void;
+  config?: Record<string, unknown>;
+};
+
+// Dynamically import ReactPlayer to avoid hydration mismatch.
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false }) as ComponentType<ReactPlayerProps>;
 
 interface HeroVideoBackgroundProps {
     videoId: string;

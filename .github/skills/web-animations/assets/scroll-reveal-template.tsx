@@ -208,9 +208,8 @@ export function ParallaxSection({
       {/* Parallax Background */}
       {backgroundImage && (
         <motion.div
-          style={{ y }}
           className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
+          style={{ y, backgroundImage: `url(${backgroundImage})` }}
         />
       )}
 

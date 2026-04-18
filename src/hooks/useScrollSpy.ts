@@ -12,13 +12,15 @@ import { useEffect, useState } from 'react';
  */
 export function useScrollSpy(sectionIds: string[], offset = 80): string {
   const [activeId, setActiveId] = useState<string>('');
+  const sectionIdsKey = sectionIds.join(',');
 
   useEffect(() => {
-    if (typeof window === 'undefined' || sectionIds.length === 0) return;
+    if (typeof window === 'undefined' || sectionIdsKey.length === 0) return;
 
     const observers: IntersectionObserver[] = [];
+    const ids = sectionIdsKey.split(',').filter((id) => id.length > 0);
 
-    sectionIds.forEach((id) => {
+    ids.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
 
@@ -43,7 +45,7 @@ export function useScrollSpy(sectionIds: string[], offset = 80): string {
     return () => {
       observers.forEach((o) => o.disconnect());
     };
-  }, [sectionIds.join(','), offset]);
+  }, [sectionIdsKey, offset]);
 
   return activeId;
 }

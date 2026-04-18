@@ -14,8 +14,14 @@ export function getOgImagePath(pathname: string): string {
     "/contact": "/logo.png",
     "/about": "/logo.png",
     "/gallery": "/logo.png",
+    "/gallery-new": "/logo.png",
+    "/funding": "/logo.png",
+    "/resources": "/logo.png",
+    "/our-team": "/logo.png",
     "/community/todays-story": "/logo.png",
     "/community/journal": "/logo.png",
+    "/community/montessori": "/logo.png",
+    "/community/ece": "/logo.png",
   };
 
   return map[path] ?? "/logo.png";

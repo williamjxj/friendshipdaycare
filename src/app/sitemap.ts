@@ -55,10 +55,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6
     },
     {
-      url: `${baseUrl}/policies`,
+      url: `${baseUrl}/gallery-new`,
       lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.5
+      changeFrequency: "weekly",
+      priority: 0.65
     }
   ];
 }

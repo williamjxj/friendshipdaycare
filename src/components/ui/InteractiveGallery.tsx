@@ -29,7 +29,6 @@ export function InteractiveGallery({ images }: InteractiveGalleryProps) {
         if (!containerRef.current || !sliderRef.current) return;
 
         const panels = gsap.utils.toArray<HTMLElement>('.gallery-item');
-        const totalWidth = panels.length * (panels[0].offsetWidth + 32); // 32px gap estimate/buffer
 
         // Horizontal Scroll Animation
         gsap.to(sliderRef.current, {

@@ -3,13 +3,7 @@
 
 'use client';
 
-import { 
-  motion, 
-  useMotionValue, 
-  useSpring, 
-  useTransform,
-  useMotionTemplate 
-} from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useRef, MouseEvent, ReactNode } from 'react';
 import { prefersReducedMotion } from '@/lib/animations';
 import { cn } from '@/lib/utils';

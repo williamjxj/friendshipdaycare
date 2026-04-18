@@ -39,7 +39,9 @@ export function VideoPlayer({ videos, className = '' }: VideoPlayerProps) {
 
   // Ensure component is mounted on client side
   useEffect(() => {
-    setMounted(true);
+    queueMicrotask(() => {
+      setMounted(true);
+    });
   }, []);
 
   // Don't render until mounted to prevent hydration mismatch

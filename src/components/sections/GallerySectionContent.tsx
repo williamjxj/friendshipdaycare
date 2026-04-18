@@ -104,8 +104,10 @@ export function GallerySectionContent() {
   }, [filteredImages.length]);
 
   useEffect(() => {
-    setCarouselSelectedIndex(0);
-    setLoadedImages({});
+    queueMicrotask(() => {
+      setCarouselSelectedIndex(0);
+      setLoadedImages({});
+    });
     const track = trackRef.current;
     if (track) gsap.set(track, { x: 0 });
   }, [selectedCategory, filteredImages.length]);

@@ -18,6 +18,14 @@
 
 import Script from 'next/script';
 
+type GtagFn = (...args: unknown[]) => void;
+
+function getGtag(): GtagFn | undefined {
+  if (typeof window === 'undefined') return undefined;
+  const g = (window as unknown as { gtag?: GtagFn }).gtag;
+  return typeof g === 'function' ? g : undefined;
+}
+
 export function GoogleAnalytics() {
   // Replace with your actual Google Analytics Measurement ID
   // Or use environment variable: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
@@ -79,8 +87,9 @@ export function trackEvent({
   label?: string;
   value?: number;
 }) {
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', action, {
+  const gtag = getGtag();
+  if (gtag) {
+    gtag('event', action, {
       event_category: category,
       event_label: label,
       value: value,
@@ -97,8 +106,10 @@ export function trackEvent({
  * trackPageView('/contact');
  */
 export function trackPageView(url: string) {
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('config', process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID, {
+  const gtag = getGtag();
+  const id = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  if (gtag && id) {
+    gtag('config', id, {
       page_path: url,
     });
   }

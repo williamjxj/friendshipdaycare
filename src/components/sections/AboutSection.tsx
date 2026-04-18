@@ -1,6 +1,7 @@
 'use client';
 
 import { getImageUrl } from '@/lib/image-utils';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
@@ -12,7 +13,18 @@ import {
 } from '@/components/ui/GridAndDotBackgrounds';
 import { BrandLogoMark } from '@/components/ui/brand-visual-assets';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Sparkles, Shield, Heart, Award, Users, Home, Target } from 'lucide-react';
+import { Sparkles, Shield, Heart, Award, Users } from 'lucide-react';
+
+type AboutValueItem = {
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+};
+
+type AboutPageValuesMessage = {
+  values?: { items?: AboutValueItem[] };
+};
 
 /**
  * About section matching manus site layout: Stats badges, Story, Feature cards
@@ -50,12 +62,7 @@ export function AboutSection() {
   ];
 
   // Values from i18n messages
-  const values = ((messages.aboutPage as any)?.values?.items ?? []) as Array<{
-    title: string;
-    description: string;
-    icon: string;
-    color: string;
-  }>;
+  const values = (messages.aboutPage as AboutPageValuesMessage | undefined)?.values?.items ?? [];
 
   return (
     <>
@@ -235,10 +242,12 @@ export function AboutSection() {
               variants={slideUp}
             >
               <div className="relative h-72 sm:h-80 md:h-96 rounded-xl overflow-hidden shadow hover:shadow-xl transition-all duration-300">
-                <img
+                <Image
                   src={getImageUrl('/imgs/home/1.jpeg')}
                   alt="Friendship Corner Daycare building"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 480px"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
               </div>
@@ -348,10 +357,12 @@ export function AboutSection() {
 
             <motion.div variants={slideUp} className="relative">
               <div className="relative h-80 rounded-xl overflow-hidden shadow hover:shadow-xl transition-all duration-300">
-                <img
+                <Image
                   src={getImageUrl('/imgs/home/2.jpeg')}
                   alt="Montessori classroom activities"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 560px"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
               </div>

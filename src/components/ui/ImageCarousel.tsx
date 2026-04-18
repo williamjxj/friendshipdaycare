@@ -34,8 +34,10 @@ export function ImageCarousel({ images, className = '' }: ImageCarouselProps) {
   useEffect(() => {
     if (!emblaApi) return;
 
-    onInit(emblaApi);
-    onSelect(emblaApi);
+    queueMicrotask(() => {
+      onInit(emblaApi);
+      onSelect(emblaApi);
+    });
     emblaApi.on('reInit', onInit);
     emblaApi.on('select', onSelect);
   }, [emblaApi, onInit, onSelect]);

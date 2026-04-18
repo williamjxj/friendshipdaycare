@@ -1,7 +1,7 @@
 'use client';
 
 import { Star } from 'lucide-react';
-import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Card, CardTitle, CardDescription } from '@/components/ui/card';
 
 export interface Testimonial {
   id: number;

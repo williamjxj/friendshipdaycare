@@ -1,28 +1,26 @@
 'use client';
 
+import { useEffect, type ReactNode } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ReactNode } from 'react';
+
+/** Map app locale codes to BCP 47 `lang` values on `<html>`. */
+const LANG_MAP: Record<string, string> = {
+  en: 'en',
+  zh: 'zh-CN',
+  ko: 'ko',
+  es: 'es',
+  fr: 'fr',
+};
 
 /**
- * Component that updates the HTML lang attribute based on current language
- * This should wrap the html element or be used to sync the lang attribute
+ * Syncs `document.documentElement.lang` with the active language (client-only).
  */
 export function LanguageAwareHtml({ children }: { children: ReactNode }) {
   const { language } = useLanguage();
-  
-  // Map language codes to HTML lang attributes
-  const langMap: Record<string, string> = {
-    en: 'en',
-    zh: 'zh-CN',
-    ko: 'ko',
-    es: 'es',
-    fr: 'fr',
-  };
 
-  // Update document language
-  if (typeof document !== 'undefined') {
-    document.documentElement.lang = langMap[language] || 'en';
-  }
+  useEffect(() => {
+    document.documentElement.lang = LANG_MAP[language] || 'en';
+  }, [language]);
 
   return <>{children}</>;
 }

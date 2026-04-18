@@ -8,7 +8,6 @@ import { ProgramsSection } from '@/components/sections/ProgramsSection';
 import { GallerySectionContent } from '@/components/sections/GallerySectionContent';
 import { EnrollmentSectionContent } from '@/components/sections/EnrollmentSectionContent';
 import { ContactFormSection } from '@/components/sections/ContactFormSection';
-import dynamic from 'next/dynamic';
 import { HeroImageCarousel } from '@/components/ui/hero-image-carousel';
 import { HeroContactForm } from '@/components/ui/hero-contact-form';
 import { motion, type Variants } from 'framer-motion';
@@ -28,9 +27,6 @@ import { cn } from '@/lib/utils';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
-
-// Dynamically import VideoPlayer
-const VideoPlayer = dynamic(() => import('@/components/ui/VideoPlayer').then(mod => ({ default: mod.VideoPlayer })), { ssr: false });
 
 /** Matches desktop header Book a Tour: `.warm-button` + gradient shine + lift/shadow (see Header.tsx). */
 const heroInfoWarmChipBase = cn(
@@ -172,14 +168,6 @@ export function HomePageClient() {
     getImageUrl('/images/toys.jpg'),
     getImageUrl('/images/circle-time-area.jpg'),
   ], []);
-
-  const videos = useMemo(() => [
-    {
-      url: getImageUrl('/videos/friendship-daycare.mp4'),
-      title: t('home.dailyAdventures.videoTitle'),
-      description: t('home.dailyAdventures.videoDescription'),
-    }
-  ], [t]);
 
   const heroMarqueeChips = useMemo(() => getHeroMarqueeChips(t), [t]);
 

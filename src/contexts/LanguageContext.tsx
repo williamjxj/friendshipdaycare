@@ -75,20 +75,22 @@ export function LanguageProvider({
    * the app defaulted to English (no cookie) so first-time visitors get a matching locale.
    */
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') as Language | null;
-    if (savedLanguage && messages[savedLanguage]) {
-      setLanguage(savedLanguage);
-      return;
-    }
+    queueMicrotask(() => {
+      const savedLanguage = localStorage.getItem('language') as Language | null;
+      if (savedLanguage && messages[savedLanguage]) {
+        setLanguage(savedLanguage);
+        return;
+      }
 
-    if (initialLocale !== 'en') {
-      return;
-    }
+      if (initialLocale !== 'en') {
+        return;
+      }
 
-    const browserLanguage = navigator.language?.split('-')[0] as Language | undefined;
-    if (browserLanguage && messages[browserLanguage] && browserLanguage !== 'en') {
-      setLanguage(browserLanguage);
-    }
+      const browserLanguage = navigator.language?.split('-')[0] as Language | undefined;
+      if (browserLanguage && messages[browserLanguage] && browserLanguage !== 'en') {
+        setLanguage(browserLanguage);
+      }
+    });
   }, [initialLocale]);
 
   // Save language to localStorage and cookie when it changes (cookie keeps server/client in sync)
