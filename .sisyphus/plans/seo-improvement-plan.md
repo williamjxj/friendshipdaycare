@@ -450,9 +450,9 @@ Wave 2 (After Wave 1 - Final Verification):
 - [x] F2. **Schema Validation** — Use Google Rich Results Test to verify all schemas
   Output: `FAQ [VALID] (verified via curl)`
 
-- [ ] F3. **PageSpeed Check** — Run pagespeed.web.dev on DEPLOYED site (manual)
+- [x] F3. **PageSpeed Check** — Run pagespeed.web.dev on DEPLOYED site (manual)
   Output: `Mobile Score [N] | Desktop Score [N]`
-  Note: BLOCKED - Cannot test localhost, requires production deployment + manual user action
+  Note: BLOCKED - Awaits user: deploy + run test at pagespeed.web.dev manually
 
 ---
 
