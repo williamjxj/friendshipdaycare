@@ -41,7 +41,7 @@ export function LocalBusinessSchema({
   image,
   priceRange = "$$",
   openingHours = [
-    "Mo-Fr 07:30-17:30"
+    "Mo-Fr 07:00-18:00"
   ],
   serviceArea,
   sameAs = [],

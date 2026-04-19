@@ -3,60 +3,59 @@ import { SEO_BASE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SEO_BASE_URL;
-  const now = new Date();
 
   return [
     {
       url: baseUrl,
-      lastModified: now,
+      lastModified: "2025-04-01",
       changeFrequency: "monthly",
       priority: 1
     },
     {
       url: `${baseUrl}/funding`,
-      lastModified: now,
+      lastModified: "2025-03-15",
       changeFrequency: "monthly",
       priority: 0.75
     },
     {
       url: `${baseUrl}/our-team`,
-      lastModified: now,
+      lastModified: "2025-01-15",
       changeFrequency: "monthly",
       priority: 0.75
     },
     {
       url: `${baseUrl}/community/todays-story`,
-      lastModified: now,
+      lastModified: "2025-04-10",
       changeFrequency: "daily",
       priority: 0.6
     },
     {
       url: `${baseUrl}/community/journal`,
-      lastModified: now,
+      lastModified: "2025-04-01",
       changeFrequency: "weekly",
       priority: 0.6
     },
     {
       url: `${baseUrl}/community/montessori`,
-      lastModified: now,
+      lastModified: "2025-03-01",
       changeFrequency: "monthly",
       priority: 0.6
     },
     {
       url: `${baseUrl}/community/ece`,
-      lastModified: now,
+      lastModified: "2025-03-01",
       changeFrequency: "monthly",
       priority: 0.6
     },
     {
       url: `${baseUrl}/resources`,
-      lastModified: now,
+      lastModified: "2025-02-01",
       changeFrequency: "monthly",
       priority: 0.6
     },
     {
       url: `${baseUrl}/gallery-new`,
-      lastModified: now,
+      lastModified: "2025-04-05",
       changeFrequency: "weekly",
       priority: 0.65
     }

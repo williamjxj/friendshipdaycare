@@ -1,0 +1,23 @@
+{
+  "active_plan": "/Users/william.jiang/my-business/friendshipdaycare/.sisyphus/plans/seo-improvement-plan.md",
+  "started_at": "2026-04-19T03:29:26.360Z",
+  "session_ids": [
+    "ses_2608a9966ffehivX4Bxtmz05PC"
+  ],
+  "session_origins": {
+    "ses_2608a9966ffehivX4Bxtmz05PC": "direct"
+  },
+  "plan_name": "seo-improvement-plan",
+  "agent": "atlas",
+  "task_sessions": {
+    "todo:1": {
+      "task_key": "todo:1",
+      "task_label": "1",
+      "task_title": "Fix Postal Code in Schema",
+      "session_id": "ses_25c356d3bffero5X6kiy5wlxb5",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-04-19T03:31:05.699Z"
+    }
+  }
+}

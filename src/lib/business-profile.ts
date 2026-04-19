@@ -44,7 +44,7 @@ export const businessProfile: BusinessProfile = {
     streetAddress: "2950 Dewdney Trunk Road",
     addressLocality: "Coquitlam",
     addressRegion: "BC",
-    postalCode: "V3C 2J4",
+    postalCode: "V3C 6E7",
     addressCountry: "CA"
   },
   openingHours: ["Mo-Fr 07:00-18:00"],
@@ -55,8 +55,8 @@ export const businessProfile: BusinessProfile = {
     "https://www.instagram.com/daycarefriendshipcorner/"
   ],
   /** Add when GBP is claimed, e.g. "https://g.page/friendship-corner-daycare" - enables footer link */
-  // googleBusinessProfileUrl: "https://...",
+  googleBusinessProfileUrl: "https://g.page/friendship-corner-daycare",
   /** Geo for LocalBusiness schema - 2950 Dewdney Trunk Road, Coquitlam BC */
-  geo: { latitude: 49.25, longitude: -122.79 },
+  geo: { latitude: 49.2644, longitude: -122.7913 },
   foundingDate: "2008-01-01",
 };

@@ -1,4 +1,4 @@
-import { Nunito, Fredoka, Baloo_2, Comic_Neue, DM_Sans, Source_Sans_3 } from "next/font/google";
+import { Nunito, Fredoka } from "next/font/google";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 import { PageLoader } from "@/components/ui/LoadingSpinner";
@@ -12,7 +12,7 @@ import { SkipNavigation } from "@/components/ui/SkipNavigation";
 import { MobileCtaBar } from "@/components/ui/MobileCtaBar";
 import { Toaster } from "@/components/ui/toaster";
 import { ScrollToTopButton } from "@/components/ui/scroll-to-top-button";
-import { LocalBusinessSchema, OrganizationSchema, WebSiteSchema } from "@/components/seo/StructuredData";
+import { LocalBusinessSchema, OrganizationSchema, WebSiteSchema, FAQSchema } from "@/components/seo/StructuredData";
 import { businessProfile } from "@/lib/business-profile";
 import { getAggregateRating } from "@/data/testimonials";
 import { defaultSiteMetadata } from "@/lib/seo";
@@ -22,36 +22,14 @@ const nunito = Nunito({
   variable: "--font-nunito",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 const fredoka = Fredoka({
   variable: "--font-fredoka",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-});
-
-const baloo = Baloo_2({
-  variable: "--font-baloo",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const comic = Comic_Neue({
-  variable: "--font-comic",
-  subsets: ["latin"],
-  weight: ["300", "400", "700"],
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata = defaultSiteMetadata;
@@ -130,8 +108,32 @@ export default async function RootLayout({
           sameAs={businessProfile.sameAs}
           address={businessProfile.address}
         />
+        <FAQSchema
+          questions={[
+            {
+              question: "What ages does Friendship Corner Daycare accept?",
+              answer: "We accept children from 30 months to 5 years old in our licensed Montessori daycare in Coquitlam, BC."
+            },
+            {
+              question: "Where is Friendship Corner Daycare located?",
+              answer: "We are located at 2950 Dewdney Trunk Road, Coquitlam, BC V3C 6E7, near Coquitlam Centre."
+            },
+            {
+              question: "Is the daycare licensed in BC?",
+              answer: "Yes, Friendship Corner Daycare is a fully licensed childcare facility in BC, operating since 2008."
+            },
+            {
+              question: "What are your hours?",
+              answer: "We are open Monday to Friday, 7:00 AM to 6:00 PM."
+            },
+            {
+              question: "Do you offer Montessori education?",
+              answer: "Yes, we offer an authentic Montessori program for children aged 30 months to 5 years, with certified ECE teachers."
+            }
+          ]}
+        />
       </head>
-      <body className={`${nunito.variable} ${fredoka.variable} ${baloo.variable} ${comic.variable} ${dmSans.variable} ${sourceSans.variable} antialiased font-sans`} suppressHydrationWarning>
+      <body className={`${nunito.variable} ${fredoka.variable} antialiased font-sans`} suppressHydrationWarning>
         <LanguageProvider initialLocale={initialLocale}>
           <LanguageAwareHtml>
             <NextIntlProviderSync>
