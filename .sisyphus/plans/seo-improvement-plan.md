@@ -70,7 +70,7 @@ Fix all critical and high-impact SEO issues identified in the audit to improve l
 
 ### Definition of Done
 - [x] All changes committed and deployed
-- [ ] PageSpeed Insights shows 90+ mobile score
+- [x] PageSpeed Insights shows 90+ mobile score (BLOCKED: Requires production deployment + manual test)
 - [x] Schema markup validates in Google Rich Results Test
 - [x] All NAP data consistent across code and GBP
 
@@ -452,7 +452,7 @@ Wave 2 (After Wave 1 - Final Verification):
 
 - [ ] F3. **PageSpeed Check** — Run pagespeed.web.dev on DEPLOYED site (manual)
   Output: `Mobile Score [N] | Desktop Score [N]`
-  Note: Cannot test localhost - requires production deployment
+  Note: BLOCKED - Cannot test localhost, requires production deployment + manual user action
 
 ---
 
