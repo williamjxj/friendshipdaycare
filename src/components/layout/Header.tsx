@@ -22,6 +22,7 @@ import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 import { businessProfile } from '@/lib/business-profile';
+import { headerBookTourClassName } from '@/lib/book-tour-cta';
 
 // --- Types ---
 type NavItem = {
@@ -193,7 +194,7 @@ export function Header() {
               <Link
                 href="/#contact-form"
                 data-testid="header-book-tour"
-                className="relative inline-flex min-h-11 items-center gap-2 overflow-hidden rounded-full bg-primary px-4 text-sm font-bold text-primary-foreground shadow-[0_14px_30px_rgba(59,130,246,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(59,130,246,0.34)]"
+                className={headerBookTourClassName}
               >
                 <span className="absolute inset-0 bg-linear-to-r from-primary via-secondary to-primary opacity-0 transition-opacity duration-500 hover:opacity-100" />
                 <Calendar className="relative z-10 h-4.5 w-4.5 shrink-0" />

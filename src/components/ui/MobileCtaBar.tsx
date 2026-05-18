@@ -26,6 +26,8 @@ export function MobileCtaBar() {
     return null;
   }
 
+  const tourHref = pathname === '/welcome' ? '#welcome-form' : '/#contact-form';
+
   return (
     <div
       className={cn(
@@ -50,7 +52,7 @@ export function MobileCtaBar() {
         <span>Call Us</span>
       </a>
       <Link
-        href="/#contact-form"
+        href={tourHref}
         className={cn(
           'flex-1 flex items-center justify-center gap-2',
           'bg-primary text-primary-foreground font-semibold rounded-lg py-3 px-4',

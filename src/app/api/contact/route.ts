@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
 import { z } from 'zod';
+import { businessFromAddress, getResendClient } from '@/lib/email/resend-client';
 
 /**
  * Contact Form API Route
@@ -22,9 +22,8 @@ const contactFormSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    // Check if Resend API key is configured
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
+    const client = getResendClient();
+    if (!client) {
       return NextResponse.json(
         {
           success: false,
@@ -34,8 +33,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Initialize Resend with API key
-    const resend = new Resend(apiKey);
+    const { resend, fromEmail } = client;
 
     const body = await request.json();
 
@@ -44,13 +42,9 @@ export async function POST(request: NextRequest) {
 
     const { name, email, phone, childAge, message } = validatedData;
 
-    // Get from email from environment variable
-    const fromEmail = process.env.RESEND_FROM_EMAIL || 'noreply@friendshipdaycare.com';
-    
-    // Email configuration
     const emailConfig = {
-      businessFrom: `Friendship Corner Daycare <${fromEmail}>`,
-      customerFrom: `Friendship Corner Daycare <${fromEmail}>`
+      businessFrom: businessFromAddress(fromEmail),
+      customerFrom: businessFromAddress(fromEmail),
     };
 
     // Create email content

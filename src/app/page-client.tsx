@@ -10,7 +10,7 @@ import { EnrollmentSectionContent } from '@/components/sections/EnrollmentSectio
 import { ContactFormSection } from '@/components/sections/ContactFormSection';
 import { HeroImageCarousel } from '@/components/ui/hero-image-carousel';
 import { HeroContactForm } from '@/components/ui/hero-contact-form';
-import { motion, type Variants } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { getHeroMarqueeChips, HeroMarqueeChipRow } from '@/lib/hero-marquee-chips';
 import Image from 'next/image';
 import gsap from 'gsap';
@@ -24,17 +24,13 @@ import { businessProfile } from '@/lib/business-profile';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 import { BorderBeam } from '@/components/ui/border-beam';
 import { cn } from '@/lib/utils';
+import { heroInfoChipClassName } from '@/lib/book-tour-cta';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-/** Matches desktop header Book a Tour: `.warm-button` + gradient shine + lift/shadow (see Header.tsx). */
-const heroInfoWarmChipBase = cn(
-  'warm-button relative overflow-hidden group/cta shadow-md',
-  'hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300',
-  '!inline-flex !h-auto !min-h-0 !items-center !justify-start gap-3',
-  '!rounded-xl !py-3 !px-4 text-sm leading-snug md:text-[0.9375rem]',
-);
+/** Matches desktop header Book a Tour — shared tokens in `@/lib/book-tour-cta`. */
+const heroInfoWarmChipBase = heroInfoChipClassName;
 
 /**
  * Gradient hover layer — same structure/classes as the Book a Tour CTA.
@@ -42,24 +38,30 @@ const heroInfoWarmChipBase = cn(
 function HeroInfoWarmChipShine() {
   return (
     <div
-      className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 transition-opacity duration-500 bg-[length:200%_auto] group-hover/cta:opacity-100 group-hover/cta:animate-[gradient_3s_linear_infinite]"
+      className="pointer-events-none absolute inset-0 bg-linear-to-r from-primary via-secondary to-primary opacity-0 transition-opacity duration-500 group-hover/cta:opacity-100"
       aria-hidden
     />
   );
 }
 
+const heroInfoChipsContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.45,
+      staggerChildren: 0.07,
+    },
+  },
+};
+
+/** Chip shell fades in; inner text/icon use their own variants. */
 const heroInfoChipVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1],
-      when: 'beforeChildren',
-      staggerChildren: 0.1,
-      delayChildren: 0.04,
-    },
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -123,6 +125,10 @@ export function HomePageClient() {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
+  const reduceMotion = useReducedMotion();
+  const heroChipMotion = reduceMotion
+    ? ({ initial: false as const, animate: 'visible' as const })
+    : ({ initial: 'hidden' as const, animate: 'visible' as const });
   const [, setHeroSlideIndex] = useState(0);
 
   useLocalizedMetadata({
@@ -349,23 +355,14 @@ export function HomePageClient() {
             <motion.div
               data-testid="hero-info-chips"
               className="mb-4 grid w-full max-w-5xl min-w-0 grid-cols-1 gap-3 sm:mb-5 sm:grid-cols-2 sm:items-stretch md:mb-6"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: {
-                    delayChildren: 0.45,
-                    staggerChildren: 0.07,
-                  },
-                },
-              }}
+              variants={heroInfoChipsContainerVariants}
+              {...heroChipMotion}
             >
               <motion.div
                 data-testid="hero-info-chip-address"
                 className={cn(heroInfoWarmChipBase, 'min-h-0 min-w-0 w-full')}
                 variants={heroInfoChipVariants}
+                {...heroChipMotion}
               >
                 <HeroInfoWarmChipShine />
                 <motion.span className="relative z-10 shrink-0" variants={heroInfoIconVariants} aria-hidden>
@@ -383,6 +380,7 @@ export function HomePageClient() {
                 data-testid="hero-info-chip-age"
                 className={cn(heroInfoWarmChipBase, 'min-w-0 w-full')}
                 variants={heroInfoChipVariants}
+                {...heroChipMotion}
               >
                 <HeroInfoWarmChipShine />
                 <motion.span className="relative z-10 shrink-0" variants={heroInfoIconVariants} aria-hidden>
@@ -400,6 +398,7 @@ export function HomePageClient() {
                 href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
                 className={cn(heroInfoWarmChipBase, 'min-w-0 w-full no-underline')}
                 variants={heroInfoChipVariants}
+                {...heroChipMotion}
                 aria-label={t('contact.phone')}
               >
                 <HeroInfoWarmChipShine />
@@ -418,6 +417,7 @@ export function HomePageClient() {
                 href={`mailto:${businessProfile.email}`}
                 className={cn(heroInfoWarmChipBase, 'min-w-0 w-full max-w-full no-underline')}
                 variants={heroInfoChipVariants}
+                {...heroChipMotion}
                 aria-label={t('contact.form.email')}
               >
                 <HeroInfoWarmChipShine />

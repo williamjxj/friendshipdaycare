@@ -33,11 +33,15 @@ TypeScript 5.9, React 19, Next.js 16: Follow standard conventions
 
 <!-- MANUAL ADDITIONS START -->
 
-## Layout: Paragraphs and Lists
+## Layout: Horizontal extension (forms, cards, copy)
 
-- **Horizontal extension, not vertical**: For paragraphs, lists, and text content, always prefer horizontal layout extension over vertical column alignment.
-- **Avoid**: CSS `columns` (e.g. `columns-2`) that force narrow vertical columns; flex/grid layouts that squeeze content into tall, narrow strips.
-- **Prefer**: Full-width containers (`w-full`, `min-w-0` where needed), normal text flow, flex-wrap for inline items, and explicit `min-width` / `shrink-0` on modals/cards to prevent unwanted shrinking.
-- **Modals and cards**: Use `min-w-[280px]` or similar, plus `shrink-0` when inside flex parents, so content extends horizontally and reads naturally.
+- **Horizontal extension, not vertical**: Forms, cards, and text must use the full content width. Never squeeze UI into a tall narrow strip with one word per line.
+- **Width utilities (Tailwind v4 + this repo)**:
+  - **Safe**: `w-full`, `min-w-0`, `max-w-6xl`, `max-w-7xl`, `max-w-[min(100%,48rem)]`, or explicit `max-w-[…rem]`.
+  - **Unsafe — do not use on forms/cards/containers**: `max-w-xs`, `max-w-sm`, `max-w-md`, `max-w-lg`, `max-w-xl`, `max-w-2xl`, `max-w-3xl`, `max-w-4xl`, `max-w-5xl` unless you verify computed width in DevTools (they were broken when `--spacing-*` lived in `@theme`).
+  - **Never** add `--spacing-xs` … `--spacing-3xl` to the `@theme { }` block in `globals.css` — they override `max-w-*` and cause ~24px–64px-wide layouts.
+- **Forms (mobile-first)**: `w-full min-w-[280px] max-w-6xl`; field grids `grid-cols-2` on mobile where possible; inputs `w-full min-w-0`.
+- **Avoid**: CSS `columns`, flex children without `min-w-0` in shrink contexts, `max-w-*` without checking rendered width.
+- **Modals and cards**: `min-w-[280px]`, `w-full`, `shrink-0` inside flex parents when needed.
 
 <!-- MANUAL ADDITIONS END -->

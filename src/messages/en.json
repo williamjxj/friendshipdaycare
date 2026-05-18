@@ -797,6 +797,101 @@
       ]
     }
   },
+  "welcomePage": {
+    "hero": {
+      "title": "Welcome to Friendship Corner",
+      "subtitle": "Schedule a tour — we'd love to meet your family"
+    },
+    "form": {
+      "title": "Request a tour",
+      "sections": {
+        "contact": "Your contact details",
+        "child": "About your child",
+        "tour": "Tour preference"
+      },
+      "success": "Thank you! We'll confirm your tour by phone or email within 24 hours.",
+      "confirmation": {
+        "title": "Tour request received",
+        "welcomeHeading": "Welcome to Friendship Corner!",
+        "welcomeBody": "Thank you for booking a tour with us. We've received your request and will confirm your visit by phone or email within 24 hours.",
+        "summaryTitle": "Your booking details",
+        "nextSteps": "Please save these details for your records. If anything looks incorrect, tap \"Book another tour\" to submit a new request or call us at 604.945.8504.",
+        "back": "Book another tour"
+      },
+      "submit": "Send tour request",
+      "submitting": "Sending...",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "childName": "Child's name",
+        "childBirthday": "Child's birthday",
+        "tourDate": "Preferred tour date",
+        "tourTimePreference": "Preferred time",
+        "message": "Message"
+      },
+      "placeholders": {
+        "name": "Your full name",
+        "email": "your.email@example.com",
+        "childName": "Child's first name",
+        "message": "Anything else we should know for your visit?"
+      },
+      "tourTime": {
+        "morning": "Morning — 11:15 AM",
+        "afternoon": "Afternoon — 5:15 PM",
+        "placeholder": "Select a time"
+      },
+      "options": {
+        "agePlaceholder": "Select age range",
+        "ageToddler": "30 months - 3 years",
+        "agePreschool": "3 - 4 years",
+        "agePreK": "4 - 5 years",
+        "ageOther": "Other"
+      },
+      "validation": {
+        "nameRequired": "Full name is required",
+        "emailRequired": "Email address is required",
+        "emailInvalid": "Please enter a valid email address",
+        "childNameRequired": "Child's name is required",
+        "childBirthdayRequired": "Child's birthday is required",
+        "childBirthdayInvalid": "Please enter a valid birthday",
+        "tourDateRequired": "Please choose a preferred tour date",
+        "tourTimeRequired": "Please choose a time preference",
+        "messageRequired": "Message is required",
+        "messageMin": "Message must be at least 10 characters long",
+        "formError": "Please correct the errors below and try again.",
+        "submitError": "Failed to send request. Please try again.",
+        "networkError": "Network error. Please check your connection and try again."
+      }
+    },
+    "info": {
+      "title": "Get in touch",
+      "description": "Questions before your visit? Call or email — we're happy to help."
+    },
+    "cards": {
+      "phone": {
+        "title": "Phone",
+        "subtitle": "Mon–Fri 7:00 AM – 6:00 PM"
+      },
+      "email": {
+        "title": "Email",
+        "subtitle": "We respond within 24 hours"
+      },
+      "hours": {
+        "title": "Hours",
+        "weekdays": "Monday – Friday",
+        "hours": "7:00 AM – 6:00 PM",
+        "subtitle": "Closed weekends and holidays"
+      },
+      "location": {
+        "title": "Location",
+        "subtitle": "Coquitlam — near Coquitlam Station"
+      }
+    },
+    "quickActions": {
+      "call": "Call Now",
+      "email": "Send Email"
+    }
+  },
   "community": {
     "journal": {
       "meta": {

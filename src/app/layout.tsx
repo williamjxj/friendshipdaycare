@@ -6,12 +6,8 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { NextIntlProviderSync } from "@/components/providers/NextIntlProviderSync";
 import { LanguageAwareHtml } from "@/components/providers/LanguageAwareHtml";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { SkipNavigation } from "@/components/ui/SkipNavigation";
-import { MobileCtaBar } from "@/components/ui/MobileCtaBar";
+import { SiteShell } from "@/components/layout/SiteShell";
 import { Toaster } from "@/components/ui/toaster";
-import { ScrollToTopButton } from "@/components/ui/scroll-to-top-button";
 import { LocalBusinessSchema, OrganizationSchema, WebSiteSchema, FAQSchema } from "@/components/seo/StructuredData";
 import { businessProfile } from "@/lib/business-profile";
 import { getAggregateRating } from "@/data/testimonials";
@@ -63,7 +59,7 @@ export default async function RootLayout({
   const aggregateRating = getAggregateRating();
 
   return (
-    <html lang={initialLocale}>
+    <html lang={initialLocale} suppressHydrationWarning>
       <head>
         {/* Favicon Links */}
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
@@ -138,18 +134,11 @@ export default async function RootLayout({
           <LanguageAwareHtml>
             <NextIntlProviderSync>
               <ThemeProvider>
-                <div className="min-h-screen flex flex-col overflow-x-hidden pb-24 md:pb-0">
-                  <SkipNavigation />
-                  <Header />
-                  <main className="pt-16 flex-1" role="main">
-                    <Suspense fallback={<PageLoader message="Loading magical content..." />}>
-                      {children}
-                    </Suspense>
-                  </main>
-                  <Footer />
-                  <MobileCtaBar />
-                  <ScrollToTopButton />
-                </div>
+                <SiteShell>
+                  <Suspense fallback={<PageLoader message="Loading magical content..." />}>
+                    {children}
+                  </Suspense>
+                </SiteShell>
                 <Toaster />
               </ThemeProvider>
             </NextIntlProviderSync>
