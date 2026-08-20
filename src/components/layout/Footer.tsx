@@ -143,6 +143,30 @@ export function Footer() {
                   {t('common.frequentlyAskedQuestions')}
                 </Link>
               </li>
+              <li>
+                <Link href="/funding" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  {t('footer.quickLinks.funding')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/our-team" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  {t('footer.quickLinks.ourTeam')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/resources" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  {t('footer.quickLinks.resources')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/community/journal" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  {t('footer.quickLinks.journal')}
+                </Link>
+              </li>
             </ul>
           </div>
 

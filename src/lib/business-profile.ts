@@ -44,7 +44,7 @@ export const businessProfile: BusinessProfile = {
     streetAddress: "2950 Dewdney Trunk Road",
     addressLocality: "Coquitlam",
     addressRegion: "BC",
-    postalCode: "V3C 6E7",
+    postalCode: "V3C 2J4",
     addressCountry: "CA"
   },
   openingHours: ["Mo-Fr 07:00-18:00"],

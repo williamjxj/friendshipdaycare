@@ -4,6 +4,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LocalizedMetadataInput {
   title?: string;
@@ -14,7 +15,13 @@ interface LocalizedMetadataInput {
  * Updates document title and meta description on language changes.
  */
 export function useLocalizedMetadata({ title, description }: LocalizedMetadataInput) {
+  const { language } = useLanguage();
+
   useEffect(() => {
+    // English is server-rendered with canonical metadata already; skip to avoid
+    // replacing the stronger SSR title/description with a weaker client variant.
+    if (language === 'en') return;
+
     if (title) {
       document.title = title;
     }
@@ -29,5 +36,5 @@ export function useLocalizedMetadata({ title, description }: LocalizedMetadataIn
         document.head.appendChild(meta);
       }
     }
-  }, [title, description]);
+  }, [title, description, language]);
 }

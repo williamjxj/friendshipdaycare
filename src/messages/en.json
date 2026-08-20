@@ -1,6 +1,8 @@
 {
-  "navigation": {
-    "home": "Home",
+    "navigation": {
+      "more": "More",
+      "funding": "Funding",
+      "home": "Home",
     "about": "About",
     "programs": "Programs",
     "pricing": "Pricing",
@@ -89,7 +91,11 @@
       "programs": "Our Programs",
       "enrollment": "Enrollment",
       "gallery": "Gallery",
-      "contact": "Contact"
+      "contact": "Contact",
+      "funding": "Funding & Subsidies",
+      "ourTeam": "Our Team",
+      "resources": "Parent Resources",
+      "journal": "Journal"
     },
     "resources": {
       "title": "Resources",

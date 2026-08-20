@@ -16,7 +16,10 @@ import {
   Facebook,
   Instagram,
   Phone,
-  Mail
+  Mail,
+  Wallet,
+  Users,
+  NotebookPen
 } from 'lucide-react';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -111,6 +114,9 @@ export function Header() {
       resources: t('navigation.resources'),
       gallery: t('navigation.gallery'),
       contact: t('navigation.contact'),
+      funding: t('navigation.funding'),
+      'our-team': t('navigation.team'),
+      more: t('navigation.more'),
     };
     return map[key] || key;
   }, [t]);
@@ -248,6 +254,51 @@ export function Header() {
                         </Link>
                       );
                     })}
+                  </div>
+                  <p className="mt-5 mb-2 px-1 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                    {t('navigation.more')}
+                  </p>
+                  <div className="grid grid-cols-1 gap-2">
+                    <Link
+                      href="/funding"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex min-h-12 items-center gap-3 rounded-2xl bg-white/70 px-4 py-3 text-sm font-semibold text-foreground transition-all hover:bg-muted"
+                    >
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/8 text-primary">
+                        <Wallet className="h-4.5 w-4.5" />
+                      </span>
+                      {getTransName('funding')}
+                    </Link>
+                    <Link
+                      href="/our-team"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex min-h-12 items-center gap-3 rounded-2xl bg-white/70 px-4 py-3 text-sm font-semibold text-foreground transition-all hover:bg-muted"
+                    >
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/8 text-primary">
+                        <Users className="h-4.5 w-4.5" />
+                      </span>
+                      {getTransName('our-team')}
+                    </Link>
+                    <Link
+                      href="/resources"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex min-h-12 items-center gap-3 rounded-2xl bg-white/70 px-4 py-3 text-sm font-semibold text-foreground transition-all hover:bg-muted"
+                    >
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/8 text-primary">
+                        <BookOpen className="h-4.5 w-4.5" />
+                      </span>
+                      {getTransName('resources')}
+                    </Link>
+                    <Link
+                      href="/community/journal"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex min-h-12 items-center gap-3 rounded-2xl bg-white/70 px-4 py-3 text-sm font-semibold text-foreground transition-all hover:bg-muted"
+                    >
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/8 text-primary">
+                        <NotebookPen className="h-4.5 w-4.5" />
+                      </span>
+                      {getTransName('journal')}
+                    </Link>
                   </div>
                   <div className="mt-4 grid grid-cols-1 gap-2 text-sm">
                     <a href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`} className="fdc-link-card items-center">

@@ -57,7 +57,7 @@ export const SEO_DEFAULT_KEYWORDS = [
 ];
 
 
-export const SEO_DEFAULT_IMAGE = `${SEO_BASE_URL}/images/slidetop-bg.jpg`;
+export const SEO_DEFAULT_IMAGE = `${SEO_BASE_URL}/og/home.png`;
 
 /**
  * Base metadata shared across all public pages.

@@ -30,10 +30,10 @@ export default function ResourcesPage() {
       category: 'Essential Documents',
       icon: '📋',
       resources: [
-        { title: 'Parent Handbook 2024-2025', description: 'Complete guide to policies, procedures, and what to expect at Friendship Corner', type: 'PDF', icon: '📖', downloadUrl: '#' },
-        { title: 'Enrollment Application', description: 'Fillable PDF application form for new families', type: 'PDF', icon: '✍️', downloadUrl: '#' },
-        { title: 'Medical Information Form', description: 'Required health and emergency contact information', type: 'PDF', icon: '🏥', downloadUrl: '#' },
-        { title: 'Field Trip Permission Form', description: 'Annual consent form for off-site activities', type: 'PDF', icon: '🚌', downloadUrl: '#' },
+        { title: 'Parent Handbook', description: 'Complete guide to policies, procedures, and what to expect at Friendship Corner', type: 'PDF', icon: '📖' },
+        { title: 'Enrollment Application', description: 'Fillable PDF application form for new families', type: 'PDF', icon: '✍️', downloadUrl: '/assets/Registration form 2026.pdf' },
+        { title: 'Medical Information Form', description: 'Required health and emergency contact information', type: 'PDF', icon: '🏥' },
+        { title: 'Field Trip Permission Form', description: 'Annual consent form for off-site activities', type: 'PDF', icon: '🚌' },
       ],
     },
     {
@@ -163,14 +163,14 @@ export default function ResourcesPage() {
             <aside className="fdc-panel p-6 sm:p-7">
               <span className="fdc-kicker">Quick Actions</span>
               <div className="mt-5 space-y-3">
-                <a href="#" className="fdc-link-card">
+                <Link href="/#contact-form" className="fdc-link-card">
                   <div>
-                    <p className="text-base font-bold text-foreground">Download the handbook</p>
-                    <p className="mt-1 text-sm leading-6 text-muted-foreground">Start with the core policies and daily expectations.</p>
+                    <p className="text-base font-bold text-foreground">Request the handbook</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">We’ll email you a copy of the full policies and daily expectations.</p>
                   </div>
-                  <Download className="h-4.5 w-4.5 shrink-0 text-primary" />
-                </a>
-                <a href="#" className="fdc-link-card">
+                  <ArrowRight className="h-4.5 w-4.5 shrink-0 text-primary" />
+                </Link>
+                <a href="/assets/Registration form 2026.pdf" download="Friendship-Corner-Daycare-Registration-2026.pdf" className="fdc-link-card">
                   <div>
                     <p className="text-base font-bold text-foreground">Get the enrollment application</p>
                     <p className="mt-1 text-sm leading-6 text-muted-foreground">Use the latest application form for new families.</p>
@@ -221,10 +221,10 @@ export default function ResourcesPage() {
                               Download
                             </a>
                           ) : (
-                            <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                            <Link href="/#contact-form" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
                               <NotebookPen className="h-4 w-4" />
-                              View resource
-                            </span>
+                              Request a copy
+                            </Link>
                           )}
                         </div>
                       </div>

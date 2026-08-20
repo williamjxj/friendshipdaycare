@@ -1,6 +1,8 @@
 {
-  "navigation": {
-    "home": "홈",
+    "navigation": {
+      "more": "더보기",
+      "funding": "보조금",
+      "home": "홈",
     "about": "소개",
     "programs": "프로그램",
     "enrollment": "등록",
@@ -87,7 +89,11 @@
       "programs": "프로그램",
       "enrollment": "등록",
       "gallery": "갤러리",
-      "contact": "문의"
+      "contact": "문의",
+      "funding": "보조금 및 지원",
+      "ourTeam": "우리 팀",
+      "resources": "학부모 자료",
+      "journal": "저널"
     },
     "resources": {
       "title": "자료",

@@ -8,22 +8,25 @@ export function getOgImagePath(pathname: string): string {
   const path = pathname.split("?")[0].split("#")[0];
 
   const map: Record<string, string> = {
-    "/": "/logo.png",
-    "/programs": "/logo.png",
-    "/enrollment": "/logo.png",
-    "/contact": "/logo.png",
-    "/about": "/logo.png",
-    "/gallery": "/logo.png",
-    "/gallery-new": "/logo.png",
-    "/funding": "/logo.png",
-    "/resources": "/logo.png",
-    "/our-team": "/logo.png",
-    "/community/todays-story": "/logo.png",
-    "/community/journal": "/logo.png",
-    "/community/montessori": "/logo.png",
-    "/community/ece": "/logo.png",
+    "/": "/og/home.png",
+    "/programs": "/og/home.png",
+    "/programs/toddler": "/og/home.png",
+    "/programs/preschool": "/og/home.png",
+    "/programs/prekindergarten": "/og/home.png",
+    "/enrollment": "/og/home.png",
+    "/contact": "/og/home.png",
+    "/about": "/og/home.png",
+    "/gallery": "/og/gallery.png",
+    "/gallery-new": "/og/gallery.png",
+    "/funding": "/og/funding.png",
+    "/resources": "/og/resources.png",
+    "/our-team": "/og/our-team.png",
+    "/welcome": "/og/welcome.png",
+    "/community/todays-story": "/og/todays-story.png",
+    "/community/journal": "/og/journal.png",
+    "/community/montessori": "/og/montessori.png",
+    "/community/ece": "/og/ece.png",
   };
 
-  return map[path] ?? "/logo.png";
+  return map[path] ?? "/og/default.png";
 }
-

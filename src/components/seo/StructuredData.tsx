@@ -29,6 +29,10 @@ interface LocalBusinessSchemaProps {
   foundingDate?: string;
   /** Schema.org AggregateRating; only added when reviewCount >= 1 */
   aggregateRating?: { ratingValue: number; reviewCount: number };
+  /** Google Maps URL for hasMap (helps Maps + AI answers) */
+  hasMap?: string;
+  /** Topics the business is an authority on (used by AI engines / knowledge graphs) */
+  knowsAbout?: string[];
 }
 
 export function LocalBusinessSchema({
@@ -48,10 +52,13 @@ export function LocalBusinessSchema({
   geo,
   foundingDate,
   aggregateRating,
+  hasMap = "https://www.google.com/maps/search/?api=1&query=2950+Dewdney+Trunk+Road+Coquitlam+BC+V3C+2J4",
+  knowsAbout = ["Montessori method", "Early childhood education", "Daycare", "Preschool", "Licensed childcare in BC"],
 }: LocalBusinessSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
     "@type": ["ChildCare", "LocalBusiness"],
+    "@id": `${url}#local-business`,
     "name": name,
     "description": description,
     "url": url,
@@ -59,6 +66,24 @@ export function LocalBusinessSchema({
     "email": email,
     "image": image,
     "priceRange": priceRange,
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": telephone,
+      "email": email,
+      "contactType": "customer service",
+      "availableLanguage": ["en", "zh-CN", "ko", "es", "fr"],
+      "areaServed": "CA",
+    },
+    "additionalProperty": [
+      { "@type": "PropertyValue", "name": "Ages Served", "value": "30 months to 5 years" },
+      { "@type": "PropertyValue", "name": "Programs", "value": "Toddler (30 months-3 years), Preschool (3-4 years), Pre-Kindergarten (4-5 years)" },
+      { "@type": "PropertyValue", "name": "Staff-to-Child Ratio", "value": "1:8" },
+      { "@type": "PropertyValue", "name": "License", "value": "BC Licensed Group Daycare under the Community Care and Assisted Living Act" },
+      { "@type": "PropertyValue", "name": "Funding", "value": "BC Affordable Child Care Benefit and ChildCareBC $10/day program" },
+      { "@type": "PropertyValue", "name": "Founded", "value": "2008" },
+    ],
+    ...(hasMap ? { hasMap } : {}),
+    ...(knowsAbout.length > 0 ? { knowsAbout } : {}),
     ...(foundingDate ? { foundingDate } : {}),
     ...(geo
       ? {
@@ -168,9 +193,11 @@ export function WebSiteSchema({
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${url}#website`,
     name,
     url,
     description,
+    inLanguage: ["en", "zh-CN", "ko", "es", "fr"],
     ...(searchUrlTemplate
       ? {
           potentialAction: {
@@ -225,13 +252,25 @@ export function OrganizationSchema({
   const schema = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
+    "@id": `${url}#organization`,
     "name": name,
     "url": url,
     "logo": logo,
     "description": description,
     "foundingDate": foundingDate,
+    "foundingLocation": {
+      "@type": "Place",
+      "name": "Coquitlam, British Columbia, Canada",
+    },
     "telephone": telephone,
     "email": email,
+    "knowsAbout": [
+      "Montessori method",
+      "Early childhood education",
+      "Licensed childcare in British Columbia",
+      "Child development",
+      "School readiness",
+    ],
     ...(sameAs.length > 0 ? { sameAs } : {}),
     "address": {
       "@type": "PostalAddress",
@@ -390,6 +429,34 @@ interface FAQSchemaProps {
     question: string;
     answer: string;
   }>;
+}
+
+interface BreadcrumbListSchemaProps {
+  items: { name: string; url: string }[];
+}
+
+/**
+ * BreadcrumbList structured data (JSON-LD) — helps search engines and AI
+ * assistants understand page hierarchy for sub-pages.
+ */
+export function BreadcrumbListSchema({ items }: BreadcrumbListSchemaProps) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
 }
 
 export function FAQSchema({ questions }: FAQSchemaProps) {

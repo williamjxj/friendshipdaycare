@@ -1,116 +1,196 @@
 /**
- * Program subpage content for /programs/[slug].
- * Per data-model.md: slug, title, description, content, ageRange, locale
+ * Real program content for /programs/[slug].
+ *
+ * Source of truth: Friendship Corner Daycare's actual offering
+ * (licensed group daycare, 30 months to 5 years, Montessori).
  */
 
-export interface ProgramContent {
-  slug: string;
-  title: string;
-  description: string;
-  content: string;
-  ageRange: string;
-  locale: string;
+export type ProgramSlug = "toddler" | "preschool" | "prekindergarten";
+
+export interface ProgramFaq {
+  question: string;
+  answer: string;
 }
 
-const PROGRAM_SLUGS = ['infant', 'toddler', 'preschool'] as const;
-export type ProgramSlug = (typeof PROGRAM_SLUGS)[number];
+export interface ProgramContent {
+  slug: ProgramSlug;
+  title: string;
+  /** Short title used in page <title> (template appends brand + city). */
+  metaTitle: string;
+  metaDescription: string;
+  ageRange: string;
+  summary: string;
+  highlights: string[];
+  curriculum: Array<{ heading: string; body: string }>;
+  schedule: Array<{ time: string; activity: string }>;
+  faqs: ProgramFaq[];
+}
 
-/** Full program content - 400+ words per program */
-const DEFAULT_PROGRAMS: Record<string, ProgramContent> = {
-  infant: {
-    slug: 'infant',
-    title: 'Infant Program',
-    description: 'Montessori infant care at Friendship Corner Daycare in Coquitlam, BC. Nurturing environment for babies 6-18 months. Experienced educators. Licensed care. Book a tour today.',
-    ageRange: '6 months - 18 months',
-    locale: 'en',
-    content: `
-<p>Our Infant Program at Friendship Corner Daycare provides a warm, safe, and nurturing environment for the youngest members of our community. Located in Coquitlam and serving families across the Tri-Cities (Coquitlam, Port Coquitlam, Port Moody), we understand that leaving your baby in someone else's care is one of the most important decisions you will make.</p>
+const DAILY_SCHEDULE = [
+  { time: "7:00 – 8:30 AM", activity: "Arrival, free play and morning work" },
+  { time: "8:30 – 9:00 AM", activity: "Morning snack" },
+  { time: "9:00 – 11:00 AM", activity: "Montessori work cycle and circle time" },
+  { time: "11:00 AM – 12:00 PM", activity: "Outdoor play (playground or gym)" },
+  { time: "12:00 – 1:00 PM", activity: "Lunch (brought from home)" },
+  { time: "1:00 – 2:30 PM", activity: "Rest or quiet activities" },
+  { time: "2:30 – 3:00 PM", activity: "Afternoon snack" },
+  { time: "3:00 – 6:00 PM", activity: "Art, storytime, music and play until pick-up" },
+] as const;
 
-<h2>A Prepared Environment for Infants</h2>
-<p>Our infant space is carefully designed to support your baby's developmental milestones. We follow Montessori principles adapted for the youngest learners: freedom of movement, responsive caregiving, and a calm, orderly environment. Soft mats, low shelves with developmentally appropriate materials, and plenty of natural light create a welcoming atmosphere where infants can explore safely.</p>
-
-<h2>Attachment and Relationships</h2>
-<p>We believe that secure attachments form the foundation for all future learning. Our experienced educators build strong, trusting relationships with each infant through consistent care, responsive interactions, and individualized attention. We maintain low caregiver-to-child ratios to ensure every baby receives the attention and nurturing they need throughout the day.</p>
-
-<h2>Daily Routine</h2>
-<p>While we follow each infant's natural rhythms for feeding and sleep, our day includes purposeful activities: tummy time and movement to support physical development, sensory exploration with safe, age-appropriate materials, songs and stories for language exposure, and plenty of one-on-one interaction. We work closely with families to align our care with your baby's needs and your parenting approach.</p>
-
-<h2>Communication with Families</h2>
-<p>We know how much you want to stay connected during the day. Our team provides regular updates, photos when appropriate, and detailed notes about your baby's day—feeding, sleep, diapers, and special moments. You can reach us by phone or through our parent communication tools whenever you need peace of mind.</p>
-
-<h2>Licensed Care in Coquitlam</h2>
-<p>Friendship Corner Daycare is a Licensed Group Daycare under BC's child care licensing regulations. Our infant program meets or exceeds all provincial health, safety, and staffing standards. We are located at 2950 Dewdney Trunk Road in Coquitlam, near Lougheed Highway, with easy access for Tri-Cities families. Hours are Monday through Friday, 7:00 AM to 6:00 PM.</p>
-
-<p><strong>Contact us</strong> at 604.945.8504 or friendship.care@live.ca to learn about availability in our Infant Program and to schedule a tour of our Coquitlam facility. We look forward to welcoming your family.</p>
-    `.trim(),
+export const programs: ProgramContent[] = [
+  {
+    slug: "toddler",
+    title: "Toddler Program",
+    metaTitle: "Toddler Montessori Program",
+    metaDescription:
+      "Montessori toddler daycare in Coquitlam for children 30 months to 3 years. Practical life, sensory learning and independence with BC ECE educators at Friendship Corner Daycare.",
+    ageRange: "30 months – 3 years",
+    summary:
+      "Our toddler program gives children aged 30 months to 3 years a gentle introduction to structured learning. In a safe, prepared Montessori environment, toddlers build independence, language and social skills through hands-on practical life activities, sensory exploration and guided play.",
+    highlights: [
+      "Practical life activities that build independence and fine motor skills",
+      "Sensory exploration and language-rich activities every day",
+      "Social skills, emotional regulation and first friendships",
+      "Potty training support — toddlers don't need to be fully trained",
+      "1:8 staff-to-child ratio with BC ECE licensed, Montessori-certified educators",
+    ],
+    curriculum: [
+      {
+        heading: "A prepared environment built for toddlers",
+        body: "The toddler classroom uses authentic Montessori materials on low, accessible shelves. Children choose activities from practical life, sensorial, language and early math areas, working at their own pace while teachers observe and guide. The calm, orderly space helps toddlers feel secure and capable.",
+      },
+      {
+        heading: "Independence and social skills first",
+        body: "Toddlers learn to pour, spoon, dress themselves, care for plants and tidy their workspace. These everyday tasks build concentration, coordination and confidence. Mixed-age interactions let younger children learn from older peers while older toddlers practice kindness and leadership.",
+      },
+      {
+        heading: "Language, movement and routine",
+        body: "Rich vocabulary, songs, stories and sandpaper letters support early language development. Outdoor play on our playground or in the gym provides daily gross-motor movement. A predictable rhythm of free play, snack, work time, outdoor time, lunch and rest helps toddlers feel safe and ready to learn.",
+      },
+    ],
+    schedule: [...DAILY_SCHEDULE],
+    faqs: [
+      {
+        question: "Does my toddler need to be potty trained?",
+        answer:
+          "No. Children in our toddler program (30 months to 3 years) do not need to be fully potty trained. Our educators support families through the process with patience and consistency.",
+      },
+      {
+        question: "What is the staff-to-child ratio in the toddler program?",
+        answer:
+          "We maintain a 1:8 staff-to-child ratio, meeting or exceeding BC licensing requirements for group daycare.",
+      },
+      {
+        question: "How do you help toddlers adjust to daycare?",
+        answer:
+          "We recommend a short tour before starting and a gradual transition plan. Our educators build warm, consistent relationships, and parents are welcome to call or check in during the day.",
+      },
+    ],
   },
-  toddler: {
-    slug: 'toddler',
-    title: 'Toddler Program',
-    description: 'Montessori toddler program at Friendship Corner Daycare in Coquitlam, BC. Ages 30 months to 3 years. Hands-on learning, independence building. Book a free tour today.',
-    ageRange: '30 months - 3 years',
-    locale: 'en',
-    content: `
-<p>Our Toddler Program at Friendship Corner Daycare offers a gentle introduction to structured learning in a Montessori environment designed specifically for children aged 30 months to 3 years. Serving Coquitlam and the Tri-Cities since 2008, we support toddlers as they build independence, develop social skills, and discover the joy of learning through hands-on exploration.</p>
-
-<h2>Focus on Independence and Social Skills</h2>
-<p>The toddler years are a critical period for developing independence, language, and social-emotional skills. Our program emphasizes practical life activities—pouring, spooning, dressing, and caring for the environment—that build fine motor skills, concentration, and self-confidence. Toddlers learn to work alongside peers, share materials, and navigate social situations with guidance from our trained educators.</p>
-
-<h2>Montessori Materials and Activities</h2>
-<p>Children engage with age-appropriate Montessori materials in practical life, sensorial, language, and early math areas. Sensory exploration helps toddlers refine their senses and understand the world around them. Language development is supported through rich vocabulary, stories, songs, and the introduction of sandpaper letters. Our mixed-age classroom allows younger toddlers to learn from older peers while older children reinforce their skills by helping others.</p>
-
-<h2>A Typical Day</h2>
-<p>Our regular day includes: arrival and free play; morning snack; Montessori circle and hands-on learning time; outdoor play on our safe, stimulating playground or in the gym; lunch (brought from home); rest time; afternoon snack; and activities and play until departure. The rhythm is predictable yet flexible, allowing children to work at their own pace while building routines that support security and growth.</p>
-
-<h2>Experienced, Caring Educators</h2>
-<p>All our teachers hold BC Early Childhood Education (ECE) licenses and Montessori credentials. We maintain a 1:8 staff-to-child ratio to ensure each child receives the attention and guidance they need. Our team is trained in child development, positive discipline, and creating an inclusive, welcoming environment for every family.</p>
-
-<h2>Convenient Location and Hours</h2>
-<p>We are located at 2950 Dewdney Trunk Road in Coquitlam, inside Friendship Baptist Church near Lougheed Highway. Our facility is licensed for 20 children and operates Monday through Friday, 7:00 AM to 6:00 PM. We serve families from Coquitlam, Port Coquitlam, Port Moody, and throughout the Tri-Cities. Our outdoor playground and gym provide ample space for active play in all weather.</p>
-
-<p><strong>Schedule a tour</strong> at 604.945.8504 or visit our contact page to see our toddler classroom in action and learn how your child can thrive at Friendship Corner Daycare in Coquitlam.</p>
-    `.trim(),
+  {
+    slug: "preschool",
+    title: "Preschool Program",
+    metaTitle: "Preschool Montessori Program",
+    metaDescription:
+      "Montessori preschool in Coquitlam for children 3 to 4 years. Hands-on learning, pre-reading and pre-math skills with certified ECE educators at Friendship Corner Daycare.",
+    ageRange: "3 – 4 years",
+    summary:
+      "Our preschool program for children aged 3 to 4 uses a Montessori-based curriculum that emphasizes hands-on learning, creative expression and social development. Children build pre-reading, pre-math and practical life skills through self-directed work in a prepared environment.",
+    highlights: [
+      "Montessori work cycle with self-directed, hands-on activities",
+      "Pre-reading, pre-math, science and cultural exploration",
+      "Creative expression through art, music, cooking and movement",
+      "Exposure to Mandarin and Japanese as part of the curriculum",
+      "Mixed-age classroom with certified ECE and Montessori educators",
+    ],
+    curriculum: [
+      {
+        heading: "The Montessori work cycle",
+        body: "Each morning includes an extended work period where children choose from carefully prepared activities in practical life, sensorial, language, math, science and cultural studies. Choosing and completing work builds concentration, planning skills and a genuine love of learning.",
+      },
+      {
+        heading: "Pre-reading and pre-math through materials",
+        body: "Children work with sandpaper letters, the moveable alphabet, number rods and golden beads. These concrete materials make abstract ideas tangible, preparing children for reading, writing and mathematics without pressure or worksheets.",
+      },
+      {
+        heading: "Beyond the classroom: cooking, music and languages",
+        body: "Preschoolers enjoy cooking, dancing, music, art and storytime. They are also introduced to Mandarin and Japanese, broadening cultural awareness and supporting language development in a playful, age-appropriate way.",
+      },
+    ],
+    schedule: [...DAILY_SCHEDULE],
+    faqs: [
+      {
+        question: "Is preschool at Friendship Corner Montessori-based?",
+        answer:
+          "Yes. We follow the Montessori method with authentic materials, a prepared environment and BC ECE licensed, Montessori-certified educators. Children learn through hands-on, self-directed activity at their own pace.",
+      },
+      {
+        question: "Do you teach academics at this age?",
+        answer:
+          "Yes, in a developmentally appropriate way. Children learn pre-reading, pre-math, science and cultural concepts through hands-on Montessori materials rather than worksheets.",
+      },
+      {
+        question: "What languages are children exposed to?",
+        answer:
+          "English is the primary language of instruction. Children are also exposed to Mandarin and Japanese through songs, stories and activities as part of our enriched curriculum.",
+      },
+    ],
   },
-  preschool: {
-    slug: 'preschool',
-    title: 'Preschool & Pre-Kindergarten Program',
-    description: 'Montessori preschool and pre-kindergarten at Friendship Corner Daycare in Coquitlam, BC. Ages 3-5. School readiness, hands-on learning. Book a free tour today.',
-    ageRange: '3 - 5 years',
-    locale: 'en',
-    content: `
-<p>Our Preschool and Pre-Kindergarten Program at Friendship Corner Daycare prepares children ages 3 to 5 for the transition to elementary school through a Montessori-based curriculum that emphasizes hands-on learning, creative expression, and holistic development. Located in Coquitlam and serving Tri-Cities families since 2008, we create a bridge between home and formal education.</p>
+  {
+    slug: "prekindergarten",
+    title: "Pre-Kindergarten Program",
+    metaTitle: "Pre-Kindergarten Program",
+    metaDescription:
+      "Montessori pre-kindergarten in Coquitlam for children 4 to 5 years. School readiness, reading, writing and math with certified ECE educators at Friendship Corner Daycare.",
+    ageRange: "4 – 5 years",
+    summary:
+      "Our pre-kindergarten program for children aged 4 to 5 focuses on school readiness with advanced Montessori materials in reading, writing and mathematics. Children graduate confident, curious and independent, ready for kindergarten and beyond.",
+    highlights: [
+      "Advanced Montessori materials for reading, writing and mathematics",
+      "Critical thinking, problem-solving and leadership skills",
+      "Kindergarten transition support with routines and independence",
+      "Mixed-age classroom with certified ECE and Montessori educators",
+      "1:8 staff-to-child ratio in a licensed BC group daycare",
+    ],
+    curriculum: [
+      {
+        heading: "School readiness with purpose",
+        body: "Pre-kindergarteners work with advanced Montessori materials such as the moveable alphabet, phonetic reading sets, the golden bead material and math operations. They develop the academic skills and study habits they will need for kindergarten.",
+      },
+      {
+        heading: "Reading, writing and mathematics",
+        body: "Children build phonemic awareness, sight vocabulary and early writing through hands-on materials. Mathematics moves from concrete materials to abstract understanding, including place value, addition and subtraction. Many of our graduates exceed kindergarten expectations.",
+      },
+      {
+        heading: "Independence, leadership and kindergarten transition",
+        body: "Older children take on classroom responsibilities and mentor younger peers, building confidence and leadership. We help families prepare for the transition to kindergarten with routines, communication and a focus on social-emotional readiness.",
+      },
+    ],
+    schedule: [...DAILY_SCHEDULE],
+    faqs: [
+      {
+        question: "Will my child be ready for kindergarten?",
+        answer:
+          "Yes. Our pre-kindergarten program focuses explicitly on school readiness. Children develop reading, writing, math, social-emotional and independence skills, and many of our graduates exceed kindergarten expectations.",
+      },
+      {
+        question: "What is different about Montessori pre-kindergarten?",
+        answer:
+          "Children learn through self-directed work with advanced Montessori materials rather than worksheets. This builds concentration, problem-solving and a love of learning alongside academic skills.",
+      },
+      {
+        question: "Do pre-kindergarten children still get rest time?",
+        answer:
+          "Yes. After lunch, children have quiet rest or quiet activity time before the afternoon snack and project time, balancing academics with age-appropriate rest.",
+      },
+    ],
+  },
+];
 
-<h2>Montessori Work Cycle and Choice</h2>
-<p>Children participate in an extended work period where they choose from carefully prepared activities in practical life, sensorial, language, math, science, and cultural studies. The Montessori approach fosters independence, concentration, and a love of learning. Mixed-age groupings allow younger children to learn from older peers and older children to reinforce skills by mentoring others. Our prepared environment includes hands-on materials that make abstract concepts concrete—from the moveable alphabet to the golden beads for math.</p>
-
-<h2>Beyond the Basics: Cooking, Music, Language</h2>
-<p>In addition to core Montessori areas, children are exposed to cooking, dancing, music, Mandarin, and Japanese. These experiences broaden cultural awareness, support language development, and add joy to the learning day. Art time, story time, and outdoor exploration round out a rich, balanced curriculum.</p>
-
-<h2>A Day in the Preschool Classroom</h2>
-<p>Our typical day includes: arrival and morning work; morning meeting or circle; extended Montessori work cycle; outdoor exploration and play; lunch and social time; rest or quiet activities; afternoon snack; art and project time; and departure. The schedule is structured yet flexible, supporting both routine and individual pace.</p>
-
-<h2>School Readiness</h2>
-<p>Our pre-kindergarten program (ages 4–5) focuses explicitly on school readiness. Children work with advanced Montessori materials in reading, writing, and mathematics. They develop critical thinking, problem-solving, and leadership skills. By the time they leave for kindergarten, they are confident, curious learners ready for the next chapter.</p>
-
-<h2>Licensed, Experienced Team</h2>
-<p>Friendship Corner is a Licensed Group Daycare under BC's child care licensing regulations. Our educators hold ECE and Montessori credentials. We align our practices with BC's Early Learning Framework while staying true to Montessori principles. Families receive regular communication about their child's progress and daily experiences.</p>
-
-<p><strong>Contact us</strong> to schedule a tour and see how our preschool program can support your child's growth. We welcome families from Coquitlam, Port Coquitlam, Port Moody, and the broader Tri-Cities area.</p>
-    `.trim(),
-  }
-};
-
-export const programsBySlugAndLocale: Record<string, Partial<Record<string, ProgramContent>>> = {
-  infant: { en: DEFAULT_PROGRAMS.infant },
-  toddler: { en: DEFAULT_PROGRAMS.toddler },
-  preschool: { en: DEFAULT_PROGRAMS.preschool }
-};
-
-export function getProgram(slug: string, locale: string): ProgramContent | null {
-  const content = programsBySlugAndLocale[slug]?.[locale] ?? programsBySlugAndLocale[slug]?.['en'];
-  return content ?? null;
+export function getProgram(slug: string): ProgramContent | null {
+  return programs.find((p) => p.slug === slug) ?? null;
 }
 
 export function getAllProgramSlugs(): ProgramSlug[] {
-  return [...PROGRAM_SLUGS];
+  return programs.map((p) => p.slug);
 }

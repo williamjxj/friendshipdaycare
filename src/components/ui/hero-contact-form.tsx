@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { businessProfile } from '@/lib/business-profile';
+import { trackEvent } from '@/components/analytics/GoogleAnalytics';
 
 /**
  * Compact hero contact form: "Schedule a Tour" — Name, Phone, Email, Child Age, Message.
@@ -38,6 +39,7 @@ export function HeroContactForm() {
       if (result.success) {
         setStatus('success');
         setFormData({ name: '', email: '', phone: '', childAge: '', message: '' });
+        trackEvent({ action: 'tour_request', category: 'conversion', label: 'hero_contact_form' });
       } else {
         setStatus('error');
         setErrorMessage(result.message || t('contactPage.form.validation.submitError'));
@@ -51,7 +53,7 @@ export function HeroContactForm() {
   };
 
   const phone = businessProfile.telephone.replace(/\D/g, '');
-  const inputClass = "w-full px-3 py-2.5 rounded-lg border border-slate-200 bg-white text-slate-900 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-slate-400";
+  const inputClass = "w-full px-3 py-2.5 rounded-lg border border-slate-200 bg-white text-slate-900 text-sm focus:ring-2 focus:ring-primary/60 focus:border-primary placeholder:text-slate-400";
   const labelClass = "block text-sm font-medium text-slate-700 mb-1";
 
   return (
@@ -120,7 +122,7 @@ export function HeroContactForm() {
         </select>
       </div>
       <div>
-        <label htmlFor="hero-message" className={labelClass}>{t('contactPage.form.fields.message')}</label>
+        <label htmlFor="hero-message" className={labelClass}>{t('contactPage.form.fields.message')} *</label>
         <textarea
           id="hero-message"
           name="message"
@@ -141,13 +143,13 @@ export function HeroContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold text-sm hover:bg-blue-500 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
+        className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-bold text-sm hover:bg-primary/90 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
         {isSubmitting ? t('contactPage.form.submitting') : t('contactPage.form.submit')}
       </button>
       <p className="text-sm text-slate-500 text-center">
-        {t('home.hero.orCallUs')}: <a href={`tel:${phone}`} className="font-semibold text-blue-600 hover:underline">{businessProfile.telephone}</a>
+        {t('home.hero.orCallUs')}: <a href={`tel:${phone}`} className="font-semibold text-primary hover:underline">{businessProfile.telephone}</a>
       </p>
     </form>
   );

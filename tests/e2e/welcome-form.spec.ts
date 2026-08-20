@@ -28,7 +28,7 @@ test.describe('Welcome tour form', () => {
     await page.getByTestId('welcome-email').fill('parent@example.com');
     await page.getByTestId('welcome-child-name').fill('Alex');
     await page.getByTestId('welcome-child-birthday').fill('2022-03-15');
-    await page.getByTestId('welcome-tour-date').fill('2026-06-01');
+    await page.getByTestId('welcome-tour-date').fill('2026-12-01');
     await page.getByTestId('welcome-tour-time').selectOption('morning');
     await page
       .getByTestId('welcome-message')

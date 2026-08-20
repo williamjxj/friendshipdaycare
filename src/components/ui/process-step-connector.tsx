@@ -67,17 +67,14 @@ export function ProcessStepConnector({
           strokeLinecap="round"
           className="connector-line-animate"
         />
-        {/* Moving dot indicator - travels along the path (both orientations use cx; SVG rotation handles vertical) */}
-        <motion.circle
-          r="3"
-          fill="var(--primary)"
-          cx={12}
-          cy={12}
-          animate={{
-            cx: [4, 36, 4],
-            transition: { duration: 2, repeat: Infinity, ease: 'linear' },
-          }}
-        />
+        {/* Moving dot indicator - travels along the path (translate on a <g> wrapper
+            instead of animating the SVG cx attribute, which framer-motion mis-handles) */}
+        <motion.g
+          animate={{ x: [0, 32, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+        >
+          <circle r="3" fill="var(--primary)" cx={4} cy={12} />
+        </motion.g>
         {/* Arrow head */}
         <path
           d="M34 6L40 12L34 18"

@@ -18,7 +18,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { FAQSchema } from '@/components/seo/StructuredData';
 import {
   GridAndDotBackgrounds,
   sectionGridDotPresets,
@@ -239,7 +238,6 @@ export function ContactFormSection() {
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
       >
-        <FAQSchema questions={faqItems} />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-8 text-center">
             {t('common.frequentlyAskedQuestions')}

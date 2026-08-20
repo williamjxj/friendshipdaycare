@@ -18,6 +18,7 @@ A modern, responsive website for Friendship Corner Daycare built with **Next.js 
 - **🎥 Dynamic Hero**: Immersive video backgrounds with fallback support
 - **🍱 Modern Layouts**: Bento Grid & Montessori Card designs for information display
 - **🌍 Internationalization**: Full content switching for English, Spanish, French, Korean, and Chinese with localized metadata and fallbacks
+- **🔍 SEO & GEO**: Per-page metadata, server-rendered structured data (LocalBusiness, FAQPage, Course), XML sitemap, robots.txt that welcomes AI crawlers, and `llms.txt` / `llms-full.txt` for generative engines
 - **📱 Responsive Design**: Optimized for all devices with Mobile QR Access
 - **🖼️ Image Gallery**: Animated carousel with category filtering and lightbox view
 - **🗺️ Google Maps Integration**: Interactive map showing daycare location
@@ -28,18 +29,24 @@ A modern, responsive website for Friendship Corner Daycare built with **Next.js 
 ```text
 src/
 ├── app/                    # Next.js App Router
-│   ├── page.tsx           # Homepage
-│   ├── about/             # About page
-│   ├── contact/           # Contact page with map
-│   ├── gallery/           # Photo & video gallery
-│   ├── programs/          # Programs information
+│   ├── page.tsx           # Homepage (single-page sections + contact/FAQ)
+│   ├── programs/[slug]/   # Toddler / Preschool / Pre-Kindergarten pages
+│   ├── community/         # Montessori, ECE, journal, today's story
+│   ├── funding/           # Subsidies & tuition
+│   ├── our-team/          # Educators
+│   ├── resources/         # Parent handbook & forms
+│   ├── gallery-new/       # Photo & video gallery
+│   ├── sitemap.xml/       # XML sitemap route
+│   ├── robots.ts          # robots.txt (incl. AI crawlers)
 │   └── globals.css        # Global styles & theme system
 ├── components/
 │   ├── layout/            # Header, Footer, Navigation
 │   ├── sections/          # Page sections
 │   └── ui/                # Reusable UI components
 ├── contexts/              # React contexts (Theme, Language)
+├── data/                  # Programs, FAQ, staff, reviews content
 ├── i18n/                  # Internationalization config
+├── lib/                   # SEO, business profile, integrations
 └── messages/              # Translation files
 ```
 
@@ -56,7 +63,7 @@ src/
 
 ```bash
 git clone <repository-url>
-cd kidgarden-daycare
+cd friendshipdaycare
 ```
 
 1. **Install dependencies**

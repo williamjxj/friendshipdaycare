@@ -39,3 +39,26 @@ I have the following questions:
 - daycarefriendshipcorner@gmail.com
 - google drive, ms onedrive
 - resend.com (email)
+
+## Session 3
+
+```text
+2026-08-20 — SEO/GEO overhaul (code complete, pending deploy)
+
+SEO:
+- Fixed postal code to V3C 2J4 (verified via Fraser Health licensing records)
+- Shortened over-long page titles (homepage + subpages)
+- Added real /programs/[slug] pages (toddler / preschool / prekindergarten),
+  fixing dead "Learn More" links and homepage soft-404s
+- Removed stale /programs/* middleware redirect; unknown slugs → noindex 404
+- Updated sitemap.xml (new program routes + fresh lastmod dates)
+
+GEO (generative engine optimization):
+- Rewrote public/llms.txt; added public/llms-full.txt
+- robots.txt explicitly allows GPTBot, PerplexityBot, ClaudeBot, Google-Extended, etc.
+- FAQPage + Course schema now server-rendered on the homepage
+- Enriched LocalBusiness/Organization/WebSite schema (IDs, contact point, facts)
+- Added tests/e2e/seo-structured-data.spec.ts (5 checks, all passing)
+
+Still open: deploy, submit sitemap in Search Console, confirm GBP postal code.
+```

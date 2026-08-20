@@ -303,7 +303,12 @@ export function EnrollmentSectionContent() {
               <p className="text-sm text-muted-foreground">{safeT('enrollmentPage.feesHours.closures', 'We are closed on all Statutory Holidays, weekends, and days when the managers choose to close due to unsafe conditions.')}</p>
             </motion.div>
             <motion.div className="fee-hour-card space-y-4 bg-muted/30 p-6 sm:p-8 rounded-xl border border-border/50 shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 transform-gpu will-change-transform" variants={staggerItem}>
-              <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.subsidy', 'Affordable Child Care Benefits available for qualified families.')}</p>
+              <p className="text-muted-foreground">
+                {safeT('enrollmentPage.feesHours.subsidy', 'Affordable Child Care Benefits available for qualified families.')}{' '}
+                <Link href="/funding" className="font-semibold text-primary underline underline-offset-2 hover:text-primary/80">
+                  {safeT('enrollmentPage.feesHours.learnAboutFunding', 'Learn about funding & subsidies')}
+                </Link>
+              </p>
               <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.registrationFee', 'A non-refundable registration fee applies.')}</p>
               <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.deposit', "A deposit fee secures your child's space.")}</p>
               <p className="text-muted-foreground">{safeT('enrollmentPage.feesHours.monthlyFees', 'Please inquire by email or phone regarding current monthly fees.')}</p>

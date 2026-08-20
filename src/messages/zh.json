@@ -1,6 +1,8 @@
 {
-  "navigation": {
-    "home": "首页",
+    "navigation": {
+      "more": "更多",
+      "funding": "资助与补贴",
+      "home": "首页",
     "about": "关于我们",
     "programs": "课程项目",
     "enrollment": "报名",
@@ -87,7 +89,11 @@
       "programs": "课程项目",
       "enrollment": "报名",
       "gallery": "图片展示",
-      "contact": "联系我们"
+      "contact": "联系我们",
+      "funding": "资助与补贴",
+      "ourTeam": "我们的团队",
+      "resources": "家长资源",
+      "journal": "育儿日志"
     },
     "resources": {
       "title": "资源",

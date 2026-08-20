@@ -24,14 +24,9 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(redirectTarget, request.url));
   }
 
-  // /programs/[slug] -> /#programs
-  if (pathname.startsWith('/programs/')) {
-    return NextResponse.redirect(new URL('/#programs', request.url));
-  }
-
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/about', '/programs', '/programs/:path*', '/contact', '/gallery', '/enrollment', '/resources/faq'],
+  matcher: ['/about', '/programs', '/contact', '/gallery', '/enrollment', '/resources/faq'],
 };

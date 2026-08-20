@@ -198,10 +198,9 @@
   --color-card-foreground: var(--card-foreground);
 
   /* Font families */
-  --font-sans: var(--font-comic), var(--font-nunito), system-ui, sans-serif;
-  --font-display: var(--font-baloo), var(--font-fredoka), system-ui, sans-serif;
-  --font-accent: var(--font-baloo), var(--font-fredoka), system-ui, sans-serif;
-  --font-rubik: var(--font-rubik);
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+  --font-display: var(--font-fredoka), system-ui, sans-serif;
+  --font-accent: var(--font-fredoka), system-ui, sans-serif;
 
   /*
    * Do NOT define --spacing-xs … --spacing-3xl here.
@@ -212,9 +211,9 @@
 
 body {
   /* Font families */
-  --font-sans: var(--font-comic), var(--font-nunito), system-ui, sans-serif;
-  --font-display: var(--font-baloo), var(--font-fredoka), system-ui, sans-serif;
-  --font-accent: var(--font-baloo), var(--font-fredoka), system-ui, sans-serif;
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+  --font-display: var(--font-fredoka), system-ui, sans-serif;
+  --font-accent: var(--font-fredoka), system-ui, sans-serif;
 
   font-family: var(--font-sans);
   line-height: 1.6;

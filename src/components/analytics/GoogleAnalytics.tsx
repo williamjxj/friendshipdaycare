@@ -38,7 +38,9 @@ export function GoogleAnalytics() {
 
   // Don't load if no measurement ID is set
   if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
-    console.warn('Google Analytics: No measurement ID configured');
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn('Google Analytics: No measurement ID configured');
+    }
     return null;
   }
 

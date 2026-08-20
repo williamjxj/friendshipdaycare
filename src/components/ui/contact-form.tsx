@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { trackEvent } from '@/components/analytics/GoogleAnalytics';
 
 /**
  * Shared contact form: Full Name, Email, Phone, Child's Age, Message.
@@ -65,6 +66,7 @@ export function ContactForm({
         setSubmitStatus('success');
         setFormData({ name: '', email: '', phone: '', childAge: '', message: '' });
         setFieldErrors({});
+        trackEvent({ action: 'tour_request', category: 'conversion', label: variant === 'hero' ? 'hero_form' : 'contact_form' });
       } else {
         setSubmitStatus('error');
         setErrorMessage(result.message || t('contactPage.form.validation.submitError'));

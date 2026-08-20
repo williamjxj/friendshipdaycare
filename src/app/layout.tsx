@@ -8,23 +8,24 @@ import { NextIntlProviderSync } from "@/components/providers/NextIntlProviderSyn
 import { LanguageAwareHtml } from "@/components/providers/LanguageAwareHtml";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Toaster } from "@/components/ui/toaster";
-import { LocalBusinessSchema, OrganizationSchema, WebSiteSchema, FAQSchema } from "@/components/seo/StructuredData";
+import { LocalBusinessSchema, OrganizationSchema, WebSiteSchema } from "@/components/seo/StructuredData";
 import { businessProfile } from "@/lib/business-profile";
 import { getAggregateRating } from "@/data/testimonials";
 import { defaultSiteMetadata } from "@/lib/seo";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import "./globals.css";
 
 const nunito = Nunito({
   variable: "--font-nunito",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700", "800"],
   display: "swap",
 });
 
 const fredoka = Fredoka({
   variable: "--font-fredoka",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["500", "700"],
   display: "swap",
 });
 
@@ -96,37 +97,13 @@ export default async function RootLayout({
         <OrganizationSchema
           name={businessProfile.name}
           url={businessProfile.url}
-          logo="/logo.png"
+          logo={`${businessProfile.url}/logo.png`}
           description="Licensed Montessori daycare providing quality early childhood education since 2008."
           foundingDate="2008-01-01"
           telephone={businessProfile.telephone}
           email={businessProfile.email}
           sameAs={businessProfile.sameAs}
           address={businessProfile.address}
-        />
-        <FAQSchema
-          questions={[
-            {
-              question: "What ages does Friendship Corner Daycare accept?",
-              answer: "We accept children from 30 months to 5 years old in our licensed Montessori daycare in Coquitlam, BC."
-            },
-            {
-              question: "Where is Friendship Corner Daycare located?",
-              answer: "We are located at 2950 Dewdney Trunk Road, Coquitlam, BC V3C 6E7, near Coquitlam Centre."
-            },
-            {
-              question: "Is the daycare licensed in BC?",
-              answer: "Yes, Friendship Corner Daycare is a fully licensed childcare facility in BC, operating since 2008."
-            },
-            {
-              question: "What are your hours?",
-              answer: "We are open Monday to Friday, 7:00 AM to 6:00 PM."
-            },
-            {
-              question: "Do you offer Montessori education?",
-              answer: "Yes, we offer an authentic Montessori program for children aged 30 months to 5 years, with certified ECE teachers."
-            }
-          ]}
         />
       </head>
       <body className={`${nunito.variable} ${fredoka.variable} antialiased font-sans`} suppressHydrationWarning>
@@ -140,6 +117,7 @@ export default async function RootLayout({
                   </Suspense>
                 </SiteShell>
                 <Toaster />
+                <GoogleAnalytics />
               </ThemeProvider>
             </NextIntlProviderSync>
           </LanguageAwareHtml>
