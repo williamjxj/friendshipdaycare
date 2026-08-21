@@ -7,7 +7,7 @@ export const SEO_SITE_NAME = "Friendship Corner Daycare";
 export const SEO_DEFAULT_TITLE = "Coquitlam Montessori Daycare | Friendship Corner Daycare Since 2008";
 export const SEO_TITLE_TEMPLATE = "%s | Friendship Corner Daycare Coquitlam";
 export const SEO_DEFAULT_DESCRIPTION =
-  "Licensed Montessori daycare in Coquitlam, BC for children ages 30 months to 5 years. Friendship Corner Daycare has served Tri-Cities families since 2008 near 2950 Dewdney Trunk Road.";
+  "Non-profit Montessori daycare in Coquitlam, BC for ages 30 months to 5. Bilingual English & Mandarin care since 2008. Book a tour.";
 export const SEO_DEFAULT_KEYWORDS = [
   // Primary local keywords
   "daycare Coquitlam",

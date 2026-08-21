@@ -15,6 +15,7 @@ import {
   Calendar,
   Facebook,
   Instagram,
+  MapPin,
   Phone,
   Mail,
   Wallet,
@@ -112,6 +113,7 @@ export function Header() {
       montessori: t('navigation.montessori'),
       ece: t('navigation.bcEarlyLearning'),
       resources: t('navigation.resources'),
+      'service-area': t('navigation.serviceArea'),
       gallery: t('navigation.gallery'),
       contact: t('navigation.contact'),
       funding: t('navigation.funding'),
@@ -268,6 +270,16 @@ export function Header() {
                         <Wallet className="h-4.5 w-4.5" />
                       </span>
                       {getTransName('funding')}
+                    </Link>
+                    <Link
+                      href="/service-area"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex min-h-12 items-center gap-3 rounded-2xl bg-white/70 px-4 py-3 text-sm font-semibold text-foreground transition-all hover:bg-muted"
+                    >
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/8 text-primary">
+                        <MapPin className="h-4.5 w-4.5" />
+                      </span>
+                      {getTransName('service-area')}
                     </Link>
                     <Link
                       href="/our-team"

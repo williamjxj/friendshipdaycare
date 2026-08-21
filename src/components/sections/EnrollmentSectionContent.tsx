@@ -33,7 +33,6 @@ import {
   sectionGridDotPresets,
   useSectionGridDotHover,
 } from '@/components/ui/GridAndDotBackgrounds';
-import { BrandAdPromoCard } from '@/components/ui/brand-visual-assets';
 
 /** Icon gradients aligned with About "Mission & Values" cards (per-step accent). */
 const ENROLLMENT_STEP_ICON_GRADIENTS = [
@@ -215,9 +214,6 @@ export function EnrollmentSectionContent() {
             <p className="text-base sm:text-xl text-muted-foreground w-full max-w-5xl mx-auto text-balance px-2">
               {safeT('enrollmentPage.process.subtitle', "Follow these simple steps to begin your child's Montessori journey in Coquitlam.")}
             </p>
-            <div className="mx-auto w-full max-w-3xl pt-4">
-              <BrandAdPromoCard className="mx-auto" />
-            </div>
           </div>
 
           {/* Desktop: horizontal flow with connectors */}

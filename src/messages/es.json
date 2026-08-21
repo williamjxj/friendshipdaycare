@@ -2,6 +2,7 @@
     "navigation": {
       "more": "Más",
       "funding": "Financiación",
+      "serviceArea": "Zona de servicio",
       "home": "Inicio",
     "about": "Acerca de",
     "programs": "Programas",
@@ -91,6 +92,7 @@
       "gallery": "Galería",
       "contact": "Contacto",
       "funding": "Financiación y subsidios",
+      "serviceArea": "Zona de servicio (Tri-Cities)",
       "ourTeam": "Nuestro equipo",
       "resources": "Recursos para padres",
       "journal": "Revista"

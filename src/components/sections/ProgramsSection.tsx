@@ -13,7 +13,6 @@ import {
   sectionGridDotPresets,
   useSectionGridDotHover,
 } from '@/components/ui/GridAndDotBackgrounds';
-import { BrandAdPromoCard } from '@/components/ui/brand-visual-assets';
 import { AuroraBackground } from '@/components/ui/aurora-background';
 
 type ProgramData = {
@@ -100,9 +99,6 @@ export function ProgramsSection() {
           <p className="mx-auto max-w-4xl text-base sm:text-lg md:text-xl text-muted-foreground">
             {t('programsPage.overview.subtitle')}
           </p>
-          <div className="mx-auto mt-10 w-full max-w-3xl px-2">
-            <BrandAdPromoCard />
-          </div>
         </motion.div>
 
         <motion.div

@@ -2,6 +2,7 @@
     "navigation": {
       "more": "더보기",
       "funding": "보조금",
+      "serviceArea": "서비스 지역",
       "home": "홈",
     "about": "소개",
     "programs": "프로그램",
@@ -91,6 +92,7 @@
       "gallery": "갤러리",
       "contact": "문의",
       "funding": "보조금 및 지원",
+      "serviceArea": "서비스 지역 (Tri-Cities)",
       "ourTeam": "우리 팀",
       "resources": "학부모 자료",
       "journal": "저널"

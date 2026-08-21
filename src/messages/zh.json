@@ -2,6 +2,7 @@
     "navigation": {
       "more": "更多",
       "funding": "资助与补贴",
+      "serviceArea": "服务区域",
       "home": "首页",
     "about": "关于我们",
     "programs": "课程项目",
@@ -91,6 +92,7 @@
       "gallery": "图片展示",
       "contact": "联系我们",
       "funding": "资助与补贴",
+      "serviceArea": "服务区域（Tri-Cities）",
       "ourTeam": "我们的团队",
       "resources": "家长资源",
       "journal": "育儿日志"
@@ -141,8 +143,8 @@
   },
   "seo": {
     "home": {
-      "title": "高贵林蒙特梭利日托中心",
-      "description": "Friendship Corner Daycare 是位于BC省高贵林的持牌蒙特梭利日托中心，服务于Tri-Cities家庭。立即预约参观。"
+      "title": "高贵林双语蒙特梭利日托 | Friendship Corner Daycare",
+      "description": "高贵林非营利蒙特梭利日托，招收30个月至5岁儿童，英中双语照顾，自2008年服务Tri-Cities（高贵林、高貴林港、满地宝）家庭。立即预约参观。"
     },
     "about": {
       "title": "关于高贵林 Friendship Corner Daycare",

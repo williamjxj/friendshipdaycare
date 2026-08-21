@@ -116,10 +116,8 @@ export function BrandLogoMark({
       <Image
         src={BRAND_ASSET_PATHS.logo}
         alt="Friendship Corner Daycare logo"
-        width={dim}
-        height={dim}
+        fill
         className="object-contain drop-shadow-sm"
-        style={{ width: 'auto', height: 'auto' }}
         sizes={`${dim}px`}
       />
     </div>

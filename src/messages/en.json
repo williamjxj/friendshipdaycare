@@ -2,6 +2,7 @@
     "navigation": {
       "more": "More",
       "funding": "Funding",
+      "serviceArea": "Service Area",
       "home": "Home",
     "about": "About",
     "programs": "Programs",
@@ -93,6 +94,7 @@
       "gallery": "Gallery",
       "contact": "Contact",
       "funding": "Funding & Subsidies",
+      "serviceArea": "Service Area (Tri-Cities)",
       "ourTeam": "Our Team",
       "resources": "Parent Resources",
       "journal": "Journal"
@@ -144,7 +146,7 @@
   "seo": {
     "home": {
       "title": "Montessori Daycare in Coquitlam, BC",
-      "description": "Authentic Montessori daycare in Coquitlam, BC. Licensed since 2008. Book a free tour at Friendship Corner Daycare."
+      "description": "Non-profit Montessori daycare in Coquitlam, BC for ages 30 months to 5. Bilingual English & Mandarin care since 2008. Book a tour."
     },
     "about": {
       "title": "About Friendship Corner Daycare in Coquitlam",

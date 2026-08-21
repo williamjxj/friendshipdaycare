@@ -150,6 +150,12 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/service-area" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+                  {t('footer.quickLinks.serviceArea')}
+                </Link>
+              </li>
+              <li>
                 <Link href="/our-team" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                   {t('footer.quickLinks.ourTeam')}

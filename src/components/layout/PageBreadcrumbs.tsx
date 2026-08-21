@@ -13,6 +13,7 @@ interface Crumb {
 
 const PAGE_TRAILS: Record<string, Crumb[]> = {
   '/funding': [{ name: 'Funding & Subsidies', href: '/funding' }],
+  '/service-area': [{ name: 'Service Area (Tri-Cities)', href: '/service-area' }],
   '/our-team': [{ name: 'Our Team', href: '/our-team' }],
   '/resources': [{ name: 'Parent Resources', href: '/resources' }],
   '/programs/toddler': [{ name: 'Programs', href: '/#programs' }, { name: 'Toddler Program', href: '/programs/toddler' }],

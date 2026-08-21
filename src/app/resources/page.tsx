@@ -16,6 +16,7 @@ interface Resource {
   type: 'PDF' | 'Guide' | 'Checklist' | 'Article';
   icon: string;
   downloadUrl?: string;
+  href?: string;
 }
 
 interface ResourceCategory {
@@ -44,6 +45,7 @@ export default function ResourcesPage() {
         { title: 'Separation Anxiety Guide', description: 'Tips for helping your child adjust to daycare', type: 'Guide', icon: '🤗' },
         { title: 'What to Pack Daily', description: 'Daily essentials your child should bring', type: 'Checklist', icon: '🎒' },
         { title: 'Potty Training Partnership', description: 'How we support families through potty training', type: 'Guide', icon: '🚽' },
+        { title: 'Service Area Guide (中英双语)', description: 'For families in Port Coquitlam and Port Moody: commute, hours, ages, subsidies, and bilingual Montessori care — in English and Chinese.', type: 'Guide', icon: '📍', href: '/service-area' },
       ],
     },
     {
@@ -220,6 +222,11 @@ export default function ResourcesPage() {
                               <Download className="h-4 w-4" />
                               Download
                             </a>
+                          ) : resource.href ? (
+                            <Link href={resource.href} className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
+                              <ArrowRight className="h-4 w-4" />
+                              View guide
+                            </Link>
                           ) : (
                             <Link href="/#contact-form" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
                               <NotebookPen className="h-4 w-4" />

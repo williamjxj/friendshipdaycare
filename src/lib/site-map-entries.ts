@@ -43,6 +43,13 @@ export const siteMapEntries: SiteMapEntry[] = [
     priority: 0.75,
   },
   {
+    path: "/service-area",
+    title: "Service Area (Tri-Cities)",
+    lastModified: "2026-08-20",
+    changeFrequency: "weekly",
+    priority: 0.65,
+  },
+  {
     path: "/our-team",
     title: "Our Team",
     lastModified: "2026-08-20",

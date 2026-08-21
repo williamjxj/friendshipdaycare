@@ -55,6 +55,19 @@ test.describe('SEO & GEO surface', () => {
     }
   });
 
+  test('service-area page renders bilingual Tri-Cities content and FAQ schema', async ({ request }) => {
+    const response = await request.get('/service-area');
+    expect(response.ok()).toBeTruthy();
+    const html = await response.text();
+
+    expect(html).toContain('"@type":"FAQPage"');
+    expect(html).toContain('Port Coquitlam');
+    expect(html).toContain('Port Moody');
+    expect(html).toContain('高貴林港');
+    expect(html).toContain('满地宝');
+    expect(html).toContain('中文');
+  });
+
   test('sitemap.xml lists the program and legal pages', async ({ request }) => {
     const response = await request.get('/sitemap.xml');
     expect(response.ok()).toBeTruthy();
@@ -65,6 +78,7 @@ test.describe('SEO & GEO surface', () => {
       '/programs/preschool',
       '/programs/prekindergarten',
       '/funding',
+      '/service-area',
       '/privacy',
     ]) {
       expect(body).toContain(path);
