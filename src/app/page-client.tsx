@@ -20,6 +20,7 @@ import { Download, Sparkles, Heart, Star, PhoneCall, ArrowRight, BookOpen, Calen
 import { MapPin } from 'lucide-react';
 import { getImageUrl } from '@/lib/image-utils';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useTypewriter } from '@/hooks/use-typewriter';
 import { businessProfile } from '@/lib/business-profile';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 import { BorderBeam } from '@/components/ui/border-beam';
@@ -124,7 +125,7 @@ export function HomePageClient() {
   const heroTitleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const reduceMotion = useReducedMotion();
   const heroChipMotion = reduceMotion
     ? ({ initial: false as const, animate: 'visible' as const })
@@ -176,6 +177,13 @@ export function HomePageClient() {
   ], []);
 
   const heroMarqueeChips = useMemo(() => getHeroMarqueeChips(t), [t]);
+  const heroTypewriterPhrases = useMemo(() => {
+    // Only the English "Montessori Daycare" headline gets the typewriter;
+    // other locales keep their existing static headline.
+    if (language !== 'en') return [];
+    return [`${t('home.hero.headlineHighlight')}${t('home.hero.headlineAfter')}`];
+  }, [language, t]);
+  const heroTypewriterText = useTypewriter(heroTypewriterPhrases);
 
   return (
     <main id="main-content" ref={mainRef} className="flex-1 overflow-x-hidden">
@@ -327,8 +335,17 @@ export function HomePageClient() {
               }}
             >
               <span className="word inline-block text-white" style={{ WebkitTextStroke: '1px rgba(0,0,0,0.3)' }}>{t('home.hero.headlineBefore')}</span>{' '}
-              <span className="word inline-block" style={{ color: '#fbbf24', WebkitTextStroke: '1px rgba(0,0,0,0.3)' }}>{t('home.hero.headlineHighlight')}</span>{' '}
-              <span className="word inline-block" style={{ color: '#fbbf24', WebkitTextStroke: '1px rgba(0,0,0,0.3)' }}>{t('home.hero.headlineAfter')}</span>
+              {language === 'en' ? (
+                <span className="word block" style={{ color: '#fbbf24', WebkitTextStroke: '1px rgba(0,0,0,0.3)' }}>
+                  {heroTypewriterText}
+                  <span className="type-caret" aria-hidden="true" />
+                </span>
+              ) : (
+                <>
+                  <span className="word inline-block" style={{ color: '#fbbf24', WebkitTextStroke: '1px rgba(0,0,0,0.3)' }}>{t('home.hero.headlineHighlight')}</span>{' '}
+                  <span className="word inline-block" style={{ color: '#fbbf24', WebkitTextStroke: '1px rgba(0,0,0,0.3)' }}>{t('home.hero.headlineAfter')}</span>
+                </>
+              )}
             </h1>
 
             {/* Subtitle - Desktop only; mobile hero is minimal */}

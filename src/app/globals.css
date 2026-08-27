@@ -1334,6 +1334,27 @@ footer .footer-section-title {
   }
 }
 
+/* Typewriter hero caret — matches the amber "Montessori Daycare" highlight */
+.type-caret {
+  display: inline-block;
+  vertical-align: -0.08em;
+  width: 4px;
+  height: 0.85em;
+  margin-left: 6px;
+  background: #fbbf24;
+  animation: typeCaretBlink 1s step-end infinite;
+}
+@keyframes typeCaretBlink {
+  50% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .type-caret {
+    animation: none;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
