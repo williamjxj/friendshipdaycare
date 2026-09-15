@@ -236,6 +236,7 @@ Current (kept in sync with the code):
 
 - `docs/codex_pwa.md` — PWA implementation, install criteria, offline behaviour, verification results
 - `docs/codex_seo-geo.md` — SEO/GEO decisions, verification rounds, maintenance checklist
+- `docs/codex_ui.md` — UI/UX audit method, findings, fixes and deferred items
 - `docs/todo.md` — session log and open items
 
 Historical research and AI advice transcripts — useful context, but they describe the site

@@ -59,7 +59,10 @@ export function PageBreadcrumbs() {
                 <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" aria-hidden />
               )}
               {crumb.href && index < crumbs.length - 1 ? (
-                <Link href={crumb.href} className="font-medium transition-colors hover:text-primary">
+                <Link
+                  href={crumb.href}
+                  className="fdc-tap-target font-medium transition-colors hover:text-primary"
+                >
                   {crumb.name}
                 </Link>
               ) : (

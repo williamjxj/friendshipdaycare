@@ -319,7 +319,6 @@ h1 {
   line-height: 1.2;
   font-family: var(--font-display);
   font-weight: 700;
-  color: #000000;
   letter-spacing: -0.02em;
 }
 
@@ -340,7 +339,6 @@ h2 {
   line-height: 1.2;
   font-family: var(--font-display);
   font-weight: 700;
-  color: #000000;
   letter-spacing: -0.02em;
 }
 
@@ -354,7 +352,6 @@ h3 {
   font-size: 1.5rem;
   line-height: 1.3;
   font-weight: 600;
-  color: #000000;
 }
 
 h4 {
@@ -363,7 +360,6 @@ h4 {
   line-height: 1.4;
   font-weight: 600;
   /* font-semibold */
-  color: var(--foreground);
 }
 
 h5 {
@@ -372,7 +368,6 @@ h5 {
   line-height: 1.5;
   font-weight: 500;
   /* font-medium */
-  color: var(--foreground);
 }
 
 h6 {
@@ -381,7 +376,6 @@ h6 {
   line-height: 1.5;
   font-weight: 500;
   /* font-medium */
-  color: var(--foreground);
 }
 
 /* Body text defaults */
@@ -390,7 +384,49 @@ p {
   /* text-base */
   line-height: 1.6;
   /* leading-relaxed */
-  color: var(--foreground);
+}
+
+/*
+ * Headings and body copy inherit their colour from the surrounding container.
+ *
+ * These used to be hard-coded (#000000 for h1-h3, var(--foreground) for the
+ * rest) as unlayered rules. Unlayered rules beat Tailwind's utilities, so any
+ * dark section was stuck with dark text: the gallery hero on `bg-zinc-950`
+ * rendered its headline at 1.05:1 contrast and its intro copy at 1.93:1 —
+ * effectively invisible. Keeping this in `@layer base` lets colour utilities
+ * win, and `inherit` means a section that sets its own text colour (text-white)
+ * also controls its headings.
+ */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    color: inherit;
+  }
+}
+
+/*
+ * Touch target helper: inline links (phone, email, footer, "learn more") render
+ * around 20-26px tall, well under the 44px minimum on phones. Add
+ * `fdc-tap-target` to those anchors; it keeps them inline-flow while giving the
+ * finger something to hit.
+ */
+.fdc-tap-target {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.fdc-tap-target-loose {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 /* Large body text for intros/heroes */

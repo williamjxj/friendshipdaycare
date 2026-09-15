@@ -187,7 +187,7 @@ export function GoogleMap({ className = '' }: GoogleMapProps) {
                 href={mapData.directionsUrl || fallbackDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm font-medium"
+                className="fdc-tap-target gap-1 text-primary hover:text-primary/80 transition-colors text-sm font-medium"
               >
                 <MapPinIcon className="w-4 h-4 mr-1" />
                 Get Directions

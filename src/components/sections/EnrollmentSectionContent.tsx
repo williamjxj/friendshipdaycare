@@ -111,7 +111,7 @@ function EnrollmentProcessStepCard({
               <a
                 href="/assets/Registration form 2026.pdf"
                 download
-                className="inline-flex min-w-0 items-center gap-1.5 font-semibold text-primary underline underline-offset-2 transition-colors hover:text-primary/80 wrap-break-word"
+                className="fdc-tap-target min-w-0 gap-1.5 font-semibold text-primary underline underline-offset-2 transition-colors hover:text-primary/80 wrap-break-word"
               >
                 <DocumentArrowDownIcon className="h-4 w-4 shrink-0" />
                 <span className="wrap-break-word">

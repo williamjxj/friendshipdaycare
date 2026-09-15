@@ -153,7 +153,10 @@ export function ContactFormSection() {
                 <PhoneIcon className="h-7 w-7 text-primary" />
               </div>
               <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.phone.title')}</h3>
-              <a href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`} className="text-muted-foreground font-semibold hover:text-primary transition-colors">
+              <a
+                href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
+                className="fdc-tap-target text-muted-foreground font-semibold hover:text-primary transition-colors"
+              >
                 {businessProfile.telephone}
               </a>
               <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.phone.subtitle')}</CardDescription>
@@ -181,7 +184,10 @@ export function ContactFormSection() {
                 <EnvelopeIcon className="h-7 w-7 text-primary" />
               </div>
               <h3 className="font-bold text-foreground mb-1 text-lg">{t('contactPage.cards.email.title')}</h3>
-              <a href={`mailto:${businessProfile.email}`} className="text-muted-foreground font-semibold hover:text-primary transition-colors break-all">
+              <a
+                href={`mailto:${businessProfile.email}`}
+                className="fdc-tap-target text-muted-foreground font-semibold hover:text-primary transition-colors break-all"
+              >
                 {businessProfile.email}
               </a>
               <CardDescription className="text-sm mt-2 font-medium">{t('contactPage.cards.email.subtitle')}</CardDescription>

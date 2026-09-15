@@ -162,7 +162,7 @@ export default function ResourcesPage() {
               </div>
             </div>
 
-            <aside className="fdc-panel p-6 sm:p-7">
+            <div className="fdc-panel p-6 sm:p-7">
               <span className="fdc-kicker">Quick Actions</span>
               <div className="mt-5 space-y-3">
                 <Link href="/#contact-form" className="fdc-link-card">
@@ -187,7 +187,7 @@ export default function ResourcesPage() {
                   <ArrowRight className="h-4.5 w-4.5 shrink-0 text-primary" />
                 </Link>
               </div>
-            </aside>
+            </div>
           </div>
         </section>
 

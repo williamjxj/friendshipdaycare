@@ -29,7 +29,7 @@ export function OurTeamPageClient() {
   const staff = staffByLocale[language] ?? staffByLocale.en ?? [];
 
   return (
-    <main id="main-content" className="fdc-section-shell min-h-screen overflow-x-hidden pb-20 pt-20">
+    <div className="fdc-section-shell min-h-screen overflow-x-hidden pb-20 pt-20">
       <section className="fdc-page-hero px-4 py-14 sm:px-6 sm:py-18 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="fdc-hero-grid">
@@ -119,6 +119,6 @@ export function OurTeamPageClient() {
           )}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

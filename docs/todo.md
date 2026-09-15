@@ -109,3 +109,39 @@ re-measure Lighthouse/PageSpeed on the deployed CDN.
   installed on this machine and did not finish downloading. The suite was
   verified against the Chromium already present locally via a throwaway config;
   run `npx playwright install chromium` before the next full e2e run.
+
+## Session 5
+
+```text
+2026-09-14 — UI/UX review of the deployed site, then fixes
+
+Deploy verified live: robots (no /_next/ block), 404 for unknown program slugs,
+308 legacy redirects, /sw.js served, optimised hero srcset, trimmed titles,
+llms.txt dated 2026-09-14, structured data intact.
+
+Audited with screenshots (1440x900 + 390x844), axe-core on five routes, DOM
+geometry measurements and pixel sampling. Fixed:
+1. /gallery-new headline was invisible — black on near-black, 1.05:1, 0% light
+   pixels in the heading band. Root cause: heading/paragraph colours were
+   unlayered element rules in globals.css that beat Tailwind utilities. Now
+   @layer base + color: inherit, so dark sections keep their text. 0% -> 11.7%
+   visible text pixels; page went from 5 serious violations to 0.
+2. Two <main> landmarks per page. SiteShell now owns the single
+   main#main-content; pages render plain containers.
+3. Homepage had no persistent mobile action (25-screen page, sticky bar was
+   disabled on /). Sticky Call / Book-a-Tour now shows everywhere except
+   /welcome.
+4. Ten undersized tap targets on mobile home. New .fdc-tap-target helper
+   applied to phone/email, footer, breadcrumbs, program and funding links, map
+   directions. 10 -> 1 (the visually-hidden skip link).
+5. Cleanups: aside panels in <main> became divs; footer caption contrast
+   2.28:1 -> above 4.5:1; decorative footer logo alt.
+
+Verified: lint + build clean, axe 0 violations on /, /gallery-new, /funding,
+/service-area, /welcome, one <main> each, 10/10 SEO tests pass, full suite 18
+passed with the known hero-chip / welcome-form parallel-load flakes passing in
+isolation.
+
+Deferred (needs owner sign-off): hero re-proportion, tour-form trim, homepage
+hero CTA differentiation. See docs/codex_ui.md.
+```

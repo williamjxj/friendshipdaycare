@@ -189,13 +189,19 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground min-h-[44px]">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <a href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`} className="hover:text-primary transition-colors break-all">
+                <a
+                  href={`tel:${businessProfile.telephone.replace(/\D/g, '')}`}
+                  className="fdc-tap-target hover:text-primary transition-colors break-all"
+                >
                   {businessProfile.telephone}
                 </a>
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground min-h-[44px]">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <a href={`mailto:${businessProfile.email}`} className="hover:text-primary transition-colors break-all">
+                <a
+                  href={`mailto:${businessProfile.email}`}
+                  className="fdc-tap-target hover:text-primary transition-colors break-all"
+                >
                   {businessProfile.email}
                 </a>
               </li>
@@ -223,7 +229,7 @@ export function Footer() {
                 viewBox={`0 0 256 256`}
               />
             </div>
-            <p className="text-[10px] text-muted-foreground/60 mt-1 sm:mt-2">
+            <p className="text-[11px] text-muted-foreground mt-1 sm:mt-2">
               {t('footer.mobileAccess.scan')}
             </p>
           </div>
@@ -242,7 +248,7 @@ export function Footer() {
               >
                 <Image
                   src="/collects/bit.png"
-                  alt="Best IT Consulting"
+                  alt=""
                   width={24}
                   height={24}
                   className="h-5 w-auto object-contain shrink-0"

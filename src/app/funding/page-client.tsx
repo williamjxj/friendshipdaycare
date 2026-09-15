@@ -26,7 +26,7 @@ const fundingCards = [
 
 export function FundingPageClient() {
   return (
-    <main id="main-content" className="fdc-section-shell min-h-screen overflow-x-hidden pb-20 pt-20">
+    <div className="fdc-section-shell min-h-screen overflow-x-hidden pb-20 pt-20">
       <section className="fdc-page-hero px-4 py-14 sm:px-6 sm:py-18 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="fdc-hero-grid">
@@ -77,7 +77,7 @@ export function FundingPageClient() {
                           href={card.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-sm font-bold text-primary"
+                          className="fdc-tap-target gap-2 text-sm font-bold text-primary"
                         >
                           {card.cta}
                           <ArrowRight className="h-4 w-4" />
@@ -90,7 +90,7 @@ export function FundingPageClient() {
             })}
           </div>
 
-          <aside className="fdc-panel p-6 sm:p-7">
+          <div className="fdc-panel p-6 sm:p-7">
             <span className="fdc-kicker">What Families Usually Ask</span>
             <div className="mt-5 space-y-5">
               <div>
@@ -118,9 +118,9 @@ export function FundingPageClient() {
                 </Link>
               </div>
             </div>
-          </aside>
+          </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -22,7 +22,7 @@ const galleryImages = [
 
 export function GalleryPageClient() {
     return (
-        <main className="bg-zinc-900 min-h-screen">
+        <div className="bg-zinc-900 min-h-screen">
             {/* Introduction Spacer to allow scrolling *into* the gallery */}
             <section className="h-screen flex items-center justify-center bg-zinc-950 text-white p-8 border-b border-indigo-500/20">
                 <div className="text-center space-y-6 max-w-2xl">
@@ -58,6 +58,6 @@ export function GalleryPageClient() {
                     </Link>
                 </div>
             </section>
-        </main>
+        </div>
     );
 }

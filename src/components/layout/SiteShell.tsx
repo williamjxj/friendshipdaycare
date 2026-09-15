@@ -43,7 +43,15 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     >
       <SkipNavigation />
       {isWelcome ? <WelcomeCompactHeader /> : <Header />}
-      <main className={isWelcome ? 'flex flex-1 flex-col pt-11 sm:pt-12' : 'flex-1 pt-16'} role="main">
+      {/*
+        The single page-level landmark. Pages render a plain container inside it;
+        having a second <main> in each page broke "skip to main content" and made
+        axe report duplicate-main landmarks on every route.
+      */}
+      <main
+        id="main-content"
+        className={isWelcome ? 'flex flex-1 flex-col pt-11 sm:pt-12' : 'flex-1 pt-16'}
+      >
         {!isWelcome && <PageBreadcrumbs />}
         {children}
       </main>

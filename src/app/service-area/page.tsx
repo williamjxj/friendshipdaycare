@@ -33,10 +33,7 @@ export default function ServiceAreaPage() {
           answer,
         }))}
       />
-      <main
-        id="main-content"
-        className="fdc-section-shell min-h-screen overflow-x-hidden pb-20 pt-20"
-      >
+      <div className="fdc-section-shell min-h-screen overflow-x-hidden pb-20 pt-20">
         <section className="fdc-page-hero px-4 py-14 sm:px-6 sm:py-18 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="fdc-hero-grid">
@@ -68,7 +65,7 @@ export default function ServiceAreaPage() {
                 </div>
               </div>
               <div className="relative z-10">
-                <aside className="fdc-panel p-6 sm:p-7">
+                <div className="fdc-panel p-6 sm:p-7">
                   <span className="fdc-kicker">Visit or Call Us · 联系与参观</span>
                   <h2 className="mt-3 text-2xl font-display font-bold text-foreground">
                     Easy to reach from the Tri-Cities
@@ -88,7 +85,7 @@ export default function ServiceAreaPage() {
                       <Phone className="h-4.5 w-4.5 shrink-0 text-primary" />
                       <a
                         href={`tel:${businessProfile.telephone.replace(/\D/g, "")}`}
-                        className="font-semibold text-foreground transition-colors hover:text-primary"
+                        className="fdc-tap-target font-semibold text-foreground transition-colors hover:text-primary"
                       >
                         {businessProfile.telephone}
                       </a>
@@ -113,7 +110,7 @@ export default function ServiceAreaPage() {
                       Ask a Question · 在线咨询
                     </Link>
                   </div>
-                </aside>
+                </div>
               </div>
             </div>
           </div>
@@ -262,7 +259,7 @@ export default function ServiceAreaPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

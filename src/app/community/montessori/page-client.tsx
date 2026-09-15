@@ -74,7 +74,7 @@ export default function MontessoriPageClient() {
               </div>
             </section>
 
-            <aside className="grid gap-5">
+            <div className="grid gap-5">
               <section className="fdc-panel p-6 sm:p-7">
                 <h2 className="text-2xl font-display font-bold text-foreground">
                   {t('community.montessori.principles.title')}
@@ -95,7 +95,7 @@ export default function MontessoriPageClient() {
                   ))}
                 </ul>
               </section>
-            </aside>
+            </div>
           </div>
 
           <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.78fr)]">

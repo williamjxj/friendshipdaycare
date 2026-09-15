@@ -18,7 +18,6 @@ export function WelcomePageClient() {
 
   return (
     <div
-      id="main-content"
       data-testid="welcome-page"
       className="relative flex min-h-0 flex-1 flex-col justify-center overflow-hidden px-3 py-3 sm:px-4 sm:py-4"
     >

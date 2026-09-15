@@ -10,6 +10,7 @@ import { EnrollmentSectionContent } from '@/components/sections/EnrollmentSectio
 import { ContactFormSection } from '@/components/sections/ContactFormSection';
 import { HeroImageCarousel } from '@/components/ui/hero-image-carousel';
 import { HeroContactForm } from '@/components/ui/hero-contact-form';
+import { QuickJumpNav } from '@/components/ui/QuickJumpNav';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { getHeroMarqueeChips, HeroMarqueeChipRow } from '@/lib/hero-marquee-chips';
 import Image from 'next/image';
@@ -119,7 +120,7 @@ function AnimatedHeroChipText({
  * Homepage client component with interactive hero and sections.
  */
 export function HomePageClient() {
-  const mainRef = useRef<HTMLElement>(null);
+  const mainRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLElement>(null);
   const heroLogoRef = useRef<HTMLDivElement>(null);
   const heroTitleRef = useRef<HTMLHeadingElement>(null);
@@ -187,8 +188,9 @@ export function HomePageClient() {
   }, [language, t]);
   const heroTypewriterText = useTypewriter(heroTypewriterPhrases);
 
+  // SiteShell owns the single <main> landmark; this is just the page container.
   return (
-    <main id="main-content" ref={mainRef} className="flex-1 overflow-x-hidden">
+    <div ref={mainRef} className="flex-1 overflow-x-hidden">
       {/* Hero Section - Clone of frienddaycare-hbvktcxj.manus.space (full-screen, nav overflow, curved bottom) */}
       <section
         id="home"
@@ -548,6 +550,8 @@ export function HomePageClient() {
         </div>
       </section>
 
+      {/* Jump-to row: six destinations instead of 25 screens of scrolling. */}
+      <QuickJumpNav />
 
       <AboutSection />
 
@@ -580,6 +584,6 @@ export function HomePageClient() {
       <EnrollmentSectionContent />
 
       <ContactFormSection />
-    </main>
+    </div>
   );
 }
