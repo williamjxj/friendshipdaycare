@@ -3,6 +3,10 @@ set -euo pipefail
 
 # Generates branded 1200x630 Open Graph images into public/og/.
 # Requires ImageMagick (magick) and macOS system fonts (Arial).
+#
+# Usage:
+#   ./scripts/generate-og-images.sh                # regenerate every card
+#   ./scripts/generate-og-images.sh service-area    # regenerate only listed keys
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/public/og"
@@ -12,10 +16,24 @@ FONT_BOLD="/System/Library/Fonts/Supplemental/Arial Bold.ttf"
 FONT="/System/Library/Fonts/Supplemental/Arial.ttf"
 LOGO="$ROOT/public/daycare-logo.png"
 
+# Optional key filter: with no arguments every card is rendered.
+FILTER=("$@")
+
+should_render() {
+  [ ${#FILTER[@]} -eq 0 ] && return 0
+  local key
+  for key in "${FILTER[@]}"; do
+    [ "$key" = "$1" ] && return 0
+  done
+  return 1
+}
+
 render() {
   local key="$1"
   local title="$2"
   local subtitle="$3"
+
+  should_render "$key" || return 0
 
   magick -size 1200x630 gradient:'#EAF2FB'-'#FDF3E7' \
     \( -size 1200x630 xc:none -fill 'rgba(44,95,77,0.09)' -draw 'circle 1060,70 1060,270' \) -composite \
@@ -35,6 +53,7 @@ render funding "Funding & Subsidies in BC" "Affordable Child Care Benefit • \$
 render our-team "Meet Our Educators" "ECE-certified Montessori team in Coquitlam"
 render welcome "Schedule a Tour" "Visit Friendship Corner Daycare in person"
 render resources "Parent Resources & Handbook" "Forms, guides, and checklists for families"
+render service-area "Daycare for Tri-Cities Families" "Coquitlam • Port Coquitlam • Port Moody"
 render journal "Friendship Corner Classroom Journal" "Monthly highlights from our Coquitlam classrooms"
 render gallery "Inside Our Montessori Classrooms" "Prepared spaces, materials, and outdoor play"
 render montessori "Montessori Education in Coquitlam" "Hands-on learning for ages 30 months to 5"

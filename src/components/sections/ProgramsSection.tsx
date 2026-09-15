@@ -165,6 +165,7 @@ export function ProgramsSection() {
                   {/* CTA Link */}
                   <Link
                     href={`/programs/${program.key}`}
+                    aria-label={`Learn more about the ${program.title} program at Friendship Corner Daycare`}
                     className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold transition-colors group/link mt-4"
                   >
                     Learn More

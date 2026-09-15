@@ -11,7 +11,8 @@ import {
 } from "@/data/service-areas";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Daycare for Tri-Cities Families | Port Coquitlam & Port Moody",
+  // Kept under ~55 characters so the brand suffix still fits the SERP budget.
+  title: "Tri-Cities Daycare | Port Coquitlam & Port Moody",
   description:
     "Montessori daycare for Coquitlam, Port Coquitlam, and Port Moody families. Bilingual English & Mandarin care, ages 30 months to 5 years. Book a tour.",
   path: "/service-area",

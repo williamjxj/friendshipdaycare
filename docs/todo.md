@@ -40,6 +40,10 @@ I have the following questions:
 - google drive, ms onedrive
 - resend.com (email)
 
+> Confirm the contact email: the website, schema, and `llms.txt` all publish
+> `friendship.care@live.ca`, while this note says `.com`. Pick one and keep every
+> surface identical (it is a local-SEO/NAP consistency issue, not just a typo).
+
 ## Session 3
 
 ```text
@@ -62,3 +66,46 @@ GEO (generative engine optimization):
 
 Still open: deploy, submit sitemap in Search Console, confirm GBP postal code.
 ```
+
+## Session 4
+
+```text
+2026-09-14 — SEO/GEO double-check against the built site (not just source)
+
+Verified working: server-rendered schema (WebSite, ChildCare/LocalBusiness,
+EducationalOrganization, FAQPage, Course, BreadcrumbList), canonicals + hreflang,
+llms.txt / llms-full.txt, robots.txt AI crawler rules, 17-URL sitemap with images.
+
+Fixed four defects that were undoing earlier SEO work:
+1. /programs/<unknown> returned 200 + index,follow + homepage canonical
+   (soft 404). Now a real 404 + noindex, handled in src/proxy.ts because the
+   site renders dynamically and notFound() cannot change a streamed status.
+2. The layout's title template pushed child-page titles past 60 characters
+   (/service-area rendered 101). buildPageMetadata now appends the brand only
+   when it fits; /service-area title rewritten. All titles <= 60 and unique.
+3. robots.txt disallowed /_next/, which blocks Googlebot from fetching the CSS/JS
+   it needs to render pages. /_next/ removed; only /api/ is disallowed.
+4. Retired URLs (/team, /pricing, /gallery, /journal, /todays-story, /policies,
+   /blog, /faq, /testimonials) 404'd or redirected 307. Now 308 permanent, and
+   /gallery points at the real gallery page instead of a homepage anchor.
+
+Also: dedicated /og/service-area.png share card, gallery breadcrumbs, sitemap
+lastmod corrections, llms.txt service-area entry + refreshed dates, and new
+Playwright regression tests covering all four defects.
+
+Still open: deploy, submit sitemap in Search Console, confirm GBP postal code,
+re-measure Lighthouse/PageSpeed on the deployed CDN.
+```
+
+### Notes from the 2026-09-14 pass
+
+- `npm run lint` clean; `npm run build` clean (Serwist still emits `public/sw.js`).
+- `tests/e2e/seo-structured-data.spec.ts` — 10/10 passing.
+- Full e2e suite: 18 passed, 1 flaky (`welcome-form` "submits tour request" times
+  out on a cold dev-server compile when run in parallel; passes on its own).
+  The `/api/welcome` endpoint itself returns 200 when called directly. That spec
+  also sends a real email through Resend on every run — worth stubbing later.
+- Local Playwright is pinned to 1.51.1 (browser revision 1161), which is not
+  installed on this machine and did not finish downloading. The suite was
+  verified against the Chromium already present locally via a throwaway config;
+  run `npx playwright install chromium` before the next full e2e run.

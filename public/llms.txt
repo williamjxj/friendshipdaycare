@@ -2,7 +2,7 @@
 
 > Friendship Corner Daycare (Montessori) is a licensed, non-profit group daycare in Coquitlam, British Columbia, serving children ages 30 months (2.5 years) to 5 years with authentic Montessori education since 2008.
 
-Last updated: 2026-08-20
+Last updated: 2026-09-14
 
 ## Business facts
 
@@ -44,6 +44,7 @@ Last updated: 2026-08-20
 - [Montessori Education](https://www.friendshipdaycare.com/community/montessori): what Montessori means at our daycare
 - [BC Early Learning (ECE)](https://www.friendshipdaycare.com/community/ece): educator credentials and approach
 - [Today's Story](https://www.friendshipdaycare.com/community/todays-story): weekly storytime videos
+- [Service Area (Tri-Cities)](https://www.friendshipdaycare.com/service-area): bilingual (English + Traditional Chinese) guide for Coquitlam, Port Coquitlam, and Port Moody families — commute, hours, ages, and subsidy details
 - [Schedule a Tour](https://www.friendshipdaycare.com/welcome): tour request form
 - [Full site content for AI](https://www.friendshipdaycare.com/llms-full.txt): complete, quotable site content in Markdown
 

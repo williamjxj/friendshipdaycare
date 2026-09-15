@@ -22,15 +22,18 @@ export default function robots(): MetadataRoute.Robots {
 
   return {
     rules: [
+      // Note: /_next/ is deliberately NOT disallowed. Googlebot must fetch the
+      // site's CSS/JS bundles to render pages; blocking them degrades indexing.
+      // Only API routes are kept out of the crawl.
       ...aiCrawlers.map((userAgent) => ({
         userAgent,
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        disallow: ["/api/"],
       })),
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        disallow: ["/api/"],
       },
     ],
     sitemap: `${SEO_BASE_URL}/sitemap.xml`,

@@ -5,7 +5,14 @@ import { getOgImagePath } from "@/lib/og-images";
 export const SEO_BASE_URL = businessProfile.url;
 export const SEO_SITE_NAME = "Friendship Corner Daycare";
 export const SEO_DEFAULT_TITLE = "Coquitlam Montessori Daycare | Friendship Corner Daycare Since 2008";
-export const SEO_TITLE_TEMPLATE = "%s | Friendship Corner Daycare Coquitlam";
+/**
+ * Brand suffix applied by the root layout to page titles that do not opt out.
+ * Kept short on purpose: the rendered `<title>` is what Google measures, and
+ * anything past ~60 characters is truncated in results.
+ */
+export const SEO_TITLE_TEMPLATE = `%s | ${SEO_SITE_NAME}`;
+/** Approximate character budget Google shows for a title tag. */
+export const SEO_TITLE_MAX_LENGTH = 60;
 export const SEO_DEFAULT_DESCRIPTION =
   "Non-profit Montessori daycare in Coquitlam, BC for ages 30 months to 5. Bilingual English & Mandarin care since 2008. Book a tour.";
 export const SEO_DEFAULT_KEYWORDS = [
@@ -138,8 +145,17 @@ export function buildPageMetadata({
   const pathSegment = path.startsWith('http') ? '' : path.startsWith('/') ? path : `/${path}`;
   const canonicalUrl = path.startsWith('http') ? path : `${SEO_BASE_URL}${pathSegment}`;
 
+  // `metadata.title` from a page is pushed through the root layout's title
+  // template, so the brand suffix is appended *after* the author picks a title.
+  // That silently produced over-long titles (e.g. /service-area rendered 101
+  // characters). Let the suffix through only when the result still fits the
+  // SERP budget; otherwise pin an absolute title.
+  const brandedTitle = ` | ${SEO_SITE_NAME}`;
+  const titleFitsWithBrand = title.length + brandedTitle.length <= SEO_TITLE_MAX_LENGTH;
+  const resolvedTitle: Metadata["title"] = titleFitsWithBrand ? title : { absolute: title };
+
   return {
-    title,
+    title: resolvedTitle,
     description,
     alternates: {
       canonical: canonicalUrl,

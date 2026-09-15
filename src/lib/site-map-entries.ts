@@ -6,11 +6,17 @@ export interface SiteMapEntry {
   priority: number;
 }
 
+/**
+ * Keep `lastModified` in sync with real content changes — weekly-updated pages
+ * (service-area, journal, today's story) should carry a recent date so crawlers
+ * see freshness. Bump the date whenever the underlying content changes.
+ */
 export const siteMapEntries: SiteMapEntry[] = [
   {
     path: "/",
     title: "Home",
-    lastModified: "2026-08-20",
+    // Bumped for the hero image / animation performance pass (2026-08-27).
+    lastModified: "2026-08-27",
     changeFrequency: "monthly",
     priority: 1,
   },
@@ -45,7 +51,7 @@ export const siteMapEntries: SiteMapEntry[] = [
   {
     path: "/service-area",
     title: "Service Area (Tri-Cities)",
-    lastModified: "2026-08-20",
+    lastModified: "2026-09-14",
     changeFrequency: "weekly",
     priority: 0.65,
   },
@@ -59,14 +65,14 @@ export const siteMapEntries: SiteMapEntry[] = [
   {
     path: "/community/todays-story",
     title: "Today's Story",
-    lastModified: "2026-08-20",
+    lastModified: "2026-08-27",
     changeFrequency: "weekly",
     priority: 0.6,
   },
   {
     path: "/community/journal",
     title: "Journal",
-    lastModified: "2026-08-20",
+    lastModified: "2026-08-27",
     changeFrequency: "monthly",
     priority: 0.6,
   },
@@ -94,7 +100,7 @@ export const siteMapEntries: SiteMapEntry[] = [
   {
     path: "/gallery-new",
     title: "Gallery",
-    lastModified: "2026-08-20",
+    lastModified: "2026-09-14",
     changeFrequency: "weekly",
     priority: 0.65,
   },

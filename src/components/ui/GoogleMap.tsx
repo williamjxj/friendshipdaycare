@@ -51,6 +51,7 @@ export function GoogleMap({ className = '' }: GoogleMapProps) {
 
   const fallbackAddress = `${businessProfile.address.streetAddress}, ${businessProfile.address.addressLocality}, ${businessProfile.address.addressRegion} ${businessProfile.address.postalCode}, ${businessProfile.address.addressCountry}`;
   const encodedAddress = encodeURIComponent(fallbackAddress);
+  const fallbackDirectionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
 
   // Loading state
   if (loading) {
@@ -183,7 +184,7 @@ export function GoogleMap({ className = '' }: GoogleMapProps) {
             </p>
             <div className="mt-3 space-y-2">
               <a
-                href={mapData.directionsUrl}
+                href={mapData.directionsUrl || fallbackDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm font-medium"

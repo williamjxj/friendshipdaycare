@@ -84,4 +84,66 @@ test.describe('SEO & GEO surface', () => {
       expect(body).toContain(path);
     }
   });
+
+  test('unknown program slugs return a hard 404 with noindex', async ({ request }) => {
+    const response = await request.get('/programs/does-not-exist', { maxRedirects: 0 });
+
+    expect(response.status()).toBe(404);
+    expect((await response.text()).toLowerCase()).toContain('noindex');
+  });
+
+  test('robots.txt leaves CSS/JS fetchable so Google can render pages', async ({ request }) => {
+    const body = await (await request.get('/robots.txt')).text();
+
+    expect(body).not.toContain('Disallow: /_next/');
+    expect(body).toContain('Disallow: /api/');
+  });
+
+  test('retired URLs permanently redirect instead of 404ing', async ({ request }) => {
+    const expectations: Array<[string, string]> = [
+      ['/gallery', '/gallery-new'],
+      ['/team', '/our-team'],
+      ['/pricing', '/funding'],
+      ['/journal', '/community/journal'],
+    ];
+
+    for (const [from, to] of expectations) {
+      const response = await request.get(from, { maxRedirects: 0 });
+      expect(response.status(), `${from} should be a permanent redirect`).toBe(308);
+      expect(response.headers()['location'], `${from} should point at ${to}`).toContain(to);
+    }
+  });
+
+  test('every indexable page title fits the SERP budget and is unique', async ({ request }) => {
+    const paths = [
+      '/',
+      '/funding',
+      '/gallery-new',
+      '/our-team',
+      '/resources',
+      '/service-area',
+      '/welcome',
+      '/privacy',
+      '/terms',
+      '/community/journal',
+      '/community/montessori',
+      '/community/ece',
+      '/community/todays-story',
+      '/programs/toddler',
+      '/programs/preschool',
+      '/programs/prekindergarten',
+    ];
+
+    const titles = new Map<string, string>();
+    for (const path of paths) {
+      const html = await (await request.get(path)).text();
+      const match = html.match(/<title>([^<]*)<\/title>/);
+      expect(match, `${path} should render a <title>`).not.toBeNull();
+
+      const title = match![1];
+      expect(title.length, `${path} title is ${title.length} characters: "${title}"`).toBeLessThanOrEqual(60);
+      expect(titles.has(title), `duplicate title "${title}" on ${path} and ${titles.get(title)}`).toBe(false);
+      titles.set(title, path);
+    }
+  });
 });

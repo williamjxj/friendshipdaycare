@@ -23,6 +23,7 @@ const PAGE_TRAILS: Record<string, Crumb[]> = {
   '/community/journal': [{ name: 'Community', href: '/community/journal' }, { name: 'Journal', href: '/community/journal' }],
   '/community/montessori': [{ name: 'Community', href: '/community/journal' }, { name: 'Montessori Education', href: '/community/montessori' }],
   '/community/ece': [{ name: 'Community', href: '/community/journal' }, { name: 'BC Early Learning', href: '/community/ece' }],
+  '/gallery-new': [{ name: 'Gallery', href: '/gallery-new' }],
   '/privacy': [{ name: 'Privacy Policy', href: '/privacy' }],
   '/terms': [{ name: 'Terms of Service', href: '/terms' }],
   '/sitemap': [{ name: 'Sitemap', href: '/sitemap' }],

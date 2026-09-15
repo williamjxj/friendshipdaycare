@@ -7,6 +7,9 @@
 export function getOgImagePath(pathname: string): string {
   const path = pathname.split("?")[0].split("#")[0];
 
+  // Every program page shares the homepage card until dedicated art exists.
+  if (/^\/programs\/[^/]+$/.test(path)) return "/og/home.png";
+
   const map: Record<string, string> = {
     "/": "/og/home.png",
     "/programs": "/og/home.png",
@@ -18,6 +21,7 @@ export function getOgImagePath(pathname: string): string {
     "/about": "/og/home.png",
     "/gallery": "/og/gallery.png",
     "/gallery-new": "/og/gallery.png",
+    "/service-area": "/og/service-area.png",
     "/funding": "/og/funding.png",
     "/resources": "/og/resources.png",
     "/our-team": "/og/our-team.png",
@@ -26,6 +30,9 @@ export function getOgImagePath(pathname: string): string {
     "/community/journal": "/og/journal.png",
     "/community/montessori": "/og/montessori.png",
     "/community/ece": "/og/ece.png",
+    "/privacy": "/og/default.png",
+    "/terms": "/og/default.png",
+    "/sitemap": "/og/default.png",
   };
 
   return map[path] ?? "/og/default.png";
