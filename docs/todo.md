@@ -145,3 +145,15 @@ isolation.
 Deferred (needs owner sign-off): hero re-proportion, tour-form trim, homepage
 hero CTA differentiation. See docs/codex_ui.md.
 ```
+
+### Notes from the 2026-09-14 UI pass (continued)
+
+- Rebuilt the Enrollment Requirements block: 3-column compact grid instead of a
+  2-column card wall, tighter heading, and a GSAP reveal where each card lifts in
+  and then its ring + tick draw themselves. Desktop section 495 → 321 px (−35%),
+  mobile 795 → 639 px (−20%). Skipped entirely under `prefers-reduced-motion`.
+- Fixed a latent motion bug while there: GSAP left `translate: none` /
+  `transform: translate(0px, 0px)` inline on each card, which beat Tailwind v4's
+  `hover:-translate-y-*` and killed the hover lift. `clearProps: 'transform'`
+  restores it — verified `translate: 0px -2px` on hover.
+- Verified 390 / 768 / 1440 / 1920 px: no clipped text, no overflow, axe clean.

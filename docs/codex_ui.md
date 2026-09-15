@@ -137,3 +137,38 @@ npm run build && npm run start -- -p 3100
 
 The audit scripts themselves live in `.lavish/` (gitignored) alongside the
 review artifact, so they can be recreated from this document if needed.
+
+## Motion conventions (learned the hard way)
+
+- **Always `clearProps: 'transform'` on a GSAP reveal that lands on an element
+  with CSS hover states.** GSAP writes `translate`/`rotate`/`scale`/`transform`
+  inline and leaves them behind; the inline values then beat Tailwind v4's
+  `hover:-translate-y-*` (which uses the `translate` property, not `transform`),
+  so the hover lift silently stops working. Clearing the transform props hands
+  control back to CSS.
+- **Pair every reveal with `gsap.matchMedia()` and
+  `(prefers-reduced-motion: no-preference)`.** Set the "hidden" starting state
+  inside that branch only, so reduced-motion visitors never get a flash of
+  invisible or half-drawn content.
+- **Use `once: true` on ScrollTriggers** (already the pattern in
+  `page-client.tsx`) instead of `toggleActions` that replay on every scroll.
+- **SVG draw-on effects:** animate `strokeDashoffset` from the path length to 0
+  (`strokeDasharray` = length). The requirement ticks use `57` for the 2πr≈56.5
+  ring and `14` for the tick path.
+
+### Enrollment Requirements section (2026-09-14)
+
+Rebuilt for compactness and motion:
+
+| | Before | After |
+| --- | --- | --- |
+| Desktop section height | 495 px | **321 px** (−35%) |
+| Mobile section height | 795 px | **639 px** (−20%) |
+| Card grid | 2 columns, `p-5 sm:p-6`, icon + text | 3 columns (`sm:2`, mobile 1), `p-3.5 sm:p-4` |
+| Heading block | `mb-12`, `text-3xl md:text-5xl`, `text-xl` subtitle | `mb-6`, `text-2xl → md:text-4xl`, `text-sm → sm:text-base` |
+| Motion | fade/slide, transform left inline (hover broke) | cards lift in, then each ring and tick draw themselves (staggered), `clearProps` restores hover |
+
+Verified at 390 / 768 / 1440 / 1920 px: no clipped text, no page overflow, one
+card height per breakpoint (66 px mobile, 70 px desktop; 92 px only where the
+tablet column wraps to two lines), and axe still reports **0 violations** on the
+homepage.

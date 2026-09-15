@@ -7,7 +7,6 @@ import {
   CalendarDaysIcon,
   DocumentCheckIcon,
   UserGroupIcon,
-  CheckCircleIcon,
   DocumentArrowDownIcon
 } from '@heroicons/react/24/outline';
 import { ProcessStepConnector } from '@/components/ui/process-step-connector';
@@ -145,29 +144,61 @@ export function EnrollmentSectionContent() {
   }>;
   const requirements = (messages.enrollmentPage?.requirements?.items ?? []) as string[];
 
+  /**
+   * Requirements reveal: the cards lift in, then each row's ring and tick draw
+   * themselves in sequence.
+   *
+   * - Motion is skipped entirely under `prefers-reduced-motion`, so the list is
+   *   static (and fully drawn) for those visitors.
+   * - `clearProps: 'transform'` hands the transform back to CSS once the tween
+   *   ends; without it GSAP leaves an inline `translate(0px, 0px)` behind and
+   *   the Tailwind hover lift silently stops working.
+   */
   useGSAP(
     () => {
-      if (!requirementsRef.current) return;
-      const cards = gsap.utils.toArray<HTMLElement>(requirementsRef.current.querySelectorAll('.requirement-card'));
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 40, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.08,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: requirementsRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
+      const scope = requirementsRef.current;
+      if (!scope) return;
+
+      const cards = gsap.utils.toArray<HTMLElement>(scope.querySelectorAll('.requirement-card'));
+      if (cards.length === 0) return;
+
+      const rings = gsap.utils.toArray<SVGCircleElement>(scope.querySelectorAll('.requirement-ring'));
+      const checks = gsap.utils.toArray<SVGPathElement>(scope.querySelectorAll('.requirement-check'));
+
+      const media = gsap.matchMedia();
+      media.add('(prefers-reduced-motion: no-preference)', () => {
+        // Ring circumference is 2πr ≈ 56.5, so 57 fully hides it before the draw.
+        gsap.set(rings, { strokeDasharray: 57, strokeDashoffset: 57 });
+        gsap.set(checks, { strokeDasharray: 14, strokeDashoffset: 14 });
+
+        const timeline = gsap.timeline({
+          scrollTrigger: { trigger: scope, start: 'top 85%', once: true },
+        });
+
+        timeline
+          .fromTo(
+            cards,
+            { opacity: 0, y: 18, scale: 0.97 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.45,
+              ease: 'power3.out',
+              stagger: 0.06,
+              clearProps: 'transform',
+            },
+            0
+          )
+          .to(rings, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.inOut', stagger: 0.06 }, 0.12)
+          .to(checks, { strokeDashoffset: 0, duration: 0.3, ease: 'power2.out', stagger: 0.06 }, 0.36);
+
+        return () => timeline.kill();
+      });
+
+      return () => media.revert();
     },
-    { scope: requirementsRef, dependencies: [requirements] }
+    { scope: requirementsRef, dependencies: [requirements.length] }
   );
 
   const faqItems = [
@@ -255,26 +286,50 @@ export function EnrollmentSectionContent() {
       {/* Requirements */}
       <section className="py-8 bg-muted/30 overflow-hidden relative">
         <div ref={requirementsRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground">
+          <div className="mx-auto mb-6 max-w-3xl space-y-2 text-center sm:mb-7">
+            <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
               {safeT('enrollmentPage.requirements.title', 'Enrollment Requirements')}
             </h2>
-            <p className="text-xl text-muted-foreground w-full max-w-5xl mx-auto text-balance">
+            <p className="text-balance text-sm text-muted-foreground sm:text-base">
               {safeT('enrollmentPage.requirements.subtitle', 'Please prepare the following documents for a smooth enrollment process.')}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {requirements.map((requirement) => (
-              <div
+              <li
                 key={requirement}
-                className="requirement-card flex items-start space-x-3 bg-card p-5 sm:p-6 rounded-xl shadow-md border border-border/50 hover:shadow-lg hover:border-primary/20 transition-all duration-300 min-w-0"
+                className="requirement-card group flex min-w-0 items-center gap-3 rounded-2xl border border-border/60 bg-card/90 p-3.5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md sm:p-4 motion-reduce:transition-none"
               >
-                <CheckCircleIcon className="h-6 w-6 text-primary shrink-0 mt-1" />
-                <p className="text-muted-foreground wrap-break-word min-w-0">{requirement}</p>
-              </div>
+                <span
+                  aria-hidden
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                    <circle
+                      className="requirement-ring"
+                      cx="12"
+                      cy="12"
+                      r="9"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                    />
+                    <path
+                      className="requirement-check"
+                      d="M8.4 12.4 10.9 14.9 15.7 9.5"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+                <p className="min-w-0 text-sm font-medium leading-snug text-foreground wrap-break-word sm:text-[0.9375rem]">
+                  {requirement}
+                </p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
         
       </section>
