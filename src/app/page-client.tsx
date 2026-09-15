@@ -159,7 +159,9 @@ export function HomePageClient() {
         scrollTrigger: {
           trigger: header,
           start: 'top 80%',
-          toggleActions: 'play none none reverse'
+          // Run once instead of reversing on every scroll: avoids repeat
+          // style/layout work that was contributing to main-thread blocking.
+          once: true,
         },
         y: 30,
         opacity: 0,

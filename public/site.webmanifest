@@ -1,11 +1,30 @@
 {
+  "id": "/",
   "name": "Friendship Corner Daycare — Montessori Daycare Coquitlam",
   "short_name": "Friendship Daycare",
   "description": "Licensed Montessori daycare in Coquitlam, BC for children ages 30 months to 5 years.",
   "start_url": "/",
+  "scope": "/",
   "icons": [
-    { "src": "/favicon_io/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/favicon_io/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "/favicon_io/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/favicon_io/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/home-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Friendship Corner Daycare homepage on mobile"
+    },
+    {
+      "src": "/screenshots/home-desktop.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Friendship Corner Daycare homepage on desktop"
+    }
   ],
   "theme_color": "#2C5F4D",
   "background_color": "#F8FAFC",

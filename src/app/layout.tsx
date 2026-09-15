@@ -13,6 +13,7 @@ import { businessProfile } from "@/lib/business-profile";
 import { getAggregateRating } from "@/data/testimonials";
 import { defaultSiteMetadata } from "@/lib/seo";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import { ServiceWorkerRegister } from "@/components/providers/ServiceWorkerRegister";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -62,12 +63,26 @@ export default async function RootLayout({
   return (
     <html lang={initialLocale} suppressHydrationWarning>
       <head>
+        {/* GEO: make the LLM-friendly summary discoverable from the document */}
+        <link
+          rel="alternate"
+          type="text/markdown"
+          href="/llms.txt"
+          title="Friendship Corner Daycare — LLM-friendly site summary"
+        />
+
         {/* Favicon Links */}
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="icon" href="/favicon_io/favicon.ico" />
+
+        {/* PWA / iOS home-screen meta tags */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-title" content="Friendship Daycare" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
         {/* Structured Data for SEO */}
         <WebSiteSchema
@@ -116,6 +131,7 @@ export default async function RootLayout({
                     {children}
                   </Suspense>
                 </SiteShell>
+                <ServiceWorkerRegister />
                 <Toaster />
                 <GoogleAnalytics />
               </ThemeProvider>

@@ -139,7 +139,6 @@ export function Header() {
                     sizes="(max-width: 640px) 160px, 200px"
                     className="object-contain"
                     priority
-                    unoptimized
                   />
                 </div>
                 <div className="min-w-0">

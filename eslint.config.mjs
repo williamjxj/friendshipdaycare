@@ -11,6 +11,8 @@ const eslintConfig = [
       "coverage/",
       "dist/",
       "scripts/",
+      "public/sw.js",
+      "public/swe-worker-*.js",
       ".vercel/",
       ".cursor/",
       ".specify/",

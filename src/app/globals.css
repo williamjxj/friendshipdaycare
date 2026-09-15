@@ -13,8 +13,8 @@
     background-color: var(--color-brand) !important;
   }
   /* Default Theme - Claymorphism (Playful & Soft) */
-  --primary: #3B82F6;
-  /* Blue - Trust, Calm */
+  --primary: #1D4ED8;
+  /* Blue-700 - Trust, Calm (AA 4.5:1+ with white text) */
   --primary-foreground: #FFFFFF;
 
   --secondary: #60A5FA;
@@ -121,8 +121,8 @@
 
 /* Playful Theme (Legacy Bubblegum) */
 [data-theme="playful"] {
-  --primary: #FF6B9D;
-  /* Pink */
+  --primary: #DB2777;
+  /* Pink-600 (AA 4.5:1+ with white text) */
   --primary-foreground: #FFFFFF;
   --secondary: #4BCFFA;
   /* Cyan */
@@ -166,7 +166,8 @@
   --card-foreground: oklch(0.3729 0.0306 259.7328);
   --popover: oklch(1.0000 0 0);
   --popover-foreground: oklch(0.3729 0.0306 259.7328);
-  --primary: oklch(0.7227 0.1920 149.5793);
+  --primary: #15803D;
+  /* Green-700 (AA 4.5:1+ with white text) */
   --primary-foreground: oklch(1.0000 0 0);
   --secondary: oklch(0.9514 0.0250 236.8242);
   --secondary-foreground: oklch(0.3030 0.1116 258.2555);
@@ -178,7 +179,7 @@
   --destructive-foreground: oklch(1.0000 0 0);
   --border: oklch(0.9276 0.0058 264.5313);
   --input: oklch(0.9276 0.0058 264.5313);
-  --ring: oklch(0.7227 0.1920 149.5793);
+  --ring: #15803D;
   --radius: 0.5rem;
 }
 

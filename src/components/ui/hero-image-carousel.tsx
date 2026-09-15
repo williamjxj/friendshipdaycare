@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -49,16 +50,30 @@ export function HeroImageCarousel({
           i === index ? (
             <motion.div
               key={src}
-              className="absolute inset-0 min-w-full min-h-full bg-no-repeat bg-center bg-cover"
-              style={{
-                backgroundImage: `url(${src})`,
-              }}
+              className="absolute inset-0 min-w-full min-h-full"
               initial={{ scale: 1, opacity: 0 }}
               animate={{ scale: 1.2, opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ scale: { duration: 3, ease: 'easeInOut' }, opacity: { duration: 1 } }}
-              aria-hidden={false}
-            />
+              aria-hidden="true"
+            >
+              {/*
+                Render slides through next/image:
+                - the first slide gets fetchpriority=high (LCP image)
+                - responsive srcset + AVIF/WebP shrink the mobile transfer dramatically
+                  (previously a single ~392 KB JPEG was fetched at full size)
+                - `fill` + `object-cover` preserve the previous background-image look
+              */}
+              <Image
+                src={src}
+                alt=""
+                fill
+                priority={i === 0}
+                fetchPriority={i === 0 ? 'high' : 'auto'}
+                sizes="100vw"
+                className="min-w-full min-h-full object-cover object-center"
+              />
+            </motion.div>
           ) : null
         )}
       </AnimatePresence>

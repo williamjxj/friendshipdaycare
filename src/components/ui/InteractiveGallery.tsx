@@ -76,7 +76,6 @@ export function InteractiveGallery({ images }: InteractiveGalleryProps) {
                             fill
                             sizes="(max-width: 768px) 80vw, 600px"
                             className="object-cover"
-                            priority={index < 3}
                             loading={index >= 3 ? 'lazy' : undefined}
                           />
                         </div>

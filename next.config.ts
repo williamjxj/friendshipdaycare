@@ -1,5 +1,6 @@
 import createNextIntlPlugin from 'next-intl/plugin';
 import type { NextConfig } from "next";
+import withSerwist from '@serwist/next';
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/config.ts');
 
@@ -41,4 +42,12 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+// PWA service worker (Serwist): compiled from src/app/sw.ts to public/sw.js at build time.
+// Disabled in development; register only in production (see ServiceWorkerRegister).
+const withSerwistInit = withSerwist({
+  swSrc: 'src/app/sw.ts',
+  swDest: 'public/sw.js',
+  disable: process.env.NODE_ENV === 'development',
+});
+
+export default withSerwistInit(withNextIntl(nextConfig));

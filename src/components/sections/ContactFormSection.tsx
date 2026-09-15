@@ -118,7 +118,6 @@ export function ContactFormSection() {
                   className="w-full max-w-full"
                   imageClassName="aspect-3/4 min-h-0 h-72 sm:h-80 w-full"
                   badgeClassName="bottom-3 right-3 w-auto max-w-[78%] rotate-0 px-3 py-2 ring-2 ring-white/70 shadow-xl"
-                  priority
                 />
               </motion.div>
             </div>

@@ -39,6 +39,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# serwist-generated PWA service worker (rebuilt by `next build`)
+/public/sw.js
+/public/swe-worker-*.js
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
@@ -95,3 +99,4 @@ ehthumbs.db
 Thumbs.db
 
 # William Jiang
+.lavish/
