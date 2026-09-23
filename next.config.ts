@@ -6,6 +6,12 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/config.ts');
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // Keep the HTML template in the serverless bundle so contact/welcome
+  // confirmation emails can read it at runtime on Vercel.
+  outputFileTracingIncludes: {
+    '/api/contact': ['./public/email-template.html'],
+    '/api/welcome': ['./public/email-template.html'],
+  },
   images: {
     qualities: [75, 85],
     remotePatterns: [

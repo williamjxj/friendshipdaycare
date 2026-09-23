@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { welcomeConfirmationEmail } from '@/lib/email/render-email-template';
 import { businessFromAddress, getResendClient } from '@/lib/email/resend-client';
 
 const tourTimePreferenceSchema = z.enum(['morning', 'afternoon']);
@@ -128,40 +129,11 @@ ${message}
 Please respond within 24 hours to confirm the tour.
     `;
 
-    const flyerNote = isFlyer
-      ? '<p style="font-size: 16px; line-height: 1.6; color: #334155;">Thank you for scanning our flyer and requesting a tour. We received your details and will confirm your visit by phone or email.</p>'
-      : '<p style="font-size: 16px; line-height: 1.6; color: #334155;">Thank you for your tour request. We received your details and will confirm your visit by phone or email within 24 hours.</p>';
-
-    const confirmationEmailHtml = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <div style="text-align: center; padding: 30px 20px; background-color: #1e40af; color: white; border-radius: 8px 8px 0 0;">
-          <h1 style="margin: 0; font-size: 28px;">Thank You, ${name}!</h1>
-          <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">
-            Your tour request is on its way
-          </p>
-        </div>
-        <div style="padding: 30px 20px; background-color: #f8fafc; border-radius: 0 0 8px 8px;">
-          <p style="font-size: 16px; line-height: 1.6; color: #334155;">Hi ${name},</p>
-          ${flyerNote}
-          <div style="background-color: #e0f2fe; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #0369a1; margin-top: 0; font-size: 18px;">Your tour preference</h3>
-            <p style="color: #0369a1; margin: 0;"><strong>Date:</strong> ${tourDate}</p>
-            <p style="color: #0369a1; margin: 8px 0 0;"><strong>Time:</strong> ${timeLabel}</p>
-          </div>
-          <p style="font-size: 16px; line-height: 1.6; color: #334155;">
-            If you need to reach us sooner, call <strong>604.945.8504</strong>.
-          </p>
-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
-            <p style="font-size: 14px; color: #64748b; margin: 0;">
-              Best regards,<br>
-              <strong>The Friendship Corner Daycare Team</strong><br>
-              2950 Dewdney Trunk Road, Coquitlam, BC<br>
-              604.945.8504 | friendship.care@live.ca
-            </p>
-          </div>
-        </div>
-      </div>
-    `;
+    const confirmationEmailHtml = welcomeConfirmationEmail(name, {
+      isFlyer,
+      tourDate,
+      timeLabel,
+    });
 
     const confirmationText = `Hi ${name},
 

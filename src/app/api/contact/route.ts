@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { contactConfirmationEmail } from '@/lib/email/render-email-template';
 import { businessFromAddress, getResendClient } from '@/lib/email/resend-client';
 
 /**
@@ -100,49 +101,7 @@ Please respond to this inquiry within 24 hours.
       text: emailText,
     });
 
-    // Send confirmation email to the customer
-    const confirmationEmailHtml = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <div style="text-align: center; padding: 30px 20px; background-color: #1e40af; color: white; border-radius: 8px 8px 0 0;">
-          <h1 style="margin: 0; font-size: 28px;">Thank You, ${name}!</h1>
-          <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">
-            We've received your message
-          </p>
-        </div>
-        
-        <div style="padding: 30px 20px; background-color: #f8fafc; border-radius: 0 0 8px 8px;">
-          <p style="font-size: 16px; line-height: 1.6; color: #334155;">
-            Hi ${name},
-          </p>
-          
-          <p style="font-size: 16px; line-height: 1.6; color: #334155;">
-            Thank you for your interest in Friendship Corner Daycare! We've received your message and our team will get back to you within 24 hours.
-          </p>
-          
-          <div style="background-color: #e0f2fe; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #0369a1; margin-top: 0; font-size: 18px;">What's Next?</h3>
-            <ul style="color: #0369a1; line-height: 1.6;">
-              <li>We'll review your inquiry and respond personally</li>
-              <li>If you're interested in visiting, we'll schedule a tour</li>
-              <li>We'll answer any questions about our programs</li>
-            </ul>
-          </div>
-          
-          <p style="font-size: 16px; line-height: 1.6; color: #334155;">
-            In the meantime, feel free to call us at <strong>604.945.8504</strong> if you have any urgent questions.
-          </p>
-          
-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
-            <p style="font-size: 14px; color: #64748b; margin: 0;">
-              Best regards,<br>
-              <strong>The Friendship Corner Daycare Team</strong><br>
-              2950 Dewdney Trunk Road, Coquitlam, BC<br>
-              604.945.8504 | friendship.care@live.ca
-            </p>
-          </div>
-        </div>
-      </div>
-    `;
+    const confirmationEmailHtml = contactConfirmationEmail(name);
 
     await resend.emails.send({
       from: emailConfig.customerFrom,
