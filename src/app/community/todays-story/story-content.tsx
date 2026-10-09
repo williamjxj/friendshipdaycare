@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { PageLoader, LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { VideoPlayer } from '@/components/ui/VideoPlayer';
-import { getImageUrl } from '@/lib/image-utils';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heart, PlayCircle, Sparkles, Star } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -90,19 +89,19 @@ export default function TodaysStoryContent() {
                       url: 'https://www.youtube.com/watch?v=Yz2NiUJHmhE',
                       title: t('community.todaysStory.videos.goodSamaritan.title'),
                       description: t('community.todaysStory.videos.goodSamaritan.description'),
-                      thumbnail: getImageUrl('/images/video-thumb-1.jpg')
+                      thumbnail: '/images/story-video-placeholder.svg'
                     },
                     {
                       url: 'https://www.youtube.com/watch?v=hlQEmjWRa4A',
                       title: t('community.todaysStory.videos.davidGoliath.title'),
                       description: t('community.todaysStory.videos.davidGoliath.description'),
-                      thumbnail: getImageUrl('/images/video-thumb-2.jpg')
+                      thumbnail: '/images/story-video-placeholder.svg'
                     },
                     {
                       url: 'https://www.youtube.com/watch?v=tLxKjqG6iAg',
                       title: t('community.todaysStory.videos.noahArk.title'),
                       description: t('community.todaysStory.videos.noahArk.description'),
-                      thumbnail: getImageUrl('/images/video-thumb-3.jpg')
+                      thumbnail: '/images/story-video-placeholder.svg'
                     }
                   ]} />
                 </div>

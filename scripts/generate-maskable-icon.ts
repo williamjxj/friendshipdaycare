@@ -10,7 +10,7 @@
 import { mkdir } from 'node:fs/promises';
 import sharp from 'sharp';
 
-const SOURCE = 'public/favicon_io/android-chrome-512x512.png';
+const SOURCE = 'public/icons/android-chrome-512x512.png';
 const OUT_DIR = 'public/icons';
 const OUT_FILE = `${OUT_DIR}/icon-maskable-512.png`;
 const SIZE = 512;

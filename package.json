@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "eslint .",
     "test:e2e": "playwright test",
-    "generate:welcome-qr": "tsx scripts/generate-welcome-qr.ts"
+    "generate:welcome-qr": "tsx scripts/generate-welcome-qr.ts",
+    "optimize:public": "python3 scripts/optimize-public-images.py",
+    "test:production": "npm run build && PLAYWRIGHT_BASE_URL=http://localhost:3100 PLAYWRIGHT_SERVER_COMMAND=\"npm run start -- --port 3100\" playwright test --workers=1"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.998.0",

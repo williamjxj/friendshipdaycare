@@ -243,7 +243,7 @@ export function AboutSection() {
             >
               <div className="relative h-72 sm:h-80 md:h-96 rounded-xl overflow-hidden shadow hover:shadow-xl transition-all duration-300">
                 <Image
-                  src={getImageUrl('/imgs/home/1.jpeg')}
+                  src={getImageUrl('/images/home/1.jpeg')}
                   alt="Friendship Corner Daycare building"
                   fill
                   className="object-cover"
@@ -358,7 +358,7 @@ export function AboutSection() {
             <motion.div variants={slideUp} className="relative">
               <div className="relative h-80 rounded-xl overflow-hidden shadow hover:shadow-xl transition-all duration-300">
                 <Image
-                  src={getImageUrl('/imgs/home/2.jpeg')}
+                  src={getImageUrl('/images/home/2.jpeg')}
                   alt="Montessori classroom activities"
                   fill
                   className="object-cover"

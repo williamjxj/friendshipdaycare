@@ -56,8 +56,8 @@ node scripts/sync_imgs.js upload
 
 - **Install dependencies**: `npm install @aws-sdk/client-s3 dotenv`
 - **Purpose**:
-  - **Download**: Recursively downloads all files from R2 `imgs/` folder to local `public/imgs/`, preserving folder structure
-  - **Upload**: Recursively uploads all files from local `public/imgs/` to R2 `imgs/` folder (overwrites originals)
+  - **Download**: Downloads R2 `imgs/home/` photos to local `public/images/home/`, preserving filenames
+  - **Upload**: Uploads local `public/images/home/` photos to the existing R2 `imgs/home/` keys (overwrites originals)
 
 - **Workflow**: Download → Edit locally → Upload back to R2
 
@@ -199,3 +199,9 @@ After downloading images using the scripts above, upload them to your Cloudflare
 3. **Third-party Tools**: Use R2-compatible S3 tools (R2 is S3-compatible)
 
 **Note**: Images are stored in R2 `images/` folder and accessed via `getImageUrl('/images/filename.jpg')` in your code.
+
+## Current asset ownership (2026-10-09)
+
+Website files live in `public/`; promotional originals are flat in `posters/`. The promotion popup and automatic poster-copy workflow were removed. The welcome QR generator still writes only to `posters/`. No dev/build lifecycle hooks copy marketing files into the website. R2 keys remain unchanged; local graphics share `public/images/` and icons share `public/icons/`. See [asset management](../docs/assets/public-directory.md).
+
+`npm run test:production` builds the app and runs Playwright serially against `npm run start` on port 3100. Set `PLAYWRIGHT_CHANNEL=chrome` to use the installed Chrome browser. `npm run test:e2e` retains the normal dev-server workflow.

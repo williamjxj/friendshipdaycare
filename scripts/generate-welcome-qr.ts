@@ -1,5 +1,5 @@
 /**
- * Generates welcome flyer QR assets and composites QR onto public/assets/flyer-0320.png.
+ * Generates welcome flyer QR assets and composites QR onto posters/flyer-0320.png.
  *
  * Run: npm run generate:welcome-qr
  */
@@ -11,8 +11,8 @@ import sharp from 'sharp';
 /** Canonical site URL (www) — matches businessProfile.url */
 const WELCOME_URL = 'https://www.friendshipdaycare.com/welcome?source=flyer-0320';
 const ROOT = process.cwd();
-const QR_DIR = path.join(ROOT, 'public/assets/qr');
-const FLYER_PATH = path.join(ROOT, 'public/assets/flyer-0320.png');
+const QR_DIR = path.join(ROOT, 'posters');
+const FLYER_PATH = path.join(ROOT, 'posters/flyer-0320.png');
 const QR_PNG = path.join(QR_DIR, 'welcome-flyer-0320.png');
 const QR_SVG = path.join(QR_DIR, 'welcome-flyer-0320.svg');
 

@@ -9,7 +9,6 @@ export * from "./button";
 export * from "./card";
 export * from "./carousel";
 export * from "./contact-form";
-export * from "./DaycareAdPopup";
 export * from "./GoogleMap";
 export * from "./hero-contact-form";
 export * from "./hero-curve-divider";

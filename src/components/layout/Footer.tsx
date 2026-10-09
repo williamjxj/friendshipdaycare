@@ -247,7 +247,7 @@ export function Footer() {
                 className="hover:text-primary transition-colors font-medium inline-flex items-center gap-1 min-h-[44px] min-w-[44px] justify-center"
               >
                 <Image
-                  src="/collects/bit.png"
+                  src="/images/bit.png"
                   alt=""
                   width={24}
                   height={24}

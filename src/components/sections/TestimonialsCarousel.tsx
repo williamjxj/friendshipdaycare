@@ -89,7 +89,7 @@ export function TestimonialsCarousel() {
                   <blockquote className="bg-white/50 dark:bg-card/80 backdrop-blur-sm border-0 rounded-xl p-8 md:p-10 shadow hover:shadow-xl transition-all duration-300">
                     <div className="flex items-center justify-between gap-4 mb-4">
                       <Image
-                        src={t.rating === 4.5 ? '/collects/stars-4.5.png' : '/collects/stars-5.png'}
+                        src={t.rating === 4.5 ? '/images/stars-4.5.png' : '/images/stars-5.png'}
                         alt={`${t.rating} star rating`}
                         width={120}
                         height={24}

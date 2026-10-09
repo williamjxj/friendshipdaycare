@@ -45,7 +45,7 @@ function TestimonialCard({
     <blockquote className="shrink-0 w-[min(300px,75vw)] bg-white/50 dark:bg-card/80 backdrop-blur-sm border-0 rounded-xl p-4 md:p-5 shadow hover:shadow-xl transition-shadow duration-300">
       <div className="flex items-center justify-between gap-3 mb-2">
         <Image
-          src={rating === 4.5 ? '/collects/stars-4.5.png' : '/collects/stars-5.png'}
+          src={rating === 4.5 ? '/images/stars-4.5.png' : '/images/stars-5.png'}
           alt={`${rating} star rating`}
           width={100}
           height={20}

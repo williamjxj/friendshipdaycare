@@ -66,7 +66,10 @@ export function getImageUrl(path: string): string {
     return path;
   }
   
-  // TEMPORARY: Use local public/imgs folder instead of R2 for imgs/ paths
+  // Homepage photos are local; retain support for legacy imgs/ URLs through rewrites.
+  if (path.startsWith('/images/home/') || path.startsWith('images/home/')) {
+    return path.startsWith('/') ? path : `/${path}`;
+  }
   if (path.startsWith('/imgs/') || path.startsWith('imgs/')) {
     return path.startsWith('/') ? path : `/${path}`;
   }

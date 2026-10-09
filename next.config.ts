@@ -5,12 +5,25 @@ import withSerwist from '@serwist/next';
 const withNextIntl = createNextIntlPlugin('./src/i18n/config.ts');
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Preserve old static URLs after consolidation; R2 keys stay unchanged.
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: '/collects/:path*', destination: '/images/:path*' },
+        { source: '/imgs/home/:path*', destination: '/images/home/:path*' },
+        { source: '/favicon_io/site.webmanifest', destination: '/site.webmanifest' },
+        { source: '/favicon_io/:path*', destination: '/icons/:path*' },
+        { source: '/imgs/programs/toddler.jpg', destination: '/images/practical-life-shelf-1.jpg' },
+        { source: '/imgs/programs/preschool.jpg', destination: '/images/sensorial-shelf.jpg' },
+        { source: '/imgs/programs/pre-k.jpg', destination: '/images/language-shelf.jpg' },
+      ],
+    };
+  },
   // Keep the HTML template in the serverless bundle so contact/welcome
   // confirmation emails can read it at runtime on Vercel.
   outputFileTracingIncludes: {
-    '/api/contact': ['./public/email-template.html'],
-    '/api/welcome': ['./public/email-template.html'],
+    '/api/contact': ['./src/lib/email/templates/customer-confirmation.html'],
+    '/api/welcome': ['./src/lib/email/templates/customer-confirmation.html'],
   },
   images: {
     qualities: [75, 85],

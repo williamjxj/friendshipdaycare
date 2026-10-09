@@ -16,7 +16,7 @@ let cachedTemplate: string | undefined;
 
 function loadTemplate(): string {
   if (!cachedTemplate) {
-    cachedTemplate = readFileSync(join(process.cwd(), 'public/email-template.html'), 'utf8');
+    cachedTemplate = readFileSync(join(process.cwd(), 'src/lib/email/templates/customer-confirmation.html'), 'utf8');
   }
   return cachedTemplate;
 }

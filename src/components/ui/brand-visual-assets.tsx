@@ -4,7 +4,6 @@ import { getImageUrl } from '@/lib/image-utils';
 
 /** Public paths for brand marketing assets (fixed placements site-wide). */
 export const BRAND_ASSET_PATHS = {
-  ad: '/ad.png',
   logo: '/daycare-logo.png',
   canvaClassroom: '/collects/canva-1.png',
 } as const;
@@ -14,7 +13,7 @@ export function classroomPhotoSrc(): string {
   try {
     return getImageUrl(BRAND_ASSET_PATHS.canvaClassroom);
   } catch {
-    return '/assets/flyer-0320.png';
+    return '/images/canva-1.png';
   }
 }
 
@@ -74,31 +73,6 @@ export function BrandCanvaClassroomPhoto({
           </span>
         </div>
       ) : null}
-    </div>
-  );
-}
-
-/**
- * Promotional graphic — enrollment strip, programs CTA, funding page.
- */
-export function BrandAdPromoCard({ className, priority }: BrandVisualBaseProps) {
-  return (
-    <div
-      className={cn(
-        'relative w-full overflow-hidden rounded-2xl border border-border bg-muted/50 p-2 sm:p-3 shadow-lg',
-        className,
-      )}
-    >
-      <div className="relative mx-auto aspect-16/10 w-full max-h-65 sm:max-h-75">
-        <Image
-          src={BRAND_ASSET_PATHS.ad}
-          alt="Friendship Corner Daycare — programs and community"
-          fill
-          className="object-contain"
-          sizes="(max-width: 768px) 100vw, min(900px, 90vw)"
-          priority={priority}
-        />
-      </div>
     </div>
   );
 }

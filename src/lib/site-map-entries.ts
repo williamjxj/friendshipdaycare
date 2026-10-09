@@ -44,7 +44,7 @@ export const siteMapEntries: SiteMapEntry[] = [
   {
     path: "/funding",
     title: "Funding & Subsidies",
-    lastModified: "2026-08-20",
+    lastModified: "2026-10-09",
     changeFrequency: "monthly",
     priority: 0.75,
   },
@@ -79,14 +79,14 @@ export const siteMapEntries: SiteMapEntry[] = [
   {
     path: "/community/montessori",
     title: "Montessori",
-    lastModified: "2026-08-20",
+    lastModified: "2026-10-09",
     changeFrequency: "monthly",
     priority: 0.6,
   },
   {
     path: "/community/ece",
     title: "ECE",
-    lastModified: "2026-08-20",
+    lastModified: "2026-10-09",
     changeFrequency: "monthly",
     priority: 0.6,
   },

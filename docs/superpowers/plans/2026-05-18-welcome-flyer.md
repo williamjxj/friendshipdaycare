@@ -24,9 +24,9 @@
 | `src/app/welcome/page-client.tsx` | Create | Page layout + contact cards |
 | `src/messages/en.json` | Modify | `welcomePage` copy keys |
 | `scripts/generate-welcome-qr.ts` | Create | QR + flyer composite |
-| `public/assets/qr/welcome-flyer-0320.svg` | Create | Standalone QR (script) |
-| `public/assets/qr/welcome-flyer-0320.png` | Create | Standalone QR (script) |
-| `public/assets/flyer-0320.png` | Modify | QR bottom-right (script) |
+| `posters/welcome-flyer-0320.svg` | Create | Standalone QR (script) |
+| `posters/welcome-flyer-0320.png` | Create | Standalone QR (script) |
+| `posters/flyer-0320.png` | Modify | QR bottom-right (script) |
 | `tests/e2e/welcome-form.spec.ts` | Create | E2E tests |
 | `package.json` | Modify | devDeps + script |
 
@@ -490,8 +490,8 @@ git commit -m "test: add welcome form e2e coverage"
 **Files:**
 - Create: `scripts/generate-welcome-qr.ts`
 - Modify: `package.json`
-- Create: `public/assets/qr/*`
-- Modify: `public/assets/flyer-0320.png`
+- Create: `posters/*`
+- Modify: `posters/flyer-0320.png`
 
 - [ ] **Step 1: Add devDependencies**
 
@@ -515,8 +515,8 @@ import sharp from 'sharp';
 
 const WELCOME_URL = 'https://friendshipdaycare.com/welcome?source=flyer-0320';
 const ROOT = process.cwd();
-const QR_DIR = path.join(ROOT, 'public/assets/qr');
-const FLYER_PATH = path.join(ROOT, 'public/assets/flyer-0320.png');
+const QR_DIR = path.join(ROOT, 'posters');
+const FLYER_PATH = path.join(ROOT, 'posters/flyer-0320.png');
 const QR_PNG = path.join(QR_DIR, 'welcome-flyer-0320.png');
 const QR_SVG = path.join(QR_DIR, 'welcome-flyer-0320.svg');
 
@@ -562,7 +562,7 @@ Expected: QR files created; flyer updated with bottom-right QR.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add package.json package-lock.json scripts/generate-welcome-qr.ts public/assets/qr public/assets/flyer-0320.png
+git add package.json package-lock.json scripts/generate-welcome-qr.ts posters/welcome-flyer-0320.png posters/welcome-flyer-0320.svg posters/flyer-0320.png
 git commit -m "feat: add welcome flyer QR assets and generation script"
 ```
 
@@ -588,7 +588,7 @@ Expected: PASS; `/welcome` listed in build output.
 
 - [ ] **Step 3: Manual QR check**
 
-Open `public/assets/flyer-0320.png` — QR visible bottom-right. Scan with phone → `/welcome?source=flyer-0320`.
+Open `posters/flyer-0320.png` — QR visible bottom-right. Scan with phone → `/welcome?source=flyer-0320`.
 
 - [ ] **Step 4: Optional live email test** (with `RESEND_API_KEY` in `.env.local`)
 

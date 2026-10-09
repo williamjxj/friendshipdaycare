@@ -13,12 +13,13 @@ export default defineConfig({
   reporter: 'list',
   use: {
     baseURL: process.env.PLAYWRIGHT_BASE_URL ?? 'http://localhost:3000',
+    channel: process.env.PLAYWRIGHT_CHANNEL,
     trace: 'on-first-retry',
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:3000',
+    command: process.env.PLAYWRIGHT_SERVER_COMMAND ?? 'npm run dev',
+    url: process.env.PLAYWRIGHT_BASE_URL ?? 'http://localhost:3000',
     /** Use an already-running `npm run dev` when port 3000 is taken. */
     reuseExistingServer: true,
     timeout: 120_000,

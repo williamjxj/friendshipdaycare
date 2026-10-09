@@ -3,8 +3,8 @@
  * Bidirectional sync script for imgs folder with Cloudflare R2
  * 
  * Usage:
- *   node scripts/sync_imgs.js download    # Download R2 -> local public/imgs/
- *   node scripts/sync_imgs.js upload      # Upload local public/imgs/ -> R2
+ *   node scripts/sync_imgs.js download    # Download R2 -> local public/images/home/
+ *   node scripts/sync_imgs.js upload      # Upload local public/images/home/ -> R2
  * 
  * Prerequisites:
  * - Node.js installed
@@ -137,10 +137,10 @@ async function uploadFileToR2(client, bucketName, localPath, key) {
 // Download from R2 to local
 async function downloadFromR2(client, bucketName) {
     console.log("🚀 Starting download from Cloudflare R2...");
-    console.log("📁 Files will be saved to: public/imgs/");
+    console.log("📁 Files will be saved to: public/images/home/");
     console.log("");
     
-    const localBaseDir = path.join(process.cwd(), 'public', 'imgs');
+    const localBaseDir = path.join(process.cwd(), 'public', 'images', 'home');
     ensureDirectoryExists(localBaseDir);
     
     try {
@@ -153,7 +153,7 @@ async function downloadFromR2(client, bucketName) {
         do {
             const listCommand = new ListObjectsV2Command({
                 Bucket: bucketName,
-                Prefix: 'imgs/',
+                Prefix: 'imgs/home/',
                 ContinuationToken: continuationToken,
                 MaxKeys: 1000,
             });
@@ -190,8 +190,8 @@ async function downloadFromR2(client, bucketName) {
             if (!key) continue;
             
             // Create local path, preserving folder structure
-            // Remove 'imgs/' prefix from key to get relative path
-            const relativePath = key.substring(5); // Remove 'imgs/' (5 characters)
+            // Keep the existing remote imgs/home/ prefix while storing photos locally in images/home/.
+            const relativePath = key.substring(10); // Remove 'imgs/home/' (10 characters)
             const localPath = path.join(localBaseDir, relativePath);
             
             const success = await downloadFileFromR2(client, bucketName, key, localPath);
@@ -221,14 +221,14 @@ async function downloadFromR2(client, bucketName) {
 // Upload from local to R2
 async function uploadToR2(client, bucketName) {
     console.log("🚀 Starting upload to Cloudflare R2...");
-    console.log("📁 Uploading from: public/imgs/");
+    console.log("📁 Uploading from: public/images/home/");
     console.log("");
     
-    const localBaseDir = path.join(process.cwd(), 'public', 'imgs');
+    const localBaseDir = path.join(process.cwd(), 'public', 'images', 'home');
     
     if (!fs.existsSync(localBaseDir)) {
         console.error(`❌ Directory not found: ${localBaseDir}`);
-        console.error('Please ensure public/imgs/ folder exists with files to upload.');
+        console.error('Please ensure public/images/home/ folder exists with files to upload.');
         process.exit(1);
     }
     
@@ -237,7 +237,7 @@ async function uploadToR2(client, bucketName) {
         const allFiles = getAllFilesRecursively(localBaseDir);
         
         if (allFiles.length === 0) {
-            console.log('⚠️  No files found in public/imgs/ folder');
+            console.log('⚠️  No files found in public/images/home/ folder');
             return;
         }
         
@@ -253,7 +253,7 @@ async function uploadToR2(client, bucketName) {
             const relativePath = path.relative(localBaseDir, localPath);
             // Normalize path separators for R2 (use forward slashes)
             const normalizedPath = relativePath.replace(/\\/g, '/');
-            const key = `imgs/${normalizedPath}`;
+            const key = `imgs/home/${normalizedPath}`;
             
             const success = await uploadFileToR2(client, bucketName, localPath, key);
             if (success) {

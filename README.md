@@ -2,11 +2,19 @@
 
 A modern, responsive website for Friendship Corner Daycare built with **Next.js 16**, **React 19**, **TypeScript**, and **TailwindCSS v4**. This website replaces the existing site with enhanced visual aesthetics, animations, and improved user experience.
 
+## Promotional assets
+
+Poster, flyer, brochure, and promotional video originals live in [`posters/`](posters/README.md). These marketing files are maintained separately from the website.
+
+## Website static assets
+
+See [public directory guidelines](docs/assets/public-directory.md) for resource ownership and safe lossless optimization. Run `npm run optimize:public` to recompress PNGs without changing their pixels or URLs.
+
 ## 🖼️ Visual Showcase
 
 <div align="center">
-  <img src="public/collects/canva-1.png" alt="Friendship Corner Daycare - Canva Design" width="48%" />
-  <img src="public/collects/gemini-1.png" alt="Friendship Corner Daycare - Gemini Design" width="48%" />
+  <img src="public/images/canva-1.png" alt="Friendship Corner Daycare - Canva Design" width="48%" />
+  <img src="public/images/gemini-1.png" alt="Friendship Corner Daycare - Gemini Design" width="48%" />
 </div>
 
 ## 🌟 Features
@@ -221,6 +229,7 @@ npm run build      # Production build — also emits public/sw.js via Serwist
 npm run start      # Start production server
 npm run lint       # Run ESLint
 npm run test:e2e   # Playwright regression suite (starts a dev server)
+PLAYWRIGHT_CHANNEL=chrome npm run test:production # Build + production SEO/GEO/UI checks
 ```
 
 Notes:
@@ -274,3 +283,7 @@ Website design and development by **Best IT Consulting** (<www.bestitconsulting.
 ---
 
 **Built with ❤️ for Friendship Corner Daycare - Where Young Minds Flourish**
+
+## Current verification and cleanup
+
+See [production verification](docs/assets/production-verification.md) for the current SEO/GEO and responsive UI checks. The promotion popup, promotional cards, poster-sync script, generated promotion directory, and npm sync hooks have been removed. Classroom images, contact/tour forms, registration downloads, and standalone marketing files remain.

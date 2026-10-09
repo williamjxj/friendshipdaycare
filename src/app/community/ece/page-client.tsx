@@ -6,7 +6,6 @@ import { Suspense } from 'react';
 import { ArrowRight, FileCheck2, School2, ShieldCheck } from 'lucide-react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { BrandAdPromoCard } from '@/components/ui/brand-visual-assets';
 import { getImageUrl } from '@/lib/image-utils';
 import { useLocalizedMetadata } from '@/lib/use-localized-metadata';
 
@@ -28,7 +27,7 @@ export default function BCEarlyLearningPageClient() {
       <main className="fdc-section-shell flex-1 overflow-x-hidden bg-background pb-20 pt-20">
         <section className="fdc-page-hero px-4 py-14 sm:px-6 sm:py-18 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="fdc-hero-grid">
+            <div className="relative max-w-4xl">
               <div className="relative z-10 space-y-6">
                 <span className="fdc-kicker">BC Early Learning</span>
                 <h1 className="max-w-4xl text-4xl font-display font-bold leading-[0.98] text-slate-900 sm:text-5xl lg:max-w-5xl lg:text-6xl">
@@ -47,9 +46,6 @@ export default function BCEarlyLearningPageClient() {
                     <span className="text-sm font-semibold text-foreground">Licensing + quality context</span>
                   </span>
                 </div>
-              </div>
-              <div className="relative z-10">
-                <BrandAdPromoCard className="max-w-xl border-white/70 bg-white/85" />
               </div>
             </div>
           </div>

@@ -1,3 +1,5 @@
+> Current verification and asset ownership: [2026-10-09 production audit](assets/production-verification.md). The material below records earlier implementation work.
+
 # SEO & GEO — Decisions and Implementation Notes
 
 > Status: implemented and verified locally (2026-08-27). Re-verified against the

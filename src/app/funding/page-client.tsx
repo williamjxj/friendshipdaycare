@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { ArrowRight, BadgeDollarSign, FileCheck2, Landmark, WalletCards } from 'lucide-react';
-import { BrandAdPromoCard } from '@/components/ui/brand-visual-assets';
 
 const fundingCards = [
   {
@@ -29,7 +28,7 @@ export function FundingPageClient() {
     <div className="fdc-section-shell min-h-screen overflow-x-hidden pb-20 pt-20">
       <section className="fdc-page-hero px-4 py-14 sm:px-6 sm:py-18 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="fdc-hero-grid">
+          <div className="relative max-w-4xl">
             <div className="relative z-10 space-y-6">
               <span className="fdc-kicker">Funding & Subsidies</span>
               <div className="space-y-4">
@@ -50,9 +49,6 @@ export function FundingPageClient() {
                   <span className="text-sm font-semibold text-foreground">Tuition questions welcomed</span>
                 </span>
               </div>
-            </div>
-            <div className="relative z-10">
-              <BrandAdPromoCard className="max-w-xl border-white/70 bg-white/85" />
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Download all images from Cloudflare R2 storage
- * and save them to the public/collects folder for local development.
+ * and save them to the public/images folder for local development.
  * 
  * Prerequisites:
  * - Node.js installed
@@ -16,7 +16,7 @@ require('dotenv').config({ path: '.env.local' });
 
 // Create collects folder if it doesn't exist
 function createCollectsFolder() {
-    const collectsFolder = path.join(process.cwd(), 'public', 'collects');
+    const collectsFolder = path.join(process.cwd(), 'public', 'images');
     if (!fs.existsSync(collectsFolder)) {
         fs.mkdirSync(collectsFolder, { recursive: true });
     }
@@ -78,7 +78,7 @@ async function downloadImageFromR2(client, bucketName, key, collectsFolder) {
 
 async function main() {
     console.log("🚀 Starting image download from Cloudflare R2...");
-    console.log("📁 Images will be saved to: public/collects/");
+    console.log("📁 Images will be saved to: public/images/");
     console.log("");
     
     // Create the collects folder

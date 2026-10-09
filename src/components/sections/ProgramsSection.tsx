@@ -1,6 +1,5 @@
 'use client';
 
-import { getImageUrl } from '@/lib/image-utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -47,7 +46,7 @@ export function ProgramsSection() {
       description: t('programsPage.programs.toddler.description'),
       icon: Baby,
       color: 'from-pink-500 to-rose-500',
-      image: '/imgs/programs/toddler.jpg',
+      image: '/images/practical-life-shelf-1.jpg',
       features: programsData?.programs?.toddler?.features || []
     },
     {
@@ -57,7 +56,7 @@ export function ProgramsSection() {
       description: t('programsPage.programs.preschool.description'),
       icon: Sparkles,
       color: 'from-blue-500 to-cyan-500',
-      image: '/imgs/programs/preschool.jpg',
+      image: '/images/sensorial-shelf.jpg',
       features: programsData?.programs?.preschool?.features || []
     },
     {
@@ -67,7 +66,7 @@ export function ProgramsSection() {
       description: t('programsPage.programs.prekindergarten.description'),
       icon: GraduationCap,
       color: 'from-amber-500 to-orange-500',
-      image: '/imgs/programs/pre-k.jpg',
+      image: '/images/language-shelf.jpg',
       features: programsData?.programs?.prekindergarten?.features || []
     }
   ];
@@ -119,7 +118,7 @@ export function ProgramsSection() {
                 {/* Program Image */}
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src={getImageUrl(program.image)}
+                    src={program.image}
                     alt={program.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
